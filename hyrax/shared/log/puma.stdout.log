@@ -1,0 +1,1543 @@
+=== puma startup: 2018-05-01 06:43:15 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-05-01 06:43:31 +0000 ===
+- Goodbye!
+=== puma startup: 2018-05-01 06:46:32 +0000 ===
+* Restarting...
+=== puma startup: 2018-05-01 06:55:44 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-05-01 06:57:23 +0000 ===
+- Goodbye!
+=== puma startup: 2018-05-01 06:57:33 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-05-01 06:59:05 +0000 ===
+- Goodbye!
+=== puma startup: 2018-05-01 07:00:02 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-05-01 07:00:15 +0000 ===
+- Goodbye!
+=== puma startup: 2018-05-01 07:00:31 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-05-01 07:02:53 +0000 ===
+- Goodbye!
+=== puma startup: 2018-05-01 07:03:18 +0000 ===
+=== puma startup: 2018-07-02 20:17:06 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-02 20:31:41 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-02 21:46:06 +0000 ===
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+File path: tmp/data/dce8b265-4f3f-490e-b66a-0a435988a3ab/testPackage2.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["CC-0"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/dce8b265-4f3f-490e-b66a-0a435988a3ab/bag/data/images/data2paper.png
+tmp/data/dce8b265-4f3f-490e-b66a-0a435988a3ab/bag/data/Swordv2Spec.pdf
+tmp/data/dce8b265-4f3f-490e-b66a-0a435988a3ab/bag/data/bagitSpec.pdf
+--------------------------------------------------
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+File path: tmp/data/362bfad7-b3ad-4407-a3e2-cf7c57e3c791/testPackage2.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["CC-0"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/362bfad7-b3ad-4407-a3e2-cf7c57e3c791/bag/data/images/data2paper.png
+tmp/data/362bfad7-b3ad-4407-a3e2-cf7c57e3c791/bag/data/Swordv2Spec.pdf
+tmp/data/362bfad7-b3ad-4407-a3e2-cf7c57e3c791/bag/data/bagitSpec.pdf
+--------------------------------------------------
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+File path: tmp/data/0acb78e2-e713-4a5b-bf2b-78636ffe20b0/testPackage2.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["CC-0"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/0acb78e2-e713-4a5b-bf2b-78636ffe20b0/bag/data/images/data2paper.png
+tmp/data/0acb78e2-e713-4a5b-bf2b-78636ffe20b0/bag/data/Swordv2Spec.pdf
+tmp/data/0acb78e2-e713-4a5b-bf2b-78636ffe20b0/bag/data/bagitSpec.pdf
+--------------------------------------------------
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+File path: tmp/data/41906ead-d418-4b0d-82c1-b54563ebf29a/testPackage2.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["CC-0"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/41906ead-d418-4b0d-82c1-b54563ebf29a/bag/data/images/data2paper.png
+tmp/data/41906ead-d418-4b0d-82c1-b54563ebf29a/bag/data/Swordv2Spec.pdf
+tmp/data/41906ead-d418-4b0d-82c1-b54563ebf29a/bag/data/bagitSpec.pdf
+--------------------------------------------------
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+File path: tmp/data/63a178c8-ef59-46e7-8e4e-56249453b362/testPackage2.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["CC-0"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/63a178c8-ef59-46e7-8e4e-56249453b362/bag/data/images/data2paper.png
+tmp/data/63a178c8-ef59-46e7-8e4e-56249453b362/bag/data/Swordv2Spec.pdf
+tmp/data/63a178c8-ef59-46e7-8e4e-56249453b362/bag/data/bagitSpec.pdf
+--------------------------------------------------
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+File path: tmp/data/480a7243-40c6-42bf-9b67-3a137cfa343d/testPackage2.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["CC-0"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/480a7243-40c6-42bf-9b67-3a137cfa343d/bag/data/images/data2paper.png
+tmp/data/480a7243-40c6-42bf-9b67-3a137cfa343d/bag/data/Swordv2Spec.pdf
+tmp/data/480a7243-40c6-42bf-9b67-3a137cfa343d/bag/data/bagitSpec.pdf
+--------------------------------------------------
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+File path: tmp/data/3ff957e0-ffa2-4599-a83f-e0fd530d9f7d/testPackage2.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["CC-0"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/3ff957e0-ffa2-4599-a83f-e0fd530d9f7d/bag/data/images/data2paper.png
+tmp/data/3ff957e0-ffa2-4599-a83f-e0fd530d9f7d/bag/data/Swordv2Spec.pdf
+tmp/data/3ff957e0-ffa2-4599-a83f-e0fd530d9f7d/bag/data/bagitSpec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [7, 8, 9]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+Content type: application/zip
+Filename: testPackageInBagit.zip
+MD5 hash: c058e3a3eba263df481ebf69ba2305f7
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+324668
+File path: tmp/data/ed0e6607-c1c0-47a4-b9eb-9aaf1bcab528/testPackageInBagit.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha Ranganathan", "Another creator"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["CC-0"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 1"]}
+--------------------------------------------------
+tmp/data/ed0e6607-c1c0-47a4-b9eb-9aaf1bcab528/contents/data/Swordv2Spec.pdf
+tmp/data/ed0e6607-c1c0-47a4-b9eb-9aaf1bcab528/contents/data/bagitSpec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [10, 11]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+Content type: application/zip
+Filename: testPackageInBagit.zip
+MD5 hash: c058e3a3eba263df481ebf69ba2305f7
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/bc018b12-6d8e-493a-8d7c-6a7460f56628/testPackageInBagit.zip
+File exists: true
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/d167771a-e112-4b23-b8a5-b0ed5a9b5ea3/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["John Smith"], :creator=>["Anusha Ranganathan", "Another creator", "Yet another creator"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :identifier=>["pubs:1234"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["Copyright Not Evaluated"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 3"]}
+--------------------------------------------------
+tmp/data/d167771a-e112-4b23-b8a5-b0ed5a9b5ea3/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [12]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/56948c35-5554-4a68-891b-8c49818863ea
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/28f87d0a-0e86-49fb-a764-e03f61c62e29/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["John Smith"], :creator=>["Anusha Ranganathan", "Another creator", "Yet another creator"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :identifier=>["pubs:1234"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["Copyright Not Evaluated"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 3"]}
+--------------------------------------------------
+tmp/data/28f87d0a-0e86-49fb-a764-e03f61c62e29/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [13]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/314171ae-ac48-4ff0-ab4b-d49d150e731d
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/31403fb7-0236-4bce-ae08-1056928e033b/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["John Smith"], :creator=>["Anusha Ranganathan", "Another creator", "Yet another creator"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :identifier=>["pubs:1234"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :relation=>["http://example.com"], :rights=>["Copyright Not Evaluated"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 3"]}
+--------------------------------------------------
+tmp/data/31403fb7-0236-4bce-ae08-1056928e033b/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [14]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/ea71cee7-9d01-45d9-97e5-8d427594bea9
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 00:26:51 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 00:27:34 +0000 ===
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/58badf02-786a-402f-ac27-b44b1ee4ab61/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/1bb7c51f-421e-40b5-9385-e69fe9abccdf/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 00:29:26 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 00:30:39 +0000 ===
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/0d7d103b-5eca-4593-b805-41bcc0482cdc/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["John Smith"], :creator=>["Anusha Ranganathan", "Another creator", "Yet another creator"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :identifier=>["pubs:1234"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 3"]}
+--------------------------------------------------
+tmp/data/0d7d103b-5eca-4593-b805-41bcc0482cdc/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [15]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/2a65a9d6-d9c9-4cc8-b9f1-880c4efa0519
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/3523be52-ec92-4a5a-9880-6fbc6180f789/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["John Smith"], :creator=>["Anusha Ranganathan", "Another creator", "Yet another creator"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :identifier=>["pubs:1234"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 3"]}
+--------------------------------------------------
+tmp/data/3523be52-ec92-4a5a-9880-6fbc6180f789/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [16]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/c0698357-11ee-43d5-bb9e-bfb2eea50d8c
+Content type: application/atom+xml;type=entry
+Filename: metadara.xml
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+17
+File path: tmp/data/3ecb0f06-a30d-4232-8c36-d165d6372183/metadara.xml
+File exists: true
+Mime type: text/plain
+Unknown format of data
+In add_work
+In find
+Content type: application/atom+xml;type=entry
+Filename: metadara.xml
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1145
+File path: tmp/data/2dbf071e-02b8-45fa-a004-81e4a69a5adf/metadara.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:title=>["Title"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/204aa903-8d7a-4042-8122-eb3aa43111c3
+Content type: application/atom+xml;type=entry
+Filename: metadara.xml
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1145
+File path: tmp/data/6fa71909-75ca-43e7-84db-97c30c30104f/metadara.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:title=>["Title"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/38f67c08-afdc-4994-aed6-02d84a9795dd
+Content type: application/atom+xml;type=entry
+Filename: metadata.xml
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1145
+File path: tmp/data/e31b9e97-d2e3-434a-ac83-7bb1bc7eacb1/metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:title=>["Title"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/24175f4d-cd55-4566-9874-c01b38a28011
+Content type: application/atom+xml;type=entry
+Filename: metadata.xml
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1145
+File path: tmp/data/970b1b00-5f1d-4c36-a11c-1e226dd58e32/metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:title=>["Title"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/b48c0612-52de-49f4-a17a-22a30fbf999c
+Content type: application/atom+xml;type=entry
+Filename: metadata.xml
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1145
+File path: tmp/data/1c2285d6-0b02-4d2a-983e-c0eb0625f474/metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:title=>["Title"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/2a6346c3-284f-44de-ac96-898bb43de5c0
+Content type: application/atom+xml;type=entry
+Filename: metadata.xml
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+970
+File path: tmp/data/24ba95db-4736-4763-8790-ced891ddc245/metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["The dublin core generator"], :date_created=>["29/05/2018"], :creator=>["Anusha"], :description=>["This is a test dc record to test the dc crosswalk and creation of a metadata only record"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record with only metadata"], :resource_type=>["Article"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/060d40c5-65b0-458d-ad71-b422bbd4500c
+Content type: application/atom+xml;type=entry
+Filename: metadata.xml
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1182
+File path: tmp/data/30ad1dbd-07e9-4cda-bc64-8595560eb19d/metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["The dublin core generator"], :date_created=>["29/05/2018"], :creator=>["Anusha"], :description=>["This is a test dc record to test the dc crosswalk and creation of a metadata only record"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Title", "Test record with only metadata"], :resource_type=>["Article"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/ee7c3074-df19-4862-99f0-f7d7c390005b
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+File path: tmp/data/a6c12338-94a5-4eeb-9101-5640dcb9b75c/testPackage2.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"CC-0", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/a6c12338-94a5-4eeb-9101-5640dcb9b75c/bag/data/images/data2paper.png
+tmp/data/a6c12338-94a5-4eeb-9101-5640dcb9b75c/bag/data/Swordv2Spec.pdf
+tmp/data/a6c12338-94a5-4eeb-9101-5640dcb9b75c/bag/data/bagitSpec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [17, 18, 19]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/12f3af39-4715-42fe-9792-e64c69ad2ab6
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 02:35:52 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 02:35:58 +0000 ===
+In find
+In find
+In find
+In find_by_id
+In find
+In find_by_id
+In find
+In find_by_id
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/def94b1e-e86c-4713-b40f-cfd64e55046a/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["John Smith"], :date_created=>["29/05/2018"], :creator=>["Anusha Ranganathan", "Another creator", "Yet another creator"], :description=>["This is a test dc record to test the dc crosswalk"], :identifier=>["pubs:1234"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 3"]}
+--------------------------------------------------
+tmp/data/def94b1e-e86c-4713-b40f-cfd64e55046a/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [20]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/9w032300g
+In find
+In find_by_id
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 03:41:23 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 03:41:29 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 03:44:28 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 03:44:34 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 03:45:04 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 03:46:22 +0000 ===
+In find
+In find_by_id
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 03:58:31 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 03:59:17 +0000 ===
+In find
+In find_by_id
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 04:03:47 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 04:07:53 +0000 ===
+In find
+In find_by_id
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 04:10:26 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 04:10:50 +0000 ===
+In find
+In find_by_id
+In find
+In find_by_id
+In find
+In find_by_id
+In find
+In find_by_id
+In find
+In find_by_id
+In find
+In find_by_id
+Content type: application/atom+xml;type=entry
+Filename: metadata.xml
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1182
+File path: tmp/data/d3ab2a3e-ba13-4479-a340-ea5be99c896c/metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["The dublin core generator"], :date_created=>["29/05/2018"], :creator=>["Anusha"], :description=>["This is a test dc record to test the dc crosswalk and creation of a metadata only record"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Title", "Test record with only metadata"], :resource_type=>["Article"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/qz20ss48r
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/e9cb794c-a972-4983-b859-00f252d465e6/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["John Smith"], :date_created=>["29/05/2018"], :creator=>["Anusha Ranganathan", "Another creator", "Yet another creator"], :description=>["This is a test dc record to test the dc crosswalk"], :identifier=>["pubs:1234"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 3"]}
+--------------------------------------------------
+tmp/data/e9cb794c-a972-4983-b859-00f252d465e6/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [21]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/k930bx00t
+Content type: application/zip
+Filename: testPackage1InBagit.zip
+MD5 hash: c058e3a3eba263df481ebf69ba2305f7
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+324668
+File path: tmp/data/bdb338a2-bec9-4e25-ac6a-2b01a678513d/testPackage1InBagit.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha Ranganathan", "Another creator"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"CC-0", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 1"]}
+--------------------------------------------------
+tmp/data/bdb338a2-bec9-4e25-ac6a-2b01a678513d/contents/data/Swordv2Spec.pdf
+tmp/data/bdb338a2-bec9-4e25-ac6a-2b01a678513d/contents/data/bagitSpec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [22, 23]
+In add_work
+In find
+In find_by_id
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/bn999672v
+In find
+In find_by_id
+In find
+In find_by_id
+In find
+In find_by_id
+In find
+In find_by_id
+In find
+In find_by_id
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 05:10:25 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 05:10:32 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 05:10:37 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 05:11:02 +0000 ===
+In find
+In find_by_id
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 10:29:42 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 10:34:34 +0000 ===
+In find_work
+In find_work_by_id
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-03 11:01:55 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-03 11:02:02 +0000 ===
+Content type: application/zip
+Filename: metadata.xml
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1182
+File path: tmp/data/35b30db1-e776-4a14-ac4b-7fddc64b15b5/metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["The dublin core generator"], :date_created=>["29/05/2018"], :creator=>["Anusha"], :description=>["This is a test dc record to test the dc crosswalk and creation of a metadata only record"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Title", "Test record with only metadata"], :resource_type=>["Article"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/6395w7085
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/68a07bdc-e25f-4f4e-9347-fc27ab86acf5/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["John Smith"], :date_created=>["29/05/2018"], :creator=>["Anusha Ranganathan", "Another creator", "Yet another creator"], :description=>["This is a test dc record to test the dc crosswalk"], :identifier=>["pubs:1234"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 3"]}
+--------------------------------------------------
+tmp/data/68a07bdc-e25f-4f4e-9347-fc27ab86acf5/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [24]
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/dn39x152w
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+File path: tmp/data/4ef89a56-4e6e-483a-b7e9-991bde8a52e6/testPackage2.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"CC-0", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/4ef89a56-4e6e-483a-b7e9-991bde8a52e6/bag/data/images/data2paper.png
+tmp/data/4ef89a56-4e6e-483a-b7e9-991bde8a52e6/bag/data/Swordv2Spec.pdf
+tmp/data/4ef89a56-4e6e-483a-b7e9-991bde8a52e6/bag/data/bagitSpec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [25, 26, 27]
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/8g84mm241
+Content type: application/zip
+Filename: testPackage1InBagit.zip
+MD5 hash: c058e3a3eba263df481ebf69ba2305f7
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+324668
+File path: tmp/data/c7782601-8634-4386-8e33-18b6f9790b33/testPackage1InBagit.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha Ranganathan", "Another creator"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"CC-0", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 1"]}
+--------------------------------------------------
+tmp/data/c7782601-8634-4386-8e33-18b6f9790b33/contents/data/Swordv2Spec.pdf
+tmp/data/c7782601-8634-4386-8e33-18b6f9790b33/contents/data/bagitSpec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [28, 29]
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/g158bh28p
+In find_work
+In find_work_by_id
+In find_work
+In find_work_by_id
+In find_work
+In find_work_by_id
+In find_work
+In find_work_by_id
+In find_work
+In find_work_by_id
+In find_work
+In find_work_by_id
+In find_work
+In find_work_by_id
+saving body
+1091
+saving body
+1091
+Content type: application/xml
+Filename: file_metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1091
+File path: tmp/data/9ea94051-e30d-40db-899c-9e1e1c55b604/file_metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["Data2pper team"], :date_created=>["29/05/2018"], :creator=>["Richard Jones"], :description=>["This is a test file. The description is being updated"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Sword V2 Specification document", "Sword V2 Specification document"]}
+--------------------------------------------------
+--------------------------------------------------
+In find_file_set
+In find_file_set_by_id
+In update_file_set
+In file_set_update_attributes
+Content type: application/xml
+Filename: file_metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1091
+File path: tmp/data/771bf23f-afdd-4a55-b68c-a6ee4869cbfc/file_metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["Data2pper team"], :date_created=>["29/05/2018"], :creator=>["Richard Jones"], :description=>["This is a test file. The description is being updated"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Sword V2 Specification document", "Sword V2 Specification document"]}
+--------------------------------------------------
+--------------------------------------------------
+In find_file_set
+In find_file_set_by_id
+In update_file_set
+In file_set_update_attributes
+Content type: application/xml
+Filename: file_metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1042
+File path: tmp/data/15bfdd48-6043-481b-81c9-cf2944beef10/file_metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["Data2pper team"], :date_created=>["29/05/2018"], :creator=>["Richard Jones"], :description=>["This is a test file. The description is being updated"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Sword V2 Specification document", "Sword V2 Specification document"]}
+--------------------------------------------------
+--------------------------------------------------
+In find_file_set
+In find_file_set_by_id
+In update_file_set
+In file_set_update_attributes
+Content type: application/xml
+Filename: file_metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1042
+File path: tmp/data/1152da44-3477-4c7a-816e-a253381cca6f/file_metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["Data2pper team"], :date_created=>["29/05/2018"], :creator=>["Richard Jones"], :description=>["This is a test file. The description is being updated"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Sword V2 Specification document", "Sword V2 Specification document"]}
+--------------------------------------------------
+--------------------------------------------------
+In find_file_set
+In find_file_set_by_id
+In update_file_set
+In file_set_update_attributes
+Content type: application/xml
+Filename: file_metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1042
+File path: tmp/data/5214c708-f3b3-483c-8ae2-9e2077e3a057/file_metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["Data2pper team"], :date_created=>["29/05/2018"], :creator=>["Richard Jones"], :description=>["This is a test file. The description is being updated"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Sword V2 Specification document", "Sword V2 Specification document"]}
+--------------------------------------------------
+--------------------------------------------------
+In find_file_set
+In find_file_set_by_id
+In update_file_set
+In file_set_update_attributes
+Content type: application/xml
+Filename: file_metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1042
+File path: tmp/data/91ed677e-870b-4f06-8a77-9b9359b9b991/file_metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["Data2pper team"], :date_created=>["29/05/2018"], :creator=>["Richard Jones"], :description=>["This is a test file. The description is being updated"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Sword V2 Specification document", "Sword V2 Specification document"]}
+--------------------------------------------------
+--------------------------------------------------
+In find_file_set
+In find_file_set_by_id
+In update_file_set
+In file_set_update_attributes
+Content type: image/png
+Filename: data2paper_screenshot.png
+MD5 hash: 605ae7a8a167bf2bfe031bf3f7378012
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+167697
+File path: tmp/data/61657e2b-63a0-4fab-8f3c-08f65a653b9b/data2paper_screenshot.png
+File exists: true
+In upload_files
+Files uploaded: [30]
+Content type: image/png
+Filename: data2paper_screenshot.png
+MD5 hash: 605ae7a8a167bf2bfe031bf3f7378012
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+167697
+File path: tmp/data/5da0ce19-ed7a-4be8-ad3a-eaaad156f733/data2paper_screenshot.png
+File exists: true
+In upload_files
+Files uploaded: [31]
+In update_work
+In update_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/dn39x152w
+Content type: application/xml
+Filename: metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1182
+File path: tmp/data/427a7a51-e6c8-483e-9882-3fb383189b6b/metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["The dublin core generator"], :date_created=>["29/05/2018"], :creator=>["Anusha"], :description=>["This is a test dc record to test the dc crosswalk and creation of a metadata only record"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Title", "Test record with only metadata"], :resource_type=>["Article"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/1g05fb60f
+In find_work
+In find_work_by_id
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/7e19b6a9-2156-4365-bfe3-b289a151a487/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["John Smith"], :date_created=>["29/05/2018"], :creator=>["Anusha Ranganathan", "Another creator", "Yet another creator"], :description=>["This is a test dc record to test the dc crosswalk"], :identifier=>["pubs:1234"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 3"]}
+--------------------------------------------------
+tmp/data/7e19b6a9-2156-4365-bfe3-b289a151a487/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [32]
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/jh343s28d
+In find_work
+In find_work_by_id
+Content type: application/zip
+Filename: testPackage2InBagit.zip
+MD5 hash: c058e3a3eba263df481ebf69ba2305f7
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+481460
+File path: tmp/data/cd7b9941-ac94-4374-a2a0-f9f8d36ffb4f/testPackage2InBagit.zip
+File exists: true
+Content type: application/zip
+Filename: testPackage2InBagit.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: 
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+481460
+File path: tmp/data/e2cdd6f0-9eb8-40c9-9723-0db1439523d2/testPackage2InBagit.zip
+File exists: true
+Content type: application/zip
+Filename: testPackage2InBagit.zip
+MD5 hash: 572371fa2ce9e371fbfb87477f8318ec
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: 
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+481460
+File path: tmp/data/eb8f9a3d-7794-4fc9-9f77-fccc8b5046b4/testPackage2InBagit.zip
+File exists: true
+Mime type: application/zip
+process zip
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"CC-0", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/eb8f9a3d-7794-4fc9-9f77-fccc8b5046b4/contents/data/images/data2paper.png
+tmp/data/eb8f9a3d-7794-4fc9-9f77-fccc8b5046b4/contents/data/Swordv2Spec.pdf
+tmp/data/eb8f9a3d-7794-4fc9-9f77-fccc8b5046b4/contents/data/bagitSpec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [33, 34, 35]
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/z316q156s
+Content type: application/xml
+Filename: file_metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1042
+File path: tmp/data/6c0bc4f7-6b66-4c28-a617-60e3713c5ceb/file_metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["Data2pper team"], :date_created=>["29/05/2018"], :creator=>["Richard Jones"], :description=>["This is a test file. The description is being updated"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Sword V2 Specification document", "Sword V2 Specification document"]}
+--------------------------------------------------
+--------------------------------------------------
+In find_file_set
+In find_file_set_by_id
+In update_file_set
+In file_set_update_attributes
+In find_work
+In find_work_by_id
+Content type: image/png
+Filename: data2paper_screenshot.png
+MD5 hash: 605ae7a8a167bf2bfe031bf3f7378012
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+167697
+File path: tmp/data/d6627fa4-800e-4dc2-bfca-332c5f2a97dc/data2paper_screenshot.png
+File exists: true
+In upload_files
+Files uploaded: [36]
+In update_work
+In update_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/jh343s28d
+In find_work
+In find_work_by_id
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-06 09:18:12 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-06 09:43:45 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-06 09:44:28 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-06 09:44:35 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-06 09:47:34 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-06 09:48:40 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-09 11:24:20 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-09 11:24:27 +0000 ===
+Content type: application/xml
+Filename: metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1182
+File path: tmp/data/01cf7adc-6d20-44d1-a1d5-40e5cc0627c2/metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["The dublin core generator"], :date_created=>["29/05/2018"], :creator=>["Anusha"], :description=>["This is a test dc record to test the dc crosswalk and creation of a metadata only record"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Title", "Test record with only metadata"], :resource_type=>["Article"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/44558d285
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-13 11:32:54 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-13 11:37:10 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-13 11:53:27 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-13 11:54:20 +0000 ===
+Default collection
+Test record 3
+Title | Test record with only metadata
+Test record 3
+Test record
+Title | Test record with only metadata
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-16 23:10:09 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-16 23:11:58 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-16 23:20:54 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-16 23:21:12 +0000 ===
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/1bf84f46-1352-4915-b70c-1b453aca33dd/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+{}
+--------------------------------------------------
+tmp/data/1bf84f46-1352-4915-b70c-1b453aca33dd/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [42]
+In add_work
+In find_work
+In create_work
+In create_attributes
+Content type: application/xml
+Filename: metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1182
+File path: tmp/data/4fa4338f-9d8f-41f4-93ef-5e1c18da9537/metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["The dublin core generator"], :date_created=>["29/05/2018"], :creator=>["Anusha"], :description=>["This is a test dc record to test the dc crosswalk and creation of a metadata only record"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Title", "Test record with only metadata"], :resource_type=>["Article"]}
+--------------------------------------------------
+--------------------------------------------------
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/bz60cw24r
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-16 23:30:15 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-16 23:30:33 +0000 ===
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/5821ff20-ea38-47e0-ae59-dd58ae10615d/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+tmp/data/5821ff20-ea38-47e0-ae59-dd58ae10615d/bag/data/metadata.xml
+true
+{}
+--------------------------------------------------
+tmp/data/5821ff20-ea38-47e0-ae59-dd58ae10615d/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [43]
+In add_work
+In find_work
+In create_work
+In create_attributes
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-16 23:35:29 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-16 23:35:46 +0000 ===
+Content type: application/zip
+Filename: testPackage3.zip
+MD5 hash: 
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+283334
+File path: tmp/data/06096ee5-33fd-4290-bec9-78bc940e540b/testPackage3.zip
+File exists: true
+Mime type: application/zip
+process zip
+tmp/data/06096ee5-33fd-4290-bec9-78bc940e540b/bag/data/metadata.xml
+true
+{:contributor=>["John Smith"], :date_created=>["29/05/2018"], :creator=>["Anusha Ranganathan", "Another creator", "Yet another creator"], :description=>["This is a test dc record to test the dc crosswalk"], :identifier=>["pubs:1234"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"Copyright Not Evaluated", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 3"]}
+--------------------------------------------------
+tmp/data/06096ee5-33fd-4290-bec9-78bc940e540b/bag/data/Swordv2Spec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [44]
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/2z10wq20d
+Content type: application/zip
+Filename: testPackage2.zip
+MD5 hash: fb19c3d7b3429a2a3ab0d4193084cec2
+Packaging http://purl.org/net/sword/package/SimpleZip
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+478979
+File path: tmp/data/b06a394a-6017-410d-9889-3cb5b778bbdf/testPackage2.zip
+File exists: true
+Mime type: application/zip
+process zip
+tmp/data/b06a394a-6017-410d-9889-3cb5b778bbdf/bag/data/metadata.xml
+true
+{:contributor=>["The dublin core generator"], :creator=>["Anusha"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"CC-0", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record"]}
+--------------------------------------------------
+tmp/data/b06a394a-6017-410d-9889-3cb5b778bbdf/bag/data/images/data2paper.png
+tmp/data/b06a394a-6017-410d-9889-3cb5b778bbdf/bag/data/Swordv2Spec.pdf
+tmp/data/b06a394a-6017-410d-9889-3cb5b778bbdf/bag/data/bagitSpec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [45, 46, 47]
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/x059c7329
+Content type: application/zip
+Filename: testPackage1InBagit.zip
+MD5 hash: c058e3a3eba263df481ebf69ba2305f7
+Packaging http://purl.org/net/sword/package/BagIt
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+324668
+File path: tmp/data/09557d64-c966-483b-a5bd-039f09fca2ef/testPackage1InBagit.zip
+File exists: true
+Mime type: application/zip
+process zip
+tmp/data/09557d64-c966-483b-a5bd-039f09fca2ef/contents/data/metadata.xml
+true
+{:contributor=>["The dublin core generator"], :creator=>["Anusha Ranganathan", "Another creator"], :date=>["29/05/2018"], :description=>["This is a test dc record to test the dc crosswalk"], :language=>["English"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :rights_statement=>"CC-0", :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Test record 1"]}
+--------------------------------------------------
+tmp/data/09557d64-c966-483b-a5bd-039f09fca2ef/contents/data/Swordv2Spec.pdf
+tmp/data/09557d64-c966-483b-a5bd-039f09fca2ef/contents/data/bagitSpec.pdf
+--------------------------------------------------
+In upload_files
+Files uploaded: [48, 49]
+In add_work
+In find_work
+In create_work
+In create_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/5425k968s
+In find_work
+In find_work_by_id
+In find_work
+In find_work_by_id
+Content type: image/png
+Filename: data2paper_screenshot.png
+MD5 hash: 605ae7a8a167bf2bfe031bf3f7378012
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+167697
+File path: tmp/data/2116f5fd-e994-4e05-872a-92c44ad30f46/data2paper_screenshot.png
+File exists: true
+In upload_files
+Files uploaded: [50]
+In update_work
+In update_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/dn39x152w
+In find_work
+In find_work_by_id
+Content type: application/xml
+Filename: file_metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1042
+File path: tmp/data/5dd4c71e-89bb-496b-a58b-14ddbfffff67/file_metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["Data2pper team"], :date_created=>["29/05/2018"], :creator=>["Richard Jones"], :description=>["This is a test file. The description is being updated"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Sword V2 Specification document", "Sword V2 Specification document"]}
+--------------------------------------------------
+--------------------------------------------------
+In find_file_set
+In find_file_set_by_id
+In update_file_set
+In file_set_update_attributes
+In find_work
+In find_work_by_id
+In find_work
+In find_work_by_id
+In find_work
+In find_work_by_id
+Content type: image/png
+Filename: data2paper_screenshot.png
+MD5 hash: 605ae7a8a167bf2bfe031bf3f7378012
+Packaging http://purl.org/net/sword/package/Binary
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+167697
+File path: tmp/data/3d990967-714c-40f8-bfb3-67343155f7c1/data2paper_screenshot.png
+File exists: true
+In upload_files
+Files uploaded: [51]
+In update_work
+In update_attributes
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/5425k968s
+Content type: application/xml
+Filename: file_metadata.xml
+MD5 hash: 
+Packaging application/atom+xml;type=entry
+In progress: false
+On behalf of: hyrax@testinstance
+Slug: 
+saving body
+1042
+File path: tmp/data/e774c8f1-8267-4ca7-9c77-b207aad92d9a/file_metadata.xml
+File exists: true
+Mime type: application/xml
+process xml
+{:contributor=>["Data2pper team"], :date_created=>["29/05/2018"], :creator=>["Richard Jones"], :description=>["This is a test file. The description is being updated"], :identifier=>["pubs:12345678"], :language=>["English"], :license=>["https://creativecommons.org/licenses/by/4.0/"], :publisher=>["Digital Nest"], :related_url=>["http://example.com"], :source=>["http://sword.digitalnest.com"], :subject=>["Sword", "Crosswalk"], :title=>["Sword V2 Specification document", "Sword V2 Specification document"]}
+--------------------------------------------------
+--------------------------------------------------
+In find_file_set
+In find_file_set_by_id
+In update_file_set
+In file_set_update_attributes
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-17 01:43:01 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-17 01:43:19 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-17 01:44:47 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-17 01:45:05 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-17 02:00:14 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-17 02:00:31 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-17 02:14:54 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-17 02:15:12 +0000 ===
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/cf95jb44s
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-18 22:58:35 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-18 22:58:53 +0000 ===
+Model: Collection
+Model: Collection
+Model: 
+Model: 
+Model: 
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-18 23:23:53 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-18 23:24:10 +0000 ===
+Model: 
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-18 23:25:29 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-18 23:26:39 +0000 ===
+Model: 
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-18 23:29:53 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-18 23:30:11 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-18 23:34:03 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-18 23:34:21 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-18 23:36:32 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-18 23:37:28 +0000 ===
+Work models: ["Work"]
+Work models: ["Work"]
+Work models: ["Work"]
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-07-18 23:56:58 +0000 ===
+- Goodbye!
+=== puma startup: 2018-07-18 23:57:15 +0000 ===
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/dn39x152w
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/dn39x152w
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/k35694332
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/k35694332
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/st74cq441
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/ks65hc20t
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/j3860693n
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/n296wz12m
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/t722h880z
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/f4752g72m
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/gq67jr16q
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/0c483j36g
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/7h149p84n
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/nk322d33s
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/8p58pc92q
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/k35694332
+URL http://hyrax.digitalnest.co.uk/sword/collections/col1/works/k35694332
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/b8515n370
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/h702q6382
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/j9602060k
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/j9602060k
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/sj139192w
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/sj139192w
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/z603qx40z
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/kd17cs845
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/7m01bk68h
+URL http://hyrax.digitalnest.co.uk/sword/collections/default/works/fb4948403
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-11-05 12:13:01 +0000 ===
+- Goodbye!
+=== puma startup: 2018-11-05 12:30:53 +0000 ===
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2018-11-05 12:39:59 +0000 ===
+- Goodbye!
+=== puma startup: 2018-11-05 12:40:50 +0000 ===
