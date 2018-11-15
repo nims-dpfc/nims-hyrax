@@ -20,15 +20,7 @@ Requires:
     ```
 
 ### Steps to run the application
-* You could use screen to run the different components
-    ```
-    screen
-    ```
-    To make it easy to navigate screen, you could add this to your ~/.screenrc file
-    ```
-    hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
-    autodetach on
-    ```
+From the `hyrax/` directory:
 
 *  Start Solr
     ```
@@ -46,3 +38,13 @@ Requires:
     ```
     bundle exec rails s
     ```
+    
+**Note:** You could use screen to run the different components
+```
+screen
+```
+To make it easy to navigate screen, you could add this to your ~/.screenrc file
+```
+hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+autodetach on
+```
