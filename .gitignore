@@ -1,5 +1,12 @@
 ### nims-hyrax project specific
 .idea/
+
+# ignore files for puma but keep directory structure
+hyrax/shared/
+!hyrax/shared/log/.keep
+!hyrax/shared/pids/.keep
+!hyrax/shared/sockets/.keep
+
 # commented out .rspec in ruby template below (since it was in git already)
 
 

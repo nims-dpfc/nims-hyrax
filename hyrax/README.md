@@ -4,13 +4,18 @@
 The application contains 
 * Hyrax version 2.3
 * Rails 5.1
-* Ruby version 2.4
+
+Requires:
+* redis
+* Ruby 2.3.1 - 2.5.3 (as tested)
 
 ### Steps to install the application 
-1.  Clone this project 
-2.  To install, cd to the directory and
+1.  Clone this project
+2.  [Set up `rbenv`](https://github.com/rbenv/rbenv#installation) for ruby 2.5.3 with `rbenv install 2.5.3`
+3.  To install, cd to the `hyrax/` directory and
     ```
-    Bundle install
+    gem install bundler
+    bundle install
     bundle exec rake db:migrate
     ```
 
@@ -33,7 +38,7 @@ The application contains
     ```
     fcrepo_wrapper
    ```
-* Start sidekiq to run the background jobs
+* Start sidekiq to run the background jobs (requires a running redis instance)
     ```
     bundle exec sidekiq
     ```
@@ -41,4 +46,3 @@ The application contains
     ```
     bundle exec rails s
     ```
-
