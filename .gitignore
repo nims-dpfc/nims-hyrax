@@ -7,6 +7,10 @@ hyrax/shared/
 !hyrax/shared/pids/.keep
 !hyrax/shared/sockets/.keep
 
+# Files that appeared when I ran hyrax that weren't initally checked in
+.generators
+.rakeTasks
+
 # commented out .rspec in ruby template below (since it was in git already)
 
 
