@@ -7,14 +7,23 @@ The application contains
 
 Requires:
 * redis
-* Ruby 2.3.1 - 2.5.3 (as tested)
+* Ruby 2.3 - 2.5
+
+### Set up ruby with `rbenv`
+1. Install `rbenv` on your system per the [installation instructions](https://github.com/rbenv/rbenv#installation)
+2. Get ruby 2.5.3
+    ```
+    rbenv install 2.5.3
+    ```
+3. Install bundler
+    ```
+    RBENV_VERSION=2.5.3 gem install bundler
+    ```
 
 ### Steps to install the application 
 1.  Clone this project
-2.  [Set up `rbenv`](https://github.com/rbenv/rbenv#installation) for ruby 2.5.3 with `rbenv install 2.5.3`
-3.  To install, cd to the `hyrax/` directory and
+2.  To install, cd to the `hyrax/` directory and
     ```
-    gem install bundler
     bundle install
     bundle exec rake db:migrate
     ```
