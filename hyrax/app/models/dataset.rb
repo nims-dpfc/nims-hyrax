@@ -7,111 +7,102 @@ class Dataset < ActiveFedora::Base
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your dataset must have a title.' }
 
-  property :analysis_field, predicate: ::RDF::Vocab::NimsRdp['analysis-field'] do |index|
+  # property date_modified - defined in core metadata
+  # property date_uploaded - defined in core metadata
+  # property depositor - defined in core metadata
+  # property title - defined in core metadata
+  # property based_near - defined in the basic metadata
+  # property bibliographic_citation - defined in the basic metadata
+  # property contributor - defined in the basic metadata
+  # property creator - defined in the basic metadata
+  # property date_created - defined in the basic metadata
+  # property description - defined in the basic metadata
+  # property identifier - defined in the basic metadata
+  # property import_url - defined in the basic metadata
+  # property keyword - defined in the basic metadata
+  # property label - defined in the basic metadata
+  # property language - defined in the basic metadata
+  # property publisher - defined in the basic metadata
+  # property related_url - defined in the basic metadata
+  # property relative_path - defined in the basic metadata
+  # property resource_type - defined in the basic metadata
+  # property license (rights) - defined in the basic metadata
+  # property rights_statement - defined in the basic metadata
+  # property source - defined in the basic metadata
+  # property subject - defined in the basic metadata
+
+  property :alternative_title, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'] do |index|
-    index.as :stored_searchable
-  end
+  property :complex_date, predicate: ::RDF::Vocab::DC.date, class_name:"ComplexDate"
 
-  property :computational_methods, predicate: ::RDF::Vocab::NimsRdp['computational-methods'] do |index|
-    index.as :stored_searchable
-  end
+  property :complex_identifier, predicate: ::RDF::Vocab::NimsRdp.identifier, class_name:"ComplexIdentifier"
 
-  property :data_origin, predicate: ::RDF::Vocab::NimsRdp['data-origin'] do |index|
-    index.as :stored_searchable
-  end
-
-  property :material_types, predicate: ::RDF::Vocab::NimsRdp['material-types'] do |index|
-    index.as :stored_searchable
-  end
-
-  property :measurement_environment, predicate: ::RDF::Vocab::NimsRdp['measurement-environment'] do |index|
-    index.as :stored_searchable
-  end
-
-  property :processing_environment, predicate: ::RDF::Vocab::NimsRdp['processing-environment'] do |index|
-    index.as :stored_searchable
-  end
-
-  property :properties_addressed, predicate: ::RDF::Vocab::NimsRdp['properties-addressed'] do |index|
-    index.as :stored_searchable
-  end
-
-  property :structural_features, predicate: ::RDF::Vocab::NimsRdp['structural-features'] do |index|
-    index.as :stored_searchable
-  end
-
-  # nims-rdp_synthesis_and_processing
-  property :synthesis_and_processing, predicate: ::RDF::Vocab::NimsRdp['synthesis-and-processing'] do |index|
-    index.as :stored_searchable
-  end
-
-  # property dces_contributor - defined in the basic metadata
-  # property dces_creator - defined in the basic metadata
-  # Have described a complex person here
-  #   This could be used to describe contributor and creator
   property :complex_person, predicate: ::RDF::Vocab::SIOC.has_creator, class_name:"ComplexPerson"
 
-  # property dces_description - defined in the basic metadata
-  # property dces_keyword - defined in the basic metadata
-  # property dces_language - defined in the basic metadata
-  # property dces_publisher - defined in the basic metadata
-  # property dces_subject - defined in the basic metadata
-  # property dct_bibliographic_citation - defined in the basic metadata
-  # property dct_date_created - defined in the basic metadata
+  # TODO: Need more information
+  # property :complex_license, predicate: ::RDF::URI.new('http://www.niso.org/schemas/ali/1.0/license_ref'), class_name:"ComplexLicense"
 
-  # property dct_identifier - defined in the basic metadata
-  # Have described a complex identifier here
-  #   This could be used to describe the identifier
-  property :complex_identifier, predicate: ::RDF::Vocab::MODS.identifierGroup, class_name:"ComplexIdentifier"
+  property :complex_rights, predicate: ::RDF::Vocab::DC11.rights, class_name:"ComplexRights"
 
+  property :complex_version, predicate: ::RDF::Vocab::NimsRdp['complex-version'], class_name:"ComplexVersion"
+
+  property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'], multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :computational_methods, predicate: ::RDF::Vocab::NimsRdp['computational-methods'], multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  # TODO - This is required
+  property :data_origin, predicate: ::RDF::Vocab::NimsRdp['data-origin'] do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :instrument, predicate: ::RDF::Vocab::NimsRdp['instrument'], class_name: "ComplexInstrument"
+
+  property :origin_system_provenance, predicate: ::RDF::Vocab::NimsRdp['origin-system-provenance'], multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  # NOTE: Not a part of Hyrax basic metadata
   property :part_of, predicate: ::RDF::Vocab::DC.isPartOf do |index|
     index.as :stored_searchable
   end
 
-  # property dct_resource_type - defined in the basic metadata
-  # property dct_rights - defined in the basic metadata
-  # property dct_source - defined in the basic metadata
-  # property edm_rights_statement - defined in the basic metadata
-  # property fedora_label
-  # property foaf_based_near - defined in the basic metadata
-  # property rdfs_related_url - defined in the basic metadata
-  # property scholarsphere_import_url - defined in the basic metadata
-  # property scholarsphere_relative_path - defined in the basic metadata
-  # property dct_date_modified - defined in core metadata
-  # property dct_date_uploaded - defined in core metadata
-  # property dct_title - defined in core metadata
-  # property marc-relators_depositor - defined in core metadata
-
-  property :status_at_start, predicate: ::RDF::Vocab::NimsRdp['status-at-start'], multiple: false do |index|
-    index.as :stored_searchable
+  property :properties_addressed, predicate: ::RDF::Vocab::NimsRdp['properties-addressed'] do |index|
+    index.as :stored_searchable, :facetable
   end
 
-  property :status_at_end, predicate: ::RDF::Vocab::NimsRdp['status-at-end'], multiple: false do |index|
-    index.as :stored_searchable
-  end
-
-  property :instrument, predicate: ::RDF::Vocab::NimsRdp['instrument'], multiple: false do |index|
-    index.as :stored_searchable
-  end
-
-  # Have described a complex date here
-  #   This could be used to describe different dates
-  property :complex_date, predicate: ::RDF::Vocab::DC.date, class_name:"ComplexDate"
-
-  # Have described a complex relation here
+  # Defined complex_relation in common_complex_properties in place of relation
   #   This could be used to describe relationships by giving more context to the relation
   #   could be used in place of part_of and related_url
   property :complex_relation, predicate: ::RDF::Vocab::DC.relation, class_name:"ComplexRelation"
 
+  # TODO - This is required
+  property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'], multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :specimen_type, predicate: ::RDF::Vocab::NimsRdp['specimen-type'], class_name: "ComplexSpecimenType"
+
+  property :synthesis_and_processing, predicate: ::RDF::Vocab::NimsRdp['synthesis-and-processing'], multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
-  accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
-  accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
-  accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
-  accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true
   include ComplexAttributes
+  accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
+  accepts_nested_attributes_for :instrument, reject_if: :instrument_blank, allow_destroy: true
+  # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
+  accepts_nested_attributes_for :specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
 end

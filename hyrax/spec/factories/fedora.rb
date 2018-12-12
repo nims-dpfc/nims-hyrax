@@ -16,7 +16,7 @@ FactoryBot.define do
   end
 
   trait :private do
-    visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
+    visibility { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE }
   end
 
 
