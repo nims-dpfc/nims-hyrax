@@ -73,7 +73,7 @@ RSpec.describe ComplexSpecimenType do
   describe "when reject_if is a symbol" do
     before do
       class ExampleWork2 < ExampleWork
-        include ComplexAttributes
+        include ComplexValidation
         accepts_nested_attributes_for :complex_specimen_type, reject_if: :specimen_type_blank
       end
     end
