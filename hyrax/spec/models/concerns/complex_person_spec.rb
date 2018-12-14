@@ -58,7 +58,7 @@ RSpec.describe ComplexPerson do
   describe "when reject_if is a symbol" do
     before do
       class ExampleWork2 < ExampleWork
-        include ComplexAttributes
+        include ComplexValidation
         accepts_nested_attributes_for :complex_person, reject_if: :person_blank
       end
     end

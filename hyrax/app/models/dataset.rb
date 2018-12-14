@@ -97,7 +97,7 @@ class Dataset < ActiveFedora::Base
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
-  include ComplexAttributes
+  include ComplexValidation
   accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   accepts_nested_attributes_for :instrument, reject_if: :instrument_blank, allow_destroy: true

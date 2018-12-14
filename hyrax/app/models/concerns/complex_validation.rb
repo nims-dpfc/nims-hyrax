@@ -1,4 +1,4 @@
-module ComplexAttributes
+module ComplexValidation
   extend ActiveSupport::Concern
   included do
     # date_blank

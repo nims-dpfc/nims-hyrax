@@ -43,7 +43,7 @@ RSpec.describe ComplexKeyValue do
   describe 'when reject_if is a symbol' do
     before do
       class ExampleWork2 < ExampleWork
-        include ComplexAttributes
+        include ComplexValidation
         accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank
       end
     end
