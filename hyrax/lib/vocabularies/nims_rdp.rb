@@ -22,7 +22,7 @@ module RDF
       property 'material-types'
       property 'origin-system-provenance'
       property 'properties-addressed'
-      property 'purchase_record'
+      property 'purchase-record'
       property 'purchase-record-item'
       property 'specimen-set'
       property 'specimen-type'
