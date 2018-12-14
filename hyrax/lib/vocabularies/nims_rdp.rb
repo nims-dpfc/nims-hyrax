@@ -1,6 +1,7 @@
 module RDF
   module Vocab
     class NimsRdp < RDF::Vocabulary("http://www.nims.go.jp/vocabs/ngdr/")
+      property 'CustomProperty'
       property 'Instrument'
       property 'PurchaseRecord'
       property 'Specimen'
@@ -9,6 +10,7 @@ module RDF
       property 'complex-version'
       property 'computational-methods'
       property 'crystalograpic-structure'
+      property 'custom-property'
       property 'data-origin'
       property 'identifier'
       property 'instrument'

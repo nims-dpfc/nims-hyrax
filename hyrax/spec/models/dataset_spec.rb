@@ -665,4 +665,34 @@ RSpec.describe Dataset do
       expect(@obj.synthesis_and_processing).to eq 'Synthesis and processing methods'
     end
   end
+
+  describe 'custom_property' do
+    it 'creates a custom property active triple resource with all the attributes' do
+      @obj = build(:dataset, custom_property_attributes: [{
+          label: 'Full name',
+          description: 'My full name is ...'
+        }]
+      )
+      expect(@obj.custom_property.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.custom_property.first.id).to include('#key_value')
+      expect(@obj.custom_property.first.label).to eq ['Full name']
+      expect(@obj.custom_property.first.description).to eq ['My full name is ...']
+    end
+
+    it 'rejects a custom property active triple with no label' do
+      @obj = build(:dataset, custom_property_attributes: [{
+          description: 'Local date'
+        }]
+      )
+      expect(@obj.custom_property).to be_empty
+    end
+
+    it 'rejects a custom property active triple with no description' do
+      @obj = build(:dataset, custom_property_attributes: [{
+          label: 'Local date'
+        }]
+      )
+      expect(@obj.custom_property).to be_empty
+    end
+  end
 end

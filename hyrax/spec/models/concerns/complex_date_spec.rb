@@ -64,7 +64,7 @@ RSpec.describe ComplexDate do
       expect(@obj.complex_date.first.description).to be_empty
     end
 
-    it 'rejects a date active triple with no ientifier' do
+    it 'rejects a date active triple with no date' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_date_attributes: [

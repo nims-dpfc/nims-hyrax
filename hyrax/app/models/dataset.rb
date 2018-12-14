@@ -92,6 +92,8 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
+  property :custom_property, predicate: ::RDF::Vocab::NimsRdp['custom-property'], class_name:"ComplexKeyValue"
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
@@ -105,4 +107,5 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
   accepts_nested_attributes_for :specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
+  accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
 end
