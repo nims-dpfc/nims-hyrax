@@ -31,6 +31,12 @@ module ComplexAttributes
       end
       date_blank || identifiers_blank || person_blank
     end
+    # key_value_blank
+    #   Requires label and description
+    resource_class.send(:define_method, :key_value_blank) do |attributes|
+      Array(attributes[:label]).all?(&:blank?) ||
+      Array(attributes[:description]).all?(&:blank?)
+    end
     # person_blank
     #   Requires first name or last name or name
     resource_class.send(:define_method, :person_blank) do |attributes|
