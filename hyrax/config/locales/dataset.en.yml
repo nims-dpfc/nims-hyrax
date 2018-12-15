@@ -1,0 +1,31 @@
+en:
+  hyrax:
+    icons:
+      dataset:     'fa fa-file-text-o'
+    select_type:
+      dataset:
+        description:        "Dataset works"
+        name:               "Dataset"
+  simple_form:
+    labels:
+      dataset:
+        analysis_field:           "Analysis field"
+        characterization_methods: "Characterization methods"
+        computational_methods:    "Computational methods"
+        data_origin:              "Data origin"
+        material_types:           "Material types "
+        measurement_environment:  "Measurement environment"
+        processing_environment:   "Processing environment"
+        properties_addressed:     "Properties addressed"
+        structural_features:      "Structural features"
+        synthesis_and_processing: "Synthesis and processing"
+        complex_person:           "Person"
+        complex_identifier:       "Identifier"
+        part_of:                  "Part of"
+        status_at_start:          "Status at start"
+        status_at_end:            "Status at end"
+        instrument:               "Instrument"
+        complex_date:             "Date"
+        complex_relation:         "Related item"
+
+
