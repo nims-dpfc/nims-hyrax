@@ -1,0 +1,8 @@
+en:
+  hyrax:
+    icons:
+      publication:     'fa fa-file-text-o'
+    select_type:
+      publication:
+        description:        "Publication works"
+        name:               "Publication"
