@@ -2,9 +2,11 @@
 .idea/
 
 # ignore files for puma but keep directory structure
-hyrax/shared/
+hyrax/shared/log/*
 !hyrax/shared/log/.keep
+hyrax/shared/pids/*
 !hyrax/shared/pids/.keep
+hyrax/shared/sockets/*
 !hyrax/shared/sockets/.keep
 
 # Files that appeared when I ran hyrax that weren't initally checked in
