@@ -1,0 +1,271 @@
+terms:
+- id: composites/複合材料
+  term: composites/複合材料
+  active: true
+- id: composites/複合材料 -- biological or green/生物学的またはグリーン
+  term: composites/複合材料 -- biological or green/生物学的またはグリーン
+  active: true
+- id: composites/複合材料 -- fiber-reinforced/繊維強化
+  term: composites/複合材料 -- fiber-reinforced/繊維強化
+  active: true
+- id: composites/複合材料 -- metal-matrix/金属マトリックス
+  term: composites/複合材料 -- metal-matrix/金属マトリックス
+  active: true
+- id: composites/複合材料 -- nanocomposites/ナノコンポジット
+  term: composites/複合材料 -- nanocomposites/ナノコンポジット
+  active: true
+- id: composites/複合材料 -- particle-reinforced/粒子強化
+  term: composites/複合材料 -- particle-reinforced/粒子強化
+  active: true
+- id: composites/複合材料 -- polymer-matrix/ポリマーマトリックス
+  term: composites/複合材料 -- polymer-matrix/ポリマーマトリックス
+  active: true
+- id: composites/複合材料 -- structural/構造
+  term: composites/複合材料 -- structural/構造
+  active: true
+- id: defects/欠陥
+  term: defects/欠陥
+  active: true
+- id: defects/欠陥 -- cracks/クラック
+  term: defects/欠陥 -- cracks/クラック
+  active: true
+- id: defects/欠陥 -- crazing/ひび割れ(crazing)
+  term: defects/欠陥 -- crazing/ひび割れ(crazing)
+  active: true
+- id: defects/欠陥 -- debonding/脱結合
+  term: defects/欠陥 -- debonding/脱結合
+  active: true
+- id: defects/欠陥 -- disclinations/回位
+  term: defects/欠陥 -- disclinations/回位
+  active: true
+- id: defects/欠陥 -- dislocations/転位
+  term: defects/欠陥 -- dislocations/転位
+  active: true
+- id: defects/欠陥 -- inclusions/内包物
+  term: defects/欠陥 -- inclusions/内包物
+  active: true
+- id: defects/欠陥 -- interstitials/インタースティシャル
+  term: defects/欠陥 -- interstitials/インタースティシャル
+  active: true
+- id: defects/欠陥 -- point defects/点欠陥
+  term: defects/欠陥 -- point defects/点欠陥
+  active: true
+- id: defects/欠陥 -- pores/細孔(pore)
+  term: defects/欠陥 -- pores/細孔(pore)
+  active: true
+- id: defects/欠陥 -- vacancies/空孔(vacancy)
+  term: defects/欠陥 -- vacancies/空孔(vacancy)
+  active: true
+- id: defects/欠陥 -- voids/空隙(void)
+  term: defects/欠陥 -- voids/空隙(void)
+  active: true
+- id: engineered structures/工学的構造
+  term: engineered structures/工学的構造
+  active: true
+- id: interfacial/界面
+  term: interfacial/界面
+  active: true
+- id: interfacial/界面 -- grain boundaries/粒界
+  term: interfacial/界面 -- grain boundaries/粒界
+  active: true
+- id: interfacial/界面 -- interfacial surface area/表面・界面領域
+  term: interfacial/界面 -- interfacial surface area/表面・界面領域
+  active: true
+- id: interfacial/界面 -- magnetic domain walls/磁壁
+  term: interfacial/界面 -- magnetic domain walls/磁壁
+  active: true
+- id: interfacial/界面 -- ordering boundaries/秩序境界(ordering boundary)
+  term: interfacial/界面 -- ordering boundaries/秩序境界(ordering boundary)
+  active: true
+- id: interfacial/界面 -- phase boundaries/相境界
+  term: interfacial/界面 -- phase boundaries/相境界
+  active: true
+- id: interfacial/界面 -- stacking faults/積層欠陥
+  term: interfacial/界面 -- stacking faults/積層欠陥
+  active: true
+- id: interfacial/界面 -- surfaces/表面
+  term: interfacial/界面 -- surfaces/表面
+  active: true
+- id: interfacial/界面 -- twin boundaries/双境界
+  term: interfacial/界面 -- twin boundaries/双境界
+  active: true
+- id: microstructures/微細構造(microstructure)
+  term: microstructures/微細構造(microstructure)
+  active: true
+- id: microstructures/微細構造(microstructure) -- cellular/細胞
+  term: microstructures/微細構造(microstructure) -- cellular/細胞
+  active: true
+- id: microstructures/微細構造(microstructure) -- clustering/クラスタリング
+  term: microstructures/微細構造(microstructure) -- clustering/クラスタリング
+  active: true
+- id: microstructures/微細構造(microstructure) -- compound/化合物
+  term: microstructures/微細構造(microstructure) -- compound/化合物
+  active: true
+- id: microstructures/微細構造(microstructure) -- crystallinity/結晶性
+  term: microstructures/微細構造(microstructure) -- crystallinity/結晶性
+  active: true
+- id: microstructures/微細構造(microstructure) -- defect structures/欠陥構造
+  term: microstructures/微細構造(microstructure) -- defect structures/欠陥構造
+  active: true
+- id: microstructures/微細構造(microstructure) -- dendritic/樹枝状
+  term: microstructures/微細構造(microstructure) -- dendritic/樹枝状
+  active: true
+- id: microstructures/微細構造(microstructure) -- dispersion/分散
+  term: microstructures/微細構造(microstructure) -- dispersion/分散
+  active: true
+- id: microstructures/微細構造(microstructure) -- eutectic/共晶
+  term: microstructures/微細構造(microstructure) -- eutectic/共晶
+  active: true
+- id: microstructures/微細構造(microstructure) -- grains/粒
+  term: microstructures/微細構造(microstructure) -- grains/粒
+  active: true
+- id: microstructures/微細構造(microstructure) -- nanocrystalline/ナノ結晶
+  term: microstructures/微細構造(microstructure) -- nanocrystalline/ナノ結晶
+  active: true
+- id: microstructures/微細構造(microstructure) -- particle distribution/粒子分布
+  term: microstructures/微細構造(microstructure) -- particle distribution/粒子分布
+  active: true
+- id: microstructures/微細構造(microstructure) -- particle shape/粒子形状
+  term: microstructures/微細構造(microstructure) -- particle shape/粒子形状
+  active: true
+- id: microstructures/微細構造(microstructure) -- polycrystalline/多結晶
+  term: microstructures/微細構造(microstructure) -- polycrystalline/多結晶
+  active: true
+- id: microstructures/微細構造(microstructure) -- polydispersity/多分散性
+  term: microstructures/微細構造(microstructure) -- polydispersity/多分散性
+  active: true
+- id: microstructures/微細構造(microstructure) -- porosity/空隙率(porosity)
+  term: microstructures/微細構造(microstructure) -- porosity/空隙率(porosity)
+  active: true
+- id: microstructures/微細構造(microstructure) -- precipitates/沈殿物(precipitate)
+  term: microstructures/微細構造(microstructure) -- precipitates/沈殿物(precipitate)
+  active: true
+- id: microstructures/微細構造(microstructure) -- quasicrystalline/準結晶
+  term: microstructures/微細構造(microstructure) -- quasicrystalline/準結晶
+  active: true
+- id: microstructures/微細構造(microstructure) -- single crystal/単結晶
+  term: microstructures/微細構造(microstructure) -- single crystal/単結晶
+  active: true
+- id: microstructures/微細構造(microstructure) -- twinned/双晶
+  term: microstructures/微細構造(microstructure) -- twinned/双晶
+  active: true
+- id: molecular structure/分子構造
+  term: molecular structure/分子構造
+  active: true
+- id: molecular structure/分子構造 -- alternating copolymer/交互共重合体
+  term: molecular structure/分子構造 -- alternating copolymer/交互共重合体
+  active: true
+- id: molecular structure/分子構造 -- block copolymer/ブロック共重合体
+  term: molecular structure/分子構造 -- block copolymer/ブロック共重合体
+  active: true
+- id: molecular structure/分子構造 -- dendrimer/デンドリマー
+  term: molecular structure/分子構造 -- dendrimer/デンドリマー
+  active: true
+- id: molecular structure/分子構造 -- end-group composition/末端基組成
+  term: molecular structure/分子構造 -- end-group composition/末端基組成
+  active: true
+- id: molecular structure/分子構造 -- functionalization/機能化
+  term: molecular structure/分子構造 -- functionalization/機能化
+  active: true
+- id: molecular structure/分子構造 -- gradient copolymer/グラジエントコポリマー
+  term: molecular structure/分子構造 -- gradient copolymer/グラジエントコポリマー
+  active: true
+- id: molecular structure/分子構造 -- long-chain branching/長鎖分岐
+  term: molecular structure/分子構造 -- long-chain branching/長鎖分岐
+  active: true
+- id: molecular structure/分子構造 -- random copolymer/ランダム共重合体
+  term: molecular structure/分子構造 -- random copolymer/ランダム共重合体
+  active: true
+- id: molecular structure/分子構造 -- short-chain branching/短鎖分岐
+  term: molecular structure/分子構造 -- short-chain branching/短鎖分岐
+  active: true
+- id: molecular structure/分子構造 -- surfactants/界面活性剤
+  term: molecular structure/分子構造 -- surfactants/界面活性剤
+  active: true
+- id: molecular structure/分子構造 -- tacticity/立体規則性
+  term: molecular structure/分子構造 -- tacticity/立体規則性
+  active: true
+- id: morphologies/形態
+  term: morphologies/形態
+  active: true
+- id: morphologies/形態 -- aligned/整列状態
+  term: morphologies/形態 -- aligned/整列状態
+  active: true
+- id: morphologies/形態 -- amorphous/アモルファス
+  term: morphologies/形態 -- amorphous/アモルファス
+  active: true
+- id: morphologies/形態 -- clusters/クラスタ
+  term: morphologies/形態 -- clusters/クラスタ
+  active: true
+- id: morphologies/形態 -- complex fluids/複雑流体
+  term: morphologies/形態 -- complex fluids/複雑流体
+  active: true
+- id: morphologies/形態 -- glass/ガラス
+  term: morphologies/形態 -- glass/ガラス
+  active: true
+- id: morphologies/形態 -- layered/層状
+  term: morphologies/形態 -- layered/層状
+  active: true
+- id: morphologies/形態 -- nanoparticles or nanotubes/ナノ粒子_ナノチューブ
+  term: morphologies/形態 -- nanoparticles or nanotubes/ナノ粒子_ナノチューブ
+  active: true
+- id: morphologies/形態 -- one-dimensional/1次元
+  term: morphologies/形態 -- one-dimensional/1次元
+  active: true
+- id: morphologies/形態 -- open-framework/オープンフレームワーク
+  term: morphologies/形態 -- open-framework/オープンフレームワーク
+  active: true
+- id: morphologies/形態 -- particles or colloids/粒子_コロイド
+  term: morphologies/形態 -- particles or colloids/粒子_コロイド
+  active: true
+- id: morphologies/形態 -- porous/多孔質
+  term: morphologies/形態 -- porous/多孔質
+  active: true
+- id: morphologies/形態 -- quantum dots or wires/量子ドット_ワイヤ
+  term: morphologies/形態 -- quantum dots or wires/量子ドット_ワイヤ
+  active: true
+- id: morphologies/形態 -- random/ランダム
+  term: morphologies/形態 -- random/ランダム
+  active: true
+- id: morphologies/形態 -- semicrystalline/半結晶質
+  term: morphologies/形態 -- semicrystalline/半結晶質
+  active: true
+- id: morphologies/形態 -- thin film/薄膜
+  term: morphologies/形態 -- thin film/薄膜
+  active: true
+- id: morphologies/形態 -- two-dimensional/2次元
+  term: morphologies/形態 -- two-dimensional/2次元
+  active: true
+- id: morphologies/形態 -- wires/ワイヤー
+  term: morphologies/形態 -- wires/ワイヤー
+  active: true
+- id: morphologies/形態 -- woven/織物(woven)
+  term: morphologies/形態 -- woven/織物(woven)
+  active: true
+- id: phases/相
+  term: phases/相
+  active: true
+- id: phases/相 -- crystalline/結晶
+  term: phases/相 -- crystalline/結晶
+  active: true
+- id: phases/相 -- disordered/無秩序性
+  term: phases/相 -- disordered/無秩序性
+  active: true
+- id: phases/相 -- gas/ガス
+  term: phases/相 -- gas/ガス
+  active: true
+- id: phases/相 -- liquid/液体
+  term: phases/相 -- liquid/液体
+  active: true
+- id: phases/相 -- melt/溶融(melt)
+  term: phases/相 -- melt/溶融(melt)
+  active: true
+- id: phases/相 -- metastable/準安定
+  term: phases/相 -- metastable/準安定
+  active: true
+- id: phases/相 -- nonequilibrium/非平衡
+  term: phases/相 -- nonequilibrium/非平衡
+  active: true
+- id: phases/相 -- ordered/秩序性
+  term: phases/相 -- ordered/秩序性
+  active: true

@@ -1,0 +1,55 @@
+terms:
+- id: CALPHAD/カルパッド
+  term: CALPHAD/カルパッド
+  active: true
+- id: Monte Carlo methods/モンテカルロ法
+  term: Monte Carlo methods/モンテカルロ法
+  active: true
+- id: boundary tracking or level set/境界トラッキングまたはレベルセット
+  term: boundary tracking or level set/境界トラッキングまたはレベルセット
+  active: true
+- id: cellular automata/セルオートマトン
+  term: cellular automata/セルオートマトン
+  active: true
+- id: cluster expansion/クラスタ拡張
+  term: cluster expansion/クラスタ拡張
+  active: true
+- id: crystal plasticity/結晶の可塑性
+  term: crystal plasticity/結晶の可塑性
+  active: true
+- id: density functional theory or electronic structure/密度汎関数理論または電子構造
+  term: density functional theory or electronic structure/密度汎関数理論または電子構造
+  active: true
+- id: dislocation dynamics/転位ダイナミクス
+  term: dislocation dynamics/転位ダイナミクス
+  active: true
+- id: finite element analysis/有限要素解析
+  term: finite element analysis/有限要素解析
+  active: true
+- id: machine learning/機械学習
+  term: machine learning/機械学習
+  active: true
+- id: molecular dynamics/分子動力学
+  term: molecular dynamics/分子動力学
+  active: true
+- id: multiscale simulations/マルチスケールシミュレーション
+  term: multiscale simulations/マルチスケールシミュレーション
+  active: true
+- id: phase-field calculations/位相場計算
+  term: phase-field calculations/位相場計算
+  active: true
+- id: reverse Monte Carlo/リバースモンテカルロ
+  term: reverse Monte Carlo/リバースモンテカルロ
+  active: true
+- id: scattering theory/散乱理論
+  term: scattering theory/散乱理論
+  active: true
+- id: self-consistent field theory/自己一貫性場理論
+  term: self-consistent field theory/自己一貫性場理論
+  active: true
+- id: simulated experiment/シミュレート実験
+  term: simulated experiment/シミュレート実験
+  active: true
+- id: statistical mechanics/統計力学
+  term: statistical mechanics/統計力学
+  active: true

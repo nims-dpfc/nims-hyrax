@@ -1,0 +1,17 @@
+terms:
+- id: experiments/実験
+  term: experiments/実験
+  active: true
+- id: informatics and data science/情報・データ科学
+  term: informatics and data science/情報・データ科学
+  active: true
+- id: other/その他
+  term: other/その他
+  active: true
+- id: simulations/シミュレーション
+  term: simulations/シミュレーション
+  active: true
+- id: theory/理論
+  term: theory/理論
+  active: true
+

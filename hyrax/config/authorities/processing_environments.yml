@@ -1,0 +1,25 @@
+terms:
+- id: at low temperature/低温
+  term: at low temperature/低温
+  active: true
+- id: in air/空気中
+  term: in air/空気中
+  active: true
+- id: in high pressure/高圧下
+  term: in high pressure/高圧下
+  active: true
+- id: in inactive gas/不活性ガス中
+  term: in inactive gas/不活性ガス中
+  active: true
+- id: in liquid/液体中
+  term: in liquid/液体中
+  active: true
+- id: in magnetic field/磁場中
+  term: in magnetic field/磁場中
+  active: true
+- id: in vacuum/真空中
+  term: in vacuum/真空中
+  active: true
+- id: other (free description)/その他（自由記述）
+  term: other (free description)/その他（自由記述）
+  active: true
