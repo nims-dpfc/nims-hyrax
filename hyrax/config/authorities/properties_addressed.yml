@@ -1,0 +1,341 @@
+terms:
+- id: chemical/化学的
+  term: chemical/化学的
+  active: true
+- id: chemical/化学的 -- composition/組成
+  term: chemical/化学的 -- composition/組成
+  active: true
+- id: chemical/化学的 -- impurity concentration/不純物濃度
+  term: chemical/化学的 -- impurity concentration/不純物濃度
+  active: true
+- id: chemical/化学的 -- molecular masses and distributions/分子量_分布
+  term: chemical/化学的 -- molecular masses and distributions/分子量_分布
+  active: true
+- id: colligative/束一性
+  term: colligative/束一性
+  active: true
+- id: corrosion/腐食
+  term: corrosion/腐食
+  active: true
+- id: corrosion/腐食 -- crevice/隙間(crevice)
+  term: corrosion/腐食 -- crevice/隙間(crevice)
+  active: true
+- id: corrosion/腐食 -- erosion-corrosion/侵食腐食
+  term: corrosion/腐食 -- erosion-corrosion/侵食腐食
+  active: true
+- id: corrosion/腐食 -- galvanic/ガルバニック
+  term: corrosion/腐食 -- galvanic/ガルバニック
+  active: true
+- id: corrosion/腐食 -- high temperature/高温
+  term: corrosion/腐食 -- high temperature/高温
+  active: true
+- id: corrosion/腐食 -- intergranular/粒子間
+  term: corrosion/腐食 -- intergranular/粒子間
+  active: true
+- id: corrosion/腐食 -- pitting/ピッティング
+  term: corrosion/腐食 -- pitting/ピッティング
+  active: true
+- id: corrosion/腐食 -- selective leaching/選択的浸出
+  term: corrosion/腐食 -- selective leaching/選択的浸出
+  active: true
+- id: corrosion/腐食 -- stress corrosion/応力腐食
+  term: corrosion/腐食 -- stress corrosion/応力腐食
+  active: true
+- id: corrosion/腐食 -- uniform/均一
+  term: corrosion/腐食 -- uniform/均一
+  active: true
+- id: crystallographic/結晶学的
+  term: crystallographic/結晶学的
+  active: true
+- id: crystallographic/結晶学的 -- crystalline lattice/結晶格子
+  term: crystallographic/結晶学的 -- crystalline lattice/結晶格子
+  active: true
+- id: crystallographic/結晶学的 -- orientation maps/方位マップ
+  term: crystallographic/結晶学的 -- orientation maps/方位マップ
+  active: true
+- id: crystallographic/結晶学的 -- space groups/空間群
+  term: crystallographic/結晶学的 -- space groups/空間群
+  active: true
+- id: crystallographic/結晶学的 -- textures/テクスチャ
+  term: crystallographic/結晶学的 -- textures/テクスチャ
+  active: true
+- id: durability/耐久性
+  term: durability/耐久性
+  active: true
+- id: durability/耐久性 -- aging/エージング
+  term: durability/耐久性 -- aging/エージング
+  active: true
+- id: durability/耐久性 -- coefficient of friction/摩擦係数
+  term: durability/耐久性 -- coefficient of friction/摩擦係数
+  active: true
+- id: durability/耐久性 -- thermal shock resistance/耐熱衝撃性
+  term: durability/耐久性 -- thermal shock resistance/耐熱衝撃性
+  active: true
+- id: durability/耐久性 -- wear resistance/耐摩耗性
+  term: durability/耐久性 -- wear resistance/耐摩耗性
+  active: true
+- id: electrical/電気特性
+  term: electrical/電気特性
+  active: true
+- id: electrical/電気特性 -- band structure/バンド構造
+  term: electrical/電気特性 -- band structure/バンド構造
+  active: true
+- id: electrical/電気特性 -- conductivity/導電性
+  term: electrical/電気特性 -- conductivity/導電性
+  active: true
+- id: electrical/電気特性 -- dielectric constant and spectra/誘電率_スペクトル
+  term: electrical/電気特性 -- dielectric constant and spectra/誘電率_スペクトル
+  active: true
+- id: electrical/電気特性 -- dielectric dispersion/誘電体分散
+  term: electrical/電気特性 -- dielectric dispersion/誘電体分散
+  active: true
+- id: electrical/電気特性 -- electrostrictive/電歪
+  term: electrical/電気特性 -- electrostrictive/電歪
+  active: true
+- id: electrical/電気特性 -- piezoelectric/圧電
+  term: electrical/電気特性 -- piezoelectric/圧電
+  active: true
+- id: electrical/電気特性 -- power conversion efficiency/電力変換効率
+  term: electrical/電気特性 -- power conversion efficiency/電力変換効率
+  active: true
+- id: electrical/電気特性 -- pyroelectric/焦電
+  term: electrical/電気特性 -- pyroelectric/焦電
+  active: true
+- id: electrical/電気特性 -- resistivity/抵抗率
+  term: electrical/電気特性 -- resistivity/抵抗率
+  active: true
+- id: electrical/電気特性 -- spin polarization/スピン偏極
+  term: electrical/電気特性 -- spin polarization/スピン偏極
+  active: true
+- id: electrical/電気特性 -- superconductivity/超伝導
+  term: electrical/電気特性 -- superconductivity/超伝導
+  active: true
+- id: electrical/電気特性 -- thermoelectric/熱電
+  term: electrical/電気特性 -- thermoelectric/熱電
+  active: true
+- id: kinetic/動的
+  term: kinetic/動的
+  active: true
+- id: kinetic/動的 -- grain growth/粒成長
+  term: kinetic/動的 -- grain growth/粒成長
+  active: true
+- id: kinetic/動的 -- phase evolution/位相進化
+  term: kinetic/動的 -- phase evolution/位相進化
+  active: true
+- id: kinetic/動的 -- phase transitions and ordering/相転移_秩序性
+  term: kinetic/動的 -- phase transitions and ordering/相転移_秩序性
+  active: true
+- id: magnetic/磁性
+  term: magnetic/磁性
+  active: true
+- id: magnetic/磁性 -- Curie temperature/キュリー温度
+  term: magnetic/磁性 -- Curie temperature/キュリー温度
+  active: true
+- id: magnetic/磁性 -- coercivity/保磁力(coercivity)
+  term: magnetic/磁性 -- coercivity/保磁力(coercivity)
+  active: true
+- id: magnetic/磁性 -- magnetization/磁化
+  term: magnetic/磁性 -- magnetization/磁化
+  active: true
+- id: magnetic/磁性 -- permeability/透過性
+  term: magnetic/磁性 -- permeability/透過性
+  active: true
+- id: magnetic/磁性 -- saturation magnetization/飽和磁化
+  term: magnetic/磁性 -- saturation magnetization/飽和磁化
+  active: true
+- id: magnetic/磁性 -- susceptibility/感受性(susceptibility)
+  term: magnetic/磁性 -- susceptibility/感受性(susceptibility)
+  active: true
+- id: mechanical/機械的性質
+  term: mechanical/機械的性質
+  active: true
+- id: mechanical/機械的性質 -- Poisson's ratio/ポアソン比
+  term: mechanical/機械的性質 -- Poisson's ratio/ポアソン比
+  active: true
+- id: mechanical/機械的性質 -- acoustic emission/音響放射
+  term: mechanical/機械的性質 -- acoustic emission/音響放射
+  active: true
+- id: mechanical/機械的性質 -- compression response/圧縮応答
+  term: mechanical/機械的性質 -- compression response/圧縮応答
+  active: true
+- id: mechanical/機械的性質 -- creep/クリープ
+  term: mechanical/機械的性質 -- creep/クリープ
+  active: true
+- id: mechanical/機械的性質 -- deformation mechanisms/変形メカニズム
+  term: mechanical/機械的性質 -- deformation mechanisms/変形メカニズム
+  active: true
+- id: mechanical/機械的性質 -- ductility/延性
+  term: mechanical/機械的性質 -- ductility/延性
+  active: true
+- id: mechanical/機械的性質 -- elasticity/弾性
+  term: mechanical/機械的性質 -- elasticity/弾性
+  active: true
+- id: mechanical/機械的性質 -- fatigue/疲労
+  term: mechanical/機械的性質 -- fatigue/疲労
+  active: true
+- id: mechanical/機械的性質 -- flexural response/曲げ応答
+  term: mechanical/機械的性質 -- flexural response/曲げ応答
+  active: true
+- id: mechanical/機械的性質 -- fracture behavior/破壊挙動
+  term: mechanical/機械的性質 -- fracture behavior/破壊挙動
+  active: true
+- id: mechanical/機械的性質 -- fracture toughness/破壊靭性
+  term: mechanical/機械的性質 -- fracture toughness/破壊靭性
+  active: true
+- id: mechanical/機械的性質 -- hardness/硬度
+  term: mechanical/機械的性質 -- hardness/硬度
+  active: true
+- id: mechanical/機械的性質 -- impact response/衝撃応答
+  term: mechanical/機械的性質 -- impact response/衝撃応答
+  active: true
+- id: mechanical/機械的性質 -- phonon modes/フォノンモード
+  term: mechanical/機械的性質 -- phonon modes/フォノンモード
+  active: true
+- id: mechanical/機械的性質 -- plasticity/可塑性
+  term: mechanical/機械的性質 -- plasticity/可塑性
+  active: true
+- id: mechanical/機械的性質 -- shear response/せん断応答
+  term: mechanical/機械的性質 -- shear response/せん断応答
+  active: true
+- id: mechanical/機械的性質 -- strength/力
+  term: mechanical/機械的性質 -- strength/力
+  active: true
+- id: mechanical/機械的性質 -- stress-strain behavior/応力 - ひずみ挙動
+  term: mechanical/機械的性質 -- stress-strain behavior/応力 - ひずみ挙動
+  active: true
+- id: mechanical/機械的性質 -- tensile response/引張応答
+  term: mechanical/機械的性質 -- tensile response/引張応答
+  active: true
+- id: mechanical/機械的性質 -- tensile strength/抗張力
+  term: mechanical/機械的性質 -- tensile strength/抗張力
+  active: true
+- id: mechanical/機械的性質 -- viscoelasticity/粘弾性
+  term: mechanical/機械的性質 -- viscoelasticity/粘弾性
+  active: true
+- id: mechanical/機械的性質 -- yield strength/降伏強度
+  term: mechanical/機械的性質 -- yield strength/降伏強度
+  active: true
+- id: optical/工学的性質
+  term: optical/工学的性質
+  active: true
+- id: optical/工学的性質 -- index of refraction/屈折率
+  term: optical/工学的性質 -- index of refraction/屈折率
+  active: true
+- id: optical/工学的性質 -- luminescence/発光
+  term: optical/工学的性質 -- luminescence/発光
+  active: true
+- id: optical/工学的性質 -- photoconductivity/光伝導性
+  term: optical/工学的性質 -- photoconductivity/光伝導性
+  active: true
+- id: rheological/レオロジー(流動学)的性質
+  term: rheological/レオロジー(流動学)的性質
+  active: true
+- id: rheological/レオロジー(流動学)的性質 -- complex modulus/複素弾性率
+  term: rheological/レオロジー(流動学)的性質 -- complex modulus/複素弾性率
+  active: true
+- id: rheological/レオロジー(流動学)的性質 -- viscoelasticity/粘弾性
+  term: rheological/レオロジー(流動学)的性質 -- viscoelasticity/粘弾性
+  active: true
+- id: rheological/レオロジー(流動学)的性質 -- viscosity/粘度
+  term: rheological/レオロジー(流動学)的性質 -- viscosity/粘度
+  active: true
+- id: structural/構造的性質
+  term: structural/構造的性質
+  active: true
+- id: thermodynamic/熱力学的性質
+  term: thermodynamic/熱力学的性質
+  active: true
+- id: thermodynamic/熱力学的性質 -- calorimetry profile/熱量測定プロファイル
+  term: thermodynamic/熱力学的性質 -- calorimetry profile/熱量測定プロファイル
+  active: true
+- id: thermodynamic/熱力学的性質 -- critical temperatures/臨界温度
+  term: thermodynamic/熱力学的性質 -- critical temperatures/臨界温度
+  active: true
+- id: thermodynamic/熱力学的性質 -- crystallization temperature/結晶化温度
+  term: thermodynamic/熱力学的性質 -- crystallization temperature/結晶化温度
+  active: true
+- id: thermodynamic/熱力学的性質 -- density/密度
+  term: thermodynamic/熱力学的性質 -- density/密度
+  active: true
+- id: thermodynamic/熱力学的性質 -- glass transition temperature/ガラス転移温度
+  term: thermodynamic/熱力学的性質 -- glass transition temperature/ガラス転移温度
+  active: true
+- id: thermodynamic/熱力学的性質 -- grain boundary energies/粒界エネルギー
+  term: thermodynamic/熱力学的性質 -- grain boundary energies/粒界エネルギー
+  active: true
+- id: thermodynamic/熱力学的性質 -- heat capacity/熱容量
+  term: thermodynamic/熱力学的性質 -- heat capacity/熱容量
+  active: true
+- id: thermodynamic/熱力学的性質 -- heat of fusion/融合熱
+  term: thermodynamic/熱力学的性質 -- heat of fusion/融合熱
+  active: true
+- id: thermodynamic/熱力学的性質 -- heat of solidification/凝固熱
+  term: thermodynamic/熱力学的性質 -- heat of solidification/凝固熱
+  active: true
+- id: thermodynamic/熱力学的性質 -- interfacial energies/界面エネルギー
+  term: thermodynamic/熱力学的性質 -- interfacial energies/界面エネルギー
+  active: true
+- id: thermodynamic/熱力学的性質 -- liquid crystal phase transition/液晶相転移温度
+  term: thermodynamic/熱力学的性質 -- liquid crystal phase transition/液晶相転移温度
+  active: true
+- id: thermodynamic/熱力学的性質 -- molar volume/モル体積
+  term: thermodynamic/熱力学的性質 -- molar volume/モル体積
+  active: true
+- id: thermodynamic/熱力学的性質 -- phase diagram/相図
+  term: thermodynamic/熱力学的性質 -- phase diagram/相図
+  active: true
+- id: thermodynamic/熱力学的性質 -- phase stability/相安定性
+  term: thermodynamic/熱力学的性質 -- phase stability/相安定性
+  active: true
+- id: thermodynamic/熱力学的性質 -- specific heat/比熱
+  term: thermodynamic/熱力学的性質 -- specific heat/比熱
+  active: true
+- id: thermodynamic/熱力学的性質 -- superconductivity/超伝導
+  term: thermodynamic/熱力学的性質 -- superconductivity/超伝導
+  active: true
+- id: thermodynamic/熱力学的性質 -- surface energies/表面エネルギー
+  term: thermodynamic/熱力学的性質 -- surface energies/表面エネルギー
+  active: true
+- id: |-
+    thermodynamic/熱力学的性質 -- temperature
+    melting temperature/融点
+  term: |-
+    thermodynamic/熱力学的性質 -- temperature
+    melting temperature/融点
+  active: true
+- id: thermodynamic/熱力学的性質 -- thermal conductivity/熱伝導率
+  term: thermodynamic/熱力学的性質 -- thermal conductivity/熱伝導率
+  active: true
+- id: thermodynamic/熱力学的性質 -- thermal decomposition temperature/熱分解温度
+  term: thermodynamic/熱力学的性質 -- thermal decomposition temperature/熱分解温度
+  active: true
+- id: thermodynamic/熱力学的性質 -- thermal expansion/熱膨張
+  term: thermodynamic/熱力学的性質 -- thermal expansion/熱膨張
+  active: true
+- id: toxicity/毒性(toxicity)
+  term: toxicity/毒性(toxicity)
+  active: true
+- id: transport/輸送
+  term: transport/輸送
+  active: true
+- id: transport/輸送 -- diffusivity/拡散率
+  term: transport/輸送 -- diffusivity/拡散率
+  active: true
+- id: transport/輸送 -- grain boundary diffusivity/粒界拡散率
+  term: transport/輸送 -- grain boundary diffusivity/粒界拡散率
+  active: true
+- id: transport/輸送 -- interdiffusion/相互拡散
+  term: transport/輸送 -- interdiffusion/相互拡散
+  active: true
+- id: transport/輸送 -- intrinsic diffusivity/固有拡散率(intrinsic diffusivity)
+  term: transport/輸送 -- intrinsic diffusivity/固有拡散率(intrinsic diffusivity)
+  active: true
+- id: transport/輸送 -- mobilities/移動(mobility)
+  term: transport/輸送 -- mobilities/移動(mobility)
+  active: true
+- id: transport/輸送 -- surface diffusivity/表面拡散率
+  term: transport/輸送 -- surface diffusivity/表面拡散率
+  active: true
+- id: transport/輸送 -- tracer diffusivity/トレーサ拡散率
+  term: transport/輸送 -- tracer diffusivity/トレーサ拡散率
+  active: true
