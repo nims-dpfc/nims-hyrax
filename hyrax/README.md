@@ -57,3 +57,13 @@ To make it easy to navigate screen, you could add this to your ~/.screenrc file
 hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 autodetach on
 ```
+
+### Steps to run the tests
+When the app is set up, from `hyrax/`:
+
+    bundle exec rspec
+
+for all tests, and e.g.
+
+    bundle exec rspec spec/models/concerns/complex_date_spec.rb
+for tests in a specific file.
