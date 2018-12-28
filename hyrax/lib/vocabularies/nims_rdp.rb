@@ -9,7 +9,7 @@ module RDF
       property 'chemical-composition'
       property 'complex-version'
       property 'computational-methods'
-      property 'crystalograpic-structure'
+      property 'crystallographic-structure'
       property 'custom-property'
       property 'data-origin'
       property 'identifier'
