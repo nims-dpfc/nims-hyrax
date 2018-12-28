@@ -88,5 +88,10 @@ module ComplexValidation
     resource_class.send(:define_method, :version_blank) do |attributes|
       Array(attributes[:version]).all?(&:blank?)
     end
+    # event_blank
+    #  Requires title
+    resource_class.send(:define_method, :event_blank) do |attributes|
+      Array(attributes[:title]).all?(&:blank?)
+    end
   end
 end

@@ -72,4 +72,13 @@ class Publication < ActiveFedora::Base
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
+  include ComplexValidation
+  accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
+  # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_event, reject_if: :event_blank, allow_destroy: true
+
 end
