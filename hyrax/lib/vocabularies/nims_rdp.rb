@@ -16,7 +16,7 @@ module RDF
       property 'instrument'
       property 'instrument-function-tier1'
       property 'instrument-function-tier2'
-      property 'imstrument-manufacturer'
+      property 'instrument-manufacturer'
       property 'instrument-operator'
       property 'instrument-organization'
       property 'material-types'
