@@ -76,7 +76,7 @@ module ComplexValidation
         identifiers_blank = identifiers_blank && Array(id[:identifier]).all?(&:blank?)
       end
       Array(attributes[:chemical_composition]).all?(&:blank?) ||
-      Array(attributes[:crystalograpic_structure]).all?(&:blank?) ||
+      Array(attributes[:crystallographic_structure]).all?(&:blank?) ||
       Array(attributes[:description]).all?(&:blank?) ||
       identifiers_blank ||
       Array(attributes[:material_types]).all?(&:blank?) ||
