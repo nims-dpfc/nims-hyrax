@@ -1,4 +1,4 @@
-require './lib/vocabularies/nims_rdp'
+require './lib/vocabularies/escidoc_publication'
 
 class Publication < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
