@@ -1,64 +1,22 @@
 terms:
-  - id: ContactPerson
-    term: Contact person
+  - id: author/著者
+    term: author/著者
     active: true
-  - id: DataCollector
-    term: Data collector
+  - id: editor/編集者
+    term: editor/編集者
     active: true
-  - id: DataCurator
-    term: Data curator
+  - id: translator/翻訳者
+    term: translator/翻訳者
     active: true
-  - id: DataManager
-    term: Data manager
+  - id: data depositor/データ記入者
+    term: data depositor/データ記入者
     active: true
-  - id: Distributor
-    term: Distributor
+  - id: data curator/データキュレーター
+    term: data curator/データキュレーター
     active: true
-  - id: Editor
-    term: Editor
+  - id: contact person/連絡責任者
+    term: contact person/連絡責任者
     active: true
-  - id: HostingInstitution
-    term: Hosting institution
-    active: true
-  - id: Producer
-    term: Producer
-    active: true
-  - id: ProjectLeader
-    term: Project leader
-    active: true
-  - id: ProjectManager
-    term: Project manager
-    active: true
-  - id: ProjectMember
-    term: Project member
-    active: true
-  - id: RegistrationAgency
-    term: Registration agency
-    active: true
-  - id: RegistrationAuthority
-    term: Registration authority
-    active: true
-  - id: RelatedPerson
-    term: Related person
-    active: true
-  - id: Researcher
-    term: Researcher
-    active: true
-  - id: ResearchGroup
-    term: Research group
-    active: true
-  - id: RightsHolder
-    term: Rights holder
-    active: true
-  - id: Sponsor
-    term: Sponsor
-    active: true
-  - id: Supervisor
-    term: Supervisor
-    active: true
-  - id: WorkPackageLeader
-    term: Work package leader
-    active: true
-  - id: Other
-    term: Other
+  - id: operator
+    term: operator/データ測定者・計算者
     active: true
