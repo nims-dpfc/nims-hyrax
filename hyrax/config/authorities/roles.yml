@@ -1,20 +1,20 @@
 terms:
-  - id: author/著者
+  - id: author
     term: author/著者
     active: true
-  - id: editor/編集者
+  - id: editor
     term: editor/編集者
     active: true
-  - id: translator/翻訳者
+  - id: translator
     term: translator/翻訳者
     active: true
-  - id: data depositor/データ記入者
+  - id: data depositor
     term: data depositor/データ記入者
     active: true
-  - id: data curator/データキュレーター
+  - id: data curator
     term: data curator/データキュレーター
     active: true
-  - id: contact person/連絡責任者
+  - id: contact person
     term: contact person/連絡責任者
     active: true
   - id: operator

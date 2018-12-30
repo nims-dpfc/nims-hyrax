@@ -1,55 +1,55 @@
 terms:
-- id: CALPHAD/カルパッド
+- id: CALPHAD
   term: CALPHAD/カルパッド
   active: true
-- id: Monte Carlo methods/モンテカルロ法
+- id: Monte Carlo methods
   term: Monte Carlo methods/モンテカルロ法
   active: true
-- id: boundary tracking or level set/境界トラッキングまたはレベルセット
+- id: boundary tracking or level set
   term: boundary tracking or level set/境界トラッキングまたはレベルセット
   active: true
-- id: cellular automata/セルオートマトン
+- id: cellular automata
   term: cellular automata/セルオートマトン
   active: true
-- id: cluster expansion/クラスタ拡張
+- id: cluster expansion
   term: cluster expansion/クラスタ拡張
   active: true
-- id: crystal plasticity/結晶の可塑性
+- id: crystal plasticity
   term: crystal plasticity/結晶の可塑性
   active: true
-- id: density functional theory or electronic structure/密度汎関数理論または電子構造
+- id: density functional theory or electronic structure
   term: density functional theory or electronic structure/密度汎関数理論または電子構造
   active: true
-- id: dislocation dynamics/転位ダイナミクス
+- id: dislocation dynamics
   term: dislocation dynamics/転位ダイナミクス
   active: true
-- id: finite element analysis/有限要素解析
+- id: finite element analysis
   term: finite element analysis/有限要素解析
   active: true
-- id: machine learning/機械学習
+- id: machine learning
   term: machine learning/機械学習
   active: true
-- id: molecular dynamics/分子動力学
+- id: molecular dynamics
   term: molecular dynamics/分子動力学
   active: true
-- id: multiscale simulations/マルチスケールシミュレーション
+- id: multiscale simulations
   term: multiscale simulations/マルチスケールシミュレーション
   active: true
-- id: phase-field calculations/位相場計算
+- id: phase-field calculations
   term: phase-field calculations/位相場計算
   active: true
-- id: reverse Monte Carlo/リバースモンテカルロ
+- id: reverse Monte Carlo
   term: reverse Monte Carlo/リバースモンテカルロ
   active: true
-- id: scattering theory/散乱理論
+- id: scattering theory
   term: scattering theory/散乱理論
   active: true
-- id: self-consistent field theory/自己一貫性場理論
+- id: self-consistent field theory
   term: self-consistent field theory/自己一貫性場理論
   active: true
-- id: simulated experiment/シミュレート実験
+- id: simulated experiment
   term: simulated experiment/シミュレート実験
   active: true
-- id: statistical mechanics/統計力学
+- id: statistical mechanics
   term: statistical mechanics/統計力学
   active: true

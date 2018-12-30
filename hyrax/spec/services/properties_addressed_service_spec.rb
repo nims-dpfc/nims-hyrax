@@ -6,8 +6,8 @@ RSpec.describe PropertiesAddressedService do
   describe "#select_active_options" do
     it "returns active terms" do
       expect(service.select_active_options).to include(
-        ["chemical/化学的", "chemical/化学的"],
-        ["corrosion/腐食", "corrosion/腐食"])
+        ["chemical/化学的", "chemical"],
+        ["corrosion/腐食", "corrosion"])
     end
   end
 end
