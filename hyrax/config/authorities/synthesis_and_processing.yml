@@ -1,284 +1,284 @@
 terms:
-- id: annealing and homogenization/アニーリング_均一化処理
+- id: annealing and homogenization
   term: annealing and homogenization/アニーリング_均一化処理
   active: true
-- id: annealing and homogenization/アニーリング_均一化処理 -- aging/エージング
+- id: annealing and homogenization -- aging
   term: annealing and homogenization/アニーリング_均一化処理 -- aging/エージング
   active: true
-- id: annealing and homogenization/アニーリング_均一化処理 -- homogenization/均質化
+- id: annealing and homogenization -- homogenization
   term: annealing and homogenization/アニーリング_均一化処理 -- homogenization/均質化
   active: true
-- id: annealing and homogenization/アニーリング_均一化処理 -- mechanical mixing/機械的混合
+- id: annealing and homogenization -- mechanical mixing
   term: annealing and homogenization/アニーリング_均一化処理 -- mechanical mixing/機械的混合
   active: true
-- id: annealing and homogenization/アニーリング_均一化処理 -- melt mixing/溶融混合
+- id: annealing and homogenization -- melt mixing
   term: annealing and homogenization/アニーリング_均一化処理 -- melt mixing/溶融混合
   active: true
-- id: annealing and homogenization/アニーリング_均一化処理 -- normalizing/焼きならし（焼準）
+- id: annealing and homogenization -- normalizing
   term: annealing and homogenization/アニーリング_均一化処理 -- normalizing/焼きならし（焼準）
   active: true
-- id: annealing and homogenization/アニーリング_均一化処理 -- recrystallization/再結晶化
+- id: annealing and homogenization -- recrystallization
   term: annealing and homogenization/アニーリング_均一化処理 -- recrystallization/再結晶化
   active: true
-- id: annealing and homogenization/アニーリング_均一化処理 -- stress relieving/応力緩和
+- id: annealing and homogenization -- stress relieving
   term: annealing and homogenization/アニーリング_均一化処理 -- stress relieving/応力緩和
   active: true
-- id: annealing and homogenization/アニーリング_均一化処理 -- tempering/焼き戻し
+- id: annealing and homogenization -- tempering
   term: annealing and homogenization/アニーリング_均一化処理 -- tempering/焼き戻し
   active: true
-- id: annealing and homogenization/アニーリング_均一化処理 -- ultrasonication/超音波処理
+- id: annealing and homogenization -- ultrasonication
   term: annealing and homogenization/アニーリング_均一化処理 -- ultrasonication/超音波処理
   active: true
-- id: casting/鋳造
+- id: casting
   term: casting/鋳造
   active: true
-- id: casting/鋳造 -- centrifugal casting/遠心鋳造
+- id: casting -- centrifugal casting
   term: casting/鋳造 -- centrifugal casting/遠心鋳造
   active: true
-- id: casting/鋳造 -- continuous casting/連続鋳造
+- id: casting -- continuous casting
   term: casting/鋳造 -- continuous casting/連続鋳造
   active: true
-- id: casting/鋳造 -- die casting/ダイカスト
+- id: casting -- die casting
   term: casting/鋳造 -- die casting/ダイカスト
   active: true
-- id: casting/鋳造 -- investment casting/インベストメント鋳造
+- id: casting -- investment casting
   term: casting/鋳造 -- investment casting/インベストメント鋳造
   active: true
-- id: casting/鋳造 -- sand castingslip/砂キャスティングスリップ
+- id: casting -- sand castingslip
   term: casting/鋳造 -- sand castingslip/砂キャスティングスリップ
   active: true
-- id: casting/鋳造 -- slip casting/スリップキャスティング
+- id: casting -- slip casting
   term: casting/鋳造 -- slip casting/スリップキャスティング
   active: true
-- id: casting/鋳造 -- vacuum arc melting/真空アーク溶解
+- id: casting -- vacuum arc melting
   term: casting/鋳造 -- vacuum arc melting/真空アーク溶解
   active: true
-- id: deposition and coating/蒸着_成膜
+- id: deposition and coating
   term: deposition and coating/蒸着_成膜
   active: true
-- id: deposition and coating/蒸着_成膜 -- Langmuir-Blodgett film deposition/ラングミュア - ブロジェット膜堆積
+- id: deposition and coating -- Langmuir-Blodgett film deposition
   term: deposition and coating/蒸着_成膜 -- Langmuir-Blodgett film deposition/ラングミュア -
     ブロジェット膜堆積
   active: true
-- id: deposition and coating/蒸着_成膜 -- atomic layer deposition/原子層堆積(ALD)
+- id: deposition and coating -- atomic layer deposition
   term: deposition and coating/蒸着_成膜 -- atomic layer deposition/原子層堆積(ALD)
   active: true
-- id: deposition and coating/蒸着_成膜 -- carbon evaporation coating/炭素蒸発コーティング
+- id: deposition and coating -- carbon evaporation coating
   term: deposition and coating/蒸着_成膜 -- carbon evaporation coating/炭素蒸発コーティング
   active: true
-- id: deposition and coating/蒸着_成膜 -- chemical vapor deposition/化学蒸着(CVD)
+- id: deposition and coating -- chemical vapor deposition
   term: deposition and coating/蒸着_成膜 -- chemical vapor deposition/化学蒸着(CVD)
   active: true
-- id: deposition and coating/蒸着_成膜 -- electrodeposition/電着
+- id: deposition and coating -- electrodeposition
   term: deposition and coating/蒸着_成膜 -- electrodeposition/電着
   active: true
-- id: deposition and coating/蒸着_成膜 -- electron beam deposition/電子ビーム蒸着
+- id: deposition and coating -- electron beam deposition
   term: deposition and coating/蒸着_成膜 -- electron beam deposition/電子ビーム蒸着
   active: true
-- id: deposition and coating/蒸着_成膜 -- evaporation/蒸発(evaporation)
+- id: deposition and coating -- evaporation
   term: deposition and coating/蒸着_成膜 -- evaporation/蒸発(evaporation)
   active: true
-- id: deposition and coating/蒸着_成膜 -- gold-sputter coating/金スパッタコーティング
+- id: deposition and coating -- gold-sputter coating
   term: deposition and coating/蒸着_成膜 -- gold-sputter coating/金スパッタコーティング
   active: true
-- id: deposition and coating/蒸着_成膜 -- ink-jet deposition/インクジェット堆積
+- id: deposition and coating -- ink-jet deposition
   term: deposition and coating/蒸着_成膜 -- ink-jet deposition/インクジェット堆積
   active: true
-- id: deposition and coating/蒸着_成膜 -- ion beam deposition/イオンビーム蒸着
+- id: deposition and coating -- ion beam deposition
   term: deposition and coating/蒸着_成膜 -- ion beam deposition/イオンビーム蒸着
   active: true
-- id: deposition and coating/蒸着_成膜 -- physical vapor deposition/物理蒸着
+- id: deposition and coating -- physical vapor deposition
   term: deposition and coating/蒸着_成膜 -- physical vapor deposition/物理蒸着
   active: true
-- id: deposition and coating/蒸着_成膜 -- plasma spraying/プラズマ溶射
+- id: deposition and coating -- plasma spraying
   term: deposition and coating/蒸着_成膜 -- plasma spraying/プラズマ溶射
   active: true
-- id: deposition and coating/蒸着_成膜 -- pulsed laser deposition/パルスレーザ堆積
+- id: deposition and coating -- pulsed laser deposition
   term: deposition and coating/蒸着_成膜 -- pulsed laser deposition/パルスレーザ堆積
   active: true
-- id: deposition and coating/蒸着_成膜 -- spin coating/スピンコーティング
+- id: deposition and coating -- spin coating
   term: deposition and coating/蒸着_成膜 -- spin coating/スピンコーティング
   active: true
-- id: deposition and coating/蒸着_成膜 -- splatter/飛散(splatter)
+- id: deposition and coating -- splatter
   term: deposition and coating/蒸着_成膜 -- splatter/飛散(splatter)
   active: true
-- id: deposition and coating/蒸着_成膜 -- sputter coating/スパッタコーティング
+- id: deposition and coating -- sputter coating
   term: deposition and coating/蒸着_成膜 -- sputter coating/スパッタコーティング
   active: true
-- id: forming/成形
+- id: forming
   term: forming/成形
   active: true
-- id: forming/成形 -- cold rolling/冷間圧延
+- id: forming -- cold rolling
   term: forming/成形 -- cold rolling/冷間圧延
   active: true
-- id: forming/成形 -- drawing/引抜(drawing)
+- id: forming -- drawing
   term: forming/成形 -- drawing/引抜(drawing)
   active: true
-- id: forming/成形 -- extrusion/押出
+- id: forming -- extrusion
   term: forming/成形 -- extrusion/押出
   active: true
-- id: forming/成形 -- forging/鍛造
+- id: forming -- forging
   term: forming/成形 -- forging/鍛造
   active: true
-- id: forming/成形 -- hot pressing/ホットプレス
+- id: forming -- hot pressing
   term: forming/成形 -- hot pressing/ホットプレス
   active: true
-- id: forming/成形 -- hot rolling/熱間圧延
+- id: forming -- hot rolling
   term: forming/成形 -- hot rolling/熱間圧延
   active: true
-- id: forming/成形 -- milling/粉砕
+- id: forming -- milling
   term: forming/成形 -- milling/粉砕
   active: true
-- id: forming/成形 -- molding/成形
+- id: forming -- molding
   term: forming/成形 -- molding/成形
   active: true
-- id: fractionation/分別(fractionation)
+- id: fractionation
   term: fractionation/分別(fractionation)
   active: true
-- id: mechanical and surface/機械的_表面
+- id: mechanical and surface
   term: mechanical and surface/機械的_表面
   active: true
-- id: mechanical and surface/機械的_表面 -- doctor blade or blade coating/ドクターブレード_ブレードコーティング
+- id: mechanical and surface -- doctor blade or blade coating
   term: mechanical and surface/機械的_表面 -- doctor blade or blade coating/ドクターブレード_ブレードコーティング
   active: true
-- id: mechanical and surface/機械的_表面 -- focused ion beam/集束イオンビーム
+- id: mechanical and surface -- focused ion beam
   term: mechanical and surface/機械的_表面 -- focused ion beam/集束イオンビーム
   active: true
-- id: mechanical and surface/機械的_表面 -- joining/接合
+- id: mechanical and surface -- joining
   term: mechanical and surface/機械的_表面 -- joining/接合
   active: true
-- id: mechanical and surface/機械的_表面 -- lithography/リソグラフィー
+- id: mechanical and surface -- lithography
   term: mechanical and surface/機械的_表面 -- lithography/リソグラフィー
   active: true
-- id: mechanical and surface/機械的_表面 -- polishing/研磨
+- id: mechanical and surface -- polishing
   term: mechanical and surface/機械的_表面 -- polishing/研磨
   active: true
-- id: mechanical and surface/機械的_表面 -- sectioning/切断
+- id: mechanical and surface -- sectioning
   term: mechanical and surface/機械的_表面 -- sectioning/切断
   active: true
-- id: mechanical and surface/機械的_表面 -- thermal plasma processing/熱プラズマ処理
+- id: mechanical and surface -- thermal plasma processing
   term: mechanical and surface/機械的_表面 -- thermal plasma processing/熱プラズマ処理
   active: true
-- id: powder processing/粉末処理
+- id: powder processing
   term: powder processing/粉末処理
   active: true
-- id: powder processing/粉末処理 -- atomization/噴霧
+- id: powder processing -- atomization
   term: powder processing/粉末処理 -- atomization/噴霧
   active: true
-- id: powder processing/粉末処理 -- ball milling/ボールミル
+- id: powder processing -- ball milling
   term: powder processing/粉末処理 -- ball milling/ボールミル
   active: true
-- id: powder processing/粉末処理 -- centrifugal disintegration/遠心分離
+- id: powder processing -- centrifugal disintegration
   term: powder processing/粉末処理 -- centrifugal disintegration/遠心分離
   active: true
-- id: powder processing/粉末処理 -- hot pressing/ホットプレス
+- id: powder processing -- hot pressing
   term: powder processing/粉末処理 -- hot pressing/ホットプレス
   active: true
-- id: powder processing/粉末処理 -- sintering/焼結
+- id: powder processing -- sintering
   term: powder processing/粉末処理 -- sintering/焼結
   active: true
-- id: powder processing/粉末処理 -- sponge iron process/スポンジ鉄プロセス
+- id: powder processing -- sponge iron process
   term: powder processing/粉末処理 -- sponge iron process/スポンジ鉄プロセス
   active: true
-- id: quenching/焼入れ(quenching)
+- id: quenching
   term: quenching/焼入れ(quenching)
   active: true
-- id: quenching/焼入れ(quenching) -- air cooled _ quench/空冷_急冷
+- id: quenching -- air cooled _ quench
   term: quenching/焼入れ(quenching) -- air cooled _ quench/空冷_急冷
   active: true
-- id: quenching/焼入れ(quenching) -- brine quench/ブラインクエンチ
+- id: quenching -- brine quench
   term: quenching/焼入れ(quenching) -- brine quench/ブラインクエンチ
   active: true
-- id: quenching/焼入れ(quenching) -- furnace cooled/炉冷却
+- id: quenching -- furnace cooled
   term: quenching/焼入れ(quenching) -- furnace cooled/炉冷却
   active: true
-- id: quenching/焼入れ(quenching) -- gas cooled/ガス冷却
+- id: quenching -- gas cooled
   term: quenching/焼入れ(quenching) -- gas cooled/ガス冷却
   active: true
-- id: quenching/焼入れ(quenching) -- ice quench/氷クエンチ
+- id: quenching -- ice quench
   term: quenching/焼入れ(quenching) -- ice quench/氷クエンチ
   active: true
-- id: quenching/焼入れ(quenching) -- liquid nitrogen quench/液体窒素急冷
+- id: quenching -- liquid nitrogen quench
   term: quenching/焼入れ(quenching) -- liquid nitrogen quench/液体窒素急冷
   active: true
-- id: quenching/焼入れ(quenching) -- oil quench/油(oil)クエンチ
+- id: quenching -- oil quench
   term: quenching/焼入れ(quenching) -- oil quench/油(oil)クエンチ
   active: true
-- id: quenching/焼入れ(quenching) -- water quench/水クエンチ
+- id: quenching -- water quench
   term: quenching/焼入れ(quenching) -- water quench/水クエンチ
   active: true
-- id: reactive/反応
+- id: reactive
   term: reactive/反応
   active: true
-- id: reactive/反応 -- addition polymerization/付加重合
+- id: reactive -- addition polymerization
   term: reactive/反応 -- addition polymerization/付加重合
   active: true
-- id: reactive/反応 -- condensation polymerization/縮合重合
+- id: reactive -- condensation polymerization
   term: reactive/反応 -- condensation polymerization/縮合重合
   active: true
-- id: reactive/反応 -- curing/硬化する
+- id: reactive -- curing
   term: reactive/反応 -- curing/硬化する
   active: true
-- id: reactive/反応 -- dissolving _ etching/溶解_エッチング
+- id: reactive -- dissolving _ etching
   term: reactive/反応 -- dissolving _ etching/溶解_エッチング
   active: true
-- id: reactive/反応 -- drying/乾燥
+- id: reactive -- drying
   term: reactive/反応 -- drying/乾燥
   active: true
-- id: reactive/反応 -- in-situ polymerization/in-situ重合
+- id: reactive -- in-situ polymerization
   term: reactive/反応 -- in-situ polymerization/in-situ重合
   active: true
-- id: reactive/反応 -- post-polymerization modification/後重合改質
+- id: reactive -- post-polymerization modification
   term: reactive/反応 -- post-polymerization modification/後重合改質
   active: true
-- id: reactive/反応 -- reductive roasting/還元焙煎
+- id: reactive -- reductive roasting
   term: reactive/反応 -- reductive roasting/還元焙煎
   active: true
-- id: reactive/反応 -- solution processing/ソリューション処理
+- id: reactive -- solution processing
   term: reactive/反応 -- solution processing/ソリューション処理
   active: true
-- id: reactive/反応 -- solvent casting/ソルベントキャスティング
+- id: reactive -- solvent casting
   term: reactive/反応 -- solvent casting/ソルベントキャスティング
   active: true
-- id: self-assembly/自己組織化
+- id: self-assembly
   term: self-assembly/自己組織化
   active: true
-- id: self-assembly/自己組織化 -- micelle formation/ミセル形成
+- id: self-assembly -- micelle formation
   term: self-assembly/自己組織化 -- micelle formation/ミセル形成
   active: true
-- id: self-assembly/自己組織化 -- monolayer formation/単層形成
+- id: self-assembly -- monolayer formation
   term: self-assembly/自己組織化 -- monolayer formation/単層形成
   active: true
-- id: self-assembly/自己組織化 -- self-assembly-assisted grafting/自己組織化グラフト
+- id: self-assembly -- self-assembly-assisted grafting
   term: self-assembly/自己組織化 -- self-assembly-assisted grafting/自己組織化グラフト
   active: true
-- id: solidification/固化(solidification)
+- id: solidification
   term: solidification/固化(solidification)
   active: true
-- id: solidification/固化(solidification) -- crystallization/結晶化温度
+- id: solidification -- crystallization
   term: solidification/固化(solidification) -- crystallization/結晶化温度
   active: true
-- id: solidification/固化(solidification) -- directional solidification/指向性凝固
+- id: solidification -- directional solidification
   term: solidification/固化(solidification) -- directional solidification/指向性凝固
   active: true
-- id: solidification/固化(solidification) -- injection molding/射出成形
+- id: solidification -- injection molding
   term: solidification/固化(solidification) -- injection molding/射出成形
   active: true
-- id: solidification/固化(solidification) -- precipitation/沈殿物(precipitate)
+- id: solidification -- precipitation
   term: solidification/固化(solidification) -- precipitation/沈殿物(precipitate)
   active: true
-- id: solidification/固化(solidification) -- rapid solidification/急速凝固
+- id: solidification -- rapid solidification
   term: solidification/固化(solidification) -- rapid solidification/急速凝固
   active: true
-- id: solidification/固化(solidification) -- seeded solidification/播種凝固
+- id: solidification -- seeded solidification
   term: solidification/固化(solidification) -- seeded solidification/播種凝固
   active: true
-- id: solidification/固化(solidification) -- single crystal solidification/単結晶凝固
+- id: solidification -- single crystal solidification
   term: solidification/固化(solidification) -- single crystal solidification/単結晶凝固
   active: true
-- id: solidification/固化(solidification) -- vacuum molding/真空成形
+- id: solidification -- vacuum molding
   term: solidification/固化(solidification) -- vacuum molding/真空成形
   active: true
-- id: solidification/固化(solidification) -- zone refining/ゾーン精製
+- id: solidification -- zone refining
   term: solidification/固化(solidification) -- zone refining/ゾーン精製
   active: true

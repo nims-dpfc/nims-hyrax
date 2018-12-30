@@ -6,8 +6,8 @@ RSpec.describe RoleService do
   describe "#select_active_options" do
     it "returns active terms" do
       expect(service.select_active_options).to include(
-        ["translator/翻訳者", "translator/翻訳者"],
-        ["data curator/データキュレーター", "data curator/データキュレーター"],
+        ["translator/翻訳者", "translator"],
+        ["data curator/データキュレーター", "data curator"],
         )
     end
   end

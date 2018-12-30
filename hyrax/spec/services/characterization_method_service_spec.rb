@@ -6,8 +6,8 @@ RSpec.describe CharacterizationMethodService do
   describe "#select_active_options" do
     it "returns active terms" do
       expect(service.select_active_options).to include(
-        ["charge distribution/荷電分布", "charge distribution/荷電分布"],
-        ["dilatometry/膨張計", "dilatometry/膨張計"])
+        ["charge distribution/荷電分布", "charge distribution"],
+        ["dilatometry/膨張計", "dilatometry"])
     end
   end
 end
