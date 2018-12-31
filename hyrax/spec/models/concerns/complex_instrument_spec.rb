@@ -12,26 +12,6 @@ RSpec.describe ComplexInstrument do
     Object.send(:remove_const, :ExampleWork)
   end
 
-  it 'has the correct uri' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_instrument_attributes: [{
-        complex_date_attributes: [{
-          date: ['2018-01-28'],
-        }],
-        complex_identifier_attributes: [{
-          identifier: ['ewfqwefqwef'],
-        }],
-        complex_person_attributes: [{
-          name: ['operator 1'],
-          role: ['Operator']
-        }],
-        title: 'Instrument 1'
-      }]
-    }
-    expect(@obj.complex_instrument.first.id).to include('#instrument')
-  end
-
   it 'creates an instrument active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {

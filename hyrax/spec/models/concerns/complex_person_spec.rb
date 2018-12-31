@@ -40,21 +40,6 @@ RSpec.describe ComplexPerson do
     expect(@obj.complex_person.first.uri).to eq ['http://localhost/person/1234567']
   end
 
-  it 'has the correct uri' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_person_attributes: [
-        {
-          first_name: 'Foo',
-          last_name: 'Bar',
-          affiliation: 'author affiliation',
-          role: 'Author'
-        }
-      ]
-    }
-    expect(@obj.complex_person.first.id).to include('#person')
-  end
-
   describe "when reject_if is a symbol" do
     before do
       class ExampleWork2 < ExampleWork

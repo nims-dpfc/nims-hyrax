@@ -1,6 +1,4 @@
 class ComplexInstrument < ActiveTriples::Resource
-  include CommonMethods
-
   configure type: ::RDF::Vocab::NimsRdp['Instrument']
 
   property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
@@ -28,15 +26,4 @@ class ComplexInstrument < ActiveTriples::Resource
   property :organization, predicate: ::RDF::Vocab::NimsRdp["instrument-organization"]
 
   property :title, predicate: ::RDF::Vocab::DC.title
-
-  ## Necessary to get AT to create hash URIs.
-  def initialize(uri, parent)
-    if uri.try(:node?)
-      uri = RDF::URI("#instrument#{uri.to_s.gsub('_:', '')}")
-    elsif uri.start_with?("#")
-      uri = RDF::URI(uri)
-    end
-    super
-  end
-
 end

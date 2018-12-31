@@ -56,7 +56,7 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
-  # TODO - This is required
+  # This is required
   property :data_origin, predicate: ::RDF::Vocab::NimsRdp['data-origin'] do |index|
     index.as :stored_searchable, :facetable
   end
@@ -82,7 +82,7 @@ class Dataset < ActiveFedora::Base
   #   could be used in place of part_of and related_url
   property :complex_relation, predicate: ::RDF::Vocab::DC.relation, class_name:"ComplexRelation"
 
-  # TODO - This is required
+  # This is required
   property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'], multiple: false do |index|
     index.as :stored_searchable
   end
