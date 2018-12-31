@@ -488,7 +488,7 @@ RSpec.describe Dataset do
     it 'creates a relation active triple resource with all the attributes' do
       @obj = build(:dataset, complex_relation_attributes: [
         {
-          label: 'A relation label',
+          title: 'A related item',
           url: 'http://example.com/relation',
           complex_identifier_attributes: [{
             identifier: ['123456'],
@@ -499,7 +499,7 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_relation.first.label).to eq ['A relation label']
+      expect(@obj.complex_relation.first.title).to eq ['A related item']
       expect(@obj.complex_relation.first.url).to eq ['http://example.com/relation']
       expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
@@ -508,9 +508,9 @@ RSpec.describe Dataset do
       expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
     end
 
-    it 'creates a relation active triple resource with label, url, identifier and relationship role' do
+    it 'creates a relation active triple resource with title, url, identifier and relationship role' do
       @obj = build(:dataset, complex_relation_attributes: [{
-          label: 'A relation label',
+          title: 'A relation label',
           url: 'http://example.com/relation',
           complex_identifier_attributes: [{
             identifier: ['123456']
@@ -519,7 +519,7 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_relation.first.label).to eq ['A relation label']
+      expect(@obj.complex_relation.first.title).to eq ['A relation label']
       expect(@obj.complex_relation.first.url).to eq ['http://example.com/relation']
       expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
