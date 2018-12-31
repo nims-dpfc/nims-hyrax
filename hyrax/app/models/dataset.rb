@@ -68,9 +68,10 @@ class Dataset < ActiveFedora::Base
   end
 
   # NOTE: Not a part of Hyrax basic metadata
-  property :part_of, predicate: ::RDF::Vocab::DC.isPartOf do |index|
-    index.as :stored_searchable
-  end
+  # Not defining this field. It raises RSolr::Error::ConnectionRefused when added to index.
+  # property :part_of, predicate: ::RDF::Vocab::DC.isPartOf do |index|
+  #   index.as :stored_searchable
+  # end
 
   property :properties_addressed, predicate: ::RDF::Vocab::NimsRdp['properties-addressed'] do |index|
     index.as :stored_searchable, :facetable
