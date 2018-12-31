@@ -5,7 +5,7 @@ class ComplexSpecimenType < ActiveTriples::Resource
 
   property :chemical_composition, predicate: ::RDF::Vocab::NimsRdp["chemical-composition"]
 
-  property :crystalograpic_structure, predicate: ::RDF::Vocab::NimsRdp["crystalograpic-structure"]
+  property :crystallographic_structure, predicate: ::RDF::Vocab::NimsRdp["crystallographic-structure"]
 
   property :description, predicate: ::RDF::Vocab::DC11.description
 

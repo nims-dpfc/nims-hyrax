@@ -64,19 +64,21 @@ module ComplexValidation
       Array(attributes[:relationship_name]).all?(&:blank?))
     end
     # rights_blank
-    #   Requires version
+    #   Requires rights
     resource_class.send(:define_method, :rights_blank) do |attributes|
       Array(attributes[:rights]).all?(&:blank?)
     end
     # specimen_type_blank
-    #   Requires title and date
+    #   Requires
+    #     chemical_composition, crystallographic_structure, description,
+    #     identifier, material_types, structural_features and title
     resource_class.send(:define_method, :specimen_type_blank) do |attributes|
       identifiers_blank = true
       Array(attributes[:complex_identifier_attributes]).each do |id|
         identifiers_blank = identifiers_blank && Array(id[:identifier]).all?(&:blank?)
       end
       Array(attributes[:chemical_composition]).all?(&:blank?) ||
-      Array(attributes[:crystalograpic_structure]).all?(&:blank?) ||
+      Array(attributes[:crystallographic_structure]).all?(&:blank?) ||
       Array(attributes[:description]).all?(&:blank?) ||
       identifiers_blank ||
       Array(attributes[:material_types]).all?(&:blank?) ||
