@@ -12,18 +12,6 @@ RSpec.describe ComplexRights do
     Object.send(:remove_const, :ExampleWork)
   end
 
-  it 'has the correct uri' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_rights_attributes: [
-        {
-          rights: 'cc0'
-        }
-      ]
-    }
-    expect(@obj.complex_rights.first.id).to include('#rights')
-  end
-
   it 'creates a rights active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {
