@@ -9,10 +9,14 @@ class DatasetIndexer < Hyrax::WorkIndexer
   # this behavior
   include Hyrax::IndexesLinkedMetadata
 
-  # Uncomment this block if you want to add custom indexing behavior:
-  # def generate_solr_document
-  #  super.tap do |solr_doc|
-  #    solr_doc['my_custom_field_ssim'] = object.my_custom_property
-  #  end
-  # end
+  # Custom indexers for dataset model
+  include ComplexField::DateIndexer
+  include ComplexField::IdentifierIndexer
+  include ComplexField::CustomPropertyIndexer
+  include ComplexField::PersonIndexer
+  include ComplexField::RightsIndexer
+  include ComplexField::VersionIndexer
+  include ComplexField::InstrumentIndexer
+  include ComplexField::RelationIndexer
+  include ComplexField::SpecimenTypeIndexer
 end
