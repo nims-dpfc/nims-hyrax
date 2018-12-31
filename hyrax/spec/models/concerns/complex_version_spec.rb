@@ -12,18 +12,6 @@ RSpec.describe ComplexVersion do
     Object.send(:remove_const, :ExampleWork)
   end
 
-  it 'has the correct uri' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_version_attributes: [
-        {
-          version: '1.0'
-        }
-      ]
-    }
-    expect(@obj.complex_version.first.id).to include('#version')
-  end
-
   it 'creates a version active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {

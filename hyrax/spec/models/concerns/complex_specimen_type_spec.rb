@@ -12,24 +12,6 @@ RSpec.describe ComplexSpecimenType do
     Object.send(:remove_const, :ExampleWork)
   end
 
-  it 'has the correct uri' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_specimen_type_attributes: [{
-        chemical_composition: 'chemical composition',
-        crystallographic_structure: 'crystallographic structure',
-        description: 'Description',
-        complex_identifier_attributes: [{
-          identifier: '1234567'
-        }],
-        material_types: 'material types',
-        structural_features: 'structural features',
-        title: 'Instrument 1'
-      }]
-    }
-    expect(@obj.complex_specimen_type.first.id).to include('#specimen')
-  end
-
   it 'creates a specimen type active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {
