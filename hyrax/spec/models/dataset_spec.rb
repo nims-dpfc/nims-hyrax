@@ -567,7 +567,7 @@ RSpec.describe Dataset do
     it 'creates a specimen type active triple resource with all the attributes' do
       @obj = build(:dataset, specimen_type_attributes: [{
           chemical_composition: 'chemical composition',
-          crystalograpic_structure: 'crystalograpic structure',
+          crystallographic_structure: 'crystallographic structure',
           description: 'Description',
           complex_identifier_attributes: [{
             identifier: '1234567'
@@ -588,7 +588,7 @@ RSpec.describe Dataset do
       expect(@obj.specimen_type.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.specimen_type.first.id).to include('#specimen')
       expect(@obj.specimen_type.first.chemical_composition).to eq ['chemical composition']
-      expect(@obj.specimen_type.first.crystalograpic_structure).to eq ['crystalograpic structure']
+      expect(@obj.specimen_type.first.crystallographic_structure).to eq ['crystallographic structure']
       expect(@obj.specimen_type.first.description).to eq ['Description']
       expect(@obj.specimen_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.specimen_type.first.complex_identifier.first.identifier).to eq ['1234567']
@@ -606,7 +606,7 @@ RSpec.describe Dataset do
     it 'creates a specimen type active triple resource with the 7 required attributes' do
       @obj = build(:dataset, specimen_type_attributes: [{
           chemical_composition: 'chemical composition',
-          crystalograpic_structure: 'crystalograpic structure',
+          crystallographic_structure: 'crystallographic structure',
           description: 'Description',
           complex_identifier_attributes: [{
             identifier: '1234567'
@@ -618,7 +618,7 @@ RSpec.describe Dataset do
       )
       expect(@obj.specimen_type.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.specimen_type.first.chemical_composition).to eq ['chemical composition']
-      expect(@obj.specimen_type.first.crystalograpic_structure).to eq ['crystalograpic structure']
+      expect(@obj.specimen_type.first.crystallographic_structure).to eq ['crystallographic structure']
       expect(@obj.specimen_type.first.description).to eq ['Description']
       expect(@obj.specimen_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.specimen_type.first.complex_identifier.first.identifier).to eq ['1234567']
@@ -630,7 +630,7 @@ RSpec.describe Dataset do
     it 'rejects a specimen type active triple with no identifier' do
       @obj = build(:dataset, specimen_type_attributes: [{
           chemical_composition: 'chemical composition',
-          crystalograpic_structure: 'crystalograpic structure',
+          crystallographic_structure: 'crystallographic structure',
           description: 'Description',
           complex_identifier_attributes: [{
             label: 'ORCID'
