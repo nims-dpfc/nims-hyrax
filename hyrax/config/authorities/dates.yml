@@ -29,3 +29,6 @@ terms:
   - id: http://purl.org/dc/terms/valid
     term: Valid
     active: true
+  - id: Processed
+    term: Processed
+    active: true
