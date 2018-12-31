@@ -168,7 +168,6 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.complex_rights.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_rights.first.id).to include('#rights')
       expect(@obj.complex_rights.first.rights).to eq ['cc0']
       expect(@obj.complex_rights.first.date).to be_empty
     end
@@ -344,7 +343,6 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.complex_version.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_version.first.id).to include('#version')
       expect(@obj.complex_version.first.date).to eq ['1978-10-28']
       expect(@obj.complex_version.first.description).to eq ['Creating the first version']
       expect(@obj.complex_version.first.identifier).to eq ['id1']
@@ -357,7 +355,6 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.complex_version.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_version.first.id).to include('#version')
       expect(@obj.complex_version.first.version).to eq ['1.0']
       expect(@obj.complex_version.first.date).to be_empty
       expect(@obj.complex_version.first.description).to be_empty
@@ -420,7 +417,6 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.instrument.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.instrument.first.id).to include('#instrument')
       expect(@obj.instrument.first.alternative_title).to eq ['An instrument title']
       expect(@obj.instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.instrument.first.complex_date.first.date).to eq ['2018-02-14']
@@ -587,7 +583,6 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.specimen_type.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.specimen_type.first.id).to include('#specimen')
       expect(@obj.specimen_type.first.chemical_composition).to eq ['chemical composition']
       expect(@obj.specimen_type.first.crystallographic_structure).to eq ['crystallographic structure']
       expect(@obj.specimen_type.first.description).to eq ['Description']
@@ -675,7 +670,6 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.custom_property.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.custom_property.first.id).to include('#key_value')
       expect(@obj.custom_property.first.label).to eq ['Full name']
       expect(@obj.custom_property.first.description).to eq ['My full name is ...']
     end

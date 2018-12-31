@@ -12,21 +12,6 @@ RSpec.describe ComplexRelation do
     Object.send(:remove_const, :ExampleWork)
   end
 
-  it 'has the correct uri' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_relation_attributes: [
-        {
-          title: 'A relation title',
-          url: 'http://example.com/relation',
-          relationship_name: 'Is part of',
-          relationship_role: 'http://example.com/isPartOf'
-        }
-      ]
-    }
-    expect(@obj.complex_relation.first.id).to include('#relation')
-  end
-
   it 'creates a relation active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {

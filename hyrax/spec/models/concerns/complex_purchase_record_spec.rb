@@ -12,17 +12,6 @@ RSpec.describe ComplexPurchaseRecord do
     Object.send(:remove_const, :ExampleWork)
   end
 
-  it 'has the correct uri' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_purchase_record_attributes: [{
-        date: ['2018-01-28'],
-        title: 'Instrument 1'
-      }]
-    }
-    expect(@obj.complex_purchase_record.first.id).to include('#purchase_record')
-  end
-
   it 'creates a purchase record active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {
