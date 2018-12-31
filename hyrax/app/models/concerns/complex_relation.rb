@@ -2,7 +2,7 @@ class ComplexRelation < ActiveTriples::Resource
   include CommonMethods
 
   configure type: ::RDF::Vocab::PROV.Association
-  property :label, predicate: ::RDF::Vocab::SKOS.prefLabel
+  property :title, predicate: ::RDF::Vocab::DC.title
   property :url, predicate: ::RDF::Vocab::MODS.locationUrl
   property :complex_identifier, predicate: ::RDF::Vocab::MODS.identifierGroup,
             class_name:"ComplexIdentifier"
