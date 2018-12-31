@@ -28,14 +28,18 @@ RSpec.describe DatasetIndexer do
       expect(@solr_document).to include('complex_date_ssm')
       expect(JSON.parse(@solr_document['complex_date_ssm'])).not_to be_empty
     end
-    it 'indexes as datebale' do
-      expect(@solr_document['complex_date_dtsim']).to match_array(['1988-10-28', '2018-01-01'])
+    it 'indexes as dateable' do
+      expect(@solr_document['complex_date_dtsim']).to match_array(
+        ["1988-10-28T00:00:00Z", "2018-01-01T00:00:00Z"])
     end
     it 'indexes each type as sortbale' do
-      expect(@solr_document['complex_date_submitted_dtsi']).to match_array('1988-10-28')
+      expect(@solr_document['complex_date_submitted_dtsi']).to match_array("1988-10-28T00:00:00Z")
     end
     it 'indexes each type as dateable' do
-      expect(@solr_document['complex_date_submitted_dtsim']).to match_array(['1988-10-28'])
+      expect(@solr_document['complex_date_submitted_dtsim']).to match_array(["1988-10-28T00:00:00Z"])
+    end
+    it 'indexes each type as displayable' do
+      expect(@solr_document['complex_date_submitted_ssm']).to match_array(["1988-10-28"])
     end
   end
 
@@ -264,10 +268,13 @@ RSpec.describe DatasetIndexer do
       expect(@solr_document['instrument_organization_sim']).to match_array(['Organisation 1', 'Organisation 2'])
     end
     it 'indexes date by type as dateable' do
-      expect(@solr_document['complex_date_processed_dtsim']).to match_array(['2018-03-15', '2018-02-14'])
+      expect(@solr_document['complex_date_processed_dtsim']).to match_array(["2018-02-14T00:00:00Z", "2018-03-15T00:00:00Z"])
     end
     it 'indexes date by type as sortable' do
-      expect(@solr_document['complex_date_processed_dtsi']).to match_array(['2018-03-15', '2018-02-14'])
+      expect(@solr_document['complex_date_processed_dtsi']).to match_array(["2018-02-14T00:00:00Z", "2018-03-15T00:00:00Z"])
+    end
+    it 'indexes date by type as displayable' do
+      expect(@solr_document['complex_date_processed_ssm']).to match_array(["2018-02-14", "2018-03-15"])
     end
     it 'indexes person by role as stored searchable' do
       expect(@solr_document['complex_person_operator_tesim']).to match_array(['Name of operator', 'Operator 2'])
@@ -457,11 +464,15 @@ RSpec.describe DatasetIndexer do
         ['qwerqwer', 'qwerqwerADSDSa'])
     end
     it 'indexes the purchase date as dateable' do
-      expect(@solr_document['complex_date_purchase_date_dtsim']).to match_array(
-        ['2018-09-23', '2018-12-23'])
+      expect(@solr_document['complex_date_purchased_dtsim']).to match_array(
+        ['2018-09-23T00:00:00Z', '2018-12-23T00:00:00Z'])
     end
     it 'indexes the purchase date as sortable' do
-      expect(@solr_document['complex_date_purchase_date_dtsi']).to match_array(
+      expect(@solr_document['complex_date_purchased_dtsi']).to match_array(
+        ['2018-09-23T00:00:00Z', '2018-12-23T00:00:00Z'])
+    end
+    it 'indexes the purchase date as displayable' do
+      expect(@solr_document['complex_date_purchased_ssm']).to match_array(
         ['2018-09-23', '2018-12-23'])
     end
   end
