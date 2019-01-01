@@ -32,3 +32,6 @@ terms:
   - id: Processed
     term: Processed
     active: true
+  - id: Purchased
+    term: Purchased
+    active: true
