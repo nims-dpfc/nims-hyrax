@@ -27,5 +27,7 @@ en:
         instrument:               "Instrument"
         complex_date:             "Date"
         complex_relation:         "Related item"
+        complex_rights:           "Rights"
+        complex_version:          "Version"
 
 
