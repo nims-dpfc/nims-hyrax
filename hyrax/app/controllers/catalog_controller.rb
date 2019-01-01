@@ -52,7 +52,29 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("publisher", :facetable), limit: 5
     config.add_facet_field solr_name("file_format", :facetable), limit: 5
     config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
-
+    config.add_facet_field solr_name("complex_person_author", :facetable), limit: 5, label: 'Author'
+    config.add_facet_field solr_name("complex_person_editor", :facetable), limit: 5, label: 'Editor'
+    config.add_facet_field solr_name("complex_person_translator", :facetable), limit: 5, label: 'Translator'
+    config.add_facet_field solr_name("complex_person_data_depositor", :facetable), limit: 5, label: 'Data depositor'
+    config.add_facet_field solr_name("complex_person_data_curator", :facetable), limit: 5, label: 'Data curator'
+    config.add_facet_field solr_name("complex_person_operator", :facetable), limit: 5, label: 'Operator'
+    config.add_facet_field solr_name("computational_methods", :facetable), limit: 5, label: 'Computational methods'
+    config.add_facet_field solr_name('specimen_type_material_types', :facetable), limit: 5, label: 'Material types'
+    config.add_facet_field solr_name('specimen_type_structural_features', :facetable), limit: 5, label: 'Structural features'
+    config.add_facet_field solr_name('synthesis_and_processing', :facetable), limit: 5, label: 'Synthesis and processing'
+    config.add_facet_field solr_name('complex_rights', :facetable), limit: 5, label: 'Rights'
+    config.add_facet_field solr_name('complex_date_accepted', :dateable), limit: 5, label: 'Date accepted'
+    config.add_facet_field solr_name('complex_date_available', :dateable), limit: 5, label: 'Date available'
+    config.add_facet_field solr_name('complex_date_copyrighted', :dateable), limit: 5, label: 'Date copyrighted'
+    config.add_facet_field solr_name('complex_date_collected', :dateable), limit: 5, label: 'Date collected'
+    config.add_facet_field solr_name('complex_date_created', :dateable), limit: 5, label: 'Date created'
+    config.add_facet_field solr_name('complex_date_issued', :dateable), limit: 5, label: 'Date issued'
+    config.add_facet_field solr_name('complex_date_published', :dateable), limit: 5, label: 'Date published'
+    config.add_facet_field solr_name('complex_date_submitted', :dateable), limit: 5, label: 'Date submitted'
+    config.add_facet_field solr_name('complex_date_updated', :dateable), limit: 5, label: 'Date updated'
+    config.add_facet_field solr_name('complex_date_valid', :dateable), limit: 5, label: 'Date valid'
+    config.add_facet_field solr_name('complex_date_processed', :dateable), limit: 5, label: 'Date processed'
+    config.add_facet_field solr_name('complex_date_purchased', :dateable), limit: 5, label: 'Date purchased'
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
     config.add_facet_field solr_name("generic_type", :facetable), if: false
