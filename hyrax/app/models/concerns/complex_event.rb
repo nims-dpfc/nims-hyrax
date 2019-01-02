@@ -7,7 +7,7 @@ class ComplexEvent < ActiveTriples::Resource
 
   property :invitation_status, predicate: ::RDF::Vocab::XSD.boolean
 
-  property :place , predicate: ::RDF::Vocab::ESciDocPublication.place
+  property :place, predicate: ::RDF::Vocab::ESciDocPublication.place
 
   property :start_date, predicate: ::RDF::Vocab::DC.date
 
