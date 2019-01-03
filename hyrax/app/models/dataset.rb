@@ -22,7 +22,6 @@ class Dataset < ActiveFedora::Base
   # property keyword - defined in the basic metadata
   # property label - defined in the basic metadata
   # property language - defined in the basic metadata
-  # property part_of - defined in the basic metadata
   # property publisher - defined in the basic metadata
   # property related_url - defined in the basic metadata
   # property relative_path - defined in the basic metadata
@@ -68,7 +67,7 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  # NOTE: Not a part of Hyrax basic metadata
+  # NOTE: Not a part of Hyrax basic metadata #fixme: should this be moved to NGDR Hyrax Work Common metadata?
   property :part_of, predicate: ::RDF::Vocab::DC.isPartOf do |index|
     index.as :stored_searchable
   end
