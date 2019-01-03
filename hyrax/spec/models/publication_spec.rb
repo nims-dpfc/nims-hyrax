@@ -371,8 +371,69 @@ RSpec.describe Publication do
       expect(@obj.complex_version).to be_empty
     end
   end
-  # complex_event
-  # issue
-  # place
-  # total_number_of_pages
+
+  describe 'complex_event' do
+    it 'creates an event active triple resource with all the attributes' do
+      @obj = build(:publication, complex_event_attributes: [
+        {
+          end_date: '2019-01-01',
+          invitation_status: true,
+          place: '221B Baker Street',
+          start_date: '2018-12-25',
+          title: 'A Title'
+        }
+      ])
+      expect(@obj.complex_event.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_event.first.id).to include('#event')
+      expect(@obj.complex_event.first.end_date).to eq ['2019-01-01']
+      expect(@obj.complex_event.first.invitation_status).to eq [true]
+      expect(@obj.complex_event.first.place).to eq ['221B Baker Street']
+      expect(@obj.complex_event.first.start_date).to eq ['2018-12-25']
+      expect(@obj.complex_title.first.title).to eq ['A Title']
+    end
+
+    it 'creates an event active triple resource with just the title' do
+      @obj = build(:publication, complex_event_attributes: [{
+                                                              title: 'Some Title'
+                                                            }]
+      )
+      expect(@obj.complex_event.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_event.first.id).to include('#event')
+      expect(@obj.complex_event.first.end_date).to be_empty
+      expect(@obj.complex_event.first.invitation_status).to be_empty
+      expect(@obj.complex_event.first.place).to be_empty
+      expect(@obj.complex_event.first.start_date).to be_empty
+      expect(@obj.complex_event.first.title).to eq ['Some Title']
+    end
+
+    it 'rejects an event active triple with no title' do
+      @obj = build(:publication, complex_event_attributes: [{
+                                                              end_date: '2019-01-01',
+                                                              invitation_status: true
+                                                            }]
+      )
+      expect(@obj.complex_event).to be_empty
+    end
+  end
+
+  describe 'issue' do
+    it 'has issue' do
+      @obj = build(:publication, issue: 'iss_1')
+      expect(@obj.issue).to eq 'iss_1'
+    end
+  end
+
+  describe 'place' do
+    it 'has place' do
+      @obj = build(:publication, place: '221B Baker Street')
+      expect(@obj.place).to eq '221B Baker Street'
+    end
+  end
+
+  describe 'total_number_of_pages' do
+    it 'has total_number_of_pages' do
+      @obj = build(:publication, total_number_of_pages: 1010)
+      expect(@obj.total_number_of_pages).to eq 1010
+    end
+  end
 end
