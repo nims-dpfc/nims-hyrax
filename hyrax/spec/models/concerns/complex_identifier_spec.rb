@@ -12,6 +12,18 @@ RSpec.describe ComplexIdentifier do
     Object.send(:remove_const, :ExampleWork)
   end
 
+  it 'has the correct uri' do
+    @obj = ExampleWork.new
+    @obj.attributes = {
+      complex_identifier_attributes: [
+        {
+          identifier: '0000-0000-0000-0000'
+        }
+      ]
+    }
+    expect(@obj.complex_identifier.first.id).to include('#identifier')
+  end
+
   it 'creates an identifier active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {
