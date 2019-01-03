@@ -22,7 +22,6 @@ class Dataset < ActiveFedora::Base
   # property keyword - defined in the basic metadata
   # property label - defined in the basic metadata
   # property language - defined in the basic metadata
-  # property part_of - defined in the basic metadata
   # property publisher - defined in the basic metadata
   # property related_url - defined in the basic metadata
   # property relative_path - defined in the basic metadata
