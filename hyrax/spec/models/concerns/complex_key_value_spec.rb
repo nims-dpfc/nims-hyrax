@@ -12,6 +12,19 @@ RSpec.describe ComplexKeyValue do
     Object.send(:remove_const, :ExampleWork)
   end
 
+  it 'has the correct uri' do
+    @obj = ExampleWork.new
+    @obj.attributes = {
+      custom_property_attributes: [
+        {
+          label: 'Full name',
+          description: 'My full name is ...'
+        }
+      ]
+    }
+    expect(@obj.custom_property.first.id).to include('#key_value')
+  end
+
   it 'creates a custom property active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {

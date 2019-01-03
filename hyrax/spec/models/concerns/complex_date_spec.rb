@@ -12,6 +12,18 @@ RSpec.describe ComplexDate do
     Object.send(:remove_const, :ExampleWork)
   end
 
+  it 'has the correct uri' do
+    @obj = ExampleWork.new
+    @obj.attributes = {
+      complex_date_attributes: [
+        {
+          date: '1978-10-06'
+        }
+      ]
+    }
+    expect(@obj.complex_date.first.id).to include('#date')
+  end
+
   it 'creates a date active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {
