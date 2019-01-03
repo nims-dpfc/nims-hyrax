@@ -282,7 +282,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_identifier.first.scheme).to be_empty
     end
 
-    it 'rejects an identifier active triple with no ientifier' do
+    it 'rejects an identifier active triple with no identifier' do
       @obj = build(:dataset, complex_identifier_attributes: [{
           label: 'Local'
         }]

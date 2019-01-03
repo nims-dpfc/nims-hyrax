@@ -23,7 +23,6 @@ class Publication < ActiveFedora::Base
   # property keyword - defined in the basic metadata
   # property label - defined in the basic metadata
   # property language - defined in the basic metadata
-  # property part_of - defined in the basic metadata
   # property publisher - defined in the basic metadata
   # property related_url - defined in the basic metadata
   # property relative_path - defined in the basic metadata
@@ -32,6 +31,12 @@ class Publication < ActiveFedora::Base
   # property rights_statement - defined in the basic metadata
   # property source - defined in the basic metadata
   # property subject - defined in the basic metadata
+
+
+  # NOTE: Not a part of Hyrax basic metadata #fixme: should this be moved to NGDR Hyrax Work Common metadata?
+  property :part_of, predicate: ::RDF::Vocab::DC.isPartOf do |index|
+    index.as :stored_searchable
+  end
 
   # NGDR Hyrax Work Common
   property :alternative_title, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|

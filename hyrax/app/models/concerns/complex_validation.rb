@@ -64,7 +64,7 @@ module ComplexValidation
       Array(attributes[:relationship_name]).all?(&:blank?))
     end
     # rights_blank
-    #   Requires version
+    #   Requires rights
     resource_class.send(:define_method, :rights_blank) do |attributes|
       Array(attributes[:rights]).all?(&:blank?)
     end

@@ -14,11 +14,11 @@ RSpec.describe ComplexEvent do
   it 'has the correct uri' do
     @obj = ExampleWork.new
     @obj.attributes = {
-        complex_event_attributes: [
-            {
-                title: "A Title"
-            }
-        ]
+      complex_event_attributes: [
+        {
+          title: "A Title"
+        }
+      ]
     }
     expect(@obj.complex_event.first.id).to include('#event')
   end
@@ -26,15 +26,15 @@ RSpec.describe ComplexEvent do
   it 'creates an event active triple resource with an id and all properties' do
     @obj = ExampleWork.new
     @obj.attributes = {
-        complex_event_attributes: [
-            {
-                end_date: '2019-01-01',
-                invitation_status: true,
-                place: '221B Baker Street',
-                start_date: '2018-12-25',
-                title: 'A Title',
-            }
-        ]
+      complex_event_attributes: [
+        {
+          end_date: '2019-01-01',
+          invitation_status: true,
+          place: '221B Baker Street',
+          start_date: '2018-12-25',
+          title: 'A Title',
+        }
+      ]
     }
     expect(@obj.complex_event.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_event.first.end_date).to eq ['2019-01-01']
