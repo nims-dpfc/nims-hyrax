@@ -61,7 +61,6 @@ RUN mkdir -p /derivatives
 
 # copy the application
 COPY . $APP_PRODUCTION
-RUN ls -l
 COPY docker-entrypoint.sh /bin/
 
 # use the just built Gemfile.lock, not the one copied into the container and verify the gems are correctly installed
