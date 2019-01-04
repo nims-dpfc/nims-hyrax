@@ -69,3 +69,4 @@ end
 gem 'riiif', '~> 1.1'
 gem 'sidekiq'
 gem 'hydra-role-management'
+gem 'pg'
