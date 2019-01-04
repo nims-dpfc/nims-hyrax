@@ -8,7 +8,6 @@ volumes:
   app:
 
 networks:
-  external:
   internal:
 
 services:
@@ -33,7 +32,6 @@ services:
       - 8983
     ports:
       - 8983:8983
-    # command: solr -f -cloud
     healthcheck:
       test:
         - CMD
@@ -66,6 +64,7 @@ services:
     environment:
       - RAILS_SERVE_STATIC_FILES=true
       - RAILS_LOG_TO_STDOUT=true
+      - REDIS_HOST=redis
     volumes:
       - app:/data/tmp/uploads
     networks:
@@ -74,14 +73,12 @@ services:
   web:
     extends:
       service: app
-    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails server -p 3000 -b '0.0.0.0'"
     command: bash -c "/bin/docker-entrypoint.sh"
     depends_on:
       - db
       - solr
       - fcrepo
       - redis
-      # - db_migrate
     ports:
       - 3000:3000
 
@@ -96,26 +93,14 @@ services:
       - solr
       - fcrepo
       - redis
-      # - db_migrate
-
-  # db_migrate:
-  #   extends:
-  #     service: app
-  #   restart: on-failure
-  #   command: bundle exec rails db:migrate
-  #   depends_on:
-  #     - db
 
   redis:
-    # image: redis:3
     image: redis:5
     command: redis-server --appendonly yes
     volumes:
       - redis:/data
     expose:
       - 6379
-    ports:
-      - 6379:6379
     networks:
       internal:
     healthcheck:
