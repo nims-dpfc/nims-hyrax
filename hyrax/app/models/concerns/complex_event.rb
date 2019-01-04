@@ -3,13 +3,13 @@ class ComplexEvent < ActiveTriples::Resource
 
   configure type: ::RDF::Vocab::ESciDocPublication.Event
 
-  property :end_date, predicate: ::RDF::Vocab::DC.date
+  property :end_date, predicate: ::RDF::Vocab::ICAL.dtend
 
   property :invitation_status, predicate: ::RDF::Vocab::XSD.boolean
 
-  property :place, predicate: ::RDF::Vocab::ESciDocPublication.place
+  property :place, predicate: ::RDF::Vocab::ESciDocPublication.place # alt: ::RDF::Vocab::ICAL.location
 
-  property :start_date, predicate: ::RDF::Vocab::DC.date
+  property :start_date, predicate: ::RDF::Vocab::ICAL.dtstart
 
   property :title, predicate: ::RDF::Vocab::DC.title
 
