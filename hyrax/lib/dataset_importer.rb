@@ -220,6 +220,7 @@ module DatasetImporter
           # which do not yet conform to any of our model keys.
           else
             puts 'Mandatory XML file contains an unacceptable key ' + meta['key'] + ' at ' + metadata_filename
+            return {}
 
           # title: ['test dataset'],
           # source: ['Source 1'],
@@ -274,7 +275,7 @@ module DatasetImporter
   
       def add_work(work_id,attributes,file_ids)
         @object = find_work(work_id)
-        if object
+        if @object
           update_work(@object,attributes,file_ids)
         else
           create_work(attributes,file_ids)
