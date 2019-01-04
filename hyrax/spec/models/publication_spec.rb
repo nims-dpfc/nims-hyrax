@@ -389,7 +389,7 @@ RSpec.describe Publication do
       expect(@obj.complex_event.first.invitation_status).to eq [true]
       expect(@obj.complex_event.first.place).to eq ['221B Baker Street']
       expect(@obj.complex_event.first.start_date).to eq ['2018-12-25']
-      expect(@obj.complex_title.first.title).to eq ['A Title']
+      expect(@obj.complex_event.first.title).to eq ['A Title']
     end
 
     it 'creates an event active triple resource with just the title' do
