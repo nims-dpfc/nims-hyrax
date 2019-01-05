@@ -11,7 +11,10 @@ module ComplexField
       solr_doc[Solrizer.solr_name('complex_date', :displayable)] = object.complex_date.to_json
       object.complex_date.each do |d|
         unless d.description.blank?
-          label = DateService.new.label(d.description.first)
+          # Not indexing description as it is a url. Finding it's display label for indexing
+          label = d.description.first
+          term = DateService.new.find_by_id(label)
+          label = term['label']if term.any?
           fld_name = Solrizer.solr_name("complex_date_#{label.downcase.tr(' ', '_')}", :stored_sortable, type: :date)
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
           solr_doc[fld_name] << DateTime.parse(d.date.reject(&:blank?).first).utc.iso8601

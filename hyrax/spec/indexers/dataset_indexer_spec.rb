@@ -323,17 +323,15 @@ RSpec.describe DatasetIndexer do
             identifier: ['123456'],
             label: ['local']
           }],
-          relationship_name: 'Is part of',
-          relationship_role: 'http://example.com/isPartOf'
+          relationship: 'isPartOf'
         }, {
           title: 'A 2nd related item',
           url: 'http://example.com/relation2',
-          relationship_name: 'Is part of',
-          relationship_role: 'http://example.com/isPartOf'
+          relationship: 'isPartOf'
         }, {
           title: 'A 3rd relation item',
           url: 'http://example.com/relation3',
-          relationship_name: 'Is version of'
+          relationship: 'isNewVersionOf'
         }
       ]
       obj = build(:dataset, complex_relation_attributes: relationships)
@@ -349,18 +347,18 @@ RSpec.describe DatasetIndexer do
     end
     it 'indexes the relationship as facetable' do
       expect(@solr_document['complex_relation_relationship_sim']).to match_array(
-        ['Is part of', 'Is part of', 'Is version of'])
+        ['isPartOf', 'isPartOf', 'isNewVersionOf'])
     end
     it 'indexes the relation by relationship as stored searchable' do
-      expect(@solr_document['complex_relation_is_part_of_tesim']).to match_array(
+      expect(@solr_document['complex_relation_ispartof_tesim']).to match_array(
         ['A related item', 'A 2nd related item'])
-      expect(@solr_document['complex_relation_is_version_of_tesim']).to match_array(
+      expect(@solr_document['complex_relation_isnewversionof_tesim']).to match_array(
         ['A 3rd relation item'])
     end
     it 'indexes the relation by relationship as facetable' do
-      expect(@solr_document['complex_relation_is_part_of_sim']).to match_array(
+      expect(@solr_document['complex_relation_ispartof_sim']).to match_array(
         ['A related item', 'A 2nd related item'])
-      expect(@solr_document['complex_relation_is_version_of_sim']).to match_array(
+      expect(@solr_document['complex_relation_isnewversionof_sim']).to match_array(
         ['A 3rd relation item'])
     end
   end
@@ -392,7 +390,7 @@ RSpec.describe DatasetIndexer do
         }],
         complex_relation_attributes: [{
           url: 'http://example.com/relation',
-          relationship_role: 'is part of'
+          relationship: 'isPartOf'
         }],
         structural_features: ['structural feature 1', 'structural feature 2'],
         title: 'Instrument 1'
