@@ -3,13 +3,13 @@ class ComplexPurchaseRecord < ActiveTriples::Resource
 
   configure type: ::RDF::Vocab::NimsRdp['PurchaseRecord']
 
-  property :date, predicate: ::RDF::Vocab::DC.date
+  property :date, predicate: ::RDF::Vocab::NimsRdp["purchase-record-date"]
 
-  property :identifier, predicate: ::RDF::Vocab::DC.identifier
+  property :identifier, predicate: ::RDF::Vocab::NimsRdp["purchase-record-identifier"]
 
   property :purchase_record_item, predicate: ::RDF::Vocab::NimsRdp["purchase-record-item"]
 
-  property :title, predicate: ::RDF::Vocab::DC.title
+  property :title, predicate: ::RDF::Vocab::NimsRdp["purchase-record-title"]
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)
