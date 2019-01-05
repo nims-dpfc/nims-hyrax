@@ -1,5 +1,5 @@
 # Provide select options for computational methods
-class ComputationalMethodService < Hyrax::QaSelectService
+class ComputationalMethodService < QaSelectServiceExtended
   def initialize(_authority_name = nil)
     super('computational_methods')
   end
