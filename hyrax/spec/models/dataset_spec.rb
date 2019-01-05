@@ -495,8 +495,7 @@ RSpec.describe Dataset do
             identifier: ['123456'],
             label: ['local']
           }],
-          relationship_name: 'Is part of',
-          relationship_role: 'http://example.com/isPartOf'
+          relationship: 'IsPartOf'
         }]
       )
       expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
@@ -505,8 +504,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
       expect(@obj.complex_relation.first.complex_identifier.first.label).to eq ['local']
-      expect(@obj.complex_relation.first.relationship_name).to eq ['Is part of']
-      expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
+      expect(@obj.complex_relation.first.relationship).to eq ['IsPartOf']
     end
 
     it 'creates a relation active triple resource with title, url, identifier and relationship role' do
@@ -516,7 +514,7 @@ RSpec.describe Dataset do
           complex_identifier_attributes: [{
             identifier: ['123456']
           }],
-          relationship_role: 'http://example.com/isPartOf'
+          relationship: 'isNewVersionOf'
         }]
       )
       expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
@@ -525,8 +523,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
       expect(@obj.complex_relation.first.complex_identifier.first.label).to be_empty
-      expect(@obj.complex_relation.first.relationship_name).to be_empty
-      expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
+      expect(@obj.complex_relation.first.relationship).to eq ['isNewVersionOf']
     end
 
     it 'rejects relation active triple with url' do
@@ -550,7 +547,7 @@ RSpec.describe Dataset do
 
     it 'rejects relation active triple with reltionship name' do
       @obj = build(:dataset, complex_relation_attributes: [{
-          relationship_name: 'is part of'
+          relationship: 'isPartOf'
         }]
       )
       expect(@obj.complex_relation).to be_empty
@@ -580,7 +577,7 @@ RSpec.describe Dataset do
           }],
           complex_relation_attributes: [{
             url: 'http://example.com/relation',
-            relationship_role: 'is part of'
+            relationship: 'isPartOf'
           }],
           structural_features: 'structural features',
           title: 'Instrument 1'
@@ -599,7 +596,7 @@ RSpec.describe Dataset do
       expect(@obj.specimen_type.first.purchase_record.first.title).to eq ['Purchase record 1']
       expect(@obj.specimen_type.first.complex_relation.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.specimen_type.first.complex_relation.first.url).to eq ['http://example.com/relation']
-      expect(@obj.specimen_type.first.complex_relation.first.relationship_role).to eq ['is part of']
+      expect(@obj.specimen_type.first.complex_relation.first.relationship).to eq ['isPartOf']
       expect(@obj.specimen_type.first.structural_features).to eq ['structural features']
       expect(@obj.specimen_type.first.title).to eq ['Instrument 1']
     end
@@ -628,21 +625,21 @@ RSpec.describe Dataset do
       expect(@obj.specimen_type.first.title).to eq ['Instrument 1']
     end
 
-    it 'rejects a specimen type active triple with no identifier' do
-      @obj = build(:dataset, specimen_type_attributes: [{
-          chemical_composition: 'chemical composition',
-          crystallographic_structure: 'crystallographic structure',
-          description: 'Description',
-          complex_identifier_attributes: [{
-            label: 'ORCID'
-          }],
-          material_types: 'material types',
-          structural_features: 'structural features',
-          title: 'Instrument 1'
-        }]
-      )
-      expect(@obj.specimen_type).to be_empty
-    end
+    # it 'rejects a specimen type active triple with no identifier' do
+    #   @obj = build(:dataset, specimen_type_attributes: [{
+    #       chemical_composition: 'chemical composition',
+    #       crystallographic_structure: 'crystallographic structure',
+    #       description: 'Description',
+    #       complex_identifier_attributes: [{
+    #         label: 'ORCID'
+    #       }],
+    #       material_types: 'material types',
+    #       structural_features: 'structural features',
+    #       title: 'Instrument 1'
+    #     }]
+    #   )
+    #   expect(@obj.specimen_type).to be_empty
+    # end
 
     it 'rejects a specimen type active triple with only purchase record and relation' do
       @obj = build(:dataset, specimen_type_attributes: [{
@@ -652,7 +649,7 @@ RSpec.describe Dataset do
           }],
           complex_relation_attributes: [{
             url: 'http://example.com/relation',
-            relationship_role: 'is part of'
+            relationship: 'isPartOf'
           }]
         }]
       )

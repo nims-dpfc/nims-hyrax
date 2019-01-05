@@ -19,8 +19,7 @@ RSpec.describe ComplexRelation do
         {
           title: 'A relation title',
           url: 'http://example.com/relation',
-          relationship_name: 'Is part of',
-          relationship_role: 'http://example.com/isPartOf'
+          relationship: 'IsPartOf'
         }
       ]
     }
@@ -38,8 +37,7 @@ RSpec.describe ComplexRelation do
             identifier: ['123456'],
             label: ['local']
           }],
-          relationship_name: 'Is part of',
-          relationship_role: 'http://example.com/isPartOf'
+          relationship: 'IsPartOf'
         }
       ]
     }
@@ -49,8 +47,7 @@ RSpec.describe ComplexRelation do
     expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
     expect(@obj.complex_relation.first.complex_identifier.first.label).to eq ['local']
-    expect(@obj.complex_relation.first.relationship_name).to eq ['Is part of']
-    expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
+    expect(@obj.complex_relation.first.relationship).to eq ['IsPartOf']
   end
 
   describe "when reject_if is a symbol" do
@@ -64,13 +61,13 @@ RSpec.describe ComplexRelation do
       Object.send(:remove_const, :ExampleWork2)
     end
 
-    it 'creates a relation active triple resource with title and relationship name' do
+    it 'creates a relation active triple resource with title and relationship' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
           {
             title: 'A relation title',
-            relationship_name: 'Is part of'
+            relationship: 'IsPartOf'
           }
         ]
       }
@@ -78,35 +75,16 @@ RSpec.describe ComplexRelation do
       expect(@obj.complex_relation.first.title).to eq ['A relation title']
       expect(@obj.complex_relation.first.url).to be_empty
       expect(@obj.complex_relation.first.complex_identifier).to be_empty
-      expect(@obj.complex_relation.first.relationship_name).to eq ['Is part of']
-      expect(@obj.complex_relation.first.relationship_role).to be_empty
+      expect(@obj.complex_relation.first.relationship).to eq ['IsPartOf']
     end
 
-    it 'creates a relation active triple resource with title and relationship role' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_relation_attributes: [
-          {
-            title: 'A relation title',
-            relationship_role: 'http://example.com/isPartOf'
-          }
-        ]
-      }
-      expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_relation.first.title).to eq ['A relation title']
-      expect(@obj.complex_relation.first.url).to be_empty
-      expect(@obj.complex_relation.first.complex_identifier).to be_empty
-      expect(@obj.complex_relation.first.relationship_name).to be_empty
-      expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
-    end
-
-    it 'creates a relation active triple resource with url and relationship name' do
+    it 'creates a relation active triple resource with url and relationship' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
           {
             url: 'http://example.com/relation',
-            relationship_name: 'Is part of'
+            relationship: 'isPreviousVersionOf'
           }
         ]
       }
@@ -114,29 +92,10 @@ RSpec.describe ComplexRelation do
       expect(@obj.complex_relation.first.title).to be_empty
       expect(@obj.complex_relation.first.url).to eq ['http://example.com/relation']
       expect(@obj.complex_relation.first.complex_identifier).to be_empty
-      expect(@obj.complex_relation.first.relationship_name).to eq ['Is part of']
-      expect(@obj.complex_relation.first.relationship_role).to be_empty
+      expect(@obj.complex_relation.first.relationship).to eq ['isPreviousVersionOf']
     end
 
-    it 'creates a relation active triple resource with url and relationship role' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_relation_attributes: [
-          {
-            url: 'http://example.com/relation',
-            relationship_role: 'http://example.com/isPartOf'
-          }
-        ]
-      }
-      expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_relation.first.title).to be_empty
-      expect(@obj.complex_relation.first.url).to eq ['http://example.com/relation']
-      expect(@obj.complex_relation.first.complex_identifier).to be_empty
-      expect(@obj.complex_relation.first.relationship_name).to be_empty
-      expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
-    end
-
-    it 'creates a relation active triple resource with identifier and relationship name' do
+    it 'creates a relation active triple resource with identifier and relationship' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
@@ -144,7 +103,7 @@ RSpec.describe ComplexRelation do
             complex_identifier_attributes: [{
               identifier: ['123456']
             }],
-            relationship_name: 'Is part of'
+            relationship: 'isSupplementTo'
           }
         ]
       }
@@ -154,41 +113,17 @@ RSpec.describe ComplexRelation do
       expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
       expect(@obj.complex_relation.first.complex_identifier.first.label).to be_empty
-      expect(@obj.complex_relation.first.relationship_name).to eq ['Is part of']
-      expect(@obj.complex_relation.first.relationship_role).to be_empty
+      expect(@obj.complex_relation.first.relationship).to eq ['isSupplementTo']
     end
 
-    it 'creates a relation active triple resource with identifier and relationship role' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_relation_attributes: [
-          {
-            complex_identifier_attributes: [{
-              identifier: ['123456'],
-              label: 'local'
-            }],
-            relationship_role: 'http://example.com/isPartOf'
-          }
-        ]
-      }
-      expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_relation.first.title).to be_empty
-      expect(@obj.complex_relation.first.url).to be_empty
-      expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
-      expect(@obj.complex_relation.first.complex_identifier.first.label).to eq ['local']
-      expect(@obj.complex_relation.first.relationship_name).to be_empty
-      expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
-    end
-
-    it 'creates a relation active triple resource with title, url and relationship name' do
+    it 'creates a relation active triple resource with title, url and relationship' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
           {
             title: 'A relation title',
             url: 'http://example.com/relation',
-            relationship_name: 'Is part of'
+            relationship: 'isContinuedBy'
           }
         ]
       }
@@ -196,11 +131,10 @@ RSpec.describe ComplexRelation do
       expect(@obj.complex_relation.first.title).to eq ['A relation title']
       expect(@obj.complex_relation.first.url).to eq ['http://example.com/relation']
       expect(@obj.complex_relation.first.complex_identifier).to be_empty
-      expect(@obj.complex_relation.first.relationship_name).to eq ['Is part of']
-      expect(@obj.complex_relation.first.relationship_role).to be_empty
+      expect(@obj.complex_relation.first.relationship).to eq ['isContinuedBy']
     end
 
-    it 'creates a relation active triple resource with title, identifier and relationship role' do
+    it 'creates a relation active triple resource with title, identifier and relationship' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
@@ -209,7 +143,7 @@ RSpec.describe ComplexRelation do
             complex_identifier_attributes: [{
               identifier: ['123456']
             }],
-            relationship_role: 'http://example.com/isPartOf'
+            relationship: 'isContinuedBy'
           }
         ]
       }
@@ -219,30 +153,10 @@ RSpec.describe ComplexRelation do
       expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
       expect(@obj.complex_relation.first.complex_identifier.first.label).to be_empty
-      expect(@obj.complex_relation.first.relationship_name).to be_empty
-      expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
+      expect(@obj.complex_relation.first.relationship).to eq ['isContinuedBy']
     end
 
-    it 'creates a relation active triple resource with title, relationship name and relationship role' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_relation_attributes: [
-          {
-            title: 'A relation title',
-            relationship_name: 'Is part of',
-            relationship_role: 'http://example.com/isPartOf'
-          }
-        ]
-      }
-      expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_relation.first.title).to eq ['A relation title']
-      expect(@obj.complex_relation.first.url).to be_empty
-      expect(@obj.complex_relation.first.complex_identifier).to be_empty
-      expect(@obj.complex_relation.first.relationship_name).to eq ['Is part of']
-      expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
-    end
-
-    it 'creates a relation active triple resource with title, url, identifier and relationship role' do
+    it 'creates a relation active triple resource with title, url, identifier and relationship' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
@@ -253,7 +167,7 @@ RSpec.describe ComplexRelation do
               identifier: ['123456'],
               label: 'Local'
             }],
-            relationship_role: 'http://example.com/isPartOf'
+            relationship: 'isDocumentedBy'
           }
         ]
       }
@@ -263,11 +177,10 @@ RSpec.describe ComplexRelation do
       expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
       expect(@obj.complex_relation.first.complex_identifier.first.label).to eq ['Local']
-      expect(@obj.complex_relation.first.relationship_name).to be_empty
-      expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
+      expect(@obj.complex_relation.first.relationship).to eq ['isDocumentedBy']
     end
 
-    it 'creates a relation active triple resource with url, identifier, relationship name and relationship role' do
+    it 'creates a relation active triple resource with url, identifier and relationship' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
@@ -277,8 +190,7 @@ RSpec.describe ComplexRelation do
               identifier: ['123456'],
               label: 'Local'
             }],
-            relationship_name: 'is part of',
-            relationship_role: 'http://example.com/isPartOf'
+            relationship: 'isDerivedFrom'
           }
         ]
       }
@@ -287,11 +199,10 @@ RSpec.describe ComplexRelation do
       expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
       expect(@obj.complex_relation.first.complex_identifier.first.label).to eq ['Local']
-      expect(@obj.complex_relation.first.relationship_name).to eq ['is part of']
-      expect(@obj.complex_relation.first.relationship_role).to eq ['http://example.com/isPartOf']
+      expect(@obj.complex_relation.first.relationship).to eq ['isDerivedFrom']
     end
 
-    it 'rejects relation active triple with title' do
+    it 'rejects relation active triple with just title and no relationship' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
@@ -303,7 +214,7 @@ RSpec.describe ComplexRelation do
       expect(@obj.complex_relation).to be_empty
     end
 
-    it 'rejects relation active triple with url' do
+    it 'rejects relation active triple with just url and no relationship' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
@@ -315,7 +226,7 @@ RSpec.describe ComplexRelation do
       expect(@obj.complex_relation).to be_empty
     end
 
-    it 'rejects relation active triple with identifier' do
+    it 'rejects relation active triple with just identifier and no relationship' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
@@ -330,24 +241,12 @@ RSpec.describe ComplexRelation do
       expect(@obj.complex_relation).to be_empty
     end
 
-    it 'rejects relation active triple with reltionship name' do
+    it 'rejects relation active triple with just reltionship and no identifying information' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_relation_attributes: [
           {
-            relationship_name: 'is part of'
-          }
-        ]
-      }
-      expect(@obj.complex_relation).to be_empty
-    end
-
-    it 'rejects relation active triple with reltionship role' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_relation_attributes: [
-          {
-            relationship_role: 'http://example.com/isPartOf'
+            relationship: 'isPartOf'
           }
         ]
       }
@@ -365,19 +264,6 @@ RSpec.describe ComplexRelation do
               identifier: ['123456'],
               label: 'Local'
             }]
-          }
-        ]
-      }
-      expect(@obj.complex_relation).to be_empty
-    end
-
-    it 'rejects relation active triple with no identifying information' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_relation_attributes: [
-          {
-            relationship_name: 'is part of',
-            relationship_role: 'http://example.com/isPartOf'
           }
         ]
       }
