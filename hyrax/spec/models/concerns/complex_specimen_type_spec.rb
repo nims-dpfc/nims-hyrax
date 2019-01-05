@@ -47,7 +47,7 @@ RSpec.describe ComplexSpecimenType do
         }],
         complex_relation_attributes: [{
           url: 'http://example.com/relation',
-          relationship_role: 'is part of'
+          relationship: 'isPartOf'
         }],
         structural_features: 'structural features',
         title: 'Instrument 1'
@@ -65,7 +65,7 @@ RSpec.describe ComplexSpecimenType do
     expect(@obj.complex_specimen_type.first.purchase_record.first.title).to eq ['Purchase record 1']
     expect(@obj.complex_specimen_type.first.complex_relation.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_specimen_type.first.complex_relation.first.url).to eq ['http://example.com/relation']
-    expect(@obj.complex_specimen_type.first.complex_relation.first.relationship_role).to eq ['is part of']
+    expect(@obj.complex_specimen_type.first.complex_relation.first.relationship).to eq ['isPartOf']
     expect(@obj.complex_specimen_type.first.structural_features).to eq ['structural features']
     expect(@obj.complex_specimen_type.first.title).to eq ['Instrument 1']
   end
@@ -158,38 +158,38 @@ RSpec.describe ComplexSpecimenType do
       expect(@obj.complex_specimen_type).to be_empty
     end
 
-    it 'rejects a specimen type active triple with no identifier' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_specimen_type_attributes: [{
-          chemical_composition: 'chemical composition',
-          crystallographic_structure: 'crystallographic structure',
-          description: 'Description',
-          complex_identifier_attributes: [{
-            label: 'ORCID'
-          }],
-          material_types: 'material types',
-          structural_features: 'structural features',
-          title: 'Instrument 1'
-        }]
-      }
-      expect(@obj.complex_specimen_type).to be_empty
-    end
+    # it 'rejects a specimen type active triple with no identifier' do
+    #   @obj = ExampleWork2.new
+    #   @obj.attributes = {
+    #     complex_specimen_type_attributes: [{
+    #       chemical_composition: 'chemical composition',
+    #       crystallographic_structure: 'crystallographic structure',
+    #       description: 'Description',
+    #       complex_identifier_attributes: [{
+    #         label: 'ORCID'
+    #       }],
+    #       material_types: 'material types',
+    #       structural_features: 'structural features',
+    #       title: 'Instrument 1'
+    #     }]
+    #   }
+    #   expect(@obj.complex_specimen_type).to be_empty
+    # end
 
-    it 'rejects a specimen type active triple with no identifier' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_specimen_type_attributes: [{
-          chemical_composition: 'chemical composition',
-          crystallographic_structure: 'crystallographic structure',
-          description: 'Description',
-          material_types: 'material types',
-          structural_features: 'structural features',
-          title: 'Instrument 1'
-        }]
-      }
-      expect(@obj.complex_specimen_type).to be_empty
-    end
+    # it 'rejects a specimen type active triple with no identifier' do
+    #   @obj = ExampleWork2.new
+    #   @obj.attributes = {
+    #     complex_specimen_type_attributes: [{
+    #       chemical_composition: 'chemical composition',
+    #       crystallographic_structure: 'crystallographic structure',
+    #       description: 'Description',
+    #       material_types: 'material types',
+    #       structural_features: 'structural features',
+    #       title: 'Instrument 1'
+    #     }]
+    #   }
+    #   expect(@obj.complex_specimen_type).to be_empty
+    # end
 
     it 'rejects a specimen type active triple with no material types' do
       @obj = ExampleWork2.new
@@ -252,7 +252,7 @@ RSpec.describe ComplexSpecimenType do
           }],
           complex_relation_attributes: [{
             url: 'http://example.com/relation',
-            relationship_role: 'is part of'
+            relationship: 'isPartOf'
           }]
         }]
       }
