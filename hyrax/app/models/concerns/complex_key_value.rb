@@ -2,8 +2,8 @@ class ComplexKeyValue < ActiveTriples::Resource
   include CommonMethods
 
   configure type: ::RDF::Vocab::NimsRdp['CustomProperty']
-  property :label, predicate: ::RDF::Vocab::RDFS.label
-  property :description, predicate: ::RDF::Vocab::DC.description
+  property :label, predicate: ::RDF::Vocab::DISCO.question
+  property :description, predicate: ::RDF::Vocab::SIOC.has_reply
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)

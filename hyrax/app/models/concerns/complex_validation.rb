@@ -51,8 +51,7 @@ module ComplexValidation
       Array(attributes[:title]).all?(&:blank?)
     end
     # relation_blank
-    #   Requires title / url / identifier and
-    #            relationship name / relationship role
+    #   Requires title / url / identifier and relationship
     resource_class.send(:define_method, :relation_blank) do |attributes|
       identifiers_blank = true
       Array(attributes[:complex_identifier_attributes]).each do |id|
@@ -60,8 +59,7 @@ module ComplexValidation
       end
       (Array(attributes[:title]).all?(&:blank?) &&
       Array(attributes[:url]).all?(&:blank?) && identifiers_blank) ||
-      (Array(attributes[:relationship_role]).all?(&:blank?) &&
-      Array(attributes[:relationship_name]).all?(&:blank?))
+      Array(attributes[:relationship]).all?(&:blank?)
     end
     # rights_blank
     #   Requires rights
