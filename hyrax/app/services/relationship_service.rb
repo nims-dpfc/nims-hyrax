@@ -1,6 +1,6 @@
 # Provide select options for roles
-class RoleService < QaSelectServiceExtended
+class RelationshipService < QaSelectServiceExtended
   def initialize(_authority_name = nil)
-    super('roles')
+    super('relationships')
   end
 end

@@ -13,4 +13,39 @@ RSpec.describe SynthesisAndProcessingService do
         ])
     end
   end
+
+  describe "find_by_id" do
+    it "returns active term matching id" do
+      expect(service.find_by_id('casting')).to eq({
+        "label" => "casting/鋳造",
+        "id" => "casting",
+        "active" => true
+      })
+    end
+  end
+
+  describe "find_by_label" do
+    it "returns active term  matching label" do
+      expect(service.find_by_label('casting/鋳造')).to eq({
+        "label" => "casting/鋳造",
+        "id" => "casting",
+        "active" => true
+      })
+    end
+  end
+
+  describe "find_by_id_or_label" do
+    it "returns active term matching id or label" do
+      expect(service.find_by_id_or_label('casting')).to eq({
+        "label" => "casting/鋳造",
+        "id" => "casting",
+        "active" => true
+      })
+      expect(service.find_by_id_or_label('casting/鋳造')).to eq({
+        "label" => "casting/鋳造",
+        "id" => "casting",
+        "active" => true
+      })
+    end
+  end
 end
