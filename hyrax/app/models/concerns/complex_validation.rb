@@ -78,8 +78,7 @@ module ComplexValidation
       Array(attributes[:chemical_composition]).all?(&:blank?) ||
       Array(attributes[:crystallographic_structure]).all?(&:blank?) ||
       Array(attributes[:description]).all?(&:blank?) ||
-      # TOOO: Cannot display 2nd level nesting in form
-      # identifiers_blank ||
+      identifiers_blank ||
       Array(attributes[:material_types]).all?(&:blank?) ||
       Array(attributes[:structural_features]).all?(&:blank?) ||
       Array(attributes[:title]).all?(&:blank?)
