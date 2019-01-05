@@ -1,49 +1,45 @@
 {
-  "users" : [
-    {
-      "email" : "admin@willow",
-      "password" : "password",
-      "name" : "Willow Admin",
-      "role" : "admin"
+  "users": [{
+      "email": "admin@willow",
+      "password": "password",
+      "name": "Willow Admin",
+      "role": "admin"
     },
     {
-      "email" : "user@willow",
-      "password" : "demouser",
-      "name" : "Demo User",
-      "role" : "user",
-      "depositor" : true
+      "email": "user@willow",
+      "password": "demouser",
+      "name": "Demo User",
+      "role": "user",
+      "depositor": true
     },
     {
-      "email" : "workflow@willow",
+      "email": "workflow@willow",
       "password": "workflow",
-      "name" : "Workflow Admin",
-      "role" : "admin"
+      "name": "Workflow Admin",
+      "role": "admin"
     }
   ],
 
-  "collections" : [
-    {
-      "id" : "datasets",
-      "metadata" : {
-        "title": ["Datasets"],
-        "resource_type": ["Journal"],
-        "creator": [ "Dataset Administrator" ],
-        "description": ["This is a collection of datasets"],
-        "keyword": ["datasets"],
-        "license": ["http://creativecommons.org/publicdomain/zero/1.0/"],
-        "publisher": ["University of Willow"],
-        "date_created": ["2014-06-01"],
-        "subject": ["anything"],
-        "language": ["English"],
-        "visibility": "open"
-      }
+  "collections": [{
+    "id": "datasets",
+    "metadata": {
+      "title": ["Datasets"],
+      "resource_type": ["Journal"],
+      "creator": ["Dataset Administrator"],
+      "description": ["This is a collection of datasets"],
+      "keyword": ["datasets"],
+      "license": ["http://creativecommons.org/publicdomain/zero/1.0/"],
+      "publisher": ["University of Willow"],
+      "date_created": ["2014-06-01"],
+      "subject": ["anything"],
+      "language": ["English"],
+      "visibility": "open"
     }
-  ],
+  }],
 
-  "administrative_sets" : [
-    {
-      "id" : "willow_admin_set",
-      "metadata" : {
+  "administrative_sets": [{
+      "id": "willow_admin_set",
+      "metadata": {
         "title": ["Willow administrative set"],
         "description": ["An administrative set using the one-step mediated workflow"],
         "creator": ["admin@willow"],
@@ -52,16 +48,16 @@
       },
       "permission_template": {
         "workflow_name": "one_step_mediated_deposit",
-        "permission_template_access" : [
-          {
-            "agent_type": "group", "agent_id": "registered", "access": "deposit"
-          }
-        ]
+        "permission_template_access": [{
+          "agent_type": "group",
+          "agent_id": "registered",
+          "access": "deposit"
+        }]
       }
     },
     {
-      "id" : "default",
-      "metadata" : {
+      "id": "default",
+      "metadata": {
         "title": ["Default workflow"],
         "description": ["A single submission step, default workflow"],
         "creator": ["admin@hyrax"],
@@ -70,17 +66,24 @@
       },
       "permission_template": {
         "workflow_name": "default",
-        "permission_template_access" : [
-          {
-            "agent_type": "group", "agent_id": "registered", "access": "deposit"
-          }
-        ]
+        "permission_template_access": [{
+          "agent_type": "group",
+          "agent_id": "registered",
+          "access": "deposit"
+        }]
       }
-    },
+    }
   ],
 
-  "workflow_responsibilities" : [
-    {"user_email": "user@willow", "workflow_name": "one_step_mediated_deposit", "role_name": "depositing"},
-    {"user_email": "workflow@willow", "workflow_name": "one_step_mediated_deposit", "role_name": "approving"}
+  "workflow_responsibilities": [{
+      "user_email": "user@willow",
+      "workflow_name": "one_step_mediated_deposit",
+      "role_name": "depositing"
+    },
+    {
+      "user_email": "workflow@willow",
+      "workflow_name": "one_step_mediated_deposit",
+      "role_name": "approving"
+    }
   ]
 }
