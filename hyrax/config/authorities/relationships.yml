@@ -1,75 +1,112 @@
 terms:
   - id: cites
     term: cites
+    active: true
   - id: isCitedBy
-    term: isCitedBy
+    term: is cited by
+    active: true
   - id: isSupplementTo
-    term: isSupplementTo
+    term: is supplement to
+    active: true
   - id: isSupplementedBy
-    term: isSupplementedBy
+    term: is supplemented by
+    active: true
   - id: continues
     term: continues
+    active: true
   - id: isContinuedBy
-    term: isContinuedBy
+    term: is continued by
+    active: true
   - id: hasMetadata
-    term: hasMetadata
+    term: has metadata
+    active: true
   - id: isMetadataFor
-    term: isMetadataFor
+    term: is metadata for
+    active: true
   - id: isNewVersionOf
-    term: isNewVersionOf
+    term: is new version of
+    active: true
   - id: isPreviousVersionOf
-    term: isPreviousVersionOf
+    term: is previous version of
+    active: true
   - id: isPartOf
-    term: isPartOf
+    term: is part of
+    active: true
   - id: hasPart
-    term: hasPart
+    term: has part
+    active: true
   - id: isReferencedBy
-    term: isReferencedBy
+    term: is referenced by
+    active: true
   - id: references
     term: references
+    active: true
   - id: isDocumentedBy
-    term: isDocumentedBy
+    term: is documented by
+    active: true
   - id: documents
     term: documents
+    active: true
   - id: isCompiledBy
-    term: isCompiledBy
+    term: is compiled by
+    active: true
   - id: compiles
     term: compiles
+    active: true
   - id: isVariantFormOf
-    term: isVariantFormOf
+    term: is variant form of
+    active: true
   - id: isOriginalFormOf
-    term: isOriginalFormOf
+    term: is original form of
+    active: true
   - id: isIdenticalTo
-    term: isIdenticalTo
+    term: is identical to
+    active: true
   - id: isReviewedBy
-    term: isReviewedBy
+    term: is reviewed by
+    active: true
   - id: reviews
     term: reviews
+    active: true
   - id: isDerivedFrom
-    term: isDerivedFrom
+    term: is derived from
+    active: true
   - id: isSourceOf
-    term: isSourceOf
+    term: is source of
+    active: true
   - id: isCommentOn
-    term: isCommentOn
+    term: is comment on
+    active: true
   - id: hasComment
-    term: hasComment
+    term: has comment
+    active: true
   - id: isReplyTo
-    term: isReplyTo
+    term: is reply to
+    active: true
   - id: hasReply
-    term: hasReply
+    term: has reply
+    active: true
   - id: basedOnData
-    term: basedOnData
+    term: based on data
+    active: true
   - id: hasRelatedMaterial
-    term: hasRelatedMaterial
+    term: has related material
+    active: true
   - id: isBasedOn
-    term: isBasedOn
+    term: is based on
+    active: true
   - id: isBasisFor
-    term: isBasisFor
+    term: is basis for
+    active: true
   - id: requires
     term: requires
+    active: true
   - id: isRequiredBy
-    term: isRequiredBy
+    term: is required by
+    active: true
   - id: hasParent
-    term: hasParent
+    term: has parent
+    active: true
   - id: isParentOf
-    term: isParentOf
+    term: is parent of
+    active: true
