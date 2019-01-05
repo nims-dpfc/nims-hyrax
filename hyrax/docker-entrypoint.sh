@@ -35,9 +35,8 @@ else
     exit 1
 fi
 
-# TODO
-# echo "(Re)seeding test data... (this can take a few minutes)"
-# bundle exec rake willow:seed_test_data["$WILLOW_SEED_FILE"]
+echo "Setting up hyrax... (this can take a few minutes)"
+bundle exec rake ngdr:setup_hyrax["seed/setup.json"]
 
 # echo "--------- Starting Hyrax in $RAILS_ENV mode ---------"
 rm -f /tmp/hyrax.pid
