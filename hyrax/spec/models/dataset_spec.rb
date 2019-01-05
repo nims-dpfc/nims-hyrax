@@ -625,21 +625,21 @@ RSpec.describe Dataset do
       expect(@obj.specimen_type.first.title).to eq ['Instrument 1']
     end
 
-    # it 'rejects a specimen type active triple with no identifier' do
-    #   @obj = build(:dataset, specimen_type_attributes: [{
-    #       chemical_composition: 'chemical composition',
-    #       crystallographic_structure: 'crystallographic structure',
-    #       description: 'Description',
-    #       complex_identifier_attributes: [{
-    #         label: 'ORCID'
-    #       }],
-    #       material_types: 'material types',
-    #       structural_features: 'structural features',
-    #       title: 'Instrument 1'
-    #     }]
-    #   )
-    #   expect(@obj.specimen_type).to be_empty
-    # end
+    it 'rejects a specimen type active triple with no identifier' do
+      @obj = build(:dataset, specimen_type_attributes: [{
+          chemical_composition: 'chemical composition',
+          crystallographic_structure: 'crystallographic structure',
+          description: 'Description',
+          complex_identifier_attributes: [{
+            label: 'ORCID'
+          }],
+          material_types: 'material types',
+          structural_features: 'structural features',
+          title: 'Instrument 1'
+        }]
+      )
+      expect(@obj.specimen_type).to be_empty
+    end
 
     it 'rejects a specimen type active triple with only purchase record and relation' do
       @obj = build(:dataset, specimen_type_attributes: [{
