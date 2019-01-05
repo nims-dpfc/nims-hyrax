@@ -16,6 +16,7 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-datepicker
 //
 // Required by Blacklight
 //= require blacklight/blacklight
