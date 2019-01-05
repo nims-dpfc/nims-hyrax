@@ -21,8 +21,7 @@ module Hyrax
       # Adding all fields in order of display in form
       :title, :alternative_title, :description, :keyword, :language,
       :publisher, :resource_type, :complex_rights, :rights_statement, :subject,
-      # :complex_date,
-      :complex_identifier, :complex_person, :complex_version,
+      :complex_date, :complex_identifier, :complex_person, :complex_version,
       :characterization_methods, :computational_methods, :data_origin,
       # :instrument, # requires fields with 2nd level of nesting
       :origin_system_provenance, :properties_addressed,
@@ -105,10 +104,8 @@ module Hyrax
        {
          title: [],
          url: [],
-         identifier: [],
-         identifier_scheme: [],
-         relationship_name: [],
-         relationship_role: []
+         complex_identifier_attributes: permitted_identifier_params,
+         relationship: []
        },
       ]
     end

@@ -1,0 +1,49 @@
+// -------- form css --------
+form .listing {
+  list-style: none;
+}
+
+form .row {
+  padding-bottom: 5px;
+}
+
+form .field-wrapper:not(:last-child) {
+  padding-bottom: 1em;
+}
+
+.multi-nested .form-group,
+.multi-nested .listing, {
+  margin-bottom: 0px;
+}
+
+.multi-nested .btn {
+  padding-top: 0px;
+}
+
+.multi-nested {
+  margin-bottom: 1em;
+}
+
+form .field-wrapper label[required="required"]::after {
+  content: " *";
+  color: red;
+}
+
+.nested-table,
+.nested-table > tbody,
+.nested-table > tbody > tr,
+.nested-table > tbody > tr > th,
+.nested-table > tbody > tr > td {
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+  padding: 0px;
+}
+
+.nested-table > tbody > tr.end > th,
+.nested-table > tbody > tr.end > td {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+// ----------------
