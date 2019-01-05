@@ -1,7 +1,7 @@
 # Provide select options for analysis fields
-class AnalysisFieldService < QaSelectServiceExtended
+class IdentifierService < QaSelectServiceExtended
   def initialize(_authority_name = nil)
-    super('analysis_fields')
+    super('identifiers')
   end
 end
 

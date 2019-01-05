@@ -1,5 +1,5 @@
 # Provide select options for data origin
-class PropertiesAddressedService < Hyrax::QaSelectService
+class PropertiesAddressedService < QaSelectServiceExtended
   def initialize(_authority_name = nil)
     super('properties_addressed')
   end
