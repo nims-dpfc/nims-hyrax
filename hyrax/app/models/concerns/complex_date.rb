@@ -2,8 +2,8 @@ class ComplexDate < ActiveTriples::Resource
   include CommonMethods
 
   configure type: ::RDF::Vocab::VCARD.Date
-  property :date, predicate: ::RDF::Vocab::DC.date
-  property :description, predicate: ::RDF::Vocab::DC.description
+  property :date, predicate: ::RDF::Vocab::Bibframe.eventDate
+  property :description, predicate: ::RDF::Vocab::Bibframe.classification
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)
