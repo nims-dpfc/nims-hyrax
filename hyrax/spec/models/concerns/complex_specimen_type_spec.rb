@@ -158,38 +158,38 @@ RSpec.describe ComplexSpecimenType do
       expect(@obj.complex_specimen_type).to be_empty
     end
 
-    # it 'rejects a specimen type active triple with no identifier' do
-    #   @obj = ExampleWork2.new
-    #   @obj.attributes = {
-    #     complex_specimen_type_attributes: [{
-    #       chemical_composition: 'chemical composition',
-    #       crystallographic_structure: 'crystallographic structure',
-    #       description: 'Description',
-    #       complex_identifier_attributes: [{
-    #         label: 'ORCID'
-    #       }],
-    #       material_types: 'material types',
-    #       structural_features: 'structural features',
-    #       title: 'Instrument 1'
-    #     }]
-    #   }
-    #   expect(@obj.complex_specimen_type).to be_empty
-    # end
+    it 'rejects a specimen type active triple with no identifier' do
+      @obj = ExampleWork2.new
+      @obj.attributes = {
+        complex_specimen_type_attributes: [{
+          chemical_composition: 'chemical composition',
+          crystallographic_structure: 'crystallographic structure',
+          description: 'Description',
+          complex_identifier_attributes: [{
+            label: 'ORCID'
+          }],
+          material_types: 'material types',
+          structural_features: 'structural features',
+          title: 'Instrument 1'
+        }]
+      }
+      expect(@obj.complex_specimen_type).to be_empty
+    end
 
-    # it 'rejects a specimen type active triple with no identifier' do
-    #   @obj = ExampleWork2.new
-    #   @obj.attributes = {
-    #     complex_specimen_type_attributes: [{
-    #       chemical_composition: 'chemical composition',
-    #       crystallographic_structure: 'crystallographic structure',
-    #       description: 'Description',
-    #       material_types: 'material types',
-    #       structural_features: 'structural features',
-    #       title: 'Instrument 1'
-    #     }]
-    #   }
-    #   expect(@obj.complex_specimen_type).to be_empty
-    # end
+    it 'rejects a specimen type active triple with no identifier' do
+      @obj = ExampleWork2.new
+      @obj.attributes = {
+        complex_specimen_type_attributes: [{
+          chemical_composition: 'chemical composition',
+          crystallographic_structure: 'crystallographic structure',
+          description: 'Description',
+          material_types: 'material types',
+          structural_features: 'structural features',
+          title: 'Instrument 1'
+        }]
+      }
+      expect(@obj.complex_specimen_type).to be_empty
+    end
 
     it 'rejects a specimen type active triple with no material types' do
       @obj = ExampleWork2.new
