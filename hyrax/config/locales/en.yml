@@ -1,23 +1,43 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  ngdr:
+    fields:
+      analysis_field:           "Analysis field"
+      characterization_methods: "Characterization methods"
+      computational_methods:    "Computational methods"
+      data_origin:              "Data origin"
+      material_types:           "Material types "
+      measurement_environment:  "Measurement environment"
+      processing_environment:   "Processing environment"
+      properties_addressed:     "Properties addressed"
+      structural_features:      "Structural features"
+      synthesis_and_processing: "Synthesis and processing"
+      complex_person:           "Person"
+      complex_identifier:       "Identifier"
+      part_of:                  "Part of"
+      status_at_start:          "Status at start"
+      status_at_end:            "Status at end"
+      instrument:               "Instrument"
+      complex_date:             "Date"
+      complex_relation:         "Related item"
+      complex_rights:           "Rights"
+      complex_version:          "Version"
+      characterization_methods: "Characterization methods"
+      computational_methods:    "Computational methods"
+      data_origin:              "Data origin"
+      instrument:               "Instrument"
+      origin_system_provenance: "Origin system provenance"
+      properties_addressed:     "Properties addressed"
+      specimen_set:             "Specimen set"
+      specimen_type:            "Specimen type"
+      synthesis_and_processing: "Synthesis and processing"
+      custom_property:          "custom property"
+      characterization_methods: "Characterization methods"
+      computational_methods:    "Computational methods"
+      data_origin:              "Data origin"
+      instrument:               "Instrument"
+      origin_system_provenance: "Origin system provenance"
+      properties_addressed:     "Properties addressed"
+      specimen_set:             "Specimen set"
+      specimen_type:            "Specimen type"
+      synthesis_and_processing: "Synthesis and processing"
+      custom_property:          "custom property"
