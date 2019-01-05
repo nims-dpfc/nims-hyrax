@@ -121,6 +121,7 @@ RSpec.describe Publication do
 
   describe 'part_of' do
     it 'has part_of' do
+      skip 'Not using this field. Raises RSolr::Error::ConnectionRefused when added to index.'
       @obj = build(:publication, part_of: ['Bigger publication'])
       expect(@obj.part_of).to eq ['Bigger publication']
     end
