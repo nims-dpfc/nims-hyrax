@@ -1,0 +1,113 @@
+version: '2.1'
+
+volumes:
+  fcrepo:
+  solr_home:
+  db:
+  redis:
+  app:
+
+networks:
+  internal:
+
+services:
+  fcrepo:
+    image: nulib/fcrepo4
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    volumes:
+      - fcrepo:/data
+    environment:
+      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
+    networks:
+      internal:
+
+  solr:
+    build: docker/solr
+    volumes:
+      - solr_home:/solr_home
+    expose:
+      - 8983
+    ports:
+      - 8983:8983
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - "-O"
+        - "/dev/null"
+        - http://localhost:8983/solr/
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      internal:
+
+  db:
+    build: docker/db
+    volumes:
+      - db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    healthcheck:
+      test: "CMD echo 'SELECT 1' | PGPASSWORD=password psql --host 127.0.0.1 --username postgres --dbname hyrax_development --quiet --no-align --tuples-only"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      internal:
+
+  app:
+    build: hyrax
+    environment:
+      - RAILS_SERVE_STATIC_FILES=true
+      - RAILS_LOG_TO_STDOUT=true
+      - REDIS_HOST=redis
+    volumes:
+      - app:/data/tmp/uploads
+    networks:
+      internal:
+
+  web:
+    extends:
+      service: app
+    command: bash -c "/bin/docker-entrypoint.sh"
+    depends_on:
+      - db
+      - solr
+      - fcrepo
+      - redis
+    ports:
+      - 3000:3000
+
+  workers:
+    extends:
+      service: app
+    command: bundle exec sidekiq
+    environment:
+      - SETTINGS__FITS_PATH=/opt/fits-1.0.5/fits.sh
+    depends_on:
+      - db
+      - solr
+      - fcrepo
+      - redis
+
+  redis:
+    image: redis:5
+    command: redis-server --appendonly yes
+    volumes:
+      - redis:/data
+    expose:
+      - 6379
+    networks:
+      internal:
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 30s
+      timeout: 5s
+      retries: 3
