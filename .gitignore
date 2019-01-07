@@ -15,7 +15,8 @@ hyrax/shared/sockets/*
 
 # commented out .rspec in ruby template below (since it was in git already)
 
-
+# public assets generated files
+hyrax/public/assets
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Ansible template
