@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_identifier,
+    as: :nested_identifier,
+    input_html: {
+      class: '',
+      data: {name: :complex_identifier}
+    },
+    required: f.object.required?(:complex_identifier)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another identifier</span>
+  </button>
+</div>

@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :custom_property,
+    as: :nested_custom_property,
+    input_html: {
+      class: '',
+      data: {name: :custom_property}
+    },
+    required: f.object.required?(:custom_property)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another custom property</span>
+  </button>
+</div>
