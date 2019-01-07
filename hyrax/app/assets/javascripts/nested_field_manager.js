@@ -1,6 +1,6 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (let i = 0; i < props.length; i++) { let descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -76,7 +76,7 @@ var NestedFieldManager = function () {
             $children.each(function () {
                 if ($.trim(this.value) === "") empty++;
             });
-            return empty == $children.length;
+            return empty === $children.length;
         }
     }, {
         key: 'clearEmptyWarning',
@@ -87,15 +87,15 @@ var NestedFieldManager = function () {
     }, {
         key: 'displayEmptyWarning',
         value: function displayEmptyWarning() {
-            let $listing = $(this.listClass, this.element);
-            let $warningMessage = $("<div class=\'message has-warning\'>cannot add another with empty field</div>");
+            var $listing = $(this.listClass, this.element);
+            var $warningMessage = $("<div class=\'message has-warning\'>cannot add another with empty field</div>");
             $listing.children(this.warningClass).remove();
             $listing.append($warningMessage);
         }
     }, {
         key: '_newField',
         value: function _newField($activeField, $currentId, $newId) {
-            let $newField = this.createNewField($activeField, $currentId, $newId);
+            var $newField = this.createNewField($activeField, $currentId, $newId);
             return $newField;
         }
     }, {
@@ -106,10 +106,9 @@ var NestedFieldManager = function () {
     }, {
         key: 'createNewField',
         value: function createNewField($activeField, $currentId, $newId) {
-            let $newField = $activeField.clone();
-            $newField;
+            var $newField = $activeField.clone();
             this.updateIndexInLabel($newField, $currentId, $newId);
-            let $newChildren = $newField.find('.form-control');
+            var $newChildren = $newField.find('.form-control');
             $newChildren.val('').removeProp('required').removeAttr('style');
             this.updateIndexInId($newChildren, $currentId, $newId);
             this.updateIndexInName($newChildren, $currentId, $newId);
@@ -121,11 +120,11 @@ var NestedFieldManager = function () {
         key: 'updateIndexInLabel',
         value: function updateIndexInLabel($newField, $currentId, $newId) {
             // Modify name in label
-            let currentLabelPart = 'attributes_' + $currentId + '_';
-            let newLabelPart = 'attributes_' + $newId + '_';
+            var currentLabelPart = 'attributes_' + $currentId + '_';
+            var newLabelPart = 'attributes_' + $newId + '_';
             $newField.find('label').each(function () {
-                let currentLabel = $(this).attr('for');
-                let newLabel = currentLabel.replace(currentLabelPart, newLabelPart);
+                var currentLabel = $(this).attr('for');
+                var newLabel = currentLabel.replace(currentLabelPart, newLabelPart);
                 $(this).attr('for', newLabel);
             });
             return $newField;
@@ -147,11 +146,11 @@ var NestedFieldManager = function () {
         key: 'updateIndexInName',
         value: function updateIndexInName($newChildren, $currentId, $newId) {
             // modify id and name in newChildren
-            let $currentNamePart = new RegExp('[' + $currentId + ']');
-            let $newnamePart = '[' + $newId + ']';
+            var $currentNamePart = new RegExp('[' + $currentId + ']');
+            var $newnamePart = '[' + $newId + ']';
             $newChildren.each(function () {
-                let $currentName = $(this).attr('name');
-                let $newName = $currentName.replace($currentNamePart, $newnamePart);
+                var $currentName = $(this).attr('name');
+                var $newName = $currentName.replace($currentNamePart, $newnamePart);
                 $(this).attr('name', $newName);
             });
             return $newChildren;
@@ -160,7 +159,7 @@ var NestedFieldManager = function () {
         key: 'removeFromList',
         value: function removeFromList(event) {
             event.preventDefault();
-            let $activeField = $(event.target).parents(this.fieldWrapperClass);
+            var $activeField = $(event.target).parents(this.fieldWrapperClass);
             $activeField.find(this.removeInputClass).val('1');
             $activeField.hide();
             this._manageFocus();
