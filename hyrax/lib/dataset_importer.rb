@@ -68,8 +68,7 @@ module DatasetImporter
 
         # NOTE there are errors in the test data such as "specime" instead of "specimen":
         # https://github.com/antleaf/nims-ngdr-development-2018/blob/master/sample_data_from_msuzuki/AES-narrow/mandatory.xml#L16
-        # There are a few errors in other places, e.g. authority files having incorrect spellings. Any mandatory.xml file that 
-        # contains data that does not match the models and authority files provided by NIMS will not be imported, and a message will be output to terminal
+        # There are a few errors in other places, e.g. authority files having incorrect spellings.
 
         # NOTE that in config/authorities, if the field key is in there, the value has to be one of the values in the corresponding file
         # can access those file by their relevant service though, in app/services/ like
@@ -81,18 +80,23 @@ module DatasetImporter
         # if it is found, I must replace whatever we do have with the ID value from the authority file
         
         # All the valid keys of the Dataset attributes are listed below - try to read each into the metadata
+        
+        # Set title with the folder title as it does not appear in the meta
+        # title: ['test dataset'],
+        attributes['title'] = [metadata_filename.split('/')[-2]]
+        
         metadata.xpath('//meta').each do |meta|
           # description: ['description 1'],
           if meta['key'] == 'material_description'
             attributes['description'] ||= []
             attributes['description'] << meta.content
 
-          # rights_statement: ['rights_statement 1'],
-          # NOTE that the value in data_accessibility would not be acceptable to the rights_statements authority file
-          # see below for more notes on what to do with this data...
-          elsif meta['key'] == 'data_accessibility'
-            attributes['rights_statement'] ||= []
-            attributes['rights_statement'] << meta.content
+          # TODO Anusha to provide info of how to save embargo data - which I will parse out of something like embargo_till_2019-09-30
+          # see: https://github.com/antleaf/nims-ngdr-development-2018/blob/master/sample_data_from_msuzuki/AES-narrow/mandatory.xml#L15
+          # As that field is defined only as a String in the sample XML, there is no way to know what format it could appear as
+          # in other documents, and also it would be a very brittle way to provide such data when the point of XML is that it could 
+          # be provided in more granular fashion. For now this has been agreed as the approach...
+          #elsif meta['key'] == 'data_accessibility'
 
           # data_origin: ['informatics and data science'],
           # TODO this value needs to be validated against the data_origin authority file
@@ -102,6 +106,7 @@ module DatasetImporter
             attributes['data_origin'] << meta.content
 
           # complex_identifier_attributes: [{identifier: '0000-0000-0000-0000', scheme: 'uri_of_ORCID_scheme', label: 'ORCID'}],
+          # TODO Anusha is adding an authority file for identifier types, so will need to check these against it
           elsif meta['key'] == 'data_id' or meta['key'] == 'previous_process_id' or meta['key'] == 'relational_id' or meta['key'] == 'reference'
             attributes['complex_identifier_attributes'] ||= []
             attributes['complex_identifier_attributes'] << {identifier: meta.content, label: meta['key']}
@@ -124,7 +129,7 @@ module DatasetImporter
           #   complex_identifier_attributes: [{identifier: '1234567',scheme: 'Local'}]
           # }],
           elsif meta['key'] == 'entrant'
-            attributes['complex_person_attributes'] ||= [{}]
+            attributes['complex_person_attributes'] ||= [{name: 'Anonymous User', role: 'data depositor'}] # agreed to use Anonymous User and data depositor
             attributes['complex_person_attributes'][0]['complex_identifier_attributes'] = [{identifier: meta.content, scheme: 'Local'}]
 
           elsif meta['key'] == 'entrant_affiliation'
@@ -157,12 +162,12 @@ module DatasetImporter
           #   organization: 'Organisation',
           elsif meta['key'] == 'instrument_registered_organization'
             attributes['instrument_attributes'] ||= [{}]
-            attributes['instrument_attributes'][0]['instrument_registered_organization'] = meta.content
+            attributes['instrument_attributes'][0]['organization'] = meta.content
 
           #   manufacturer: 'Manufacturer name',
           elsif meta['key'] == 'instrument_manufacturer'
             attributes['instrument_attributes'] ||= [{}]
-            attributes['instrument_attributes'][0]['instrument_manufacturer'] = meta.content
+            attributes['instrument_attributes'][0]['manufacturer'] = meta.content
 
           #   complex_person_attributes: [{name: ['Name of operator'], role: ['Operator']}],
           elsif meta['key'] == 'instrument_operator'
@@ -199,17 +204,15 @@ module DatasetImporter
           # NOTE the sample data does not have any of the other complex specimen type fields, 
           # but it DOES have specime_initial_state (note the incorrect spelling) and specimen_final_state
           # neither of which seem to have corresponding keys in the model to insert them into
+          # For now agreed to collate specimen fields into the specimen_set string, and import specime as specimen
+          # specimen_set: 'Specimen set',
+          elsif meta['key'] == 'specime_initial_state' or meta['key'] == 'specimen_initial_state' or meta['key'] == 'specime_final_state' or meta['key'] == 'specimen_final_state' 
+            attributes['specimen_set'] ||= ''
+            attributes['specimen_set'] += meta['key'] + ':' + meta.content + ';'
 
           # NOTE also that all of the fields below that are defined in our model appear to be missing in 
           # the sample data. At least "title" seems to be mandatory for our model, so it does not seem that any of this data could be acceptable
 
-          # It is also possible that complex_rights_attributes could be used to better represent data_accessibility, which 
-          # was inserted above as a simple string, which is what it is provided as in the sample data, such as embargo_till_2019-09-30
-          # see: https://github.com/antleaf/nims-ngdr-development-2018/blob/master/sample_data_from_msuzuki/AES-narrow/mandatory.xml#L15
-          # BUT as that field is defined only as a String in the sample XML, there is no way to know what format it could appear as
-          # in other documents, and also it would be a very brittle way to provide such data when the point of XML is that it could 
-          # be provided in more granular fashion. So for now this has not been used, and it is just saved above as a simple string.
-          
           # ALSO perhaps relation_attributes would better suit what have been entered above as complex_identifier_attributes
           # but without some way to know what sort of relation a relation_id is meant to be, or what a reference really is, 
           # there is no way to know how to use these relation_attributes for them.
@@ -219,10 +222,12 @@ module DatasetImporter
           # NOTE that for now this means none of them would succeed, as there are 4 key names described above
           # which do not yet conform to any of our model keys.
           else
-            puts 'Mandatory XML file contains an unacceptable key ' + meta['key'] + ' at ' + metadata_filename
+            puts 'Mandatory XML file contains an unknown key, which has been imported as a custom property instead: ' + meta['key'] + ' at ' + metadata_filename
+            # custom_property_attributes: [{label: 'Full name', description: 'My full name is ...'}]
+            attributes['custom_property_attributes'] ||= []
+            attributes['custom_property_attributes'] << {label: meta['key'], description: meta.content}
             return {}
 
-          # title: ['test dataset'],
           # source: ['Source 1'],
           # keyword: ['keyword 1', 'keyword 2'],
           # language: ['language 1'],
@@ -233,7 +238,6 @@ module DatasetImporter
           # characterization_methods: 'charge distribution',
           # computational_methods: 'computational methods',
           # origin_system_provenance: 'origin system provenance',
-          # specimen_set: 'Specimen set',
           # synthesis_and_processing: 'Synthesis and processing methods',
           # complex_rights_attributes: [{date: '1978-10-28', rights: 'CC0'}],
           # complex_version_attributes: [{date: '1978-10-28', description: 'Creating the first version', identifier: 'id1', version: '1.0'}],
@@ -243,9 +247,19 @@ module DatasetImporter
           #   complex_identifier_attributes: [{identifier: ['123456'], label: ['local']}],
           #   relationship_name: 'Is part of',
           #   relationship_role: 'http://example.com/isPartOf'
-          # }],
-          # custom_property_attributes: [{label: 'Full name', description: 'My full name is ...'}]
+          # }]
 
+          end
+        end
+        
+        # also agreed to parse a measurement.xml file if present, so just do that here for the time being, if it exists in the same folder
+        measures_filename = metadata_filename.rpartition('/').first + '/measurement.xml'
+        if File.file?(measures_filename)
+          measures = File.open(measures_filename) { |f| Nokogiri::XML(f) }
+          measures.xpath('//meta').each do |measure|
+            # custom_property_attributes: [{label: 'Full name', description: 'My full name is ...'}]
+            attributes['custom_property_attributes'] ||= []
+            attributes['custom_property_attributes'] << {label: meta['key'], description: meta.content}
           end
         end
 
