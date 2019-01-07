@@ -33,10 +33,11 @@ class Publication < ActiveFedora::Base
   # property subject - defined in the basic metadata
 
 
-  # NOTE: Not a part of Hyrax basic metadata #fixme: should this be moved to NGDR Hyrax Work Common metadata?
-  property :part_of, predicate: ::RDF::Vocab::DC.isPartOf do |index|
-    index.as :stored_searchable
-  end
+  # NOTE: Not a part of Hyrax basic metadata
+  # Not defining this field. It raises RSolr::Error::ConnectionRefused when added to index.
+  # property :part_of, predicate: ::RDF::Vocab::DC.isPartOf do |index|
+  #   index.as :stored_searchable
+  # end
 
   # NGDR Hyrax Work Common
   property :alternative_title, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|

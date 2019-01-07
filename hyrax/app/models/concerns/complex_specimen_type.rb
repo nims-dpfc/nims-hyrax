@@ -5,7 +5,7 @@ class ComplexSpecimenType < ActiveTriples::Resource
 
   property :chemical_composition, predicate: ::RDF::Vocab::NimsRdp["chemical-composition"]
 
-  property :crystalograpic_structure, predicate: ::RDF::Vocab::NimsRdp["crystalograpic-structure"]
+  property :crystallographic_structure, predicate: ::RDF::Vocab::NimsRdp["crystallographic-structure"]
 
   property :description, predicate: ::RDF::Vocab::DC11.description
 
@@ -25,7 +25,7 @@ class ComplexSpecimenType < ActiveTriples::Resource
 
   property :structural_features, predicate: ::RDF::Vocab::NimsRdp["structural-features"]
 
-  property :title, predicate: ::RDF::Vocab::DC.title
+  property :title, predicate: ::RDF::Vocab::NimsRdp["speciment-title"]
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)

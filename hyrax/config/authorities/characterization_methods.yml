@@ -1,0 +1,285 @@
+terms:
+- id: charge distribution
+  term: charge distribution/荷電分布
+  active: true
+- id: charge distribution -- pulsed electroacoustic method
+  term: charge distribution/荷電分布 -- pulsed electroacoustic method/パルス電気音響法
+  active: true
+- id: chromatography
+  term: chromatography/クロマトグラフィー
+  active: true
+- id: chromatography -- critical and supercritical chromatography
+  term: chromatography/クロマトグラフィー -- critical and supercritical chromatography/クリティカルと超臨界クロマトグラフィー
+  active: true
+- id: chromatography -- gas-phase chromatography
+  term: chromatography/クロマトグラフィー -- gas-phase chromatography/気相クロマトグラフィー
+  active: true
+- id: chromatography -- ion chromatography
+  term: chromatography/クロマトグラフィー -- ion chromatography/イオンクロマトグラフィー
+  active: true
+- id: chromatography -- liquid-phase chromatography
+  term: chromatography/クロマトグラフィー -- liquid-phase chromatography/液相クロマトグラフィー
+  active: true
+- id: dilatometry
+  term: dilatometry/膨張計
+  active: true
+- id: electrochemical
+  term: electrochemical/電気化学
+  active: true
+- id: electrochemical -- amperometry
+  term: electrochemical/電気化学 -- amperometry/アンペロメトリー
+  active: true
+- id: electrochemical -- potentiometry
+  term: electrochemical/電気化学 -- potentiometry/電位差測定法
+  active: true
+- id: electrochemical -- voltammetry
+  term: electrochemical/電気化学 -- voltammetry/ボルタンメトリー
+  active: true
+- id: mechanical
+  term: mechanical/機械特性
+  active: true
+- id: mechanical -- compression tests
+  term: mechanical/機械特性 -- compression tests/圧縮試験
+  active: true
+- id: mechanical -- creep tests
+  term: mechanical/機械特性 -- creep tests/クリープテスト
+  active: true
+- id: mechanical -- dynamic mechanical analysis
+  term: mechanical/機械特性 -- dynamic mechanical analysis/動的機械的分析
+  active: true
+- id: mechanical -- hardness
+  term: mechanical/機械特性 -- hardness/硬度
+  active: true
+- id: mechanical -- nanoindentation
+  term: mechanical/機械特性 -- nanoindentation/ナノインデンテーション
+  active: true
+- id: mechanical -- shear or torsion tests
+  term: mechanical/機械特性 -- shear or torsion tests/せん断試験またはねじり試験
+  active: true
+- id: mechanical -- tension tests
+  term: mechanical/機械特性 -- tension tests/張力試験
+  active: true
+- id: mechanical -- wear tests
+  term: mechanical/機械特性 -- wear tests/摩耗試験
+  active: true
+- id: microscopy
+  term: microscopy/顕微鏡法
+  active: true
+- id: microscopy -- analytical electron microscopy
+  term: microscopy/顕微鏡法 -- analytical electron microscopy/分析電子顕微鏡法
+  active: true
+- id: microscopy -- atomic force microscopy
+  term: microscopy/顕微鏡法 -- atomic force microscopy/原子間力顕微鏡
+  active: true
+- id: microscopy -- confocal microscopy
+  term: microscopy/顕微鏡法 -- confocal microscopy/共焦点顕微鏡法
+  active: true
+- id: microscopy -- electron probe microanalysis
+  term: microscopy/顕微鏡法 -- electron probe microanalysis/電子プローブ微量分析
+  active: true
+- id: microscopy -- environmental scanning electron
+  term: microscopy/顕微鏡法 -- environmental scanning electron/環境走査型電子顕微鏡
+  active: true
+- id: microscopy -- field emission electron probe
+  term: |-
+    microscopy/顕微鏡法 -- microscopy
+    field emission electron probe/電界放出電子プローブ
+  active: true
+- id: microscopy -- optical microscopy
+  term: microscopy/顕微鏡法 -- optical microscopy/光学顕微鏡法
+  active: true
+- id: microscopy -- photoluminescence microscopy
+  term: microscopy/顕微鏡法 -- photoluminescence microscopy/フォトルミネセンス顕微鏡
+  active: true
+- id: microscopy -- scanning Auger electron microscopy
+  term: microscopy/顕微鏡法 -- scanning Auger electron microscopy/走査型オージェ電子顕微鏡法
+  active: true
+- id: microscopy -- scanning Kelvin probe
+  term: microscopy/顕微鏡法 -- scanning Kelvin probe/スキャニングケルビンプローブ
+  active: true
+- id: microscopy -- scanning electron microscopy
+  term: microscopy/顕微鏡法 -- scanning electron microscopy/電子顕微鏡
+  active: true
+- id: microscopy -- scanning probe microscopy
+  term: microscopy/顕微鏡法 -- scanning probe microscopy/走査型プローブ顕微鏡法
+  active: true
+- id: microscopy -- scanning transmission electron microscopy
+  term: microscopy/顕微鏡法 -- scanning transmission electron microscopy/走査透過電子顕微鏡法
+  active: true
+- id: microscopy -- scanning tunneling microscopy
+  term: microscopy/顕微鏡法 -- scanning tunneling microscopy/走査トンネル顕微鏡
+  active: true
+- id: microscopy -- transmission electron microscopy
+  term: microscopy/顕微鏡法 -- transmission electron microscopy/透過電子顕微鏡法
+  active: true
+- id: microscopy -- x-ray optical interferometry
+  term: microscopy/顕微鏡法 -- x-ray optical interferometry/X線光学干渉法
+  active: true
+- id: optical
+  term: optical/光学測定
+  active: true
+- id: optical -- differential refractive index
+  term: optical/光学測定 -- differential refractive index/示差屈折率
+  active: true
+- id: optical -- dynamic light scattering
+  term: optical/光学測定 -- dynamic light scattering/動的光散乱
+  active: true
+- id: optical -- ellipsometry
+  term: optical/光学測定 -- ellipsometry/エリプソメトリー
+  active: true
+- id: optical -- fractography
+  term: optical/光学測定 -- fractography/フラクトグラフィ
+  active: true
+- id: optical -- light scattering
+  term: optical/光学測定 -- light scattering/光散乱
+  active: true
+- id: optical -- quasi-elastic light scattering
+  term: optical/光学測定 -- quasi-elastic light scattering/準弾性光散乱
+  active: true
+- id: osmometry
+  term: osmometry/浸透圧法(osmometry)
+  active: true
+- id: osmometry -- freezing point depression osmometry
+  term: osmometry/浸透圧法(osmometry) -- freezing point depression osmometry/凝固点降下
+  active: true
+- id: osmometry -- membrane osmometry
+  term: osmometry/浸透圧法(osmometry) -- membrane osmometry/膜浸透圧測定
+  active: true
+- id: osmometry -- vapor pressure depression osmometry
+  term: osmometry/浸透圧法(osmometry) -- vapor pressure depression osmometry/蒸気圧低下浸透圧法
+  active: true
+- id: profilometry
+  term: profilometry/プロフィロメトリー
+  active: true
+- id: scattering and diffraction
+  term: scattering and diffraction/散乱_回折
+  active: true
+- id: scattering and diffraction -- XRD grazing incidence
+  term: scattering and diffraction/散乱_回折 -- XRD grazing incidence/XRD低角入射
+  active: true
+- id: scattering and diffraction -- electron backscatter diffraction
+  term: scattering and diffraction/散乱_回折 -- electron backscatter diffraction/電子バックスキャッタ回折
+  active: true
+- id: scattering and diffraction -- neutron (elastic)
+  term: scattering and diffraction/散乱_回折 -- neutron (elastic)/中性子(弾性)
+  active: true
+- id: scattering and diffraction -- neutron (inelastic)
+  term: scattering and diffraction/散乱_回折 -- neutron (inelastic)/中性子(非弾性)
+  active: true
+- id: scattering and diffraction -- small angle x-ray scattering
+  term: scattering and diffraction/散乱_回折 -- small angle x-ray scattering/小角X線散乱_極小角X線散乱
+  active: true
+- id: scattering and diffraction -- small-angle neutron scattering
+  term: scattering and diffraction/散乱_回折 -- small-angle neutron scattering/小角中性子
+  active: true
+- id: scattering and diffraction -- synchrotron
+  term: scattering and diffraction/散乱_回折 -- synchrotron/シンクロトロン利用
+  active: true
+- id: scattering and diffraction -- x-ray diffraction
+  term: scattering and diffraction/散乱_回折 -- x-ray diffraction/X線回折
+  active: true
+- id: scattering and diffraction -- x-ray reflectivity
+  term: scattering and diffraction/散乱_回折 -- x-ray reflectivity/X線反射率
+  active: true
+- id: scattering and diffraction -- x-ray topography
+  term: scattering and diffraction/散乱_回折 -- x-ray topography/X線トポグラフィ
+  active: true
+- id: spectrometry
+  term: spectrometry/分光分析法
+  active: true
+- id: spectrometry -- IR_FTIR spectrometry
+  term: spectrometry/分光分析法 -- IR_FTIR spectrometry/IR _ FTIR分光測定
+  active: true
+- id: spectrometry -- alpha spectrometry
+  term: spectrometry/分光分析法 -- alpha spectrometry/アルファ分光法
+  active: true
+- id: spectrometry -- energy dispersive x-ray spectometry
+  term: spectrometry/分光分析法 -- energy dispersive x-ray spectometry/エネルギー分散型X線分光法
+  active: true
+- id: spectrometry -- gamma spectrometry
+  term: spectrometry/分光分析法 -- gamma spectrometry/ガンマ線分光法
+  active: true
+- id: spectrometry -- ion mobility spectrometry
+  term: spectrometry/分光分析法 -- ion mobility spectrometry/イオン移動度分光法
+  active: true
+- id: spectrometry -- mass spectrometry
+  term: spectrometry/分光分析法 -- mass spectrometry/質量分析
+  active: true
+- id: spectrometry -- secondary ion mass spectrometry
+  term: spectrometry/分光分析法 -- secondary ion mass spectrometry/二次イオン質量分析法
+  active: true
+- id: spectrometry -- x-ray flourescence spectrometry
+  term: spectrometry/分光分析法 -- x-ray flourescence spectrometry/X線蛍光分光分析
+  active: true
+- id: spectroscopy
+  term: spectroscopy/分光法
+  active: true
+- id: spectroscopy -- EXAFS
+  term: spectroscopy/分光法 -- EXAFS/EXAFS
+  active: true
+- id: spectroscopy -- Fourier-transform infrared spectroscopy
+  term: spectroscopy/分光法 -- Fourier-transform infrared spectroscopy/フーリエ変換赤外分光法
+  active: true
+- id: spectroscopy -- NEXAFS
+  term: spectroscopy/分光法 -- NEXAFS/NEXAFS
+  active: true
+- id: spectroscopy -- NMR
+  term: spectroscopy/分光法 -- NMR/NMR
+  active: true
+- id: spectroscopy -- Raman
+  term: spectroscopy/分光法 -- Raman/ラマン
+  active: true
+- id: spectroscopy -- XPS variable kinetic
+  term: spectroscopy/分光法 -- XPS variable kinetic/XPS入射光可変
+  active: true
+- id: spectroscopy -- dielectric and impedance spectroscopy
+  term: spectroscopy/分光法 -- dielectric and impedance spectroscopy/誘電体_インピーダンス分光法
+  active: true
+- id: spectroscopy -- dynamic mechanical spectroscopy
+  term: spectroscopy/分光法 -- dynamic mechanical spectroscopy/動的機械的分析
+  active: true
+- id: spectroscopy -- electron energy-loss spectroscopy
+  term: spectroscopy/分光法 -- electron energy-loss spectroscopy/電子エネルギー損失分光法
+  active: true
+- id: spectroscopy -- x-ray absorption spectroscopy
+  term: spectroscopy/分光法 -- x-ray absorption spectroscopy/X線吸収分光法
+  active: true
+- id: spectroscopy -- x-ray emission spectroscopy
+  term: spectroscopy/分光法 -- x-ray emission spectroscopy/X線発光分光法
+  active: true
+- id: spectroscopy -- x-ray photoelectron spectroscopy
+  term: spectroscopy/分光法 -- x-ray photoelectron spectroscopy/X線光電子分光法
+  active: true
+- id: thermochemical
+  term: thermochemical/熱化学
+  active: true
+- id: thermochemical -- calorimetry
+  term: thermochemical/熱化学 -- calorimetry/熱量測定
+  active: true
+- id: thermochemical -- differential scanning calorimetry
+  term: thermochemical/熱化学 -- differential scanning calorimetry/示差走査熱量測定
+  active: true
+- id: thermochemical -- differential thermal analysis
+  term: thermochemical/熱化学 -- differential thermal analysis/示差熱分析
+  active: true
+- id: thermochemical -- microcalorimetry
+  term: thermochemical/熱化学 -- microcalorimetry/微量熱量測定
+  active: true
+- id: thermochemical -- thermogravimetry
+  term: thermochemical/熱化学 -- thermogravimetry/熱重量測定
+  active: true
+- id: tomography
+  term: tomography/トモグラフィー
+  active: true
+- id: tomography -- atom probe tomography
+  term: tomography/トモグラフィー -- atom probe tomography/原子プローブトモグラフィー
+  active: true
+- id: tomography -- x-ray tomography
+  term: tomography/トモグラフィー -- x-ray tomography/X線断層撮影
+  active: true
+- id: ultrasonic
+  term: ultrasonic/超音波
+  active: true
+- id: viscometry
+  term: viscometry/粘度測定
+  active: true

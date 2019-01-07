@@ -5,7 +5,7 @@ class ComplexInstrument < ActiveTriples::Resource
 
   property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
 
-  property :complex_date, predicate: ::RDF::Vocab::DC.date,
+  property :complex_date, predicate: ::RDF::Vocab::NimsRdp["instrument-date"],
             class_name:"ComplexDate"
   accepts_nested_attributes_for :complex_date
 
@@ -27,7 +27,7 @@ class ComplexInstrument < ActiveTriples::Resource
 
   property :organization, predicate: ::RDF::Vocab::NimsRdp["instrument-organization"]
 
-  property :title, predicate: ::RDF::Vocab::DC.title
+  property :title, predicate: ::RDF::Vocab::NimsRdp["instrument-title"]
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)

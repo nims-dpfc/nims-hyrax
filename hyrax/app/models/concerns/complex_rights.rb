@@ -2,7 +2,7 @@ class ComplexRights < ActiveTriples::Resource
   include CommonMethods
 
   configure type: ::RDF::Vocab::NimsRdp['License']
-  property :date, predicate: ::RDF::Vocab::DC.date
+  property :date, predicate: ::RDF::Vocab::DISCO.startDate
   property :rights, predicate: ::RDF::Vocab::DC.rights
 
   ## Necessary to get AT to create hash URIs.
