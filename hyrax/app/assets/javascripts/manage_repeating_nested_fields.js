@@ -24,7 +24,7 @@ Blacklight.onLoad(function() {
     // removeText:         'Remove',
 
     labelControls:      true,
-  }
+  };
 
   $.fn.manage_nested_fields = function(option) {
     // var nested_editor = require('./nested_field_manager')

@@ -12,7 +12,7 @@ module Hyrax
       # Fields interested in, but removing to re-order
       :title, :description, :keyword, :language, :publisher, :resource_type,
       :rights_statement, :subject
-      # Fileds that are not displayed
+      # Fields that are not displayed
       # :import_url, :date_modified, :date_uploaded, :depositor, :bibliographic_citation,
       # :date_created, :label, :relative_path
     ]
@@ -52,7 +52,7 @@ module Hyrax
        {
          date: [],
          description: []
-       },
+       }
       ]
     end
 
@@ -63,7 +63,7 @@ module Hyrax
          identifier: [],
          scheme: [],
          label: []
-       },
+       }
       ]
     end
 
@@ -81,7 +81,7 @@ module Hyrax
          complex_person_attributes: permitted_person_params,
          organization: [],
          title: []
-       },
+       }
       ]
     end
 
@@ -94,7 +94,7 @@ module Hyrax
          affiliation: [],
          complex_identifier_attributes: permitted_identifier_params,
          uri: []
-       },
+       }
       ]
     end
 
@@ -106,7 +106,7 @@ module Hyrax
          url: [],
          complex_identifier_attributes: permitted_identifier_params,
          relationship: []
-       },
+       }
       ]
     end
 
@@ -116,7 +116,7 @@ module Hyrax
        {
          date: [],
          rights: []
-       },
+       }
       ]
     end
 
@@ -133,7 +133,7 @@ module Hyrax
          complex_relation_attributes: permitted_relation_params,
          structural_features: [],
          title: []
-       },
+       }
       ]
     end
 
@@ -145,7 +145,7 @@ module Hyrax
          description: [],
          identifier: [],
          version: []
-       },
+       }
       ]
     end
 
@@ -155,7 +155,7 @@ module Hyrax
        {
          label: [],
          description: []
-       },
+       }
       ]
     end
 
@@ -167,7 +167,7 @@ module Hyrax
          identifier: [],
          purchase_record_item: [],
          title: []
-       },
+       }
       ]
     end
 
