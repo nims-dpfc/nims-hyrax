@@ -283,7 +283,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_identifier.first.scheme).to be_empty
     end
 
-    it 'rejects an identifier active triple with no ientifier' do
+    it 'rejects an identifier active triple with no identifier' do
       @obj = build(:dataset, complex_identifier_attributes: [{
           label: 'Local'
         }]
@@ -536,10 +536,10 @@ RSpec.describe Dataset do
 
     it 'rejects relation active triple with identifier' do
       @obj = build(:dataset, complex_relation_attributes: [{
-          complex_identifier_attributes: [{
-            identifier: ['123456'],
-            label: 'Local'
-          }],
+        complex_identifier_attributes: [{
+                                          identifier: ['123456'],
+                                          label: 'Local'
+                                        }],
         }]
       )
       expect(@obj.complex_relation).to be_empty
