@@ -1,0 +1,43 @@
+terms:
+  - id: data identifier local
+    term: Data Identifier - Local
+    active: true
+  - id: data identifier persistent
+    term: Data Identifier - Persistent
+    active: true
+  - id: edu person principal name
+    term: eduPersonPrincipalName
+    active: true
+  - id: edu person targeted id
+    term: eduPersonTargetedID
+    active: true
+  - id: full image url
+    term: Full Image URL
+    active: true
+  - id: nims person id
+    term: NIMS Person ID
+    active: true
+  - id: ORCID
+    term: ORCID
+    active: true
+  - id: project id
+    term: Project ID
+    active: true
+  - id: referred data identifier local
+    term: Referred Data Identifier - Local
+    active: true
+  - id: referred data identifier persistent
+    term: Referred Data Identifier - Persistent
+    active: true
+  - id: related data identifier local
+    term: Related Data Identifier - Local
+    active: true
+  - id: related data identifier persistent
+    term: Related Data Identifier - Persistent
+    active: true
+  - id: thumbnail image url
+    term: Thumbnail Image URL
+    active: true
+  - id: web image url
+    term: Web Image URL
+    active: true

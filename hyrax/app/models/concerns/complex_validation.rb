@@ -51,17 +51,15 @@ module ComplexValidation
       Array(attributes[:title]).all?(&:blank?)
     end
     # relation_blank
-    #   Requires label / url / identifier and
-    #            relationship name / relationship role
+    #   Requires title / url / identifier and relationship
     resource_class.send(:define_method, :relation_blank) do |attributes|
       identifiers_blank = true
       Array(attributes[:complex_identifier_attributes]).each do |id|
         identifiers_blank = identifiers_blank && Array(id[:identifier]).all?(&:blank?)
       end
-      (Array(attributes[:label]).all?(&:blank?) &&
+      (Array(attributes[:title]).all?(&:blank?) &&
       Array(attributes[:url]).all?(&:blank?) && identifiers_blank) ||
-      (Array(attributes[:relationship_role]).all?(&:blank?) &&
-      Array(attributes[:relationship_name]).all?(&:blank?))
+      Array(attributes[:relationship]).all?(&:blank?)
     end
     # rights_blank
     #   Requires rights
@@ -69,14 +67,16 @@ module ComplexValidation
       Array(attributes[:rights]).all?(&:blank?)
     end
     # specimen_type_blank
-    #   Requires title and date
+    #   Requires
+    #     chemical_composition, crystallographic_structure, description,
+    #     identifier, material_types, structural_features and title
     resource_class.send(:define_method, :specimen_type_blank) do |attributes|
       identifiers_blank = true
       Array(attributes[:complex_identifier_attributes]).each do |id|
         identifiers_blank = identifiers_blank && Array(id[:identifier]).all?(&:blank?)
       end
       Array(attributes[:chemical_composition]).all?(&:blank?) ||
-      Array(attributes[:crystalograpic_structure]).all?(&:blank?) ||
+      Array(attributes[:crystallographic_structure]).all?(&:blank?) ||
       Array(attributes[:description]).all?(&:blank?) ||
       identifiers_blank ||
       Array(attributes[:material_types]).all?(&:blank?) ||
