@@ -11,10 +11,8 @@ Blacklight.onLoad(function() {
 
     controlsHtml:      '<span class=\"input-group-btn field-controls\">',
     fieldWrapperClass: '.field-wrapper',
-
     warningClass:      '.has-warning',
     listClass:         '.listing',
-    fieldWrapperClass: '.field-wrapper',
     removeInputClass:   '.remove-hidden',
 
     addHtml:           '<button type=\"button\" class=\"btn btn-link add\"><span class=\"glyphicon glyphicon-plus\"></span><span class="controls-add-text"></span></button>',
@@ -23,7 +21,7 @@ Blacklight.onLoad(function() {
     // removeHtml:        '<button type=\"button\" class=\"btn btn-link remove\"><span class=\"glyphicon glyphicon-remove\"></span><span class="controls-remove-text"></span> <span class=\"sr-only\"> previous <span class="controls-field-name-text">field</span></span></button>',
     // removeText:         'Remove',
 
-    labelControls:      true,
+    labelControls:      true
   };
 
   $.fn.manage_nested_fields = function(option) {
