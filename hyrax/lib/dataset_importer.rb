@@ -273,8 +273,10 @@ module DatasetImporter
         file_ids = []
         files.each do |file|
           unless File.file?(file)
-            # TODO if there are dirs in the file list, perhaps this should zip them instead of ignoreing them
-            puts 'Upload dataset are not allowed to include directories within them - only files or zips. Directory ' + file + ' will be ignored'
+            # if there are dirs in the file list, they are all just being flattened - but the top level may still appear in the list
+            # TODO there does not appear to be a setting of the filename here, so cannot add a namespaced filename for things inside folders, if any
+            # will just have to see how that comes out when used in hyrax, and perhaps Anusha knows how to add the filename here if turns out to be needed later
+            puts 'Uploads can only be files, this does not appear to be: ' + file
             next
           end
           u = ::Hyrax::UploadedFile.new
