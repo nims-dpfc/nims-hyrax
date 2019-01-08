@@ -32,7 +32,8 @@ RSpec.describe DatasetIndexer do
       expect(@solr_document['complex_date_dtsim']).to match_array(
         ["1988-10-28T00:00:00Z", "2018-01-01T00:00:00Z"])
     end
-    it 'indexes each type as sortbale' do
+    it 'indexes each type as sortable' do
+      skip 'this cannot be multi-valued'
       expect(@solr_document['complex_date_submitted_dtsi']).to match_array("1988-10-28T00:00:00Z")
     end
     it 'indexes each type as dateable' do
@@ -271,6 +272,7 @@ RSpec.describe DatasetIndexer do
       expect(@solr_document['complex_date_processed_dtsim']).to match_array(["2018-02-14T00:00:00Z", "2018-03-15T00:00:00Z"])
     end
     it 'indexes date by type as sortable' do
+      skip 'this cannot be multi-valued'
       expect(@solr_document['complex_date_processed_dtsi']).to match_array(["2018-02-14T00:00:00Z", "2018-03-15T00:00:00Z"])
     end
     it 'indexes date by type as displayable' do
@@ -466,6 +468,7 @@ RSpec.describe DatasetIndexer do
         ['2018-09-23T00:00:00Z', '2018-12-23T00:00:00Z'])
     end
     it 'indexes the purchase date as sortable' do
+      skip 'this cannot be multi-valued'
       expect(@solr_document['complex_date_purchased_dtsi']).to match_array(
         ['2018-09-23T00:00:00Z', '2018-12-23T00:00:00Z'])
     end
