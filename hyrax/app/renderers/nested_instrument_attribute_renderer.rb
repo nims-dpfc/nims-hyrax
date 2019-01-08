@@ -17,7 +17,8 @@ class NestedInstrumentAttributeRenderer < Hyrax::Renderers::FacetedAttributeRend
       end
       # complex date
       unless v.dig('complex_date').blank?
-        val = NestedDateAttributeRenderer.new('complex_date', v.dig('complex_date')).render
+        dt_j = v.dig('complex_date').to_json
+        val = NestedDateAttributeRenderer.new('Date', dt_j).render
         instrument << ['Date', val]
       end
       # description
@@ -26,7 +27,8 @@ class NestedInstrumentAttributeRenderer < Hyrax::Renderers::FacetedAttributeRend
       end
       # complex identifier
       unless v.dig('complex_identifier').blank?
-        val = NestedIdentifierAttributeRenderer.new('complex_identifier', v.dig('complex_identifier')).render
+        id_j = v.dig('complex_identifier').to_json
+        val = NestedIdentifierAttributeRenderer.new('Identifier', id_j).render
         instrument << ['Identifier', val]
       end
       # function_1
@@ -43,7 +45,8 @@ class NestedInstrumentAttributeRenderer < Hyrax::Renderers::FacetedAttributeRend
       end
       # compex_person
       unless v.dig('complex_person').blank?
-        val = NestedPersonAttributeRenderer.new('complex_person', v.dig('complex_person')).render
+        p_j = v.dig('complex_person').to_json
+        val = NestedPersonAttributeRenderer.new('Person', p_j).render
         instrument << ['Person', val]
       end
       # organization
