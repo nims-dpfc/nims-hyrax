@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  authenticate :user, lambda { |u| u.has_role? :admin } do
+  authenticate :user, lambda { |u| u.admin? } do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
   end
