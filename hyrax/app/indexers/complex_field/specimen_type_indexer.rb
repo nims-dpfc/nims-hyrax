@@ -67,13 +67,15 @@ module ComplexField
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
           solr_doc[fld_name] << pr.date.reject(&:blank?).first
 
-          fld_name = Solrizer.solr_name('complex_date_purchased', :stored_sortable, type: :date)
-          solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
-          solr_doc[fld_name] << DateTime.parse(pr.date.reject(&:blank?).first).utc.iso8601
+          unless pr.date.reject(&:blank?).blank?
+            fld_name = Solrizer.solr_name('complex_date_purchased', :stored_sortable, type: :date)
+            solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+            solr_doc[fld_name] << DateTime.parse(pr.date.reject(&:blank?).first).utc.iso8601
 
-          fld_name = Solrizer.solr_name('complex_date_purchased', :dateable)
-          solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
-          solr_doc[fld_name] << DateTime.parse(pr.date.reject(&:blank?).first).utc.iso8601
+            fld_name = Solrizer.solr_name('complex_date_purchased', :dateable)
+            solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+            solr_doc[fld_name] << DateTime.parse(pr.date.reject(&:blank?).first).utc.iso8601
+          end
         end
       end
     end
