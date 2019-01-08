@@ -35,3 +35,6 @@ terms:
   - id: Purchased
     term: Purchased
     active: true
+  - id: Registered
+    term: Registered
+    active: true
