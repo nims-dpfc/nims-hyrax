@@ -35,11 +35,15 @@ module Importers
     private
 
       def add_work
-        @object = find_work if @object.blank?
-        if @object
-          update_work
-        else
-          create_work
+        begin
+          @object = find_work if @object.blank?
+          if @object
+            update_work
+          else
+            create_work
+          end
+        rescue
+          puts "========= Error creating work #{@work_id} ================"
         end
       end
 
