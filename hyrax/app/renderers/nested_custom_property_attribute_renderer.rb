@@ -9,7 +9,7 @@ class NestedCustomPropertyAttributeRenderer < Hyrax::Renderers::AttributeRendere
     value.each do |v|
       label = ''
       val = ''
-      unless v.dig('lable').blank?
+      unless v.dig('label').blank?
         label = v['label'][0]
       end
       unless v.dig('description').blank?
