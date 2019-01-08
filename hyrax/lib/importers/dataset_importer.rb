@@ -21,25 +21,22 @@ module Importers
       # for each dir in the import_dir, parse the mandatory.xml file and upload all other files
       # Some examples have measurement.xml, meta.xml, meta_unit.xml - these are not parsed, just treated as files to be uploaded
       Dir.glob(File.join(import_dir, '*')).each do |dir|
-        errors = []
-        fn =  File.join(dir, metadata_filename)
-        unless File.file?(fn)
-          errors << 'Directory does not contain a mandatory file at ' + fn
+        mandatory_fn =  File.join(dir, metadata_filename)
+        unless File.file?(mandatory_fn)
           puts << 'Directory does not contain a mandatory file at ' + fn
           next
         end
 
+        measurement_fn = File.join(dir, 'measurement.xml')
+
         # parse the mandatory metadata file
-        attributes, errors = parse_metadata(metadata_filename, true)
-        if errors.any?
-          write_errors(dir)
-        end
+        attributes = parse_metadata(dir, mandatory_fn, measurement_fn)
         if attributes.blank?
           puts 'No suitable attributes available, skipping import of ' + dir
           next
         end
         # list all the files to be uploaded for this item
-        files = Dir.glob(File.join(dir, '*')) - [fn,
+        files = Dir.glob(File.join(dir, '*')) - [mandatory_fn, measurement_fn,
           File.join(dir, 'ERRORS.json'),
           File.join(dir, 'METADATA.json'),
           File.join(dir, 'FILES.json')]
@@ -55,10 +52,10 @@ module Importers
 
     private
       # Extract metadata and return as attributes
-      def parse_metadata(metadata_filename)
+      def parse_metadata(dir, metadata_file, measurement_file)
         attributes = {}
         errors = []
-        metadata = File.open(metadata_filename) { |f| Nokogiri::XML(f) }
+        metadata = File.open(metadata_file) { |f| Nokogiri::XML(f) }
 
         # To import the sample data in: https://github.com/antleaf/nims-ngdr-development-2018/tree/master/sample_data_from_msuzuki
         # the model object is: https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/app/models/dataset.rb
@@ -91,7 +88,7 @@ module Importers
 
         # Set title with the folder title as it does not appear in the meta
         # title: ['test dataset'],
-        attributes['title'] = [metadata_filename.split('/')[-2]]
+        attributes['title'] = [metadata_file.split('/')[-2]]
 
         metadata.xpath('//meta').each do |meta|
           # description: ['description 1'],
@@ -207,19 +204,19 @@ module Importers
           # but it DOES have instrument_type and instrument_registered_department, which are not in the model, so not used
           # ALSO I have checked all the other sample mandatory files and they all contain the same keys
 
-          # complex_specimen_type_attributes: [{
+          # specimen_type_attributes: [{
           #   chemical_composition: 'chemical composition',
           #   crystallographic_structure: 'crystallographic structure',
           #   description: 'Description',
           #   complex_identifier_attributes: [{identifier: '1234567'}],
           #   material_types: 'material types',
           #   purchase_record_attributes: [{date: ['2018-02-14'], identifier: ['123456'], purchase_record_item: ['Has a purchase record item'], title: 'Purchase record title'}],
-          #   complex_relation_attributes: [{url: 'http://example.com/relation', relationship_role: 'is part of'}],
+          #   complex_relation_attributes: [{url: 'http://example.com/relation', relationship: 'is part of'}],
           #   structural_features: 'structural features',
           #   title: 'Instrument 1'
           # }],
           elsif meta['key'] == 'specimen_process_purchase_date'
-            attributes['complex_specimen_type_attributes'] = [ { purchase_record_attributes: [{date: meta.content}] } ]
+            attributes['specimen_type_attributes'] = [ { purchase_record_attributes: [{date: meta.content}] } ]
 
           # NOTE the sample data does not have any of the other complex specimen type fields,
           # but it DOES have specime_initial_state (note the incorrect spelling) and specimen_final_state
@@ -242,7 +239,7 @@ module Importers
           # NOTE that for now this means none of them would succeed, as there are 4 key names described above
           # which do not yet conform to any of our model keys.
           else
-            # puts 'Mandatory XML file contains an unknown key, which has been imported as a custom property instead: ' + meta['key'] + ' at ' + metadata_filename
+            # puts 'Mandatory XML file contains an unknown key, which has been imported as a custom property instead: ' + meta['key'] + ' at ' + metadata_file
             # custom_property_attributes: [{label: 'Full name', description: 'My full name is ...'}]
             attributes['custom_property_attributes'] ||= []
             attributes['custom_property_attributes'] << {label: meta['key'], description: meta.content}
@@ -265,28 +262,26 @@ module Importers
           #   title: 'A related item',
           #   url: 'http://example.com/relation',
           #   complex_identifier_attributes: [{identifier: ['123456'], label: ['local']}],
-          #   relationship_name: 'Is part of',
-          #   relationship_role: 'http://example.com/isPartOf'
+          #   relationship: 'Is part of'
           # }]
 
           end
         end
+        unless attributes.any?
+          puts "Could not extract any metadata from " + metadata_file
+        end
+        write_errors(dir, errors) if errors.any?
 
         # also agreed to parse a measurement.xml file if present, so just do that here for the time being, if it exists in the same folder
-        measures_filename = metadata_filename.rpartition('/').first + '/measurement.xml'
-        if File.file?(measures_filename)
-          measures = File.open(measures_filename) { |f| Nokogiri::XML(f) }
-          measures.xpath('//meta').each do |measure|
+        if File.file?(measurement_file)
+          measures = File.open(measurement_file) { |f| Nokogiri::XML(f) }
+          measures.xpath('//meta').each do |meta|
             # custom_property_attributes: [{label: 'Full name', description: 'My full name is ...'}]
             attributes['custom_property_attributes'] ||= []
             attributes['custom_property_attributes'] << {label: meta['key'], description: meta.content}
           end
         end
-
-        unless attributes.any?
-          puts "Could not extract any metadata from " + metadata_filename
-        end
-        return attributes, errors
+        return attributes
       end
 
       def write_errors(dir, errors)
