@@ -20,7 +20,8 @@ class NestedRelationAttributeRenderer < Hyrax::Renderers::AttributeRenderer
       relation << ['Title', title]
       # complex identifier
       unless v.dig('complex_identifier').blank?
-        val = NestedIdentifierAttributeRenderer.new('complex_identifier', v.dig('complex_identifier')).render
+        id_j = v.dig('complex_identifier').to_json
+        val = NestedIdentifierAttributeRenderer.new('Identifier', id_j).render
         relation << ['Identifier', val]
       end
       # Relationship
