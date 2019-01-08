@@ -15,11 +15,13 @@ module ComplexField
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
           solr_doc[fld_name] << r.relationship.reject(&:blank?)
           solr_doc[fld_name].flatten!
+
           relationship = r.relationship.reject(&:blank?).first.downcase.tr(' ', '_')
           fld_name = Solrizer.solr_name("complex_relation_#{relationship}", :facetable)
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
           solr_doc[fld_name] << r.title.reject(&:blank?)
           solr_doc[fld_name].flatten!
+
           fld_name = Solrizer.solr_name("complex_relation_#{relationship}", :stored_searchable)
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
           solr_doc[fld_name] << r.title.reject(&:blank?)
