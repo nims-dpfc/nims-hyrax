@@ -2,7 +2,6 @@ FROM solr:7.6-alpine
 
 ENV SOLR_HOME=/solr_home \
     SOLR_CONFIG_DIR=/solr_conf
-# ENV SOLR_HOME=/opt/solr/server/solr
 
 USER root
 #RUN mkdir $SOLR_CONFIG_DIR \
