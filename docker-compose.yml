@@ -12,7 +12,7 @@ networks:
 
 services:
   fcrepo:
-    image: nulib/fcrepo4
+    image: ualbertalib/docker-fcrepo4:4.7
     expose:
       - 8080
     ports:
@@ -20,7 +20,9 @@ services:
     volumes:
       - fcrepo:/data
     environment:
-      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
+      CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC"
+    depends_on:
+      - db
     networks:
       internal:
 
@@ -67,6 +69,7 @@ services:
       - REDIS_HOST=redis
     volumes:
       - app:/data/tmp/uploads
+      - /data:/data/data
     networks:
       internal:
 
