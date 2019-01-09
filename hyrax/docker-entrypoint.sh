@@ -27,7 +27,7 @@ else
 fi
 
 # check that Fedora is running
-FEDORA=$(curl --silent --connect-timeout 45 "http://${FEDORA_HOST:-fcrepo}:${FEDORA_PORT:-8080}/" | grep "Fedora Commons Repository")
+FEDORA=$(curl --silent --connect-timeout 45 "http://${FEDORA_HOST:-fcrepo}:${FEDORA_PORT:-8080}/fcrepo/" | grep "Fedora Commons Repository")
 if [ -n "$FEDORA" ] ; then
     echo "Fedora is running..."
 else
