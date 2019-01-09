@@ -15,9 +15,7 @@ fi
 bundle exec rake db:migrate
 
 # wait for Solr and Fedora to come up
-echo "web sleeping"
-sleep 60s
-echo "web awake"
+sleep 15s
 
 # check that Solr is running
 SOLR=$(curl --silent --connect-timeout 45 "http://${SOLR_HOST:-solr}:${SOLR_PORT:-8983}/solr/" | grep "Apache SOLR")
