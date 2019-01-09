@@ -42,9 +42,8 @@ namespace :ngdr do
     ##############################################
     # Create default administrative set
     ######
-    #
-
-    AdminSet.find_or_create_default_admin_set_id
-
+    Rake::Task['hyrax:default_admin_set:create'].invoke
+    Rake::Task['hyrax:workflow:load'].invoke
+    Rake::Task['hyrax:default_collection_types:create'].invoke
   end
 end
