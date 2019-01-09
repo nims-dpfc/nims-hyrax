@@ -36,10 +36,12 @@ module Importers
           next
         end
         # list all the files to be uploaded for this item
-        files = Dir.glob(File.join(dir, '*')) - [mandatory_fn, measurement_fn,
-          File.join(dir, 'ERRORS.json'),
-          File.join(dir, 'METADATA.json'),
-          File.join(dir, 'FILES.json')]
+        files = Dir.glob(File.join(dir, '*')) - [
+          # mandatory_fn,
+          # measurement_fn,
+          File.join(dir, '__ERRORS.json'),
+          File.join(dir, '__METADATA.json'),
+          File.join(dir, '__FILES.json')]
         if @debug
           write_attributes(dir, attributes)
           write_files(dir, files)
@@ -285,19 +287,19 @@ module Importers
       end
 
       def write_errors(dir, errors)
-        File.open(File.join(dir, 'ERRORS.json'), 'w') do |f|
+        File.open(File.join(dir, '__ERRORS.json'), 'w') do |f|
           f.write(JSON.pretty_generate(errors))
         end
       end
 
       def write_attributes(dir, attributes)
-        File.open(File.join(dir, 'METADATA.json'),"w") do |f|
+        File.open(File.join(dir, '__METADATA.json'),"w") do |f|
           f.write(JSON.pretty_generate(attributes))
         end
       end
 
       def write_files(dir, files)
-        File.open(File.join(dir, 'FILES.json'),"w") do |f|
+        File.open(File.join(dir, '__FILES.json'),"w") do |f|
           f.write(JSON.pretty_generate(files))
         end
       end
