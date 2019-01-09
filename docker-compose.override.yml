@@ -1,4 +1,9 @@
 # Overrides the docker-compose file for development environment
+# - No nginx in front of the app
+# - Different location for app /data/ volume
+# - app accessible on port 3000
+
+# todo: nginx to serve static files
 
 version: '2.1'
 
