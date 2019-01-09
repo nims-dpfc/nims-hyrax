@@ -35,7 +35,7 @@ services:
       - web
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./docker/nginx/.htpasswd:/etc/nginx/nginx/conf.d/.htpasswd:ro
+      - ./docker/nginx/.htpasswd:/etc/nginx/conf.d/.htpasswd:ro
     ports:
       - 81:80
       #- 443:443
