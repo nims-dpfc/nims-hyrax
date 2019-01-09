@@ -63,10 +63,11 @@ services:
 
   app:
     build: hyrax
-    environment:
-      - RAILS_SERVE_STATIC_FILES=true
-      - RAILS_LOG_TO_STDOUT=true
-      - REDIS_HOST=redis
+    env_file:
+      - .env
+      - .env.production
+    volumes:
+      - /srv/ngdr/data:/data/data
     networks:
       internal:
 
