@@ -1,4 +1,7 @@
 # Overrides the docker-compose file for production environment
+# - Adds nginx with basic auth in front of the app
+# - Uses /srv/ mount point for /data/ volume
+
 
 version: '2.1'
 
@@ -18,16 +21,6 @@ services:
       - /srv/ngdr/data/:/data/data
     networks:
       internal:
-
-  web:
-    extends:
-      service: app
-    command: bash -c "/bin/docker-entrypoint.sh"
-    depends_on:
-      - db
-      - solr
-      - fcrepo
-      - redis
 
   nginx:
     image: nginx:stable-alpine
