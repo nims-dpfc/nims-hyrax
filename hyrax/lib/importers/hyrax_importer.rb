@@ -92,8 +92,7 @@ module Importers
       # a way that is compatible with how the factory needs them.
       def transform_attributes
         # @attributes.slice(*permitted_attributes).merge(file_attributes)
-        @attributes = @attributes.merge(file_attributes)
-	@attributes
+        @attributes.merge!(file_attributes)
       end
 
       def file_attributes
