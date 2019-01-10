@@ -286,7 +286,7 @@ module Importers
 
       def file_exists?(file_path)
         return true if File.file?(file_path)
-        message = 'Error: Mandatory file missing: ' + fn
+        message = 'Error: Mandatory file missing: ' + file_path
         write_log(message)
         false
       end
@@ -301,7 +301,7 @@ module Importers
       def write_errors(metadata_file, errors)
         message = 'WARN: Metadata errors in file ' + metadata_file
         message += JSON.pretty_generate(errors)
-        write_log(message, also_print=false)
+        write_log(message, false)
       end
 
       def write_attributes(dir, attributes)
