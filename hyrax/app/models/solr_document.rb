@@ -99,7 +99,7 @@ class SolrDocument
   end
 
   def issue
-    self[Solrizer.solr_name('issue', :displayable)]
+    self[Solrizer.solr_name('issue', :stored_searchable)]
   end
 
   def place
@@ -107,6 +107,6 @@ class SolrDocument
   end
 
   def total_number_of_pages
-    self[Solrizer.solr_name('total_number_of_pages', :displayable)]
+    self[Solrizer.solr_name('total_number_of_pages', stored_searchable)]
   end
 end

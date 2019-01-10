@@ -8,7 +8,7 @@ en:
         name:               "Publication"
   simple_form:
     labels:
-      dataset:
+      publication:
         complex_person:           "Person"
         complex_identifier:       "Identifier"
         part_of:                  "Part of"
