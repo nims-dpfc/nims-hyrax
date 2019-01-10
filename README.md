@@ -1,6 +1,24 @@
-## nims-hyrax
+## Introduction
 
-The main repo for the Next Generation Data Repository code for NIMS 2018-19.
+[Nims-Hyrax](https://github.com/antleaf/nims-hyrax/) is an implementation of the Hyrax stack by [Cottage Labs](http://cottagelabs.com/) and [AntLeaf](http://antleaf.com/). It is built with Docker containers, which simplify development and deployment onto live services.
+
+
+## Getting Started
+
+Ensure you have docker and docker-compose
+
+Open a console and try running `docker -h` and `docker-compose -h` to verify they are both accessible.
+
+Create the environment file `.env.production` and set the postgres database username and password and the secret key. You can use the `example.env.production` file as template.
+
+To build and run the system, issue the `up` command to docker-compose: 
+```bash
+$ docker-compose up --build
+```
+ * You should see the Hyrax app at localhost:3000
+ * Solr is available at localhost:8983/solr
+ * Fedora is available at localhost:8080/fcrepo/rest
+ * For conveneince, the default workflows are loaded, the default admin set and collection types are created and 3 users are created, as detailed [here](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/seed/setup.json)
 
 ### For Developers
 We use the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching model, so ensure you set up 
