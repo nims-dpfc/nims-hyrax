@@ -285,12 +285,10 @@ module Importers
       end
 
       def file_exists?(file_path)
-        unless File.file?(file_path)
-          message = 'Error: Mandatory file missing: ' + fn
-          write_log(message)
-          return false
-        end
-        true
+        return true if File.file?(file_path)
+        message = 'Error: Mandatory file missing: ' + fn
+        write_log(message)
+        false
       end
 
       def list_data_files(dir)
