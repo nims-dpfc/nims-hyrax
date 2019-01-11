@@ -25,3 +25,7 @@ en:
       specimen_set:             "Specimen set"
       specimen_type:            "Specimen type"
       custom_property:          "custom property"
+      complex_event:            "Event"
+      issue:                    "Issue"
+      place:                    "Location"
+      total_number_of_pages:    "Number of pages"

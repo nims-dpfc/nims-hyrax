@@ -93,4 +93,20 @@ class SolrDocument
   def custom_property
     self[Solrizer.solr_name('custom_property', :displayable)]
   end
+
+  def complex_event
+    self[Solrizer.solr_name('complex_event', :displayable)]
+  end
+
+  def issue
+    self[Solrizer.solr_name('issue', :stored_searchable)]
+  end
+
+  def place
+    self[Solrizer.solr_name('place', :stored_searchable)]
+  end
+
+  def total_number_of_pages
+    self[Solrizer.solr_name('total_number_of_pages', stored_searchable)]
+  end
 end
