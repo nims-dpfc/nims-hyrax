@@ -5,16 +5,18 @@ module Importers
   class DatasetImporter
     attr_reader :import_dir, :metadata_filename
 
-    def initialize(import_dir, metadata_filename='mandatory.xml', debug=false)
+    def initialize(import_dir, metadata_filename='mandatory.xml', debug=false, log_file=nil)
       @work_klass = Dataset
       @import_dir = import_dir
       @metadata_filename = metadata_filename
       @debug = debug
+      @log_file = log_file || 'import_dataset.log'
     end
 
     def perform_create
       unless File.directory?(import_dir)
-        puts 'Directory does not exist at ' + import_dir
+        message = 'Error: Directory does not exist at ' + import_dir
+        write_log(message)
         return
       end
 
@@ -22,26 +24,21 @@ module Importers
       # Some examples have measurement.xml, meta.xml, meta_unit.xml - these are not parsed, just treated as files to be uploaded
       Dir.glob(File.join(import_dir, '*')).each do |dir|
         mandatory_fn =  File.join(dir, metadata_filename)
-        unless File.file?(mandatory_fn)
-          puts << 'Directory does not contain a mandatory file at ' + fn
-          next
-        end
-
         measurement_fn = File.join(dir, 'measurement.xml')
+        next unless file_exists?(mandatory_fn)
 
         # parse the mandatory metadata file
         attributes = parse_metadata(dir, mandatory_fn, measurement_fn)
         if attributes.blank?
-          puts 'No suitable attributes available, skipping import of ' + dir
+          message = 'Error: No attributes available, skipping import of ' + dir
+          write_log(message)
           next
         end
+
         # list all the files to be uploaded for this item
-        files = Dir.glob(File.join(dir, '*')) - [
-          # mandatory_fn,
-          # measurement_fn,
-          File.join(dir, '__ERRORS.json'),
-          File.join(dir, '__METADATA.json'),
-          File.join(dir, '__FILES.json')]
+        files = list_data_files(dir)
+
+        # log or import
         if @debug
           write_attributes(dir, attributes)
           write_files(dir, files)
@@ -270,9 +267,10 @@ module Importers
           end
         end
         unless attributes.any?
-          puts "Could not extract any metadata from " + metadata_file
+          message = "Error: Could not extract any metadata from " + metadata_file
+          write_log(message)
         end
-        write_errors(dir, errors) if errors.any?
+        write_errors(metadata_file, errors) if errors.any?
 
         # also agreed to parse a measurement.xml file if present, so just do that here for the time being, if it exists in the same folder
         if File.file?(measurement_file)
@@ -286,10 +284,24 @@ module Importers
         return attributes
       end
 
-      def write_errors(dir, errors)
-        File.open(File.join(dir, '__ERRORS.json'), 'w') do |f|
-          f.write(JSON.pretty_generate(errors))
-        end
+      def file_exists?(file_path)
+        return true if File.file?(file_path)
+        message = 'Error: Mandatory file missing: ' + file_path
+        write_log(message)
+        false
+      end
+
+      def list_data_files(dir)
+        Dir.glob(File.join(dir, '*')) - [
+          File.join(dir, '__METADATA.json'),
+          File.join(dir, '__FILES.json')
+        ]
+      end
+
+      def write_errors(metadata_file, errors)
+        message = 'WARN: Metadata errors in file ' + metadata_file
+        message += JSON.pretty_generate(errors)
+        write_log(message, false)
       end
 
       def write_attributes(dir, attributes)
@@ -304,5 +316,11 @@ module Importers
         end
       end
 
+      def write_log(message, also_print=true)
+        File.open(@log_file, 'w') do |f|
+          f.write(message + '\n')
+        end
+        puts message if also_print
+      end
   end
 end
