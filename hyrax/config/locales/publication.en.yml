@@ -6,3 +6,17 @@ en:
       publication:
         description:        "Publication works"
         name:               "Publication"
+  simple_form:
+    labels:
+      publication:
+        complex_person:           "Person"
+        complex_identifier:       "Identifier"
+        part_of:                  "Part of"
+        complex_date:             "Date"
+        complex_relation:         "Related item"
+        complex_rights:           "Rights"
+        complex_version:          "Version"
+        complex_event:            "Event"
+        issue:                    "Issue"
+        place:                    "Location"
+        total_number_of_pages:    "Number of pages"
