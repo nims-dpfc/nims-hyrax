@@ -1,6 +1,6 @@
 # Overrides the docker-compose file for development environment
+# - Publish the fcrepo and solr ports
 # - No nginx in front of the app
-# - Different location for app /data/ volume
 # - app accessible on port 3000
 
 # todo: nginx to serve static files
@@ -9,26 +9,14 @@ version: '2.1'
 
 services:
 
-  app:
-    build: hyrax
-    environment:
-      - RAILS_SERVE_STATIC_FILES=true
-      - RAILS_LOG_TO_STDOUT=true
-      - REDIS_HOST=redis
-    volumes:
-      - app:/data/tmp/uploads
-      - /tmp/ngdr/data/:/data/data
-    networks:
-      internal:
+  fcrepo:
+    ports:
+      - 8080:8080
+
+  solr:
+    ports:
+      - 8983:8983
 
   web:
-    extends:
-      service: app
-    command: bash -c "/bin/docker-entrypoint.sh"
-    depends_on:
-      - db
-      - solr
-      - fcrepo
-      - redis
     ports:
       - 3000:3000

@@ -1,7 +1,6 @@
 # Overrides the docker-compose file for production environment
 # - Adds nginx with basic auth in front of the app
-# - Uses /srv/ mount point for /data/ volume
-
+# - Production env file for the app
 
 version: '2.1'
 
@@ -11,16 +10,8 @@ volumes:
 services:
 
   app:
-    build: hyrax
-    environment:
-      - RAILS_SERVE_STATIC_FILES=true
-      - RAILS_LOG_TO_STDOUT=true
-      - REDIS_HOST=redis
-    volumes:
-      - app:/data/tmp/uploads
-      - /srv/ngdr/data/:/data/data
-    networks:
-      internal:
+    env_file:
+      - .env.production
 
   nginx:
     image: nginx:stable-alpine
