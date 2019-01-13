@@ -20,7 +20,7 @@ services:
     volumes:
       - fcrepo:/data
     environment:
-      CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
+      CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC -Dfcrepo.object.directory=\"/data/objects\" -Dfcrepo.binary.directory=\"/data/binaries\""
     depends_on:
       - db
     networks:
