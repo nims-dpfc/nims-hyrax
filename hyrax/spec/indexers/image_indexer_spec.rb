@@ -177,4 +177,17 @@ RSpec.describe ImageIndexer do
       expect(@solr_document['part_of_tesim']).to match_array(['Another record'])
     end
   end
+
+  describe 'indexes status' do
+    before do
+      obj = build(:image, status: 'Status D')
+      @solr_document = obj.to_solr
+    end
+    it 'indexes as stored searchable' do
+      expect(@solr_document['status_tesim']).to eq 'Status D'
+    end
+    it 'indexes as facetable' do
+      expect(@solr_document['status_sim']).to eq 'Status D'
+    end
+  end
 end

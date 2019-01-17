@@ -32,7 +32,8 @@ RSpec.describe Image do
   describe 'title' do
     it 'requires title' do
       @obj = build(:image, title: nil)
-      expect{@obj.save!}.to raise_error(ActiveFedora::RecordInvalid, 'Validation failed: Title Your image must have a title.')
+      expect{@obj.save!}.to raise_error(ActiveFedora::RecordInvalid,
+        'Validation failed: Title Your image must have a title.')
     end
 
     it 'has a multi valued title field' do
@@ -163,10 +164,7 @@ RSpec.describe Image do
 
   describe 'complex_rights' do
     it 'creates a complex rights active triple resource with rights' do
-      @obj = build(:image, complex_rights_attributes: [{
-                                                             rights: 'cc0'
-                                                         }]
-      )
+      @obj = build(:image, complex_rights_attributes: [{rights: 'cc0'}])
       expect(@obj.complex_rights.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_rights.first.id).to include('#rights')
       expect(@obj.complex_rights.first.rights).to eq ['cc0']
@@ -175,9 +173,9 @@ RSpec.describe Image do
 
     it 'creates a rights active triple resource with all the attributes' do
       @obj = build(:image, complex_rights_attributes: [{
-                                                             date: '1978-10-28',
-                                                             rights: 'CC0'
-                                                         }]
+          date: '1978-10-28',
+          rights: 'CC0'
+        }]
       )
       expect(@obj.complex_rights.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_rights.first.date).to eq ['1978-10-28']
@@ -186,8 +184,8 @@ RSpec.describe Image do
 
     it 'rejects a rights active triple with no rights' do
       @obj = build(:image, complex_rights_attributes: [{
-                                                             date: '2018-01-01'
-                                                         }]
+          date: '2018-01-01'
+        }]
       )
       expect(@obj.complex_rights).to be_empty
     end
@@ -257,11 +255,12 @@ RSpec.describe Image do
 
   describe 'complex_identifier' do
     it 'creates an identifier active triple resource with all the attributes' do
-      @obj = build(:image, complex_identifier_attributes: [{
-                                                                 identifier: '0000-0000-0000-0000',
-                                                                 scheme: 'uri_of_ORCID_scheme',
-                                                                 label: 'ORCID'
-                                                             }]
+      @obj = build(:image, complex_identifier_attributes: [
+        {
+          identifier: '0000-0000-0000-0000',
+          scheme: 'uri_of_ORCID_scheme',
+          label: 'ORCID'
+        }]
       )
       expect(@obj.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_identifier.first.identifier).to eq ['0000-0000-0000-0000']
@@ -271,8 +270,8 @@ RSpec.describe Image do
 
     it 'creates an identifier active triple resource with just the identifier' do
       @obj = build(:image, complex_identifier_attributes: [{
-                                                                 identifier: '1234'
-                                                             }]
+          identifier: '1234'
+        }]
       )
       expect(@obj.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_identifier.first.identifier).to eq ['1234']
@@ -282,8 +281,8 @@ RSpec.describe Image do
 
     it 'rejects an identifier active triple with no identifier' do
       @obj = build(:image, complex_identifier_attributes: [{
-                                                                 label: 'Local'
-                                                             }]
+        label: 'Local'
+        }]
       )
       expect(@obj.complex_identifier).to be_empty
     end
@@ -292,8 +291,8 @@ RSpec.describe Image do
   describe 'complex_person' do
     it 'creates a person active triple resource with name' do
       @obj = build(:image, complex_person_attributes: [{
-                                                             name: 'Anamika'
-                                                         }]
+          name: 'Anamika'
+        }]
       )
       expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_person.first.name).to eq ['Anamika']
@@ -307,10 +306,10 @@ RSpec.describe Image do
 
     it 'creates a person active triple resource with name, affiliation and role' do
       @obj = build(:image, complex_person_attributes: [{
-                                                             name: 'Anamika',
-                                                             affiliation: 'Paradise',
-                                                             role: 'Creator'
-                                                         }]
+          name: 'Anamika',
+          affiliation: 'Paradise',
+          role: 'Creator'
+        }]
       )
       expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_person.first.name).to eq ['Anamika']
@@ -324,8 +323,7 @@ RSpec.describe Image do
 
     it 'rejects person active triple with no name and only uri' do
       @obj = build(:image, complex_person_attributes: [{
-                                                             uri: 'http://example.com/person/123456'
-                                                         }]
+        uri: 'http://example.com/person/123456'}]
       )
       expect(@obj.complex_person).to be_empty
     end
@@ -369,6 +367,13 @@ RSpec.describe Image do
                                                           }]
       )
       expect(@obj.complex_version).to be_empty
+    end
+  end
+
+  describe 'ststus' do
+    it 'has status' do
+      @obj = build(:image, status: 'Status 1')
+      expect(@obj.status).to eq 'Status 1'
     end
   end
 
