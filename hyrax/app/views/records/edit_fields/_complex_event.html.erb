@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_event,
+    as: :nested_event,
+    input_html: {
+      class: '',
+      data: {name: :complex_event}
+    },
+    required: f.object.required?(:complex_event)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another event</span>
+  </button>
+</div>
