@@ -6,3 +6,13 @@ en:
       image:
         description:        "Image works"
         name:               "Image"
+  simple_form:
+    labels:
+      dataset:
+        complex_person:           "Person"
+        complex_identifier:       "Identifier"
+        part_of:                  "Part of"
+        complex_date:             "Date"
+        complex_rights:           "Rights"
+        complex_version:          "Version"
+        status:                   "Status"
