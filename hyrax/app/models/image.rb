@@ -57,6 +57,10 @@ class Image < ActiveFedora::Base
 
   property :complex_version, predicate: ::RDF::Vocab::NimsRdp['complex-version'], class_name: 'ComplexVersion'
 
+  property :status, predicate: ::RDF::Vocab::BIBO.status, multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
   # NGDR Hyrax Work Image MVP
   # Note: all date fields are covered by complex_date in Hyrax Work Common above
 
