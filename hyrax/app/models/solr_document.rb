@@ -109,4 +109,8 @@ class SolrDocument
   def total_number_of_pages
     self[Solrizer.solr_name('total_number_of_pages', :stored_searchable)]
   end
+
+  def status
+    self[Solrizer.solr_name('status', :stored_searchable)]
+  end
 end
