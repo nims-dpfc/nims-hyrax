@@ -2,9 +2,7 @@ class NestedEventAttributeRenderer < Hyrax::Renderers::AttributeRenderer
   private
   def attribute_value_to_html(value)
     value = JSON.parse(value)
-    if not value.kind_of?(Array)
-      value = [value]
-    end
+    html = []
     value.each do |v|
       event = []
       unless v.dig('title').blank?
