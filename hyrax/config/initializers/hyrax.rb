@@ -189,7 +189,7 @@ Hyrax.config do |config|
   # Location on local file system where derivatives will be stored
   # If you use a multi-server architecture, this MUST be a shared volume
   # config.derivatives_path = Rails.root.join('tmp', 'derivatives')
-  if ENV['DERIVATIVES_PATH']
+  if ENV.fetch('DERIVATIVES_PATH', nil)
     config.derivatives_path = Pathname.new(ENV['DERIVATIVES_PATH'])
   else
     config.derivatives_path = Rails.root.join('tmp', 'derivatives')

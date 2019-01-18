@@ -111,6 +111,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('lease_expiration_date', :stored_sortable, type: :date), label: 'Lease expiration date', helper_method: :human_readable_date
     config.add_index_field solr_name('place', :stored_searchable), itemprop: 'place', link_to_search: solr_name('place', :facetable)
     config.add_index_field solr_name('status', :stored_searchable), itemprop: 'status', link_to_search: solr_name('status', :facetable)
+    config.add_index_field solr_name('issue', :stored_searchable), label: 'Issue'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -133,6 +134,8 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('identifier', :stored_searchable)
     config.add_show_field solr_name('place', :stored_searchable)
     config.add_show_field solr_name('status', :stored_searchable)
+    config.add_show_field solr_name('issue', :stored_searchable)
+
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #

@@ -67,7 +67,7 @@ class Publication < ActiveFedora::Base
   end
 
   property :place, predicate: ::RDF::Vocab::ESciDocPublication['place'], multiple: false do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :total_number_of_pages, predicate: ::RDF::Vocab::ESciDocPublication['total-pages'], multiple: false do |index|
