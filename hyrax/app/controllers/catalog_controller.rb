@@ -75,6 +75,8 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name('complex_date_valid', :dateable), limit: 5, label: 'Date valid'
     config.add_facet_field solr_name('complex_date_processed', :dateable), limit: 5, label: 'Date processed'
     config.add_facet_field solr_name('complex_date_purchased', :dateable), limit: 5, label: 'Date purchased'
+    config.add_facet_field solr_name('place', :facetable), limit: 5, label: 'Place'
+    config.add_facet_field solr_name('status', :facetable), limit: 5, label: 'Status'
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
     config.add_facet_field solr_name('generic_type', :facetable), if: false
@@ -107,6 +109,9 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('identifier', :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
     config.add_index_field solr_name('embargo_release_date', :stored_sortable, type: :date), label: 'Embargo release date', helper_method: :human_readable_date
     config.add_index_field solr_name('lease_expiration_date', :stored_sortable, type: :date), label: 'Lease expiration date', helper_method: :human_readable_date
+    config.add_index_field solr_name('place', :stored_searchable), itemprop: 'place', link_to_search: solr_name('place', :facetable)
+    config.add_index_field solr_name('status', :stored_searchable), itemprop: 'status', link_to_search: solr_name('status', :facetable)
+    config.add_index_field solr_name('issue', :stored_searchable), label: 'Issue'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -127,6 +132,9 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('resource_type', :stored_searchable), label: 'Resource Type'
     config.add_show_field solr_name('format', :stored_searchable)
     config.add_show_field solr_name('identifier', :stored_searchable)
+    config.add_show_field solr_name('place', :stored_searchable)
+    config.add_show_field solr_name('status', :stored_searchable)
+    config.add_show_field solr_name('issue', :stored_searchable)
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
