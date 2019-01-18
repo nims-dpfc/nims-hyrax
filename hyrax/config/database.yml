@@ -9,12 +9,16 @@ default: &default
   password: <%= ENV['POSTGRES_PASSWORD'] || 'password' %>
 
 development:
-  <<: *default
-  database: hyrax_development
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
 
 test:
-  <<: *default
-  database: hyrax_test
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
 
 production:
   <<: *default
