@@ -184,10 +184,10 @@ RSpec.describe ImageIndexer do
       @solr_document = obj.to_solr
     end
     it 'indexes as stored searchable' do
-      expect(@solr_document['status_tesim']).to eq 'Status D'
+      expect(@solr_document['status_tesim']).to eq ['Status D']
     end
     it 'indexes as facetable' do
-      expect(@solr_document['status_sim']).to eq 'Status D'
+      expect(@solr_document['status_sim']).to eq ['Status D']
     end
   end
 end
