@@ -1,12 +1,12 @@
-require './lib/vocabularies/escidoc_publication'
-
-class Publication < ActiveFedora::Base
+# Generated via
+#  `rails generate hyrax:work Image`
+class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
 
-  self.indexer = PublicationIndexer
+  self.indexer = ImageIndexer
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
-  validates :title, presence: { message: 'Your publication must have a title.' }
+  validates :title, presence: { message: 'Your image must have a title.' }
 
   # property date_modified - defined in core metadata
   # property date_uploaded - defined in core metadata
@@ -57,23 +57,12 @@ class Publication < ActiveFedora::Base
 
   property :complex_version, predicate: ::RDF::Vocab::NimsRdp['complex-version'], class_name: 'ComplexVersion'
 
-  # NGDR Hyrax Work Publication MVP
-  # Note: all date fields are covered by complex_date in Hyrax Work Common above
-
-  property :complex_event, predicate: ::RDF::Vocab::ESciDocPublication['complex-event'], class_name: 'ComplexEvent'
-
-  property :issue, predicate: ::RDF::Vocab::ESciDocPublication['issue'], multiple: false do |index|
-    index.as :stored_searchable
-  end
-
-  property :place, predicate: ::RDF::Vocab::ESciDocPublication['place'], multiple: false do |index|
+  property :status, predicate: ::RDF::Vocab::BIBO.status, multiple: false do |index|
     index.as :stored_searchable, :facetable
   end
 
-  property :total_number_of_pages, predicate: ::RDF::Vocab::ESciDocPublication['total-pages'], multiple: false do |index|
-    index.as :stored_searchable, :sortable, type: :integer
-  end
-
+  # NGDR Hyrax Work Image MVP
+  # Note: all date fields are covered by complex_date in Hyrax Work Common above
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
@@ -85,6 +74,4 @@ class Publication < ActiveFedora::Base
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
-  accepts_nested_attributes_for :complex_event, reject_if: :event_blank, allow_destroy: true
-
 end

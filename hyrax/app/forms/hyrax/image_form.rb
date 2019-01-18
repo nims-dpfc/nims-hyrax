@@ -1,9 +1,10 @@
 # Generated via
-#  `rails generate hyrax:work Publication`
+#  `rails generate hyrax:work Image`
 module Hyrax
-  # Generated form for Publication
-  class PublicationForm < Hyrax::Forms::WorkForm
-    self.model_class = ::Publication
+  # Generated form for Image
+  class ImageForm < Hyrax::Forms::WorkForm
+    self.model_class = ::Image
+
     self.terms -= [
       # Fields not interested in
       :based_near, :contributor, :creator, :date_created, :identifier, :license,
@@ -20,8 +21,7 @@ module Hyrax
       # Adding all fields in order of display in form
       :title, :alternative_title, :description, :keyword, :language,
       :publisher, :resource_type, :complex_rights, :rights_statement, :subject,
-      :complex_date, :complex_identifier, :complex_person, :complex_version,
-      :complex_event, :issue, :place, :total_number_of_pages
+      :complex_date, :complex_identifier, :complex_person, :complex_version, :status
     ]
 
     self.required_fields -= [
@@ -36,7 +36,7 @@ module Hyrax
     ]
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,
-      :complex_person, :complex_rights, :complex_version, :complex_event].freeze
+      :complex_person, :complex_rights, :complex_version].freeze
 
     protected
 
@@ -96,19 +96,6 @@ module Hyrax
       ]
     end
 
-    def self.permitted_event_params
-      [:id,
-       :_destroy,
-       {
-         title: [],
-         place: [],
-         start_date: [],
-         end_date: [],
-         invitation_status: []
-       }
-      ]
-    end
-
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
@@ -116,7 +103,7 @@ module Hyrax
       permitted << { complex_person_attributes: permitted_person_params }
       permitted << { complex_rights_attributes: permitted_rights_params }
       permitted << { complex_version_attributes: permitted_version_params }
-      permitted << { complex_event_attributes: permitted_event_params }
     end
+
   end
 end
