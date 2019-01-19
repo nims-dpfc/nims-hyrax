@@ -28,6 +28,7 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
     ffmpeg \
     ufraw \
     bzip2 unzip xz-utils \
+    vim \
     # install open-jdk and ca-certs from jessie-backports
     && apt-get install -t jessie-backports -y --no-install-recommends openjdk-8-jre-headless ca-certificates-java \
     && apt-get clean \
