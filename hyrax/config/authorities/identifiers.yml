@@ -41,3 +41,6 @@ terms:
   - id: web image url
     term: Web Image URL
     active: true
+  - id: previous identifier
+    term: Previous identifier
+    active: true
