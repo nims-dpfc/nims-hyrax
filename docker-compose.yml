@@ -67,7 +67,7 @@ services:
       - .env
       - .env.production
     volumes:
-      - app:/data/tmp/uploads
+      - app:/app
       - /srv/ngdr/data/:/data/data
     networks:
       internal:
