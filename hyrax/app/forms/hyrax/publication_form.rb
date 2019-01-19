@@ -21,7 +21,7 @@ module Hyrax
       :title, :alternative_title, :description, :keyword, :language,
       :publisher, :resource_type, :complex_rights, :rights_statement, :subject,
       :complex_date, :complex_identifier, :complex_person, :complex_version,
-      :complex_event, :issue, :place, :total_number_of_pages
+      :complex_event, :issue, :source, :place, :total_number_of_pages
     ]
 
     self.required_fields -= [
