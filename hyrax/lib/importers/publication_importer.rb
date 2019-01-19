@@ -40,7 +40,7 @@ module Importers
           }
         }
         fn = File.basename(@metadata_file)
-        return collections[fn]
+        return collections.fetch(fn, nil)
       end
 
       # Extract metadata and return as attributes
@@ -67,13 +67,14 @@ module Importers
           files = files_list[0]
           files_ignored = files_list[1]
           files_missing = files_list[2]
-          log_progress(metadata_file, attributes[:id], col_attrs[:title], files, files_ignored, files_missing, attributes)
+          log_progress(metadata_file, work_id, col_attrs[:title], files, files_ignored, files_missing, attributes)
           puts attributes
           puts '-'*50
           puts files
           puts '~'*50
+          remote_files = []
           unless debug
-            h = Importers::HyraxImporter.new('Publication', attributes, files, work_id)
+            h = Importers::HyraxImporter.new('Publication', attributes, files, remote_files, work_id)
             h.import
           end
         end
@@ -493,19 +494,6 @@ module Importers
         return true if File.directory?(dir_path)
         message = 'Error: Diectory missing: ' + dir_path
         false
-      end
-
-      def list_data_files(dir)
-        Dir.glob(File.join(dir, '*')) - [
-          File.join(dir, '__METADATA.json'),
-          File.join(dir, '__FILES.json')
-        ]
-      end
-
-      def write_publication(attributes, files)
-        File.open("__publications.json","a") do |f|
-          f.write(JSON.pretty_generate({attributes: attributes, files:files}))
-        end
       end
 
       def log_progress(metadata_file, id, collection, files, files_ignored, files_missing, attributes)
