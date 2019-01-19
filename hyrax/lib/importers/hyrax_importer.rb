@@ -1,18 +1,38 @@
+require 'browse_everything/retriever'
+
 module Importers
   class HyraxImporter
-    attr_reader :klass, :work_klass, :object, :work_id, :attributes, :files, :file_ids
+    attr_reader :klass, :work_klass, :object, :work_id, :attributes, :files, :file_ids, :remote_files
 
-    def initialize(klass, attributes, files, work_id=nil)
+    def initialize(klass, attributes, files, remote_files, work_id=nil)
       @work_id = work_id ||= SecureRandom.uuid
       @attributes = attributes
       @files = files
+      @remote_files = remote_files
       @klass = klass
       set_work_klass
     end
 
     def import
+      upload_remote_files unless remote_files.blank?
       upload_files unless files.blank?
       add_work
+    end
+
+    def upload_remote_files
+      remote_files.each do |file_url|
+        filename = File.basename(file_url)
+        dir = Dir.mktmpdir
+        File.open(File.join(dir, filename), 'wb') do |f|
+          begin
+            write_file(uri, f, headers)
+            yield f
+          rescue StandardError => e
+            Rails.logger.error(e.message)
+          end
+        end
+        @files << File.join(dir, filename)
+      end
     end
 
     def upload_files
@@ -129,6 +149,15 @@ module Importers
 
       def set_work_klass
         @work_klass = @klass.constantize
+      end
+
+      def write_file(uri, f, headers)
+        retriever = BrowseEverything::Retriever.new
+        uri_spec = { 'url' => uri }.merge(headers)
+        retriever.retrieve(uri_spec) do |chunk|
+          f.write(chunk)
+        end
+        f.rewind
       end
   end
 end

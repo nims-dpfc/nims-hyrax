@@ -32,13 +32,13 @@ module Importers
 
         # list all the files to be uploaded for this item
         files = list_data_files(dir)
-
+        remote_files = []
         # log or import
         if @debug
           write_attributes(dir, attributes)
           write_files(dir, files)
         else
-          h = Importers::HyraxImporter.new('Dataset', attributes, files)
+          h = Importers::HyraxImporter.new('Dataset', attributes, files, remote_files)
           h.import
         end
       end
