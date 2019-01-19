@@ -32,6 +32,30 @@ module Importers
       end
     end
 
+    def add_visibility(visibility)
+      # Filesets inherit visibility for work
+      possible_options = %w(open authenticated embargo lease restricted)
+      return {} unless possible_options.include? visibility
+      { visibility: visibility }
+    end
+
+    def add_embargo(visibility_during, visibility_after, release_dt)
+      during_options = %w(authenticated restricted)
+      after_options = %w(open authenticated)
+      # Date should be parseable
+      return unless during_options.include? visibility_during
+      return unless after_options.include? visibility_after
+      {
+        visibility_during_embargo: visibility_during,
+        embargo_release_date: release_dt,
+        visibility_after_embargo: visibility_after
+      }
+    end
+
+    def add_collection_id(collection_id)
+      {member_of_collection_ids: [collection_id]}
+    end
+
     private
 
       def add_work
@@ -105,27 +129,6 @@ module Importers
 
       def set_work_klass
         @work_klass = @klass.constantize
-      end
-
-      def visibility_options(visibility)
-        # Filesets inherit visibility for work
-        # TODO: How to set filset attribute different from work
-        possible_options = %w(open authenticated embargo lease restricted)
-        return {} unless possible_options.include? visibility
-        { visibility: visibility }
-      end
-
-      def embargo_options(visibility_during, visibility_after, release_dt)
-        during_options = %w(authenticated restricted)
-        after_options = %w(open authenticated)
-        # Date should be parseable
-        return unless during_options.include? visibility_during
-        return unless after_options.include? visibility_after
-        {
-          visibility_during_embargo: visibility_during,
-          embargo_release_date: release_dt,
-          visibility_after_embargo: visibility_after
-        }
       end
   end
 end
