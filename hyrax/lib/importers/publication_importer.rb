@@ -519,7 +519,7 @@ module Importers
           'files to be added',
           'files ignored',
           'files missing',
-          'attributes'
+          # 'attributes'
         ] if write_headers
         files = '' if files.blank?
         files_ignored = '' if files_ignored.blank?
@@ -531,7 +531,7 @@ module Importers
           JSON.pretty_generate(files),
           JSON.pretty_generate(files_ignored),
           JSON.pretty_generate(files_missing),
-          JSON.pretty_generate(attributes)
+          # JSON.pretty_generate(attributes)
         ]
         csv_file.close
       end
