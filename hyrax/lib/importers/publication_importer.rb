@@ -4,16 +4,13 @@ require 'importers/collection_importer'
 
 module Importers
   class PublicationImporter
-    attr_accessor :import_dir, :metadata_file, :publications, :debug, :file_visibilities, :metadata_visibilities
+    attr_accessor :import_dir, :metadata_file, :debug
 
     def initialize(import_dir, metadata_file, debug=false, log_file=nil)
       @import_dir = import_dir
       @metadata_file = metadata_file
       @debug = debug
       @log_file = log_file || 'import_dataset.csv'
-      @publications = []
-      @file_visibilities = []
-      @metadata_visibilities = []
     end
 
     def perform_create
@@ -23,12 +20,24 @@ module Importers
     end
 
     private
-      def set_collection_title
+      def set_collection_attrs
         collections = {
-          'escidoc_dump_genso.xml' => ['Library of Strategic Natural Resources (genso)'],
-          'escidoc_dump_materials.xml' => ['Materials Science Library'],
-          'escidoc_dump_nims_publications.xml' => ['NIMS Publications'],
-          'escidoc_dump_nnin.xml' => ['NNIN collection']
+          'escidoc_dump_genso.xml' => {
+            title: ['Library of Strategic Natural Resources (genso)'],
+            id: 'genso'
+          },
+          'escidoc_dump_materials.xml' => {
+            title: ['Materials Science Library'],
+            id: 'materials'
+          },
+          'escidoc_dump_nims_publications.xml' => {
+            title: ['NIMS Publications'],
+            id: 'nims'
+          },
+          'escidoc_dump_nnin.xml' => {
+            title: ['NNIN collection'],
+            id: 'nnin'
+          }
         }
         fn = File.basename(@metadata_file)
         return collections[fn]
@@ -43,23 +52,28 @@ module Importers
         #     components (= files)
         #     relations
         #     resources
-        col_attrs = {}
-        col_attrs[:title] = set_collection_title
-        col = Importers::CollectionImporter.new(col_attrs, nil, 'open')
+        col_attrs = set_collection_attrs
+        col = Importers::CollectionImporter.new(col_attrs, col_attrs[:id], 'open')
         col.create_collection
         pub_xml = File.open(metadata_file) { |f| Nokogiri::XML(f) }
         pub_xml.xpath('/root/item').each do |item|
+          work_id = nil
           attributes = get_properties(item)
           metadata = get_metadata(item)
           attributes.merge!(metadata)
           attributes.merge!({member_of_collection_ids: [col.col_id]})
+          work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
           files_list = get_components(item)
           files = files_list[0]
           files_ignored = files_list[1]
           files_missing = files_list[2]
           log_progress(metadata_file, attributes[:id], col_attrs[:title], files, files_ignored, files_missing, attributes)
+          puts attributes
+          puts '-'*50
+          puts files
+          puts '~'*50
           unless debug
-            h = Importers::HyraxImporter.new('Publication', attributes, files)
+            h = Importers::HyraxImporter.new('Publication', attributes, files, work_id)
             h.import
           end
         end
@@ -168,7 +182,7 @@ module Importers
         metadata[:description] = val if val.any?
         # alternative
         val = get_text(node, 'alternative')
-        metadata[:alternative_title] = val if val.any?
+        metadata[:alternative_title] = val[0] if val.any?
         # created - ignoring this date for now
         # creator
         metadata[:complex_person_attributes] = get_creators(node)
@@ -193,7 +207,7 @@ module Importers
         metadata[:language] = val if val.any?
         # location
         val = get_text(node, 'location')
-        metadata[:place] = val if val.any?
+        metadata[:place] = val[0] if val.any?
         # modified - ignoring date modified for now
         # published-online
         val = get_text(node, 'published-online')
@@ -219,7 +233,7 @@ module Importers
         metadata[:title] = val if val.any?
         # total-number-of-pages
         val = get_text(node, 'total-number-of-pages')
-        metadata[:total_number_of_pages] = val if val.any?
+        metadata[:total_number_of_pages] = val[0] if val.any?
         # return
         metadata
       end
@@ -243,13 +257,13 @@ module Importers
         # /mnt/ngdr/pubman/
         dir_path = File.join(@import_dir, file_id)
         if File.directory?(dir_path)
-          dir_list = Dir.glob("/srv/ngdr/data/pubman/#{file_id}/*")
-          if File.basename(dir_list[0]).size < 50
-            files = dir_list
-          else
-            files_ignored = dir_list
-            puts "Not including file because name is too long - #{dir_list[0]}"
-          end
+          dir_list = Dir.glob("#{dir_path}/*")
+          # if dir_list.any? and File.basename(dir_list[0]).size < 50
+          #   files = dir_list
+          # else
+          #   files_ignored = dir_list
+          # end
+          files = dir_list
         else
           files_missing = dir_path
         end
@@ -505,7 +519,7 @@ module Importers
           'files to be added',
           'files ignored',
           'files missing',
-          # 'attributes'
+          'attributes'
         ] if write_headers
         files = '' if files.blank?
         files_ignored = '' if files_ignored.blank?
@@ -517,10 +531,9 @@ module Importers
           JSON.pretty_generate(files),
           JSON.pretty_generate(files_ignored),
           JSON.pretty_generate(files_missing),
-          # JSON.pretty_generate(attributes)
+          JSON.pretty_generate(attributes)
         ]
         csv_file.close
       end
-
   end
 end

@@ -13,9 +13,13 @@ module Importers
     def create_collection
       return unless @attributes.any?
       set_attributes
-      col = Collection.new(@attributes)
-      col.save!
-      col.update_index
+      begin
+        Collection.find(@col_id)
+      rescue ActiveFedora::ObjectNotFoundError
+        col = Collection.new(@attributes)
+        col.save!
+        col.update_index
+      end
     end
 
     private
