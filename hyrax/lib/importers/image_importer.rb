@@ -102,7 +102,7 @@ module Importers
       def get_metadata(image)
         return metadata if image.blank?
         metadata = {}
-        files = []
+        files = {}
         # The metadata xml node contains the following
         #   dcterms:created
         #   dcterms:issued
@@ -161,7 +161,7 @@ module Importers
         # imeji:fullImageUrl
         attrs = get_value_by_attribute(image, 'imeji:fullImageUrl')
         val = attrs.fetch('resource', nil)
-        files << val unless val.blank?
+        files[val] = "full_#{File.basename(val)}" unless val.blank?
         # imeji:metadataSet (don't know what to do with this. Ignore for now)
         # imeji:status
         val = get_text(image, 'imeji:status')
@@ -170,7 +170,7 @@ module Importers
         # imeji:thumbnailImageUrl
         attrs = get_value_by_attribute(image, 'imeji:thumbnailImageUrl')
         val = attrs.fetch('resource', nil)
-        files << val unless val.blank?
+        files[val] = "thumbnail_#{File.basename(val)}" unless val.blank?
         # imeji:versionNumber
         val = get_text(image, 'imeji:versionNumber')
         metadata[:complex_version_attributes] = [{version: val[0]}] if val.any?
@@ -187,7 +187,7 @@ module Importers
         #   imeji:webImageUrl
         attrs = get_value_by_attribute(image, 'imeji:webImageUrl')
         val = attrs.fetch('resource', nil)
-        files << val unless val.blank?
+        files[val] = "web_#{File.basename(val)}" unless val.blank?
         [metadata, files]
       end
 
