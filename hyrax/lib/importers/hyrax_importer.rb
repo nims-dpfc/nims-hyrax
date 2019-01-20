@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'browse_everything/retriever'
 
 module Importers
@@ -10,6 +11,7 @@ module Importers
       @files = files
       @remote_files = remote_files
       @klass = klass
+      @remote_tmp_dir = "tmp/remote_files/#{@work_id}"
       set_work_klass
     end
 
@@ -17,21 +19,27 @@ module Importers
       upload_remote_files unless remote_files.blank?
       upload_files unless files.blank?
       add_work
+      unless remote_files.blank?
+        FileUtils.rm Dir.glob(File.join(@remote_tmp_dir, '*'))
+        FileUtils.rmdir @remote_tmp_dir
+      end
     end
 
     def upload_remote_files
-      remote_files.each do |file_url|
-        filename = File.basename(file_url)
-        dir = Dir.mktmpdir
-        File.open(File.join(dir, filename), 'wb') do |f|
+      if remote_files.kind_of? Array
+        @remote_files = Hash[remote_files.collect { |item| [item, File.basename(item)] } ]
+      end
+      remote_files.each do |file_url, filename|
+        FileUtils.mkdir_p(@remote_tmp_dir)
+        filepath = File.join(@remote_tmp_dir, filename)
+        File.open(filepath, 'wb') do |f|
           begin
-            write_file(uri, f, headers)
-            yield f
+            write_file(file_url, f)
           rescue StandardError => e
             Rails.logger.error(e.message)
           end
         end
-        @files << File.join(dir, filename)
+        @files << filepath
       end
     end
 
@@ -151,7 +159,7 @@ module Importers
         @work_klass = @klass.constantize
       end
 
-      def write_file(uri, f, headers)
+      def write_file(uri, f, headers={})
         retriever = BrowseEverything::Retriever.new
         uri_spec = { 'url' => uri }.merge(headers)
         retriever.retrieve(uri_spec) do |chunk|
