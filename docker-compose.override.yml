@@ -1,4 +1,5 @@
 # Overrides the docker-compose file for development environment
+# - Use the example end.production file (because in dev it doesn't matter)
 # - Publish the fcrepo and solr ports
 # - No nginx in front of the app
 # - app accessible on port 3000
@@ -9,6 +10,9 @@ version: '2.1'
 
 services:
 
+  app:
+    env_file:
+      - .env.production.example
   fcrepo:
     ports:
       - 8080:8080

@@ -28,6 +28,7 @@ services:
     build: docker/solr
     volumes:
       - solr_home:/solr_home
+      - file_uploads:/data/tmp/uploads
     expose:
       - 8983
     healthcheck:

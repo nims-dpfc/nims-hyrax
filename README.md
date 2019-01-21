@@ -11,14 +11,26 @@ Open a console and try running `docker -h` and `docker-compose -h` to verify the
 
 Create the environment file `.env.production` and set the postgres database username and password and the secret key. You can use the `example.env.production` file as template.
 
-To build and run the system, issue the `up` command to docker-compose: 
+To build and run the system in a development environment, issue the docker-compose `up` command: 
 ```bash
 $ docker-compose up --build
 ```
  * You should see the Hyrax app at localhost:3000
  * Solr is available at localhost:8983/solr
  * Fedora is available at localhost:8080/fcrepo/rest
- * For conveneince, the default workflows are loaded, the default admin set and collection types are created and 3 users are created, as detailed [here](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/seed/setup.json)
+ * For convenience, the default workflows are loaded, the default admin set and collection types are created and 3 users are created, as detailed [here](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/seed/setup.json)
+
+### In production (& on the test server)
+In order to secure our development, the 'production' app runs behind nginx. The access credentials are:
+* user name: `nims-test`
+* password: `zaigii5R`
+
+Ensure you have created a `.env.production` file in `hyrax/` (see the example) and run with:
+    
+    docker-compose -f docker-compose.yml -f docker-compose-production.yml up -d
+
+* The service will run without Solr, etc. ports being exposed to the host
+* Hyrax is accessible behind http basic auth at ports 81 and 3000
 
 ### For Developers
 We use the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching model, so ensure you set up 
