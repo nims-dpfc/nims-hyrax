@@ -15,8 +15,6 @@ services:
     image: ualbertalib/docker-fcrepo4:4.7
     expose:
       - 8080
-    ports:
-      - 8080:8080
     volumes:
       - fcrepo:/data
     environment:
@@ -32,8 +30,6 @@ services:
       - solr_home:/solr_home
     expose:
       - 8983
-    ports:
-      - 8983:8983
     healthcheck:
       test:
         - CMD
@@ -65,7 +61,6 @@ services:
     build: hyrax
     env_file:
       - .env
-      - .env.production
     volumes:
       - file_uploads:/data/tmp/uploads
       - /srv/ngdr/data/:/data/data
@@ -81,8 +76,8 @@ services:
       - solr
       - fcrepo
       - redis
-    ports:
-      - 3000:3000
+    expose:
+      - 3000
 
   workers:
     extends:
