@@ -6,7 +6,6 @@ module Importers
     attr_reader :import_dir, :metadata_filename
 
     def initialize(import_dir, metadata_filename='mandatory.xml', debug=false, log_file=nil)
-      @work_klass = Dataset
       @import_dir = import_dir
       @metadata_filename = metadata_filename
       @debug = debug
@@ -14,11 +13,7 @@ module Importers
     end
 
     def perform_create
-      unless File.directory?(import_dir)
-        message = 'Error: Directory does not exist at ' + import_dir
-        write_log(message)
-        return
-      end
+      return unless dir_exists?(import_dir)
 
       # for each dir in the import_dir, parse the mandatory.xml file and upload all other files
       # Some examples have measurement.xml, meta.xml, meta_unit.xml - these are not parsed, just treated as files to be uploaded
@@ -37,13 +32,13 @@ module Importers
 
         # list all the files to be uploaded for this item
         files = list_data_files(dir)
-
+        remote_files = []
         # log or import
         if @debug
           write_attributes(dir, attributes)
           write_files(dir, files)
         else
-          h = Importers::HyraxImporter.new('Dataset', attributes, files)
+          h = Importers::HyraxImporter.new('Dataset', attributes, files, remote_files)
           h.import
         end
       end
@@ -287,6 +282,13 @@ module Importers
       def file_exists?(file_path)
         return true if File.file?(file_path)
         message = 'Error: Mandatory file missing: ' + file_path
+        write_log(message)
+        false
+      end
+
+      def dir_exists?(dir_path)
+        return true if File.directory?(dir_path)
+        message = 'Error: Diectory missing: ' + dir_path
         write_log(message)
         false
       end

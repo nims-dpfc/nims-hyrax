@@ -1,18 +1,46 @@
+require 'fileutils'
+require 'browse_everything/retriever'
+
 module Importers
   class HyraxImporter
-    attr_reader :klass, :work_klass, :object, :work_id, :attributes, :files, :file_ids
+    attr_reader :klass, :work_klass, :object, :work_id, :attributes, :files, :file_ids, :remote_files
 
-    def initialize(klass, attributes, files, work_id=nil)
+    def initialize(klass, attributes, files, remote_files, work_id=nil)
       @work_id = work_id ||= SecureRandom.uuid
       @attributes = attributes
       @files = files
+      @remote_files = remote_files
       @klass = klass
+      @remote_tmp_dir = "tmp/remote_files/#{@work_id}"
       set_work_klass
     end
 
     def import
+      upload_remote_files unless remote_files.blank?
       upload_files unless files.blank?
       add_work
+      unless remote_files.blank?
+        FileUtils.rm Dir.glob(File.join(@remote_tmp_dir, '*'))
+        FileUtils.rmdir @remote_tmp_dir
+      end
+    end
+
+    def upload_remote_files
+      if remote_files.kind_of? Array
+        @remote_files = Hash[remote_files.collect { |item| [item, File.basename(item)] } ]
+      end
+      remote_files.each do |file_url, filename|
+        FileUtils.mkdir_p(@remote_tmp_dir)
+        filepath = File.join(@remote_tmp_dir, filename)
+        File.open(filepath, 'wb') do |f|
+          begin
+            write_file(file_url, f)
+          rescue StandardError => e
+            Rails.logger.error(e.message)
+          end
+        end
+        @files << filepath
+      end
     end
 
     def upload_files
@@ -30,6 +58,30 @@ module Importers
         u.save
         @file_ids << u.id
       end
+    end
+
+    def add_visibility(visibility)
+      # Filesets inherit visibility for work
+      possible_options = %w(open authenticated embargo lease restricted)
+      return {} unless possible_options.include? visibility
+      { visibility: visibility }
+    end
+
+    def add_embargo(visibility_during, visibility_after, release_dt)
+      during_options = %w(authenticated restricted)
+      after_options = %w(open authenticated)
+      # Date should be parseable
+      return unless during_options.include? visibility_during
+      return unless after_options.include? visibility_after
+      {
+        visibility_during_embargo: visibility_during,
+        embargo_release_date: release_dt,
+        visibility_after_embargo: visibility_after
+      }
+    end
+
+    def add_collection_id(collection_id)
+      {member_of_collection_ids: [collection_id]}
     end
 
     private
@@ -107,25 +159,13 @@ module Importers
         @work_klass = @klass.constantize
       end
 
-      def visibility_options(visibility)
-        # Filesets inherit visibility for work
-        # TODO: How to set filset attribute different from work
-        possible_options = %w(open authenticated embargo lease restricted)
-        return {} unless possible_options.include? visibility
-        { visibility: visibility }
-      end
-
-      def embargo_options(visibility_during, visibility_after, release_dt)
-        during_options = %w(authenticated restricted)
-        after_options = %w(open authenticated)
-        # Date should be parseable
-        return unless during_options.include? visibility_during
-        return unless after_options.include? visibility_after
-        {
-          visibility_during_embargo: visibility_during,
-          embargo_release_date: release_dt,
-          visibility_after_embargo: visibility_after
-        }
+      def write_file(uri, f, headers={})
+        retriever = BrowseEverything::Retriever.new
+        uri_spec = { 'url' => uri }.merge(headers)
+        retriever.retrieve(uri_spec) do |chunk|
+          f.write(chunk)
+        end
+        f.rewind
       end
   end
 end
