@@ -6,10 +6,10 @@ module Importers
   class ImageImporter
     attr_accessor :import_dir, :metadata_file, :debug
 
-    def initialize(metadata_file, debug=false, log_file=nil)
+    def initialize(metadata_file, debug=false, log_file='import_image_log.csv')
       @metadata_file = metadata_file
       @debug = debug
-      @log_file = log_file || 'import_dataset.csv'
+      @log_file = log_file
     end
 
     def perform_create
@@ -66,7 +66,7 @@ module Importers
 
       # Extract metadata and return as attributes
       def parse_image_file
-        # Each xml file has multiple items
+        # Open xml file with namespace
         rdf_xml = Nokogiri::XML('<rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/"
           xmlns:dcterms="http://purl.org/dc/terms/"
           xmlns:eprofiles="http://purl.org/escidoc/metadata/profiles/0.1/"
@@ -79,23 +79,51 @@ module Importers
           xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"></rdf:RDF>')
         doc = File.open(metadata_file) { |f| Nokogiri::XML(f) }
         rdf_xml.root << doc.root.children
+
+        # Each xml file has multiple items
         rdf_xml.xpath('//imeji:image').each do |item|
-          data = get_metadata(item)
-          attributes = data[0]
-          files = []
-          remote_files = data[1]
+          # Set defaults
           work_id = nil
-          work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
-          col_id = attributes.fetch(:member_of_collection_ids, [])[0]
-          log_progress(metadata_file, work_id, col_id, attributes)
-          puts attributes
-          puts '-'*50
-          puts remote_files
-          puts '~'*50
-          unless debug
+          col_id = nil
+          attributes = {}
+          files = []
+          remote_files = []
+          error = ''
+
+          # Parse metadata file
+          all_metadata = get_metadata(item)
+          attributes = all_metadata[0]
+          collection_url = all_metadata[1]
+          remote_files = all_metadata[2]
+
+          # get collection attributes
+          collection_attrs = get_collection(collection_url) unless collection_url.blank?
+
+          if debug
+            log_progress(metadata_file, work_id, col_id, attributes, remote_files, error)
+            next
+          end
+
+          # add collection
+          unless collection_url.blank?
+            collection = Importers::CollectionImporter.new(collection_attrs, collection_attrs[:id], 'open')
+            collection.create_collection
+            col_id = collection.col_id
+            metadata[:member_of_collection_ids] = [collection.col_id]
+          end
+
+          # Import image
+          begin
+            # Set work id to be same as the id in metadata
+            work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
             h = Importers::HyraxImporter.new('Image', attributes, files, remote_files, work_id)
             h.import
+          rescue StandardError => exception
+            error = exception.backtrace
           end
+
+          # log progress
+          log_progress(metadata_file, work_id, col_id, attributes, remote_files, error)
         end
       end
 
@@ -147,12 +175,6 @@ module Importers
         # imeji:collection (implement with Hyrax collection. The collections were created by hand)
         attrs = get_value_by_attribute(image, 'imeji:collection')
         col_url = attrs.fetch('resource', nil)
-        unless col_url.blank?
-          col_attrs = get_collection(col_url)
-          col = Importers::CollectionImporter.new(col_attrs, col_attrs[:id], 'open')
-          col.create_collection
-          metadata[:member_of_collection_ids] = [col.col_id]
-        end
         # imeji:discardComment (does not appear to be used so suggest ignoring this)
         # imeji:escidocId (does not appear to be used so suggest ignoring this)
         # imeji:fileSize - add to file metadata
@@ -161,6 +183,9 @@ module Importers
         # imeji:fullImageUrl
         attrs = get_value_by_attribute(image, 'imeji:fullImageUrl')
         val = attrs.fetch('resource', nil)
+        if val and val.include?('http://imeji.nims.go.jp/imeji/imeji/')
+          val = val.gsub('http://imeji.nims.go.jp/imeji/imeji/', 'http://imeji.nims.go.jp/imeji/')
+        end
         files[val] = "full_#{File.basename(val)}" unless val.blank?
         # imeji:metadataSet (don't know what to do with this. Ignore for now)
         # imeji:status
@@ -170,7 +195,10 @@ module Importers
         # imeji:thumbnailImageUrl
         attrs = get_value_by_attribute(image, 'imeji:thumbnailImageUrl')
         val = attrs.fetch('resource', nil)
-        files[val] = "thumbnail_#{File.basename(val)}" unless val.blank?
+        if val and val.include?('http://imeji.nims.go.jp/imeji/imeji/')
+          val = val.gsub('http://imeji.nims.go.jp/imeji/imeji/', 'http://imeji.nims.go.jp/imeji/')
+        end
+        # files[val] = "thumbnail_#{File.basename(val)}" unless val.blank?
         # imeji:versionNumber
         val = get_text(image, 'imeji:versionNumber')
         metadata[:complex_version_attributes] = [{version: val[0]}] if val.any?
@@ -187,8 +215,11 @@ module Importers
         #   imeji:webImageUrl
         attrs = get_value_by_attribute(image, 'imeji:webImageUrl')
         val = attrs.fetch('resource', nil)
-        files[val] = "web_#{File.basename(val)}" unless val.blank?
-        [metadata, files]
+        if val and val.include?('http://imeji.nims.go.jp/imeji/imeji/')
+          val = val.gsub('http://imeji.nims.go.jp/imeji/imeji/', 'http://imeji.nims.go.jp/imeji/')
+        end
+        # files[val] = "web_#{File.basename(val)}" unless val.blank?
+        [metadata, col_url, files]
       end
 
       def get_text_with_tags(node, element)
@@ -217,7 +248,7 @@ module Importers
         values
       end
 
-      def log_progress(metadata_file, work_id, col_id, attributes)
+      def log_progress(metadata_file, work_id, col_id, attributes, remote_files, error)
         write_headers = true
         write_headers = false if File.file?(@log_file)
         csv_file = CSV.open(@log_file, "ab")
@@ -225,14 +256,18 @@ module Importers
           'metadata file',
           'work id',
           'collection id',
-          'attributes'
+          'attributes',
+          'Remote files',
+          'error'
         ] if write_headers
         files = '' if files.blank?
         csv_file << [
           metadata_file,
           work_id,
           col_id,
-          JSON.pretty_generate(attributes)
+          JSON.pretty_generate(attributes),
+          JSON.pretty_generate(remote_files),
+          JSON.pretty_generate(error)
         ]
         csv_file.close
       end
