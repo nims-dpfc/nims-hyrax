@@ -12,6 +12,8 @@ services:
   app:
     env_file:
       - .env.production
+    volumes:
+      - /mnt/ngdr/:/mnt/ngdr
 
   nginx:
     image: nginx:stable-alpine
