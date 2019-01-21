@@ -5,7 +5,7 @@ volumes:
   solr_home:
   db:
   redis:
-  app:
+  file_uploads:
 
 networks:
   internal:
@@ -62,8 +62,8 @@ services:
     env_file:
       - .env
     volumes:
-      - app:/data/tmp/uploads
-      - /srv/ngdr/data:/data/data
+      - file_uploads:/data/tmp/uploads
+      - /srv/ngdr/data/:/data/data
     networks:
       internal:
 
@@ -84,7 +84,7 @@ services:
       service: app
     command: bundle exec sidekiq
     environment:
-      - SETTINGS__FITS_PATH=/opt/fits-1.0.5/fits.sh
+      - SETTINGS__FITS_PATH=/fits/fits-1.0.5/fits.sh
     depends_on:
       - db
       - solr
