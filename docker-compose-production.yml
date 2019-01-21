@@ -22,6 +22,7 @@ services:
       - ./docker/nginx/.htpasswd:/etc/nginx/conf.d/.htpasswd:ro
     ports:
       - 81:80
+      - 3000:80
       #- 443:443
     networks:
       internal:
