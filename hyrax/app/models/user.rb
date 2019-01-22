@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
 
   if Blacklight::Utils.needs_attr_accessible?
-    attr_accessible :email, :password, :password_confirmation
+    attr_accessible :username, :email, :password, :password_confirmation
   end
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
@@ -25,6 +25,6 @@ class User < ApplicationRecord
   # user class to get a user-displayable login/identifier for
   # the account.
   def to_s
-    email
+    username
   end
 end
