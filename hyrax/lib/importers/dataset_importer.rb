@@ -5,11 +5,11 @@ module Importers
   class DatasetImporter
     attr_reader :import_dir, :metadata_filename
 
-    def initialize(import_dir, metadata_filename='mandatory.xml', debug=false, log_file=nil)
+    def initialize(import_dir, metadata_filename='mandatory.xml', debug=false, log_file='import_dataset_log.csv')
       @import_dir = import_dir
       @metadata_filename = metadata_filename
       @debug = debug
-      @log_file = log_file || 'import_dataset.log'
+      @log_file = log_file
     end
 
     def perform_create
@@ -18,29 +18,49 @@ module Importers
       # for each dir in the import_dir, parse the mandatory.xml file and upload all other files
       # Some examples have measurement.xml, meta.xml, meta_unit.xml - these are not parsed, just treated as files to be uploaded
       Dir.glob(File.join(import_dir, '*')).each do |dir|
+        # Set defaults
+        work_id = nil
+        attributes = {}
+        files = []
+        remote_files = []
+        error = nil
+
+        # Check metadata file exists
         mandatory_fn =  File.join(dir, metadata_filename)
         measurement_fn = File.join(dir, 'measurement.xml')
-        next unless file_exists?(mandatory_fn)
-
-        # parse the mandatory metadata file
-        attributes = parse_metadata(dir, mandatory_fn, measurement_fn)
-        if attributes.blank?
-          message = 'Error: No attributes available, skipping import of ' + dir
-          write_log(message)
+        unless File.file?(mandatory_fn)
+          error = 'Error: Mandatory file missing: ' + mandatory_fn
+          log_progress(dir, work_id, attributes, files, error)
           next
         end
 
-        # list all the files to be uploaded for this item
+        # parse the metadata files
+        attributes = parse_metadata(dir, mandatory_fn, measurement_fn)
+        if attributes.blank?
+          error = 'Error: No attributes available, skipping import of ' + dir
+          log_progress(dir, work_id, attributes, files, error)
+          next
+        end
+
+        # Get all the files to be uploaded for this item
         files = list_data_files(dir)
-        remote_files = []
-        # log or import
+
         if @debug
-          write_attributes(dir, attributes)
-          write_files(dir, files)
-        else
+          log_progress(dir, work_id, attributes, files, error)
+          next
+        end
+
+        # import dataset
+        begin
           h = Importers::HyraxImporter.new('Dataset', attributes, files, remote_files)
           h.import
+          work_id = h.work_id
+        rescue StandardError => exception
+          error = exception.backtrace
         end
+
+        # log progress
+        log_progress(dir, work_id, attributes, files, error)
       end
     end
 
@@ -261,11 +281,7 @@ module Importers
 
           end
         end
-        unless attributes.any?
-          message = "Error: Could not extract any metadata from " + metadata_file
-          write_log(message)
-        end
-        write_errors(metadata_file, errors) if errors.any?
+        return attributes unless attributes.any?
 
         # also agreed to parse a measurement.xml file if present, so just do that here for the time being, if it exists in the same folder
         if File.file?(measurement_file)
@@ -279,17 +295,10 @@ module Importers
         return attributes
       end
 
-      def file_exists?(file_path)
-        return true if File.file?(file_path)
-        message = 'Error: Mandatory file missing: ' + file_path
-        write_log(message)
-        false
-      end
-
       def dir_exists?(dir_path)
         return true if File.directory?(dir_path)
-        message = 'Error: Diectory missing: ' + dir_path
-        write_log(message)
+        message = 'Error: Directory missing: ' + dir_path
+        puts message
         false
       end
 
@@ -300,29 +309,26 @@ module Importers
         ]
       end
 
-      def write_errors(metadata_file, errors)
-        message = 'WARN: Metadata errors in file ' + metadata_file
-        message += JSON.pretty_generate(errors)
-        write_log(message, false)
-      end
-
-      def write_attributes(dir, attributes)
-        File.open(File.join(dir, '__METADATA.json'),"w") do |f|
-          f.write(JSON.pretty_generate(attributes))
-        end
-      end
-
-      def write_files(dir, files)
-        File.open(File.join(dir, '__FILES.json'),"w") do |f|
-          f.write(JSON.pretty_generate(files))
-        end
-      end
-
-      def write_log(message, also_print=true)
-        File.open(@log_file, 'w') do |f|
-          f.write(message + '\n')
-        end
-        puts message if also_print
+      def log_progress(dir, work_id, attributes, files, error)
+        write_headers = true
+        write_headers = false if File.file?(@log_file)
+        csv_file = CSV.open(@log_file, "ab")
+        csv_file << [
+          'directory',
+          'work id',
+          'attributes',
+          'files',
+          'error'
+        ] if write_headers
+        files = '' if files.blank?
+        csv_file << [
+          dir,
+          work_id,
+          JSON.pretty_generate(attributes),
+          JSON.pretty_generate(files),
+          JSON.pretty_generate(error)
+        ]
+        csv_file.close
       end
   end
 end
