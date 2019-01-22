@@ -5,7 +5,7 @@
 
 ## Getting Started
 
-Ensure you have docker and docker-compose
+Ensure you have docker and docker-compose. See [notes on installing docker](https://github.com/antleaf/nims-hyrax/blob/develop/README.md#installing-docker)
 
 Open a console and try running `docker -h` and `docker-compose -h` to verify they are both accessible.
 
