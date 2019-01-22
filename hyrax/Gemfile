@@ -66,8 +66,9 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
-gem 'riiif', '~> 1.1'
 gem 'sidekiq'
 gem 'hydra-role-management'
 gem 'bootstrap-datepicker-rails'
 gem 'pg'
+
+gem 'riiif', '~> 2.0'
