@@ -6,11 +6,11 @@ module Importers
   class PublicationImporter
     attr_accessor :import_dir, :metadata_file, :debug
 
-    def initialize(import_dir, metadata_file, debug=false, log_file=nil)
+    def initialize(import_dir, metadata_file, debug=false, log_file='import_publication_log.csv')
       @import_dir = import_dir
       @metadata_file = metadata_file
       @debug = debug
-      @log_file = log_file || 'import_dataset.csv'
+      @log_file = log_file
     end
 
     def perform_create
@@ -52,31 +52,59 @@ module Importers
         #     components (= files)
         #     relations
         #     resources
+
+        # get collection attributes
         col_attrs = set_collection_attrs
-        col = Importers::CollectionImporter.new(col_attrs, col_attrs[:id], 'open')
-        col.create_collection
+
+        # create collection
+        unless debug
+          col = Importers::CollectionImporter.new(col_attrs, col_attrs[:id], 'open')
+          col.create_collection
+          col_id = col.col_id
+        end
+
+        # Open publications xml file
         pub_xml = File.open(metadata_file) { |f| Nokogiri::XML(f) }
+
+        # Each xml file has multiple items
         pub_xml.xpath('/root/item').each do |item|
+          # Set defaults
           work_id = nil
+          attributes = {}
+          files = []
+          files_ignored = []
+          files_missing = []
+          remote_files = []
+          error = nil
+
+          # Get attributes
           attributes = get_properties(item)
-          metadata = get_metadata(item)
-          attributes.merge!(metadata)
-          attributes.merge!({member_of_collection_ids: [col.col_id]})
-          work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
+          attributes.merge!(get_metadata(item))
+          attributes.merge!({member_of_collection_ids: [col_id]}) unless col_id.blank?
+
+          # Get files
           files_list = get_components(item)
           files = files_list[0]
           files_ignored = files_list[1]
           files_missing = files_list[2]
-          log_progress(metadata_file, work_id, col_attrs[:title], files, files_ignored, files_missing, attributes)
-          puts attributes
-          puts '-'*50
-          puts files
-          puts '~'*50
-          remote_files = []
-          unless debug
+
+          if debug
+            log_progress(metadata_file, work_id, col_id, files, files_ignored, files_missing, attributes)
+            next
+          end
+
+          # Import image
+          begin
+            # Set work id to be same as the id in metadata
+            work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
             h = Importers::HyraxImporter.new('Publication', attributes, files, remote_files, work_id)
             h.import
+          rescue StandardError => exception
+            error = exception.backtrace
           end
+
+          # log progress
+          log_progress(metadata_file, work_id, col_id, files, files_ignored, files_missing, attributes)
         end
       end
 
@@ -503,7 +531,7 @@ module Importers
         csv_file << [
           'metadata file',
           'work id',
-          'collection title',
+          'collection',
           'files to be added',
           'files ignored',
           'files missing',
