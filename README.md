@@ -51,3 +51,22 @@ Hooks and filters directory? [<your-path-to-checked-out-repo>/nims-hyrax/.git/ho
 
 The default branch in this repository is `develop`, and `master` should be used for stable releases only. After
 finishing bugfixes or releases with `git-flow` remember to also push tags with `git push --tags`.
+
+### Docker tips
+[Docker cheat sheet](https://github.com/wsargent/docker-cheat-sheet)
+
+#### Installing Docker
+
+1. Install Docker [by following step 1 of the Docker Compose installation tutorial](https://docs.docker.com/compose/install/) on your machine.
+
+2. Make sure you don't need to `sudo` to run docker. [Instructions on set-up and how to test that it works.](https://docs.docker.com/engine/installation/linux/ubuntulinux/#/manage-docker-as-a-non-root-user)
+
+3. Install [Docker Compose by following steps 2 and onwards from the Docker Compose installation Tutorial](https://docs.docker.com/compose/install/).
+
+> Ubuntu Linux users, the command that Docker-Compose provides you with will not work since /usr/local/bin is not writeable by anybody but root in default Ubuntu setups. Use `sudo tee` instead, e.g.:
+  
+```bash
+$ curl -L https://github.com/docker/compose/releases/download/[INSERT_DESIRED_DOCKER_COMPOSE_VERSION_HERE]/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null && sudo chmod a+x /usr/local/bin/docker-compose
+```
+
+4. Open a console and try running `docker -h` and `docker-compose -h` to verify they are both accessible.
