@@ -6,6 +6,7 @@ volumes:
   db:
   redis:
   file_uploads:
+  derivatives:
 
 networks:
   internal:
@@ -65,6 +66,7 @@ services:
     volumes:
       - file_uploads:/data/tmp/uploads
       - /srv/ngdr/data/:/data/data
+      - derivatives:/derivatives
     networks:
       internal:
 
