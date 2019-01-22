@@ -60,7 +60,7 @@ module Importers
         unless debug
           col = Importers::CollectionImporter.new(col_attrs, col_attrs[:id], 'open')
           col.create_collection
-          col_id = collection.col_id
+          col_id = col.col_id
         end
 
         # Open publications xml file
@@ -531,7 +531,7 @@ module Importers
         csv_file << [
           'metadata file',
           'work id',
-          'collection title',
+          'collection',
           'files to be added',
           'files ignored',
           'files missing',

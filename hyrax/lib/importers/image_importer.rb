@@ -21,7 +21,7 @@ module Importers
       def get_collection(col_url)
         collections = {
           'http://imeji.nims.go.jp/imeji/collection/sdZWq3eqN1ivoU60/' => {
-            id: '12579s24j',
+            id: '2d0752c0-fc37-4773-b764-b79ba0fc3139',
             title: ['Fiber fuse damage'],
             description: ['Top part of damage train left after a sudden shutdown of laser power supply.'],
             related_url: ['http://imeji.nims.go.jp/imeji/collection/sdZWq3eqN1ivoU60/'],
@@ -29,7 +29,7 @@ module Importers
             visibility: 'open'
           },
           'http://imeji.nims.go.jp/imeji/collection/8' => {
-            id: '2227mp645',
+            id: '0f252c92-c493-4a69-88c1-6f869ff87d8e',
             title: ['Fiber Fuse Movies'],
             description: ['It looks like a tiny comet, a light-induced breakdown of a silica glass optical fiber. In situ image and fused fibers are presented. See also a YouTube video http://www.youtube.com/watch?v=BVmIgaafERk'],
             related_url: ['http://imeji.nims.go.jp/imeji/collection/8'],
@@ -37,7 +37,7 @@ module Importers
             visibility: 'open'
           },
           'http://imeji.nims.go.jp/imeji/collection/PK_GJp0wrrycetcj' => {
-            id: 'sf268509m',
+            id: '77e4e495-6046-4c52-9b2c-a1afb84276c1',
             title: [' Fiber fuse damage 2'],
             description: ['Initial part of damage train left after a fiber fuse initiation.'],
             related_url: ['http://imeji.nims.go.jp/imeji/collection/PK_GJp0wrrycetcj'],
@@ -45,7 +45,7 @@ module Importers
             visibility: 'open'
           },
           'http://imeji.nims.go.jp/imeji/collection/DEIKQkLx77W3Jrlc' => {
-            id: 'hm50tr726',
+            id: '74e1cb36-357d-49a0-9e94-56c9213a2cf6',
             title: ['フラーレンナノウィスカー'],
             description: ['フラーレンナノウィスカーの成長写真'],
             related_url: ['http://imeji.nims.go.jp/imeji/collection/DEIKQkLx77W3Jrlc'],
@@ -53,7 +53,7 @@ module Importers
             visibility: 'open'
           },
           'http://imeji.nims.go.jp/imeji/profile/15' => {
-            id: 'pg15bd88s',
+            id: 'c8265f76-dc6a-44bd-8b63-4c87f0e3b814',
             title: ['Profile information: Optical emission of Methylene Blue'],
               description: ['Optical emission from Methylene Blue in ethanolic solution (excited by a green (532-nm) laser pointer).'],
             related_url: ['http://imeji.nims.go.jp/imeji/profile/15'],
@@ -109,7 +109,7 @@ module Importers
             collection = Importers::CollectionImporter.new(collection_attrs, collection_attrs[:id], 'open')
             collection.create_collection
             col_id = collection.col_id
-            metadata[:member_of_collection_ids] = [collection.col_id]
+            attributes[:member_of_collection_ids] = [collection.col_id]
           end
 
           # Import image
