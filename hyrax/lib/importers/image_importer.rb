@@ -18,8 +18,8 @@ module Importers
     end
 
     private
-      def get_collection(col_url)
-        collections = {
+      def collections
+        {
           'http://imeji.nims.go.jp/imeji/collection/sdZWq3eqN1ivoU60/' => {
             id: '2d0752c0-fc37-4773-b764-b79ba0fc3139',
             title: ['Fiber fuse damage'],
@@ -61,7 +61,23 @@ module Importers
             visibility: 'open'
           }
         }
-        return collections.fetch(col_url, nil)
+      end
+
+      def create_collections
+        puts 'creating collections'
+        collections.each do |url, attributes|
+          unless attributes.blank?
+            collection = Importers::CollectionImporter.new(attributes, attributes[:id], 'open')
+            collection.create_collection
+          end
+        end
+      end
+
+      def index_collections
+        collections.each do |url, attributes|
+          collection = Collection.find(attributes[:id])
+          collection.reindex_extent = Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX
+        end
       end
 
       # Extract metadata and return as attributes
@@ -80,8 +96,13 @@ module Importers
         doc = File.open(metadata_file) { |f| Nokogiri::XML(f) }
         rdf_xml.root << doc.root.children
 
+        create_collections unless @debug
+
+        count = 0
         # Each xml file has multiple items
         rdf_xml.xpath('//imeji:image').each do |item|
+          count += 1
+          puts "Starting import of #{count}"
           # Set defaults
           work_id = nil
           col_id = nil
@@ -97,29 +118,22 @@ module Importers
           remote_files = all_metadata[2]
 
           # get collection attributes
-          collection_attrs = get_collection(collection_url) unless collection_url.blank?
+          collection_attrs = collections.fetch(collection_url, {}) unless collection_url.blank?
+          collection_ids = [collection_attrs.fetch(:id, nil)]
 
           if debug
             log_progress(metadata_file, work_id, col_id, attributes, remote_files, error)
             next
           end
 
-          # add collection
-          unless collection_url.blank?
-            collection = Importers::CollectionImporter.new(collection_attrs, collection_attrs[:id], 'open')
-            collection.create_collection
-            col_id = collection.col_id
-            attributes[:member_of_collection_ids] = [collection.col_id]
-          end
-
           # Import image
           begin
             # Set work id to be same as the id in metadata
             work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
-            h = Importers::HyraxImporter.new('Image', attributes, files, remote_files, work_id)
+            h = Importers::HyraxImporter.new('Image', attributes, files, remote_files, collection_ids, work_id)
             h.import
           rescue StandardError => exception
-            error = exception.backtrace
+            error = exception.backtrace.unshift(exception.message)
           end
 
           # log progress

@@ -12,10 +12,10 @@ module Importers
 
     def create_collection
       return unless @attributes.any?
-      set_attributes
       begin
         Collection.find(@col_id)
       rescue ActiveFedora::ObjectNotFoundError
+        set_attributes
         col = Collection.new(@attributes)
         col.save!
         col.update_index

@@ -5,19 +5,22 @@ module Importers
   class DatasetImporter
     attr_reader :import_dir, :metadata_filename
 
-    def initialize(import_dir, metadata_filename='mandatory.xml', debug=false, log_file='import_dataset_log.csv')
+    def initialize(import_dir, metadata_filename='mandatory.xml', collections=nil, debug=false, log_file='import_dataset_log.csv')
       @import_dir = import_dir
       @metadata_filename = metadata_filename
       @debug = debug
       @log_file = log_file
+      @collections = collections
     end
 
     def perform_create
+      puts "Directory: #{import_dir}: #{dir_exists?(import_dir)}"
       return unless dir_exists?(import_dir)
 
       # for each dir in the import_dir, parse the mandatory.xml file and upload all other files
       # Some examples have measurement.xml, meta.xml, meta_unit.xml - these are not parsed, just treated as files to be uploaded
       Dir.glob(File.join(import_dir, '*')).each do |dir|
+        puts "Starting import of #{dir}"
         # Set defaults
         work_id = nil
         attributes = {}
@@ -30,6 +33,7 @@ module Importers
         measurement_fn = File.join(dir, 'measurement.xml')
         unless File.file?(mandatory_fn)
           error = 'Error: Mandatory file missing: ' + mandatory_fn
+          puts error
           log_progress(dir, work_id, attributes, files, error)
           next
         end
@@ -38,6 +42,7 @@ module Importers
         attributes = parse_metadata(dir, mandatory_fn, measurement_fn)
         if attributes.blank?
           error = 'Error: No attributes available, skipping import of ' + dir
+          puts error
           log_progress(dir, work_id, attributes, files, error)
           next
         end
@@ -52,13 +57,12 @@ module Importers
 
         # import dataset
         begin
-          h = Importers::HyraxImporter.new('Dataset', attributes, files, remote_files)
+          h = Importers::HyraxImporter.new('Dataset', attributes, files, remote_files, @collections)
           h.import
           work_id = h.work_id
         rescue StandardError => exception
-          error = exception.backtrace
+          error = exception.backtrace.unshift(exception.message)
         end
-
         # log progress
         log_progress(dir, work_id, attributes, files, error)
       end
