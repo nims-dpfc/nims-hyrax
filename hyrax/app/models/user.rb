@@ -10,7 +10,6 @@ class User < ApplicationRecord
   include Hyrax::UserUsageStats
 
 
-
   if Blacklight::Utils.needs_attr_accessible?
     attr_accessible :username, :email, :password, :password_confirmation
   end
@@ -26,5 +25,10 @@ class User < ApplicationRecord
   # the account.
   def to_s
     username
+  end
+
+  def self.find_or_create_system_user(user_key)
+    username = user_key.split('@')[0]
+    User.find_by('email' => user_key) || User.create!(username: username, email: user_key, password: Devise.friendly_token[0, 20])
   end
 end
