@@ -3,22 +3,35 @@ require 'browse_everything/retriever'
 
 module Importers
   class HyraxImporter
-    attr_reader :klass, :work_klass, :object, :work_id, :attributes, :files, :file_ids, :remote_files
+    attr_reader :klass, :attributes, :files, :remote_files, :collections, :work_id,
+                :file_ids, :work_klass, :object
 
-    def initialize(klass, attributes, files, remote_files, work_id=nil)
-      @work_id = work_id ||= SecureRandom.uuid
+    def initialize(klass, attributes, files, remote_files, collections, work_id=nil, depositor=nil)
+      @klass = klass
       @attributes = attributes
       @files = files
       @remote_files = remote_files
-      @klass = klass
+      @collections = Array(collections)
+      @work_id = work_id ||= SecureRandom.uuid
       @remote_tmp_dir = "tmp/remote_files/#{@work_id}"
       set_work_klass
+      # Set Hyrax.config.batch_user_key
+      @depositor = nil
+      @depositor = User.find(depositor) unless depositor.blank?
+      @depositor = User.batch_user if @depositor.blank?
     end
 
     def import
       upload_remote_files unless remote_files.blank?
       upload_files unless files.blank?
       add_work
+      if @object.save
+        update_work_by_actor
+        add_member_collections
+        @object.save
+        # Apply visibility setting after the actor stack runs to ensure it doesn't get overriden.
+        # object.visibility = @visibility
+      end
       unless remote_files.blank?
         FileUtils.rm Dir.glob(File.join(@remote_tmp_dir, '*'))
         FileUtils.rmdir @remote_tmp_dir
@@ -48,12 +61,11 @@ module Importers
       files.each do |file|
         unless File.file?(file)
           # TODO if there are dirs in the file list, perhaps this should zip them instead of ignoring them
-          puts 'Upload dataset are not allowed to include directories within them - only files or zips. Directory ' + file + ' will be ignored'
+          puts 'Files are not allowed to include directories within them - only files or zips. Directory ' + file + ' will be ignored'
           next
         end
         u = ::Hyrax::UploadedFile.new
-        @current_user = User.batch_user
-        u.user_id = @current_user.id unless @current_user.nil?
+        u.user = @depositor unless @depositor.nil?
         u.file = ::CarrierWave::SanitizedFile.new(file)
         u.save
         @file_ids << u.id
@@ -80,10 +92,6 @@ module Importers
       }
     end
 
-    def add_collection_id(collection_id)
-      {member_of_collection_ids: [collection_id]}
-    end
-
     private
 
       def add_work
@@ -106,14 +114,33 @@ module Importers
         nil
       end
 
-      def update_work
-        raise "Object doesn't exist" unless @object
-        work_actor.update(environment(update_attributes))
+      def create_work
+        create_attributes[:id] = work_id
+        @object = @work_klass.new(create_attributes)
+        @object.depositor = @depositor.username
+        @object.admin_set_id = AdminSet.find_or_create_default_admin_set_id
       end
 
-      def create_work
-        @object = @work_klass.new
-        work_actor.create(environment(create_attributes))
+      def update_work
+        raise "Object doesn't exist" unless @object
+        @object.update(update_attributes)
+        @object.depositor = @depositor
+      end
+
+      def update_work_by_actor
+        raise "Object doesn't exist" unless @object
+        work_actor.update(environment(work_actor_attributes))
+      end
+
+      def add_member_collections
+        @collections.each do |collection_id|
+          begin
+            col = Collection.find(collection_id)
+            @object.member_of_collections << col unless col.blank?
+          rescue ActiveFedora::ObjectNotFoundError
+            col = nil
+          end
+        end
       end
 
       def create_attributes
@@ -127,9 +154,7 @@ module Importers
       # @param [Hash] attrs the attributes to put in the environment
       # @return [Hyrax::Actors::Environment]
       def environment(attrs)
-        # Set Hyrax.config.batch_user_key
-        @current_user = User.batch_user # unless @current_user.present?
-        ::Hyrax::Actors::Environment.new(@object, Ability.new(@current_user), attrs)
+        ::Hyrax::Actors::Environment.new(@object, Ability.new(@depositor), attrs)
       end
 
       def work_actor
@@ -139,12 +164,35 @@ module Importers
       # Override if we need to map the attributes from the parser in
       # a way that is compatible with how the factory needs them.
       def transform_attributes
-        # @attributes.slice(*permitted_attributes).merge(file_attributes)
-        @attributes.merge!(file_attributes)
+        # attributes.slice(*permitted_attributes).merge(file_attributes)
+        attributes.
+          except(:uploaded_files, :member_of_collections_attributes, :member_of_collection_ids,
+                'uploaded_files', 'member_of_collections_attributes', 'member_of_collection_ids')
       end
 
       def file_attributes
         @file_ids.present? ? { uploaded_files: @file_ids } : {}
+      end
+
+      # @example a collections attribute hash
+      #   'member_of_collections_attributes' => {
+      #     '0' => { 'id' => '12312412'},
+      #     '1' => { 'id' => '99981228', '_destroy' => 'true' }
+      #   }
+      # see: https://github.com/samvera/hyrax/blob/master/app/actors/hyrax/actors/collections_membership_actor.rb#L6
+      def collection_attributes
+        attrs = {}
+        return attrs unless @collections
+        # @collections.each_with_index do |id, i|
+        #  attrs["#{i}"] = { 'id' => id }
+        # end
+        # {member_of_collections_attributes: attrs}
+        { member_of_collection_ids: @collections }
+      end
+
+      def work_actor_attributes
+        # {}.merge(file_attributes).merge(collection_attributes)
+        file_attributes
       end
 
       def permitted_attributes
