@@ -11,17 +11,19 @@ module Importers
       @metadata_file = metadata_file
       @debug = debug
       @log_file = log_file
+      @collection = nil
     end
 
     def perform_create
-      return unless dir_exists?(import_dir)
-      return unless file_exists?(metadata_file)
+      return unless File.directory?(import_dir)
+      return unless File.file?(metadata_file)
+      create_collection
       parse_publications_file
     end
 
     private
-      def set_collection_attrs
-        collections = {
+      def collections
+        {
           'escidoc_dump_genso.xml' => {
             title: ['Library of Strategic Natural Resources (genso)'],
             id: 'genso'
@@ -39,8 +41,23 @@ module Importers
             id: 'nnin'
           }
         }
+      end
+
+      def collection_attrs
         fn = File.basename(@metadata_file)
-        return collections.fetch(fn, nil)
+        collections.fetch(fn, nil)
+      end
+
+      def create_collection
+        # create collection
+        unless debug
+          col_attrs = collection_attrs
+          unless col_attrs.blank?
+            col = Importers::CollectionImporter.new(col_attrs, col_attrs[:id], 'open')
+            col.create_collection
+            @collection = [col.col_id]
+          end
+        end
       end
 
       # Extract metadata and return as attributes
@@ -52,17 +69,6 @@ module Importers
         #     components (= files)
         #     relations
         #     resources
-
-        # get collection attributes
-        col_attrs = set_collection_attrs
-
-        # create collection
-        unless debug
-          col = Importers::CollectionImporter.new(col_attrs, col_attrs[:id], 'open')
-          col.create_collection
-          col_id = col.col_id
-        end
-
         # Open publications xml file
         pub_xml = File.open(metadata_file) { |f| Nokogiri::XML(f) }
 
@@ -80,7 +86,6 @@ module Importers
           # Get attributes
           attributes = get_properties(item)
           attributes.merge!(get_metadata(item))
-          attributes.merge!({member_of_collection_ids: [col_id]}) unless col_id.blank?
 
           # Get files
           files_list = get_components(item)
@@ -89,22 +94,22 @@ module Importers
           files_missing = files_list[2]
 
           if debug
-            log_progress(metadata_file, work_id, col_id, files, files_ignored, files_missing, attributes)
+            log_progress(metadata_file, work_id, @collection, files, files_ignored, files_missing, attributes, error)
             next
           end
 
-          # Import image
+          # Import publication
           begin
             # Set work id to be same as the id in metadata
             work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
-            h = Importers::HyraxImporter.new('Publication', attributes, files, remote_files, work_id)
+            h = Importers::HyraxImporter.new('Publication', attributes, files, remote_files, @collection, work_id)
             h.import
           rescue StandardError => exception
             error = exception.backtrace
           end
 
           # log progress
-          log_progress(metadata_file, work_id, col_id, files, files_ignored, files_missing, attributes)
+          log_progress(metadata_file, work_id, @collection, files, files_ignored, files_missing, attributes, error)
         end
       end
 
@@ -512,19 +517,7 @@ module Importers
         values
       end
 
-      def file_exists?(file_path)
-        return true if File.file?(file_path)
-        message = 'Error: Mandatory file missing: ' + file_path
-        false
-      end
-
-      def dir_exists?(dir_path)
-        return true if File.directory?(dir_path)
-        message = 'Error: Diectory missing: ' + dir_path
-        false
-      end
-
-      def log_progress(metadata_file, id, collection, files, files_ignored, files_missing, attributes)
+      def log_progress(metadata_file, id, collection, files, files_ignored, files_missing, attributes, error)
         write_headers = true
         write_headers = false if File.file?(@log_file)
         csv_file = CSV.open(@log_file, "ab")
@@ -535,7 +528,8 @@ module Importers
           'files to be added',
           'files ignored',
           'files missing',
-          # 'attributes'
+          'attributes',
+          'error'
         ] if write_headers
         files = '' if files.blank?
         files_ignored = '' if files_ignored.blank?
@@ -547,7 +541,8 @@ module Importers
           JSON.pretty_generate(files),
           JSON.pretty_generate(files_ignored),
           JSON.pretty_generate(files_missing),
-          # JSON.pretty_generate(attributes)
+          JSON.pretty_generate(attributes),
+          JSON.pretty_generate(error)
         ]
         csv_file.close
       end
