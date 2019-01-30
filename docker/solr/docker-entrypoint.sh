@@ -21,6 +21,7 @@ hyrax_created=$SOLR_HOME/hyrax_created
 if [ -f $hyrax_created ]; then
     echo "Skipping solr core creation"
 else
+    echo "Creating solr cores"
     start-local-solr
 
     if [ ! -f $hyrax_created ]; then
