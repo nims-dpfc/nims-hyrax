@@ -20,7 +20,7 @@ module Importers
     private
       def collections
         {
-          'http://imeji.nims.go.jp/imeji/collection/sdZWq3eqN1ivoU60/' => {
+          'http://imeji.nims.go.jp/imeji/collection/sdZWq3eqN1ivoU60' => {
             id: '2d0752c0-fc37-4773-b764-b79ba0fc3139',
             title: ['Fiber fuse damage'],
             description: ['Top part of damage train left after a sudden shutdown of laser power supply.'],
@@ -52,11 +52,11 @@ module Importers
             creator: ['科学情報PF (NIMS科学情報PF)'],
             visibility: 'open'
           },
-          'http://imeji.nims.go.jp/imeji/profile/15' => {
+          'http://imeji.nims.go.jp/imeji/collection/16' => {
             id: 'c8265f76-dc6a-44bd-8b63-4c87f0e3b814',
             title: ['Profile information: Optical emission of Methylene Blue'],
               description: ['Optical emission from Methylene Blue in ethanolic solution (excited by a green (532-nm) laser pointer).'],
-            related_url: ['http://imeji.nims.go.jp/imeji/profile/15'],
+            related_url: ['http://imeji.nims.go.jp/imeji/collection/16'],
             creator: [],
             visibility: 'open'
           }

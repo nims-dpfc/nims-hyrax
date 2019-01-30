@@ -43,15 +43,11 @@ module Importers
         }
       end
 
-      def collection_attrs
-        fn = File.basename(@metadata_file)
-        collections.fetch(fn, nil)
-      end
-
       def create_collection
         # create collection
         unless debug
-          col_attrs = collection_attrs
+          fn = File.basename(@metadata_file)
+          col_attrs = collections.fetch(fn, nil)
           unless col_attrs.blank?
             col = Importers::CollectionImporter.new(col_attrs, col_attrs[:id], 'open')
             col.create_collection
@@ -102,7 +98,7 @@ module Importers
           begin
             # Set work id to be same as the id in metadata
             work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
-            h = Importers::HyraxImporter.new('Publication', attributes, files, remote_files, @collection, work_id)
+            h = Importers::HyraxImporter.new('Publication', attributes, files, remote_files, nil, work_id)
             h.import
           rescue StandardError => exception
             error = exception.backtrace
