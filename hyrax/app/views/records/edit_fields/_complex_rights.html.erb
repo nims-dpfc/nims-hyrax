@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_rights,
+    as: :nested_rights,
+    input_html: {
+      class: '',
+      data: {name: :complex_rights}
+    },
+    required: f.object.required?(:complex_rights)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another rights</span>
+  </button>
+</div>

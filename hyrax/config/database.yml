@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  encoding: unicode
+  host: <%= ENV['POSTGRES_HOST'] || 'db' %>
+  port: <%= ENV['POSTGRES_PORT'] || '5432' %>
+  username: <%= ENV['POSTGRES_USER'] || 'postgres' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || 'password' %>
+
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+  <<: *default
+  database: hyrax_production

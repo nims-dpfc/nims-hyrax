@@ -1,0 +1,142 @@
+terms:
+- id: biological
+  term: biological/生物学的物質
+  active: true
+- id: biomaterials
+  term: biomaterials/生体材料
+  active: true
+- id: ceramics
+  term: ceramics/セラミックス
+  active: true
+- id: ceramics -- carbides
+  term: ceramics/セラミックス -- carbides/炭化物
+  active: true
+- id: ceramics -- cements
+  term: ceramics/セラミックス -- cements/セメント
+  active: true
+- id: ceramics -- nitrides
+  term: ceramics/セラミックス -- nitrides/窒化物
+  active: true
+- id: ceramics -- oxides
+  term: ceramics/セラミックス -- oxides/酸化物
+  active: true
+- id: ceramics -- perovskites
+  term: ceramics/セラミックス -- perovskites/ペロブスカイト
+  active: true
+- id: ceramics -- silicates
+  term: ceramics/セラミックス -- silicates/シリケート
+  active: true
+- id: metals and alloys
+  term: metals and alloys/金属・合金
+  active: true
+- id: metals and alloys -- Al-containing
+  term: metals and alloys/金属・合金 -- Al-containing/Al含有物質
+  active: true
+- id: metals and alloys -- Cu-containing
+  term: metals and alloys/金属・合金 -- Cu-containing/Cu含有物質
+  active: true
+- id: metals and alloys -- Fe-containing
+  term: metals and alloys/金属・合金 -- Fe-containing/Fe含有物質
+  active: true
+- id: metals and alloys -- Mg-containing
+  term: metals and alloys/金属・合金 -- Mg-containing/Mg含有物質
+  active: true
+- id: metals and alloys -- Ni-containing
+  term: metals and alloys/金属・合金 -- Ni-containing/Ni含有物質
+  active: true
+- id: metals and alloys -- Ti-containing
+  term: metals and alloys/金属・合金 -- Ti-containing/Ti含有物質
+  active: true
+- id: metals and alloys -- commercially pure metals
+  term: metals and alloys/金属・合金 -- commercially pure metals/商用純粋金属
+  active: true
+- id: metals and alloys -- intermetallics
+  term: metals and alloys/金属・合金 -- intermetallics/金属間化合物
+  active: true
+- id: metals and alloys -- rare earths
+  term: metals and alloys/金属・合金 -- rare earths/希土類
+  active: true
+- id: metals and alloys -- refractories
+  term: metals and alloys/金属・合金 -- refractories/耐火物
+  active: true
+- id: metals and alloys -- steels
+  term: metals and alloys/金属・合金 -- steels/鋼
+  active: true
+- id: metals and alloys -- superalloys
+  term: metals and alloys/金属・合金 -- superalloys/超合金
+  active: true
+- id: metamaterials
+  term: metamaterials/メタマテリアル
+  active: true
+- id: molecular fluids
+  term: molecular fluids/分子流体
+  active: true
+- id: organic compounds
+  term: organic compounds/有機化合物
+  active: true
+- id: organic compounds -- amines
+  term: organic compounds/有機化合物 -- amines/アミン類
+  active: true
+- id: organic compounds -- carboxylic acids
+  term: organic compounds/有機化合物 -- carboxylic acids/カルボン酸
+  active: true
+- id: organic compounds -- nitriles
+  term: organic compounds/有機化合物 -- nitriles/ニトリル
+  active: true
+- id: organometallics
+  term: organometallics/有機金属
+  active: true
+- id: polymers
+  term: polymers/ポリマー
+  active: true
+- id: polymers -- copolymers
+  term: polymers/ポリマー -- copolymers/コポリマー
+  active: true
+- id: polymers -- elastomers
+  term: polymers/ポリマー -- elastomers/エラストマー
+  active: true
+- id: polymers -- homopolymers
+  term: polymers/ポリマー -- homopolymers/ホモポリマー
+  active: true
+- id: polymers -- liquid crystals
+  term: polymers/ポリマー -- liquid crystals/液晶
+  active: true
+- id: polymers -- polymer blends
+  term: polymers/ポリマー -- polymer blends/ポリマーブレンド
+  active: true
+- id: polymers -- rubbers
+  term: polymers/ポリマー -- rubbers/ゴム
+  active: true
+- id: polymers -- thermoplastics
+  term: polymers/ポリマー -- thermoplastics/熱可塑性プラスチック
+  active: true
+- id: polymers -- thermosets
+  term: polymers/ポリマー -- thermosets/熱硬化性樹脂
+  active: true
+- id: semiconductors
+  term: semiconductors/半導体
+  active: true
+- id: semiconductors -- II-VI
+  term: semiconductors/半導体 -- II-VI/II-VI
+  active: true
+- id: semiconductors -- III-V
+  term: semiconductors/半導体 -- III-V/III-V
+  active: true
+- id: semiconductors -- extrinsic
+  term: semiconductors/半導体 -- extrinsic/外因性(extrinsic)
+  active: true
+- id: semiconductors -- intrinsic
+  term: semiconductors/半導体 -- intrinsic/固有(intrinsic)
+  active: true
+- id: semiconductors -- n-type
+  term: semiconductors/半導体 -- n-type/n型
+  active: true
+- id: semiconductors -- nitrides
+  term: semiconductors/半導体 -- nitrides/窒化物
+  active: true
+- id: semiconductors -- p-type
+  term: semiconductors/半導体 -- p-type/p型
+  active: true
+- id: semiconductors -- silicon
+  term: semiconductors/半導体 -- silicon/シリコン
+  active: true

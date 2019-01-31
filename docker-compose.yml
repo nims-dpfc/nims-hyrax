@@ -1,0 +1,113 @@
+version: '2.1'
+
+volumes:
+  fcrepo:
+  solr_home:
+  db:
+  redis:
+  file_uploads:
+  derivatives:
+
+networks:
+  internal:
+
+services:
+  fcrepo:
+    image: ualbertalib/docker-fcrepo4:4.7
+    expose:
+      - 8080
+    volumes:
+      - fcrepo:/data
+    environment:
+      CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC -Dfcrepo.object.directory=\"/data/objects\" -Dfcrepo.binary.directory=\"/data/binaries\""
+    depends_on:
+      - db
+    networks:
+      internal:
+
+  solr:
+    build: docker/solr
+    volumes:
+      - solr_home:/solr_home
+      - file_uploads:/data/tmp/uploads
+    expose:
+      - 8983
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - "-O"
+        - "/dev/null"
+        - http://localhost:8983/solr/
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      internal:
+
+  db:
+    build: docker/db
+    volumes:
+      - db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    healthcheck:
+      test: "CMD echo 'SELECT 1' | PGPASSWORD=password psql --host 127.0.0.1 --username postgres --dbname hyrax_development --quiet --no-align --tuples-only"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      internal:
+
+  app:
+    build: hyrax
+    env_file:
+      - .env
+    volumes:
+      - file_uploads:/data/tmp/uploads
+      - /srv/ngdr/data/:/data/data
+      - derivatives:/derivatives
+    networks:
+      internal:
+
+  web:
+    extends:
+      service: app
+    command: bash -c "/bin/docker-entrypoint.sh"
+    depends_on:
+      - db
+      - solr
+      - fcrepo
+      - redis
+    expose:
+      - 3000
+
+  workers:
+    extends:
+      service: app
+    command: bundle exec sidekiq
+    environment:
+      - SETTINGS__FITS_PATH=/fits/fits-1.0.5/fits.sh
+    depends_on:
+      - db
+      - solr
+      - fcrepo
+      - redis
+
+  redis:
+    image: redis:5
+    command: redis-server --appendonly yes
+    volumes:
+      - redis:/data
+    expose:
+      - 6379
+    networks:
+      internal:
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 30s
+      timeout: 5s
+      retries: 3

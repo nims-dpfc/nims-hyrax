@@ -1,0 +1,8 @@
+<% service = PropertiesAddressedService.new %>
+<%= f.input :properties_addressed, as: :multi_value_select,
+    collection: service.select_active_options,
+    include_blank: true,
+    item_helper: service.method(:include_current_value),
+    input_html: { class: 'form-control' } %>
+
+
