@@ -1,0 +1,6 @@
+<% service = ComputationalMethodService.new %>
+<%= f.input :computational_methods, as: :select,
+    collection: service.select_active_options,
+    include_blank: true,
+    item_helper: service.method(:include_current_value),
+    input_html: { class: 'form-control' } %>

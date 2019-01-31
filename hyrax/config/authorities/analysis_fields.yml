@@ -1,0 +1,49 @@
+terms:
+- id: bio property
+  term: bio property/バイオ特性
+  active: true
+- id: chemical state
+  term: chemical state/化学状態
+  active: true
+- id: crystallograpgy
+  term: crystallograpgy/結晶学
+  active: true
+- id: distribution
+  term: distribution/分布
+  active: true
+- id: electronic property
+  term: electronic property/電子的性質
+  active: true
+- id: environmental analysis
+  term: environmental analysis/環境分析
+  active: true
+- id: failuar analysis
+  term: failuar analysis/故障解析
+  active: true
+- id: impurity analysis
+  term: impurity analysis/不純物分析
+  active: true
+- id: magnetic property
+  term: magnetic property/磁気特性
+  active: true
+- id: morphology
+  term: morphology/形態学
+  active: true
+- id: optical property
+  term: optical property/光学特性
+  active: true
+- id: other (free description)
+  term: other (free description)/その他（自由記述）
+  active: true
+- id: physical property
+  term: physical property/物理的特性
+  active: true
+- id: qualitative analysis
+  term: qualitative analysis/定性分析
+  active: true
+- id: quantitative analysis
+  term: quantitative analysis/定量分析
+  active: true
+- id: theoretical simulation
+  term: theoretical simulation/理論的シミュレーション
+  active: true
