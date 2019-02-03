@@ -97,7 +97,7 @@ module Importers
           # Import publication
           begin
             # Set work id to be same as the id in metadata
-            work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
+            work_id = attributes.fetch(:id, nil)
             h = Importers::HyraxImporter.new('Publication', attributes, files, remote_files, nil, work_id)
             h.import
           rescue StandardError => exception
@@ -518,6 +518,7 @@ module Importers
         write_headers = false if File.file?(@log_file)
         csv_file = CSV.open(@log_file, "ab")
         csv_file << [
+          'Current time',
           'metadata file',
           'work id',
           'collection',
@@ -531,6 +532,7 @@ module Importers
         files_ignored = '' if files_ignored.blank?
         files_missing = '' if files_missing.blank?
         csv_file << [
+          Time.now.to_s,
           metadata_file,
           id,
           collection,
