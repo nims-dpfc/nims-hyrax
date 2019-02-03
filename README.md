@@ -21,9 +21,7 @@ $ docker-compose up --build
  * For convenience, the default workflows are loaded, the default admin set and collection types are created and 3 users are created, as detailed [here](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/seed/setup.json)
 
 ### In production (& on the test server)
-In order to secure our development, the 'production' app runs behind nginx. The access credentials are:
-* user name: `nims-test`
-* password: `zaigii5R`
+In order to secure our development, the 'production' app runs behind nginx. The access credentials are in our private repo.
 
 Ensure you have created a `.env.production` file in `hyrax/` (see the example) and run with:
     
