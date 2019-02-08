@@ -3,9 +3,11 @@ class ComplexSpecimenType < ActiveTriples::Resource
 
   configure type: ::RDF::Vocab::NimsRdp['Specimen']
 
-  property :chemical_composition, predicate: ::RDF::Vocab::NimsRdp["chemical-composition"]
+  property :chemical_composition, predicate: ::RDF::Vocab::NimsRdp["chemical-composition"],
+    class_name:"ComplexChemicalComposition"
 
-  property :crystallographic_structure, predicate: ::RDF::Vocab::NimsRdp["crystallographic-structure"]
+  property :crystallographic_structure, predicate: ::RDF::Vocab::NimsRdp["crystallographic-structure"],
+    class_name:"ComplexCrystallographicStructure"
 
   property :description, predicate: ::RDF::Vocab::DC11.description
 
@@ -13,7 +15,8 @@ class ComplexSpecimenType < ActiveTriples::Resource
             class_name:"ComplexIdentifier"
   accepts_nested_attributes_for :complex_identifier
 
-  property :material_types, predicate: ::RDF::Vocab::NimsRdp["material-types"]
+  property :material_types, predicate: ::RDF::Vocab::NimsRdp["material-types"],
+    class_name:"ComplexMaterialType"
 
   property :purchase_record, predicate: ::RDF::Vocab::NimsRdp["purchase-record"],
             class_name:"ComplexPurchaseRecord"
@@ -23,7 +26,10 @@ class ComplexSpecimenType < ActiveTriples::Resource
             class_name:"ComplexRelation"
   accepts_nested_attributes_for :complex_relation
 
-  property :structural_features, predicate: ::RDF::Vocab::NimsRdp["structural-features"]
+  property :structural_features, predicate: ::RDF::Vocab::NimsRdp["structural-features"],
+    class_name:"ComplexStructuralFeature"
+  property :form, predicate: ::RDF::Vocab::NimsRdp["form"],
+    class_name:"ComplexForm"
 
   property :title, predicate: ::RDF::Vocab::NimsRdp["specimen-title"]
 

@@ -10,6 +10,11 @@ class ComplexPurchaseRecord < ActiveTriples::Resource
   property :purchase_record_item, predicate: ::RDF::Vocab::NimsRdp["purchase-record-item"]
 
   property :title, predicate: ::RDF::Vocab::NimsRdp["purchase-record-title"]
+  property :supplier, predicate: ::RDF::Vocab::NimsRdp["supplier"],
+    class_name:"ComplexOrganization"
+  property :manufacturer, predicate: ::RDF::Vocab::NimsRdp["manufacturer"],
+    class_name:"ComplexOrganization"
+
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)

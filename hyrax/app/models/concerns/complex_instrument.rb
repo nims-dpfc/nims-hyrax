@@ -15,19 +15,21 @@ class ComplexInstrument < ActiveTriples::Resource
             class_name:"ComplexIdentifier"
   accepts_nested_attributes_for :complex_identifier
 
-  property :function_1, predicate: ::RDF::Vocab::NimsRdp["instrument-function-tier1"]
+  property :instrument_function, predicate: ::RDF::Vocab::NimsRdp["instrument-function"],
+    class_name:"ComplexInstrumentFunction"
 
-  property :function_2, predicate: ::RDF::Vocab::NimsRdp["instrument-function-tier2"]
-
-  property :manufacturer, predicate: ::RDF::Vocab::NimsRdp["instrument-manufacturer"]
+  property :manufacturer, predicate: ::RDF::Vocab::NimsRdp["instrument-manufacturer"],
+    class_name:"ComplexOrganization"
 
   property :complex_person, predicate: ::RDF::Vocab::NimsRdp["instrument-operator"],
             class_name:"ComplexPerson"
   accepts_nested_attributes_for :complex_person
 
-  property :organization, predicate: ::RDF::Vocab::NimsRdp["instrument-organization"]
+  property :managing_organization, predicate: ::RDF::Vocab::NimsRdp["instrument-managing-organization"],
+    class_name:"ComplexOrganization"
 
   property :title, predicate: ::RDF::Vocab::NimsRdp["instrument-title"]
+  property :instrument_type, predicate: ::RDF::Vocab::NimsRdp["instrument-type"]
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)
