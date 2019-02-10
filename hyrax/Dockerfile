@@ -1,7 +1,9 @@
 FROM ruby:2.6
 
 # Setup build variables
-ARG RAILS_ENV=production
+# ARG RAILS_ENV="production"
+ARG RAILS_ENV
+ARG SECRET_KEY_BASE
 
 ENV RAILS_ENV="$RAILS_ENV" \
     LANG=C.UTF-8 \
@@ -77,7 +79,7 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
 
 WORKDIR $APP_WORKDIR
 
-ARG SECRET_KEY_BASE="ec6aebaf837655680ac99c7a60a7b4ef61d9bcc320a9d3e78ef989bf309f8c9d63ee51b2997a0c5543fe20df30aa253c5fb19e1f065bfaf2be1224258904d45f"
+# ARG SECRET_KEY_BASE="ec6aebaf837655680ac99c7a60a7b4ef61d9bcc320a9d3e78ef989bf309f8c9d63ee51b2997a0c5543fe20df30aa253c5fb19e1f065bfaf2be1224258904d45f"
 ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
 
 RUN chmod +x /bin/docker-entrypoint.sh

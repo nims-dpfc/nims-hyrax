@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3'
 
 volumes:
   fcrepo:
@@ -59,8 +59,12 @@ services:
     networks:
       internal:
 
-  app:
-    build: hyrax
+  app: &app
+    build:
+      context: hyrax
+      args:
+        RAILS_ENV: "production"
+        SECRET_KEY_BASE: "ec6aebaf837655680ac99c7a60a7b4ef61d9bcc320a9d3e78ef989bf309f8c9d63ee51b2997a0c5543fe20df30aa253c5fb19e1f065bfaf2be1224258904d45f"
     env_file:
       - .env
     volumes:
@@ -71,8 +75,9 @@ services:
       internal:
 
   web:
-    extends:
-      service: app
+    # extends:
+    #   service: app
+    <<: *app
     command: bash -c "/bin/docker-entrypoint.sh"
     depends_on:
       - db
@@ -83,8 +88,9 @@ services:
       - 3000
 
   workers:
-    extends:
-      service: app
+    # extends:
+    #   service: app
+    <<: *app
     command: bundle exec sidekiq
     environment:
       - SETTINGS__FITS_PATH=/fits/fits-1.0.5/fits.sh
