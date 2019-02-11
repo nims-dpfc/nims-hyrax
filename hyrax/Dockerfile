@@ -38,7 +38,7 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
 
 # Doing the multi-stage build and hope it works
 # Else go back up and uncomment the long ffmpeg line
-COPY --from=myffmpeg /opt/ffmpeg /usr/share/
+COPY --from=myffmpeg /opt/ffmpeg /usr/
 
 RUN mkdir -p /fits/ \
     && wget -q http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip -O /fits/fits-1.0.5.zip \
