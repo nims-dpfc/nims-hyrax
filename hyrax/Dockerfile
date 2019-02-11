@@ -1,21 +1,20 @@
+FROM alfg/ffmpeg:latest as myffmpeg
+
 FROM ruby:2.6
 
 # Setup build variables
-# ARG RAILS_ENV="production"
 ARG RAILS_ENV
 ARG SECRET_KEY_BASE
 
-ENV RAILS_ENV="$RAILS_ENV" \
-    LANG=C.UTF-8 \
-    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre \
-    RAILS_LOG_TO_STDOUT=yes_please \
-    PATH=/fits/fits-1.0.5/:$PATH \
-    BUNDLE_JOBS=2 \
-    APP_PRODUCTION=/data/ \
-    APP_WORKDIR="/data"
+ENV APP_PRODUCTION=/data/ \
+    APP_WORKDIR=/data
 
 # Add backports to apt-get sources
 # Install libraries, dependencies, java and fits
+
+RUN echo 'deb  http://deb.debian.org/debian stretch main contrib non-free'
+RUN echo 'deb-src  http://deb.debian.org/debian stretch main contrib non-free'
+
 
 RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list \
     && apt-get update -qq \
@@ -24,10 +23,10 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
     libxml2-dev libxslt1-dev \
     # libqt4-webkit libqt4-dev xvfb \
     nodejs \
-    imagemagick \
+    imagemagick libjpeg-dev libtiff-dev libpng-dev \
     libreoffice \
     ghostscript \
-    ffmpeg \
+    # ffmpeg libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config texinfo wget yasm zlib1g-dev \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
@@ -36,6 +35,10 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && /var/lib/dpkg/info/ca-certificates-java.postinst configure
+
+# Doing the multi-stage build and hope it works
+# Else go back up and uncomment the long ffmpeg line
+COPY --from=myffmpeg /opt/ffmpeg /usr/share/
 
 RUN mkdir -p /fits/ \
     && wget -q http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip -O /fits/fits-1.0.5.zip \
@@ -78,8 +81,5 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
     fi
 
 WORKDIR $APP_WORKDIR
-
-# ARG SECRET_KEY_BASE="ec6aebaf837655680ac99c7a60a7b4ef61d9bcc320a9d3e78ef989bf309f8c9d63ee51b2997a0c5543fe20df30aa253c5fb19e1f065bfaf2be1224258904d45f"
-ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
 
 RUN chmod +x /bin/docker-entrypoint.sh
