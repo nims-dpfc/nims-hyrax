@@ -63,10 +63,11 @@ services:
     build:
       context: hyrax
       args:
-        RAILS_ENV: "production"
-        SECRET_KEY_BASE: "ec6aebaf837655680ac99c7a60a7b4ef61d9bcc320a9d3e78ef989bf309f8c9d63ee51b2997a0c5543fe20df30aa253c5fb19e1f065bfaf2be1224258904d45f"
+        RAILS_ENV: ${RAILS_ENV}
+        SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     env_file:
       - .env
+      - .env.production
     volumes:
       - file_uploads:/data/tmp/uploads
       - /srv/ngdr/data/:/data/data

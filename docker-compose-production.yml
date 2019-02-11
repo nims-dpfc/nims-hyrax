@@ -11,7 +11,7 @@ services:
 
   app:
     env_file:
-      - .env.production
+      - .env
     volumes:
       - /mnt/ngdr/:/mnt/ngdr
 

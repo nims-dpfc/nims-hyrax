@@ -14,8 +14,6 @@ cp /opt/solr/server/solr/solr.xml $SOLR_HOME/
 
 . /opt/docker-solr/scripts/run-initdb
 
-SOLR_CONFIG_DIR=/solr_conf
-
 hyrax_created=$SOLR_HOME/hyrax_created
 
 if [ -f $hyrax_created ]; then
