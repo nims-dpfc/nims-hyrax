@@ -1,5 +1,3 @@
-FROM alfg/ffmpeg:latest as myffmpeg
-
 FROM ruby:2.6
 
 # Setup build variables
@@ -23,10 +21,10 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
     libxml2-dev libxslt1-dev \
     # libqt4-webkit libqt4-dev xvfb \
     nodejs \
-    imagemagick libjpeg-dev libtiff-dev libpng-dev \
+    libjpeg-dev libtiff-dev libpng-dev imagemagick \
     libreoffice \
     ghostscript \
-    # ffmpeg libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config texinfo wget yasm zlib1g-dev \
+    libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config texinfo wget yasm zlib1g-dev ffmpeg \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
@@ -35,10 +33,6 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && /var/lib/dpkg/info/ca-certificates-java.postinst configure
-
-# Doing the multi-stage build and hope it works
-# Else go back up and uncomment the long ffmpeg line
-COPY --from=myffmpeg /opt/ffmpeg /usr/
 
 RUN mkdir -p /fits/ \
     && wget -q http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip -O /fits/fits-1.0.5.zip \
