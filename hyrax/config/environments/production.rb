@@ -11,12 +11,27 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
+  # To display stack traces in production, you want 
+  # config.consider_all_requests_local       = true
+  # To hide stack traces in production, set this to false.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  # Use Sidekiq to process background jobs
+  config.active_job.queue_adapter = :sidekiq
+
+  # Attempt to read encrypted secrets from `config/secrets.yml.enc`.
+  # Requires an encryption key in `ENV["RAILS_MASTER_KEY"]` or
+  # `config/secrets.yml.key`.
+  # config.read_encrypted_secrets = true
+
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  if ENV['RAILS_SERVE_STATIC_FILES'].present?
+    config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES']
+  else
+    config.public_file_server.enabled = true
+  end
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
