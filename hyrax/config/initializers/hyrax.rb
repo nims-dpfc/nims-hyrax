@@ -66,7 +66,7 @@ Hyrax.config do |config|
 
   # Enables a link to the citations page for a work
   # Default is false
-  # config.citations = false
+  config.citations = true
 
   # Where to store tempfiles, leave blank for the system temp directory (e.g. /tmp)
   # config.temp_file_base = '/home/developer1'
@@ -75,7 +75,7 @@ Hyrax.config do |config|
   # config.persistent_hostpath = 'http://localhost/files/'
 
   # If you have ffmpeg installed and want to transcode audio and video set to true
-  # config.enable_ffmpeg = false
+  config.enable_ffmpeg = true
 
   # Hyrax uses NOIDs for files and collections instead of Fedora UUIDs
   # where NOID = 10-character string and UUID = 32-character string w/ hyphens
@@ -185,10 +185,11 @@ Hyrax.config do |config|
   # These must be lambdas that return a Pathname. Can be configured separately
   #  config.upload_path = ->() { Rails.root + 'tmp' + 'uploads' }
   #  config.cache_path = ->() { Rails.root + 'tmp' + 'uploads' + 'cache' }
+  #  config.upload_path = ->() { ENV.fetch('UPLOADS_PATH', Rails.root.join('..', '..', 'shared', 'uploads')) }
+  #  config.cache_path = ->() { ENV.fetch('CACHE_PATH', Rails.root.join('..', '..', 'shared', 'uploads', 'cache')) }
 
   # Location on local file system where derivatives will be stored
   # If you use a multi-server architecture, this MUST be a shared volume
-  # config.derivatives_path = Rails.root.join('tmp', 'derivatives')
   if ENV['DERIVATIVES_PATH']
     config.derivatives_path = Pathname.new(ENV['DERIVATIVES_PATH'])
   else
@@ -206,6 +207,7 @@ Hyrax.config do |config|
   # prior to being ingested into the repository or having derivatives generated.
   # If you use a multi-server architecture, this MUST be a shared volume.
   # config.working_path = Rails.root.join( 'tmp', 'uploads')
+  # config.working_path = ENV.fetch('UPLOADS_PATH', Rails.root.join('..', '..', 'shared', 'uploads'))
 
   # Should the media display partial render a download link?
   # config.display_media_download_link = true
