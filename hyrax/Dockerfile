@@ -2,7 +2,9 @@ FROM ruby:2.6
 
 # Setup build variables
 ARG RAILS_ENV
-ARG SECRET_KEY_BASE
+ARG DERIVATIVES_PATH
+ARG UPLOADS_PATH
+ARG CACHE_PATH
 
 ENV APP_PRODUCTION=/data/ \
     APP_WORKDIR=/data
@@ -21,10 +23,9 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
     libxml2-dev libxslt1-dev \
     # libqt4-webkit libqt4-dev xvfb \
     nodejs \
-    libjpeg-dev libtiff-dev libpng-dev imagemagick \
     libreoffice \
-    ghostscript \
-    libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config texinfo wget yasm zlib1g-dev ffmpeg \
+    libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config texinfo wget yasm zlib1g-dev \
+    libjpeg-dev libtiff-dev libpng-dev ffmpeg ghostscript imagemagick \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
@@ -56,8 +57,10 @@ RUN cd $APP_PRODUCTION && \
 # copy the seeds
 COPY ./seed /seed
 
-# create a folder to store derivatives
-RUN mkdir -p /derivatives
+# create a folder to store derivatives, file uploads and cache directory
+RUN mkdir -p $DERIVATIVES_PATH
+RUN mkdir -p $UPLOADS_PATH
+RUN mkdir -p $CACHE_PATH
 
 # copy the application
 COPY . $APP_PRODUCTION

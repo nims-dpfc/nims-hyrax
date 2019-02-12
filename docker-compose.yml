@@ -7,6 +7,7 @@ volumes:
   redis:
   file_uploads:
   derivatives:
+  cache:
 
 networks:
   internal:
@@ -19,7 +20,7 @@ services:
     volumes:
       - fcrepo:/data
     environment:
-      CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC -Dfcrepo.object.directory=\"/data/objects\" -Dfcrepo.binary.directory=\"/data/binaries\""
+      CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx4096m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC -XX:+UseG1GC -Dfcrepo.object.directory=\"/data/objects\" -Dfcrepo.binary.directory=\"/data/binaries\" -Dfcrepo.modeshape.configuration=\"classpath:/config/jdbc-postgresql/repository.json\" -Dfcrepo.postgresql.username=${POSTGRES_USER} -Dfcrepo.postgresql.password=${POSTGRES_PASSWORD} -Dfcrepo.postgresql.host=${POSTGRES_HOST} -Dfcrepo.postgresql.port=${POSTGRES_PORT}"
     depends_on:
       - db
     networks:
@@ -29,7 +30,6 @@ services:
     build: docker/solr
     volumes:
       - solr_home:/solr_home
-      - file_uploads:/data/tmp/uploads
     expose:
       - 8983
     healthcheck:
@@ -52,7 +52,7 @@ services:
     env_file:
       - .env
     healthcheck:
-      test: "CMD echo 'SELECT 1' | PGPASSWORD=password psql --host 127.0.0.1 --username postgres --dbname hyrax_development --quiet --no-align --tuples-only"
+      test: "CMD echo 'SELECT 1' | PGPASSWORD=${POSTGRES_PASSWORD} psql --host 127.0.0.1 --username ${POSTGRES_USER} --dbname hyrax_production --quiet --no-align --tuples-only"
       interval: 30s
       timeout: 5s
       retries: 3
@@ -64,13 +64,16 @@ services:
       context: hyrax
       args:
         RAILS_ENV: ${RAILS_ENV}
-        SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+        UPLOADS_PATH: ${UPLOADS_PATH}
+        DERIVATIVES_PATH: ${DERIVATIVES_PATH}
+        CACHE_PATH: ${CACHE_PATH}
     env_file:
       - .env
     volumes:
-      - file_uploads:/data/tmp/uploads
+      - file_uploads:${UPLOADS_PATH}
+      - derivatives:${DERIVATIVES_PATH}
+      - cache:${CACHE_PATH}
       - /srv/ngdr/data/:/data/data
-      - derivatives:/derivatives
     networks:
       internal:
 
