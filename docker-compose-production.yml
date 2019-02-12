@@ -10,8 +10,6 @@ volumes:
 services:
 
   app:
-    env_file:
-      - .env
     volumes:
       - /mnt/ngdr/:/mnt/ngdr
 
