@@ -24,7 +24,7 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
     # libqt4-webkit libqt4-dev xvfb \
     nodejs \
     libreoffice \
-    libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config texinfo wget yasm zlib1g-dev \
+    libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config texinfo wget yasm zlib1g-dev fonts-ipaexfont fonts-ipafont fonts-vlgothic \
     libjpeg-dev libtiff-dev libpng-dev libraw-dev libwebp-dev libjxr-dev \
     libcairo2-dev libgs-dev librsvg2-dev \
     libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev libav-tools \
