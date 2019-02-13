@@ -25,7 +25,10 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
     nodejs \
     libreoffice \
     libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config texinfo wget yasm zlib1g-dev \
-    libjpeg-dev libtiff-dev libpng-dev ffmpeg ghostscript imagemagick \
+    libjpeg-dev libtiff-dev libpng-dev libraw-dev libwebp-dev libjxr-dev \
+    libcairo2-dev libgs-dev librsvg2-dev \
+    libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev libav-tools \
+    ghostscript ffmpeg imagemagick \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
@@ -40,6 +43,13 @@ RUN mkdir -p /fits/ \
     && unzip -q /fits/fits-1.0.5.zip -d /fits \
     && chmod a+x /fits/fits-1.0.5/fits.sh \
     && rm /fits/fits-1.0.5.zip
+
+# RUN apt-get install -y --no-install-recommends git && \
+#     cd /opt && \
+#     git clone https://github.com/ImageMagick/ImageMagick.git && \
+#     cd ImageMagick && git checkout `git describe --tags` && \
+#     ./configure --prefix=/usr --with-gslib=yes && \
+#     make && make install && cd /opt && rm -r ImageMagick
 
 # copy gemfiles to production folder
 COPY Gemfile Gemfile.lock $APP_PRODUCTION
