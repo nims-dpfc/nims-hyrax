@@ -2,7 +2,7 @@
 # - Adds nginx with basic auth in front of the app
 # - Production env file for the app
 
-version: '2.1'
+version: '3'
 
 volumes:
   nginx:
@@ -10,8 +10,6 @@ volumes:
 services:
 
   app:
-    env_file:
-      - .env.production
     volumes:
       - /mnt/ngdr/:/mnt/ngdr
 
