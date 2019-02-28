@@ -23,12 +23,12 @@ $ docker-compose up --build
 ### In production (& on the test server)
 In order to secure our development, the 'production' app runs behind nginx. The access credentials are in our private repo.
 
-Ensure you have created a `.env.production` file in `hyrax/` (see the example) and run with:
+Run with:
     
     docker-compose -f docker-compose.yml -f docker-compose-production.yml up -d
 
 * The service will run without Solr, etc. ports being exposed to the host
-* Hyrax is accessible behind http basic auth at ports 81 and 3000
+* Hyrax is accessible behind http basic auth at ports 80 and 3000
 
 ### For Developers
 We use the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching model, so ensure you set up 
