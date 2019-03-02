@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_organization,
+    as: :nested_organization,
+    input_html: {
+      class: '',
+      data: {name: :complex_organization}
+    },
+    required: f.object.required?(:complex_organization)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another organization</span>
+  </button>
+</div>

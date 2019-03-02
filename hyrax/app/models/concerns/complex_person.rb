@@ -10,6 +10,9 @@ class ComplexPerson < ActiveTriples::Resource
   property :complex_identifier, predicate: ::RDF::Vocab::MODS.identifierGroup,
             class_name:"ComplexIdentifier"
   accepts_nested_attributes_for :complex_identifier
+  property :complex_organization, predicate: ::RDF::Vocab::ORG.memberOf,
+            class_name:"ComplexOrganization"
+  accepts_nested_attributes_for :complex_organization
   property :uri, predicate: ::RDF::Vocab::Identifiers.uri
 
 

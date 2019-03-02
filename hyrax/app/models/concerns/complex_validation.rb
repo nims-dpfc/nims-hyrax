@@ -37,6 +37,11 @@ module ComplexValidation
       Array(attributes[:label]).all?(&:blank?) ||
       Array(attributes[:description]).all?(&:blank?)
     end
+    # organization_blank
+    #   Requires organization
+    resource_class.send(:define_method, :organization_blank) do |attributes|
+      Array(attributes[:organization]).all?(&:blank?)
+    end
     # person_blank
     #   Requires first name or last name or name
     resource_class.send(:define_method, :person_blank) do |attributes|
