@@ -55,7 +55,7 @@ class Image < ActiveFedora::Base
 
   property :complex_rights, predicate: ::RDF::Vocab::DC11.rights, class_name: 'ComplexRights'
 
-  property :complex_version, predicate: ::RDF::Vocab::NimsRdp['complex-version'], class_name: 'ComplexVersion'
+  property :complex_version, predicate: ::RDF::Vocab::NimsRdp.version, class_name: 'ComplexVersion'
 
   property :status, predicate: ::RDF::Vocab::BIBO.status, multiple: false do |index|
     index.as :stored_searchable, :facetable

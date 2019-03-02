@@ -46,7 +46,7 @@ class Dataset < ActiveFedora::Base
 
   property :complex_rights, predicate: ::RDF::Vocab::DC11.rights, class_name:"ComplexRights"
 
-  property :complex_version, predicate: ::RDF::Vocab::NimsRdp['complex-version'], class_name:"ComplexVersion"
+  property :complex_version, predicate: ::RDF::Vocab::NimsRdp.version, class_name:"ComplexVersion"
 
   property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'], multiple: false do |index|
     index.as :stored_searchable
@@ -61,7 +61,7 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
-  property :instrument, predicate: ::RDF::Vocab::NimsRdp['instrument'], class_name: "ComplexInstrument"
+  property :instrument, predicate: ::RDF::Vocab::NimsRdp.instrument, class_name: "ComplexInstrument"
 
   property :origin_system_provenance, predicate: ::RDF::Vocab::NimsRdp['origin-system-provenance'], multiple: false do |index|
     index.as :stored_searchable
