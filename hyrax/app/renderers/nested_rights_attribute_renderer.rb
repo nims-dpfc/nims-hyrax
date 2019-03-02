@@ -1,19 +1,15 @@
 class NestedRightsAttributeRenderer < Hyrax::Renderers::AttributeRenderer
   private
   def attribute_value_to_html(value)
-    value = JSON.parse(value)
-    if not value.kind_of?(Array)
-      value = [value]
-    end
+    value = Array(JSON.parse(value))
     html = ''
     value.each do |v|
       # extract values
-      if v.dig('rights') and not v['rights'][0].blank?
-        val = v['rights'][0]
-        html += "<tr class=\"start\"><th>Rights</th><td>#{val}</td></tr>"
-      end
-      if v.dig('date') and not v['date'][0].blank?
-        val = Date.parse(v['date'][0]).to_formatted_s(:standard)
+      val = v.fetch('rights', [])[0]
+      html += "<tr class=\"start\"><th>Rights</th><td>#{val}</td></tr>"  unless val.blank?
+      dt = v.fetch('date', [])[0]
+      unless dt.blank?
+        val = Date.parse(dt).to_formatted_s(:standard)
         html += "<tr class=\"end\"><th>Start date</th><td>#{val}</td></tr>"
       end
     end
