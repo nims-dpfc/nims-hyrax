@@ -25,6 +25,9 @@ RSpec.describe ComplexPerson do
             identifier: '1234567',
             scheme: 'Local'
           }],
+          complex_organization_attributes: [{
+            organization: 'org'
+          }],
           uri: 'http://localhost/person/1234567'
         }
       ]
@@ -37,6 +40,7 @@ RSpec.describe ComplexPerson do
     expect(@obj.complex_person.first.role).to eq ['Author']
     expect(@obj.complex_person.first.complex_identifier.first.identifier).to eq ['1234567']
     expect(@obj.complex_person.first.complex_identifier.first.scheme).to eq ['Local']
+    expect(@obj.complex_person.first.complex_organization.first.organization).to eq ['org']
     expect(@obj.complex_person.first.uri).to eq ['http://localhost/person/1234567']
   end
 
@@ -82,6 +86,7 @@ RSpec.describe ComplexPerson do
       expect(@obj.complex_person.first.affiliation).to be_empty
       expect(@obj.complex_person.first.role).to be_empty
       expect(@obj.complex_person.first.complex_identifier).to be_empty
+      expect(@obj.complex_person.first.complex_organization).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
     end
 
@@ -101,6 +106,7 @@ RSpec.describe ComplexPerson do
       expect(@obj.complex_person.first.affiliation).to be_empty
       expect(@obj.complex_person.first.role).to be_empty
       expect(@obj.complex_person.first.complex_identifier).to be_empty
+      expect(@obj.complex_person.first.complex_organization).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
     end
 
@@ -120,6 +126,7 @@ RSpec.describe ComplexPerson do
       expect(@obj.complex_person.first.affiliation).to be_empty
       expect(@obj.complex_person.first.role).to be_empty
       expect(@obj.complex_person.first.complex_identifier).to be_empty
+      expect(@obj.complex_person.first.complex_organization).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
     end
 
@@ -193,6 +200,21 @@ RSpec.describe ComplexPerson do
       }
       expect(@obj.complex_person).to be_empty
     end
+
+    it 'rejects person active triple with no name and only organization' do
+      @obj = ExampleWork2.new
+      @obj.attributes = {
+        complex_person_attributes: [
+          {
+            complex_organization_attributes: [{
+              organization: 'org'
+            }]
+          }
+        ]
+      }
+      expect(@obj.complex_person).to be_empty
+    end
+
 
   end
 end

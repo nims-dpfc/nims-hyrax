@@ -21,7 +21,8 @@ module Hyrax
       :title, :alternative_title, :description, :keyword, :language,
       :publisher, :resource_type, :complex_rights, :rights_statement, :subject,
       :complex_date, :complex_identifier, :complex_person, :complex_version,
-      :complex_event, :issue, :source, :place, :total_number_of_pages
+      :complex_event, :issue, :source, :place, :complex_source, :table_of_contents,
+      :total_number_of_pages
     ]
 
     self.required_fields -= [
@@ -36,7 +37,7 @@ module Hyrax
     ]
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,
-      :complex_person, :complex_rights, :complex_version, :complex_event].freeze
+      :complex_person, :complex_rights, :complex_version, :complex_event, :complex_source].freeze
 
     protected
 
@@ -109,6 +110,22 @@ module Hyrax
       ]
     end
 
+    def self.permitted_source_params
+      [:id,
+       :_destroy,
+       {
+         alternative_title: [],
+         end_page: [],
+         issue: [],
+         sequence_number: [],
+         start_page: [],
+         title: [],
+         total_number_of_pages: [],
+         volume: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
@@ -117,6 +134,7 @@ module Hyrax
       permitted << { complex_rights_attributes: permitted_rights_params }
       permitted << { complex_version_attributes: permitted_version_params }
       permitted << { complex_event_attributes: permitted_event_params }
+      permitted << { complex_source_attributes: permitted_source_params }
     end
   end
 end

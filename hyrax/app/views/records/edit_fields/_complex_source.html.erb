@@ -1,0 +1,10 @@
+<div class="multi-nested">
+  <%= f.input :complex_source,
+    as: :nested_source,
+    input_html: {
+      class: '',
+      data: {name: :complex_source}
+    },
+    required: f.object.required?(:complex_source)
+  %>
+</div>
