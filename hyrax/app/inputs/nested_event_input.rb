@@ -9,7 +9,7 @@ protected
 
     # Inherit required for fields validated in nested attributes
     required  = false
-    if object.required?(:complex_person) and index == 0
+    if object.required?(:complex_event) and index == 0
       required = true
     end
 
@@ -55,7 +55,7 @@ protected
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
-    out << template.label_tag(field_name, field.to_s.humanize, required: required)
+    out << template.label_tag(field_name, field.to_s.humanize, required: false)
     out << '  </div>'
 
     out << "  <div class='col-md-9'>"
@@ -73,7 +73,7 @@ protected
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
-    out << template.label_tag(field_name, field.to_s.humanize, required: required)
+    out << template.label_tag(field_name, field.to_s.humanize, required: false)
     out << '  </div>'
 
     out << "  <div class='col-md-9'>"
@@ -93,7 +93,7 @@ protected
     field_value = event_statement.send(field).first
 
     out << "  <div class='col-md-3'>"
-    out << template.label_tag(field_name, field.to_s.humanize, required: required)
+    out << template.label_tag(field_name, field.to_s.humanize, required: false)
     out << '  </div>'
 
     out << "  <div class='col-md-6'>"
@@ -102,7 +102,7 @@ protected
     out << '  </div>'
 
     # --- delete checkbox
-    field_label = 'Person'
+    field_label = 'Event'
     out << "  <div class='col-md-3'>"
     out << destroy_widget(attribute_name, index, field_label)
     out << '  </div>'
