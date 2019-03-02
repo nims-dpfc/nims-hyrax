@@ -54,6 +54,31 @@ module ComplexField
           solr_doc[fld_name] << id.identifier.reject(&:blank?).first
         end
       end
+
+      def self.facet_fields
+        # solr fields that will be treated as facets
+        super.tap do |fields|
+          fields << Solrizer.solr_name('instrument_manufacturer', :facetable)
+          fields << Solrizer.solr_name('instrument_organization', :facetable)
+        end
+      end
+
+      def self.search_fields
+        # solr fields that will be used for a search
+        super.tap do |fields|
+          fields << Solrizer.solr_name('instrument_title', :stored_searchable)
+          fields << Solrizer.solr_name('instrument_manufacturer', :stored_searchable)
+          fields << Solrizer.solr_name('instrument_organization', :stored_searchable)
+        end
+      end
+
+      def self.show_fields
+        # solr fields that will be used to display results on the record page
+        super.tap do |fields|
+          fields << Solrizer.solr_name('instrument', :displayable)
+        end
+      end
+
     end
   end
 end

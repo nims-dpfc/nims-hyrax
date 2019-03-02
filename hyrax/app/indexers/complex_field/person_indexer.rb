@@ -32,5 +32,36 @@ module ComplexField
         end
       end
     end
+
+    def self.facet_fields
+      # solr fields that will be treated as facets
+      super.tap do |fields|
+        fields << Solrizer.solr_name('complex_person_author', :facetable)
+        fields << Solrizer.solr_name('complex_person_editor', :facetable)
+        fields << Solrizer.solr_name('complex_person_translator', :facetable)
+        fields << Solrizer.solr_name('complex_person_data_depositor', :facetable)
+        fields << Solrizer.solr_name('complex_person_data_curator', :facetable)
+        fields << Solrizer.solr_name('complex_person_operator', :facetable)
+      end
+    end
+
+    def self.search_fields
+      # solr fields that will be used for a search
+      super.tap do |fields|
+        fields << Solrizer.solr_name('complex_person_author', :stored_searchable)
+        fields << Solrizer.solr_name('complex_person_editor', :stored_searchable)
+        fields << Solrizer.solr_name('complex_person_translator', :stored_searchable)
+        fields << Solrizer.solr_name('complex_person_data_depositor', :stored_searchable)
+        fields << Solrizer.solr_name('complex_person_data_curator', :stored_searchable)
+        fields << Solrizer.solr_name('complex_person_operator', :stored_searchable)
+      end
+    end
+
+    def self.show_fields
+      # solr fields that will be used to display results on the record page
+      super.tap do |fields|
+        fields << Solrizer.solr_name('complex_person', :displayable)
+      end
+    end
   end
 end
