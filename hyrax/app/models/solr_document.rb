@@ -6,7 +6,6 @@ class SolrDocument
   # Adds Hyrax behaviors to the SolrDocument.
   include Hyrax::SolrDocumentBehavior
 
-
   # self.unique_key = 'id'
 
   # Email uses the semantic field mappings below to generate the body of an email.
@@ -106,11 +105,20 @@ class SolrDocument
     self[Solrizer.solr_name('place', :stored_searchable)]
   end
 
+  def table_of_contents
+    self[Solrizer.solr_name('table_of_contents', :stored_searchable)]
+  end
+
   def total_number_of_pages
     self[Solrizer.solr_name('total_number_of_pages', :stored_searchable)]
+  end
+
+  def complex_source
+    self[Solrizer.solr_name('complex_source', :displayable)]
   end
 
   def status
     self[Solrizer.solr_name('status', :stored_searchable)]
   end
 end
+

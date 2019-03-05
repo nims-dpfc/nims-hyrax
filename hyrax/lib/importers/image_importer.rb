@@ -6,10 +6,11 @@ module Importers
   class ImageImporter
     attr_accessor :import_dir, :metadata_file, :debug
 
-    def initialize(metadata_file, debug=false, log_file='import_image_log.csv')
+    def initialize(metadata_file, debug=false, log_file='import_image_log.csv', add_to_collection=false)
       @metadata_file = metadata_file
       @debug = debug
       @log_file = log_file
+      @add_to_collection = add_to_collection
     end
 
     def perform_create
@@ -96,7 +97,7 @@ module Importers
         doc = File.open(metadata_file) { |f| Nokogiri::XML(f) }
         rdf_xml.root << doc.root.children
 
-        create_collections unless @debug
+        create_collections if @add_to_collection and not @debug
 
         count = 0
         # Each xml file has multiple items
@@ -118,8 +119,11 @@ module Importers
           remote_files = all_metadata[2]
 
           # get collection attributes
-          collection_attrs = collections.fetch(collection_url, {}) unless collection_url.blank?
-          collection_ids = [collection_attrs.fetch(:id, nil)]
+          collection_ids = nil
+          if @add_to_collection and not @debug
+            collection_attrs = collections.fetch(collection_url, {}) unless collection_url.blank?
+            collection_ids = [collection_attrs.fetch(:id, nil)]
+          end
 
           if debug
             log_progress(metadata_file, work_id, col_id, attributes, remote_files, error)

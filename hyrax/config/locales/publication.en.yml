@@ -9,14 +9,15 @@ en:
   simple_form:
     labels:
       publication:
-        complex_person:           "Person"
-        complex_identifier:       "Identifier"
-        part_of:                  "Part of"
         complex_date:             "Date"
+        complex_event:            "Event"
+        complex_identifier:       "Identifier"
+        complex_person:           "Person"
         complex_relation:         "Related item"
         complex_rights:           "Rights"
+        complex_source:           "Source"
         complex_version:          "Version"
-        complex_event:            "Event"
+        part_of:                  "Part of"
         issue:                    "Issue"
         place:                    "Location"
         total_number_of_pages:    "Number of pages"

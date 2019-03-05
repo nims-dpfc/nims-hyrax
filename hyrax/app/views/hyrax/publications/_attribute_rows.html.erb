@@ -15,6 +15,7 @@
 <%= presenter.attribute_to_html(:complex_event, render_as: :nested_event, label: "Event", html_dl: true) %>
 <%= presenter.attribute_to_html(:issue, label: "Issue", html_dl: true) %>
 <%= presenter.attribute_to_html(:place, render_as: :faceted, label: "Location", html_dl: true) %>
+<%= presenter.attribute_to_html(:table_of_contents, label: "Table of contents", html_dl: true) %>
 <%= presenter.attribute_to_html(:total_number_of_pages, label: "Number of pages", html_dl: true) %>
 <%= presenter.attribute_to_html(:source, label: "Source", html_dl: true) %>
-
+<%= presenter.attribute_to_html(:complex_source, render_as: :nested_source, label: t('ngdr.fields.complex_source'), html_dl: true) %>

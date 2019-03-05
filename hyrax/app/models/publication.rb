@@ -55,25 +55,30 @@ class Publication < ActiveFedora::Base
 
   property :complex_rights, predicate: ::RDF::Vocab::DC11.rights, class_name: 'ComplexRights'
 
-  property :complex_version, predicate: ::RDF::Vocab::NimsRdp['complex-version'], class_name: 'ComplexVersion'
+  property :complex_version, predicate: ::RDF::Vocab::NimsRdp.version, class_name: 'ComplexVersion'
 
   # NGDR Hyrax Work Publication MVP
   # Note: all date fields are covered by complex_date in Hyrax Work Common above
 
-  property :complex_event, predicate: ::RDF::Vocab::ESciDocPublication['complex-event'], class_name: 'ComplexEvent'
+  property :complex_event, predicate: ::RDF::Vocab::ESciDocPublication.event, class_name: 'ComplexEvent'
 
-  property :issue, predicate: ::RDF::Vocab::ESciDocPublication['issue'], multiple: false do |index|
+  property :issue, predicate: ::RDF::Vocab::ESciDocPublication.issue, multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :place, predicate: ::RDF::Vocab::ESciDocPublication['place'], multiple: false do |index|
+  property :place, predicate: ::RDF::Vocab::ESciDocPublication.place, multiple: false do |index|
     index.as :stored_searchable, :facetable
   end
 
-  property :total_number_of_pages, predicate: ::RDF::Vocab::ESciDocPublication['total-pages'], multiple: false do |index|
+  property :table_of_contents, predicate: ::RDF::Vocab::DC.tableOfContents, multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :total_number_of_pages, predicate: ::RDF::Vocab::ESciDocPublication['total-number-of-pages'], multiple: false do |index|
     index.as :stored_searchable, :sortable, type: :integer
   end
 
+  property :complex_source, predicate: ::RDF::Vocab::ESciDocPublication.source, class_name: 'ComplexSource'
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
@@ -86,5 +91,5 @@ class Publication < ActiveFedora::Base
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_event, reject_if: :event_blank, allow_destroy: true
-
+  accepts_nested_attributes_for :complex_source, reject_if: :all_blank, allow_destroy: true
 end

@@ -6,18 +6,19 @@ module Importers
   class PublicationImporter
     attr_accessor :import_dir, :metadata_file, :debug
 
-    def initialize(import_dir, metadata_file, debug=false, log_file='import_publication_log.csv')
+    def initialize(import_dir, metadata_file, debug=false, log_file='import_publication_log.csv', add_to_collection=false)
       @import_dir = import_dir
       @metadata_file = metadata_file
       @debug = debug
       @log_file = log_file
+      @add_to_collection = add_to_collection
       @collection = nil
     end
 
     def perform_create
       return unless File.directory?(import_dir)
       return unless File.file?(metadata_file)
-      create_collection
+      create_collection if @add_to_collection
       parse_publications_file
     end
 
@@ -98,7 +99,7 @@ module Importers
           begin
             # Set work id to be same as the id in metadata
             work_id = attributes.fetch(:id, nil)
-            h = Importers::HyraxImporter.new('Publication', attributes, files, remote_files, nil, work_id)
+            h = Importers::HyraxImporter.new('Publication', attributes, files, remote_files, @collection, work_id)
             h.import
           rescue StandardError => exception
             error = exception.backtrace
@@ -250,14 +251,14 @@ module Importers
         metadata[:publisher] = val if val.any?
         # review-method - not in model
         # source
-        # TODO: Source has large number of properties not accommodated in model
-        # source = get_source(node)
-        val = get_text(node, 'source/title')
-        metadata[:source] = val if val.any?
+        source = get_source(node)
+        metadata[:complex_source_attributes] = source if source.any?
         # subject
         val = get_text(node, 'subject')
         metadata[:subject] = val if val.any?
-        # tableOfContents - Not in model
+        # tableOfContents
+        val = get_text(node, 'tableOfContents')
+        metadata[:table_of_contents] = val if val.any?
         # title
         val = get_text(node, 'title')
         metadata[:title] = val if val.any?
@@ -390,10 +391,38 @@ module Importers
         sources = []
         node.xpath("./source").each do |ele|
           source = {}
-          typ = ele.attribute('type')
-          source[:relationship] = typ unless typ.blank?
-          title = get_text(ele, 'title')
-          source[:title] = title if title.any?
+          # typ = ele.attribute('type')
+          # alternative title
+          val = get_text(ele, 'alternative')
+          source[:alternative_title] = val if val.any?
+          # creator
+          val = get_text(ele, 'creator')
+          source[:complex_person_attributes] = [{name: val, role: 'editor'}] if val.any?
+          # end-page
+          val = get_text(ele, 'end-page')
+          source[:end_page] = val if val.any?
+          # identifier
+          val = get_text(ele, 'identifier')
+          source[:complex_identifier_attributes] = [{identifier: val}] if val.any?
+          # issue
+          val = get_text(ele, 'issue')
+          source[:issue] = val if val.any?
+          # publishing-info - not in model
+          # sequence-number
+          val = get_text(ele, 'sequence-number')
+          source[:sequence_number] = val if val.any?
+          # start-page
+          val = get_text(ele, 'start-page')
+          source[:start_page] = val if val.any?
+          # title
+          val = get_text(ele, 'title')
+          source[:title] = val if val.any?
+          # total-number-of-pages
+          val = get_text(ele, 'total-number-of-pages')
+          source[:total_number_of_pages] = val if val.any?
+          # volume
+          val = get_text(ele, 'volume')
+          source[:volume] = val if val.any?
           sources << source if source.any?
         end
         sources
