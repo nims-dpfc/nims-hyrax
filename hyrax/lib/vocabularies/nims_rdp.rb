@@ -7,7 +7,6 @@ module RDF
       property 'Specimen'
       property 'characterization-methods'
       property 'chemical-composition'
-      property 'complex-version'
       property 'computational-methods'
       property 'crystallographic-structure'
       property 'custom-property'
@@ -34,6 +33,7 @@ module RDF
       property 'specimen-type'
       property 'structural-features'
       property 'synthesis-and-processing'
+      property 'version'
       property 'version-date'
       property 'version-identifier'
     end

@@ -1,15 +1,15 @@
-class NestedEventInput < NestedAttributesInput
+class NestedSourceInput < NestedAttributesInput
 
 protected
 
   def build_components(attribute_name, value, index, options)
     out = ''
 
-    event_statement = value
+    source_statement = value
 
     # Inherit required for fields validated in nested attributes
     required  = false
-    if object.required?(:complex_event) and index == 0
+    if object.required?(:complex_source) and index == 0
       required = true
     end
 
@@ -17,7 +17,7 @@ protected
     field = :title
     field_name = name_for(attribute_name, index, field)
     field_id = id_for(attribute_name, index, field)
-    field_value = event_statement.send(field).first
+    field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -30,11 +30,11 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
-    # --- place
-    field = :place
+    # --- alternative_title
+    field = :alternative_title
     field_name = name_for(attribute_name, index, field)
     field_id = id_for(attribute_name, index, field)
-    field_value = event_statement.send(field).first
+    field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -47,11 +47,11 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
-    # --- start_date
-    field = :start_date
+    # --- start_page
+    field = :start_page
     field_name = name_for(attribute_name, index, field)
     field_id = id_for(attribute_name, index, field)
-    field_value = event_statement.send(field).first
+    field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -60,16 +60,15 @@ protected
 
     out << "  <div class='col-md-9'>"
     out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id,
-            data: { provide: 'datepicker' }, required: false))
+        options.merge(value: field_value, name: field_name, id: field_id, required: false))
     out << '  </div>'
     out << '</div>' # row
 
-    # --- end_date
-    field = :end_date
+    # --- end_page
+    field = :end_page
     field_name = name_for(attribute_name, index, field)
     field_id = id_for(attribute_name, index, field)
-    field_value = event_statement.send(field).first
+    field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -78,19 +77,69 @@ protected
 
     out << "  <div class='col-md-9'>"
     out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id,
-            data: { provide: 'datepicker' }, required: false))
+        options.merge(value: field_value, name: field_name, id: field_id, required: false))
+    out << '  </div>'
+    out << '</div>' # row
+
+    # --- issue
+    field = :issue
+    field_name = name_for(attribute_name, index, field)
+    field_id = id_for(attribute_name, index, field)
+    field_value = source_statement.send(field).first
+
+    out << "<div class='row'>"
+    out << "  <div class='col-md-3'>"
+    out << template.label_tag(field_name, field.to_s.humanize, required: false)
+    out << '  </div>'
+
+    out << "  <div class='col-md-9'>"
+    out << @builder.text_field(field_name,
+        options.merge(value: field_value, name: field_name, id: field_id, required: false))
+    out << '  </div>'
+    out << '</div>' # row
+
+    # --- sequence_number
+    field = :sequence_number
+    field_name = name_for(attribute_name, index, field)
+    field_id = id_for(attribute_name, index, field)
+    field_value = source_statement.send(field).first
+
+    out << "<div class='row'>"
+    out << "  <div class='col-md-3'>"
+    out << template.label_tag(field_name, field.to_s.humanize, required: false)
+    out << '  </div>'
+
+    out << "  <div class='col-md-9'>"
+    out << @builder.text_field(field_name,
+        options.merge(value: field_value, name: field_name, id: field_id, required: false))
+    out << '  </div>'
+    out << '</div>' # row
+
+    # --- total_number_of_pages
+    field = :total_number_of_pages
+    field_name = name_for(attribute_name, index, field)
+    field_id = id_for(attribute_name, index, field)
+    field_value = source_statement.send(field).first
+
+    out << "<div class='row'>"
+    out << "  <div class='col-md-3'>"
+    out << template.label_tag(field_name, field.to_s.humanize, required: false)
+    out << '  </div>'
+
+    out << "  <div class='col-md-9'>"
+    out << @builder.text_field(field_name,
+        options.merge(value: field_value, name: field_name, id: field_id, required: false))
     out << '  </div>'
     out << '</div>' # row
 
     # last row
     out << "<div class='row'>"
 
-    # --- invitation_status
-    field = :invitation_status
+    # --- volume
+    field = :volume
     field_name = name_for(attribute_name, index, field)
     field_id = id_for(attribute_name, index, field)
-    field_value = event_statement.send(field).first
+    field_value = source_statement.send(field).first
 
     out << "  <div class='col-md-3'>"
     out << template.label_tag(field_name, field.to_s.humanize, required: false)
@@ -102,7 +151,7 @@ protected
     out << '  </div>'
 
     # --- delete checkbox
-    field_label = 'Event'
+    field_label = 'Source'
     out << "  <div class='col-md-3'>"
     out << destroy_widget(attribute_name, index, field_label)
     out << '  </div>'
