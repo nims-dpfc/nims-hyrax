@@ -51,8 +51,8 @@ class NestedSpecimenTypeAttributeRenderer < Hyrax::Renderers::FacetedAttributeRe
       unless v.dig('complex_relation').blank?
         label = t('ngdr.fields.complex_relation')
         r_j = v.dig('complex_relation').to_json
-        val = NestedRelationAttributeRenderer.new('complex_relation', r_j).render
-        specimen << [label, val]
+        val = NestedRelationAttributeRenderer.new(label, r_j).render
+        specimen << ['', val]
       end
       # structural_features
       unless v.dig('structural_features').blank?
