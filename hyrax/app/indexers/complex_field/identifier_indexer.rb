@@ -18,5 +18,20 @@ module ComplexField
         end
       end
     end
+
+    def self.search_fields
+      # solr fields that will be used for a search
+      super.tap do |fields|
+        fields << Solrizer.solr_name('complex_identifier', :symbol)
+      end
+    end
+
+    def self.show_fields
+      # solr fields that will be used to display results on the record page
+      super.tap do |fields|
+        fields << Solrizer.solr_name('complex_identifier', :displayable)
+      end
+    end
+
   end
 end
