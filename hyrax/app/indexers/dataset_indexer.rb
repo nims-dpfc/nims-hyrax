@@ -13,7 +13,14 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::SpecimenTypeIndexer
 
   def self.facet_fields
+    # solr fields that will be treated as facets
     super.tap do |fields|
+      dataset_facet_fields = [
+        'computational_methods',
+        'data_origin',
+        'properties_addressed',
+        'synthesis_and_processing'
+      ]
       dataset_facet_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :facetable)
       end
@@ -21,7 +28,18 @@ class DatasetIndexer < NgdrIndexer
   end
 
   def self.search_fields
+    # solr fields that will be used for a search
     super.tap do |fields|
+      dataset_search_fields = [
+        'alternative_title',
+        'characterization_methods',
+        'computational_methods',
+        'data_origin',
+        'origin_system_provenance',
+        'properties_addressed',
+        'specimen_set',
+        'synthesis_and_processing',
+      ]
       dataset_search_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :stored_searchable)
       end
@@ -29,39 +47,22 @@ class DatasetIndexer < NgdrIndexer
   end
 
   def self.show_fields
+    # solr fields that will be used to display results on the record page
     super.tap do |fields|
+      dataset_show_fields = [
+        'alternative_title',
+        'characterization_methods',
+        'computational_methods',
+        'data_origin',
+        'origin_system_provenance',
+        'properties_addressed',
+        'specimen_set',
+        'synthesis_and_processing',
+      ]
       dataset_show_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :stored_searchable)
       end
     end
   end
 
-  def dataset_facet_fields
-    # solr fields that will be treated as facets
-    [
-      'computational_methods',
-      'data_origin',
-      'properties_addressed',
-      'synthesis_and_processing'
-    ]
-  end
-
-  def dataset_search_fields
-    # solr fields that will be used for a search
-    [
-      'alternative_title',
-      'characterization_methods',
-      'computational_methods',
-      'data_origin',
-      'origin_system_provenance',
-      'properties_addressed',
-      'specimen_set',
-      'synthesis_and_processing',
-    ]
-  end
-
-  def dataset_show_fields
-    # solr fields that will be used to display results on the record page
-    dataset_search_fields
-  end
 end
