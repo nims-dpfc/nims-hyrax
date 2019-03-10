@@ -150,7 +150,7 @@ module Importers
         metadata[:subject] = val if val.any?
         # tableOfContents
         val = get_text(node, 'tableOfContents')
-        metadata[:table_of_contents] = val if val.any?
+        metadata[:table_of_contents] = val[0] if val.any?
         # title
         val = get_text(node, 'title')
         metadata[:title] = val if val.any?

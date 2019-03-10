@@ -15,7 +15,7 @@ module Importers
         @metadata_file = metadata_file
         @debug = debug
         @log_file = log_file
-        @log_file = "data/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}_import_publication_log.csv"
+        @log_file = "data/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}_import_publication_log.csv" if log_file.blank?
         @add_to_collection = add_to_collection
         @collection = nil
       end
