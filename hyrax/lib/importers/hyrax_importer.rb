@@ -23,7 +23,7 @@ module Importers
     def import
       upload_files unless @files.blank?
       add_work
-      if @object.save
+      if @object.save!
         add_member_collections
         upload_files_with_attributes unless @files.blank?
         # update_work_by_actor
