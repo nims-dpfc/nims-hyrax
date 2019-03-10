@@ -63,6 +63,13 @@ class Image < ActiveFedora::Base
 
   # NGDR Hyrax Work Image MVP
   # Note: all date fields are covered by complex_date in Hyrax Work Common above
+  property :instrument, predicate: ::RDF::Vocab::NimsRdp.instrument do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'] do |index|
+    index.as :stored_searchable, :facetable
+  end
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
