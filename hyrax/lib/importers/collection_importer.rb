@@ -3,22 +3,30 @@ module Importers
 
     attr_accessor :col_id
 
-    def initialize(attributes, col_id=nil, visibility=open)
+    def initialize(attributes, col_id=nil, visibility='open')
       @col_id = col_id ||= ::Noid::Rails::Service.new.minter.mint
       @visibility = check_visibility(visibility)
       @attributes = attributes
       @user_collection = find_user_collection
     end
 
-    def create_collection
-      return unless @attributes.any?
+    def fetch_collection
       begin
         Collection.find(@col_id)
       rescue ActiveFedora::ObjectNotFoundError
+        nil
+      end
+    end
+
+    def create_collection
+      if fetch_collection.blank?
+        return unless @attributes.any?
         set_attributes
-        col = Collection.new(@attributes)
-        col.save!
-        col.update_index
+        collection = Collection.new(@attributes)
+        collection.reindex_extent = Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX
+        collection.save!
+        # collection.update_index
+        collection
       end
     end
 

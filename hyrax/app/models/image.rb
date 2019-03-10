@@ -63,6 +63,17 @@ class Image < ActiveFedora::Base
 
   # NGDR Hyrax Work Image MVP
   # Note: all date fields are covered by complex_date in Hyrax Work Common above
+  property :instrument, predicate: ::RDF::Vocab::NimsRdp.instrument do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'] do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :complex_relation, predicate: ::RDF::Vocab::DC.relation, class_name:"ComplexRelation"
+
+  property :custom_property, predicate: ::RDF::Vocab::NimsRdp['custom-property'], class_name:"ComplexKeyValue"
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
@@ -74,4 +85,6 @@ class Image < ActiveFedora::Base
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true
+  accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
 end

@@ -6,11 +6,10 @@ module Importers
     attr_reader :klass, :attributes, :files, :remote_files, :collections, :work_id,
                 :file_ids, :work_klass, :object
 
-    def initialize(klass, attributes, files, remote_files, collections, work_id=nil, depositor=nil)
+    def initialize(klass, attributes, files, collections, work_id=nil, depositor=nil)
       @klass = klass
       @attributes = attributes
       @files = files
-      @remote_files = remote_files
       @collections = Array(collections)
       @work_id = work_id ||= SecureRandom.uuid
       @remote_tmp_dir = "tmp/remote_files/#{@work_id}"
@@ -22,54 +21,70 @@ module Importers
     end
 
     def import
-      upload_remote_files unless remote_files.blank?
-      upload_files unless files.blank?
+      upload_files unless @files.blank?
       add_work
-      if @object.save
-        update_work_by_actor
+      if @object.save!
         add_member_collections
+        upload_files_with_attributes unless @files.blank?
+        # update_work_by_actor
         @object.save
-        # Apply visibility setting after the actor stack runs to ensure it doesn't get overriden.
-        # object.visibility = @visibility
       end
-      unless remote_files.blank?
-        FileUtils.rm Dir.glob(File.join(@remote_tmp_dir, '*'))
-        FileUtils.rmdir @remote_tmp_dir
-      end
-    end
-
-    def upload_remote_files
-      if remote_files.kind_of? Array
-        @remote_files = Hash[remote_files.collect { |item| [item, File.basename(item)] } ]
-      end
-      remote_files.each do |file_url, filename|
-        FileUtils.mkdir_p(@remote_tmp_dir)
-        filepath = File.join(@remote_tmp_dir, filename)
-        File.open(filepath, 'wb') do |f|
-          begin
-            write_file(file_url, f)
-          rescue StandardError => e
-            Rails.logger.error(e.message)
-          end
-        end
-        @files << filepath
-      end
+      cleanup_files
     end
 
     def upload_files
-      @file_ids = []
+      # files is an array of hashes, with each hash containing
+      #   filename, filetype, fileurl, filepath, metadata, uploadedfile
       files.each do |file|
-        unless File.file?(file)
-          # TODO if there are dirs in the file list, perhaps this should zip them instead of ignoring them
-          puts 'Files are not allowed to include directories within them - only files or zips. Directory ' + file + ' will be ignored'
-          next
+        filepath = file.fetch(:filepath, nil)
+        fileurl = file.fetch(:fileurl, nil)
+        if fileurl.present? and filepath.blank?
+          filepath  = upload_remote_file(file)
+          file[:filepath] = filepath
         end
-        u = ::Hyrax::UploadedFile.new
-        u.user = @depositor unless @depositor.nil?
-        u.file = ::CarrierWave::SanitizedFile.new(file)
-        u.save
-        @file_ids << u.id
+        file[:uploadedfile] = upload_file(file)
       end
+    end
+
+    def cleanup_files
+      files.each do |file|
+        filepath = file.fetch(:filepath, nil)
+        fileurl = file.fetch(:fileurl, nil)
+        if fileurl.present? and File.exist?(filepath)
+          FileUtils.rm filepath
+        end
+      end
+    end
+
+    def upload_file(file)
+      if file.fetch(:filepath, nil).blank?
+        message = "not uploading #{file}. No filepath fouund"
+        Rails.logger.warn(message)
+        return
+      end
+      unless File.file?(file[:filepath])
+        message = "not uploading #{file}. It is not a file"
+        Rails.logger.warn(message)
+        return
+      end
+      u = ::Hyrax::UploadedFile.new
+      u.user = @depositor unless @depositor.nil?
+      u.file = ::CarrierWave::SanitizedFile.new(file[:filepath])
+      u.save
+      u
+    end
+
+    def upload_remote_file(file)
+      FileUtils.mkdir_p(@remote_tmp_dir)
+      filepath = File.join(@remote_tmp_dir, file[:filename])
+      File.open(filepath, 'wb') do |f|
+        begin
+          write_file(file[:fileurl], f)
+        rescue StandardError => e
+          Rails.logger.error(e.message)
+        end
+      end
+      filepath
     end
 
     def add_visibility(visibility)
@@ -136,8 +151,11 @@ module Importers
         @collections.each do |collection_id|
           begin
             col = Collection.find(collection_id)
+            col.reindex_extent = Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX
             @object.member_of_collections << col unless col.blank?
+            @object.save
           rescue ActiveFedora::ObjectNotFoundError
+            puts '*** Error adding collection membership'
             col = nil
           end
         end
@@ -197,6 +215,34 @@ module Importers
 
       def permitted_attributes
         "::Hyrax::#{@klass}Form".constantize.build_permitted_params
+      end
+
+      def upload_files_with_attributes
+        @files.each do |file|
+          create_file_set_with_attributes(file)
+        end
+      end
+
+      def create_file_set_with_attributes(file_attributes)
+        file_set = FileSet.create
+        actor = ::Hyrax::Actors::FileSetActor.new(file_set, @depositor)
+        actor.file_set.permissions_attributes = @object.permissions.map(&:to_hash)
+        # Add file
+        actor.create_content(file_attributes[:uploadedfile])
+        actor.file_set.title = Array(file_attributes[:filename])
+        # update_metadata
+        if file_attributes[:metadata].any?
+          actor.create_metadata(file_set_attributes(file_attributes[:metadata]))
+        end
+        actor.attach_to_work(@object) if @object
+      end
+
+      def file_set_attributes(attributes)
+        attributes.slice(*permitted_file_attributes).except(:id, 'id')
+      end
+
+      def permitted_file_attributes
+        FileSet.properties.keys.map(&:to_sym) + [:id, :edit_users, :edit_groups, :read_groups, :visibility]
       end
 
       def set_work_klass
