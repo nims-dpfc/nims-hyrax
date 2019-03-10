@@ -15,4 +15,6 @@ class ImageIndexer < Hyrax::WorkIndexer
   include ComplexField::PersonIndexer
   include ComplexField::RightsIndexer
   include ComplexField::VersionIndexer
+  include ComplexField::CustomPropertyIndexer
+  include ComplexField::RelationIndexer
 end
