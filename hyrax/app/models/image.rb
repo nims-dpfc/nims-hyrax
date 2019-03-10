@@ -71,6 +71,10 @@ class Image < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
+  property :complex_relation, predicate: ::RDF::Vocab::DC.relation, class_name:"ComplexRelation"
+
+  property :custom_property, predicate: ::RDF::Vocab::NimsRdp['custom-property'], class_name:"ComplexKeyValue"
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
@@ -81,4 +85,6 @@ class Image < ActiveFedora::Base
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true
+  accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
 end
