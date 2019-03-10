@@ -6,12 +6,15 @@ require 'importers/hyrax_importer'
 module Importers
   module ImageImporter
     class Importer
+      include Importers::ImageImporter::Collections
+      include Importers::ImageImporter::ParseXml
       attr_accessor :import_dir, :metadata_file, :debug
 
-      def initialize(metadata_file, debug=false, log_file='import_image_log.csv', add_to_collection=false)
+      def initialize(metadata_file, debug=false, log_file=nil, add_to_collection=false)
         @metadata_file = metadata_file
         @debug = debug
         @log_file = log_file
+        @log_file = "data/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}_import_imeji_log.csv" if log_file.blank?
         @add_to_collection = add_to_collection
       end
 
