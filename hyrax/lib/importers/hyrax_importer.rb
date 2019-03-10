@@ -37,7 +37,7 @@ module Importers
       #   filename, filetype, fileurl, filepath, metadata, uploadedfile
       files.each do |file|
         filepath = file.fetch(:filepath, nil)
-        fileurl = file.fetch(:fileutl, nil)
+        fileurl = file.fetch(:fileurl, nil)
         if fileurl.present? and filepath.blank?
           filepath  = upload_remote_file(file)
           file[:filepath] = filepath
@@ -49,14 +49,19 @@ module Importers
     def cleanup_files
       files.each do |file|
         filepath = file.fetch(:filepath, nil)
-        fileurl = file.fetch(:fileutl, nil)
-        if fileurl.present?
+        fileurl = file.fetch(:fileurl, nil)
+        if fileurl.present? and File.exist?(filepath)
           FileUtils.rm filepath
         end
       end
     end
 
     def upload_file(file)
+      if file.fetch(:filepath, nil).blank?
+        message = "not uploading #{file}. No filepath fouund"
+        Rails.logger.warn(message)
+        return
+      end
       unless File.file?(file[:filepath])
         message = "not uploading #{file}. It is not a file"
         Rails.logger.warn(message)
