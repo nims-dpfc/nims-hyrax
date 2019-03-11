@@ -67,6 +67,9 @@ services:
         UPLOADS_PATH: ${UPLOADS_PATH}
         DERIVATIVES_PATH: ${DERIVATIVES_PATH}
         CACHE_PATH: ${CACHE_PATH}
+        AIRBRAKE_HOST: ${AIRBRAKE_HOST}
+        AIRBRAKE_PROJECT_ID: ${AIRBRAKE_PROJECT_ID}
+        AIRBRAKE_PROJECT_KEY: ${AIRBRAKE_PROJECT_KEY}
     env_file:
       - .env
     volumes:
