@@ -344,4 +344,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Environment variables file
 .env.production
+.env
