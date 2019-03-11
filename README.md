@@ -9,9 +9,9 @@ Ensure you have docker and docker-compose. See [notes on installing docker](http
 
 Open a console and try running `docker -h` and `docker-compose -h` to verify they are both accessible.
 
-Create the environment file `.env.production` and set the postgres database username and password and the secret key. You can use the `example.env.production` file as template.
+Create the environment file `.env`. You can start by copying the template file `.env.template` to `.env` and customizing the values to your setup.
 
-To build and run the system in a development environment, issue the docker-compose `up` command: 
+To build and run the system in a development environment, issue the docker-compose `up` command:
 ```bash
 $ docker-compose up --build
 ```
@@ -24,27 +24,27 @@ $ docker-compose up --build
 In order to secure our development, the 'production' app runs behind nginx. The access credentials are in our private repo.
 
 Ensure you have created a `.env.production` file in `hyrax/` (see the example) and run with:
-    
+
     docker-compose -f docker-compose.yml -f docker-compose-production.yml up -d
 
 * The service will run without Solr, etc. ports being exposed to the host
 * Hyrax is accessible behind http basic auth at ports 81 and 3000
 
 ### For Developers
-We use the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching model, so ensure you set up 
+We use the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching model, so ensure you set up
 your project directory by running `git flow init` and accept the defaults.
 [Installation for git-flow](https://github.com/nvie/gitflow/wiki/Installation).
 
 ```shell
-Branch name for production releases: [master] 
-Branch name for "next release" development: [develop] 
-Feature branches? [feature/] 
-Bugfix branches? [bugfix/] 
-Release branches? [release/] 
-Hotfix branches? [hotfix/] 
-Support branches? [support/] 
-Version tag prefix? [] 
-Hooks and filters directory? [<your-path-to-checked-out-repo>/nims-hyrax/.git/hooks] 
+Branch name for production releases: [master]
+Branch name for "next release" development: [develop]
+Feature branches? [feature/]
+Bugfix branches? [bugfix/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? []
+Hooks and filters directory? [<your-path-to-checked-out-repo>/nims-hyrax/.git/hooks]
 ```
 
 The default branch in this repository is `develop`, and `master` should be used for stable releases only. After
@@ -62,7 +62,7 @@ finishing bugfixes or releases with `git-flow` remember to also push tags with `
 3. Install [Docker Compose by following steps 2 and onwards from the Docker Compose installation Tutorial](https://docs.docker.com/compose/install/).
 
 > Ubuntu Linux users, the command that Docker-Compose provides you with will not work since /usr/local/bin is not writeable by anybody but root in default Ubuntu setups. Use `sudo tee` instead, e.g.:
-  
+
 ```bash
 $ curl -L https://github.com/docker/compose/releases/download/[INSERT_DESIRED_DOCKER_COMPOSE_VERSION_HERE]/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null && sudo chmod a+x /usr/local/bin/docker-compose
 ```
