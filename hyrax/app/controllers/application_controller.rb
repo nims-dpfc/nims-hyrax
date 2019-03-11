@@ -19,10 +19,12 @@ class ApplicationController < ActionController::Base
       new_path = '/dashboard/my/works'
       sign_in_url = new_user_session_url
       stored_path = stored_location_for(resource)
-      if request.referer != root_path && request.referer != sign_in_url
-        stored_path || request.referer || new_path
-      else
-        stored_path || new_path
-      end
+      # if request.referer != root_path && request.referer != sign_in_url
+      #   stored_path || request.referer || new_path
+      # else
+      #   stored_path || new_path
+      # end
+      # Trying fix for redirect loop
+      stored_path || new_path
     end
 end
