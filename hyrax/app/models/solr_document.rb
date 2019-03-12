@@ -37,6 +37,10 @@ class SolrDocument
     self[Solrizer.solr_name('complex_identifier', :displayable)]
   end
 
+  def complex_instrument
+    self[Solrizer.solr_name('instrument', :displayable)]
+  end
+
   def complex_person
     self[Solrizer.solr_name('complex_person', :displayable)]
   end
@@ -62,7 +66,7 @@ class SolrDocument
   end
 
   def instrument
-    self[Solrizer.solr_name('instrument', :displayable)]
+    self[Solrizer.solr_name('instrument', :stored_searchable)]
   end
 
   def origin_system_provenance

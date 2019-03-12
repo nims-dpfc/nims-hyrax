@@ -43,7 +43,8 @@ class CatalogController < ApplicationController
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
     facet_fields = (DatasetIndexer.facet_fields +
-                   PublicationIndexer.facet_fields).uniq
+                   PublicationIndexer.facet_fields +
+                   ImageIndexer.facet_fields).uniq
     facet_fields.each do |fld|
       config.add_facet_field fld, limit: 5
     end
@@ -92,7 +93,8 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     show_fields = (DatasetIndexer.show_fields +
-                   PublicationIndexer.show_fields).uniq
+                   PublicationIndexer.show_fields +
+                   ImageIndexer.show_fields).uniq
     show_fields.each do |fld|
       config.add_show_field fld
     end
@@ -116,7 +118,8 @@ class CatalogController < ApplicationController
     # since we aren't specifying it otherwise.
     config.add_search_field('all_fields', label: 'All Fields') do |field|
       all_names = (DatasetIndexer.search_fields +
-                   PublicationIndexer.search_fields).uniq
+                   PublicationIndexer.search_fields +
+                   ImageIndexer.search_fields).uniq
       title_name = solr_name("title", :stored_searchable)
       field.solr_parameters = {
         qf: "#{all_names} file_format_tesim all_text_timv",
