@@ -396,9 +396,9 @@ RSpec.describe Dataset do
     end
   end
 
-  describe 'instrument' do
+  describe 'complex_instrument' do
     it 'creates an instrument active triple resource with all the attributes' do
-      @obj = build(:dataset, instrument_attributes: [{
+      @obj = build(:dataset, complex_instrument_attributes: [{
           alternative_title: 'An instrument title',
           complex_date_attributes: [{
             date: ['2018-02-14']
@@ -419,27 +419,27 @@ RSpec.describe Dataset do
           title: 'Instrument title'
         }]
       )
-      expect(@obj.instrument.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.instrument.first.id).to include('#instrument')
-      expect(@obj.instrument.first.alternative_title).to eq ['An instrument title']
-      expect(@obj.instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.instrument.first.complex_date.first.date).to eq ['2018-02-14']
-      expect(@obj.instrument.first.description).to eq ['Instrument description']
-      expect(@obj.instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.instrument.first.complex_identifier.first.identifier).to eq ['123456']
-      expect(@obj.instrument.first.complex_identifier.first.label).to eq ['Local']
-      expect(@obj.instrument.first.function_1).to eq ['Has a function']
-      expect(@obj.instrument.first.function_2).to eq ['Has two functions']
-      expect(@obj.instrument.first.manufacturer).to eq ['Manufacturer name']
-      expect(@obj.instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.instrument.first.complex_person.first.name).to eq ['Name of operator']
-      expect(@obj.instrument.first.complex_person.first.role).to eq ['Operator']
-      expect(@obj.instrument.first.organization).to eq ['Organisation']
-      expect(@obj.instrument.first.title).to eq ['Instrument title']
+      expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.id).to include('#instrument')
+      expect(@obj.complex_instrument.first.alternative_title).to eq ['An instrument title']
+      expect(@obj.complex_instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.complex_date.first.date).to eq ['2018-02-14']
+      expect(@obj.complex_instrument.first.description).to eq ['Instrument description']
+      expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['123456']
+      expect(@obj.complex_instrument.first.complex_identifier.first.label).to eq ['Local']
+      expect(@obj.complex_instrument.first.function_1).to eq ['Has a function']
+      expect(@obj.complex_instrument.first.function_2).to eq ['Has two functions']
+      expect(@obj.complex_instrument.first.manufacturer).to eq ['Manufacturer name']
+      expect(@obj.complex_instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.complex_person.first.name).to eq ['Name of operator']
+      expect(@obj.complex_instrument.first.complex_person.first.role).to eq ['Operator']
+      expect(@obj.complex_instrument.first.organization).to eq ['Organisation']
+      expect(@obj.complex_instrument.first.title).to eq ['Instrument title']
     end
 
-    it 'creates an instrument active triple resource with date, identifier and person' do
-      @obj = build(:dataset, instrument_attributes: [{
+    it 'creates an complex_instrument active triple resource with date, identifier and person' do
+      @obj = build(:dataset, complex_instrument_attributes: [{
           complex_date_attributes: [{
             date: ['2018-01-28'],
           }],
@@ -452,22 +452,22 @@ RSpec.describe Dataset do
           }]
         }]
       )
-      expect(@obj.instrument.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.instrument.first.complex_date.first.date).to eq ['2018-01-28']
-      expect(@obj.instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.instrument.first.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
-      expect(@obj.instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.instrument.first.complex_person.first.name).to eq ['operator 1']
-      expect(@obj.instrument.first.complex_person.first.role).to eq ['Operator']
+      expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.complex_date.first.date).to eq ['2018-01-28']
+      expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
+      expect(@obj.complex_instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.complex_person.first.name).to eq ['operator 1']
+      expect(@obj.complex_instrument.first.complex_person.first.role).to eq ['Operator']
     end
 
-    it 'rejects an instrument active triple with no date, identifier and person' do
-      @obj = build(:dataset, instrument_attributes: [{
+    it 'rejects an complex_instrument active triple with no date, identifier and person' do
+      @obj = build(:dataset, complex_instrument_attributes: [{
           title: 'Instrument A',
         }]
       )
-      expect(@obj.instrument).to be_empty
+      expect(@obj.complex_instrument).to be_empty
     end
   end
 

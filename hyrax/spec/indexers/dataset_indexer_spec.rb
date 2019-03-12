@@ -240,12 +240,12 @@ RSpec.describe DatasetIndexer do
         organization: 'Organisation 2',
         title: 'Instrument title 2'
       }]
-      obj = build(:dataset, instrument_attributes: instruments)
+      obj = build(:dataset, complex_instrument_attributes: instruments)
       @solr_document = obj.to_solr
     end
     it 'indexes as displayable' do
-      expect(@solr_document).to include('instrument_ssm')
-      expect(JSON.parse(@solr_document['instrument_ssm'])).not_to be_empty
+      expect(@solr_document).to include('complex_instrument_ssm')
+      expect(JSON.parse(@solr_document['complex_instrument_ssm'])).not_to be_empty
     end
     it 'indexes title asstored searchable' do
       expect(@solr_document['instrument_title_tesim']).to match_array(['Instrument title 1', 'Instrument title 2'])
