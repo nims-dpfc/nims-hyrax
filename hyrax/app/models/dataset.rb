@@ -61,7 +61,7 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
-  property :instrument, predicate: ::RDF::Vocab::NimsRdp.instrument, class_name: "ComplexInstrument"
+  property :complex_instrument, predicate: ::RDF::Vocab::NimsRdp.instrument, class_name: "ComplexInstrument"
 
   property :origin_system_provenance, predicate: ::RDF::Vocab::NimsRdp['origin-system-provenance'], multiple: false do |index|
     index.as :stored_searchable
@@ -101,7 +101,7 @@ class Dataset < ActiveFedora::Base
   include ComplexValidation
   accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
-  accepts_nested_attributes_for :instrument, reject_if: :instrument_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
   # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true

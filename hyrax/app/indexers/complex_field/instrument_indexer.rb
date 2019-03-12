@@ -7,14 +7,14 @@ module ComplexField
     end
 
     def index_instrument(solr_doc)
-      solr_doc[Solrizer.solr_name('instrument', :displayable)] = object.instrument.to_json
-      solr_doc[Solrizer.solr_name('instrument_title', :stored_searchable)] = object.instrument.map { |i| i.title.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('instrument_description', :stored_searchable)] = object.instrument.map { |i| i.description.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('instrument_manufacturer', :stored_searchable)] = object.instrument.map { |i| i.manufacturer.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('instrument_manufacturer', :facetable)] = object.instrument.map { |i| i.manufacturer.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('instrument_organization', :stored_searchable)] = object.instrument.map { |i| i.organization.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('instrument_organization', :facetable)] = object.instrument.map { |i| i.organization.reject(&:blank?).first }
-      object.instrument.each do |i|
+      solr_doc[Solrizer.solr_name('complex_instrument', :displayable)] = object.complex_instrument.to_json
+      solr_doc[Solrizer.solr_name('instrument_title', :stored_searchable)] = object.complex_instrument.map { |i| i.title.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('instrument_description', :stored_searchable)] = object.complex_instrument.map { |i| i.description.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('instrument_manufacturer', :stored_searchable)] = object.complex_instrument.map { |i| i.manufacturer.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('instrument_manufacturer', :facetable)] = object.complex_instrument.map { |i| i.manufacturer.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('instrument_organization', :stored_searchable)] = object.complex_instrument.map { |i| i.organization.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('instrument_organization', :facetable)] = object.complex_instrument.map { |i| i.organization.reject(&:blank?).first }
+      object.complex_instrument.each do |i|
         i.complex_date.each do |d|
           unless d.description.blank?
             label = DateService.new.label(d.description.first)
@@ -75,7 +75,7 @@ module ComplexField
       def self.show_fields
         # solr fields that will be used to display results on the record page
         super.tap do |fields|
-          fields << Solrizer.solr_name('instrument', :displayable)
+          fields << Solrizer.solr_name('complex_instrument', :displayable)
         end
       end
 
