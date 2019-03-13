@@ -12,26 +12,26 @@ module ComplexField
       solr_doc[Solrizer.solr_name('complex_event_place', :stored_searchable)] = object.complex_event.map { |r| r.place.reject(&:blank?).first }
     end
 
-    def self.facet_fields
+    def self.event_facet_fields
       # solr fields that will be treated as facets
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_event', :facetable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_event', :facetable)
+      fields
     end
 
-    def self.search_fields
+    def self.event_search_fields
       # solr fields that will be used for a search
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_event_title', :stored_searchable)
-        fields << Solrizer.solr_name('complex_event_place', :stored_searchable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_event_title', :stored_searchable)
+      fields << Solrizer.solr_name('complex_event_place', :stored_searchable)
+      fields
     end
 
-    def self.show_fields
+    def self.event_show_fields
       # solr fields that will be used to display results on the record page
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_event', :displayable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_event', :displayable)
+      fields
     end
 
   end

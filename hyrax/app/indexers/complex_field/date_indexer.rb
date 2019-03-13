@@ -16,6 +16,7 @@ module ComplexField
             label = d.description.first
             term = DateService.new.find_by_id(label)
             label = term['label'] if term.any?
+            label = 'other' if label.blank?
       	    # Not indexing date as sortbale as it needs to be single valued
             # fld_name = Solrizer.solr_name("complex_date_#{label.downcase.tr(' ', '_')}", :stored_sortable, type: :date)
             # solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
@@ -36,47 +37,49 @@ module ComplexField
       end
     end
 
-    def self.facet_fields
+    def self.date_facet_fields
       # solr fields that will be treated as facets
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_date_accepted', :dateable)
-        fields << Solrizer.solr_name('complex_date_available', :dateable)
-        fields << Solrizer.solr_name('complex_date_copyrighted', :dateable)
-        fields << Solrizer.solr_name('complex_date_collected', :dateable)
-        fields << Solrizer.solr_name('complex_date_created', :dateable)
-        fields << Solrizer.solr_name('complex_date_issued', :dateable)
-        fields << Solrizer.solr_name('complex_date_published', :dateable)
-        fields << Solrizer.solr_name('complex_date_submitted', :dateable)
-        fields << Solrizer.solr_name('complex_date_updated', :dateable)
-        fields << Solrizer.solr_name('complex_date_valid', :dateable)
-        fields << Solrizer.solr_name('complex_date_processed', :dateable)
-        fields << Solrizer.solr_name('complex_date_purchased', :dateable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_date_accepted', :dateable)
+      fields << Solrizer.solr_name('complex_date_available', :dateable)
+      fields << Solrizer.solr_name('complex_date_copyrighted', :dateable)
+      fields << Solrizer.solr_name('complex_date_collected', :dateable)
+      fields << Solrizer.solr_name('complex_date_created', :dateable)
+      fields << Solrizer.solr_name('complex_date_issued', :dateable)
+      fields << Solrizer.solr_name('complex_date_published', :dateable)
+      fields << Solrizer.solr_name('complex_date_submitted', :dateable)
+      fields << Solrizer.solr_name('complex_date_updated', :dateable)
+      fields << Solrizer.solr_name('complex_date_valid', :dateable)
+      fields << Solrizer.solr_name('complex_date_processed', :dateable)
+      fields << Solrizer.solr_name('complex_date_purchased', :dateable)
+      fields << Solrizer.solr_name('complex_date_other', :dateable)
+      fields
     end
 
-    def self.search_fields
+    def self.date_search_fields
       # solr fields that will be used for a search
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_date', :stored_searchable, type: :date)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_date', :stored_searchable, type: :date)
+      fields
     end
 
-    def self.show_fields
+    def self.date_show_fields
       # solr fields that will be used to display results on the record page
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_date_accepted', :displayable)
-        fields << Solrizer.solr_name('complex_date_available', :displayable)
-        fields << Solrizer.solr_name('complex_date_copyrighted', :displayable)
-        fields << Solrizer.solr_name('complex_date_collected', :displayable)
-        fields << Solrizer.solr_name('complex_date_created', :displayable)
-        fields << Solrizer.solr_name('complex_date_issued', :displayable)
-        fields << Solrizer.solr_name('complex_date_published', :displayable)
-        fields << Solrizer.solr_name('complex_date_submitted', :displayable)
-        fields << Solrizer.solr_name('complex_date_updated', :displayable)
-        fields << Solrizer.solr_name('complex_date_valid', :displayable)
-        fields << Solrizer.solr_name('complex_date_processed', :displayable)
-        fields << Solrizer.solr_name('complex_date_purchased', :displayable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_date_accepted', :displayable)
+      fields << Solrizer.solr_name('complex_date_available', :displayable)
+      fields << Solrizer.solr_name('complex_date_copyrighted', :displayable)
+      fields << Solrizer.solr_name('complex_date_collected', :displayable)
+      fields << Solrizer.solr_name('complex_date_created', :displayable)
+      fields << Solrizer.solr_name('complex_date_issued', :displayable)
+      fields << Solrizer.solr_name('complex_date_published', :displayable)
+      fields << Solrizer.solr_name('complex_date_submitted', :displayable)
+      fields << Solrizer.solr_name('complex_date_updated', :displayable)
+      fields << Solrizer.solr_name('complex_date_valid', :displayable)
+      fields << Solrizer.solr_name('complex_date_processed', :displayable)
+      fields << Solrizer.solr_name('complex_date_purchased', :displayable)
+      fields << Solrizer.solr_name('complex_date_other', :displayable)
+      fields
     end
 
   end

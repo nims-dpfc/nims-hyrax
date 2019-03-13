@@ -14,27 +14,27 @@ module ComplexField
       solr_doc[Solrizer.solr_name('complex_sub_organization', :facetable)] = object.complex_organization.map { |o| o.sub_organization.reject(&:blank?).first }
     end
 
-    def self.facet_fields
+    def self.organization_facet_fields
       # solr fields that will be treated as facets
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_organization', :facetable)
-        fields << Solrizer.solr_name('complex_sub_organization', :facetable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_organization', :facetable)
+      fields << Solrizer.solr_name('complex_sub_organization', :facetable)
+      fields
     end
 
-    def self.search_fields
+    def self.organization_search_fields
       # solr fields that will be used for a search
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_organization', :stored_searchable)
-        fields << Solrizer.solr_name('complex_sub_organization', :stored_searchable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_organization', :stored_searchable)
+      fields << Solrizer.solr_name('complex_sub_organization', :stored_searchable)
+      fields
     end
 
-    def self.show_fields
+    def self.organization_show_fields
       # solr fields that will be used to display results on the record page
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_organization', :displayable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_organization', :displayable)
+      fields
     end
 
   end
