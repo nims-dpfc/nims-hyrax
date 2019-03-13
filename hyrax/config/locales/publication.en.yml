@@ -12,7 +12,7 @@ en:
         complex_date:             "Date"
         complex_event:            "Event"
         complex_identifier:       "Identifier"
-        complex_person:           "Person"
+        complex_person:           "Creator"
         complex_relation:         "Related item"
         complex_rights:           "Rights"
         complex_source:           "Source"

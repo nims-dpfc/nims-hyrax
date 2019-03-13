@@ -14,7 +14,7 @@ en:
         complex_date:             "Date"
         complex_identifier:       "Identifier"
         complex_organization:     "Organization"
-        complex_person:           "Person"
+        complex_person:           "Creator"
         complex_relation:         "Related item"
         complex_rights:           "Rights"
         complex_version:          "Version"
