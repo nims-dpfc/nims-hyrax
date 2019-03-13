@@ -32,25 +32,25 @@ module ComplexField
       end
     end
 
-    def self.facet_fields
+    def self.source_facet_fields
       # solr fields that will be treated as facets
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_source_title', :facetable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_source_title', :facetable)
+      fields
     end
 
-    def self.search_fields
+    def self.source_search_fields
       # solr fields that will be used for a search
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_source_title', :stored_searchable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_source_title', :stored_searchable)
+      fields
     end
 
-    def self.show_fields
+    def self.source_show_fields
       # solr fields that will be used to display results on the record page
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_source', :displayable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_source', :displayable)
+      fields
     end
 
   end

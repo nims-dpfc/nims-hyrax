@@ -11,25 +11,25 @@ module ComplexField
       solr_doc[Solrizer.solr_name('complex_rights', :facetable)] = object.complex_rights.map { |r| r.rights.reject(&:blank?).first }
     end
 
-    def self.facet_fields
+    def self.rights_facet_fields
       # solr fields that will be treated as facets
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_rights', :facetable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_rights', :facetable)
+      fields
     end
 
-    def self.search_fields
+    def self.rights_search_fields
       # solr fields that will be used for a search
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_rights', :facetable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_rights', :facetable)
+      fields
     end
 
-    def self.show_fields
+    def self.rights_show_fields
       # solr fields that will be used to display results on the record page
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_rights', :displayable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_rights', :displayable)
+      fields
     end
 
   end

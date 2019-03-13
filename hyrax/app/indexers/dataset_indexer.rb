@@ -24,6 +24,10 @@ class DatasetIndexer < NgdrIndexer
       dataset_facet_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :facetable)
       end
+      fields.concat ComplexField::DateIndexer.date_facet_fields
+      fields.concat ComplexField::PersonIndexer.person_facet_fields
+      fields.concat ComplexField::RightsIndexer.rights_facet_fields
+      # fields.concat ComplexField::InstrumentIndexer.instrument_facet_fields
     end
   end
 
@@ -43,6 +47,12 @@ class DatasetIndexer < NgdrIndexer
       dataset_search_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :stored_searchable)
       end
+      fields.concat ComplexField::IdentifierIndexer.identifier_search_fields
+      fields.concat ComplexField::DateIndexer.date_search_fields
+      fields.concat ComplexField::CustomPropertyIndexer.custom_property_search_fields
+      fields.concat ComplexField::PersonIndexer.person_search_fields
+      fields.concat ComplexField::RightsIndexer.rights_search_fields
+      # fields.concat ComplexField::InstrumentIndexer.instrument_search_fields
     end
   end
 
@@ -62,6 +72,12 @@ class DatasetIndexer < NgdrIndexer
       dataset_show_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :stored_searchable)
       end
+      fields.concat ComplexField::IdentifierIndexer.identifier_show_fields
+      fields.concat ComplexField::DateIndexer.date_show_fields
+      fields.concat ComplexField::CustomPropertyIndexer.custom_property_show_fields
+      fields.concat ComplexField::PersonIndexer.person_show_fields
+      fields.concat ComplexField::RightsIndexer.rights_show_fields
+      # fields.concat ComplexField::InstrumentIndexer.instrument_show_fields
     end
   end
 

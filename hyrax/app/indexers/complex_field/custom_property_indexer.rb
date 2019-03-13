@@ -10,7 +10,6 @@ module ComplexField
       solr_doc[Solrizer.solr_name('custom_property', :displayable)] = object.custom_property.to_json
       property = object.custom_property.map { |c| c.description.reject(&:blank?) }
       solr_doc[Solrizer.solr_name('custom_property', :stored_searchable)] = property
-      solr_doc[Solrizer.solr_name('custom_property', :facetable)] = property
       object.custom_property.each do |c|
         unless (c.label.first.blank? or c.description.first.blank?)
           fld_name = Solrizer.solr_name("custom_property_#{c.label.first.downcase.tr(' ', '_')}", :stored_searchable)
@@ -25,25 +24,18 @@ module ComplexField
       end
     end
 
-    def self.facet_fields
-      # solr fields that will be treated as facets
-      super.tap do |fields|
-        fields << Solrizer.solr_name('custom_property', :facetable)
-      end
-    end
-
-    def self.search_fields
+    def self.custom_property_search_fields
       # solr fields that will be used for a search
-      super.tap do |fields|
-        fields << Solrizer.solr_name('custom_property', :stored_searchable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('custom_property', :stored_searchable)
+      fields
     end
 
-    def self.show_fields
+    def self.custom_property_show_fields
       # solr fields that will be used to display results on the record page
-      super.tap do |fields|
-        fields << Solrizer.solr_name('custom_property', :displayable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('custom_property', :displayable)
+      fields
     end
 
   end

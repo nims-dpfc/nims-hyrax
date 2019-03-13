@@ -42,6 +42,7 @@ class CatalogController < ApplicationController
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
+
     facet_fields = (DatasetIndexer.facet_fields +
                    PublicationIndexer.facet_fields +
                    ImageIndexer.facet_fields).uniq
@@ -65,6 +66,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('subject', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject', :facetable)
     # config.add_index_field solr_name('creator', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable)
     # config.add_index_field solr_name('contributor', :stored_searchable), itemprop: 'contributor', link_to_search: solr_name('contributor', :facetable)
+    config.add_index_field solr_name('complex_person_other', :stored_searchable), itemprop: 'creator or contributor', link_to_search: solr_name('complex_person_other', :facetable)
     config.add_index_field solr_name('complex_person_author', :stored_searchable), itemprop: 'author', link_to_search: solr_name('complex_person_author', :facetable)
     config.add_index_field solr_name('complex_person_editor', :stored_searchable), itemprop: 'editor', link_to_search: solr_name('complex_person_editor', :facetable)
     config.add_index_field solr_name('complex_person_translator', :stored_searchable), itemprop: 'translator', link_to_search: solr_name('complex_person_translator', :facetable)

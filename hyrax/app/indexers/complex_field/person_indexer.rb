@@ -29,39 +29,51 @@ module ComplexField
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
           solr_doc[fld_name] << person_name
           solr_doc[fld_name].flatten!
+        else
+          fld_name = Solrizer.solr_name("complex_person_other}", :stored_searchable)
+          solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+          solr_doc[fld_name] << person_name
+          solr_doc[fld_name].flatten!
+
+          fld_name = Solrizer.solr_name("complex_person_other", :facetable)
+          solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+          solr_doc[fld_name] << person_name
+          solr_doc[fld_name].flatten!
         end
       end
     end
 
-    def self.facet_fields
+    def self.person_facet_fields
       # solr fields that will be treated as facets
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_person_author', :facetable)
-        fields << Solrizer.solr_name('complex_person_editor', :facetable)
-        fields << Solrizer.solr_name('complex_person_translator', :facetable)
-        fields << Solrizer.solr_name('complex_person_data_depositor', :facetable)
-        fields << Solrizer.solr_name('complex_person_data_curator', :facetable)
-        fields << Solrizer.solr_name('complex_person_operator', :facetable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_person_other', :facetable)
+      fields << Solrizer.solr_name('complex_person_author', :facetable)
+      fields << Solrizer.solr_name('complex_person_editor', :facetable)
+      fields << Solrizer.solr_name('complex_person_translator', :facetable)
+      fields << Solrizer.solr_name('complex_person_data_depositor', :facetable)
+      fields << Solrizer.solr_name('complex_person_data_curator', :facetable)
+      fields << Solrizer.solr_name('complex_person_operator', :facetable)
+      fields
     end
 
-    def self.search_fields
+    def self.person_search_fields
       # solr fields that will be used for a search
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_person_author', :stored_searchable)
-        fields << Solrizer.solr_name('complex_person_editor', :stored_searchable)
-        fields << Solrizer.solr_name('complex_person_translator', :stored_searchable)
-        fields << Solrizer.solr_name('complex_person_data_depositor', :stored_searchable)
-        fields << Solrizer.solr_name('complex_person_data_curator', :stored_searchable)
-        fields << Solrizer.solr_name('complex_person_operator', :stored_searchable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_person_other', :stored_searchable)
+      fields << Solrizer.solr_name('complex_person_author', :stored_searchable)
+      fields << Solrizer.solr_name('complex_person_editor', :stored_searchable)
+      fields << Solrizer.solr_name('complex_person_translator', :stored_searchable)
+      fields << Solrizer.solr_name('complex_person_data_depositor', :stored_searchable)
+      fields << Solrizer.solr_name('complex_person_data_curator', :stored_searchable)
+      fields << Solrizer.solr_name('complex_person_operator', :stored_searchable)
+      fields
     end
 
-    def self.show_fields
+    def self.person_show_fields
       # solr fields that will be used to display results on the record page
-      super.tap do |fields|
-        fields << Solrizer.solr_name('complex_person', :displayable)
-      end
+      fields = []
+      fields << Solrizer.solr_name('complex_person', :displayable)
+      fields
     end
   end
 end
