@@ -37,6 +37,7 @@ en:
           data_origin_sim: Data origin
           file_format_sim: Format
           generic_type_sim: Type
+          human_readable_type_sim: Type of work
           instrument_sim: Instrument
           instrument_manufacturer_sim: Instrument manufacturer
           instrument_organization_sim: Instrument organization
