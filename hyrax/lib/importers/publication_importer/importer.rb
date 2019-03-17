@@ -33,6 +33,8 @@ module Importers
       private
       # Extract metadata and return as attributes
       def parse_publications_file
+        @count += 1
+        print "#{@count}."
         # Each xml file has multiple items
         # Each Item contains the following elements
         #     properties
