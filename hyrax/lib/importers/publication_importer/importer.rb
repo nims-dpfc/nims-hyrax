@@ -122,7 +122,7 @@ module Importers
       end
 
       def log_rotate
-        get_log_file if @log_file.blank or (@count % 1000 == 0)
+        get_log_file if @log_file.blank? or (@count % 1000 == 0)
       end
 
       def get_log_file
