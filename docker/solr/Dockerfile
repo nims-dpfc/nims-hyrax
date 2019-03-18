@@ -4,6 +4,12 @@ ENV SOLR_HOME=/solr_home \
     SOLR_CONFIG_DIR=/solr_conf
 
 USER root
+
+# Install japanese fonts to help solr process some pdf files
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && apk update
+    && apk add font-ipa encodings font-alias fontconfig mkfontdir mkfontscale
+
 #RUN mkdir $SOLR_CONFIG_DIR \
 #    && chown -R solr:solr $SOLR_CONFIG_DIR
 
