@@ -7,7 +7,7 @@ USER root
 
 # Install japanese fonts to help solr process some pdf files
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && apk update
+    && apk update \
     && apk add font-ipa encodings font-alias fontconfig mkfontdir mkfontscale
 
 #RUN mkdir $SOLR_CONFIG_DIR \
