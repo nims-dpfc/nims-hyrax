@@ -4,4 +4,4 @@ FROM nginx:stable-alpine
 RUN apk add --no-cache --upgrade certbot certbot-nginx
 
 # Ensure nginx is running
-RUN service nginx start
+RUN /etc/nginx/sbin/nginx
