@@ -768,6 +768,7 @@ PLATFORMS
 DEPENDENCIES
   airbrake (~> 5.0)
   bootstrap-datepicker-rails
+  browse-everything
   byebug
   coffee-rails (~> 4.2)
   devise
