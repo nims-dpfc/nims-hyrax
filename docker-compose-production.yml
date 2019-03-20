@@ -22,7 +22,7 @@ services:
       - ./docker/nginx/ngdrdemo.cottagelabs.com.conf:/etc/nginx/conf.d/ngdrdemo.cottagelabs.com.conf:rw
       - ./docker/nginx/.htpasswd:/etc/nginx/conf.d/.htpasswd:ro
       - letsencrypt:/etc/letsencrypt
-    command: sh -c "certbot --nginx --redirect -d ngdrdemo.cottagelabs.com -n --agree-tos --email sysadmin+ngdr@cottagelabs.com && nginx -g 'daemon off;'"
+    command: sh -c "certbot --nginx --redirect -d ngdrdemo.cottagelabs.com -n --agree-tos --email sysadmin+ngdr@cottagelabs.com && nginx -s reload"
     ports:
       - 80:80
       - 443:443
