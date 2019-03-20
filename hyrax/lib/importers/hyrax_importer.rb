@@ -231,8 +231,9 @@ module Importers
         actor.create_content(file_attributes[:uploadedfile])
         actor.file_set.title = Array(file_attributes[:filename])
         # update_metadata
-        if file_attributes[:metadata].any?
-          actor.create_metadata(file_set_attributes(file_attributes[:metadata]))
+        unless file_attributes[:metadata].blank?
+          actor.file_set.update(file_set_attributes(file_attributes[:metadata]))
+          actor.file_set.save!
         end
         actor.attach_to_work(@object) if @object
       end
