@@ -6,3 +6,6 @@ COPY .htpasswd /etc/nginx/conf.d/.htpasswd
 
 # Install Certbot
 RUN apk add --no-cache --upgrade certbot certbot-nginx
+
+# Run nginx
+CMD ["nginx", "-g", "daemon off;"]

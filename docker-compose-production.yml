@@ -18,7 +18,7 @@ services:
       - web
     volumes:
       - letsencrypt:/etc/letsencrypt
-    #command: certbot --nginx -d ngdrdemo.cottagelabs.com -n  --redirect --agree-tos --test-cert --email sysadmin+ngdr@cottagelabs.com
+    command: sh -c "nginx && certbot --nginx -d ngdrdemo.cottagelabs.com -n --redirect --agree-tos --email sysadmin+ngdr@cottagelabs.com && nginx -s stop && nginx -g 'daemon off;'"
     ports:
       - 80:80
       - 443:443
