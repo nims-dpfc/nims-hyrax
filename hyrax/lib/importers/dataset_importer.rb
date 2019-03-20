@@ -25,7 +25,6 @@ module Importers
         work_id = nil
         attributes = {}
         files = []
-        remote_files = []
         error = nil
 
         # Check metadata file exists
@@ -57,7 +56,7 @@ module Importers
 
         # import dataset
         begin
-          h = Importers::HyraxImporter.new('Dataset', attributes, files, remote_files, @collections)
+          h = Importers::HyraxImporter.new('Dataset', attributes, files, @collections)
           h.import
           work_id = h.work_id
         rescue StandardError => exception
@@ -171,47 +170,47 @@ module Importers
             attributes['complex_person_attributes'] ||= [{}]
             attributes['complex_person_attributes'][0]['affiliation'] = meta.content
 
-          # instrument_attributes: [{
+          # complex_instrument_attributes: [{
           #   title: 'Instrument title'
           elsif meta['key'] == 'instrument_name'
-            attributes['instrument_attributes'] ||= [{}]
-            attributes['instrument_attributes'][0]['title'] = meta.content
+            attributes['complex_instrument_attributes'] ||= [{}]
+            attributes['complex_instrument_attributes'][0]['title'] = meta.content
 
           #   description: 'Instrument description',
           elsif meta['key'] == 'instrument_description'
-            attributes['instrument_attributes'] ||= [{}]
-            attributes['instrument_attributes'][0]['description'] = meta.content
+            attributes['complex_instrument_attributes'] ||= [{}]
+            attributes['complex_instrument_attributes'][0]['description'] = meta.content
 
           #   function_1: ['Has a function'],
           elsif meta['key'] == 'instrument_function_tier_1'
-            attributes['instrument_attributes'] ||= [{}]
-            attributes['instrument_attributes'][0]['function_1'] ||= []
-            attributes['instrument_attributes'][0]['function_1'] << meta.content
+            attributes['complex_instrument_attributes'] ||= [{}]
+            attributes['complex_instrument_attributes'][0]['function_1'] ||= []
+            attributes['complex_instrument_attributes'][0]['function_1'] << meta.content
 
           #   function_2: ['Has two functions'],
           elsif meta['key'] == 'instrument_function_tier_2'
-            attributes['instrument_attributes'] ||= [{}]
-            attributes['instrument_attributes'][0]['function_2'] ||= []
-            attributes['instrument_attributes'][0]['function_2'] << meta.content
+            attributes['complex_instrument_attributes'] ||= [{}]
+            attributes['complex_instrument_attributes'][0]['function_2'] ||= []
+            attributes['complex_instrument_attributes'][0]['function_2'] << meta.content
 
           #   organization: 'Organisation',
           elsif meta['key'] == 'instrument_registered_organization'
-            attributes['instrument_attributes'] ||= [{}]
-            attributes['instrument_attributes'][0]['organization'] = meta.content
+            attributes['complex_instrument_attributes'] ||= [{}]
+            attributes['complex_instrument_attributes'][0]['organization'] = meta.content
 
           #   manufacturer: 'Manufacturer name',
           elsif meta['key'] == 'instrument_manufacturer'
-            attributes['instrument_attributes'] ||= [{}]
-            attributes['instrument_attributes'][0]['manufacturer'] = meta.content
+            attributes['complex_instrument_attributes'] ||= [{}]
+            attributes['complex_instrument_attributes'][0]['manufacturer'] = meta.content
 
           #   complex_person_attributes: [{name: ['Name of operator'], role: ['Operator']}],
           elsif meta['key'] == 'instrument_operator'
             # NOTE this does not actually contain a name, it appears to be an ID like 9999-8888-7777-3210
             # but there is no name to use, and the complex person attributes do not include ID, so this value will be put in as name
             # see https://github.com/antleaf/nims-ngdr-development-2018/blob/master/sample_data_from_msuzuki/AES-narrow/mandatory.xml#L29
-            attributes['instrument_attributes'] ||= [{}]
-            attributes['instrument_attributes'][0]['complex_person_attributes'] ||= []
-            attributes['instrument_attributes'][0]['complex_person_attributes'] << {name: [meta.content], role: ['operator']}
+            attributes['complex_instrument_attributes'] ||= [{}]
+            attributes['complex_instrument_attributes'][0]['complex_person_attributes'] ||= []
+            attributes['complex_instrument_attributes'][0]['complex_person_attributes'] << {name: [meta.content], role: ['operator']}
 
           #   alternative_title: 'An instrument title',
           #   complex_date_attributes: [{date: ['2018-02-14'], description: 'Processed'}],
@@ -307,10 +306,20 @@ module Importers
       end
 
       def list_data_files(dir)
-        Dir.glob(File.join(dir, '*')) - [
+        metadata_files = [
           File.join(dir, '__METADATA.json'),
           File.join(dir, '__FILES.json')
         ]
+        files = []
+        Dir.glob(File.join(dir, '*')).each do |filepath|
+          next if metadata_files.include? filepath
+          fa = {
+            filename: File.basename(filepath),
+            filepath: filepath
+          }
+          files << fa
+        end
+        files
       end
 
       def log_progress(dir, work_id, attributes, files, error)
