@@ -95,9 +95,9 @@ module Importers
           file_info[:filetype] = filetype unless filetype.blank?
           file_info[:fileurl] = full_image_url
           metadata = {}
-          metadata[:title] = this_filename
+          metadata[:title] = [this_filename]
           metadata[:visibility] = 'restricted'
-          metadata[:resource_type] = 'Full image'
+          metadata[:resource_type] = ['Full image']
           file_info[:metadata] = metadata
           files << file_info
         end
@@ -111,9 +111,9 @@ module Importers
           file_info[:filetype] = filetype unless filetype.blank?
           file_info[:fileurl] = web_image_url
           metadata = {}
-          metadata[:title] = this_filename
+          metadata[:title] = [this_filename]
           metadata[:visibility] = visibility
-          metadata[:resource_type] = 'Web image'
+          metadata[:resource_type] = ['Web image']
           file_info[:metadata] = metadata
           files << file_info
         end
@@ -128,9 +128,9 @@ module Importers
         #   file_info[:filetype] = filetype unless filetype.blank?
         #   file_info[:fileurl] = thumbnail_image_url
         #   metadata = {}
-        #   metadata[:title] = this_filename
+        #   metadata[:title] = [this_filename]
         #   metadata[:visibility] = visibility
-        #   metadata[:resource_type] = 'Thumbnail'
+        #   metadata[:resource_type] = ['Thumbnail']
         #   file_info[:metadata] = metadata
         #   files << file_info
         # end
