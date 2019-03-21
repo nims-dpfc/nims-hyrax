@@ -143,22 +143,21 @@ Hyrax.config do |config|
   # Default is false
   config.iiif_image_server = true
 
+  if ENV.fetch('IIIF_TO_SERVE_SSL_URLS', 'false') == 'true'
+    protocol = 'https'
+  else
+    protocol = 'http'
+  end
   # Returns a URL that resolves to an image provided by a IIIF image server
   config.iiif_image_url_builder = lambda do |file_id, base_url, size|
-    Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size)
+    Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size, protocol: protocol)
   end
-  # config.iiif_image_url_builder = lambda do |file_id, base_url, size|
-  #   "#{base_url}/downloads/#{file_id.split('/').first}"
-  # end
 
   # Returns a URL that resolves to an info.json file provided by a IIIF image server
   config.iiif_info_url_builder = lambda do |file_id, base_url|
-    uri = Riiif::Engine.routes.url_helpers.info_url(file_id, host: base_url)
+    uri = Riiif::Engine.routes.url_helpers.info_url(file_id, host: base_url, protocol: protocol)
     uri.sub(%r{/info\.json\Z}, '')
   end
-  # config.iiif_info_url_builder = lambda do |_, _|
-  #   ""
-  # end
 
   # Returns a URL that indicates your IIIF image server compliance level
   # config.iiif_image_compliance_level_uri = 'http://iiif.io/api/image/2/level2.json'
