@@ -8,10 +8,9 @@ module Hyrax
     self.terms -= [
       # Fields not interested in
       :based_near, :contributor, :creator, :date_created, :identifier, :license,
-      :related_url, :source,
+      :rights_statement, :related_url, :source,
       # Fields interested in, but removing to re-order
-      :title, :description, :keyword, :language, :publisher, :resource_type,
-      :rights_statement, :subject
+      :title, :description, :keyword, :language, :publisher, :resource_type, :subject
       # Fields that are not displayed
       # :import_url, :date_modified, :date_uploaded, :depositor, :bibliographic_citation,
       # :date_created, :label, :relative_path
@@ -20,16 +19,16 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :title, :alternative_title, :description, :keyword, :language,
-      :publisher, :resource_type, :complex_rights, :rights_statement, :subject,
+      :publisher, :resource_type, :complex_rights, :subject,
       :complex_date, :complex_identifier, :complex_person, :complex_version,
       :status, :instrument, :specimen_set, :complex_relation, :custom_property
     ]
 
     self.required_fields -= [
       # Fields not interested in
-      :creator, :keyword,
+      :creator, :keyword, :rights_statement,
       # Fields interested in, but removing to re-order
-      :title, :rights_statement]
+      :title]
 
     self.required_fields += [
       # # Adding all required fields in order of display in form
