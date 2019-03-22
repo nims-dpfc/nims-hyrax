@@ -87,3 +87,4 @@ group :test do
 end
 
 gem 'coveralls', require: false
+gem 'blacklight_oai_provider'
