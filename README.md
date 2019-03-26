@@ -25,7 +25,7 @@ This will use the configuration in `docker-compose.yml` and `docker-compose-over
 ### In production (& on the test server)
 In order to secure our development, the 'production' app runs behind nginx. The access credentials are in our private repo.
 
-Ensure you have created a specific `.env` file in `hyrax/` on your production infrastructure (see the example) and run with:
+Docker-compose commands must be run from the root of the project respository (where the -compose.yml files are situated). On the `saku05` and demo servers, this is at `/srv/ngdr/nims-hyrax`. Ensure you have created a specific `.env` file in `hyrax/` on your production infrastructure (see the example) and run with:
 
     docker-compose -f docker-compose.yml -f docker-compose-production.yml up -d
 
@@ -39,8 +39,40 @@ In order for the certificate verification to succeed, it is important not to des
 Since on the live server, the production compose file must be referred to each time a `docker-compose` command is made. To assist this, an alias similar to that below can be useful:
 
 ```bash
-TODO
+alias ngdrproddocker='docker-compose -f docker-compose.yml -f docker-compose-production.yml'
 ```
+
+Some example usage:
+
+```bash
+# Bring the whole application up to run in the background, building the containers
+ngdrproddocker up -d --build
+
+# Halt the system
+ngdrproddocker down
+
+# Re-create the nginx container without affecting the rest of the system (and run in the background with -d)
+ngdrproddocker up -d --build --no-deps --force-recreate nginx
+
+# View the logs for the web application container
+ngdrproddocker logs web
+```
+
+The data for the application is stored in docker volumes as specified by the compose files. These are:
+
+```bash
+$ docker volume list
+nims-hyrax_cache
+nims-hyrax_db
+nims-hyrax_derivatives
+nims-hyrax_fcrepo
+nims-hyrax_file_uploads
+nims-hyrax_letsencrypt
+nims-hyrax_redis
+nims-hyrax_solr_home
+```
+
+These will persist when the system is rebuilt. Deleting them will require importers etc. to run again.
 
 ### For Developers
 We use the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching model, so ensure you set up
