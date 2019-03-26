@@ -15,6 +15,8 @@ To build and run the system in a development environment, issue the docker-compo
 ```bash
 $ docker-compose up --build
 ```
+This will use the configuration in `docker-compose.yml` and `docker-compose-override.yml`. The reason the port exposure options are only present in the override file is so that these are not used in production. After some delay, you should see the application running:
+
  * You should see the Hyrax app at localhost:3000
  * Solr is available at localhost:8983/solr
  * Fedora is available at localhost:8080/fcrepo/rest
@@ -23,12 +25,22 @@ $ docker-compose up --build
 ### In production (& on the test server)
 In order to secure our development, the 'production' app runs behind nginx. The access credentials are in our private repo.
 
-Ensure you have created a `.env.production` file in `hyrax/` (see the example) and run with:
+Ensure you have created a specific `.env` file in `hyrax/` on your production infrastructure (see the example) and run with:
 
     docker-compose -f docker-compose.yml -f docker-compose-production.yml up -d
 
-* The service will run without Solr, etc. ports being exposed to the host
-* Hyrax is accessible behind http basic auth at ports 81 and 3000
+* The service will run without the ports of intermediary services such as Solr being exposed to the host.
+* Hyrax is accessible behind http basic auth at port 443, http requests to port 80 will be redirected to https.
+* To change or remove the http auth, edit the config in `docker/nginx/nginx.org` and the `.htpasswd` file. Credentials can be generated with the `htpasswd` command from the `apache2-utils` package (on Ubuntu).
+* The nginx container will automatically try to ascertain free-of-charge a [Certbot / LetsEncrypt](https://certbot.eff.org) certificate.
+
+In order for the certificate verification to succeed, it is important not to destroy and recreate the nginx container's volumes so fast as to hit the Certbot rate limit for new certificates. In addition, ports 80 and 443 on our application must be accessible from the Certbot servers (i.e. not blocked by firewall).
+
+Since on the live server, the production compose file must be referred to each time a `docker-compose` command is made. To assist this, an alias similar to that below can be useful:
+
+```bash
+TODO
+```
 
 ### For Developers
 We use the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching model, so ensure you set up
@@ -54,6 +66,8 @@ finishing bugfixes or releases with `git-flow` remember to also push tags with `
 [Docker cheat sheet](https://github.com/wsargent/docker-cheat-sheet)
 
 #### Installing Docker
+
+On `saku05` and the demo server on Digital Ocean we use docker version 18.09.3, and docker-compose version 1.23.2
 
 1. Install Docker [by following step 1 of the Docker Compose installation tutorial](https://docs.docker.com/compose/install/) on your machine.
 
