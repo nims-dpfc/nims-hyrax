@@ -19,8 +19,8 @@ RUN echo 'deb  http://deb.debian.org/debian stretch main contrib non-free'
 RUN echo 'deb-src  http://deb.debian.org/debian stretch main contrib non-free'
 
 
-RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list \
-    && apt-get update -qq \
+#RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list \
+RUN apt-get update -qq \
     && apt-get install -y --no-install-recommends \
     libpq-dev \
     libxml2-dev libxslt1-dev \
@@ -36,10 +36,10 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
     bzip2 unzip xz-utils \
     vim \
     # install open-jdk and ca-certs from jessie-backports
-    && apt-get install -t jessie-backports -y --no-install-recommends openjdk-8-jre-headless ca-certificates-java \
+    #&& apt-get install -t jessie-backports -y --no-install-recommends openjdk-8-jre-headless ca-certificates-java \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && /var/lib/dpkg/info/ca-certificates-java.postinst configure
+    && rm -rf /var/lib/apt/lists/*
+    #&& /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
 RUN mkdir -p /fits/ \
     && wget -q http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip -O /fits/fits-1.0.5.zip \

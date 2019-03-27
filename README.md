@@ -11,16 +11,24 @@ Open a console and try running `docker -h` and `docker-compose -h` to verify the
 
 Create the environment file `.env`. You can start by copying the template file `.env.template` to `.env` and customizing the values to your setup.
 
-To build and run the system in a development environment, issue the docker-compose `up` command:
+To build the system in a development environment, issue the docker-compose `build` command:
 ```bash
-$ docker-compose up --build
+$ docker-compose build
 ```
-This will use the configuration in `docker-compose.yml` and `docker-compose-override.yml`. The reason the port exposure options are only present in the override file is so that these are not used in production. After some delay, you should see the application running:
+This will use the configuration in `docker-compose.yml` and `docker-compose-override.yml`. The individual containers will build from their `Dockerfile`. The process will take a few minutes. The reason the port exposure options are only present in the override file is so that these are not used in production. After some delay, you should see the application running:
 
  * You should see the Hyrax app at localhost:3000
  * Solr is available at localhost:8983/solr
  * Fedora is available at localhost:8080/fcrepo/rest
  * For convenience, the default workflows are loaded, the default admin set and collection types are created and 3 users are created, as detailed [here](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/seed/setup.json)
+
+To run the containers after build, issue the `up` command (-d means run as daemon, in the background):
+
+```bash
+docker-compose up -d
+```
+
+You can see the state of the containers with `docker-compose ps`, and view logs e.g. for the web container using `docker-compose logs web`
 
 ### In production (& on the test server)
 In order to secure our development, the 'production' app runs behind nginx. The access credentials are in our private repo. The extra password is just temporary during the development phase since we are using publicly accessible servers.
