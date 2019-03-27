@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  mount BrowseEverything::Engine => '/browse'
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
   # This needs to appear before Hyrax's routes else sign_in and sign_out break
   devise_for :users, controllers: {sessions: 'users/sessions'}
@@ -13,6 +12,7 @@ Rails.application.routes.draw do
   mount Blacklight::Engine => '/'
   mount Hydra::RoleManagement::Engine => '/'
   mount Hyrax::Engine, at: '/'
+  mount BrowseEverything::Engine => '/browse'
 
   concern :exportable, Blacklight::Routes::Exportable.new
   concern :searchable, Blacklight::Routes::Searchable.new
