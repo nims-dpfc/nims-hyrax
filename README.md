@@ -57,6 +57,10 @@ ngdrproddocker up -d --build --no-deps --force-recreate nginx
 # View the logs for the web application container
 ngdrproddocker logs web
 
+# Create a log dump file
+ngdrproddocker logs web | tee web_logs_`date --iso-8601`
+# (writes to e.g. web_logs_2019-03-27)
+
 # View all running containers
 docker ps
 # (example output:)
