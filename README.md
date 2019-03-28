@@ -5,7 +5,7 @@
 
 ## Getting Started
 
-Clone the repository with `git clone https://github.com/antleaf/nims-hyrax.git`.
+Clone the repository with `git clone https://github.com/antleaf/nims-hyrax.git`. The source code for the MDR hyrax application is in the `hyrax` directory, and supporting docker containers reside in `docker`.
 
 Ensure you have docker and docker-compose. See [notes on installing docker](https://github.com/antleaf/nims-hyrax/blob/develop/README.md#installing-docker)
 
@@ -17,18 +17,20 @@ To build the system in a development environment, issue the docker-compose `buil
 ```bash
 $ docker-compose build
 ```
-This will use the configuration in `docker-compose.yml` and `docker-compose-override.yml`. The individual containers will build from their `Dockerfile`. The process will take a few minutes. The reason the port exposure options are only present in the override file is so that these are not used in production. After some delay, you should see the application running:
+This will use the configuration in `docker-compose.yml` and `docker-compose-override.yml`. The individual containers will build from their `Dockerfile`. The process will take a few minutes. The reason the port exposure options are only present in the override file is so that these are not used in production. 
+To run the containers after build, issue the `up` command (-d means run as daemon, in the background):
+
+```bash
+docker-compose up -d
+```
+
+After some delay, you should see the application running:
 
  * You should see the Hyrax app at localhost:3000
  * Solr is available at localhost:8983/solr
  * Fedora is available at localhost:8080/fcrepo/rest
  * For convenience, the default workflows are loaded, the default admin set and collection types are created and 3 users are created, as detailed [here](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/seed/setup.json)
 
-To run the containers after build, issue the `up` command (-d means run as daemon, in the background):
-
-```bash
-docker-compose up -d
-```
 
 You can see the state of the containers with `docker-compose ps`, and view logs e.g. for the web container using `docker-compose logs web`
 
