@@ -38,6 +38,23 @@ There are 3 `docker-compose` files provided in the repository, which build the c
   * [docker-compose.override.yml](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose.override.yml) This file exposes the ports for fcrepo, solr and the hyrax web container, so they an be accessed outside the container. If running this servcie in development or test, we could use this file.
   * [docker-compose-production.yml](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose-production.yml) builds the [nginx container](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose-production.yml#L15-L26) running the nginx service, which will reverse proxy requests from the web service, run by the web container. This will expose port 443 to the users, so they can interact with the materials data repository using https://mdr-domain-name.com
 
+The data for the application is stored in docker named volumes as specified by the compose files. These are:
+
+```bash
+$ docker volume list
+nims-hyrax_cache
+nims-hyrax_db
+nims-hyrax_derivatives
+nims-hyrax_fcrepo
+nims-hyrax_file_uploads
+nims-hyrax_letsencrypt
+nims-hyrax_redis
+nims-hyrax_solr_home
+```
+
+These will persist when the system is brought down and rebuilt. Deleting them will require importers etc. to run again.
+
+
 ## Running in development or test
 
 When running in development and test environment use `docker-compose`. This will use the docker-compose.yml file and the docker-compose.override.yml file and not use the docker-compose-production.yml.
@@ -57,9 +74,17 @@ alias ngdrdocker='docker-compose'
 
 ## Running in production
 
-when running in production, you need to use `docker-compose -f docker-compose.yml -f docker-compose-production.yml`, specifically mentioning the 2 files to use docker-compose.yml and docker-compose-production.yml and not using docker-compose.override.yml
+When running in production, you need to use `docker-compose -f docker-compose.yml -f docker-compose-production.yml`, specifically mentioning the 2 files to use docker-compose.yml and docker-compose-production.yml and not using docker-compose.override.yml
 
 The production compose file must be referred to each time a `docker-compose` command is made. To assist this, an alias similar to that below can be useful:
+
+* The service will run without the ports of intermediary services such as Solr being exposed to the host.
+* Hyrax is accessible behind http basic auth at port 443, http requests to port 80 will be redirected to https.
+* To change or remove the http auth, edit the config in `docker/nginx/nginx.org` and the `.htpasswd` file. Credentials can be generated with the `htpasswd` command from the `apache2-utils` package (on Ubuntu).
+* The nginx container will automatically try to ascertain free-of-charge a [Certbot / LetsEncrypt](https://certbot.eff.org) certificate.
+
+In order for the certificate verification to succeed, it is important not to destroy and recreate the nginx container's volumes so fast as to hit the Certbot rate limit for new certificates. In addition, ports 80 and 443 on our application must be accessible from the Certbot servers (i.e. not blocked by firewall).
+
 
 ```bash
 alias ngdrdocker='docker-compose -f docker-compose.yml -f docker-compose-production.yml'
@@ -104,30 +129,27 @@ $ docker-compose -f docker-compose.yml -f docker-compose-production.yml up -d
 The containers should all start and the services should be available in their end points as described above
 * web server at http://localhost:3000 in development and https://domain-name in production
 
-### docker container status
+### docker container status and logs
 
 You can see the state of the containers with `docker-compose ps`, and view logs e.g. for the web container using `docker-compose logs web`
 
+The services that you would need to monitor the ligs for are docker mainly web and workers.
 
 
-Docker-compose commands must be run from the root of the project respository (where the -compose.yml files are situated). On the `saku05` and demo servers, this is at `/srv/ngdr/nims-hyrax`. Ensure you have created a specific `.env` file in `hyrax/` on your production infrastructure (see the example) and run with:
+### Backups
 
-    docker-compose -f docker-compose.yml -f docker-compose-production.yml up -d
+There is [docker documentation](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes) advising how to back up volumes and their data.
 
-* The service will run without the ports of intermediary services such as Solr being exposed to the host.
-* Hyrax is accessible behind http basic auth at port 443, http requests to port 80 will be redirected to https.
-* To change or remove the http auth, edit the config in `docker/nginx/nginx.org` and the `.htpasswd` file. Credentials can be generated with the `htpasswd` command from the `apache2-utils` package (on Ubuntu).
-* The nginx container will automatically try to ascertain free-of-charge a [Certbot / LetsEncrypt](https://certbot.eff.org) certificate.
+### System initialisation and configuration
 
-In order for the certificate verification to succeed, it is important not to destroy and recreate the nginx container's volumes so fast as to hit the Certbot rate limit for new certificates. In addition, ports 80 and 443 on our application must be accessible from the Certbot servers (i.e. not blocked by firewall).
+* As mentioned above, there is a `.env` file containing application secrets. This **must not** be checked into version control!
+* The system is configured on start-up using the `docker-entrypoint.sh` script, which configures users in the `seed/setup.json` file.
+* Importers are run manually in the container using the rails console. See [The project wiki](https://github.com/antleaf/nims-hyrax/wiki) for more information.
 
-Since on the live server, the production compose file must be referred to each time a `docker-compose` command is made. To assist this, an alias similar to that below can be useful:
 
-```bash
-alias ngdrproddocker='docker-compose -f docker-compose.yml -f docker-compose-production.yml'
-```
+### Some example docker commands and usage:
 
-Some example usage:
+[Docker cheat sheet](https://github.com/wsargent/docker-cheat-sheet)
 
 ```bash
 # Bring the whole application up to run in the background, building the containers
@@ -161,55 +183,6 @@ a9e18ff5eef7        ualbertalib/docker-fcrepo4:4.7   "catalina.sh run"        5 
 # Using its container name, you can run a shell in a container to view or make changes directly
 docker exec -it nims-hyrax_nginx_1 sh
 ```
-
-The data for the application is stored in docker named volumes as specified by the compose files. These are:
-
-```bash
-$ docker volume list
-nims-hyrax_cache
-nims-hyrax_db
-nims-hyrax_derivatives
-nims-hyrax_fcrepo
-nims-hyrax_file_uploads
-nims-hyrax_letsencrypt
-nims-hyrax_redis
-nims-hyrax_solr_home
-```
-
-These will persist when the system is brought down and rebuilt. Deleting them will require importers etc. to run again.
-
-### Backups
-
-There is [docker documentation](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes) advising how to back up volumes and their data.
-
-### System initialisation and configuration
-
-* As mentioned above, there is a `.env` file containing application secrets. This **must not** be checked into version control!
-* The system is configured on start-up using the `docker-entrypoint.sh` script, which configures users in the `seed/setup.json` file.
-* Importers are run manually in the container using the rails console. See [The project wiki](https://github.com/antleaf/nims-hyrax/wiki) for more information.
-
-### For Developers
-We use the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching model, so ensure you set up
-your project directory by running `git flow init` and accept the defaults.
-[Installation for git-flow](https://github.com/nvie/gitflow/wiki/Installation).
-
-```shell
-Branch name for production releases: [master]
-Branch name for "next release" development: [develop]
-Feature branches? [feature/]
-Bugfix branches? [bugfix/]
-Release branches? [release/]
-Hotfix branches? [hotfix/]
-Support branches? [support/]
-Version tag prefix? []
-Hooks and filters directory? [<your-path-to-checked-out-repo>/nims-hyrax/.git/hooks]
-```
-
-The default branch in this repository is `develop`, and `master` should be used for stable releases only. After
-finishing bugfixes or releases with `git-flow` remember to also push tags with `git push --tags`.
-
-### Docker tips
-[Docker cheat sheet](https://github.com/wsargent/docker-cheat-sheet)
 
 #### Installing Docker
 
