@@ -3,9 +3,13 @@ class ComplexSpecimenType < ActiveTriples::Resource
 
   configure type: ::RDF::Vocab::NimsRdp['Specimen']
 
-  property :chemical_composition, predicate: ::RDF::Vocab::NimsRdp["chemical-composition"]
+  property :complex_chemical_composition, predicate: ::RDF::Vocab::NimsRdp["chemical-composition"],
+            class_name:"ComplexChemicalComposition"
+  accepts_nested_attributes_for :complex_chemical_composition
 
-  property :crystallographic_structure, predicate: ::RDF::Vocab::NimsRdp["crystallographic-structure"]
+  property :complex_crystallographic_structure, predicate: ::RDF::Vocab::NimsRdp["crystallographic-structure"],
+            class_name:"ComplexCrystallographicStructure"
+  accepts_nested_attributes_for :complex_crystallographic_structure
 
   property :description, predicate: ::RDF::Vocab::DC11.description
 
@@ -13,17 +17,29 @@ class ComplexSpecimenType < ActiveTriples::Resource
             class_name:"ComplexIdentifier"
   accepts_nested_attributes_for :complex_identifier
 
-  property :material_types, predicate: ::RDF::Vocab::NimsRdp["material-types"]
+  property :complex_material_type, predicate: ::RDF::Vocab::NimsRdp["material-type"],
+            class_name:"ComplexMaterialType"
+  accepts_nested_attributes_for :complex_material_type
 
-  property :purchase_record, predicate: ::RDF::Vocab::NimsRdp["purchase-record"],
+  property :complex_purchase_record, predicate: ::RDF::Vocab::NimsRdp["purchase-record"],
             class_name:"ComplexPurchaseRecord"
-  accepts_nested_attributes_for :purchase_record
+  accepts_nested_attributes_for :complex_purchase_record
 
   property :complex_relation, predicate: ::RDF::Vocab::DC.relation,
             class_name:"ComplexRelation"
   accepts_nested_attributes_for :complex_relation
 
-  property :structural_features, predicate: ::RDF::Vocab::NimsRdp["structural-features"]
+  property :complex_structural_feature, predicate: ::RDF::Vocab::NimsRdp["structural-feature"],
+            class_name:"ComplexStructuralFeature"
+  accepts_nested_attributes_for :complex_structural_feature
+
+  property :complex_state, predicate: ::RDF::Vocab::NimsRdp["state-of-matter"],
+            class_name:"ComplexStateOfMatter"
+  accepts_nested_attributes_for :complex_state
+
+  property :complex_shape, predicate: ::RDF::Vocab::NimsRdp["shape"],
+            class_name:"ComplexShape"
+  accepts_nested_attributes_for :complex_shape
 
   property :title, predicate: ::RDF::Vocab::NimsRdp["specimen-title"]
 

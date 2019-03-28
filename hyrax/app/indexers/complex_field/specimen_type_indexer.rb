@@ -12,11 +12,12 @@ module ComplexField
       solr_doc[Solrizer.solr_name('specimen_type', :stored_searchable)] = object.specimen_type.map { |s| s.title.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('specimen_type_description', :stored_searchable)] = object.specimen_type.map { |s| s.description.reject(&:blank?).first }
       object.specimen_type.each do |st|
-        unless st.chemical_composition.reject(&:blank?).blank?
-          fld_name = Solrizer.solr_name('chemical_composition', :stored_searchable)
-          solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
-          solr_doc[fld_name] << st.chemical_composition.reject(&:blank?)
-          solr_doc[fld_name].flatten!
+        st.chemical_composition.each do |cc|
+          cc.complex_identifier.each do |id|
+            fld_name = Solrizer.solr_name('chemical_composition_identifier', :symbol)
+            solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+            solr_doc[fld_name] << id.identifier.reject(&:blank?).first
+          end
         end
         unless st.crystallographic_structure.reject(&:blank?).blank?
           fld_name = Solrizer.solr_name('crystallographic_structure', :stored_searchable)

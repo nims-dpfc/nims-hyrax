@@ -1,15 +1,51 @@
 module ComplexValidation
   extend ActiveSupport::Concern
   included do
+    # affiliation_blank
+    #   Requires job_title, organization
+    resource_class.send(:define_method, :affiliation_blank) do |attributes|
+      organization_blank = true
+      Array(attributes[:complex_organization_attributes]).each do |org|
+        organization_blank = organization_blank && Array(org[:organization]).all?(&:blank?)
+      end
+      Array(attributes[:job_title]).all?(&:blank?) || organization_blank
+    end
     # date_blank
     #   Requires date
     resource_class.send(:define_method, :date_blank) do |attributes|
       Array(attributes[:date]).all?(&:blank?)
     end
+    # history_blank
+    #   Requires upstream or downsteam or event date or operator
+    resource_class.send(:define_method, :history_blank) do |attributes|
+      date_blank = true
+      Array(attributes[:complex_event_date_attributes]).each do |dt|
+        date_blank = date_blank && Array(dt[:date]).all?(&:blank?)
+      end
+      person_blank = true
+      Array(attributes[:complex_operator_attributes]).each do |p|
+        person_blank = person_blank &&
+        Array(p[:first_name]).all?(&:blank?) &&
+        Array(p[:last_name]).all?(&:blank?) &&
+        Array(p[:name]).all?(&:blank?)
+      end
+      Array(attributes[:upstream]).all?(&:blank?) &&
+      Array(attributes[:downstream]).all?(&:blank?) &&
+      date_blank && person_blank
+    end
     # identifier_blank
     #   Requires identifier
     resource_class.send(:define_method, :identifier_blank) do |attributes|
       Array(attributes[:identifier]).all?(&:blank?)
+    end
+    # identifier_description_blank
+    #   Requires description, identifier
+    resource_class.send(:define_method, :identifier_description_blank) do |attributes|
+      identifiers_blank = true
+      Array(attributes[:complex_identifier_attributes]).each do |id|
+        identifiers_blank = identifiers_blank && Array(id[:identifier]).all?(&:blank?)
+      end
+      Array(attributes[:description]).all?(&:blank?) || identifiers_blank
     end
     # instrument_blank
     #   Requires date, identifier and person
