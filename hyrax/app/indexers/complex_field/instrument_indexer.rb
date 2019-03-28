@@ -8,12 +8,12 @@ module ComplexField
 
     def index_instrument(solr_doc)
       solr_doc[Solrizer.solr_name('complex_instrument', :displayable)] = object.complex_instrument.to_json
-      solr_doc[Solrizer.solr_name('instrument_title', :stored_searchable)] = object.complex_instrument.map { |i| i.title.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('instrument_description', :stored_searchable)] = object.complex_instrument.map { |i| i.description.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('instrument_manufacturer', :stored_searchable)] = object.complex_instrument.map { |i| i.manufacturer.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('instrument_title', :stored_searchable)] = object.complex_instrument.map { |i| i.title.reject(&:blank?) }
+      solr_doc[Solrizer.solr_name('instrument_description', :stored_searchable)] = object.complex_instrument.map { |i| i.description.reject(&:blank?) }
+      solr_doc[Solrizer.solr_name('instrument_manufacturer', :stored_searchable)] = object.complex_instrument.map { |i| i.manufacturer.reject(&:blank?) }
       solr_doc[Solrizer.solr_name('instrument_manufacturer', :facetable)] = object.complex_instrument.map { |i| i.manufacturer.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('instrument_organization', :stored_searchable)] = object.complex_instrument.map { |i| i.organization.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('instrument_organization', :facetable)] = object.complex_instrument.map { |i| i.organization.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('instrument_model_number', :stored_searchable)] = object.complex_instrument.map { |i| i.model_number.reject(&:blank?) }
+      solr_doc[Solrizer.solr_name('instrument_model_number', :facetable)] = object.complex_instrument.map { |i| i.model_number.reject(&:blank?).first }
       object.complex_instrument.each do |i|
         i.complex_date.each do |d|
           unless d.description.blank?
@@ -52,6 +52,15 @@ module ComplexField
           fld_name = Solrizer.solr_name('instrument_identifier', :symbol)
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
           solr_doc[fld_name] << id.identifier.reject(&:blank?).first
+        end
+        i.complex_organization.each do |org|
+          fld_name = Solrizer.solr_name('instrument_organization', :stored_searchable)
+          solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+          solr_doc[fld_name] << org.organization.reject(&:blank?)
+          fld_name = Solrizer.solr_name('instrument_organization', :stored_searchable)
+          solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+          solr_doc[fld_name] << org.organization.reject(&:blank?)
+          # TODO Facet by role
         end
       end
 
