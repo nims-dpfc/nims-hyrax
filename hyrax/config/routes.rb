@@ -8,11 +8,11 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  mount BrowseEverything::Engine => '/browse'
   mount Qa::Engine => '/authorities'
   mount Blacklight::Engine => '/'
   mount Hydra::RoleManagement::Engine => '/'
   mount Hyrax::Engine, at: '/'
-  mount BrowseEverything::Engine => '/browse'
 
   concern :exportable, Blacklight::Routes::Exportable.new
   concern :searchable, Blacklight::Routes::Searchable.new
