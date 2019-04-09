@@ -73,4 +73,3 @@ gem 'pg'
 
 gem 'riiif', '~> 2.0'
 gem 'airbrake', '~> 5.0'
-gem 'browse-everything'
