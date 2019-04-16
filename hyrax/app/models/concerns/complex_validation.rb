@@ -110,18 +110,45 @@ module ComplexValidation
     # specimen_type_blank
     #   Requires
     #     chemical_composition, crystallographic_structure, description,
-    #     identifier, material_types, structural_features and title
+    #     identifier, material_type, structural_feature and title
     resource_class.send(:define_method, :specimen_type_blank) do |attributes|
-      identifiers_blank = true
-      Array(attributes[:complex_identifier_attributes]).each do |id|
-        identifiers_blank = identifiers_blank && Array(id[:identifier]).all?(&:blank?)
+      # complex_chemical_composition blank
+      cc_blank = true
+      Array(attributes[:complex_chemical_composition_attributes]).each do |cc|
+        cc_blank = cc_blank && Array(cc[:description]).all?(&:blank?)
       end
-      Array(attributes[:chemical_composition]).all?(&:blank?) ||
-      Array(attributes[:crystallographic_structure]).all?(&:blank?) ||
+      # complex_crystallographic_structure blank
+      cs_blank = true
+      Array(attributes[:complex_crystallographic_structure_attributes]).each do |cs|
+        cs_blank = cs_blank && Array(cs[:description]).all?(&:blank?)
+      end
+      # identifier blank
+      id_blank = true
+      Array(attributes[:complex_identifier_attributes]).each do |id|
+        id_blank = id_blank && Array(id[:identifier]).all?(&:blank?)
+      end
+      # complex_material_type blank
+      mt_blank = true
+      Array(attributes[:complex_material_type_attributes]).each do |mt|
+        mt_blank = mt_blank &&
+                   Array(mt[:description]).all?(&:blank?) &&
+                   Array(mt[:material_type]).all?(&:blank?) &&
+                   Array(mt[:sub_material_type]).all?(&:blank?)
+      end
+      # complex_structural_feature blank
+      sf_blank = true
+      Array(attributes[:complex_structural_feature_attributes]).each do |sf|
+        sf_blank = sf_blank &&
+                   Array(sf[:description]).all?(&:blank?) &&
+                   Array(sf[:category]).all?(&:blank?) &&
+                   Array(sf[:sub_category]).all?(&:blank?)
+      end
+      cc_blank ||
+      cs_blank ||
       Array(attributes[:description]).all?(&:blank?) ||
-      identifiers_blank ||
-      Array(attributes[:material_types]).all?(&:blank?) ||
-      Array(attributes[:structural_features]).all?(&:blank?) ||
+      id_blank ||
+      mt_blank ||
+      sf_blank ||
       Array(attributes[:title]).all?(&:blank?)
     end
     # version_blank

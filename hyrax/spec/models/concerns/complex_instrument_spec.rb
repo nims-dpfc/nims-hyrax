@@ -46,14 +46,35 @@ RSpec.describe ComplexInstrument do
             identifier: ['123456'],
             label: ['Local']
           }],
-          function_1: ['Has a function'],
-          function_2: ['Has two functions'],
-          manufacturer: 'Manufacturer name',
+          instrument_function_attributes: [{
+            column_number: 1,
+            main_category_type: 'some value',
+            sub_category_type: 'some other value',
+            description: 'Instrument function description'
+          }],
+          manufacturer_attributes: [{
+            organization: 'Foo',
+            sub_organization: 'Bar',
+            purpose: 'Manufacturer',
+            complex_identifier_attributes: [{
+              identifier: '123456789m',
+              scheme: 'Local'
+            }]
+          }],
+          model_number: '123xfty',
           complex_person_attributes: [{
             name: ['Name of operator'],
             role: ['Operator']
           }],
-          organization: 'Organisation',
+          managing_organization_attributes: [{
+            organization: 'FooFoo',
+            sub_organization: 'BarBar',
+            purpose: 'Managing organization',
+            complex_identifier_attributes: [{
+              identifier: '123456789mo',
+              scheme: 'Local'
+            }]
+          }],
           title: 'Instrument title'
         }
       ]
@@ -66,13 +87,27 @@ RSpec.describe ComplexInstrument do
     expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['123456']
     expect(@obj.complex_instrument.first.complex_identifier.first.label).to eq ['Local']
-    expect(@obj.complex_instrument.first.function_1).to eq ['Has a function']
-    expect(@obj.complex_instrument.first.function_2).to eq ['Has two functions']
-    expect(@obj.complex_instrument.first.manufacturer).to eq ['Manufacturer name']
+    expect(@obj.complex_instrument.first.instrument_function.first).to be_kind_of ActiveTriples::Resource
+    expect(@obj.complex_instrument.first.instrument_function.first.column_number).to eq [1]
+    expect(@obj.complex_instrument.first.instrument_function.first.main_category_type).to eq ['some value']
+    expect(@obj.complex_instrument.first.instrument_function.first.sub_category_type).to eq ['some other value']
+    expect(@obj.complex_instrument.first.instrument_function.first.description).to eq ['Instrument function description']
+    expect(@obj.complex_instrument.first.manufacturer.first).to be_kind_of ActiveTriples::Resource
+    expect(@obj.complex_instrument.first.manufacturer.first.organization).to eq ['Foo']
+    expect(@obj.complex_instrument.first.manufacturer.first.sub_organization).to eq ['Bar']
+    expect(@obj.complex_instrument.first.manufacturer.first.purpose).to eq ['Manufacturer']
+    expect(@obj.complex_instrument.first.manufacturer.first.complex_identifier.first.identifier).to eq ['123456789m']
+    expect(@obj.complex_instrument.first.manufacturer.first.complex_identifier.first.scheme).to eq ['Local']
+    expect(@obj.complex_instrument.first.model_number).to eq ['123xfty']
     expect(@obj.complex_instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_instrument.first.complex_person.first.name).to eq ['Name of operator']
     expect(@obj.complex_instrument.first.complex_person.first.role).to eq ['Operator']
-    expect(@obj.complex_instrument.first.organization).to eq ['Organisation']
+    expect(@obj.complex_instrument.first.managing_organization.first).to be_kind_of ActiveTriples::Resource
+    expect(@obj.complex_instrument.first.managing_organization.first.organization).to eq ['FooFoo']
+    expect(@obj.complex_instrument.first.managing_organization.first.sub_organization).to eq ['BarBar']
+    expect(@obj.complex_instrument.first.managing_organization.first.purpose).to eq ['Managing organization']
+    expect(@obj.complex_instrument.first.managing_organization.first.complex_identifier.first.identifier).to eq ['123456789mo']
+    expect(@obj.complex_instrument.first.managing_organization.first.complex_identifier.first.scheme).to eq ['Local']
     expect(@obj.complex_instrument.first.title).to eq ['Instrument title']
   end
 
