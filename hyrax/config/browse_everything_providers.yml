@@ -9,6 +9,9 @@ google_drive:
 dropbox:
  :client_id: <%= ENV['DROPBOX_CLIENT_ID'] %>
  :client_secret: <%= ENV['DROPBOX_CLIENT_SECRET'] %>
+box:
+ :client_id: <%= ENV['BOX_CLIENT_ID'] %>
+ :client_secret: <%= ENV['BOX_CLIENT_SECRET'] %>
 
 # file_system:
 #  :home: ""
