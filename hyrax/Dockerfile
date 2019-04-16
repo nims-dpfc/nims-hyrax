@@ -18,7 +18,6 @@ ENV APP_PRODUCTION=/data/ \
 RUN echo 'deb  http://deb.debian.org/debian stretch main contrib non-free'
 RUN echo 'deb-src  http://deb.debian.org/debian stretch main contrib non-free'
 
-
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libpq-dev \
     libxml2-dev libxslt1-dev \
