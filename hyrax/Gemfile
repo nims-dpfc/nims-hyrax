@@ -73,6 +73,6 @@ gem 'pg'
 
 gem 'riiif', '~> 2.0'
 
-# group :production do
-#   gem 'airbrake', '~> 5.0'
-# end
+group :production do
+  gem 'airbrake', '~> 5.0'
+end
