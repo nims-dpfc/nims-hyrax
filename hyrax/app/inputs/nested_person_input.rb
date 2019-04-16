@@ -30,7 +30,7 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
-    --- affiliation
+    # --- affiliation
     field = :affiliation
     field_name = name_for(attribute_name, index, field)
     field_id = id_for(attribute_name, index, field)
