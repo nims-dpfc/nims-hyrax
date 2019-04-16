@@ -19,8 +19,7 @@ RUN echo 'deb  http://deb.debian.org/debian stretch main contrib non-free'
 RUN echo 'deb-src  http://deb.debian.org/debian stretch main contrib non-free'
 
 
-RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list \
-    && apt-get update -qq \
+RUN apt-get update -qq \
     && apt-get install -y --no-install-recommends \
     libpq-dev \
     libxml2-dev libxslt1-dev \
