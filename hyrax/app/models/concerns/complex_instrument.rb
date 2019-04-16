@@ -16,7 +16,7 @@ class ComplexInstrument < ActiveTriples::Resource
   accepts_nested_attributes_for :complex_identifier
 
   property :instrument_function, predicate: ::RDF::Vocab::NimsRdp["instrument-function"],
-            class_name:"ComplexCategoryCode"
+            class_name:"ComplexInstrumentFunction"
   accepts_nested_attributes_for :instrument_function
 
   property :manufacturer, predicate: ::RDF::Vocab::NimsRdp["instrument-manufacturer"],

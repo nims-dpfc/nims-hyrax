@@ -11,6 +11,13 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::InstrumentIndexer
   include ComplexField::RelationIndexer
   include ComplexField::SpecimenTypeIndexer
+  include ComplexField::ChemicalCompositionIndexer
+  include ComplexField::CrystallographicStructureIndexer
+  include ComplexField::MaterialTypeIndexer
+  include ComplexField::PurchaseRecordIndexer
+  include ComplexField::ShapeIndexer
+  include ComplexField::StateOfMatterIndexer
+  include ComplexField::StructuralFeatureIndexer
 
   def self.facet_fields
     # solr fields that will be treated as facets
@@ -27,7 +34,11 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::DateIndexer.date_facet_fields
       fields.concat ComplexField::PersonIndexer.person_facet_fields
       fields.concat ComplexField::RightsIndexer.rights_facet_fields
-      # fields.concat ComplexField::InstrumentIndexer.instrument_facet_fields
+      fields.concat ComplexField::InstrumentIndexer.instrument_facet_fields
+      fields.concat ComplexField::MaterialTypeIndexer.material_type_facet_fields
+      fields.concat ComplexField::PurchaseRecordIndexer.purchase_record_facet_fields
+      fields.concat ComplexField::StateOfMatterIndexer.state_of_matter_search_fields
+      fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_facet_fields
     end
   end
 
@@ -52,7 +63,14 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::CustomPropertyIndexer.custom_property_search_fields
       fields.concat ComplexField::PersonIndexer.person_search_fields
       fields.concat ComplexField::RightsIndexer.rights_search_fields
-      # fields.concat ComplexField::InstrumentIndexer.instrument_search_fields
+      fields.concat ComplexField::InstrumentIndexer.instrument_search_fields
+      fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_search_fields
+      fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_search_fields
+      fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_search_fields
+      fields.concat ComplexField::MaterialTypeIndexer.material_type_search_fields
+      fields.concat ComplexField::PurchaseRecordIndexer.purchase_record_search_fields
+      fields.concat ComplexField::ShapeIndexer.shape_search_fields
+      fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_search_fields
     end
   end
 
@@ -77,7 +95,8 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::CustomPropertyIndexer.custom_property_show_fields
       fields.concat ComplexField::PersonIndexer.person_show_fields
       fields.concat ComplexField::RightsIndexer.rights_show_fields
-      # fields.concat ComplexField::InstrumentIndexer.instrument_show_fields
+      fields.concat ComplexField::InstrumentIndexer.instrument_show_fields
+      fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_show_fields
     end
   end
 

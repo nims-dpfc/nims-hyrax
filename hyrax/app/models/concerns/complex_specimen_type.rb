@@ -25,28 +25,24 @@ class ComplexSpecimenType < ActiveTriples::Resource
             class_name:"ComplexPurchaseRecord"
   accepts_nested_attributes_for :complex_purchase_record
 
-  property :complex_relation, predicate: ::RDF::Vocab::DC.relation,
-            class_name:"ComplexRelation"
-  accepts_nested_attributes_for :complex_relation
+  property :complex_shape, predicate: ::RDF::Vocab::NimsRdp["shape"],
+            class_name:"ComplexShape"
+  accepts_nested_attributes_for :complex_shape
+
+  property :complex_state_of_matter, predicate: ::RDF::Vocab::NimsRdp["state-of-matter"],
+            class_name:"ComplexStateOfMatter"
+  accepts_nested_attributes_for :complex_state_of_matter
 
   property :complex_structural_feature, predicate: ::RDF::Vocab::NimsRdp["structural-feature"],
             class_name:"ComplexStructuralFeature"
   accepts_nested_attributes_for :complex_structural_feature
-
-  property :complex_state, predicate: ::RDF::Vocab::NimsRdp["state-of-matter"],
-            class_name:"ComplexStateOfMatter"
-  accepts_nested_attributes_for :complex_state
-
-  property :complex_shape, predicate: ::RDF::Vocab::NimsRdp["shape"],
-            class_name:"ComplexShape"
-  accepts_nested_attributes_for :complex_shape
 
   property :title, predicate: ::RDF::Vocab::NimsRdp["specimen-title"]
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)
     if uri.try(:node?)
-      uri = RDF::URI("#specimen#{uri.to_s.gsub('_:', '')}")
+      uri = RDF::URI("#specimen_type#{uri.to_s.gsub('_:', '')}")
     elsif uri.start_with?("#")
       uri = RDF::URI(uri)
     end
