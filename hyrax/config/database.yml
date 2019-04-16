@@ -22,5 +22,5 @@ test:
 
 production:
   <<: *default
-  database: hyrax_production
+  database: <%= ENV['APP_DB'] || 'hyrax_production' %>
   pool: 50
