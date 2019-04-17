@@ -8,7 +8,7 @@ module Hyrax
     self.terms -= [
       # Fields not interested in
       :based_near, :contributor, :creator, :date_created, :identifier, :license,
-      :rights_statement, :related_url, :source,
+      :related_url, :rights_statement, :source,
       # Fields interested in, but removing to re-order
       :title, :description, :keyword, :language, :publisher, :resource_type, :subject
       # Fields that are not displayed
@@ -25,7 +25,9 @@ module Hyrax
       # :instrument, # requires fields with 2nd level of nesting
       :origin_system_provenance, :properties_addressed,
       :complex_relation,
-      :specimen_set, :specimen_type, :synthesis_and_processing, :custom_property
+      :specimen_set,
+      # :specimen_type,
+      :synthesis_and_processing, :custom_property
     ]
 
     self.required_fields -= [
@@ -44,6 +46,16 @@ module Hyrax
       :complex_version, :custom_property].freeze
 
     protected
+
+    def self.permitted_affiliation_params
+      [:id,
+       :_destroy,
+       {
+         job_title: [],
+	 complex_organization_attributes: permitted_organization_params,
+       }
+      ]
+    end
 
     def self.permitted_date_params
       [:id,
@@ -84,13 +96,25 @@ module Hyrax
       ]
     end
 
+    def self.permitted_organization_params
+      [:id,
+       :_destroy,
+       {
+         organization: [],
+         sub_organization: [],
+	 purpose: [],
+	 complex_identifier_attributes: permitted_identifier_params,
+       }
+      ]
+    end
+
     def self.permitted_person_params
       [:id,
        :_destroy,
        {
          name: [],
          role: [],
-         affiliation: [],
+         complex_affiliation_attributes: permitted_affiliation_params,
          complex_identifier_attributes: permitted_identifier_params,
          uri: []
        }
