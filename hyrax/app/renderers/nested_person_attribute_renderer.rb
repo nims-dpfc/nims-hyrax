@@ -22,10 +22,20 @@ class NestedPersonAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
         val = link_to(ERB::Util.h(creator_name), search_path(creator_name))
         person << [label, val]
       end
-      unless v.dig('affiliation').blank?
+      unless v.dig('complex_affiliation').blank?
         label = 'Affiliation'
-        val = v['affiliation'][0]
+        val = ''
         person << [label, val]
+        v['complex_affiliation'].each do |v2|
+          unless v2.dig('complex_organization').blank?
+            val = v2['complex_organization'][0].fetch('organization', [])[0]
+            label = "Organization"
+            person << [label, val] unless val.blank?
+            val = v2['complex_organization'][0].fetch('sub_organization', [])[0]
+            label = "Sub organization"
+            person << [label, val] unless val.blank?
+          end
+        end
       end
       unless v.dig('role').blank?
         label = 'Role'
