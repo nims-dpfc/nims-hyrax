@@ -2,7 +2,7 @@ class NestedSourceInput < NestedAttributesInput
 
 protected
 
-  def build_components(attribute_name, value, index, options)
+  def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
     source_statement = value
@@ -15,8 +15,8 @@ protected
 
     # --- title
     field = :title
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
@@ -32,8 +32,8 @@ protected
 
     # --- alternative_title
     field = :alternative_title
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
@@ -49,8 +49,8 @@ protected
 
     # --- start_page
     field = :start_page
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
@@ -66,8 +66,8 @@ protected
 
     # --- end_page
     field = :end_page
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
@@ -83,8 +83,8 @@ protected
 
     # --- issue
     field = :issue
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
@@ -100,8 +100,8 @@ protected
 
     # --- sequence_number
     field = :sequence_number
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
@@ -117,8 +117,8 @@ protected
 
     # --- total_number_of_pages
     field = :total_number_of_pages
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = source_statement.send(field).first
 
     out << "<div class='row'>"
@@ -137,8 +137,8 @@ protected
 
     # --- volume
     field = :volume
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = source_statement.send(field).first
 
     out << "  <div class='col-md-3'>"
@@ -153,7 +153,7 @@ protected
     # --- delete checkbox
     field_label = 'Source'
     out << "  <div class='col-md-3'>"
-    out << destroy_widget(attribute_name, index, field_label)
+    out << destroy_widget(attribute_name, index, field_label, parent)
     out << '  </div>'
 
     out << '</div>' # last row

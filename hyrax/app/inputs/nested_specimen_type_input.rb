@@ -2,7 +2,7 @@ class NestedSpecimenTypeInput < NestedAttributesInput
 
 protected
 
-  def build_components(attribute_name, value, index, options)
+  def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
     # Requires
@@ -27,8 +27,8 @@ protected
 
     # --- title
     field = :title
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = spect_statement.send(field).first
 
     out << "<div class='row'>"
@@ -44,8 +44,8 @@ protected
 
     # --- chemical_composition
     field = :chemical_composition
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = spect_statement.send(field).first
 
     out << "<div class='row'>"
@@ -61,8 +61,8 @@ protected
 
     # --- crystallographic_structure
     field = :crystallographic_structure
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = spect_statement.send(field).first
 
     out << "<div class='row'>"
@@ -79,8 +79,8 @@ protected
     # --- material_types
     mat_options = MaterialTypeService.new.select_all_options
     field = :material_types
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = spect_statement.send(field).first
 
     out << "<div class='row'>"
@@ -97,8 +97,8 @@ protected
     # --- structural_features
     sf_options = StructuralFeatureService.new.select_all_options
     field = :structural_features
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = spect_statement.send(field).first
 
     out << "<div class='row'>"
@@ -117,8 +117,8 @@ protected
 
     # --- description
     field = :description
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = spect_statement.send(field).first
 
     out << "  <div class='col-md-3'>"
@@ -133,7 +133,7 @@ protected
     # --- delete checkbox
     field_label = 'Specimen type'
     out << "  <div class='col-md-3'>"
-    out << destroy_widget(attribute_name, index, field_label)
+    out << destroy_widget(attribute_name, index, field_label, parent)
     out << '  </div>'
 
     out << '</div>' # last row
