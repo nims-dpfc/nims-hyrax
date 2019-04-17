@@ -2,7 +2,7 @@ class NestedPersonInput < NestedAttributesInput
 
 protected
 
-  def build_components(attribute_name, value, index, options)
+  def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
     person_statement = value
@@ -13,10 +13,16 @@ protected
       required = true
     end
 
+    # Add remove elemnt only if element repeats
+    repeats = options.delete(:repeats)
+    repeats = true if repeats.nil?
+
+    parent_attribute = name_for(attribute_name, index, '', parent)[0..-5]
+
     # --- name
     field = :name
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = person_statement.send(field).first
 
     out << "<div class='row'>"
@@ -30,22 +36,43 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
-    # --- affiliation
-    field = :affiliation
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
-    field_value = person_statement.send(field).first
+    # --- complex_identifier
+    field = :complex_identifier
+    field_value = person_statement.send(field)
+    if field_value.blank?
+      person_statement.complex_identifier.build
+      field_value = person_statement.send(field)
+    end
+    nested_fields = NestedIdentifierInput.new(@builder, field, nil, :multi_value, {})
+    out << "<div class='inner-nested'>"
+    out << "<div class='form-group'>"
+    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Identifier</label>"
+    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    out << "</div>"
+    # out << "  <button type='button' class='btn btn-link add'>"
+    # out << "    <span class='glyphicon glyphicon-plus'></span>"
+    # out << "    <span class='controls-add-text'>Add another identifier</span>"
+    # out << "  </button>"
+    out << "</div>" # row
 
-    out << "<div class='row'>"
-    out << "  <div class='col-md-3'>"
-    out << template.label_tag(field_name, field.to_s.humanize, required: false)
-    out << '  </div>'
-
-    out << "  <div class='col-md-9'>"
-    out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id, required: false))
-    out << '  </div>'
-    out << '</div>' # row
+    # --- complex_affiliation
+    field = :complex_affiliation
+    field_value = person_statement.send(field)
+    if field_value.blank?
+      person_statement.complex_affiliation.build
+      field_value = person_statement.send(field)
+    end
+    nested_fields = NestedAffiliationInput.new(@builder, field, nil, :multi_value, {})
+    out << "<div class='inner-nested'>"
+    out << "<div class='form-group'>"
+    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Affiliation</label>"
+    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    out << "</div>"
+    # out << "  <button type='button' class='btn btn-link add'>"
+    # out << "    <span class='glyphicon glyphicon-plus'></span>"
+    # out << "    <span class='controls-add-text'>Add another identifier</span>"
+    # out << "  </button>"
+    out << "</div>" # row
 
     # last row
     out << "<div class='row'>"
@@ -53,8 +80,8 @@ protected
     # --- role
     role_options = RoleService.new.select_all_options
     field = :role
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = person_statement.send(field).first
 
     out << "  <div class='col-md-3'>"
@@ -67,10 +94,12 @@ protected
     out << '  </div>'
 
     # --- delete checkbox
-    field_label = 'Person'
-    out << "  <div class='col-md-3'>"
-    out << destroy_widget(attribute_name, index, field_label)
-    out << '  </div>'
+    if repeats == true
+      field_label = 'Person'
+      out << "  <div class='col-md-3'>"
+      out << destroy_widget(attribute_name, index, field_label, parent)
+      out << '  </div>'
+    end
 
     out << '</div>' # last row
     out

@@ -2,7 +2,7 @@ class NestedRelationInput < NestedAttributesInput
 
 protected
 
-  def build_components(attribute_name, value, index, options)
+  def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
     relation_statement = value
@@ -15,8 +15,8 @@ protected
 
     # --- title
     field = :title
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = relation_statement.send(field).first
 
     out << "<div class='row'>"
@@ -32,8 +32,8 @@ protected
 
     # --- url
     field = :url
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = relation_statement.send(field).first
 
     out << "<div class='row'>"
@@ -50,8 +50,8 @@ protected
     # # --- identifier
     # field = :identifier
     # field_value = relation_statement.send(field).first
-    # field_id = id_for(attribute_name, index, field)
-    # field_name = name_for(attribute_name, index, field)
+    # field_id = id_for(attribute_name, index, field, parent)
+    # field_name = name_for(attribute_name, index, field, parent)
 
     # out << "<div class='row'>"
     # out << "  <div class='col-md-3'>"
@@ -69,8 +69,8 @@ protected
 
     # --- relationship
     field = :relationship
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
     field_value = relation_statement.send(field).first
     role_options = RelationshipService.new.select_all_options
 
@@ -88,7 +88,7 @@ protected
     # --- delete checkbox
     field_label ='Related work'
     out << "  <div class='col-md-3'>"
-    out << destroy_widget(attribute_name, index, field_label)
+    out << destroy_widget(attribute_name, index, field_label, parent)
     out << '  </div>'
 
     out << '</div>' # last row
