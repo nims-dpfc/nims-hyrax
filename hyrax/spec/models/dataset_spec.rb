@@ -422,8 +422,8 @@ RSpec.describe Dataset do
           }],
           instrument_function_attributes: [{
             column_number: 1,
-            main_category_type: 'some value',
-            sub_category_type: 'some other value',
+            category: 'some value',
+            sub_category: 'some other value',
             description: 'Instrument function description'
           }],
           manufacturer_attributes: [{
@@ -462,8 +462,8 @@ RSpec.describe Dataset do
       expect(@obj.complex_instrument.first.complex_identifier.first.label).to eq ['Local']
       expect(@obj.complex_instrument.first.instrument_function.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.instrument_function.first.column_number).to eq [1]
-      expect(@obj.complex_instrument.first.instrument_function.first.main_category_type).to eq ['some value']
-      expect(@obj.complex_instrument.first.instrument_function.first.sub_category_type).to eq ['some other value']
+      expect(@obj.complex_instrument.first.instrument_function.first.category).to eq ['some value']
+      expect(@obj.complex_instrument.first.instrument_function.first.sub_category).to eq ['some other value']
       expect(@obj.complex_instrument.first.instrument_function.first.description).to eq ['Instrument function description']
       expect(@obj.complex_instrument.first.manufacturer.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.manufacturer.first.organization).to eq ['Foo']
