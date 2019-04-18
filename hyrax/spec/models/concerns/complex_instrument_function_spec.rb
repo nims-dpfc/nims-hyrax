@@ -17,8 +17,8 @@ RSpec.describe ComplexInstrumentFunction do
     @obj.attributes = {
       complex_instrument_function_attributes: [{
         column_number: 1,
-        main_category_type: 'some value',
-        sub_category_type: 'some other value',
+        category: 'some value',
+        sub_category: 'some other value',
         description: 'Instrument function description'
       }]
     }
@@ -30,15 +30,15 @@ RSpec.describe ComplexInstrumentFunction do
     @obj.attributes = {
       complex_instrument_function_attributes: [{
         column_number: 1,
-        main_category_type: 'some value',
-        sub_category_type: 'some other value',
+        category: 'some value',
+        sub_category: 'some other value',
         description: 'Instrument function description'
       }]
     }
     expect(@obj.complex_instrument_function.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_instrument_function.first.column_number).to eq [1]
-    expect(@obj.complex_instrument_function.first.main_category_type).to eq ['some value']
-    expect(@obj.complex_instrument_function.first.sub_category_type).to eq ['some other value']
+    expect(@obj.complex_instrument_function.first.category).to eq ['some value']
+    expect(@obj.complex_instrument_function.first.sub_category).to eq ['some other value']
     expect(@obj.complex_instrument_function.first.description).to eq ['Instrument function description']
   end
 
@@ -62,36 +62,36 @@ RSpec.describe ComplexInstrumentFunction do
       }
       expect(@obj.complex_instrument_function.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument_function.first.column_number).to eq [5]
-      expect(@obj.complex_instrument_function.first.main_category_type).to be_empty
-      expect(@obj.complex_instrument_function.first.sub_category_type).to be_empty
+      expect(@obj.complex_instrument_function.first.category).to be_empty
+      expect(@obj.complex_instrument_function.first.sub_category).to be_empty
       expect(@obj.complex_instrument_function.first.description).to be_empty
     end
 
-    it 'creates a category type active triple resource with just the main_category_type' do
+    it 'creates a category type active triple resource with just the category' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_instrument_function_attributes: [{
-          main_category_type: 'asdfg'
+          category: 'asdfg'
         }]
       }
       expect(@obj.complex_instrument_function.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument_function.first.column_number).to be_empty
-      expect(@obj.complex_instrument_function.first.main_category_type).to eq ['asdfg']
-      expect(@obj.complex_instrument_function.first.sub_category_type).to be_empty
+      expect(@obj.complex_instrument_function.first.category).to eq ['asdfg']
+      expect(@obj.complex_instrument_function.first.sub_category).to be_empty
       expect(@obj.complex_instrument_function.first.description).to be_empty
     end
 
-    it 'creates a category type active triple resource with just the sub_category_type' do
+    it 'creates a category type active triple resource with just the sub_category' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_instrument_function_attributes: [{
-          sub_category_type: 'asdfg'
+          sub_category: 'asdfg'
         }]
       }
       expect(@obj.complex_instrument_function.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument_function.first.column_number).to be_empty
-      expect(@obj.complex_instrument_function.first.main_category_type).to be_empty
-      expect(@obj.complex_instrument_function.first.sub_category_type).to eq ['asdfg']
+      expect(@obj.complex_instrument_function.first.category).to be_empty
+      expect(@obj.complex_instrument_function.first.sub_category).to eq ['asdfg']
       expect(@obj.complex_instrument_function.first.description).to be_empty
     end
 
@@ -104,8 +104,8 @@ RSpec.describe ComplexInstrumentFunction do
       }
       expect(@obj.complex_instrument_function.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument_function.first.column_number).to be_empty
-      expect(@obj.complex_instrument_function.first.main_category_type).to be_empty
-      expect(@obj.complex_instrument_function.first.sub_category_type).to be_empty
+      expect(@obj.complex_instrument_function.first.category).to be_empty
+      expect(@obj.complex_instrument_function.first.sub_category).to be_empty
       expect(@obj.complex_instrument_function.first.description).to eq ['Instrument function description']
     end
 
@@ -114,7 +114,7 @@ RSpec.describe ComplexInstrumentFunction do
       @obj.attributes = {
         complex_instrument_function_attributes: [{
           column_number: nil,
-          main_category_type: ''
+          category: ''
         }]
       }
       expect(@obj.complex_instrument_function).to be_empty

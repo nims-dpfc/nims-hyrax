@@ -278,8 +278,8 @@ RSpec.describe DatasetIndexer do
         }],
         instrument_function_attributes: [{
           column_number: 1,
-          main_category_type: 'some value',
-          sub_category_type: 'some other value',
+          category: 'some value',
+          sub_category: 'some other value',
           description: 'Instrument function description'
         }],
         manufacturer_attributes: [{
@@ -319,8 +319,8 @@ RSpec.describe DatasetIndexer do
         }],
         instrument_function_attributes: [{
           column_number: 1,
-          main_category_type: 'some value 2',
-          sub_category_type: 'some other value 2',
+          category: 'some value 2',
+          sub_category: 'some other value 2',
           description: 'Instrument function description 2'
         }],
         manufacturer_attributes: [{

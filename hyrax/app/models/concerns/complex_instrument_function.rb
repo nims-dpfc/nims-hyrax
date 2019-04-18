@@ -3,8 +3,8 @@ class ComplexInstrumentFunction < ActiveTriples::Resource
 
   configure type: ::RDF::Vocab::NimsRdp['InstrumentFunction']
   property :column_number, predicate: ::RDF::Vocab::NimsRdp["column-number"]
-  property :main_category_type, predicate: ::RDF::Vocab::NimsRdp["category-type"]
-  property :sub_category_type, predicate: ::RDF::Vocab::NimsRdp["category-sub-type"]
+  property :category, predicate: ::RDF::Vocab::NimsRdp["category"]
+  property :sub_category, predicate: ::RDF::Vocab::NimsRdp["sub-category"]
   property :description, predicate: ::RDF::Vocab::DC11.description
 
   ## Necessary to get AT to create hash URIs.
