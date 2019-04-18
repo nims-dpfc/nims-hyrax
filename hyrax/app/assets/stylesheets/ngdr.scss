@@ -23,6 +23,8 @@ form .field-wrapper:not(:last-child) {
 
 .multi-nested {
   margin-bottom: 1em;
+  background-color: #eee;
+  padding: 10px;
 }
 
 form .field-wrapper label[required="required"]::after {
@@ -50,5 +52,11 @@ form .field-wrapper label[required="required"]::after {
 
 .inner-listing {
   padding-left: 0px;
+}
+
+.inner-nested {
+  margin-bottom: 1em;
+  background-color: #f7fdd5;
+  padding: 10px;
 }
 // ----------------
