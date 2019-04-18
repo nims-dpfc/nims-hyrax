@@ -8,7 +8,7 @@ module Hyrax
     self.terms -= [
       # Fields not interested in
       :based_near, :contributor, :creator, :date_created, :identifier, :license,
-      :related_url, :rights_statement, :source,
+      :related_url, :resource_type, :rights_statement, :source,
       # Fields interested in, but removing to re-order
       :title, :description, :keyword, :language, :publisher, :resource_type, :subject
       # Fields that are not displayed
@@ -19,15 +19,12 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :title, :alternative_title, :description, :keyword, :language,
-      :publisher, :resource_type, :complex_rights, :subject,
-      :complex_date, :complex_identifier, :complex_person, :complex_version,
-      :characterization_methods, :computational_methods, :data_origin,
-      # :instrument, # requires fields with 2nd level of nesting
-      :origin_system_provenance, :properties_addressed,
-      :complex_relation,
-      :specimen_set,
-      # :specimen_type,
-      :synthesis_and_processing, :custom_property
+      :publisher, :complex_rights, :subject, :complex_date, :complex_person,
+      :complex_version, :characterization_methods, :computational_methods,
+      # :complex_identifier # not using this for now
+      :data_origin, :complex_instrument, :origin_system_provenance,
+      :properties_addressed, :complex_relation, :specimen_set,
+      :complex_specimen_type, :synthesis_and_processing, :custom_property
     ]
 
     self.required_fields -= [
@@ -41,8 +38,32 @@ module Hyrax
       :title, :data_origin, :specimen_set
     ]
 
-    NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :instrument,
-      :complex_person, :complex_relation, :complex_rights, :specimen_type,
+    def metadata_tab_terms
+      [
+        :title, :alternative_title, :description, :complex_person, :keyword,
+        :subject, :language, :publisher, :complex_date, :complex_rights,
+        :complex_version, :complex_relation
+      ]
+    end
+
+    def method_tab_terms
+      [
+        :characterization_methods, :computational_methods, :data_origin,
+        :origin_system_provenance, :properties_addressed, :specimen_set,
+        :synthesis_and_processing, :custom_property
+      ]
+    end
+
+    def instrument_tab_terms
+      [ :complex_instrument ]
+    end
+
+    def specimen_tab_terms
+      [ :complex_specimen_type ]
+    end
+
+    NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
+      :complex_person, :complex_relation, :complex_rights, :complex_specimen_type,
       :complex_version, :custom_property].freeze
 
     protected
@@ -52,7 +73,17 @@ module Hyrax
        :_destroy,
        {
          job_title: [],
-	 complex_organization_attributes: permitted_organization_params,
+	       complex_organization_attributes: permitted_organization_params,
+       }
+      ]
+    end
+
+    def self.permitted_custom_property_params
+      [:id,
+       :_destroy,
+       {
+         label: [],
+         description: []
        }
       ]
     end
@@ -63,6 +94,16 @@ module Hyrax
        {
          date: [],
          description: []
+       }
+      ]
+    end
+
+    def self.permitted_desc_id_params
+      [:id,
+       :_destroy,
+       {
+         description: [],
+         complex_identifier_attributes: permitted_identifier_params,
        }
       ]
     end
@@ -86,12 +127,36 @@ module Hyrax
          complex_date_attributes: permitted_date_params,
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
-         function_1: [],
-         function_2: [],
-         manufacturer: [],
+         instrument_function_attributes: permitted_instrument_function_params,
+         manufacturer_attributes: permitted_organization_params,
+         model_number: [],
          complex_person_attributes: permitted_person_params,
-         organization: [],
+         managing_organization_attributes: permitted_organization_params,
          title: []
+       }
+      ]
+    end
+
+    def self.permitted_instrument_function_params
+      [:id,
+       :_destroy,
+       {
+         column_number: [],
+         category: [],
+         sub_category: [],
+         description: []
+       }
+      ]
+    end
+
+    def self.permitted_material_type_params
+      [:id,
+       :_destroy,
+       {
+         material_type: [],
+         description: [],
+         complex_identifier_attributes: permitted_identifier_params,
+         sub_material_type: []
        }
       ]
     end
@@ -102,8 +167,8 @@ module Hyrax
        {
          organization: [],
          sub_organization: [],
-	 purpose: [],
-	 complex_identifier_attributes: permitted_identifier_params,
+         purpose: [],
+         complex_identifier_attributes: permitted_identifier_params,
        }
       ]
     end
@@ -117,6 +182,20 @@ module Hyrax
          complex_affiliation_attributes: permitted_affiliation_params,
          complex_identifier_attributes: permitted_identifier_params,
          uri: []
+       }
+      ]
+    end
+
+    def self.permitted_purchase_record_params
+      [:id,
+       :_destroy,
+       {
+         date: [],
+         complex_identifier_attributes: permitted_identifier_params,
+         supplier_attributes: permitted_organization_params,
+         manufacturer_attributes: permitted_organization_params,
+         purchase_record_item: [],
+         title: []
        }
       ]
     end
@@ -147,15 +226,28 @@ module Hyrax
       [:id,
        :_destroy,
        {
-         chemical_composition: [],
-         crystallographic_structure: [],
+         complex_chemical_composition_attributes: permitted_desc_id_params,
+         complex_crystallographic_structure_attributes: permitted_desc_id_params,
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
-         material_types: [],
-         purchase_record_attributes: permitted_purchase_record_params,
-         complex_relation_attributes: permitted_relation_params,
-         structural_features: [],
+         complex_material_type_attributes: permitted_material_type_params,
+         complex_purchase_record_attributes: permitted_purchase_record_params,
+         complex_shape_attributes: permitted_desc_id_params,
+         complex_state_of_matter_attributes: permitted_desc_id_params,
+         complex_structural_feature_attributes: permitted_structural_feature_params,
          title: []
+       }
+      ]
+    end
+
+    def self.permitted_structural_feature_params
+      [:id,
+       :_destroy,
+       {
+         category: [],
+         description: [],
+         complex_identifier_attributes: permitted_identifier_params,
+         sub_category: []
        }
       ]
     end
@@ -172,37 +264,15 @@ module Hyrax
       ]
     end
 
-    def self.permitted_custom_property_params
-      [:id,
-       :_destroy,
-       {
-         label: [],
-         description: []
-       }
-      ]
-    end
-
-    def self.permitted_purchase_record_params
-      [:id,
-       :_destroy,
-       {
-         date: [],
-         identifier: [],
-         purchase_record_item: [],
-         title: []
-       }
-      ]
-    end
-
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
       permitted << { complex_identifier_attributes: permitted_identifier_params }
-      permitted << { instrument_attributes: permitted_instrument_params }
+      permitted << { complex_instrument_attributes: permitted_instrument_params }
       permitted << { complex_person_attributes: permitted_person_params }
       permitted << { complex_relation_attributes: permitted_relation_params }
       permitted << { complex_rights_attributes: permitted_rights_params }
-      permitted << { specimen_type_attributes: permitted_specimen_type_params }
+      permitted << { complex_specimen_type_attributes: permitted_specimen_type_params }
       permitted << { complex_version_attributes: permitted_version_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
     end
