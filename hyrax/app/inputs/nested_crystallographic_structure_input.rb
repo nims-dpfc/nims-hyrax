@@ -1,4 +1,4 @@
-class NestedAffiliationInput < NestedAttributesInput
+class NestedCrystallographicStructureInput < NestedAttributesInput
 
 protected
 
@@ -17,17 +17,17 @@ protected
 
     parent_attribute = name_for(attribute_name, index, '', parent)[0..-5]
 
-    # --- complex_organization
-    field = :complex_organization
+    # --- complex_identifier
+    field = :complex_identifier
     field_value = value.send(field)
     if field_value.blank?
-      value.complex_organization.build
+      value.complex_identifier.build
       field_value = value.send(field)
     end
-    nested_fields = NestedOrganizationInput.new(@builder, field, nil, :multi_value, {})
+    nested_fields = NestedIdentifierInput.new(@builder, field, nil, :multi_value, {})
     out << "<div class='inner-nested'>"
     out << "<div class='form-group'>"
-    # out << "  <label class='control-label optional' for='dataset_complex_orgnaization'>Organization</label>"
+    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Identifier</label>"
     out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
     out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
@@ -39,8 +39,8 @@ protected
     # last row
     out << "<div class='row'>"
 
-    # --- job_title
-    field = :job_title
+    # --- description
+    field = :description
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
     field_value = value.send(field).first
@@ -56,7 +56,7 @@ protected
 
     # --- delete checkbox
     if repeats == true
-      field_label = 'Affiliation'
+      field_label = 'Crystallographic structure'
       out << "  <div class='col-md-3'>"
       out << destroy_widget(attribute_name, index, field_label, parent)
       out << '  </div>'

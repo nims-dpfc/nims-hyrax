@@ -5,8 +5,6 @@ protected
   def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
-    source_statement = value
-
     # Inherit required for fields validated in nested attributes
     required  = false
     if object.required?(:complex_source) and index == 0
@@ -17,7 +15,7 @@ protected
     field = :title
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = source_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -34,7 +32,7 @@ protected
     field = :alternative_title
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = source_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -51,7 +49,7 @@ protected
     field = :start_page
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = source_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -68,7 +66,7 @@ protected
     field = :end_page
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = source_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -85,7 +83,7 @@ protected
     field = :issue
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = source_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -102,7 +100,7 @@ protected
     field = :sequence_number
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = source_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -119,7 +117,7 @@ protected
     field = :total_number_of_pages
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = source_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -139,7 +137,7 @@ protected
     field = :volume
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = source_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "  <div class='col-md-3'>"
     out << template.label_tag(field_name, field.to_s.humanize, required: false)

@@ -5,8 +5,6 @@ protected
   def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
-    custom_property_statement = value
-
     # Inherit required for fields validated in nested attributes
     required  = false
     if object.required?(:custom_property) and index == 0
@@ -21,7 +19,7 @@ protected
     field = :label
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = custom_property_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -41,7 +39,7 @@ protected
     field = :description
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = custom_property_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "  <div class='col-md-3'>"
     out << template.label_tag(field_name, field.to_s.humanize, required: false)

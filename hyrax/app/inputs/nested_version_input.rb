@@ -5,8 +5,6 @@ protected
   def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
-    version_statement = value
-
     # Inherit required for fields validated in nested attributes
     required  = false
     if object.required?(:complex_version) and index == 0
@@ -17,7 +15,7 @@ protected
     field = :version
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = version_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -34,7 +32,7 @@ protected
     field = :date
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = version_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"

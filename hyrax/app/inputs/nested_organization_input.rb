@@ -5,8 +5,6 @@ protected
   def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
-    org_statement = value
-
     # Inherit required for fields validated in nested attributes
     required  = false
     if object.required?(:complex_organization) and index == 0
@@ -21,7 +19,7 @@ protected
     field = :organization
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = org_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -38,7 +36,7 @@ protected
     field = :sub_organization
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = org_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -59,10 +57,10 @@ protected
     field = :purpose
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = org_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "  <div class='col-md-3 hidden'>"
-    out << template.label_tag(field_name, field.to_s.humanize, required: required)
+    out << template.label_tag(field_name, 'Role', required: required)
     out << '  </div>'
 
     out << "  <div class='col-md-6 hidden'>"

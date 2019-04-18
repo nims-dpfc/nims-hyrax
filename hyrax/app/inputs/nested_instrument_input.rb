@@ -1,4 +1,4 @@
-class NestedSpecimenTypeInput < NestedAttributesInput
+class NestedInstrumentInput < NestedAttributesInput
 
 protected
 
@@ -34,41 +34,40 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
-    # --- complex_chemical_composition
-    field = :complex_chemical_composition
-    field_value = value.send(field)
-    if field_value.blank?
-      value.complex_chemical_composition.build
-      field_value = value.send(field)
-    end
-    nested_fields = NestedChemicalCompositionInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Chemical composition</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
-    # out << "  <button type='button' class='btn btn-link add'>"
-    # out << "    <span class='glyphicon glyphicon-plus'></span>"
-    # out << "    <span class='controls-add-text'>Add another chemical composition</span>"
-    # out << "  </button>"
-    out << "</div>" # row
+    # --- alternative_title
+    field = :alternative_title
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
+    field_value = value.send(field).first
 
-    # --- complex_crystallographic_structure
-    field = :complex_crystallographic_structure
+    out << "<div class='row'>"
+    out << "  <div class='col-md-3'>"
+    out << template.label_tag(field_name, field.to_s.humanize, required: required)
+    out << '  </div>'
+
+    out << "  <div class='col-md-9'>"
+    out << @builder.text_field(field_name,
+        options.merge(value: field_value, name: field_name, id: field_id, required: required))
+    out << '  </div>'
+    out << '</div>' # row
+
+    # --- complex_date
+    field = :complex_date
     field_value = value.send(field)
     if field_value.blank?
-      value.complex_crystallographic_structure.build
+      value.complex_date.build
+      value.complex_date[0]['description'] = 'Processed'
       field_value = value.send(field)
     end
-    nested_fields = NestedCrystallographicStructureInput.new(@builder, field, nil, :multi_value, {})
+    nested_fields = NestedDateInput.new(@builder, field, nil, :multi_value, {})
     out << "<div class='inner-nested'>"
     out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Crystallographic structure</label>"
+    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Date</label>"
     out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
     out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
-    # out << "    <span class='controls-add-text'>Add another crystallographic structure</span>"
+    # out << "    <span class='controls-add-text'>Add another date</span>"
     # out << "  </button>"
     out << "</div>" # row
 
@@ -108,98 +107,99 @@ protected
     # out << "  </button>"
     out << "</div>" # row
 
-    # --- complex_material_type
-    field = :complex_material_type
+    # --- instrument_function
+    field = :instrument_function
     field_value = value.send(field)
     if field_value.blank?
-      value.complex_material_type.build
+      value.instrument_function.build
       field_value = value.send(field)
     end
-    nested_fields = NestedMaterialTypeInput.new(@builder, field, nil, :multi_value, {})
+    nested_fields = NestedInstrumentFunctionInput.new(@builder, field, nil, :multi_value, {})
     out << "<div class='inner-nested'>"
     out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Material type</label>"
+    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Instrument function</label>"
     out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
     out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
-    # out << "    <span class='controls-add-text'>Add another material type</span>"
+    # out << "    <span class='controls-add-text'>Add another instrument function</span>"
     # out << "  </button>"
     out << "</div>" # row
 
-    # --- complex_purchase_record
-    field = :complex_purchase_record
+    # --- manufacturer
+    field = :manufacturer
     field_value = value.send(field)
     if field_value.blank?
-      value.complex_purchase_record.build
+      value.manufacturer.build
+      value.manufacturer[0].purpose = 'Manufacturer'
       field_value = value.send(field)
     end
-    nested_fields = NestedPurchaseRecordInput.new(@builder, field, nil, :multi_value, {})
+    nested_fields = NestedOrganizationInput.new(@builder, field, nil, :multi_value, {})
     out << "<div class='inner-nested'>"
     out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Purchase record</label>"
+    out << "  <label class='control-label optional' for='dataset_complex_orgnaization'>Manufacturer</label>"
     out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
     out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
-    # out << "    <span class='controls-add-text'>Add another purchase record</span>"
+    # out << "    <span class='controls-add-text'>Add another manufacturer</span>"
     # out << "  </button>"
     out << "</div>" # row
 
-    # --- complex_shape
-    field = :complex_shape
+    # --- model_number
+    field = :model_number
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
+    field_value = value.send(field).first
+
+    out << "<div class='row'>"
+    out << "  <div class='col-md-3'>"
+    out << template.label_tag(field_name, field.to_s.humanize, required: required)
+    out << '  </div>'
+
+    out << "  <div class='col-md-9'>"
+    out << @builder.text_field(field_name,
+        options.merge(value: field_value, name: field_name, id: field_id, required: required))
+    out << '  </div>'
+    out << '</div>' # row
+
+    # --- complex_person
+    field = :complex_person
     field_value = value.send(field)
     if field_value.blank?
-      value.complex_shape.build
+      value.complex_person.build
+      value.complex_person[0].role = 'operator'
       field_value = value.send(field)
     end
-    nested_fields = NestedShapeInput.new(@builder, field, nil, :multi_value, {})
+    nested_fields = NestedPersonInput.new(@builder, field, nil, :multi_value, {})
     out << "<div class='inner-nested'>"
     out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Shape</label>"
+    out << "  <label class='control-label optional' for='dataset_complex_orgnaization'>Operator</label>"
     out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
     out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
-    # out << "    <span class='controls-add-text'>Add another shape</span>"
+    # out << "    <span class='controls-add-text'>Add another operator</span>"
     # out << "  </button>"
     out << "</div>" # row
 
-    # --- complex_state_of_matter
-    field = :complex_state_of_matter
+    # --- managing_organization
+    field = :managing_organization
     field_value = value.send(field)
     if field_value.blank?
-      value.complex_state_of_matter.build
+      value.managing_organization.build
+      value.managing_organization[0].purpose = 'Managing organization'
       field_value = value.send(field)
     end
-    nested_fields = NestedStateOfMatterInput.new(@builder, field, nil, :multi_value, {})
+    nested_fields = NestedOrganizationInput.new(@builder, field, nil, :multi_value, {})
     out << "<div class='inner-nested'>"
     out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>State of matter</label>"
+    out << "  <label class='control-label optional' for='dataset_complex_orgnaization'>Managing organization</label>"
     out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
     out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
-    # out << "    <span class='controls-add-text'>Add another state of matter</span>"
-    # out << "  </button>"
-    out << "</div>" # row
-
-    # --- complex_structural_feature
-    field = :complex_structural_feature
-    field_value = value.send(field)
-    if field_value.blank?
-      value.complex_structural_feature.build
-      field_value = value.send(field)
-    end
-    nested_fields = NestedStructuralFeatureInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Structural feature</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
-    # out << "  <button type='button' class='btn btn-link add'>"
-    # out << "    <span class='glyphicon glyphicon-plus'></span>"
-    # out << "    <span class='controls-add-text'>Add another structural feature</span>"
+    # out << "    <span class='controls-add-text'>Add another managing organization</span>"
     # out << "  </button>"
     out << "</div>" # row
 
@@ -207,11 +207,11 @@ protected
     # --- delete checkbox
     if repeats == true
       out << "<div class='row'>"
-      field_label = 'Specimen type'
+      field_label = 'Instrument'
       out << "  <div class='col-md-3'>"
       out << destroy_widget(attribute_name, index, field_label, parent)
       out << '  </div>'
-      out << '</div>' # row
+      out << '</div>' # last row
     end
 
     out

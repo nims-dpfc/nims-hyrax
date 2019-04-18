@@ -5,8 +5,6 @@ protected
   def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
-    id_statement = value
-
     # Inherit required for fields validated in nested attributes
     required  = false
     if object.required?(:complex_identifier) and index == 0
@@ -20,12 +18,12 @@ protected
     # --- scheme and id - single row
     out << "<div class='row'>"
 
-    # --- obj_id_scheme
-    field = :obj_id_scheme
+    # --- scheme
+    field = :scheme
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = id_statement.send(field).first
-    id_options = RdssIdentifierTypesService.new.select_all_options
+    field_value = value.send(field).first
+    id_options = IdentifierService.new.select_all_options
 
     out << "  <div class='col-md-3'>"
     out << template.select_tag(field_name,
@@ -33,11 +31,11 @@ protected
         label: '', class: 'select form-control', prompt: 'choose type', id: field_id)
     out << '  </div>'
 
-    # --- obj_id
+    # --- identifier
     field = :identifier
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = id_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "  <div class='col-md-6'>"
     out << @builder.text_field(field_name,
