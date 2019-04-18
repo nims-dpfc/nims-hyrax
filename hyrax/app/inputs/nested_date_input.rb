@@ -5,8 +5,6 @@ protected
   def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
-    date_statement = value
-
     # Inherit required for fields validated in nested attributes
     required  = false
     if object.required?(:complex_date) and index == 0
@@ -24,7 +22,7 @@ protected
     field = :description
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = date_statement.send(field).first
+    field_value = value.send(field).first
     date_options = DateService.new.select_all_options
     out << "  <div class='col-md-3'>"
     out << template.select_tag(field_name, template.options_for_select(date_options, field_value),
@@ -35,7 +33,7 @@ protected
     field = :date
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = date_statement.send(field).first
+    field_value = value.send(field).first
 
     out << "  <div class='col-md-6'>"
     out << @builder.text_field(field_name,
