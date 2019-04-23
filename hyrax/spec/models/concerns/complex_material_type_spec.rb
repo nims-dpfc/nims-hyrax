@@ -18,7 +18,7 @@ RSpec.describe ComplexMaterialType do
       complex_material_type_attributes: [{
         description: 'material description',
         material_type: 'some value',
-        sub_material_type: 'some other value'
+        material_sub_type: 'some other value'
       }]
     }
     expect(@obj.complex_material_type.first.id).to include('#material_type')
@@ -30,7 +30,7 @@ RSpec.describe ComplexMaterialType do
       complex_material_type_attributes: [{
         description: 'material description',
         material_type: 'some value',
-        sub_material_type: 'some other value',
+        material_sub_type: 'some other value',
         complex_identifier_attributes: [{
           identifier: ['ewfqwefqwef'],
           label: ['Local']
@@ -40,7 +40,7 @@ RSpec.describe ComplexMaterialType do
     expect(@obj.complex_material_type.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_material_type.first.description).to eq ['material description']
     expect(@obj.complex_material_type.first.material_type).to eq ['some value']
-    expect(@obj.complex_material_type.first.sub_material_type).to eq ['some other value']
+    expect(@obj.complex_material_type.first.material_sub_type).to eq ['some other value']
     expect(@obj.complex_material_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_material_type.first.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
     expect(@obj.complex_material_type.first.complex_identifier.first.label).to eq ['Local']
@@ -68,7 +68,7 @@ RSpec.describe ComplexMaterialType do
       expect(@obj.complex_material_type.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_material_type.first.description).to eq ['Material description 55']
       expect(@obj.complex_material_type.first.material_type).to be_empty
-      expect(@obj.complex_material_type.first.sub_material_type).to be_empty
+      expect(@obj.complex_material_type.first.material_sub_type).to be_empty
       expect(@obj.complex_material_type.first.complex_identifier).to be_empty
     end
 
@@ -82,25 +82,25 @@ RSpec.describe ComplexMaterialType do
       expect(@obj.complex_material_type.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_material_type.first.description).to be_empty
       expect(@obj.complex_material_type.first.material_type).to eq ['asdfg']
-      expect(@obj.complex_material_type.first.sub_material_type).to be_empty
+      expect(@obj.complex_material_type.first.material_sub_type).to be_empty
       expect(@obj.complex_material_type.first.complex_identifier).to be_empty
     end
 
-    it 'creates a material type type active triple resource with just the sub_material_type' do
+    it 'creates a material type type active triple resource with just the material_sub_type' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_material_type_attributes: [{
-          sub_material_type: 'asdfg'
+          material_sub_type: 'asdfg'
         }]
       }
       expect(@obj.complex_material_type.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_material_type.first.description).to be_empty
       expect(@obj.complex_material_type.first.material_type).to be_empty
-      expect(@obj.complex_material_type.first.sub_material_type).to eq ['asdfg']
+      expect(@obj.complex_material_type.first.material_sub_type).to eq ['asdfg']
       expect(@obj.complex_material_type.first.complex_identifier).to be_empty
     end
 
-    it 'creates a material type type active triple resource with just the sub_material_type' do
+    it 'creates a material type type active triple resource with just the material_sub_type' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_material_type_attributes: [{
@@ -112,7 +112,7 @@ RSpec.describe ComplexMaterialType do
       expect(@obj.complex_material_type.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_material_type.first.description).to be_empty
       expect(@obj.complex_material_type.first.material_type).to be_empty
-      expect(@obj.complex_material_type.first.sub_material_type).to be_empty
+      expect(@obj.complex_material_type.first.material_sub_type).to be_empty
       expect(@obj.complex_material_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_material_type.first.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
       expect(@obj.complex_material_type.first.complex_identifier.first.label).to be_empty

@@ -156,7 +156,7 @@ module Hyrax
          material_type: [],
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
-         sub_material_type: []
+         material_sub_type: []
        }
       ]
     end

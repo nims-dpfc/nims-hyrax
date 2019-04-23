@@ -34,8 +34,8 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
-    # --- sub_material_type
-    field = :sub_material_type
+    # --- material_sub_type
+    field = :material_sub_type
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
     field_value = value.send(field).first

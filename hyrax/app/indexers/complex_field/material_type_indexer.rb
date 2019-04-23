@@ -25,14 +25,14 @@ module ComplexField
         solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
         solr_doc[fld_name] << vals
         solr_doc[fld_name].flatten!
-        # sub_material_type as complex_sub_material_type searchable
-        vals = st.complex_material_type.map { |c| c.sub_material_type.reject(&:blank?) }
-        fld_name = Solrizer.solr_name('complex_sub_material_type', :stored_searchable)
+        # material_sub_type as complex_material_sub_type searchable
+        vals = st.complex_material_type.map { |c| c.material_sub_type.reject(&:blank?) }
+        fld_name = Solrizer.solr_name('complex_material_sub_type', :stored_searchable)
         solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
         solr_doc[fld_name] << vals
         solr_doc[fld_name].flatten!
-        # sub_material_type as complex_sub_material_type facetable
-        fld_name = Solrizer.solr_name('complex_sub_material_type', :facetable)
+        # material_sub_type as complex_material_sub_type facetable
+        fld_name = Solrizer.solr_name('complex_material_sub_type', :facetable)
         solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
         solr_doc[fld_name] << vals
         solr_doc[fld_name].flatten!
@@ -51,7 +51,7 @@ module ComplexField
       # solr fields that will be used for a search
       fields = []
       fields << Solrizer.solr_name('complex_material_type', :facetable)
-      fields << Solrizer.solr_name('complex_sub_material_type', :facetable)
+      fields << Solrizer.solr_name('complex_material_sub_type', :facetable)
       fields
     end
 
@@ -59,7 +59,7 @@ module ComplexField
       # solr fields that will be used for a search
       fields = []
       fields << Solrizer.solr_name('complex_material_type', :stored_searchable)
-      fields << Solrizer.solr_name('complex_sub_material_type', :stored_searchable)
+      fields << Solrizer.solr_name('complex_material_sub_type', :stored_searchable)
       fields << Solrizer.solr_name('complex_material_type_description', :stored_searchable)
       fields << Solrizer.solr_name('complex_material_type_identifier', :symbol)
       fields

@@ -133,7 +133,7 @@ module ComplexValidation
         mt_blank = mt_blank &&
                    Array(mt[:description]).all?(&:blank?) &&
                    Array(mt[:material_type]).all?(&:blank?) &&
-                   Array(mt[:sub_material_type]).all?(&:blank?)
+                   Array(mt[:material_sub_type]).all?(&:blank?)
       end
       # complex_structural_feature blank
       sf_blank = true

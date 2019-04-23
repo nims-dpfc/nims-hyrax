@@ -524,7 +524,7 @@ RSpec.describe DatasetIndexer do
           complex_material_type_attributes: [{
             description: 'material description',
             material_type: 'some material type',
-            sub_material_type: 'some other material sub type',
+            material_sub_type: 'some other material sub type',
             complex_identifier_attributes: [{
               identifier: ['material/12345'],
               label: ['Local']
@@ -603,7 +603,7 @@ RSpec.describe DatasetIndexer do
           complex_material_type_attributes: [{
             description: 'material description 2',
             material_type: 'some material type 2',
-            sub_material_type: 'some other material sub type 2',
+            material_sub_type: 'some other material sub type 2',
             complex_identifier_attributes: [{
               identifier: ['material/67890'],
               label: ['Local']
@@ -735,11 +735,11 @@ RSpec.describe DatasetIndexer do
         ['material description', 'material description 2'])
     end
     it 'indexes sub material type as stored_searchable' do
-      expect(@solr_document['complex_sub_material_type_tesim']).to match_array(
+      expect(@solr_document['complex_material_sub_type_tesim']).to match_array(
         ['some other material sub type', 'some other material sub type 2'])
     end
     it 'indexes sub material type as facetable' do
-      expect(@solr_document['complex_sub_material_type_sim']).to match_array(
+      expect(@solr_document['complex_material_sub_type_sim']).to match_array(
         ['some other material sub type', 'some other material sub type 2'])
     end
     it 'indexes material type identifier as symbol' do
