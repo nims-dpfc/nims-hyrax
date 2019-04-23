@@ -1,27 +1,17 @@
-class NestedOrganizationAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
+class NestedAffiliationAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
   private
   def li_value(value)
     value = JSON.parse(value)
     html = []
     value.each do |v|
       vals = []
-      unless v.dig('organization').blank?
-        label = "Organization"
-        val = link_to(ERB::Util.h(v['organization'][0]), search_path(v['organization'][0]))
+      unless v.dig('job_title').blank?
+        label = "Job title"
+        val = v['job_title'][0]
         vals << [label, val]
       end
-      unless v.dig('sub_organization').blank?
-        label = 'Sub organization'
-        val = v['sub_organization'][0]
-        vals << [label, val]
-      end
-      unless v.dig('purpose').blank?
-        label = 'Role'
-        val = v['purpose'].render
-        vals << [label, val]
-      end
-      unless v.dig('complex_identifier').blank?
-        id_j = v.dig('complex_identifier').to_json
+      unless v.dig('complex_organization').blank?
+        id_j = v.dig('complex_organization').to_json
         val = NestedIdentifierAttributeRenderer.new('Identifier', id_j).render
         vals << ['', val]
       end

@@ -4,63 +4,69 @@ class NestedInstrumentAttributeRenderer < Hyrax::Renderers::FacetedAttributeRend
     value = JSON.parse(value)
     html = []
     value.each do |v|
-      instrument = []
+      vals = []
       # title
       unless v.dig('title').blank?
         label ="Title"
         val = link_to(ERB::Util.h(v['title'][0]), search_path(v['title'][0]))
-        instrument << [label, val]
+        vals << [label, val]
       end
       # alternative title
       unless v.dig('alternative_title').blank?
-        instrument << ['Alternative title', v['alternative_title'][0]]
+        vals << ['Alternative title', v['alternative_title'][0]]
       end
       # complex date
       unless v.dig('complex_date').blank?
-        dt_j = v.dig('complex_date').to_json
-        val = NestedDateAttributeRenderer.new('Date', dt_j).render
-        instrument << ['', val]
+        val_j = v.dig('complex_date').to_json
+        val = NestedDateAttributeRenderer.new('Date', val_j).render
+        vals << ['', val]
       end
       # description
       unless v.dig('description').blank?
-        instrument << ['Description', v['description'][0]]
+        vals << ['Description', v['description'][0]]
       end
       # complex identifier
       unless v.dig('complex_identifier').blank?
-        id_j = v.dig('complex_identifier').to_json
-        val = NestedIdentifierAttributeRenderer.new('Identifier', id_j).render
-        instrument << ['', val]
+        val_j = v.dig('complex_identifier').to_json
+        val = NestedIdentifierAttributeRenderer.new('Identifier', val_j).render
+        vals << ['', val]
       end
-      # function_1
-      unless v.dig('function_1').blank?
-        instrument << ['Function 1', v['function_1'][0]]
-      end
-      # function_2
-      unless v.dig('function_2').blank?
-        instrument << ['Function 2', v['function_2'][0]]
+      # instrument function
+      unless v.dig('instrument_function').blank?
+        val_j = v.dig('instrument_function').to_json
+        val = NestedInstrumentFunctionAttributeRenderer.new('Instrument function', val_j).render
+        vals << ['', val]
       end
       # manufacturer
       unless v.dig('manufacturer').blank?
-        instrument << ['Manufacturer', v['manufacturer'][0]]
+        val_j = v.dig('manufacturer').to_json
+        val = NestedOrganizationAttributeRenderer.new('Manufacturer', val_j).render
+        vals << ['', val]
+      end
+      # model_number
+      unless v.dig('model_number').blank?
+        vals << ['Model number', v['model_number'][0]]
       end
       # compex_person
       unless v.dig('complex_person').blank?
-        p_j = v.dig('complex_person').to_json
-        val = NestedPersonAttributeRenderer.new('Person', p_j).render
-        instrument << ['', val]
+        val_j = v.dig('complex_person').to_json
+        val = NestedPersonAttributeRenderer.new('Operator', val_j).render
+        vals << ['', val]
       end
-      # organization
-      unless v.dig('organization').blank?
-        instrument << ['Organization', v['organization'][0]]
+      # managing_organization
+      unless v.dig('managing_organization').blank?
+        val_j = v.dig('managing_organization').to_json
+        val = NestedOrganizationAttributeRenderer.new('Managing organization', val_j).render
+        vals << ['', val]
       end
-      html << instrument
+      html << vals
     end
     html_out = ''
     unless html.blank?
       html_out = '<table class="table nested-table"><tbody>'
-      html.each do |instrument|
-        instrument.each_with_index do |h,index|
-          if (index + 1) == instrument.size
+      html.each do |vals|
+        vals.each_with_index do |h,index|
+          if (index + 1) == vals.size
             html_out += '<tr class="end">'
           else
             html_out += '<tr>'

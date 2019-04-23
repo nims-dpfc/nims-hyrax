@@ -4,69 +4,71 @@ class NestedSpecimenTypeAttributeRenderer < Hyrax::Renderers::FacetedAttributeRe
     value = JSON.parse(value)
     html = []
     value.each do |v|
-      specimen = []
+      vals = []
       # title
       unless v.dig('title').blank?
-        label ="Title"
-        val = link_to(ERB::Util.h(v['title'][0]), search_path(v['title'][0]))
-        specimen << [label, val]
+        vals << ['Title', v['title'][0]]
       end
-      # chemical_composition
-      unless v.dig('chemical_composition').blank?
-        label = 'Chemical composition'
-        val = v['chemical_composition'][0]
-        specimen << [label, val]
+      # complex_chemical_composition
+      unless v.dig('complex_chemical_composition').blank?
+        val_j = v.dig('complex_chemical_composition').to_json
+        val = NestedDescIdAttributeRenderer.new('Chemical composition', val_j).render
+        vals << ['', val]
       end
-      # crystallographic_structure
-      unless v.dig('crystallographic_structure').blank?
-        label = 'Crystallographic structure'
-        val = v['crystallographic_structure'][0]
-        specimen << [label, val]
+      # complex_crystallographic_structure
+      unless v.dig('complex_crystallographic_structure').blank?
+        val_j = v.dig('complex_crystallographic_structure').to_json
+        val = NestedDescIdAttributeRenderer.new('Crystallographic structure', val_j).render
+        vals << ['', val]
       end
       # description
       unless v.dig('description').blank?
-        label = 'Description'
-        val = v['description'][0]
-        specimen << [label, val]
+        vals << ['Description', v['description'][0]]
       end
-      # complex identifier
+      # identifier
       unless v.dig('complex_identifier').blank?
-        label = 'Identifier'
-        unless v['complex_identifier'][0].dig('label').blank?
-          label = v['complex_identifier'][0]['label'][0]
-          term = IdentifierService.new.find_by_id(label)
-          label = term['label'] if term.any?
-        end
-        val = v['complex_identifier'][0]['identifier'][0]
-        specimen << [label, val]
+        val_j = v.dig('complex_identifier').to_json
+        val = NestedIdentifierAttributeRenderer.new('Identifier', val_j).render
+        vals << ['', val]
       end
-      # material_types
-      unless v.dig('material_types').blank?
-        label = t('ngdr.fields.material_types')
-        val = v['material_types'][0]
-        specimen << [label, val]
+      # complex_material_type
+      unless v.dig('complex_material_type').blank?
+        val_j = v.dig('complex_material_type').to_json
+        val = NestedMaterialTypeAttributeRenderer.new('Material type', val_j).render
+        vals << ['', val]
       end
-      #TODO: complex purchase_record
-      # Complex relation
-      unless v.dig('complex_relation').blank?
-        label = t('ngdr.fields.complex_relation')
-        r_j = v.dig('complex_relation').to_json
-        val = NestedRelationAttributeRenderer.new(label, r_j).render
-        specimen << ['', val]
+      # complex_purchase_record
+      unless v.dig('complex_purchase_record').blank?
+        val_j = v.dig('complex_purchase_record').to_json
+        val = NestedPurchaseRecordAttributeRenderer.new('Purchase record', val_j).render
+        vals << ['', val]
       end
-      # structural_features
-      unless v.dig('structural_features').blank?
-        label = 'Structural features'
-        val = v['structural_features'][0]
-        specimen << [label, val]
+      # complex_shape
+      unless v.dig('complex_shape').blank?
+        val_j = v.dig('complex_shape').to_json
+        val = NestedDescIdAttributeRenderer.new('Shape', val_j).render
+        vals << ['', val]
       end
-      html << specimen
+      # complex_state_of_matter
+      unless v.dig('complex_state_of_matter').blank?
+        val_j = v.dig('complex_state_of_matter').to_json
+        val = NestedIdentifierAttributeRenderer.new('State of matter', val_j).render
+        vals << ['', val]
+      end
+      # complex_structural_feature
+      unless v.dig('complex_structural_feature').blank?
+        val_j = v.dig('complex_structural_feature').to_json
+        val = NestedStructuralFeatureAttributeRenderer.new('Structural feature', val_j).render
+        vals << ['', val]
+      end
+      html << vals
     end
+    html_out = ''
     unless html.blank?
       html_out = '<table class="table nested-table"><tbody>'
-      html.each do |specimen|
-        specimen.each_with_index do |h,index|
-          if (index + 1) == specimen.size
+      html.each do |vals|
+        vals.each_with_index do |h,index|
+          if (index + 1) == vals.size
             html_out += '<tr class="end">'
           else
             html_out += '<tr>'
