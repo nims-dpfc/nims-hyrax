@@ -7,7 +7,7 @@ class ComplexMaterialType < ActiveTriples::Resource
   property :complex_identifier, predicate: ::RDF::Vocab::MODS.identifierGroup,
             class_name:"ComplexIdentifier"
   accepts_nested_attributes_for :complex_identifier
-  property :sub_material_type, predicate: ::RDF::Vocab::NimsRdp['sub-material-type']
+  property :material_sub_type, predicate: ::RDF::Vocab::NimsRdp['material-sub-type']
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)

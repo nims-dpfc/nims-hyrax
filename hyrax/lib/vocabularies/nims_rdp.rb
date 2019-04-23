@@ -32,7 +32,7 @@ module RDF
       property 'instrument-title'
       property 'material-type'
       property 'sub-category'
-      property 'sub-material-type'
+      property 'material-sub-type'
       property 'origin-system-provenance'
       property 'properties-addressed'
       property 'purchase-date'

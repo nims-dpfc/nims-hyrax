@@ -634,7 +634,7 @@ RSpec.describe Dataset do
           complex_material_type_attributes: [{
             description: 'material description',
             material_type: 'some material type',
-            sub_material_type: 'some other material sub type',
+            material_sub_type: 'some other material sub type',
             complex_identifier_attributes: [{
               identifier: ['material/ewfqwefqwef'],
               label: ['Local']
@@ -719,7 +719,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_specimen_type.first.complex_material_type.first.id).to include('#material_type')
       expect(@obj.complex_specimen_type.first.complex_material_type.first.description).to eq ['material description']
       expect(@obj.complex_specimen_type.first.complex_material_type.first.material_type).to eq ['some material type']
-      expect(@obj.complex_specimen_type.first.complex_material_type.first.sub_material_type).to eq ['some other material sub type']
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.material_sub_type).to eq ['some other material sub type']
       expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier.first.identifier).to eq ['material/ewfqwefqwef']
       expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier.first.label).to eq ['Local']
@@ -814,7 +814,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_specimen_type.first.complex_material_type.first.id).to include('#material_type')
       expect(@obj.complex_specimen_type.first.complex_material_type.first.description).to eq ['material description']
       expect(@obj.complex_specimen_type.first.complex_material_type.first.material_type).to be_empty
-      expect(@obj.complex_specimen_type.first.complex_material_type.first.sub_material_type).to be_empty
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.material_sub_type).to be_empty
       expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier).to be_empty
       # purchase record
       expect(@obj.complex_specimen_type.first.complex_purchase_record).to be_empty
@@ -844,7 +844,7 @@ RSpec.describe Dataset do
           }],
           description: 'Specimen description',
           complex_material_type_attributes: [{
-            sub_material_type: 'some sub material type',
+            material_sub_type: 'some sub material type',
           }],
           complex_structural_feature_attributes: [{
             sub_category: 'structural feature sub category',
