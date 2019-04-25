@@ -16,7 +16,7 @@ sleep 15s
 
 ## Run any pending migrations, if the database exists
 ## If not setup the database
-bundle exec rake db:exists && rake db:migrate || rake db:setup
+bundle exec rake db:exists && bundle exec rake db:migrate || bundle exec rake db:setup
 
 # check that Solr is running
 SOLR=$(curl --silent --connect-timeout 45 "http://${SOLR_HOST:-solr}:${SOLR_PORT:-8983}/solr/" | grep "Apache SOLR")
