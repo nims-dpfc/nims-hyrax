@@ -21,7 +21,7 @@ services:
     volumes:
       - fcrepo:/data
     depends_on:
-      - fcrepo-db
+      - fcrepodb
     networks:
       internal:
 
@@ -67,16 +67,16 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-  fcrepo-db:
+  fcrepodb:
     <<: *db
     environment:
-      - POSTGRES_DB=${FCREPO_DB}
+      - POSTGRES_DB=${POSTGRES_DB_FCREPO}
     volumes:
       - db-fcrepo:/var/lib/postgresql/data
-  app-db:
+  appdb:
     <<: *db
     environment:
-      - POSTGRES_DB=${APP_DB}
+      - POSTGRES_DB=${POSTGRES_DB_APP}
     volumes:
       - db:/var/lib/postgresql/data
 
@@ -105,7 +105,7 @@ services:
     <<: *app
     command: bash -c "/bin/docker-entrypoint.sh"
     depends_on:
-      - app-db
+      - appdb
       - solr
       - fcrepo
       - redis
@@ -118,7 +118,7 @@ services:
     environment:
       - SETTINGS__FITS_PATH=/fits/fits-1.0.5/fits.sh
     depends_on:
-      - app-db
+      - appdb
       - solr
       - fcrepo
       - redis
