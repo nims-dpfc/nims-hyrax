@@ -34,7 +34,7 @@ class CatalogController < ApplicationController
       provider: {
         repository_name: 'NIMS NGDR',
         repository_url: 'https://ngdrdemo.cottagelabs.com/catalog/oai',
-        record_prefix: 'oai:ngdrdemo',
+        record_prefix: 'ngdrdemo',
         admin_email: 'nims.ngdr@gmail.com',
         sample_id: '9e9f5e08-8905-44bc-8d85-5bfc691a7e3c'
       },
