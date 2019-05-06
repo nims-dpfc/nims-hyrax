@@ -19,7 +19,7 @@ RUN echo 'deb  http://deb.debian.org/debian stretch main contrib non-free'
 RUN echo 'deb-src  http://deb.debian.org/debian stretch main contrib non-free'
 
 
-RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list \
+RUN echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/stretch-backports.list \
     && apt-get update -qq \
     && apt-get install -y --no-install-recommends \
     libpq-dev \
@@ -35,8 +35,8 @@ RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sou
     ufraw \
     bzip2 unzip xz-utils \
     vim \
-    # install open-jdk and ca-certs from jessie-backports
-    && apt-get install -t jessie-backports -y --no-install-recommends openjdk-8-jre-headless ca-certificates-java \
+    # install open-jdk and ca-certs from stretch-backports
+    && apt-get install -t stretch-backports -y --no-install-recommends openjdk-8-jre-headless ca-certificates-java \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && /var/lib/dpkg/info/ca-certificates-java.postinst configure
