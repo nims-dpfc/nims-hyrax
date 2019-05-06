@@ -2,7 +2,7 @@ FROM nginx:stable-alpine
 
 # Copy our configuration
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY hyrax.conf /etc/nginx/hyrax.conf
+COPY ssl.conf /etc/nginx/ssl.conf
 COPY .htpasswd /etc/nginx/conf.d/.htpasswd
 
 # Install Certbot
