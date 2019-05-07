@@ -228,6 +228,49 @@ RSpec.describe DatasetIndexer do
     end
   end
 
+  describe 'indexes the organization active triple resource with all the attributes' do
+    before do
+      organizations = [
+        {
+          organization: 'Foo',
+          sub_organization: 'Bar',
+          purpose: 'org purpose',
+          complex_identifier_attributes: [{
+            identifier: '1234567',
+            scheme: 'Local'
+          }]
+        },
+        {
+          organization: 'Big',
+          sub_organization: 'Baz',
+          purpose: 'Manufacturer',
+          complex_identifier_attributes: [{
+            identifier: '1234567890m',
+            scheme: 'Local'
+          }]
+        }
+      ]
+      obj = build(:dataset, complex_organization_attributes: organizations)
+      @solr_document = obj.to_solr
+    end
+    it 'indexes as displayable' do
+      expect(@solr_document).to include('complex_organization_ssm')
+      expect(JSON.parse(@solr_document['complex_organization_ssm'])).not_to be_empty
+    end
+    it 'indexes organization as stored searchable' do
+      expect(@solr_document['complex_organization_tesim']).to match_array(['Foo', 'Big'])
+    end
+    it 'indexes organization as facetable' do
+      expect(@solr_document['complex_organization_sim']).to match_array(['Foo', 'Big'])
+    end
+    it 'indexes sub organization as stored searchable' do
+      expect(@solr_document['complex_sub_organization_tesim']).to match_array(['Bar', 'Baz'])
+    end
+    it 'indexes sub organization as facetable' do
+      expect(@solr_document['complex_sub_organization_sim']).to match_array(['Bar', 'Baz'])
+    end
+  end
+
   describe 'indexes characterization methods' do
     before do
       obj = build(:dataset, characterization_methods: 'Method D')
