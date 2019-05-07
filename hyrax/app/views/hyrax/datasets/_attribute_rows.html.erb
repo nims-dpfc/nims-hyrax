@@ -21,6 +21,6 @@
 <%= presenter.attribute_to_html(:properties_addressed, render_as: :faceted, label: t('ngdr.fields.properties_addressed'), html_dl: true) %>
 <%= presenter.attribute_to_html(:complex_relation, render_as: :nested_relation, label: t('ngdr.fields.complex_relation'), html_dl: true) %>
 <%= presenter.attribute_to_html(:specimen_set, label: t('ngdr.fields.specimen_set'), html_dl: true) %>
-<%= presenter.attribute_to_html(:specimen_type, render_as: :nested_specimen_type, label: t('ngdr.fields.specimen_type'), html_dl: true) %>
+<%= presenter.attribute_to_html(:complex_specimen_type, render_as: :nested_specimen_type, label: t('ngdr.fields.complex_specimen_type'), html_dl: true) %>
 <%= presenter.attribute_to_html(:synthesis_and_processing, render_as: :faceted, label: t('ngdr.fields.synthesis_and_processing'), html_dl: true) %>
 <%= presenter.attribute_to_html(:custom_property, render_as: :nested_custom_property, label: t('ngdr.fields.custom_property'), html_dl: true) %>
