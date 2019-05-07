@@ -48,6 +48,8 @@ class Dataset < ActiveFedora::Base
 
   property :complex_version, predicate: ::RDF::Vocab::NimsRdp.version, class_name:"ComplexVersion"
 
+  property :complex_organization, predicate: ::RDF::Vocab::ORG.organization, class_name:"ComplexOrganization"
+
   property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'], multiple: false do |index|
     index.as :stored_searchable
   end
@@ -104,6 +106,7 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
   # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_organization, reject_if: :organization_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
