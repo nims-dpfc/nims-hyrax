@@ -386,6 +386,48 @@ RSpec.describe Dataset do
     end
   end
 
+  describe 'complex_organization' do
+    it 'creates an organization active triple resource with an id and all properties' do
+      @obj = build(:dataset, complex_organization_attributes: [{
+          organization: 'Foo',
+          sub_organization: 'Bar',
+          purpose: 'org purpose',
+          complex_identifier_attributes: [{
+            identifier: '1234567',
+            scheme: 'Local'
+          }]
+        }]
+      )
+      expect(@obj.complex_organization.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_organization.first.id).to include('#organization')
+      expect(@obj.complex_organization.first.organization).to eq ['Foo']
+      expect(@obj.complex_organization.first.sub_organization).to eq ['Bar']
+      expect(@obj.complex_organization.first.purpose).to eq ['org purpose']
+      expect(@obj.complex_organization.first.complex_identifier.first.identifier).to eq ['1234567']
+      expect(@obj.complex_organization.first.complex_identifier.first.scheme).to eq ['Local']
+    end
+
+    it 'creates an organization active triple with organization' do
+      @obj = build(:dataset, complex_organization_attributes: [{
+          organization: 'Foo'
+        }]
+      )
+      expect(@obj.complex_organization.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_organization.first.organization).to eq ['Foo']
+      expect(@obj.complex_organization.first.sub_organization).to be_empty
+      expect(@obj.complex_organization.first.purpose).to be_empty
+      expect(@obj.complex_organization.first.complex_identifier).to be_empty
+    end
+
+    it 'rejects an organization active triple with no organization' do
+      @obj = build(:dataset, complex_organization_attributes: [{
+          sub_organization: 'sub org'
+        }]
+      )
+      expect(@obj.complex_organization).to be_empty
+    end
+  end
+
   describe 'characterization_methods' do
     it 'has characterization_methods' do
       @obj = build(:dataset, characterization_methods: 'Characterization methods')

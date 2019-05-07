@@ -21,6 +21,7 @@ module Hyrax
       :title, :alternative_title, :description, :keyword, :language,
       :publisher, :complex_rights, :subject, :complex_date, :complex_person,
       :complex_version, :characterization_methods, :computational_methods,
+      :complex_organization,
       # :complex_identifier # not using this for now
       :data_origin, :complex_instrument, :origin_system_provenance,
       :properties_addressed, :complex_relation, :specimen_set,
@@ -40,9 +41,9 @@ module Hyrax
 
     def metadata_tab_terms
       [
-        :title, :alternative_title, :description, :complex_person, :keyword,
-        :subject, :language, :publisher, :complex_date, :complex_rights,
-        :complex_version, :complex_relation
+        :title, :alternative_title, :description, :complex_person,
+        :complex_organization, :keyword, :subject, :language, :publisher,
+        :complex_date, :complex_rights, :complex_version, :complex_relation
       ]
     end
 
@@ -63,8 +64,8 @@ module Hyrax
     end
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
-      :complex_person, :complex_relation, :complex_rights, :complex_specimen_type,
-      :complex_version, :custom_property].freeze
+      :complex_organization, :complex_person, :complex_relation, :complex_rights,
+      :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
 
@@ -270,6 +271,7 @@ module Hyrax
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_instrument_attributes: permitted_instrument_params }
       permitted << { complex_person_attributes: permitted_person_params }
+      permitted << { complex_organization_attributes: permitted_organization_params }
       permitted << { complex_relation_attributes: permitted_relation_params }
       permitted << { complex_rights_attributes: permitted_rights_params }
       permitted << { complex_specimen_type_attributes: permitted_specimen_type_params }
