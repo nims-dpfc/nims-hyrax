@@ -34,6 +34,7 @@ RUN echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/so
     ghostscript ffmpeg imagemagick \
     ufraw \
     bzip2 unzip xz-utils \
+    libclamav-dev clamav-daemon clamav-freshclam \
     vim \
     # install open-jdk and ca-certs from stretch-backports
     && apt-get install -t stretch-backports -y --no-install-recommends openjdk-8-jre-headless ca-certificates-java \
@@ -74,6 +75,8 @@ COPY ./seed /seed
 RUN mkdir -p $DERIVATIVES_PATH
 RUN mkdir -p $UPLOADS_PATH
 RUN mkdir -p $CACHE_PATH
+
+RUN freshclam
 
 # copy the application
 COPY . $APP_PRODUCTION

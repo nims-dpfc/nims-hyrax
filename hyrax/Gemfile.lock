@@ -140,6 +140,7 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    clamav (0.4.1)
     clipboard-rails (1.7.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -770,6 +771,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   browse-everything
   byebug
+  clamav
   coffee-rails (~> 4.2)
   devise
   devise-guests (~> 0.6)
