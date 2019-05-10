@@ -77,3 +77,4 @@ group :production do
   gem 'airbrake', '~> 5.0'
 end
 gem 'devise_ldap_authenticatable'
+gem 'clamav'

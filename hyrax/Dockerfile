@@ -32,6 +32,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     ghostscript ffmpeg imagemagick \
     ufraw \
     bzip2 unzip xz-utils \
+    libclamav-dev clamav-daemon clamav-freshclam \
     vim \
     git \
     openjdk-8-jre-headless
@@ -62,6 +63,8 @@ COPY ./seed /seed
 RUN mkdir -p $DERIVATIVES_PATH
 RUN mkdir -p $UPLOADS_PATH
 RUN mkdir -p $CACHE_PATH
+
+RUN freshclam
 
 # copy the application
 COPY . $APP_PRODUCTION
