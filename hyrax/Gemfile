@@ -73,6 +73,5 @@ gem 'pg'
 
 gem 'riiif', '~> 2.0'
 gem 'airbrake', '~> 5.0'
-gem 'browse-everything'
 gem 'devise_ldap_authenticatable'
 gem 'clamav'
