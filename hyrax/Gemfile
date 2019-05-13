@@ -87,4 +87,4 @@ group :test do
 end
 
 gem 'coveralls', require: false
-gem 'blacklight_oai_provider'
+gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_oai_provider.git', branch: 'master'

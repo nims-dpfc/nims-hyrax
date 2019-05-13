@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/CottageLabs/blacklight_oai_provider.git
+  revision: 73d5f34315e313fb22084cfc52939d71e3c0728a
+  branch: master
+  specs:
+    blacklight_oai_provider (1.4.1)
+      blacklight (>= 6.1)
+      oai (~> 0.4.0)
+      rails (>= 4.2)
+
+GIT
   remote: https://github.com/CottageLabs/willow_sword.git
   revision: ab456d99eaa4d07ed12d0510330be07909981204
   branch: feature/prep_for_new_release
@@ -127,10 +137,6 @@ GEM
       bootstrap-sass (~> 3.0)
       openseadragon (>= 0.2.0)
       rails
-    blacklight_oai_provider (6.0.0)
-      blacklight (~> 6.0)
-      oai (~> 0.4)
-      rails (>= 4.2, < 6)
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
     bootstrap-sass (3.4.1)
@@ -843,7 +849,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake (~> 5.0)
-  blacklight_oai_provider
+  blacklight_oai_provider!
   bootstrap-datepicker-rails
   byebug
   capybara
