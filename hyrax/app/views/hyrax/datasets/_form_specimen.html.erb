@@ -1,0 +1,5 @@
+        <div class="base-terms">
+          <% f.object.specimen_tab_terms.each do |term| %>
+            <%= render_edit_field_partial(term, f: f) %>
+          <% end %>
+        </div>

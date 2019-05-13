@@ -1,11 +1,11 @@
 <div class="multi-nested">
-  <%= f.input :specimen_type,
+  <%= f.input :complex_specimen_type,
     as: :nested_specimen_type,
     input_html: {
       class: '',
-      data: {name: :specimen_type}
+      data: {name: :complex_specimen_type}
     },
-    required: f.object.required?(:specimen_type)
+    required: f.object.required?(:complex_specimen_type)
   %>
   <button type="button" class="btn btn-link add">
     <span class="glyphicon glyphicon-plus"></span>

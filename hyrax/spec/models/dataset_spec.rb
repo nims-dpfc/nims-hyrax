@@ -32,7 +32,8 @@ RSpec.describe Dataset do
   describe 'title' do
     it 'requires title' do
       @obj = build(:dataset, title: nil)
-      expect{@obj.save!}.to raise_error(ActiveFedora::RecordInvalid, 'Validation failed: Title Your dataset must have a title.')
+      expect{@obj.save!}.to raise_error(ActiveFedora::RecordInvalid,
+        'Validation failed: Title Your dataset must have a title.')
     end
 
     it 'has a multi valued title field' do
@@ -163,7 +164,8 @@ RSpec.describe Dataset do
 
   describe 'complex_rights' do
     it 'creates a complex rights active triple resource with rights' do
-      @obj = build(:dataset, complex_rights_attributes: [{
+      @obj = build(:dataset,
+        complex_rights_attributes: [{
           rights: 'cc0'
         }]
       )
@@ -174,7 +176,8 @@ RSpec.describe Dataset do
     end
 
     it 'creates a rights active triple resource with all the attributes' do
-      @obj = build(:dataset, complex_rights_attributes: [{
+      @obj = build(:dataset,
+        complex_rights_attributes: [{
           date: '1978-10-28',
           rights: 'CC0'
         }]
@@ -185,7 +188,8 @@ RSpec.describe Dataset do
     end
 
     it 'rejects a rights active triple with no rights' do
-      @obj = build(:dataset, complex_rights_attributes: [{
+      @obj = build(:dataset,
+        complex_rights_attributes: [{
           date: '2018-01-01'
         }]
       )
@@ -223,12 +227,11 @@ RSpec.describe Dataset do
 
   describe 'complex_date' do
     it 'creates a date active triple resource with all the attributes' do
-      @obj = build(:dataset, complex_date_attributes: [
-          {
-            date: '1978-10-28',
-            description: 'Some kind of a date',
-          }
-        ]
+      @obj = build(:dataset,
+        complex_date_attributes: [{
+          date: '1978-10-28',
+          description: 'Some kind of a date',
+        }]
       )
       expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_date.first.date).to eq ['1978-10-28']
@@ -236,11 +239,10 @@ RSpec.describe Dataset do
     end
 
     it 'creates a date active triple resource with just the date' do
-      @obj = build(:dataset, complex_date_attributes: [
-          {
-            date: '1984-09-01'
-          }
-        ]
+      @obj = build(:dataset,
+        complex_date_attributes: [{
+          date: '1984-09-01'
+        }]
       )
       expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_date.first.date).to eq ['1984-09-01']
@@ -248,11 +250,10 @@ RSpec.describe Dataset do
     end
 
     it 'rejects a date active triple with no date' do
-      @obj = build(:dataset, complex_date_attributes: [
-          {
-            description: 'Local date'
-          }
-        ]
+      @obj = build(:dataset,
+        complex_date_attributes: [{
+          description: 'Local date'
+        }]
       )
       expect(@obj.complex_date).to be_empty
     end
@@ -260,7 +261,8 @@ RSpec.describe Dataset do
 
   describe 'complex_identifier' do
     it 'creates an identifier active triple resource with all the attributes' do
-      @obj = build(:dataset, complex_identifier_attributes: [{
+      @obj = build(:dataset,
+        complex_identifier_attributes: [{
           identifier: '0000-0000-0000-0000',
           scheme: 'uri_of_ORCID_scheme',
           label: 'ORCID'
@@ -273,7 +275,8 @@ RSpec.describe Dataset do
     end
 
     it 'creates an identifier active triple resource with just the identifier' do
-      @obj = build(:dataset, complex_identifier_attributes: [{
+      @obj = build(:dataset,
+        complex_identifier_attributes: [{
           identifier: '1234'
         }]
       )
@@ -284,7 +287,8 @@ RSpec.describe Dataset do
     end
 
     it 'rejects an identifier active triple with no identifier' do
-      @obj = build(:dataset, complex_identifier_attributes: [{
+      @obj = build(:dataset,
+        complex_identifier_attributes: [{
           label: 'Local'
         }]
       )
@@ -294,7 +298,8 @@ RSpec.describe Dataset do
 
   describe 'complex_person' do
     it 'creates a person active triple resource with name' do
-      @obj = build(:dataset, complex_person_attributes: [{
+      @obj = build(:dataset,
+        complex_person_attributes: [{
           name: 'Anamika'
         }]
       )
@@ -302,16 +307,20 @@ RSpec.describe Dataset do
       expect(@obj.complex_person.first.name).to eq ['Anamika']
       expect(@obj.complex_person.first.first_name).to be_empty
       expect(@obj.complex_person.first.last_name).to be_empty
-      expect(@obj.complex_person.first.affiliation).to be_empty
+      expect(@obj.complex_person.first.email).to be_empty
+      expect(@obj.complex_person.first.complex_affiliation).to be_empty
       expect(@obj.complex_person.first.role).to be_empty
       expect(@obj.complex_person.first.complex_identifier).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
     end
 
     it 'creates a person active triple resource with name, affiliation and role' do
-      @obj = build(:dataset, complex_person_attributes: [{
+      @obj = build(:dataset,
+        complex_person_attributes: [{
           name: 'Anamika',
-          affiliation: 'Paradise',
+          complex_affiliation_attributes: [{
+            job_title: 'Paradise',
+          }],
           role: 'Creator'
         }]
       )
@@ -319,10 +328,12 @@ RSpec.describe Dataset do
       expect(@obj.complex_person.first.name).to eq ['Anamika']
       expect(@obj.complex_person.first.first_name).to be_empty
       expect(@obj.complex_person.first.last_name).to be_empty
-      expect(@obj.complex_person.first.affiliation).to eq ['Paradise']
+      expect(@obj.complex_person.first.email).to be_empty
       expect(@obj.complex_person.first.role).to eq ['Creator']
       expect(@obj.complex_person.first.complex_identifier).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
+      expect(@obj.complex_person.first.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_person.first.complex_affiliation.first.job_title).to eq ['Paradise']
     end
 
     it 'rejects person active triple with no name and only uri' do
@@ -375,6 +386,48 @@ RSpec.describe Dataset do
     end
   end
 
+  describe 'complex_organization' do
+    it 'creates an organization active triple resource with an id and all properties' do
+      @obj = build(:dataset, complex_organization_attributes: [{
+          organization: 'Foo',
+          sub_organization: 'Bar',
+          purpose: 'org purpose',
+          complex_identifier_attributes: [{
+            identifier: '1234567',
+            scheme: 'Local'
+          }]
+        }]
+      )
+      expect(@obj.complex_organization.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_organization.first.id).to include('#organization')
+      expect(@obj.complex_organization.first.organization).to eq ['Foo']
+      expect(@obj.complex_organization.first.sub_organization).to eq ['Bar']
+      expect(@obj.complex_organization.first.purpose).to eq ['org purpose']
+      expect(@obj.complex_organization.first.complex_identifier.first.identifier).to eq ['1234567']
+      expect(@obj.complex_organization.first.complex_identifier.first.scheme).to eq ['Local']
+    end
+
+    it 'creates an organization active triple with organization' do
+      @obj = build(:dataset, complex_organization_attributes: [{
+          organization: 'Foo'
+        }]
+      )
+      expect(@obj.complex_organization.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_organization.first.organization).to eq ['Foo']
+      expect(@obj.complex_organization.first.sub_organization).to be_empty
+      expect(@obj.complex_organization.first.purpose).to be_empty
+      expect(@obj.complex_organization.first.complex_identifier).to be_empty
+    end
+
+    it 'rejects an organization active triple with no organization' do
+      @obj = build(:dataset, complex_organization_attributes: [{
+          sub_organization: 'sub org'
+        }]
+      )
+      expect(@obj.complex_organization).to be_empty
+    end
+  end
+
   describe 'characterization_methods' do
     it 'has characterization_methods' do
       @obj = build(:dataset, characterization_methods: 'Characterization methods')
@@ -398,7 +451,8 @@ RSpec.describe Dataset do
 
   describe 'complex_instrument' do
     it 'creates an instrument active triple resource with all the attributes' do
-      @obj = build(:dataset, complex_instrument_attributes: [{
+      @obj = build(:dataset,
+        complex_instrument_attributes: [{
           alternative_title: 'An instrument title',
           complex_date_attributes: [{
             date: ['2018-02-14']
@@ -408,19 +462,39 @@ RSpec.describe Dataset do
             identifier: ['123456'],
             label: ['Local']
           }],
-          function_1: ['Has a function'],
-          function_2: ['Has two functions'],
-          manufacturer: 'Manufacturer name',
+          instrument_function_attributes: [{
+            column_number: 1,
+            category: 'some value',
+            sub_category: 'some other value',
+            description: 'Instrument function description'
+          }],
+          manufacturer_attributes: [{
+            organization: 'Foo',
+            sub_organization: 'Bar',
+            purpose: 'Manufacturer',
+            complex_identifier_attributes: [{
+              identifier: '123456789m',
+              scheme: 'Local'
+            }]
+          }],
+          model_number: '123xfty',
           complex_person_attributes: [{
             name: ['Name of operator'],
             role: ['Operator']
           }],
-          organization: 'Organisation',
+          managing_organization_attributes: [{
+            organization: 'FooFoo',
+            sub_organization: 'BarBar',
+            purpose: 'Managing organization',
+            complex_identifier_attributes: [{
+              identifier: '123456789mo',
+              scheme: 'Local'
+            }]
+          }],
           title: 'Instrument title'
         }]
       )
       expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.id).to include('#instrument')
       expect(@obj.complex_instrument.first.alternative_title).to eq ['An instrument title']
       expect(@obj.complex_instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.complex_date.first.date).to eq ['2018-02-14']
@@ -428,18 +502,33 @@ RSpec.describe Dataset do
       expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['123456']
       expect(@obj.complex_instrument.first.complex_identifier.first.label).to eq ['Local']
-      expect(@obj.complex_instrument.first.function_1).to eq ['Has a function']
-      expect(@obj.complex_instrument.first.function_2).to eq ['Has two functions']
-      expect(@obj.complex_instrument.first.manufacturer).to eq ['Manufacturer name']
+      expect(@obj.complex_instrument.first.instrument_function.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.instrument_function.first.column_number).to eq [1]
+      expect(@obj.complex_instrument.first.instrument_function.first.category).to eq ['some value']
+      expect(@obj.complex_instrument.first.instrument_function.first.sub_category).to eq ['some other value']
+      expect(@obj.complex_instrument.first.instrument_function.first.description).to eq ['Instrument function description']
+      expect(@obj.complex_instrument.first.manufacturer.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.manufacturer.first.organization).to eq ['Foo']
+      expect(@obj.complex_instrument.first.manufacturer.first.sub_organization).to eq ['Bar']
+      expect(@obj.complex_instrument.first.manufacturer.first.purpose).to eq ['Manufacturer']
+      expect(@obj.complex_instrument.first.manufacturer.first.complex_identifier.first.identifier).to eq ['123456789m']
+      expect(@obj.complex_instrument.first.manufacturer.first.complex_identifier.first.scheme).to eq ['Local']
+      expect(@obj.complex_instrument.first.model_number).to eq ['123xfty']
       expect(@obj.complex_instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.complex_person.first.name).to eq ['Name of operator']
       expect(@obj.complex_instrument.first.complex_person.first.role).to eq ['Operator']
-      expect(@obj.complex_instrument.first.organization).to eq ['Organisation']
+      expect(@obj.complex_instrument.first.managing_organization.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_instrument.first.managing_organization.first.organization).to eq ['FooFoo']
+      expect(@obj.complex_instrument.first.managing_organization.first.sub_organization).to eq ['BarBar']
+      expect(@obj.complex_instrument.first.managing_organization.first.purpose).to eq ['Managing organization']
+      expect(@obj.complex_instrument.first.managing_organization.first.complex_identifier.first.identifier).to eq ['123456789mo']
+      expect(@obj.complex_instrument.first.managing_organization.first.complex_identifier.first.scheme).to eq ['Local']
       expect(@obj.complex_instrument.first.title).to eq ['Instrument title']
     end
 
     it 'creates an complex_instrument active triple resource with date, identifier and person' do
-      @obj = build(:dataset, complex_instrument_attributes: [{
+      @obj = build(:dataset,
+        complex_instrument_attributes: [{
           complex_date_attributes: [{
             date: ['2018-01-28'],
           }],
@@ -487,8 +576,8 @@ RSpec.describe Dataset do
 
   describe 'complex_relation' do
     it 'creates a relation active triple resource with all the attributes' do
-      @obj = build(:dataset, complex_relation_attributes: [
-        {
+      @obj = build(:dataset,
+        complex_relation_attributes: [{
           title: 'A related item',
           url: 'http://example.com/relation',
           complex_identifier_attributes: [{
@@ -508,7 +597,8 @@ RSpec.describe Dataset do
     end
 
     it 'creates a relation active triple resource with title, url, identifier and relationship role' do
-      @obj = build(:dataset, complex_relation_attributes: [{
+      @obj = build(:dataset,
+        complex_relation_attributes: [{
           title: 'A relation label',
           url: 'http://example.com/relation',
           complex_identifier_attributes: [{
@@ -535,11 +625,12 @@ RSpec.describe Dataset do
     end
 
     it 'rejects relation active triple with identifier' do
-      @obj = build(:dataset, complex_relation_attributes: [{
-        complex_identifier_attributes: [{
-                                          identifier: ['123456'],
-                                          label: 'Local'
-                                        }],
+      @obj = build(:dataset,
+        complex_relation_attributes: [{
+          complex_identifier_attributes: [{
+            identifier: ['123456'],
+            label: 'Local'
+          }],
         }]
       )
       expect(@obj.complex_relation).to be_empty
@@ -563,97 +654,308 @@ RSpec.describe Dataset do
 
   describe 'specimen_type' do
     it 'creates a specimen type active triple resource with all the attributes' do
-      @obj = build(:dataset, specimen_type_attributes: [{
-          chemical_composition: 'chemical composition',
-          crystallographic_structure: 'crystallographic structure',
-          description: 'Description',
+      @obj = build(:dataset,
+        complex_specimen_type_attributes: [{
+          complex_chemical_composition_attributes: [{
+            description: 'chemical composition 1',
+            complex_identifier_attributes: [{
+              identifier: 'chemical_composition/1234567'
+            }],
+          }],
+          complex_crystallographic_structure_attributes: [{
+            description: 'crystallographic_structure 1',
+            complex_identifier_attributes: [{
+              identifier: ['crystallographic_structure/123456'],
+              label: ['Local']
+            }],
+          }],
+          description: 'Specimen description',
           complex_identifier_attributes: [{
-            identifier: '1234567'
+            identifier: 'specimen/1234567'
           }],
-          material_types: 'material types',
-          purchase_record_attributes: [{
-            date: '2018-09-23',
-            title: 'Purchase record 1'
+          complex_material_type_attributes: [{
+            description: 'material description',
+            material_type: 'some material type',
+            material_sub_type: 'some other material sub type',
+            complex_identifier_attributes: [{
+              identifier: ['material/ewfqwefqwef'],
+              label: ['Local']
+            }],
           }],
-          complex_relation_attributes: [{
-            url: 'http://example.com/relation',
-            relationship: 'isPartOf'
+          complex_purchase_record_attributes: [{
+            date: ['2018-02-14'],
+            complex_identifier_attributes: [{
+              identifier: ['purchase_record/123456'],
+              label: ['Local']
+            }],
+            supplier_attributes: [{
+              organization: 'Fooss',
+              sub_organization: 'Barss',
+              purpose: 'Supplier',
+              complex_identifier_attributes: [{
+                identifier: 'supplier/123456789',
+                scheme: 'Local'
+              }]
+            }],
+            manufacturer_attributes: [{
+              organization: 'Foo',
+              sub_organization: 'Bar',
+              purpose: 'Manufacturer',
+              complex_identifier_attributes: [{
+                identifier: 'manufacturer/123456789',
+                scheme: 'Local'
+              }]
+            }],
+            purchase_record_item: ['Has a purchase record item'],
+            title: 'Purchase record title'
           }],
-          structural_features: 'structural features',
-          title: 'Instrument 1'
+          complex_shape_attributes: [{
+            description: 'shape description',
+            complex_identifier_attributes: [{
+              identifier: ['shape/123456'],
+              label: ['Local']
+            }]
+          }],
+          complex_state_of_matter_attributes: [{
+            description: 'state of matter description',
+            complex_identifier_attributes: [{
+              identifier: ['state/123456'],
+              label: ['Local']
+            }]
+          }],
+          complex_structural_feature_attributes: [{
+            description: 'structural feature description',
+            category: 'structural feature category',
+            sub_category: 'structural feature sub category',
+            complex_identifier_attributes: [{
+              identifier: ['structural_feature/123456'],
+              label: ['Local']
+            }]
+          }],
+          title: 'Specimen 1'
         }]
       )
-      expect(@obj.specimen_type.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.specimen_type.first.id).to include('#specimen')
-      expect(@obj.specimen_type.first.chemical_composition).to eq ['chemical composition']
-      expect(@obj.specimen_type.first.crystallographic_structure).to eq ['crystallographic structure']
-      expect(@obj.specimen_type.first.description).to eq ['Description']
-      expect(@obj.specimen_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.specimen_type.first.complex_identifier.first.identifier).to eq ['1234567']
-      expect(@obj.specimen_type.first.material_types).to eq ['material types']
-      expect(@obj.specimen_type.first.purchase_record.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.specimen_type.first.purchase_record.first.date).to eq ['2018-09-23']
-      expect(@obj.specimen_type.first.purchase_record.first.title).to eq ['Purchase record 1']
-      expect(@obj.specimen_type.first.complex_relation.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.specimen_type.first.complex_relation.first.url).to eq ['http://example.com/relation']
-      expect(@obj.specimen_type.first.complex_relation.first.relationship).to eq ['isPartOf']
-      expect(@obj.specimen_type.first.structural_features).to eq ['structural features']
-      expect(@obj.specimen_type.first.title).to eq ['Instrument 1']
+      expect(@obj.complex_specimen_type.first).to be_kind_of ActiveTriples::Resource
+      # chemical composition
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.id).to include('#chemical_composition')
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.description).to eq ['chemical composition 1']
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first.identifier).to eq ['chemical_composition/1234567']
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first.label).to be_empty
+      # crystallographic structure
+      expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first.id).to include('#crystallographic_structure')
+      expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first.description).to eq ['crystallographic_structure 1']
+      expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first.complex_identifier.first.identifier).to eq ['crystallographic_structure/123456']
+      expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first.complex_identifier.first.label).to eq ['Local']
+      # description
+      expect(@obj.complex_specimen_type.first.description).to eq ['Specimen description']
+      # identifier
+      expect(@obj.complex_specimen_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_identifier.first.id).to include('#identifier')
+      expect(@obj.complex_specimen_type.first.complex_identifier.first.identifier).to eq ['specimen/1234567']
+      # material type
+      expect(@obj.complex_specimen_type.first.complex_material_type.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.id).to include('#material_type')
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.description).to eq ['material description']
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.material_type).to eq ['some material type']
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.material_sub_type).to eq ['some other material sub type']
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier.first.identifier).to eq ['material/ewfqwefqwef']
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier.first.label).to eq ['Local']
+      # purchase record
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.id).to include('#purchase_record')
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.date).to eq ['2018-02-14']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.complex_identifier.first.identifier).to eq ['purchase_record/123456']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.complex_identifier.first.label).to eq ['Local']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.supplier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.supplier.first.organization).to eq ['Fooss']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.supplier.first.sub_organization).to eq ['Barss']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.supplier.first.purpose).to eq ['Supplier']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.supplier.first.complex_identifier.first.identifier).to eq ['supplier/123456789']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.supplier.first.complex_identifier.first.scheme).to eq ['Local']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.manufacturer.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.manufacturer.first.organization).to eq ['Foo']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.manufacturer.first.sub_organization).to eq ['Bar']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.manufacturer.first.purpose).to eq ['Manufacturer']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.manufacturer.first.complex_identifier.first.identifier).to eq ['manufacturer/123456789']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.manufacturer.first.complex_identifier.first.scheme).to eq ['Local']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.purchase_record_item).to eq ['Has a purchase record item']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.title).to eq ['Purchase record title']
+      # shape
+      expect(@obj.complex_specimen_type.first.complex_shape.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_shape.first.id).to include('#shape')
+      expect(@obj.complex_specimen_type.first.complex_shape.first.description).to eq ['shape description']
+      expect(@obj.complex_specimen_type.first.complex_shape.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_shape.first.complex_identifier.first.identifier).to eq ['shape/123456']
+      expect(@obj.complex_specimen_type.first.complex_shape.first.complex_identifier.first.label).to eq ['Local']
+      # state of matter
+      expect(@obj.complex_specimen_type.first.complex_state_of_matter.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.id).to include('#state_of_matter')
+      expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.description).to eq ['state of matter description']
+      expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first.identifier).to eq ['state/123456']
+      expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first.label).to eq ['Local']
+      # structural feature
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.id).to include('#structural_feature')
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.description).to eq ['structural feature description']
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.category).to eq ['structural feature category']
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.sub_category).to eq ['structural feature sub category']
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first.identifier).to eq ['structural_feature/123456']
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first.label).to eq ['Local']
+      # title
+      expect(@obj.complex_specimen_type.first.title).to eq ['Specimen 1']
     end
 
     it 'creates a specimen type active triple resource with the 7 required attributes' do
-      @obj = build(:dataset, specimen_type_attributes: [{
-          chemical_composition: 'chemical composition',
-          crystallographic_structure: 'crystallographic structure',
-          description: 'Description',
-          complex_identifier_attributes: [{
-            identifier: '1234567'
+      @obj = build(:dataset,
+        complex_specimen_type_attributes: [{
+          complex_chemical_composition_attributes: [{
+            description: 'chemical composition 1',
           }],
-          material_types: 'material types',
-          structural_features: 'structural features',
-          title: 'Instrument 1'
+          complex_crystallographic_structure_attributes: [{
+            description: 'crystallographic_structure 1',
+          }],
+          description: 'Specimen description',
+          complex_identifier_attributes: [{
+            identifier: 'specimen/1234567'
+          }],
+          complex_material_type_attributes: [{
+            description: 'material description'
+          }],
+          complex_structural_feature_attributes: [{
+            description: 'structural feature description'
+          }],
+          title: 'Specimen 1'
         }]
       )
-      expect(@obj.specimen_type.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.specimen_type.first.chemical_composition).to eq ['chemical composition']
-      expect(@obj.specimen_type.first.crystallographic_structure).to eq ['crystallographic structure']
-      expect(@obj.specimen_type.first.description).to eq ['Description']
-      expect(@obj.specimen_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.specimen_type.first.complex_identifier.first.identifier).to eq ['1234567']
-      expect(@obj.specimen_type.first.material_types).to eq ['material types']
-      expect(@obj.specimen_type.first.structural_features).to eq ['structural features']
-      expect(@obj.specimen_type.first.title).to eq ['Instrument 1']
+      # chemical composition
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.id).to include('#chemical_composition')
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.description).to eq ['chemical composition 1']
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier).to be_empty
+      # crystallographic structure
+      expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first.id).to include('#crystallographic_structure')
+      expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first.description).to eq ['crystallographic_structure 1']
+      expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first.complex_identifier).to be_empty
+      # description
+      expect(@obj.complex_specimen_type.first.description).to eq ['Specimen description']
+      # identifier
+      expect(@obj.complex_specimen_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_identifier.first.id).to include('#identifier')
+      expect(@obj.complex_specimen_type.first.complex_identifier.first.identifier).to eq ['specimen/1234567']
+      # material type
+      expect(@obj.complex_specimen_type.first.complex_material_type.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.id).to include('#material_type')
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.description).to eq ['material description']
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.material_type).to be_empty
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.material_sub_type).to be_empty
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier).to be_empty
+      # purchase record
+      expect(@obj.complex_specimen_type.first.complex_purchase_record).to be_empty
+      # shape
+      expect(@obj.complex_specimen_type.first.complex_shape).to be_empty
+      # state of matter
+      expect(@obj.complex_specimen_type.first.complex_state_of_matter).to be_empty
+      # structural feature
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.id).to include('#structural_feature')
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.description).to eq ['structural feature description']
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.category).to be_empty
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.sub_category).to be_empty
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier).to be_empty
+      # title
+      expect(@obj.complex_specimen_type.first.title).to eq ['Specimen 1']
     end
 
     it 'rejects a specimen type active triple with no identifier' do
-      @obj = build(:dataset, specimen_type_attributes: [{
-          chemical_composition: 'chemical composition',
-          crystallographic_structure: 'crystallographic structure',
-          description: 'Description',
-          complex_identifier_attributes: [{
-            label: 'ORCID'
+      @obj = build(:dataset,
+        complex_specimen_type_attributes: [{
+          complex_chemical_composition_attributes: [{
+            description: 'chemical composition 1',
           }],
-          material_types: 'material types',
-          structural_features: 'structural features',
-          title: 'Instrument 1'
+          complex_crystallographic_structure_attributes: [{
+            description: 'crystallographic_structure 1',
+          }],
+          description: 'Specimen description',
+          complex_material_type_attributes: [{
+            material_sub_type: 'some sub material type',
+          }],
+          complex_structural_feature_attributes: [{
+            sub_category: 'structural feature sub category',
+          }],
+          title: 'Specimen 1'
         }]
       )
-      expect(@obj.specimen_type).to be_empty
+      expect(@obj.complex_specimen_type).to be_empty
     end
 
-    it 'rejects a specimen type active triple with only purchase record and relation' do
-      @obj = build(:dataset, specimen_type_attributes: [{
-          purchase_record_attributes: [{
-            date: '2018-09-23',
-            title: 'Purchase record 1'
+    it 'rejects a specimen type active triple with some required and some non-required information' do
+      @obj = build(:dataset,
+        complex_specimen_type_attributes: [{
+          complex_chemical_composition_attributes: [{
+            complex_identifier_attributes: [{
+              identifier: 'chemical_composition/1234567'
+            }],
           }],
-          complex_relation_attributes: [{
-            url: 'http://example.com/relation',
-            relationship: 'isPartOf'
-          }]
+          complex_crystallographic_structure_attributes: [{
+            complex_identifier_attributes: [{
+              identifier: ['crystallographic_structure/123456'],
+              label: ['Local']
+            }],
+          }],
+          description: 'Specimen description',
+          complex_identifier_attributes: [{
+            identifier: 'specimen/1234567'
+          }],
+          complex_material_type_attributes: [{
+            complex_identifier_attributes: [{
+              identifier: ['material/ewfqwefqwef'],
+              label: ['Local']
+            }],
+          }],
+          complex_purchase_record_attributes: [{
+            date: ['2018-02-14'],
+            complex_identifier_attributes: [{
+              identifier: ['purchase_record/123456'],
+              label: ['Local']
+            }],
+            supplier_attributes: [{
+              organization: 'Fooss',
+              sub_organization: 'Barss',
+              purpose: 'Supplier',
+            }],
+            manufacturer_attributes: [{
+              organization: 'Foo',
+              sub_organization: 'Bar',
+              purpose: 'Manufacturer',
+            }],
+            purchase_record_item: ['Has a purchase record item'],
+            title: 'Purchase record title'
+          }],
+          complex_shape_attributes: [{
+            description: 'shape description',
+          }],
+          complex_state_of_matter_attributes: [{
+            description: 'state of matter description',
+          }],
+          complex_structural_feature_attributes: [{
+            complex_identifier_attributes: [{
+              identifier: ['structural_feature/123456'],
+              label: ['Local']
+            }]
+          }],
+          title: 'Specimen 1'
         }]
       )
-      expect(@obj.specimen_type).to be_empty
+      expect(@obj.complex_specimen_type).to be_empty
     end
   end
 
@@ -666,7 +968,8 @@ RSpec.describe Dataset do
 
   describe 'custom_property' do
     it 'creates a custom property active triple resource with all the attributes' do
-      @obj = build(:dataset, custom_property_attributes: [{
+      @obj = build(:dataset,
+        custom_property_attributes: [{
           label: 'Full name',
           description: 'My full name is ...'
         }]
@@ -678,7 +981,8 @@ RSpec.describe Dataset do
     end
 
     it 'rejects a custom property active triple with no label' do
-      @obj = build(:dataset, custom_property_attributes: [{
+      @obj = build(:dataset,
+        custom_property_attributes: [{
           description: 'Local date'
         }]
       )
@@ -686,7 +990,8 @@ RSpec.describe Dataset do
     end
 
     it 'rejects a custom property active triple with no description' do
-      @obj = build(:dataset, custom_property_attributes: [{
+      @obj = build(:dataset,
+        custom_property_attributes: [{
           label: 'Local date'
         }]
       )

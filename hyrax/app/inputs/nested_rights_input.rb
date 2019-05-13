@@ -2,10 +2,8 @@ class NestedRightsInput < NestedAttributesInput
 
   protected
 
-    def build_components(attribute_name, value, index, options)
+    def build_components(attribute_name, value, index, options, parent=@builder.object_name)
       out = ''
-
-      rights_statement = value
 
       # Inherit required for fields validated in nested attributes
       required  = false
@@ -15,9 +13,9 @@ class NestedRightsInput < NestedAttributesInput
 
       # --- rights
       field = :rights
-      field_name = name_for(attribute_name, index, field)
-      field_id = id_for(attribute_name, index, field)
-      field_value = rights_statement.send(field).first
+      field_name = name_for(attribute_name, index, field, parent)
+      field_id = id_for(attribute_name, index, field, parent)
+      field_value = value.send(field).first
       active_options = Hyrax::LicenseService.new.select_active_options
 
       out << "<div class='row'>"
@@ -38,9 +36,9 @@ class NestedRightsInput < NestedAttributesInput
 
       # --- start date
       field = :date
-      field_name = name_for(attribute_name, index, field)
-      field_id = id_for(attribute_name, index, field)
-      field_value = rights_statement.send(field).first
+      field_name = name_for(attribute_name, index, field, parent)
+      field_id = id_for(attribute_name, index, field, parent)
+      field_value = value.send(field).first
 
       out << "  <div class='col-md-3'>"
       out << template.label_tag(field_name, field.to_s.humanize, required: false)
@@ -55,7 +53,7 @@ class NestedRightsInput < NestedAttributesInput
       # delete checkbox
       field_label = 'Rights'
       out << "  <div class='col-md-3'>"
-      out << destroy_widget(attribute_name, index, field_label)
+      out << destroy_widget(attribute_name, index, field_label, parent)
       out << '  </div>'
 
       out << '</div>' # last row
