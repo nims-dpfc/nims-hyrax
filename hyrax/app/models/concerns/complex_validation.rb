@@ -5,7 +5,8 @@ module ComplexValidation
     #   Requires job_title, organization
     resource_class.send(:define_method, :affiliation_blank) do |attributes|
       organization_blank = true
-      Array(attributes[:complex_organization_attributes]).each do |org|
+      Array(attributes[:complex_organization_attributes]).each do |key, org|
+        next if org.blank?
         organization_blank = organization_blank && Array(org[:organization]).all?(&:blank?)
       end
       Array(attributes[:job_title]).all?(&:blank?) || organization_blank
@@ -19,11 +20,13 @@ module ComplexValidation
     #   Requires upstream or downsteam or event date or operator
     resource_class.send(:define_method, :history_blank) do |attributes|
       date_blank = true
-      Array(attributes[:complex_event_date_attributes]).each do |dt|
+      Array(attributes[:complex_event_date_attributes]).each do |key, dt|
+        next if dt.blank?
         date_blank = date_blank && Array(dt[:date]).all?(&:blank?)
       end
       person_blank = true
-      Array(attributes[:complex_operator_attributes]).each do |p|
+      Array(attributes[:complex_operator_attributes]).each do |key, p|
+        next if p.blank?
         person_blank = person_blank &&
         Array(p[:first_name]).all?(&:blank?) &&
         Array(p[:last_name]).all?(&:blank?) &&
@@ -42,7 +45,8 @@ module ComplexValidation
     #   Requires description, identifier
     resource_class.send(:define_method, :identifier_description_blank) do |attributes|
       identifiers_blank = true
-      Array(attributes[:complex_identifier_attributes]).each do |id|
+      Array(attributes[:complex_identifier_attributes]).each do |key, id|
+        next if id.blank?
         identifiers_blank = identifiers_blank && Array(id[:identifier]).all?(&:blank?)
       end
       Array(attributes[:description]).all?(&:blank?) || identifiers_blank
@@ -51,15 +55,18 @@ module ComplexValidation
     #   Requires date, identifier and person
     resource_class.send(:define_method, :instrument_blank) do |attributes|
       identifiers_blank = true
-      Array(attributes[:complex_identifier_attributes]).each do |id|
+      Array(attributes[:complex_identifier_attributes]).each do |key, id|
+        next if id.blank?
         identifiers_blank = identifiers_blank && Array(id[:identifier]).all?(&:blank?)
       end
       date_blank = true
-      Array(attributes[:complex_date_attributes]).each do |dt|
+      Array(attributes[:complex_date_attributes]).each do |key, dt|
+        next if dt.blank?
         date_blank = date_blank && Array(dt[:date]).all?(&:blank?)
       end
       person_blank = true
-      Array(attributes[:complex_person_attributes]).each do |p|
+      Array(attributes[:complex_person_attributes]).each do |key, p|
+        next if p.blank?
         person_blank = person_blank &&
         Array(p[:first_name]).all?(&:blank?) &&
         Array(p[:last_name]).all?(&:blank?) &&
@@ -95,7 +102,8 @@ module ComplexValidation
     #   Requires title / url / identifier and relationship
     resource_class.send(:define_method, :relation_blank) do |attributes|
       identifiers_blank = true
-      Array(attributes[:complex_identifier_attributes]).each do |id|
+      Array(attributes[:complex_identifier_attributes]).each do |key, id|
+        next if id.blank?
         identifiers_blank = identifiers_blank && Array(id[:identifier]).all?(&:blank?)
       end
       (Array(attributes[:title]).all?(&:blank?) &&
@@ -114,22 +122,26 @@ module ComplexValidation
     resource_class.send(:define_method, :specimen_type_blank) do |attributes|
       # complex_chemical_composition blank
       cc_blank = true
-      Array(attributes[:complex_chemical_composition_attributes]).each do |cc|
+      Array(attributes[:complex_chemical_composition_attributes]).each do |key, cc|
+        next if cc.blank?
         cc_blank = cc_blank && Array(cc[:description]).all?(&:blank?)
       end
       # complex_crystallographic_structure blank
       cs_blank = true
-      Array(attributes[:complex_crystallographic_structure_attributes]).each do |cs|
+      Array(attributes[:complex_crystallographic_structure_attributes]).each do |key, cs|
+        next if cs.blank?
         cs_blank = cs_blank && Array(cs[:description]).all?(&:blank?)
       end
       # identifier blank
       id_blank = true
-      Array(attributes[:complex_identifier_attributes]).each do |id|
+      Array(attributes[:complex_identifier_attributes]).each do |key, id|
+        next if id.blank?
         id_blank = id_blank && Array(id[:identifier]).all?(&:blank?)
       end
       # complex_material_type blank
       mt_blank = true
-      Array(attributes[:complex_material_type_attributes]).each do |mt|
+      Array(attributes[:complex_material_type_attributes]).each do |key, mt|
+        next if mt.blank?
         mt_blank = mt_blank &&
                    Array(mt[:description]).all?(&:blank?) &&
                    Array(mt[:material_type]).all?(&:blank?) &&
@@ -137,7 +149,8 @@ module ComplexValidation
       end
       # complex_structural_feature blank
       sf_blank = true
-      Array(attributes[:complex_structural_feature_attributes]).each do |sf|
+      Array(attributes[:complex_structural_feature_attributes]).each do |key, sf|
+        next if sf.blank?
         sf_blank = sf_blank &&
                    Array(sf[:description]).all?(&:blank?) &&
                    Array(sf[:category]).all?(&:blank?) &&
