@@ -48,6 +48,8 @@ class Dataset < ActiveFedora::Base
 
   property :complex_version, predicate: ::RDF::Vocab::NimsRdp.version, class_name:"ComplexVersion"
 
+  property :complex_organization, predicate: ::RDF::Vocab::ORG.organization, class_name:"ComplexOrganization"
+
   property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'], multiple: false do |index|
     index.as :stored_searchable
   end
@@ -87,7 +89,8 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :specimen_type, predicate: ::RDF::Vocab::NimsRdp['specimen-type'], class_name: "ComplexSpecimenType"
+  property :complex_specimen_type, predicate: ::RDF::Vocab::NimsRdp['specimen-type'],
+  class_name: "ComplexSpecimenType"
 
   property :synthesis_and_processing, predicate: ::RDF::Vocab::NimsRdp['synthesis-and-processing'], multiple: false do |index|
     index.as :stored_searchable, :facetable
@@ -103,10 +106,11 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
   # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_organization, reject_if: :organization_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
-  accepts_nested_attributes_for :specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
 end

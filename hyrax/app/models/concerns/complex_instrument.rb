@@ -15,17 +15,23 @@ class ComplexInstrument < ActiveTriples::Resource
             class_name:"ComplexIdentifier"
   accepts_nested_attributes_for :complex_identifier
 
-  property :function_1, predicate: ::RDF::Vocab::NimsRdp["instrument-function-tier1"]
+  property :instrument_function, predicate: ::RDF::Vocab::NimsRdp["instrument-function"],
+            class_name:"ComplexInstrumentFunction"
+  accepts_nested_attributes_for :instrument_function
 
-  property :function_2, predicate: ::RDF::Vocab::NimsRdp["instrument-function-tier2"]
+  property :manufacturer, predicate: ::RDF::Vocab::NimsRdp["instrument-manufacturer"],
+            class_name:"ComplexOrganization"
+   accepts_nested_attributes_for :manufacturer
 
-  property :manufacturer, predicate: ::RDF::Vocab::NimsRdp["instrument-manufacturer"]
+  property :model_number, predicate: ::RDF::Vocab::NimsRdp["instrument-model-number"]
 
   property :complex_person, predicate: ::RDF::Vocab::NimsRdp["instrument-operator"],
             class_name:"ComplexPerson"
   accepts_nested_attributes_for :complex_person
 
-  property :organization, predicate: ::RDF::Vocab::NimsRdp["instrument-organization"]
+  property :managing_organization, predicate: ::RDF::Vocab::NimsRdp["instrument-organization"],
+            class_name:"ComplexOrganization"
+  accepts_nested_attributes_for :managing_organization
 
   property :title, predicate: ::RDF::Vocab::NimsRdp["instrument-title"]
 

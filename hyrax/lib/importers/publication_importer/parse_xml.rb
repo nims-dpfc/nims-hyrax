@@ -230,10 +230,14 @@ module Importers
           #   title
           #   ignoring address and identifier
           val = get_text(ele, 'person/organization/title')
-          creator[:affiliation] = val if val.any?
-          # Organisation
-          val = get_text(ele, 'organization/title')
-          creator[:name] = val if val.any?
+          attrs = {}
+          if val.any?
+            attrs[:complex_organization_attributes] = [{
+              organization: val
+            }]
+            creator[:complex_affiliation_attributes] = attrs
+          end
+          # Organisation -ignoring
           creators << creator if creator.any?
         end
         creators

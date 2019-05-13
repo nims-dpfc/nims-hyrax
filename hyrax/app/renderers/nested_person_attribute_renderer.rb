@@ -4,11 +4,11 @@ class NestedPersonAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
     value = JSON.parse(value)
     html = []
     value.each do |v|
-      person = []
+      vals = []
       unless v.dig('name').blank?
         label = "Name"
         val = link_to(ERB::Util.h(v['name'][0]), search_path(v['name'][0]))
-        person << [label, val]
+        vals << [label, val]
       else
         creator_name = []
         unless v.dig('first_name').blank?
@@ -20,27 +20,32 @@ class NestedPersonAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
         creator_name = creator_name.join(' ').strip
         label = "Name"
         val = link_to(ERB::Util.h(creator_name), search_path(creator_name))
-        person << [label, val]
+        vals << [label, val]
       end
-      unless v.dig('affiliation').blank?
-        label = 'Affiliation'
-        val = v['affiliation'][0]
-        person << [label, val]
+      unless v.dig('complex_identifier').blank?
+        id_j = v.dig('complex_identifier').to_json
+        val = NestedIdentifierAttributeRenderer.new('Identifier', id_j).render
+        vals << ['', val]
+      end
+      unless v.dig('complex_affiliation').blank?
+        id_j = v.dig('complex_affiliation').to_json
+        val = NestedAffiliationAttributeRenderer.new('Affiliation', id_j).render
+        vals << ['', val]
       end
       unless v.dig('role').blank?
         label = 'Role'
         val = v['role'][0]
         term = RoleService.new.find_by_id(val)
         val = term['label'] if term.any?
-        person << [label, val]
+        vals << [label, val]
       end
-      html << person if person.any?
+      html << vals if vals.any?
     end
     html_out = ''
     unless html.blank?
       html_out = '<table class="table nested-table"><tbody>'
-      html.each do |person|
-        person.each_with_index do |h,index|
+      html.each do |vals|
+        vals.each_with_index do |h,index|
           if (index + 1) == person.size
             html_out += '<tr class="end">'
           else
