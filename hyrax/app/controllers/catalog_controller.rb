@@ -1,7 +1,7 @@
 class CatalogController < ApplicationController
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
-  include BlacklightOaiProvider::Controller
+  include BlacklightOaiProvider::CatalogControllerBehavior
 
   # This filter applies the hydra access controls
   before_action :enforce_show_permissions, only: :show
@@ -36,7 +36,7 @@ class CatalogController < ApplicationController
         repository_url: 'https://ngdrdemo.cottagelabs.com/catalog/oai',
         record_prefix: 'ngdrdemo',
         admin_email: 'nims.ngdr@gmail.com',
-        sample_id: '9e9f5e08-8905-44bc-8d85-5bfc691a7e3c'
+        sample_id: 'x059c7329'
       },
       document: {
         limit: 25,            # number of records returned with each request, default: 15
