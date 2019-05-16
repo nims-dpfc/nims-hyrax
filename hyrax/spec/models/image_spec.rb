@@ -233,22 +233,22 @@ RSpec.describe Image do
     end
 
     it 'creates a date active triple resource with just the date' do
-      @obj = build(:image, complex_date_attributes: [
-        {
+      @obj = build(:image,
+        complex_date_attributes: [{
           date: '1984-09-01'
-        }
-      ])
+        }]
+      )
       expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_date.first.date).to eq ['1984-09-01']
       expect(@obj.complex_date.first.description).to be_empty
     end
 
     it 'rejects a date active triple with no date' do
-      @obj = build(:image, complex_date_attributes: [
-        {
+      @obj = build(:image,
+        complex_date_attributes: [{
           description: 'Local date'
-        }
-      ])
+        }]
+      )
       expect(@obj.complex_date).to be_empty
     end
   end
@@ -298,7 +298,7 @@ RSpec.describe Image do
       expect(@obj.complex_person.first.name).to eq ['Anamika']
       expect(@obj.complex_person.first.first_name).to be_empty
       expect(@obj.complex_person.first.last_name).to be_empty
-      expect(@obj.complex_person.first.affiliation).to be_empty
+      expect(@obj.complex_person.first.complex_affiliation).to be_empty
       expect(@obj.complex_person.first.role).to be_empty
       expect(@obj.complex_person.first.complex_identifier).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
@@ -307,7 +307,14 @@ RSpec.describe Image do
     it 'creates a person active triple resource with name, affiliation and role' do
       @obj = build(:image, complex_person_attributes: [{
           name: 'Anamika',
-          affiliation: 'Paradise',
+          complex_affiliation_attributes: [{
+            job_title: 'Master',
+            complex_organization_attributes: [{
+              organization: 'Org',
+              sub_organization: 'Sub org',
+              purpose: 'org purpose',
+            }]
+          }],
           role: 'Creator'
         }]
       )
@@ -315,7 +322,12 @@ RSpec.describe Image do
       expect(@obj.complex_person.first.name).to eq ['Anamika']
       expect(@obj.complex_person.first.first_name).to be_empty
       expect(@obj.complex_person.first.last_name).to be_empty
-      expect(@obj.complex_person.first.affiliation).to eq ['Paradise']
+      expect(@obj.complex_person.first.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_person.first.complex_affiliation.first.job_title).to eq ['Master']
+      expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.organization).to eq ['Org']
+      expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.sub_organization).to eq ['Sub org']
+      expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.purpose).to eq ['org purpose']
+      expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.complex_identifier).to be_empty
       expect(@obj.complex_person.first.role).to eq ['Creator']
       expect(@obj.complex_person.first.complex_identifier).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
@@ -331,12 +343,13 @@ RSpec.describe Image do
 
   describe 'complex_version' do
     it 'creates a version active triple resource with all the attributes' do
-      @obj = build(:image, complex_version_attributes: [{
-                                                              date: '1978-10-28',
-                                                              description: 'Creating the first version',
-                                                              identifier: 'id1',
-                                                              version: '1.0'
-                                                          }]
+      @obj = build(:image,
+        complex_version_attributes: [{
+          date: '1978-10-28',
+          description: 'Creating the first version',
+          identifier: 'id1',
+          version: '1.0'
+        }]
       )
       expect(@obj.complex_version.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_version.first.id).to include('#version')
@@ -347,9 +360,10 @@ RSpec.describe Image do
     end
 
     it 'creates a version active triple resource with just the version' do
-      @obj = build(:image, complex_version_attributes: [{
-                                                              version: '1.0'
-                                                          }]
+      @obj = build(:image,
+        complex_version_attributes: [{
+          version: '1.0'
+        }]
       )
       expect(@obj.complex_version.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_version.first.id).to include('#version')
@@ -360,11 +374,12 @@ RSpec.describe Image do
     end
 
     it 'rejects a version active triple with no version' do
-      @obj = build(:image, complex_version_attributes: [{
-                                                              description: 'Local version',
-                                                              identifier: 'id1',
-                                                              date: '2018-01-01'
-                                                          }]
+      @obj = build(:image,
+        complex_version_attributes: [{
+          description: 'Local version',
+          identifier: 'id1',
+          date: '2018-01-01'
+        }]
       )
       expect(@obj.complex_version).to be_empty
     end

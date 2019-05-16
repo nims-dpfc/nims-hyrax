@@ -1,5 +1,6 @@
 // -------- form css --------
-form .listing {
+form .listing,
+form .inner-listing {
   list-style: none;
 }
 
@@ -22,6 +23,8 @@ form .field-wrapper:not(:last-child) {
 
 .multi-nested {
   margin-bottom: 1em;
+  background-color: #eee;
+  padding: 10px;
 }
 
 form .field-wrapper label[required="required"]::after {
@@ -45,5 +48,15 @@ form .field-wrapper label[required="required"]::after {
 .nested-table > tbody > tr.end > td {
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
+}
+
+.inner-listing {
+  padding-left: 0px;
+}
+
+.inner-nested {
+  margin-bottom: 1em;
+  background-color: #f7fdd5;
+  padding: 10px;
 }
 // ----------------

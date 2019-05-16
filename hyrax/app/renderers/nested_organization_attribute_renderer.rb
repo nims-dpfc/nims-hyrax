@@ -4,35 +4,35 @@ class NestedOrganizationAttributeRenderer < Hyrax::Renderers::FacetedAttributeRe
     value = JSON.parse(value)
     html = []
     value.each do |v|
-      source = []
+      vals = []
       unless v.dig('organization').blank?
         label = "Organization"
         val = link_to(ERB::Util.h(v['organization'][0]), search_path(v['organization'][0]))
-        source << [label, val]
+        vals << [label, val]
       end
       unless v.dig('sub_organization').blank?
         label = 'Sub organization'
         val = v['sub_organization'][0]
-        source << [label, val]
+        vals << [label, val]
       end
       unless v.dig('purpose').blank?
         label = 'Role'
         val = v['purpose'].render
-        source << [label, val]
+        vals << [label, val]
       end
       unless v.dig('complex_identifier').blank?
         id_j = v.dig('complex_identifier').to_json
         val = NestedIdentifierAttributeRenderer.new('Identifier', id_j).render
-        source << ['', val]
+        vals << ['', val]
       end
-      html << source if source.any?
+      html << vals if vals.any?
     end
     html_out = ''
     unless html.blank?
       html_out = '<table class="table nested-table"><tbody>'
-      html.each do |source|
-        source.each_with_index do |h,index|
-          if (index + 1) == source.size
+      html.each do |vals|
+        vals.each_with_index do |h,index|
+          if (index + 1) == vals.size
             html_out += '<tr class="end">'
           else
             html_out += '<tr>'
