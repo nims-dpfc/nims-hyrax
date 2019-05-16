@@ -4,6 +4,9 @@ class CatalogController < ApplicationController
 
   # This filter applies the hydra access controls
   before_action :enforce_show_permissions, only: :show
+  configure_blacklight do |config|
+    config.http_method = :post
+  end
 
   def self.uploaded_field
     solr_name('system_create', :stored_sortable, type: :date)
