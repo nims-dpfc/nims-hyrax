@@ -769,7 +769,6 @@ PLATFORMS
 DEPENDENCIES
   airbrake (~> 5.0)
   bootstrap-datepicker-rails
-  browse-everything
   byebug
   clamav
   coffee-rails (~> 4.2)
@@ -790,6 +789,7 @@ DEPENDENCIES
   riiif (~> 2.0)
   rsolr (>= 1.0)
   rspec-rails
+  rubyzip
   sass-rails (~> 5.0)
   sidekiq
   solr_wrapper (~> 2.0)

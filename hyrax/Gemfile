@@ -78,3 +78,4 @@ group :production do
 end
 gem 'devise_ldap_authenticatable'
 gem 'clamav'
+gem 'rubyzip'
