@@ -79,3 +79,7 @@ end
 gem 'devise_ldap_authenticatable'
 gem 'clamav'
 gem 'rubyzip'
+
+group :test do
+  gem 'simplecov'
+end
