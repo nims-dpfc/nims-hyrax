@@ -1,4 +1,4 @@
-//-------------- Fonts -----------------
+//----------- fonts to be used ---------
 @font-face {
   font-family: "Galano Grotesque";
   src: font-url('GalanoGrotesqueBold.otf');
@@ -12,11 +12,19 @@
   font-style: normal;
 }
 
-//-------------- colours ---------------
+//---------- colours to be used --------
 $mdr-grey: #F4F4F4;
 $mdr-black: #1E2022;
 $mdr-green-1: #AFCA0B;
 $mdr-green-2: #7DB928;
+
+//-------------- Fonts -----------------
+body {
+  font-family: "Galano Grotesque";
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: $mdr-black;
+}
 
 //-------------- Headings --------------
 h1, .h1 {
@@ -220,3 +228,20 @@ body.dashboard {
   color: $mdr-green-2;
 }
 
+//-------------- Search ----------------
+.facet-field-heading {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.facet_select {
+  color: $mdr-black;
+}
+
+.facet-values li .selected {
+  color: #FF0000;
+}
+
+.facet-values .remove {
+  color: #FF0000;
+}
