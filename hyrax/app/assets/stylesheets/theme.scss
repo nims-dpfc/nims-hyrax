@@ -1,0 +1,222 @@
+//-------------- Fonts -----------------
+@font-face {
+  font-family: "Galano Grotesque";
+  src: font-url('GalanoGrotesqueBold.otf');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Galano Grotesque";
+  src: font-url('GalanoGrotesqueLight.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+//-------------- colours ---------------
+$mdr-grey: #F4F4F4;
+$mdr-black: #1E2022;
+$mdr-green-1: #AFCA0B;
+$mdr-green-2: #7DB928;
+
+//-------------- Headings --------------
+h1, .h1 {
+  font-family: "Galano Grotesque";
+  font-size: 32px;
+}
+
+h2, .modal-title, .h2 {
+  font-family: "Galano Grotesque";
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: $mdr-black;
+}
+
+h3, .h3 {
+  font-family: "Galano Grotesque";
+  font-weight: bold;
+  font-size: 14px;
+  color: $mdr-black;
+}
+
+//------------- anchor -----------------
+a, a:focus, a:hover, a:active {
+  color: $mdr-green-2;
+}
+
+// --------------- buttons -------------
+.btn {
+  border-radius: 0px;
+}
+
+.btn-primary, .btn-primary:focus {
+  background-color: $mdr-black;
+  border-color: $mdr-black;
+  color: $mdr-green-2;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 0px;
+}
+
+.btn-default, .btn-default:focus {
+  background-color: $mdr-black;
+  border-color: $mdr-black;
+  color: $mdr-green-2;
+  text-transform: uppercase;
+  border-radius: 0px;
+}
+
+a.btn-primary,
+a.btn-primary:focus,
+a.btn-primary:hover,
+a.btn-primary:active {
+  color: $mdr-green-2;
+}
+
+.glyphicon-search {
+  color: $mdr-green-2;
+}
+
+.facets-toggle, td.toggle input[type="submit"] {
+  border-radius: 0px;
+}
+
+// ------------- label -----------------
+.label {
+  background-color: inherit;
+  border: none;
+}
+
+.label-danger {
+  color: #FF0000;
+}
+
+.label-success {
+  color: $mdr-green-2;
+}
+
+// ------------- dropdown --------------
+#sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle {
+  color: $mdr-green-2;
+}
+
+//-------------- Header ----------------
+
+// .recent-field-fluid > .navbar-header, .recent-field-fluid > .navbar-collapse {
+//    margin-top: 15px;
+// }
+
+#masthead {
+  background-color: $mdr-black;
+}
+
+.navbar-inverse .navbar-nav > li.dropdown > a {
+  color: $mdr-green-2;
+  font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  color: $mdr-green-2;
+}
+
+.navbar {
+  min-height: 80px;
+}
+
+.navbar + .navbar {
+  margin-top: 0px;
+}
+
+.navbar-brand {
+  height: 80px;
+}
+
+.navbar-right {
+  margin-top: 15px;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #3c3c3c;
+  font-weight: bold;
+}
+
+nav.searchbar {
+  margin-bottom: 0px;
+  background-color: $mdr-green-2;
+}
+
+.searchbar > .recent-field-fluid {
+  margin-bottom: 0px;
+}
+
+.searchbar-left {
+  padding-top: 15px;
+}
+
+.navbar-left {
+  // margin-top: 15px;
+  float: left !important;
+}
+
+#search-submit-header {
+  color: white;
+}
+
+// ------------- footer ----------------
+.site-footer {
+  height: 60px;
+  padding: 20px;
+  background-color: $mdr-black;
+  color: #fff;
+  font-weight: bold;
+}
+
+// ------------- homepage -----------------
+.homepage-icon {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.homepage-row {
+  padding-bottom: 30px;
+}
+
+.homepage-row:first-child {
+  padding-top: 30px;
+}
+
+.homepage-row:nth-child(odd) {
+  background: $mdr-grey;
+}
+
+.homepage-row:nth-child(even) {
+  background: #FFF;
+}
+
+.home-recently-uploaded,
+.home-featured-works,
+.home-featured-researcher {
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-browse {
+  text-transform: uppercase;
+}
+
+//--------------- dashboard -----------
+body.dashboard {
+  padding-top: 80px;
+}
+
+//--------------- work show ------------
+.work-type-tag {
+  color: $mdr-green-2;
+}
+
