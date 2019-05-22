@@ -24,3 +24,7 @@ services:
       - 443:443
     networks:
       internal:
+
+  solr:
+    environment:
+     - "SOLR_JAVA_MEM=-Xms4096m -Xmx4096m"
