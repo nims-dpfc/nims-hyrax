@@ -232,9 +232,10 @@ module Importers
           val = get_text(ele, 'person/organization/title')
           attrs = {}
           if val.any?
-            attrs[:complex_organization_attributes] = [{
-              organization: val
-            }]
+            attrs[:complex_organization_attributes] = {
+              # FIXME
+              # organization: val
+            }
             creator[:complex_affiliation_attributes] = attrs
           end
           # Organisation -ignoring
@@ -398,10 +399,12 @@ module Importers
         metadata[:description] = val if val.any?
         # extent
         val = get_text(node, 'extent')
-        metadata[:extent] = val if val.any?
+        # FIXME
+        # metadata[:extent] = val if val.any?
         # format
         val = get_text(node, 'format')
-        metadata[:format] = val if val.any?
+        # FIXME
+        # metadata[:format] = val if val.any?
         # license
         val = get_text(node, 'license')
         metadata[:license] = val if val.any?
@@ -418,7 +421,7 @@ module Importers
         file_info = {}
         file_info = properties.except(:pid, :visibility)
         file_metadata[:visibility] = properties.fetch(:visibility, 'restricted')
-        file_metadata[:resource_type] = 'Article'
+        file_metadata[:resource_type] = ['Article']
         file_info[:metadata] = file_metadata
         file_info
       end
