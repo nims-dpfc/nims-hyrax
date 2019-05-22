@@ -21,8 +21,9 @@ module Hyrax
       :title, :alternative_title, :description, :keyword, :language,
       :publisher, :complex_rights, :subject, :complex_date, :complex_person,
       :complex_version, :characterization_methods, :computational_methods,
-      :complex_organization, :complex_identifier, :data_origin,
-      :complex_instrument, :origin_system_provenance,
+      :complex_organization,
+      # :complex_identifier # not using this for now
+      :data_origin, :complex_instrument, :origin_system_provenance,
       :properties_addressed, :complex_relation, :specimen_set,
       :complex_specimen_type, :synthesis_and_processing, :custom_property
     ]
@@ -42,8 +43,7 @@ module Hyrax
       [
         :title, :alternative_title, :description, :complex_person,
         :complex_organization, :keyword, :subject, :language, :publisher,
-        :complex_date, :complex_rights, :complex_identifier, :complex_version,
-        :complex_relation
+        :complex_date, :complex_rights, :complex_version, :complex_relation
       ]
     end
 
