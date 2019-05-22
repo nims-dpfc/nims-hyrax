@@ -80,6 +80,8 @@ class Publication < ActiveFedora::Base
 
   property :complex_source, predicate: ::RDF::Vocab::ESciDocPublication.source, class_name: 'ComplexSource'
 
+  property :complex_organization, predicate: ::RDF::Vocab::ORG.organization, class_name:"ComplexOrganization"
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
@@ -92,4 +94,5 @@ class Publication < ActiveFedora::Base
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_event, reject_if: :event_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_source, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_organization, reject_if: :organization_blank, allow_destroy: true
 end

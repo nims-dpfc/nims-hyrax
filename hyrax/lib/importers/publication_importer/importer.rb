@@ -75,9 +75,11 @@ module Importers
               h = Importers::HyraxImporter.new('Publication', attributes, files, @collection, work_id)
               begin
                 h.import
+                puts "************ Imported work #{work_id} *************"
               rescue StandardError => exception
                 error = []
                 error = [exception.message, "\n"] + Array(exception.backtrace)
+                puts error
                 puts '************ Error importing work *************'
               end
               # puts 'Imported work'
