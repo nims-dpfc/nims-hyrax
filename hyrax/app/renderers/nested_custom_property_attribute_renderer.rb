@@ -1,11 +1,8 @@
-class NestedCustomPropertyAttributeRenderer < Hyrax::Renderers::AttributeRenderer
-  private
-  def attribute_value_to_html(value)
-    value = JSON.parse(value)
-    if not value.kind_of?(Array)
-      value = [value]
-    end
+class NestedCustomPropertyAttributeRenderer < NestedAttributeRenderer
+  def attribute_value_to_html(input_value)
     html = ''
+    return html if input_value.blank?
+    value = parse_value(input_value)
     value.each do |v|
       label = ''
       val = ''
@@ -15,14 +12,9 @@ class NestedCustomPropertyAttributeRenderer < Hyrax::Renderers::AttributeRendere
       unless v.dig('description').blank?
         val = v['description'][0]
       end
-      html += "<tr class=\"end\"><th>#{label}</th><td>#{val}</td></tr>"
+      html += get_row(label, val)
     end
-    html_out = ''
-    unless html.blank?
-      html_out = '<table class="table nested-table"><tbody>'
-      html_out += html
-      html_out += '</tbody></table>'
-    end
+    html_out = get_ouput_html(html)
     %(#{html_out})
   end
 end

@@ -1,81 +1,73 @@
-class NestedInstrumentAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
-  private
-  def li_value(value)
-    value = JSON.parse(value)
-    html = []
+class NestedInstrumentAttributeRenderer < NestedAttributeRenderer
+  def attribute_value_to_html(input_value)
+    html = ''
+    return html if input_value.blank?
+    value = parse_value(input_value)
     value.each do |v|
-      vals = []
+      each_html = ''
       # title
       unless v.dig('title').blank?
         label ="Title"
         val = link_to(ERB::Util.h(v['title'][0]), search_path(v['title'][0]))
-        vals << [label, val]
+        each_html += get_row(label, val)
       end
       # alternative title
       unless v.dig('alternative_title').blank?
-        vals << ['Alternative title', v['alternative_title'][0]]
+        label = 'Alternative title'
+        val = v['alternative_title'][0]
+        each_html += get_row(label, val)
       end
       # complex date
       unless v.dig('complex_date').blank?
-        val_j = v.dig('complex_date').to_json
-        val = NestedDateAttributeRenderer.new('Date', val_j).render
-        vals << ['', val]
+        label = 'Date'
+        renderer_class = NestedDateAttributeRenderer
+        each_html += get_nested_output(label, v['complex_date'], renderer_class, false)
       end
       # description
       unless v.dig('description').blank?
-        vals << ['Description', v['description'][0]]
+        label = 'Description'
+        val = v['description'][0]
+        each_html += get_row(label, val)
       end
       # complex identifier
       unless v.dig('complex_identifier').blank?
-        val_j = v.dig('complex_identifier').to_json
-        val = NestedIdentifierAttributeRenderer.new('Identifier', val_j).render
-        vals << ['', val]
+        label = 'Identifier'
+        renderer_class = NestedIdentifierAttributeRenderer
+        each_html += get_nested_output(label, v['complex_identifier'], renderer_class, false)
       end
       # instrument function
       unless v.dig('instrument_function').blank?
-        val_j = v.dig('instrument_function').to_json
-        val = NestedInstrumentFunctionAttributeRenderer.new('Instrument function', val_j).render
-        vals << ['', val]
+        label = 'Instrument function'
+        renderer_class = NestedInstrumentFunctionAttributeRenderer
+        each_html += get_nested_output(label, v['instrument_function'], renderer_class, true)
       end
       # manufacturer
       unless v.dig('manufacturer').blank?
-        val_j = v.dig('manufacturer').to_json
-        val = NestedOrganizationAttributeRenderer.new('Manufacturer', val_j).render
-        vals << ['', val]
+        label = 'Manufacturer'
+        renderer_class = NestedOrganizationAttributeRenderer
+        each_html += get_nested_output(label, v['manufacturer'], renderer_class, true)
       end
       # model_number
       unless v.dig('model_number').blank?
-        vals << ['Model number', v['model_number'][0]]
+        label = 'Model number'
+        val = v['model_number'][0]
+        each_html += get_row(label, val)
       end
       # compex_person
       unless v.dig('complex_person').blank?
-        val_j = v.dig('complex_person').to_json
-        val = NestedPersonAttributeRenderer.new('Operator', val_j).render
-        vals << ['', val]
+        label = 'Operator'
+        renderer_class = NestedPersonAttributeRenderer
+        each_html += get_nested_output(label, v['complex_person'], renderer_class, true)
       end
       # managing_organization
       unless v.dig('managing_organization').blank?
-        val_j = v.dig('managing_organization').to_json
-        val = NestedOrganizationAttributeRenderer.new('Managing organization', val_j).render
-        vals << ['', val]
+        label = 'Managing organization'
+        renderer_class = NestedOrganizationAttributeRenderer
+        each_html += get_nested_output(label, v['managing_organization'], renderer_class, true)
       end
-      html << vals
+      html += get_inner_html(each_html)
     end
-    html_out = ''
-    unless html.blank?
-      html_out = '<table class="table nested-table"><tbody>'
-      html.each do |vals|
-        vals.each_with_index do |h,index|
-          if (index + 1) == vals.size
-            html_out += '<tr class="end">'
-          else
-            html_out += '<tr>'
-          end
-          html_out += "<th>#{h[0]}</th><td>#{h[1]}</td></tr>"
-        end
-      end
-      html_out += '</tbody></table>'
-    end
+    html_out = get_ouput_html(html)
     %(#{html_out})
   end
 end
