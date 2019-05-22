@@ -1,0 +1,20 @@
+<% provide :page_title, application_name %>
+
+<div class="homepage-row">
+  <%= render 'home_share' %>
+  <%= render 'home_browse' %>
+</div>
+
+<div class="homepage-row">
+  <%= render 'featured_works' %>
+</div>
+
+<div class="homepage-row">
+  <%= render 'recently_uploaded' %>
+</div>
+
+<div class="homepage-row">
+  <%= render 'featured_researcher' %>
+</div>
+
+<%= render '/shared/select_work_type_modal', create_work_presenter: @presenter.create_work_presenter if @presenter.draw_select_work_modal? %>

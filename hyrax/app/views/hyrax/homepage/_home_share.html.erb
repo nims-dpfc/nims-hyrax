@@ -1,0 +1,33 @@
+<% if @presenter.display_share_button? %>
+  <% if signed_in? %>
+    <% if @presenter.create_many_work_types? %>
+      <%
+        link = '#'
+        data = { behavior: 'select-work', target: '#worktypes-to-create', 'create-type' => 'single' }
+      %>
+    <% else # simple link to the first work type %>
+      <%
+        link = new_polymorphic_path([main_app, @presenter.first_work_type])
+        data = ''
+      %>
+    <% end %>
+  <% else %>
+    <%
+      link = hyrax.my_works_path
+      data = ''
+    %>
+  <% end %>
+  <div class="home-share row">
+    <div class="col-sm-12 text-center">
+      <div><%= link_to link do %>
+        <%= image_tag 'final-icons-02-100.png', class: "homepage-icon" %>
+      <% end %></div>
+      <h2><%= link_to link,
+        class: 'btn btn-primary',
+        data: data do %>
+        <b><%= t('hyrax.share_button') %></b>
+      <% end %></h2>
+      <div><%= link_to t(:'hyrax.pages.tabs.terms_page'), hyrax.terms_path %></div>
+    </div>
+  </div>
+<% end %>
