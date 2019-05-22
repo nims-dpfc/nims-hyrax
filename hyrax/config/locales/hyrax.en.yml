@@ -189,8 +189,9 @@ en:
     directory:
       suffix: "@example.org"
     footer:
-      copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
+      copyright_html: "Copyright &copy; National Institute for Materials Science"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
+      address_html: National Institute for Materials Science (NIMS) 1-2-1 Sengen, Tsukuba, Ibaraki 305-0047 JAPAN
     institution_name: Institution
     institution_name_full: The Institution Name
     product_name: MDR
