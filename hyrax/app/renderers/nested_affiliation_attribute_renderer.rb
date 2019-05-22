@@ -1,37 +1,23 @@
-class NestedAffiliationAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
-  private
-  def li_value(value)
-    value = JSON.parse(value)
-    html = []
+class NestedAffiliationAttributeRenderer < NestedAttributeRenderer
+  def attribute_value_to_html(input_value)
+    html = ''
+    return html if input_value.blank?
+    value = parse_value(input_value)
     value.each do |v|
-      vals = []
+      each_html = ''
       unless v.dig('job_title').blank?
         label = "Job title"
         val = v['job_title'][0]
-        vals << [label, val]
+        each_html += get_row(label, val)
       end
       unless v.dig('complex_organization').blank?
-        id_j = v.dig('complex_organization').to_json
-        val = NestedIdentifierAttributeRenderer.new('Identifier', id_j).render
-        vals << ['', val]
+        label = 'Organization'
+        renderer_class = NestedOrganizationAttributeRenderer
+        each_html += get_nested_output(label, v['complex_organization'], renderer_class, false)
       end
-      html << vals if vals.any?
+      html += get_inner_html(each_html)
     end
-    html_out = ''
-    unless html.blank?
-      html_out = '<table class="table nested-table"><tbody>'
-      html.each do |vals|
-        vals.each_with_index do |h,index|
-          if (index + 1) == vals.size
-            html_out += '<tr class="end">'
-          else
-            html_out += '<tr>'
-          end
-          html_out += "<th>#{h[0]}</th><td>#{h[1]}</td></tr>"
-        end
-      end
-      html_out += '</tbody></table>'
-    end
+    html_out = get_ouput_html(html)
     %(#{html_out})
   end
 end
