@@ -1,7 +1,4 @@
 require 'nokogiri'
-require 'importers/image_importer/collections'
-require 'importers/image_importer/parse_xml'
-require 'importers/hyrax_importer'
 
 module Importers
   module ImageImporter
@@ -76,6 +73,7 @@ module Importers
         write_headers = false if File.file?(@log_file)
         csv_file = CSV.open(@log_file, "ab")
         csv_file << [
+          'Current time',
           'metadata file',
           'work id',
           'collection ids',
@@ -85,6 +83,7 @@ module Importers
         ] if write_headers
         files = '' if files.blank?
         csv_file << [
+          Time.now.to_s,
           metadata_file,
           work_id,
           JSON.pretty_generate(collection_ids),

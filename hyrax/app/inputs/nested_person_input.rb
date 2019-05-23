@@ -34,6 +34,24 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
+    # --- role
+    role_options = RoleService.new.select_all_options
+    field = :role
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
+    field_value = value.send(field).first
+
+    out << "<div class='row'>"
+    out << "  <div class='col-md-3'>"
+    out << template.label_tag(field_name, field.to_s.humanize, required: required)
+    out << '  </div>'
+
+    out << "  <div class='col-md-9'>"
+    out << template.select_tag(field_name, template.options_for_select(role_options, field_value),
+        prompt: 'Select role played', label: '', class: 'select form-control', id: field_id, required: required)
+    out << '  </div>'
+    out << '</div>' # row
+
     # --- complex_identifier
     field = :complex_identifier
     field_value = value.send(field)
@@ -73,33 +91,16 @@ protected
     out << "</div>" # row
 
     # last row
-    out << "<div class='row'>"
-
-    # --- role
-    role_options = RoleService.new.select_all_options
-    field = :role
-    field_name = name_for(attribute_name, index, field, parent)
-    field_id = id_for(attribute_name, index, field, parent)
-    field_value = value.send(field).first
-
-    out << "  <div class='col-md-3'>"
-    out << template.label_tag(field_name, field.to_s.humanize, required: required)
-    out << '  </div>'
-
-    out << "  <div class='col-md-6'>"
-    out << template.select_tag(field_name, template.options_for_select(role_options, field_value),
-        prompt: 'Select role played', label: '', class: 'select form-control', id: field_id, required: required)
-    out << '  </div>'
-
     # --- delete checkbox
     if repeats == true
       field_label = 'Person'
+      out << "<div class='row'>"
       out << "  <div class='col-md-3'>"
       out << destroy_widget(attribute_name, index, field_label, parent)
       out << '  </div>'
+      out << '</div>' # last row
     end
 
-    out << '</div>' # last row
     out
   end
 end
