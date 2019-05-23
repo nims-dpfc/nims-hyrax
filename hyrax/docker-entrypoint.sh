@@ -11,11 +11,12 @@ else
     bundle check || bundle install --without production
 fi
 
-## Run any pending migrations
-bundle exec rake db:migrate
-
 # wait for Solr and Fedora to come up
 sleep 15s
+
+## Run any pending migrations, if the database exists
+## If not setup the database
+bundle exec rake db:exists && bundle exec rake db:migrate || bundle exec rake db:setup
 
 # check that Solr is running
 SOLR=$(curl --silent --connect-timeout 45 "http://${SOLR_HOST:-solr}:${SOLR_PORT:-8983}/solr/" | grep "Apache SOLR")

@@ -2,8 +2,9 @@ version: '3'
 
 volumes:
   fcrepo:
-  solr_home:
+  solr:
   db:
+  db-fcrepo:
   redis:
   file_uploads:
   derivatives:
@@ -19,19 +20,19 @@ services:
       - 8080
     volumes:
       - fcrepo:/data
-    environment:
-      CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx4096m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC -XX:+UseG1GC -Dfcrepo.object.directory=\"/data/objects\" -Dfcrepo.binary.directory=\"/data/binaries\" -Dfcrepo.modeshape.configuration=\"classpath:/config/jdbc-postgresql/repository.json\" -Dfcrepo.postgresql.username=${POSTGRES_USER} -Dfcrepo.postgresql.password=${POSTGRES_PASSWORD} -Dfcrepo.postgresql.host=${POSTGRES_HOST} -Dfcrepo.postgresql.port=${POSTGRES_PORT}"
     depends_on:
-      - db
+      - fcrepodb
     networks:
       internal:
 
   solr:
-    build: docker/solr
-    volumes:
-      - solr_home:/solr_home
+    image: solr:7-alpine
     expose:
       - 8983
+    ports:
+      - 8983:8983
+    env_file:
+      - .env
     healthcheck:
       test:
         - CMD
@@ -44,20 +45,40 @@ services:
       retries: 3
     networks:
       internal:
-
-  db:
-    build: docker/db
     volumes:
-      - db:/var/lib/postgresql/data
+      - solr:/opt/solr/server/solr/mycores
+      - ./hyrax/solr/config:/opt/solr/solr_conf
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - ${SOLR_CORE}
+      - /opt/solr/solr_conf
+
+  db: &db
+    image: postgres:11-alpine
+    networks:
+      internal:
     env_file:
       - .env
+    expose:
+      - 5432
     healthcheck:
-      test: "CMD echo 'SELECT 1' | PGPASSWORD=${POSTGRES_PASSWORD} psql --host 127.0.0.1 --username ${POSTGRES_USER} --dbname hyrax_production --quiet --no-align --tuples-only"
+      test: "CMD echo 'SELECT 1' | POSTGRES_PASSWORD=${POSTGRES_PASSWORD} psql --host 127.0.0.1 --username #{POSTGRES_USER} --dbname #{POSTGRES_DB} --quiet --no-align --tuples-only"
       interval: 30s
       timeout: 5s
       retries: 3
-    networks:
-      internal:
+  fcrepodb:
+    <<: *db
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB_FCREPO}
+    volumes:
+      - db-fcrepo:/var/lib/postgresql/data
+  appdb:
+    <<: *db
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB_APP}
+    volumes:
+      - db:/var/lib/postgresql/data
 
   app: &app
     build:
@@ -81,12 +102,10 @@ services:
       internal:
 
   web:
-    # extends:
-    #   service: app
     <<: *app
     command: bash -c "/bin/docker-entrypoint.sh"
     depends_on:
-      - db
+      - appdb
       - solr
       - fcrepo
       - redis
@@ -94,14 +113,12 @@ services:
       - 3000
 
   workers:
-    # extends:
-    #   service: app
     <<: *app
     command: bundle exec sidekiq
     environment:
       - SETTINGS__FITS_PATH=/fits/fits-1.0.5/fits.sh
     depends_on:
-      - db
+      - appdb
       - solr
       - fcrepo
       - redis
