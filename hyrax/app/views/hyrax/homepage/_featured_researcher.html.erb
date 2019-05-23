@@ -1,0 +1,16 @@
+<div class="home-featured-researcher">
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <h2><%= t('hyrax.homepage.featured_researcher.title') %></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <% if @featured_researcher.value.present? %>
+        <%= displayable_content_block @featured_researcher %>
+      <% else %>
+        <%= t('hyrax.homepage.featured_researcher.missing') %>
+      <% end %>
+    </div>
+  </div>
+</div>

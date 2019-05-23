@@ -1,0 +1,52 @@
+<div class="home-browse row">
+  <div class="col-sm-4 text-center">
+    <%
+      field = Solrizer.solr_name("human_readable_type", :facetable)
+      item = 'Publication'
+      path = main_app.search_catalog_path(search_state.add_facet_params_and_redirect(field, item))
+      data = ''
+    %>
+    <p><%= link_to path do %>
+      <%= image_tag 'final-icons-01-100.png', class: "homepage-icon" %>
+    <% end %></p>
+    <h3><%= link_to path,
+      class: 'btn btn-primary',
+      data: data do %>
+      <b><%= t('hyrax.browse_publication') %></b>
+    <% end %></h3>
+  </div>
+
+  <div class="col-sm-4 text-center">
+    <%
+      field = Solrizer.solr_name("human_readable_type", :facetable)
+      item = 'Dataset'
+      path = main_app.search_catalog_path(search_state.add_facet_params_and_redirect(field, item))
+      data = ''
+    %>
+    <p><%= link_to path do %>
+      <%= image_tag 'final-icons-03-100.png', class: "homepage-icon" %>
+    <% end %></p>
+    <h3><%= link_to path,
+      class: 'btn btn-primary',
+      data: data do %>
+      <b><%= t('hyrax.browse_dataset') %></b>
+    <% end %></h3>
+  </div>
+
+  <div class="col-sm-4 text-center">
+    <%
+      field = Solrizer.solr_name("human_readable_type", :facetable)
+      item = 'Collection'
+      path = main_app.search_catalog_path(search_state.add_facet_params_and_redirect(field, item))
+      data = ''
+    %>
+    <p><%= link_to path do %>
+      <%= image_tag 'final-icons-05-100.png', class: "homepage-icon" %>
+    <% end %></p>
+    <h3><%= link_to path,
+      class: 'btn btn-primary',
+      data: data do %>
+      <b><%= t('hyrax.browse_collection') %></b>
+    <% end %></h3>
+  </div>
+</div>
