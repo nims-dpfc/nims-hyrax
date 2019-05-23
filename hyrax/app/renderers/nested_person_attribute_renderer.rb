@@ -1,14 +1,15 @@
-class NestedPersonAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
-  private
-  def li_value(value)
-    value = JSON.parse(value)
-    html = []
+class NestedPersonAttributeRenderer < NestedAttributeRenderer
+  def attribute_value_to_html(input_value)
+    html = ''
+    return html if input_value.blank?
+    value = parse_value(input_value)
     value.each do |v|
-      vals = []
+      each_html = ''
+      # creator name
       unless v.dig('name').blank?
         label = "Name"
         val = link_to(ERB::Util.h(v['name'][0]), search_path(v['name'][0]))
-        vals << [label, val]
+        each_html += get_row(label, val)
       else
         creator_name = []
         unless v.dig('first_name').blank?
@@ -20,42 +21,31 @@ class NestedPersonAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
         creator_name = creator_name.join(' ').strip
         label = "Name"
         val = link_to(ERB::Util.h(creator_name), search_path(creator_name))
-        vals << [label, val]
+        each_html += get_row(label, val)
       end
+      # complex_identifier
       unless v.dig('complex_identifier').blank?
-        id_j = v.dig('complex_identifier').to_json
-        val = NestedIdentifierAttributeRenderer.new('Identifier', id_j).render
-        vals << ['', val]
+        label = 'Identifier'
+        renderer_class = NestedIdentifierAttributeRenderer
+        each_html += get_nested_output(label, v['complex_identifier'], renderer_class, false)
       end
+      # complex_affiliation
       unless v.dig('complex_affiliation').blank?
-        id_j = v.dig('complex_affiliation').to_json
-        val = NestedAffiliationAttributeRenderer.new('Affiliation', id_j).render
-        vals << ['', val]
+        label = 'Affiliation'
+        renderer_class = NestedAffiliationAttributeRenderer
+        each_html += get_nested_output(label, v['complex_affiliation'], renderer_class, true)
       end
+      # role
       unless v.dig('role').blank?
         label = 'Role'
         val = v['role'][0]
         term = RoleService.new.find_by_id(val)
         val = term['label'] if term.any?
-        vals << [label, val]
+        each_html += get_row(label, val)
       end
-      html << vals if vals.any?
+      html += get_inner_html(each_html)
     end
-    html_out = ''
-    unless html.blank?
-      html_out = '<table class="table nested-table"><tbody>'
-      html.each do |vals|
-        vals.each_with_index do |h,index|
-          if (index + 1) == person.size
-            html_out += '<tr class="end">'
-          else
-            html_out += '<tr>'
-          end
-          html_out += "<th>#{h[0]}</th><td>#{h[1]}</td></tr>"
-        end
-      end
-      html_out += '</tbody></table>'
-    end
+    html_out = get_ouput_html(html)
     %(#{html_out})
   end
 end
