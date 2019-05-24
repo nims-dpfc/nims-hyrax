@@ -17,6 +17,23 @@ protected
 
     parent_attribute = name_for(attribute_name, index, '', parent)[0..-5]
 
+    # --- job_title
+    out << "<div class='row'>"
+    field = :job_title
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
+    field_value = value.send(field).first
+
+    out << "  <div class='col-md-3'>"
+    out << template.label_tag(field_name, field.to_s.humanize, required: required)
+    out << '  </div>'
+
+    out << "  <div class='col-md-9'>"
+    out << @builder.text_field(field_name,
+        options.merge(value: field_value, name: field_name, id: field_id, required: false))
+    out << '  </div>'
+    out << '</div>'
+
     # --- complex_organization
     field = :complex_organization
     field_value = value.send(field)
@@ -37,32 +54,16 @@ protected
     out << "</div>" # row
 
     # last row
-    out << "<div class='row'>"
-
-    # --- job_title
-    field = :job_title
-    field_name = name_for(attribute_name, index, field, parent)
-    field_id = id_for(attribute_name, index, field, parent)
-    field_value = value.send(field).first
-
-    out << "  <div class='col-md-3'>"
-    out << template.label_tag(field_name, field.to_s.humanize, required: required)
-    out << '  </div>'
-
-    out << "  <div class='col-md-6'>"
-    out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id, required: false))
-    out << '  </div>'
-
     # --- delete checkbox
     if repeats == true
+      out << "<div class='row'>"
       field_label = 'Affiliation'
-      out << "  <div class='col-md-3'>"
+      out << "  <div class='col-md-12'>"
       out << destroy_widget(attribute_name, index, field_label, parent)
       out << '  </div>'
+      out << '</div>' # last row
     end
 
-    out << '</div>' # last row
     out
   end
 end

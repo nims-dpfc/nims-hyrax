@@ -2,4 +2,5 @@
           <% f.object.metadata_tab_terms.each do |term| %>
             <%= render_edit_field_partial(term, f: f) %>
           <% end %>
+          <%= render 'form_media', f: f %>
         </div>

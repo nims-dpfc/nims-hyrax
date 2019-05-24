@@ -6,6 +6,9 @@ en:
       dataset:
         description:        "Dataset works"
         name:               "Dataset"
+    browse_dataset:         "Browse all datasets"
+    browse_publication:     "Browse all publications"
+    browse_collection:      "Browse all collections"
   simple_form:
     labels:
       dataset:

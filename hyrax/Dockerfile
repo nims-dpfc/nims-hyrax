@@ -18,16 +18,14 @@ ENV APP_PRODUCTION=/data/ \
 RUN echo 'deb  http://deb.debian.org/debian stretch main contrib non-free'
 RUN echo 'deb-src  http://deb.debian.org/debian stretch main contrib non-free'
 
-
-RUN echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/stretch-backports.list \
-    && apt-get update -qq \
-    && apt-get install -y --no-install-recommends \
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libpq-dev \
     libxml2-dev libxslt1-dev \
-    # libqt4-webkit libqt4-dev xvfb \
     nodejs \
     libreoffice \
-    libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config texinfo wget yasm zlib1g-dev fonts-ipaexfont fonts-ipafont fonts-vlgothic \
+    libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev \
+    libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config \
+    texinfo wget yasm zlib1g-dev fonts-ipaexfont fonts-ipafont fonts-vlgothic \
     libjpeg-dev libtiff-dev libpng-dev libraw-dev libwebp-dev libjxr-dev \
     libcairo2-dev libgs-dev librsvg2-dev \
     libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev libav-tools \
@@ -36,24 +34,14 @@ RUN echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/so
     bzip2 unzip xz-utils \
     libclamav-dev clamav-daemon clamav-freshclam \
     vim \
-    # install open-jdk and ca-certs from stretch-backports
-    && apt-get install -t stretch-backports -y --no-install-recommends openjdk-8-jre-headless ca-certificates-java \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && /var/lib/dpkg/info/ca-certificates-java.postinst configure
+    git \
+    openjdk-8-jre-headless
 
 RUN mkdir -p /fits/ \
     && wget -q http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip -O /fits/fits-1.0.5.zip \
     && unzip -q /fits/fits-1.0.5.zip -d /fits \
     && chmod a+x /fits/fits-1.0.5/fits.sh \
     && rm /fits/fits-1.0.5.zip
-
-# RUN apt-get install -y --no-install-recommends git && \
-#     cd /opt && \
-#     git clone https://github.com/ImageMagick/ImageMagick.git && \
-#     cd ImageMagick && git checkout `git describe --tags` && \
-#     ./configure --prefix=/usr --with-gslib=yes && \
-#     make && make install && cd /opt && rm -r ImageMagick
 
 # copy gemfiles to production folder
 COPY Gemfile Gemfile.lock $APP_PRODUCTION

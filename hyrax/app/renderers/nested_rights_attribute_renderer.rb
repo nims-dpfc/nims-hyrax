@@ -1,24 +1,19 @@
-class NestedRightsAttributeRenderer < Hyrax::Renderers::AttributeRenderer
-  private
-  def attribute_value_to_html(value)
-    value = Array(JSON.parse(value))
+class NestedRightsAttributeRenderer < NestedAttributeRenderer
+  def attribute_value_to_html(input_value)
     html = ''
+    return html if input_value.blank?
+    value = parse_value(input_value)
     value.each do |v|
-      # extract values
-      val = v.fetch('rights', [])[0]
-      html += "<tr class=\"start\"><th>Rights</th><td>#{val}</td></tr>"  unless val.blank?
-      dt = v.fetch('date', [])[0]
-      unless dt.blank?
-        val = Date.parse(dt).to_formatted_s(:standard)
-        html += "<tr class=\"end\"><th>Start date</th><td>#{val}</td></tr>"
-      end
+      each_html = ''
+      # Rights
+      val = v.fetch('rights', [])
+      each_html += get_row('Rights', val[0]) unless val.blank?
+      # start date
+      val = v.fetch('date', [])
+      each_html += get_row('Date', val[0]) unless val.blank?
+      html += get_inner_html(each_html)
     end
-    html_out = ''
-    unless html.blank?
-      html_out = '<table class="table nested-table"><tbody>'
-      html_out += html
-      html_out += '</tbody></table>'
-    end
+    html_out = get_ouput_html(html)
     %(#{html_out})
   end
 end
