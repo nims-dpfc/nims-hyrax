@@ -59,4 +59,11 @@ form .field-wrapper label[required="required"]::after {
   background-color: #f7fdd5;
   padding: 10px;
 }
-// ----------------
+// -------- display css --------
+.each_metadata:not(:first-child) {
+  padding-top: 10px;
+}
+.each_metadata:not(:last-child) {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
