@@ -47,3 +47,9 @@ terms:
   - id: previous identifier
     term: Previous identifier
     active: true
+  - id: CAS
+    term: CAS
+    active: true
+  - id: other
+    term: Other
+    active: true

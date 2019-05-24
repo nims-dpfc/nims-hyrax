@@ -1,0 +1,20 @@
+<div class="home-recently-uploaded">
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <h2><%= t('hyrax.homepage.recently_uploaded.title') %></h2>
+    </div>
+  </div>
+  <% if @recent_documents.blank? %>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <p><%= t('.no_public') %></p>
+      </div>
+    </div>
+  <% else %>
+    <div id="recent_docs" class="row">
+      <!-- <ol class="list-group list-group-striped recent_uploads"> -->
+        <%= render partial: "recent_document", collection: @recent_documents[0,3] %>
+      <!-- </ol> -->
+    </div>
+  <% end %>
+</div>
