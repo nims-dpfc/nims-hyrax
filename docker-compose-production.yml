@@ -27,4 +27,4 @@ services:
 
   solr:
     environment:
-     - "SOLR_JAVA_MEM=-Xms4096m -Xmx4096m"
+     - "SOLR_JAVA_MEM=-Xms1024m -Xmx8192m"
