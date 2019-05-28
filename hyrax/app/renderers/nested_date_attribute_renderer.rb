@@ -6,12 +6,12 @@ class NestedDateAttributeRenderer < NestedAttributeRenderer
     value.each do |v|
       label = 'Date'
       val = ''
-      unless v.dig('description').blank?
+      if v.dig('description').present? and v['description'][0].present?
         label = v['description'][0]
         term = DateService.new.find_by_id(label)
         label = term['label'] if term.any?
       end
-      unless v.dig('date').blank?
+      if v.dig('date').present? and v['date'][0].present?
         val = Date.parse(v['date'][0]).to_formatted_s(:standard)
       end
       html += get_row(label, val)
