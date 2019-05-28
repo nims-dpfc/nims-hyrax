@@ -229,7 +229,7 @@ module Importers
         org_ele = ele.xpath('manufacturer')
         org = get_organization_hash(org_ele, 'Manufacturer')
         if org.any?
-          parent = 'complex_organization'
+          parent = 'manufacturer'
           assign_nested_hash(parent, org, false, inst_hash)
         end
       end
@@ -243,7 +243,7 @@ module Importers
         org_ele = ele.xpath('managing-organization')
         org = get_organization_hash(org_ele, 'Managing organization')
         if org.any?
-          parent = 'complex_organization'
+          parent = 'managing_organization'
           assign_nested_hash(parent, org, false, inst_hash)
         end
       end
@@ -559,7 +559,14 @@ module Importers
         end
         # role
         role = ele.name.split('-identifier', -1)[0].gsub('-', ' ')
-        person[:role] = role if person.any?
+        if person.any?
+          term = RoleService.new.find_by_id_or_label(role)
+          if term.any?
+            person[:role] = term['id']
+          else
+            @errors << "#{role} not in role authority"
+          end
+        end
         person
       end
 
