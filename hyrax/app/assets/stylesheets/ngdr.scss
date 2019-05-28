@@ -1,7 +1,7 @@
 //-------------- colours ---------------
 $mdr-grey: #F4F4F4;
-$mdr-green-1: #AFCA0B;
-$mdr-green-1-light: #BEEB7D;
+$mdr-green: #AFCA0B;
+$mdr-green-light: #BEEB7D;
 
 //-------------- form css --------------
 form .listing,
@@ -16,7 +16,7 @@ form .row {
 form .field-wrapper:not(:last-child) {
   padding-bottom: 1em;
   margin-bottom: 1em;
-  border-bottom: 2px solid $mdr-green-1;
+  border-bottom: 2px solid $mdr-green;
 }
 
 .multi-nested .form-group,
@@ -62,13 +62,14 @@ form .field-wrapper label[required="required"]::after {
 
 .inner-nested {
   margin-bottom: 1em;
-  background-color: $mdr-green-1-light;
   padding: 10px;
+  background-color: $mdr-green-light;
 }
 //------------ display css -------------
 .each_metadata:not(:last-child) {
   margin-bottom: 1em;
   padding-bottom: 1em;
+  border-bottom: 1px solid #ddd;
 }
 .label-row {
   color: #999;
