@@ -277,6 +277,8 @@ module Hyrax
       permitted << { complex_specimen_type_attributes: permitted_specimen_type_params }
       permitted << { complex_version_attributes: permitted_version_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
+      permitted << :member_of_collection_ids
+      permitted << :find_child_work
     end
   end
 end
