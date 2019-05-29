@@ -393,7 +393,8 @@ module Importers
         # metadata['available'] = val if val.any?
         # dateCopyrighted
         val = get_text(node, 'dateCopyrighted')
-        metadata[:date_copyrighted] = val if val.any?
+        # FIXME
+        # metadata[:date_copyrighted] = val if val.any?
         # description
         val = get_text(node, 'description')
         metadata[:description] = val if val.any?
