@@ -3,6 +3,7 @@ class Dataset < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
 
   self.indexer = DatasetIndexer
+
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your dataset must have a title.' }
@@ -40,9 +41,6 @@ class Dataset < ActiveFedora::Base
   property :complex_identifier, predicate: ::RDF::Vocab::NimsRdp.identifier, class_name:"ComplexIdentifier"
 
   property :complex_person, predicate: ::RDF::Vocab::SIOC.has_creator, class_name:"ComplexPerson"
-
-  # TODO: Need more information
-  # property :complex_license, predicate: ::RDF::URI.new('http://www.niso.org/schemas/ali/1.0/license_ref'), class_name:"ComplexLicense"
 
   property :complex_rights, predicate: ::RDF::Vocab::DC11.rights, class_name:"ComplexRights"
 
@@ -104,15 +102,12 @@ class Dataset < ActiveFedora::Base
   include ComplexValidation
   accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
-  # accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
-  accepts_nested_attributes_for :complex_instrument, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_organization, reject_if: :organization_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
-  # accepts_nested_attributes_for :complex_specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
-  accepts_nested_attributes_for :complex_specimen_type, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
 end
