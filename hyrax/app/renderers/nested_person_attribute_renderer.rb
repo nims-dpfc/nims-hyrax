@@ -6,7 +6,7 @@ class NestedPersonAttributeRenderer < NestedAttributeRenderer
     value.each do |v|
       each_html = ''
       # creator name
-      unless v.dig('name').blank?
+      if v.dig('name').present? and v['name'][0].present?
         label = "Name"
         val = link_to(ERB::Util.h(v['name'][0]), search_path(v['name'][0]))
         each_html += get_row(label, val)
@@ -19,9 +19,11 @@ class NestedPersonAttributeRenderer < NestedAttributeRenderer
           creator_name += v['last_name']
         end
         creator_name = creator_name.join(' ').strip
-        label = "Name"
-        val = link_to(ERB::Util.h(creator_name), search_path(creator_name))
-        each_html += get_row(label, val)
+        if creator_name.present?
+          label = "Name"
+          val = link_to(ERB::Util.h(creator_name), search_path(creator_name))
+          each_html += get_row(label, val)
+        end
       end
       # complex_identifier
       unless v.dig('complex_identifier').blank?
