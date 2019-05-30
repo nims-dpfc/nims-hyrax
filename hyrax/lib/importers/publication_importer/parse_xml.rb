@@ -134,8 +134,7 @@ module Importers
         # modified - ignoring date modified for now
         # published-online
         val = get_text(node, 'published-online')
-        desc  = DateService.new.find_by_id_or_label('Published')['id']
-        metadata[:complex_date_attributes] << {date: val, description: desc} if val.any?
+        metadata[:complex_date_attributes] << {date: val[0], description: 'Published'} if val.any?
         # publishing-info
         #   publisher
         #   place - Ignoring this. Not accommodated in model
