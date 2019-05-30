@@ -72,9 +72,16 @@ gem 'bootstrap-datepicker-rails'
 gem 'pg'
 
 gem 'riiif', '~> 2.0'
+gem 'clamav'
+gem 'rubyzip'
+
+group :test do
+  gem 'simplecov'
+end
 
 group :production do
   gem 'airbrake', '~> 5.0'
+  gem 'devise_ldap_authenticatable'
 end
 gem 'devise_ldap_authenticatable'
 gem 'clamav'
