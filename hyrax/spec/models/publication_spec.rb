@@ -228,11 +228,16 @@ RSpec.describe Publication do
         {
           date: '1978-10-28',
           description: 'Some kind of a date',
+        },{
+          date: '2019-05-28',
+          description: 'Published',
         }
       ])
       expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_date.first.date).to eq ['1978-10-28']
       expect(@obj.complex_date.first.description).to eq ['Some kind of a date']
+      expect(@obj.complex_date[1].date).to eq ['2019-05-28']
+      expect(@obj.complex_date[1].description).to eq ['Published']
     end
 
     it 'creates a date active triple resource with just the date' do
