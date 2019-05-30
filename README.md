@@ -21,6 +21,28 @@ $ docker-compose up -d
 ```
 You should see the containers being built and the services start.
 
+### For Development
+We use the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching model, so ensure you set up 
+your project directory by running `git flow init` and accept the defaults.
+[Installation for git-flow](https://github.com/nvie/gitflow/wiki/Installation).
+
+```shell
+Branch name for production releases: [master] 
+Branch name for "next release" development: [develop] 
+Feature branches? [feature/] 
+Bugfix branches? [bugfix/] 
+Release branches? [release/] 
+Hotfix branches? [hotfix/] 
+Support branches? [support/] 
+Version tag prefix? [] 
+Hooks and filters directory? [<your-path-to-checked-out-repo>/nims-hyrax/.git/hooks] 
+```
+
+The default branch in this repository is `develop`, and `master` should be used for stable releases only. After
+finishing bugfixes or releases with `git-flow` remember to also push tags with `git push --tags`.
+
+New code is created in `feature/` or `hotfix/` branches, and from there we make a pull request against the develop branch. A member of the team other than the new code's author reviews the pull request and performs the merge. Codeship tests run when the `develop` branch is updated.
+
 ## Guide to docker-compose and the services needed to run the materials data repository
 
 ![services diagram](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/docs/container_diag.png)
