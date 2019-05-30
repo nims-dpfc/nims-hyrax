@@ -25,16 +25,10 @@ RSpec.describe PublicationIndexer do
       @solr_document = @obj.to_solr
     end
     it 'indexes as displayable' do
-      skip 'this test is failing'
-      puts @obj.complex_date.to_json
-      puts '~'*50
-      puts @solr_document.keys
-      puts '-'*50
       expect(@solr_document).to include('complex_date_ssm')
       expect(JSON.parse(@solr_document['complex_date_ssm'])).not_to be_empty
     end
     it 'indexes as dateable' do
-      skip 'this test is failing'
       expect(@solr_document['complex_date_dtsim']).to match_array(
         ["1988-10-28T00:00:00Z", "2018-01-01T00:00:00Z"])
     end
@@ -43,11 +37,9 @@ RSpec.describe PublicationIndexer do
       expect(@solr_document['complex_date_submitted_dtsi']).to match_array("1988-10-28T00:00:00Z")
     end
     it 'indexes each type as dateable' do
-      skip 'this test is failing'
       expect(@solr_document['complex_date_submitted_dtsim']).to match_array(["1988-10-28T00:00:00Z"])
     end
     it 'indexes each type as displayable' do
-      skip 'this test is failing'
       expect(@solr_document['complex_date_submitted_ssm']).to match_array(["1988-10-28"])
     end
   end

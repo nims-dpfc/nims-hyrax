@@ -17,6 +17,8 @@ class CatalogController < ApplicationController
   end
 
   configure_blacklight do |config|
+    config.http_method = :post
+
     config.view.gallery.partials = [:index_header, :index]
     config.view.masonry.partials = [:index]
     config.view.slideshow.partials = [:index]
