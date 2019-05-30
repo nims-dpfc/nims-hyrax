@@ -15,8 +15,8 @@
 //---------- colours to be used --------
 $mdr-grey: #F4F4F4;
 $mdr-black: #1E2022;
-$mdr-green-1: #AFCA0B;
-$mdr-green-2: #7DB928;
+$mdr-green: #AFCA0B;
+$mdr-green-light: #7DB928;
 
 //-------------- Fonts -----------------
 body {
@@ -48,7 +48,7 @@ h3, .h3 {
 
 //------------- anchor -----------------
 a, a:focus, a:hover, a:active {
-  color: $mdr-green-2;
+  color: $mdr-green;
 }
 
 // --------------- buttons -------------
@@ -56,19 +56,21 @@ a, a:focus, a:hover, a:active {
   border-radius: 0px;
 }
 
-.btn-primary, .btn-primary:focus {
+.btn-primary, .btn-primary:focus, .btn-primary:hover, .btn-primary:active,
+ {
   background-color: $mdr-black;
   border-color: $mdr-black;
-  color: $mdr-green-2;
+  color: $mdr-green;
   text-transform: uppercase;
   font-weight: bold;
   border-radius: 0px;
 }
 
-.btn-default, .btn-default:focus {
+.btn-default, .btn-default:focus, .btn-default:hover, .btn-default:active,
+.btn-success, .btn-success:focus, .btn-success:hover, .btn-success:active {
   background-color: $mdr-black;
   border-color: $mdr-black;
-  color: $mdr-green-2;
+  color: $mdr-green;
   text-transform: uppercase;
   border-radius: 0px;
 }
@@ -77,11 +79,11 @@ a.btn-primary,
 a.btn-primary:focus,
 a.btn-primary:hover,
 a.btn-primary:active {
-  color: $mdr-green-2;
+  color: $mdr-green;
 }
 
 .glyphicon-search {
-  color: $mdr-green-2;
+  color: $mdr-green;
 }
 
 .facets-toggle, td.toggle input[type="submit"] {
@@ -94,17 +96,25 @@ a.btn-primary:active {
   border: none;
 }
 
+.label-success {
+  color: $mdr-green;
+}
+
+.label-info {
+  color: #2c76c7;
+}
+
+.label-warning {
+    color: #e65c00;
+}
+
 .label-danger {
   color: #FF0000;
 }
 
-.label-success {
-  color: $mdr-green-2;
-}
-
 // ------------- dropdown --------------
 #sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle {
-  color: $mdr-green-2;
+  color: $mdr-green;
 }
 
 //-------------- Header ----------------
@@ -118,14 +128,14 @@ a.btn-primary:active {
 }
 
 .navbar-inverse .navbar-nav > li.dropdown > a {
-  color: $mdr-green-2;
+  color: $mdr-green;
   font-weight: bold;
 }
 
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
-  color: $mdr-green-2;
+  color: $mdr-green;
 }
 
 .navbar {
@@ -154,7 +164,7 @@ a.btn-primary:active {
 
 nav.searchbar {
   margin-bottom: 0px;
-  background-color: $mdr-green-2;
+  background-color: $mdr-green-light;
 }
 
 .searchbar > .recent-field-fluid {
@@ -224,7 +234,7 @@ body.dashboard {
 
 //--------------- work show ------------
 .work-type-tag {
-  color: $mdr-green-2;
+  color: $mdr-green;
 }
 
 //-------------- Search ----------------

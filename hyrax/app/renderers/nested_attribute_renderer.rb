@@ -1,5 +1,23 @@
 class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
 
+  # Draw the dl row for the attribute
+  def render_dl_row
+    markup = ''
+    return markup if values.blank? && !options[:include_empty]
+    inner_markup = ''
+    attributes = microdata_object_attributes(field).merge(class: "attribute attribute-#{field}")
+    Array(values).each do |value|
+      inner_text = attribute_value_to_html(value.to_s)
+      inner_markup << "<li#{html_attributes(attributes)}>#{inner_text}</li>" if inner_text.present?
+    end
+    if !options[:include_empty] and inner_markup.present?
+      markup << %(<dt>#{label}</dt>\n<dd><ul class='tabular'>)
+      markup << inner_markup
+      markup << %(</ul></dd>)
+    end
+    markup.html_safe
+  end
+
   private
 
   def parse_value(value)
