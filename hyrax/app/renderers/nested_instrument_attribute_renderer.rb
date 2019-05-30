@@ -6,7 +6,7 @@ class NestedInstrumentAttributeRenderer < NestedAttributeRenderer
     value.each do |v|
       each_html = ''
       # title
-      unless v.dig('title').blank?
+      if v.dig('title').present? and v['title'][0].present?
         label ="Title"
         val = link_to(ERB::Util.h(v['title'][0]), search_path(v['title'][0]))
         each_html += get_row(label, val)

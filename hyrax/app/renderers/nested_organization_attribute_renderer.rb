@@ -5,7 +5,7 @@ class NestedOrganizationAttributeRenderer < NestedAttributeRenderer
     value = parse_value(input_value)
     value.each do |v|
       each_html = ''
-      unless v.dig('organization').blank?
+      if v.dig('organization').present? and v['organization'][0].present?
         label = "Organization"
         val = link_to(ERB::Util.h(v['organization'][0]), search_path(v['organization'][0]))
         each_html += get_row(label, val)

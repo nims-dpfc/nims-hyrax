@@ -7,10 +7,10 @@ module Hyrax
 
     self.terms -= [
       # Fields not interested in
-      :based_near, :contributor, :creator, :date_created, :identifier, :keyword,
-      :license, :related_url, :resource_type, :rights_statement, :source,
+      :based_near, :contributor, :creator, :date_created, :identifier, :license,
+      :related_url, :resource_type, :rights_statement, :source,
       # Fields interested in, but removing to re-order
-      :title, :description, :language, :publisher, :resource_type, :subject
+      :title, :description, :keyword, :language, :publisher, :resource_type, :subject
       # Fields that are not displayed
       # :import_url, :date_modified, :date_uploaded, :depositor, :bibliographic_citation,
       # :date_created, :label, :relative_path
@@ -18,7 +18,7 @@ module Hyrax
 
     self.terms += [
       # Adding all fields in order of display in form
-      :title, :alternative_title, :description, :language,
+      :title, :alternative_title, :description, :keyword, :language,
       :publisher, :complex_rights, :subject, :complex_date, :complex_person,
       :complex_version, :characterization_methods, :computational_methods,
       :complex_organization,
@@ -42,7 +42,7 @@ module Hyrax
     def metadata_tab_terms
       [
         :title, :alternative_title, :description, :complex_person,
-        :complex_organization, :subject, :language, :publisher,
+        :complex_organization, :keyword, :subject, :language, :publisher,
         :complex_date, :complex_rights, :complex_version, :complex_relation
       ]
     end
