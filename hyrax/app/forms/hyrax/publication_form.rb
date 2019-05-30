@@ -41,6 +41,16 @@ module Hyrax
 
     protected
 
+    def self.permitted_affiliation_params
+      [:id,
+       :_destroy,
+       {
+         job_title: [],
+         complex_organization_attributes: permitted_organization_params,
+       }
+      ]
+    end
+
     def self.permitted_date_params
       [:id,
        :_destroy,
@@ -62,13 +72,25 @@ module Hyrax
       ]
     end
 
+    def self.permitted_organization_params
+      [:id,
+       :_destroy,
+       {
+         organization: [],
+         sub_organization: [],
+         purpose: [],
+         complex_identifier_attributes: permitted_identifier_params,
+       }
+      ]
+    end
+
     def self.permitted_person_params
       [:id,
        :_destroy,
        {
          name: [],
          role: [],
-         affiliation: [],
+         complex_affiliation_attributes: permitted_affiliation_params,
          complex_identifier_attributes: permitted_identifier_params,
          uri: []
        }
@@ -135,6 +157,8 @@ module Hyrax
       permitted << { complex_version_attributes: permitted_version_params }
       permitted << { complex_event_attributes: permitted_event_params }
       permitted << { complex_source_attributes: permitted_source_params }
+      permitted << :member_of_collection_ids
+      permitted << :find_child_work
     end
   end
 end
