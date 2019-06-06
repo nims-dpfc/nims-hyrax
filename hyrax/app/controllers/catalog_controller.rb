@@ -33,7 +33,8 @@ class CatalogController < ApplicationController
     config.oai = {
       provider: {
         repository_name: 'NIMS NGDR',
-        repository_url: 'https://ngdrdemo.cottagelabs.com/catalog/oai',
+        #repository_url: 'https://ngdrdemo.cottagelabs.com/catalog/oai',
+        repository_url: 'http://localhost:3000/catalog/oai',
         record_prefix: 'ngdrdemo',
         admin_email: 'nims.ngdr@gmail.com',
         sample_id: 'x059c7329'
@@ -45,6 +46,8 @@ class CatalogController < ApplicationController
         #]
       }
     }
+
+    BlacklightOaiProvider::SolrDocumentProvider.register_format(Metadata::Jpcoar.instance)
 
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
     config.default_solr_params = {
