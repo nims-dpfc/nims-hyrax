@@ -28,6 +28,8 @@ module Formats
         'dc:coverage': Solrizer.solr_name('', :displayable),
         'dc:rights': Solrizer.solr_name('rights_statement', :displayable)
       }
+    }
+
 =begin
       'fields': {
         'dc:title': 'title_tesim',
@@ -47,7 +49,6 @@ module Formats
         'dc:rights': 'rights_ssm'
     }
 =end
-    }
 
     def export_as_oai_dc_xml
       xml = Builder::XmlMarkup.new
