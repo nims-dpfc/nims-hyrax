@@ -20,20 +20,20 @@ module Formats
             }
         },
         'fields': {
-            'dc:title': 'title_tesim',
-            'dcterms:alternative': 'alternative_title_tesim',
+            'dc:title': Solrizer.solr_name('title', :displayable),
+            'dcterms:alternative': Solrizer.solr_name('alternative_title', :displayable),
             'jpcoar:creator': {'function': 'creator'},
             'jpcoar:contributor': {'function': 'contributor'},      # looks very similar to creator
             'dcterms:accessRights': '',
             'rioxxterms:apc': '',
-            'dc:rights': {'function': 'complex_rights'},
-            'jpcoar:rightsHolder': {'function': 'rightsHolder'},
+            'dc:rights': Solrizer.solr_name('rights_statement', :displayable),
+            'jpcoar:rightsHolder': {'function': 'rights_holder'},
             'jpcoar:subject': 'subject_sim',
             'datacite:description': '',
-            'dc:publisher': '',
+            'dc:publisher': Solrizer.solr_name('publisher', :displayable),
             'datacite:date': '',
-            'dc:language': '',
-            'dc:type': '',
+            'dc:language': Solrizer.solr_name('language', :displayable),
+            'dc:type': Solrizer.solr_name('resource_type', :displayable),
             'datacite:version': '',
             'oaire:version': '',
             'jpcoar:identifier': '',
@@ -86,5 +86,17 @@ module Formats
     def mime_types
       self['content_mime_type_ssm']
     end
+
+    def creator
+    end
+
+    def contributor
+    end
+
+    def rights_holder
+    end
+
+
+
   end
 end
