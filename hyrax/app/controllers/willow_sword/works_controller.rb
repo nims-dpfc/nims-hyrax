@@ -9,6 +9,7 @@ module WillowSword
     include WillowSword::ProcessRequest
     include ::Integrator::Hyrax::WorksBehavior
 
+    # overriding this method so zip files in the payload are unpacked vefore ingest
     def bag_request
       # The data is processed as a bag
       contents_path = File.join(@dir, 'contents')
