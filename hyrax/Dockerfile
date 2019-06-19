@@ -37,10 +37,10 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     openjdk-8-jre-headless
 
 RUN mkdir -p /fits/ \
-    && wget -q http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip -O /fits/fits-1.0.5.zip \
-    && unzip -q /fits/fits-1.0.5.zip -d /fits \
-    && chmod a+x /fits/fits-1.0.5/fits.sh \
-    && rm /fits/fits-1.0.5.zip
+    && wget -q https://projects.iq.harvard.edu/files/fits/files/fits-1.3.0.zip -O /fits/fits-1.3.0.zip \
+    && unzip -q /fits/fits-1.3.0.zip -d /fits/fits-1.3.0 \
+    && chmod a+x /fits/fits-1.3.0/fits.sh \
+    && rm /fits/fits-1.3.0.zip
 
 # copy gemfiles to production folder
 COPY Gemfile Gemfile.lock $APP_PRODUCTION
