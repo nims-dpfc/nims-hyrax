@@ -70,6 +70,7 @@ gem 'sidekiq'
 gem 'hydra-role-management'
 gem 'bootstrap-datepicker-rails'
 gem 'pg'
+gem 'devise_ldap_authenticatable'
 
 gem 'riiif', '~> 2.0'
 
