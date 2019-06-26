@@ -25,7 +25,8 @@ module Importers
         get_data_origin(desc)
         get_license(desc)
         get_visibility(desc)
-        set_title
+        get_title
+        # set_title
       end
 
       def get_specimen_description
@@ -202,6 +203,14 @@ module Importers
           end
           @attributes[:visibility] = visibility if visibility.present?
         end
+      end
+
+      def get_title
+        filenames = []
+        @xml_metadata.xpath("depositUploadReq/additional-attachment-pointer/additional-for-attached-filename[@attached-order='1']/object-path-name").each do |fp|
+          filenames << File.basename(fp.text.strip, '.zip') if fp.text
+        end
+        @attributes[:title] = [filenames[0]] if filenames.any?
       end
 
       def set_title
