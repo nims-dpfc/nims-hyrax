@@ -34,7 +34,7 @@ module Importers
 
     def upload_files
       # files is an array of hashes, with each hash containing
-      #   filename, filetype, fileurl, filepath, metadata, uploadedfile
+      #   filename, filetype, fileurl, filepath, metadata, uploaded_file
       files.each do |file|
         filepath = file.fetch(:filepath, nil)
         fileurl = file.fetch(:fileurl, nil)
@@ -42,7 +42,7 @@ module Importers
           filepath  = upload_remote_file(file)
           file[:filepath] = filepath
         end
-        file[:uploadedfile] = upload_file(file)
+        file[:uploaded_file] = upload_file(file)
       end
     end
 
@@ -228,7 +228,7 @@ module Importers
         actor = ::Hyrax::Actors::FileSetActor.new(file_set, @depositor)
         actor.file_set.permissions_attributes = @object.permissions.map(&:to_hash)
         # Add file
-        actor.create_content(file_attributes[:uploadedfile])
+        actor.create_content(file_attributes[:uploaded_file])
         actor.file_set.title = Array(file_attributes[:filename])
         # update_metadata
         unless file_attributes[:metadata].blank?
