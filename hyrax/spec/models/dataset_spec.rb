@@ -647,8 +647,8 @@ RSpec.describe Dataset do
 
   describe 'specimen_set' do
     it 'has specimen_set' do
-      @obj = build(:dataset, specimen_set: 'Specimen set')
-      expect(@obj.specimen_set).to eq 'Specimen set'
+      @obj = build(:dataset, specimen_set: 'Specimen')
+      expect(@obj.specimen_set).to eq 'Specimen'
     end
   end
 
