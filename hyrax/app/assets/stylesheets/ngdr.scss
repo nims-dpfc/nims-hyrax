@@ -86,4 +86,8 @@ form .field-wrapper label[required="required"]::after {
     /* symbol for "collapsed" panels */
     content: "\e080";    /* adjust as needed, taken from bootstrap.css */
 }
+//-------------- edit form css --------------
+.switch-upload-type {
+  display: none;
+}
 //--------------------------------------
