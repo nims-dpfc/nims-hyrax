@@ -62,7 +62,7 @@ en:
           place_sim: Location
           properties_addressed_sim: Properties addressed
           publisher_sim: Publisher
-          specimen_set_sim: Specimen set
+          specimen_set_sim: Specimen
           subject_sim: Subject
           synthesis_and_processing_sim: Synthesis and processing
         index:
@@ -149,7 +149,7 @@ en:
           properties_addressed_tesim: Properties addressed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
-          specimen_set_tesim: Specimen set
+          specimen_set_tesim: Specimen
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
         show:
@@ -210,7 +210,7 @@ en:
           properties_addressed_tesim: Properties processed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
-          specimen_set_tesim: Specimen set
+          specimen_set_tesim: Specimen
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
           table_of_contents_tesim: Table of contents
