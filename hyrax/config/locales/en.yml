@@ -44,7 +44,7 @@ en:
       processing_environment:   "Processing environment"
       properties_addressed:     "Properties addressed"
       purchase_record_item:     "Purchase record item"
-      specimen_set:             "Specimen set"
+      specimen_set:             "Specimen"
       specimen_type:            "Specimen type"
       status:                   "Status"
       status_at_end:            "Status at end"
@@ -54,4 +54,3 @@ en:
       sub_organization:         "Sub organization"
       synthesis_and_processing: "Synthesis and processing"
       total_number_of_pages:    "Number of pages"
-

@@ -72,7 +72,7 @@ dataset_attributes = {
     }],
     relationship: 'isSupplementTo'
   }],
-  specimen_set: 'Specimen set',
+  specimen_set: 'Specimen',
   specimen_type_attributes: [{
     chemical_composition: 'chemical composition',
     crystallographic_structure: 'crystallographic structure',
