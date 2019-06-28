@@ -22,7 +22,7 @@ en:
         complex_rights:           "Rights"
         complex_version:          "Version"
         computational_methods:    "Computational methods"
-        custom_property:          "custom property"
+        custom_property:          "Additional metadata"
         data_origin:              "Data origin"
         complex_instrument:       "Instrument"
         material_types:           "Material types "
