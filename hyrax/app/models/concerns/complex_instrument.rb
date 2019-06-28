@@ -3,13 +3,13 @@ class ComplexInstrument < ActiveTriples::Resource
 
   configure type: ::RDF::Vocab::NimsRdp['Instrument']
 
-  property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
+#  property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
+
+property :description, predicate: ::RDF::Vocab::DC11.description
 
   property :complex_date, predicate: ::RDF::Vocab::NimsRdp["instrument-date"],
             class_name:"ComplexDate"
   accepts_nested_attributes_for :complex_date
-
-  property :description, predicate: ::RDF::Vocab::DC11.description
 
   property :complex_identifier, predicate: ::RDF::Vocab::MODS.identifierGroup,
             class_name:"ComplexIdentifier"
