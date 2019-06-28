@@ -107,7 +107,7 @@ module ComplexField
       # solr fields that will be used for a search
       fields = []
       fields << Solrizer.solr_name('instrument_title', :stored_searchable)
-      fields << Solrizer.solr_name('instrument_alternative_title', :stored_searchable)
+      # fields << Solrizer.solr_name('instrument_alternative_title', :stored_searchable)
       fields << Solrizer.solr_name('instrument_description', :stored_searchable)
       fields << Solrizer.solr_name('instrument_manufacturer', :stored_searchable)
       fields << Solrizer.solr_name('instrument_manufacturer_sub_organization', :stored_searchable)

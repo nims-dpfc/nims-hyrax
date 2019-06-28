@@ -37,14 +37,13 @@ RSpec.describe ComplexInstrument do
     @obj.attributes = {
       complex_instrument_attributes: [
         {
-          alternative_title: 'An instrument title',
-          complex_date_attributes: [{
-            date: ['2018-02-14']
-          }],
           description: 'Instrument description',
           complex_identifier_attributes: [{
             identifier: ['123456'],
             label: ['Local']
+          }],
+          complex_date_attributes: [{
+            date: ['2018-02-14']
           }],
           instrument_function_attributes: [{
             column_number: 1,
@@ -80,10 +79,9 @@ RSpec.describe ComplexInstrument do
       ]
     }
     expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_instrument.first.alternative_title).to eq ['An instrument title']
+    expect(@obj.complex_instrument.first.description).to eq ['Instrument description']
     expect(@obj.complex_instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_instrument.first.complex_date.first.date).to eq ['2018-02-14']
-    expect(@obj.complex_instrument.first.description).to eq ['Instrument description']
     expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['123456']
     expect(@obj.complex_instrument.first.complex_identifier.first.label).to eq ['Local']

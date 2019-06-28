@@ -41,7 +41,6 @@ dataset_attributes = {
   computational_methods: 'computational methods',
   data_origin: ['informatics and data science'],
   complex_instrument_attributes: [{
-    alternative_title: 'An instrument title',
     complex_date_attributes: [{
       date: ['2018-02-14'],
       description: 'Processed'

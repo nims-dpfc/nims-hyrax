@@ -11,23 +11,23 @@ class NestedInstrumentAttributeRenderer < NestedAttributeRenderer
         val = link_to(ERB::Util.h(v['title'][0]), search_path(v['title'][0]))
         each_html += get_row(label, val)
       end
-      # alternative title
-      unless v.dig('alternative_title').blank?
-        label = 'Alternative title'
-        val = v['alternative_title'][0]
-        each_html += get_row(label, val)
-      end
-      # complex date
-      unless v.dig('complex_date').blank?
-        label = 'Date'
-        renderer_class = NestedDateAttributeRenderer
-        each_html += get_nested_output(label, v['complex_date'], renderer_class, false)
-      end
       # description
       unless v.dig('description').blank?
         label = 'Description'
         val = v['description'][0]
         each_html += get_row(label, val)
+      end
+      # alternative title
+      # unless v.dig('alternative_title').blank?
+      #   label = 'Alternative title'
+      #   val = v['alternative_title'][0]
+      #   each_html += get_row(label, val)
+      # end
+      # complex date
+      unless v.dig('complex_date').blank?
+        label = 'Date'
+        renderer_class = NestedDateAttributeRenderer
+        each_html += get_nested_output(label, v['complex_date'], renderer_class, false)
       end
       # complex identifier
       unless v.dig('complex_identifier').blank?

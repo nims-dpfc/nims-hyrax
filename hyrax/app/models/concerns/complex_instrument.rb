@@ -5,7 +5,7 @@ class ComplexInstrument < ActiveTriples::Resource
 
 #  property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
 
-property :description, predicate: ::RDF::Vocab::DC11.description
+  property :description, predicate: ::RDF::Vocab::DC11.description
 
   property :complex_date, predicate: ::RDF::Vocab::NimsRdp["instrument-date"],
             class_name:"ComplexDate"
