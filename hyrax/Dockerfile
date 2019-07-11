@@ -18,7 +18,12 @@ ENV APP_PRODUCTION=/data/ \
 RUN echo 'deb  http://deb.debian.org/debian buster main contrib non-free'
 RUN echo 'deb-src  http://deb.debian.org/debian buster main contrib non-free'
 
-RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+RUN apt-get update -qq && \
+    apt-get -y install apt-transport-https && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    apt-get update -qq && apt-get install -y --no-install-recommends \ 
     libpq-dev \
     libxml2-dev libxslt1-dev \
     nodejs \
@@ -35,6 +40,9 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     vim \
     git \
     openjdk-11-jre-headless
+    yarn && \
+    yarn config set no-progress && \
+    yarn config set silent
 
 RUN mkdir -p /fits/ \
     && wget -q https://projects.iq.harvard.edu/files/fits/files/fits-1.3.0.zip -O /fits/fits-1.3.0.zip \
@@ -75,6 +83,7 @@ RUN cd $APP_PRODUCTION \
 # generate production assets if production environment
 RUN if [ "$RAILS_ENV" = "production" ]; then \
         cd $APP_PRODUCTION \
+        && yarn install \
         && SECRET_KEY_BASE_PRODUCTION=0 bundle exec rake assets:clean assets:precompile; \
     fi
 

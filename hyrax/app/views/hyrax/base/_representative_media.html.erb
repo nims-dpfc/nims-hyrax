@@ -1,0 +1,10 @@
+<%# Copied from Hyrax for upgraded universal viewer, @todo remove on upgrade to Hyrax 3.x %>
+<% if presenter.representative_id.present? && presenter.representative_presenter.present? %>
+  <% if defined?(viewer) && viewer %>
+    <%= iiif_viewer_display presenter %>
+  <% else %>
+    <%= media_display presenter.representative_presenter %>
+  <% end %>
+<% else %>
+  <%= image_tag 'default.png', class: "canonical-image" %>
+<% end %>
