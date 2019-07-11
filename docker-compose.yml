@@ -106,6 +106,9 @@ services:
   web:
     <<: *app
     command: bash -c "/bin/docker-entrypoint.sh"
+    environment:
+      - VIRTUAL_HOST=nims.docker
+      - VIRTUAL_PORT=3000
     depends_on:
       - appdb
       - solr
@@ -117,8 +120,6 @@ services:
   workers:
     <<: *app
     command: bundle exec sidekiq
-    environment:
-      - SETTINGS__FITS_PATH=/fits/fits-1.3.0/fits.sh
     depends_on:
       - appdb
       - solr
