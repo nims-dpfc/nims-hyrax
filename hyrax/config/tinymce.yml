@@ -6,7 +6,6 @@ default: &default
   plugins:
     - table
     - fullscreen
-    - uploadimage
 content_block:
   <<: *default
 custom:
