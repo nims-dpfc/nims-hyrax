@@ -348,3 +348,6 @@ $RECYCLE.BIN/
 # Environment variables file
 .env.production
 .env
+
+# nginx config files
+docker/nginx/certs/

@@ -17,11 +17,13 @@ services:
     depends_on:
       - web
     volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./docker/nginx/.htpasswd:/etc/nginx/conf.d/.htpasswd:ro
+      # set the path to the custom nginx config directory
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+
+      # set the path to the custom server sertificate directory
+      - ./docker/nginx/certs:/etc/nginx/certs
     env_file:
       - .env
-    command: "sed -i 's%X.X.X.0/24%${NGINX_NIMS_IP_RANGE}%g' /etc/nginx.conf && nginx -s reload"
     ports:
       - 80:80
       - 443:443
