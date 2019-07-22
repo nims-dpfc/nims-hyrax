@@ -15,8 +15,8 @@ ENV APP_PRODUCTION=/data/ \
 # Add backports to apt-get sources
 # Install libraries, dependencies, java and fits
 
-RUN echo 'deb  http://deb.debian.org/debian stretch main contrib non-free'
-RUN echo 'deb-src  http://deb.debian.org/debian stretch main contrib non-free'
+RUN echo 'deb  http://deb.debian.org/debian buster main contrib non-free'
+RUN echo 'deb-src  http://deb.debian.org/debian buster main contrib non-free'
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libpq-dev \
@@ -28,13 +28,13 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     texinfo wget yasm zlib1g-dev fonts-ipaexfont fonts-ipafont fonts-vlgothic \
     libjpeg-dev libtiff-dev libpng-dev libraw-dev libwebp-dev libjxr-dev \
     libcairo2-dev libgs-dev librsvg2-dev \
-    libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev libav-tools \
+    libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev \
     ghostscript ffmpeg imagemagick \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
     git \
-    openjdk-8-jre-headless
+    openjdk-11-jre-headless
 
 RUN mkdir -p /fits/ \
     && wget -q https://projects.iq.harvard.edu/files/fits/files/fits-1.3.0.zip -O /fits/fits-1.3.0.zip \
