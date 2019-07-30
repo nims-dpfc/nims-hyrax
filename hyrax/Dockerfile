@@ -8,6 +8,8 @@ ARG CACHE_PATH
 ARG AIRBRAKE_HOST
 ARG AIRBRAKE_PROJECT_ID
 ARG AIRBRAKE_PROJECT_KEY
+ARG FITS_PATH
+ARG FITS_VERSION
 
 ENV APP_PRODUCTION=/data/ \
     APP_WORKDIR=/data
@@ -39,16 +41,16 @@ RUN apt-get update -qq && \
     bzip2 unzip xz-utils \
     vim \
     git \
-    openjdk-11-jre-headless
+    openjdk-11-jre-headless \
     yarn && \
     yarn config set no-progress && \
     yarn config set silent
 
 RUN mkdir -p /fits/ \
-    && wget -q https://projects.iq.harvard.edu/files/fits/files/fits-1.3.0.zip -O /fits/fits-1.3.0.zip \
-    && unzip -q /fits/fits-1.3.0.zip -d /fits/fits-1.3.0 \
-    && chmod a+x /fits/fits-1.3.0/fits.sh \
-    && rm /fits/fits-1.3.0.zip
+    && wget -q https://projects.iq.harvard.edu/files/fits/files/$FITS_VERSION.zip -O /fits/$FITS_VERSION.zip \
+    && unzip -q /fits/$FITS_VERSION.zip -d /fits/$FITS_VERSION \
+    && chmod a+x $FITS_PATH \
+    && rm /fits/$FITS_VERSION.zip
 
 # copy gemfiles to production folder
 COPY Gemfile Gemfile.lock $APP_PRODUCTION
