@@ -87,3 +87,29 @@ form .field-wrapper label[required="required"]::after {
     content: "\e080";    /* adjust as needed, taken from bootstrap.css */
 }
 //--------------------------------------
+
+//------------ UNIVERSAL VIEWER (ported from Hyrax master) @todo remove on upgrade to Hyrax 3.x -------------
+
+/* pad the top and bottom universal viewer*/
+.viewer-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.viewer-wrapper iframe {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// Show various footer, header, left and right panels on larger screens only
+@media only screen and (min-width: 640px) {
+  .viewer-wrapper {
+    height: 640px;
+  }
+}
+
+//--------------------------------------
