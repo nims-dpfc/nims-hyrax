@@ -22,7 +22,7 @@ module Hyrax
       :publisher, :resource_type, :complex_rights, :subject,
       :complex_date, :complex_identifier, :complex_person, :complex_version,
       :complex_event, :issue, :source, :place, :complex_source, :table_of_contents,
-      :total_number_of_pages
+      :total_number_of_pages, :application_number
     ]
 
     self.required_fields -= [
@@ -33,7 +33,7 @@ module Hyrax
 
     self.required_fields += [
       # # Adding all required fields in order of display in form
-      :title
+      :title, :application_number
     ]
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,
