@@ -544,7 +544,7 @@ ActiveRecord::Schema.define(version: 20190122162320) do
     t.string "zotero_userid"
     t.string "preferred_locale"
     t.string "username"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

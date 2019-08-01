@@ -96,6 +96,8 @@ class Dataset < ActiveFedora::Base
 
   property :custom_property, predicate: ::RDF::Vocab::NimsRdp['custom-property'], class_name:"ComplexKeyValue"
 
+  property :application_number, predicate: ::RDF::Vocab::NimsRdp['application-number']
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
