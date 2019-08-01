@@ -25,7 +25,8 @@ module Hyrax
       # :complex_identifier # not using this for now
       :data_origin, :complex_instrument, :origin_system_provenance,
       :properties_addressed, :complex_relation, :specimen_set,
-      :complex_specimen_type, :synthesis_and_processing, :custom_property
+      :complex_specimen_type, :synthesis_and_processing, :custom_property,
+      :application_number
     ]
 
     self.required_fields -= [
@@ -35,12 +36,14 @@ module Hyrax
       :title]
 
     self.required_fields += [
-      :title, :data_origin
+      # # Adding all required fields in order of display in form
+      :title, :data_origin, :application_number
     ]
 
     def metadata_tab_terms
       [
         # Description tab order determined here
+        :application_number,
         :title, :alternative_title, :data_origin, :description, :keyword,
         :specimen_set, :complex_person, 
         # :complex_organization, # not using this
