@@ -162,6 +162,13 @@ RSpec.describe Publication do
     end
   end
 
+  describe 'application_number' do
+    it 'has application_number' do
+      @obj = build(:publication, application_number: ['Kosuke Tanabe 2019.08.01'])
+      expect(@obj.application_number).to eq ['Kosuke Tanabe 2019.08.01']
+    end
+  end
+
   describe 'complex_rights' do
     it 'creates a complex rights active triple resource with rights' do
       @obj = build(:publication, complex_rights_attributes: [{
