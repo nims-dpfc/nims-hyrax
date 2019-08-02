@@ -36,12 +36,7 @@ services:
     env_file:
       - .env
     healthcheck:
-      test:
-        - CMD
-        - wget
-        - "-O"
-        - "/dev/null"
-        - http://localhost:8983/solr/
+      test: ["CMD-SHELL", "wget -O /dev/null http://localhost:8983/solr/"]
       interval: 30s
       timeout: 5s
       retries: 3
