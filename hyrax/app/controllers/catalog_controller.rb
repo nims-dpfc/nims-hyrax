@@ -123,7 +123,7 @@ class CatalogController < ApplicationController
     config.add_search_field('all_fields', label: 'All Fields') do |field|
       all_names = (DatasetIndexer.search_fields +
                    PublicationIndexer.search_fields +
-                   ImageIndexer.search_fields).uniq
+                   ImageIndexer.search_fields).uniq.join(" ")
       title_name = solr_name("title", :stored_searchable)
       field.solr_parameters = {
         qf: "#{all_names} file_format_tesim all_text_timv",
