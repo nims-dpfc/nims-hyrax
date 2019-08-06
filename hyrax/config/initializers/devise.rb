@@ -293,4 +293,9 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  config.omniauth :orcid,
+    ENV['ORCID_CLIENT_ID'],
+    ENV['ORCID_CLIENT_SECRET'],
+    member: false,
+    client_options: { ssl: { version: "TLSv1_2" } }
 end
