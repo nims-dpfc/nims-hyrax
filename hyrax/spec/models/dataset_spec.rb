@@ -647,8 +647,8 @@ RSpec.describe Dataset do
 
   describe 'specimen_set' do
     it 'has specimen_set' do
-      @obj = build(:dataset, specimen_set: 'Specimen set')
-      expect(@obj.specimen_set).to eq 'Specimen set'
+      @obj = build(:dataset, specimen_set: 'Specimen')
+      expect(@obj.specimen_set).to eq 'Specimen'
     end
   end
 
@@ -967,7 +967,7 @@ RSpec.describe Dataset do
   end
 
   describe 'custom_property' do
-    it 'creates a custom property active triple resource with all the attributes' do
+    it 'creates a custom property (additional metadata) active triple resource with all the attributes' do
       @obj = build(:dataset,
         custom_property_attributes: [{
           label: 'Full name',
@@ -980,7 +980,7 @@ RSpec.describe Dataset do
       expect(@obj.custom_property.first.description).to eq ['My full name is ...']
     end
 
-    it 'rejects a custom property active triple with no label' do
+    it 'rejects a custom property (additional metadata) active triple with no label' do
       @obj = build(:dataset,
         custom_property_attributes: [{
           description: 'Local date'
@@ -989,7 +989,7 @@ RSpec.describe Dataset do
       expect(@obj.custom_property).to be_empty
     end
 
-    it 'rejects a custom property active triple with no description' do
+    it 'rejects a custom property (additional metadata) active triple with no description' do
       @obj = build(:dataset,
         custom_property_attributes: [{
           label: 'Local date'

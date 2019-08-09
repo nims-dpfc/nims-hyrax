@@ -52,7 +52,7 @@ protected
 
     # --- delete checkbox
     if repeats == true
-      field_label = 'Custom property'
+      field_label = 'Additional metadata'
       out << "  <div class='col-md-3'>"
       out << destroy_widget(attribute_name, index, field_label, parent)
       out << '  </div>'

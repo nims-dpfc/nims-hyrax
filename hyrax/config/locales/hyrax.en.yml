@@ -45,7 +45,7 @@ en:
           complex_sub_organization_sim: Sub organization
           complex_person_sim: Creator
           computational_methods_sim: Computational methods
-          custom_property_sim: Custom property
+          custom_property_sim: Additional metadata
           data_origin_sim: Data origin
           file_format_sim: Format
           generic_type_sim: Type
@@ -62,7 +62,7 @@ en:
           place_sim: Location
           properties_addressed_sim: Properties addressed
           publisher_sim: Publisher
-          specimen_set_sim: Specimen set
+          specimen_set_sim: Specimen
           subject_sim: Subject
           synthesis_and_processing_sim: Synthesis and processing
         index:
@@ -125,7 +125,7 @@ en:
           complex_structural_feature_identifier_ssim: Structural feature identifier
           complex_version_ssim: Version
           computational_methods_tesim: Computational methods
-          custom_property_tesim: Custom property
+          custom_property_tesim: Additional metadata
           data_origin_tesim: Data origin
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
@@ -149,7 +149,7 @@ en:
           properties_addressed_tesim: Properties addressed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
-          specimen_set_tesim: Specimen set
+          specimen_set_tesim: Specimen
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
         show:
@@ -192,7 +192,7 @@ en:
           complex_specimen_type_ssm: Specimen type
           complex_version_ssm: Version
           creator_tesim: Creator
-          custom_property_ssm: Custom property
+          custom_property_ssm: Additional metadata
           data_origin_tesim: Data origin
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
@@ -210,7 +210,7 @@ en:
           properties_addressed_tesim: Properties processed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
-          specimen_set_tesim: Specimen set
+          specimen_set_tesim: Specimen
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
           table_of_contents_tesim: Table of contents
@@ -232,8 +232,8 @@ en:
         tab:
           files: Files
           metadata: Descriptions
-          method: Experimental method
-          instrument: Instrument
+          method: Method
+          instrument: Instruments
           relationships: Relationships
           share: Sharing
-          specimen: Specimen type
+          specimen: Specimen details
