@@ -36,12 +36,7 @@ services:
     env_file:
       - .env
     healthcheck:
-      test:
-        - CMD
-        - wget
-        - "-O"
-        - "/dev/null"
-        - http://localhost:8983/solr/
+      test: ["CMD-SHELL", "wget -O /dev/null http://localhost:8983/solr/"]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -64,23 +59,28 @@ services:
       - .env
     expose:
       - 5432
-    healthcheck:
-      test: "CMD echo 'SELECT 1' | POSTGRES_PASSWORD=${POSTGRES_PASSWORD} psql --host 127.0.0.1 --username #{POSTGRES_USER} --dbname #{POSTGRES_DB} --quiet --no-align --tuples-only"
-      interval: 30s
-      timeout: 5s
-      retries: 3
   fcrepodb:
     <<: *db
     environment:
       - POSTGRES_DB=${POSTGRES_DB_FCREPO}
     volumes:
       - db-fcrepo:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "POSTGRES_PASSWORD=${POSTGRES_PASSWORD} pg_isready -U ${POSTGRES_USER} -h localhost -d ${POSTGRES_DB_FCREPO}"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
   appdb:
     <<: *db
     environment:
       - POSTGRES_DB=${POSTGRES_DB_APP}
     volumes:
       - db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "POSTGRES_PASSWORD=${POSTGRES_PASSWORD} pg_isready -U ${POSTGRES_USER} -h localhost -d ${POSTGRES_DB_APP}"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
 
   app: &app
     build:
@@ -138,10 +138,7 @@ services:
     networks:
       internal:
     healthcheck:
-      test:
-        - CMD
-        - redis-cli
-        - ping
+      test: ["CMD-SHELL", "redis-cli ping"]
       interval: 30s
       timeout: 5s
       retries: 3
