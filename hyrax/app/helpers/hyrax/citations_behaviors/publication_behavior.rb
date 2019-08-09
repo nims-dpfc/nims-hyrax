@@ -2,6 +2,18 @@ module Hyrax
   module CitationsBehaviors
     module PublicationBehavior
       include Hyrax::CitationsBehaviors::CommonBehavior
+
+      # nims override to add doi
+      def setup_doi(work)
+        # join and split at } to give us an array of identifiers
+        # this is a bit hacky, but it works
+        identifiers = work.complex_identifier.join('}').split('}')
+        # extract only dois
+        dois = identifiers.select {|i| i.include?('DOI')}
+        # pattern match to extract the doi
+        "#{dois.map {|d| d.gsub(/(.*)identifier\":\["/, '').gsub(/"\],"scheme":\["DOI"(.*)/, '')}.join('. ')}"
+      end
+
       # nims override to retrieve nested properties
       def setup_pub_date(work)
         first_date = CGI.escapeHTML(work.solr_document['complex_date_published_ssm'].first) 
@@ -15,7 +27,7 @@ module Hyrax
       end
 
       # @param [Hyrax::WorkShowPresenter] work_presenter
-      # nims override to retrieve nested properties
+      # nims override to retrieve place
       def setup_pub_place(work_presenter)
         work_presenter.place&.first
       end
@@ -35,7 +47,10 @@ module Hyrax
 
         pub_date = include_date ? setup_pub_date(work) : nil
         pub_info << ", " << pub_date unless pub_date.nil?
-
+        # nims override to add doi
+        pub_doi = setup_doi(work)
+        pub_info << ". " << pub_doi unless pub_doi.nil?
+        # end nims override to add doi
         pub_info.strip!
         pub_info.blank? ? nil : pub_info
       end
