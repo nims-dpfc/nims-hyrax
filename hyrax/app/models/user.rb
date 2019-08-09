@@ -35,18 +35,35 @@ class User < ApplicationRecord
     User.find_by('email' => user_key) || User.create!(username: username, email: user_key, password: Devise.friendly_token[0, 20])
   end
 
+  def ldap_before_save
+    self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
+    self.password = Devise.friendly_token[0, 20]
+    # self.provider = 'nims_ldap'
+  end
+
   def self.from_omniauth(auth)
-    #Rails.logger.info "auth = #{auth.inspect}"
-    Rails.logger.info "auth = #{auth.info.inspect}"
-    # Uncomment the debugger above to capture what a shib auth object looks like for testing
-    user = find_by(provider: auth.provider, username: auth.uid)
+    Rails.logger.debug "auth = #{auth.inspect}"
+
+    # NIMS-LDAP users
+    user = User.find_by(provider: 'nims_ldap', orcid: auth.uid)
+
+    # ORCID users
+    user = User.find_by(provider: auth.provider, username: auth.uid) unless user
+
+    # Sign up
     unless user
-      user = User.create!(
-        username: auth.uid,
-        email: "dummy@example.com",
-        password: Devise.friendly_token
-      )
+      if auth.info.email
+        user = User.create!(
+          username: auth.uid,
+          email: auth.email || 'orcid-dummy@example.com',
+          # display_name: auth.name,
+          password: Devise.friendly_token[0, 20],
+          orcid: auth.uid,
+          # provider: auth.provider
+        )
+      end
     end
+
     user
   end
 end
