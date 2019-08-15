@@ -35,22 +35,23 @@ module Hyrax
       :title]
 
     self.required_fields += [
-      # # Adding all required fields in order of display in form
       :title, :data_origin, :specimen_set
     ]
 
     def metadata_tab_terms
       [
-        :title, :alternative_title, :description, :complex_person,
-        :complex_organization, :keyword, :subject, :language, :publisher,
+        # Description tab order determined here
+        :title, :alternative_title, :data_origin, :description, :complex_person,
+        :complex_organization, :specimen_set, :keyword, :subject, :language, :publisher,
         :complex_date, :complex_rights, :complex_version, :complex_relation
       ]
     end
 
     def method_tab_terms
       [
-        :characterization_methods, :computational_methods, :data_origin,
-        :origin_system_provenance, :properties_addressed, :specimen_set,
+        # Method tab order determined here
+        :characterization_methods, :computational_methods,
+        :origin_system_provenance, :properties_addressed,
         :synthesis_and_processing, :custom_property
       ]
     end
