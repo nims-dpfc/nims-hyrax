@@ -41,8 +41,9 @@ module Hyrax
     def metadata_tab_terms
       [
         # Description tab order determined here
-        :title, :alternative_title, :data_origin, :specimen_set, :description, :keyword,
-        :complex_person, :complex_organization,
+        :title, :alternative_title, :data_origin, :description, :keyword,
+        :specimen_set, :complex_person, 
+        # :complex_organization, # not using this
         :complex_date, :complex_rights, :complex_version, :complex_relation,
         :custom_property
       ]
