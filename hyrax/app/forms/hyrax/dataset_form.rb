@@ -42,10 +42,10 @@ module Hyrax
 
     def metadata_tab_terms
       [
+        :application_number,
         :title, :alternative_title, :description, :complex_person,
         :complex_organization, :keyword, :subject, :language, :publisher,
         :complex_date, :complex_rights, :complex_version, :complex_relation,
-        :application_number
       ]
     end
 
