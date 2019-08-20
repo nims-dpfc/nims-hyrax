@@ -19,7 +19,7 @@ class User < ApplicationRecord
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise ENV.fetch('MDR_DEVISE_AUTH_MODULE', 'database_authenticatable').to_sym,
          :recoverable,
-         :rememberable, :trackable, :validatable
+         :rememberable, :trackable, :validatable, :lockable
 
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
