@@ -16,7 +16,7 @@ en:
         complex_person:           "Creator"
         complex_relation:         "Related item"
         complex_rights:           "Rights"
-        complex_source:           "Journal"
+        complex_source:           "Journal/Book/Proceedings/Database"
         complex_version:          "Version"
         part_of:                  "Part of"
         issue:                    "Issue"
