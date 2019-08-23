@@ -12,14 +12,15 @@ module ComplexField
       solr_doc[Solrizer.solr_name('complex_date', :displayable)] = object.complex_date.to_json
       # date as complex_date searchable
       dates = object.complex_date.map { |d| d.date.reject(&:blank?) }.flatten
-      dates_utc = dates.map { |d| DateTime.parse(d).utc.iso8601 } unless dates.blank?
+      # cope with just a year being supplied
+      dates_utc = dates.map { |d| d.length <= 4 ? DateTime.strptime(d, '%Y').utc.iso8601 : DateTime.parse(d).utc.iso8601 } unless dates.blank?
       solr_doc[Solrizer.solr_name('complex_date', :stored_searchable, type: :date)] = dates_utc unless dates.blank?
       solr_doc[Solrizer.solr_name('complex_date', :dateable)] = dates_utc unless dates.blank?
       object.complex_date.each do |d|
         next if d.date.reject(&:blank?).blank?
         label = 'other'
         unless d.description.blank?
-          # Finding it's display label for indexing
+          # Finding its display label for indexing
           term = DateService.new.find_by_id(d.description.first)
           label = term['label'] if term.any?
         end
