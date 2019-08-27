@@ -139,7 +139,7 @@ module Importers
       def update_work
         raise "Object doesn't exist" unless @object
         @object.update(update_attributes)
-        @object.depositor = @depositor
+        @object.depositor = @depositor.username
       end
 
       def update_work_by_actor
