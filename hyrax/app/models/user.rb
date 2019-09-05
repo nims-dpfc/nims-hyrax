@@ -18,7 +18,6 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise ENV.fetch('MDR_DEVISE_AUTH_MODULE', 'database_authenticatable').to_sym,
-         :recoverable,
          :rememberable, :trackable, :validatable, :lockable
 
   # Method added by Blacklight; Blacklight uses #to_s on your
