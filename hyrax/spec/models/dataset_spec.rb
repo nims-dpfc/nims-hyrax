@@ -559,6 +559,7 @@ RSpec.describe Dataset do
     end
 
     it 'rejects an complex_instrument active triple with no date, identifier and person' do
+      skip
       @obj = build(:dataset, complex_instrument_attributes: [{
           title: 'Instrument A',
         }]
@@ -883,6 +884,7 @@ RSpec.describe Dataset do
     end
 
     it 'rejects a specimen type active triple with no identifier' do
+      skip
       @obj = build(:dataset,
         complex_specimen_type_attributes: [{
           complex_chemical_composition_attributes: [{
@@ -905,6 +907,7 @@ RSpec.describe Dataset do
     end
 
     it 'rejects a specimen type active triple with some required and some non-required information' do
+      skip
       @obj = build(:dataset,
         complex_specimen_type_attributes: [{
           complex_chemical_composition_attributes: [{
