@@ -1,3 +1,7 @@
-<%= f.input :supervisor_approval, required: f.object.required?(key), hint: raw("Supervisor's name, approval date, and application number in NIMS Research Presentation Management System （発表許可申請システム） if available. See <a href='https://gitlab.nims.go.jp'>User Manual</a> for details.
+<%= f.input :supervisor_approval,
+  required: f.object.required?(key),
+  as: :multi_value,
+  hint: raw("Obtain approval from your supervisor, then fill in their name and the date of approval. If applicable, also fill in the RPMS application number (発表許可申請システム申請番号). See <a href='https://gitlab.nims.go.jp' target='_blank' rel='noopener'>User's Manual</a> for details.
 <br />
-e.g. Butsuzai, Taro 2019-09-30 2019A00xxxA") %>
+e.g. Butsuzai, Taro 2019-09-30 2019A00xxxA"),
+  input_html: {class: 'form-control'} %>
