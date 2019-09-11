@@ -1,23 +1,9 @@
 # Overrides the docker-compose file for production environment
-# - Adds nginx with basic auth in front of the app
+# - app accessible on port 3000
 
 version: '3'
 
-volumes:
-  letsencrypt:
-
 services:
-
-  app:
-    volumes:
-      - /mnt/ngdr/:/mnt/ngdr
-
-  nginx:
-    build: docker/nginx
-    depends_on:
-      - web
+  web:
     ports:
-      - 80:80
-      - 443:443
-    networks:
-      internal:
+      - 3000:3000
