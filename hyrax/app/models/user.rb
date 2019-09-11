@@ -31,4 +31,9 @@ class User < ApplicationRecord
     username = user_key.split('@')[0]
     User.find_by('email' => user_key) || User.create!(username: username, email: user_key, password: Devise.friendly_token[0, 20])
   end
+
+  def ldap_before_save
+    self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
+    self.password = Devise.friendly_token[0, 20]
+  end
 end
