@@ -51,6 +51,12 @@ module Hyrax
           complex_purchase_record
           complex_material_type
           instrument_function
+          complex_chemical_composition
+          complex_crystallographic_structure
+          complex_event
+          complex_source
+          complex_event_date
+
         ]
       end
     end
