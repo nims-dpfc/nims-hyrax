@@ -998,4 +998,41 @@ RSpec.describe Dataset do
       expect(@obj.custom_property).to be_empty
     end
   end
+
+  describe 'complex_identifier' do
+    it 'creates an identifier active triple resource with all the attributes' do
+      @obj = build(:dataset,
+        complex_identifier_attributes: [{
+           identifier: '0000-0000-0000-0000',
+           scheme: 'uri_of_ORCID_scheme',
+           label: 'ORCID'
+         }]
+      )
+      expect(@obj.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_identifier.first.identifier).to eq ['0000-0000-0000-0000']
+      expect(@obj.complex_identifier.first.scheme).to eq ['uri_of_ORCID_scheme']
+      expect(@obj.complex_identifier.first.label).to eq ['ORCID']
+    end
+
+    it 'creates an identifier active triple resource with just the identifier' do
+      @obj = build(:publication,
+        complex_identifier_attributes: [{
+          identifier: '1234'
+        }]
+      )
+      expect(@obj.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_identifier.first.identifier).to eq ['1234']
+      expect(@obj.complex_identifier.first.label).to be_empty
+      expect(@obj.complex_identifier.first.scheme).to be_empty
+    end
+
+    it 'rejects an identifier active triple with no identifier' do
+      @obj = build(:publication,
+        complex_identifier_attributes: [{
+          label: 'Local'
+        }]
+      )
+      expect(@obj.complex_identifier).to be_empty
+    end
+  end
 end
