@@ -237,3 +237,8 @@ en:
           relationships: Relationships
           share: Sharing
           specimen: Specimen details
+    visibility:
+      embargo:
+        note_html: This option is not valid.
+      lease:
+        note_html: This option is not valid.
