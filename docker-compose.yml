@@ -1,11 +1,9 @@
 version: '3'
 
 volumes:
-  fcrepo:
   solr:
   db:
   db-fcrepo:
-  redis:
 
 networks:
   internal:
@@ -15,8 +13,6 @@ services:
     image: ualbertalib/docker-fcrepo4:4.7
     expose:
       - 8080
-    volumes:
-      - fcrepo:/data
     depends_on:
       - fcrepodb
     networks:
@@ -123,8 +119,6 @@ services:
   redis:
     image: redis:5
     command: redis-server --appendonly yes
-    volumes:
-      - redis:/data
     expose:
       - 6379
     networks:
