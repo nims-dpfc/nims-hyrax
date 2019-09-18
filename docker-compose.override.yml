@@ -12,12 +12,16 @@ volumes:
   file_uploads:
   derivatives:
   cache:
+  fcrepo:
+  redis:
 
 services:
 
   fcrepo:
     ports:
       - 8080:8080
+    volumes:
+      - fcrepo:/data
 
   solr:
     ports:
@@ -35,3 +39,7 @@ services:
       - 3000:3000
     environment:
     - RAILS_FORCE_SSL=false
+
+  redis:
+    volumes:
+      - redis:/data
