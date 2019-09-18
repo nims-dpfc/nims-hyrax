@@ -21,6 +21,7 @@ module Hyrax
         temp_name.last + " " + temp_name.first
       end
 
+      # TODO: this logic does not correctly handle middle names: 'First Middle LAST' --> 'Middle LAST, First'
       def surname_first(name)
         name = name.join('') if name.is_a? Array
         # make sure we handle "Cher" correctly
@@ -35,6 +36,7 @@ module Hyrax
         end
       end
 
+      # TODO: this logic does not correctly handle middle names: 'First Middle LAST' --> 'Middle LAST, F.'
       def abbreviate_name(name)
         abbreviated_name = ''
         name = name.join('') if name.is_a? Array

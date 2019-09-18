@@ -29,7 +29,8 @@ module Hyrax
       # @param [Hyrax::WorkShowPresenter] work_presenter
       # nims override to retrieve place
       def setup_pub_place(work_presenter)
-        work_presenter.place&.first
+        # unclear whether place is a single value or multi-value
+        work_presenter.place.is_a?(String) ? work_presenter.place : work_presenter.place&.first
       end
 
       def setup_pub_publisher(work)
