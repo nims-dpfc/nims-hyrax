@@ -96,6 +96,8 @@ class Dataset < ActiveFedora::Base
 
   property :custom_property, predicate: ::RDF::Vocab::NimsRdp['custom-property'], class_name:"ComplexKeyValue"
 
+  property :supervisor_approval, predicate: ::RDF::Vocab::NimsRdp['supervisor-approval']
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
