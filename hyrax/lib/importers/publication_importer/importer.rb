@@ -60,6 +60,8 @@ module Importers
           if attributes.any? and attributes.fetch(:visibility, nil).blank?
             attributes[:visibility] = 'restricted'
           end
+          # set dummy supervisor approval
+          attributes[:supervisor_approval] = ['imported from PubMan']
           # Get files
           files_list = get_components(item)
           files = files_list[:files]
