@@ -32,6 +32,9 @@ class Dataset < ActiveFedora::Base
   # property source - defined in the basic metadata
   # property subject - defined in the basic metadata
 
+  # Required due to bug saving nested resources
+  property :updated_subresources, predicate: ::RDF::URI.new('http://example.com/updatedSubresources'), class_name: "ActiveTriples::Resource"
+
   property :alternative_title, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|
     index.as :stored_searchable
   end
@@ -112,4 +115,5 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
+  accepts_nested_attributes_for :updated_subresources, allow_destroy: true
 end
