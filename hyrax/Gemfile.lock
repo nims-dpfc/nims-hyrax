@@ -157,6 +157,7 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     clipboard-rails (1.7.1)
+    coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -526,6 +527,9 @@ GEM
     pg (1.1.4)
     posix-spawn (0.3.13)
     power_converter (0.1.2)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     public_suffix (3.1.0)
     pul_uv_rails (2.0.1)
     puma (3.12.1)
@@ -805,6 +809,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   pg
+  pry
   puma (~> 3.0)
   rails (>= 5.0.6)
   redis (~> 3.0)
@@ -825,4 +830,4 @@ DEPENDENCIES
   willow_sword!
 
 BUNDLED WITH
-   1.17.1
+   1.17.3
