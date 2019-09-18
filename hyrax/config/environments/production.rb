@@ -59,6 +59,7 @@ Rails.application.configure do
     config.force_ssl = false
   else
     config.force_ssl = true #default if nothing specified is more secure.
+    Rails.application.routes.default_url_options[:protocol] = 'https'
   end
 
   # Use the lowest log level (:debug) to ensure availability of diagnostic information
