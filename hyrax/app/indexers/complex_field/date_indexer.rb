@@ -14,9 +14,9 @@ module ComplexField
       dates = object.complex_date.map { |d| d.date.reject(&:blank?) }.flatten
       # cope with just a year being supplied
       begin
-        dates_utc = dates.map { |d| d.length <= 4 ? DateTime.strptime(d, '%Y').utc.iso8601 : DateTime.parse(d).utc.iso8601 } unless dates.blank?
+        dates_utc = dates.map{|d| d.tr('０-９ａ-ｚＡ-Ｚ','0-9a-zA-Z')}.map { |d| d.length <= 4 ? DateTime.strptime(d, '%Y').utc.iso8601 : DateTime.parse(d).utc.iso8601 } unless dates.blank?
       rescue ArgumentError
-        dates_utc = dates.map { |d| DateTime.parse("#{d}-01").utc.iso8601 } unless dates.blank?
+        dates_utc = dates.map{|d| d.tr('０-９ａ-ｚＡ-Ｚ','0-9a-zA-Z')}.map { |d| DateTime.parse("#{d}-01").utc.iso8601 } unless dates.blank?
       end
       solr_doc[Solrizer.solr_name('complex_date', :stored_searchable, type: :date)] = dates_utc unless dates.blank?
       solr_doc[Solrizer.solr_name('complex_date', :dateable)] = dates_utc unless dates.blank?
@@ -39,9 +39,9 @@ module ComplexField
         fld_name = Solrizer.solr_name("complex_date_#{label}", :dateable)
         solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
         begin
-          solr_doc[fld_name] << vals.map { |dt| dt.length <= 4 ? DateTime.strptime(dt, '%Y').utc.iso8601 : DateTime.parse(dt).utc.iso8601 }
+          solr_doc[fld_name] << vals.map{|d| d.tr('０-９ａ-ｚＡ-Ｚ','0-9a-zA-Z')}.map { |dt| dt.length <= 4 ? DateTime.strptime(dt, '%Y').utc.iso8601 : DateTime.parse(dt).utc.iso8601 }
         rescue ArgumentError
-          solr_doc[fld_name] << vals.map { |dt| DateTime.parse("#{dt}-01").utc.iso8601 }
+          solr_doc[fld_name] << vals.map{|d| d.tr('０-９ａ-ｚＡ-Ｚ','0-9a-zA-Z')}.map { |dt| DateTime.parse("#{dt}-01").utc.iso8601 }
         end
         solr_doc[fld_name].flatten!
         # date as complex_date_type displayable
