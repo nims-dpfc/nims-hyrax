@@ -4,8 +4,8 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # ==> LDAP Configuration
-  # config.ldap_logger = true
-  # config.ldap_create_user = false
+  config.ldap_logger = true
+  config.ldap_create_user = true
   # config.ldap_update_password = true
   # config.ldap_config = "#{Rails.root}/config/ldap.yml"
   # config.ldap_check_group_membership = false
@@ -293,4 +293,9 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  config.omniauth :orcid,
+    ENV['ORCID_CLIENT_ID'],
+    ENV['ORCID_CLIENT_SECRET'],
+    member: false,
+    client_options: { ssl: { version: "TLSv1_2" } }
 end

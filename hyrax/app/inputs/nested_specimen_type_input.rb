@@ -41,17 +41,17 @@ protected
       value.complex_chemical_composition.build
       field_value = value.send(field)
     end
-    nested_fields = NestedChemicalCompositionInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Chemical composition</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedChemicalCompositionInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Chemical composition</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another chemical composition</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- complex_crystallographic_structure
     field = :complex_crystallographic_structure
@@ -60,17 +60,17 @@ protected
       value.complex_crystallographic_structure.build
       field_value = value.send(field)
     end
-    nested_fields = NestedCrystallographicStructureInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Crystallographic structure</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedCrystallographicStructureInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Crystallographic structure</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another crystallographic structure</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- description
     field = :description
@@ -96,17 +96,17 @@ protected
       value.complex_identifier.build
       field_value = value.send(field)
     end
-    nested_fields = NestedIdentifierInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Identifier</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedIdentifierInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Identifier</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another identifier</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- complex_material_type
     field = :complex_material_type
@@ -115,17 +115,17 @@ protected
       value.complex_material_type.build
       field_value = value.send(field)
     end
-    nested_fields = NestedMaterialTypeInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Material type</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedMaterialTypeInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Material type</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another material type</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- complex_purchase_record
     field = :complex_purchase_record
@@ -134,17 +134,17 @@ protected
       value.complex_purchase_record.build
       field_value = value.send(field)
     end
-    nested_fields = NestedPurchaseRecordInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Purchase record</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedPurchaseRecordInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Purchase record</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another purchase record</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- complex_shape
     field = :complex_shape
@@ -153,17 +153,17 @@ protected
       value.complex_shape.build
       field_value = value.send(field)
     end
-    nested_fields = NestedShapeInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Shape</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedShapeInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Shape</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another shape</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- complex_state_of_matter
     field = :complex_state_of_matter
@@ -172,17 +172,17 @@ protected
       value.complex_state_of_matter.build
       field_value = value.send(field)
     end
-    nested_fields = NestedStateOfMatterInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>State of matter</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedStateOfMatterInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>State of matter</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another state of matter</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- complex_structural_feature
     field = :complex_structural_feature
@@ -191,17 +191,17 @@ protected
       value.complex_structural_feature.build
       field_value = value.send(field)
     end
-    nested_fields = NestedStructuralFeatureInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Structural feature</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedStructuralFeatureInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Structural feature</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another structural feature</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # last row
     # --- delete checkbox
