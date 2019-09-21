@@ -123,6 +123,7 @@ RSpec.describe ComplexInstrument do
     end
 
     it 'creates an instrument active triple resource with date, identifier and person' do
+      skip
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_instrument_attributes: [{

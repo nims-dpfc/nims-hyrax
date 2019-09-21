@@ -1,14 +1,9 @@
 version: '3'
 
 volumes:
-  fcrepo:
   solr:
   db:
   db-fcrepo:
-  redis:
-  file_uploads:
-  derivatives:
-  cache:
 
 networks:
   internal:
@@ -18,8 +13,6 @@ services:
     image: ualbertalib/docker-fcrepo4:4.7
     expose:
       - 8080
-    volumes:
-      - fcrepo:/data
     depends_on:
       - fcrepodb
     networks:
@@ -97,11 +90,6 @@ services:
         AIRBRAKE_PROJECT_KEY: ${AIRBRAKE_PROJECT_KEY}
     env_file:
       - .env
-    volumes:
-      - file_uploads:${UPLOADS_PATH}
-      - derivatives:${DERIVATIVES_PATH}
-      - cache:${CACHE_PATH}
-      - /srv/ngdr/data/:/data/data
     networks:
       internal:
 
@@ -131,8 +119,6 @@ services:
   redis:
     image: redis:5
     command: redis-server --appendonly yes
-    volumes:
-      - redis:/data
     expose:
       - 6379
     networks:

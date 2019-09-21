@@ -197,7 +197,7 @@ module ComplexValidation
       # end
       # # description blank
       # desc_blank = get_val_blank(attributes, :description)
-      # # title blank
+      # title blank
       # title_blank = get_val_blank(attributes, :title)
       # # combine them all
       # cc_blank ||

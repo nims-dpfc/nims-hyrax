@@ -162,10 +162,10 @@ RSpec.describe Dataset do
     end
   end
 
-  describe 'application_number' do
-    it 'has application_number' do
-      @obj = build(:dataset, application_number: ['Kosuke Tanabe 2019.08.01'])
-      expect(@obj.application_number).to eq ['Kosuke Tanabe 2019.08.01']
+  describe 'supervisor_approval' do
+    it 'has supervisor_approval' do
+      @obj = build(:dataset, supervisor_approval: ['Kosuke Tanabe 2019.08.01'])
+      expect(@obj.supervisor_approval).to eq ['Kosuke Tanabe 2019.08.01']
     end
   end
 
@@ -534,6 +534,7 @@ RSpec.describe Dataset do
     end
 
     it 'creates an complex_instrument active triple resource with date, identifier and person' do
+      skip
       @obj = build(:dataset,
         complex_instrument_attributes: [{
           complex_date_attributes: [{
@@ -1006,6 +1007,43 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.custom_property).to be_empty
+    end
+  end
+
+  describe 'complex_identifier' do
+    it 'creates an identifier active triple resource with all the attributes' do
+      @obj = build(:dataset,
+        complex_identifier_attributes: [{
+           identifier: '0000-0000-0000-0000',
+           scheme: 'uri_of_ORCID_scheme',
+           label: 'ORCID'
+         }]
+      )
+      expect(@obj.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_identifier.first.identifier).to eq ['0000-0000-0000-0000']
+      expect(@obj.complex_identifier.first.scheme).to eq ['uri_of_ORCID_scheme']
+      expect(@obj.complex_identifier.first.label).to eq ['ORCID']
+    end
+
+    it 'creates an identifier active triple resource with just the identifier' do
+      @obj = build(:publication,
+        complex_identifier_attributes: [{
+          identifier: '1234'
+        }]
+      )
+      expect(@obj.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_identifier.first.identifier).to eq ['1234']
+      expect(@obj.complex_identifier.first.label).to be_empty
+      expect(@obj.complex_identifier.first.scheme).to be_empty
+    end
+
+    it 'rejects an identifier active triple with no identifier' do
+      @obj = build(:publication,
+        complex_identifier_attributes: [{
+          label: 'Local'
+        }]
+      )
+      expect(@obj.complex_identifier).to be_empty
     end
   end
 end
