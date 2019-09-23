@@ -162,6 +162,13 @@ RSpec.describe Publication do
     end
   end
 
+  describe 'supervisor_approval' do
+    it 'has supervisor_approval' do
+      @obj = build(:publication, supervisor_approval: ['Kosuke Tanabe 2019.08.01'])
+      expect(@obj.supervisor_approval).to eq ['Kosuke Tanabe 2019.08.01']
+    end
+  end
+
   describe 'complex_rights' do
     it 'creates a complex rights active triple resource with rights' do
       @obj = build(:publication, complex_rights_attributes: [{
