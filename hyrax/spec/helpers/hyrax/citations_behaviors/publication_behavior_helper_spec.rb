@@ -6,7 +6,15 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
   describe '#setup_doi' do
     let(:publication) { build(:publication, :with_complex_identifier) }
     subject { helper.setup_doi(presenter) }
-     it { is_expected.to eql('10.0.1111. 10.0.2222') }
+
+    context 'valid solr json' do
+      it { is_expected.to eql('10.0.1111. 10.0.2222') }
+    end
+
+    context 'invalid solr json' do
+      before { allow(presenter).to receive(:complex_identifier) { 'some illegal solr json' } }
+      it { is_expected.to be_nil }
+    end
   end
 
   describe '#setup_pub_date' do

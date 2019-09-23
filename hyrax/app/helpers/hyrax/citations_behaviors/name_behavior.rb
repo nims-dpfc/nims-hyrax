@@ -29,7 +29,8 @@ module Hyrax
         name_segments = name.split(' ')
         given_name = name_segments.first
         surnames = name_segments[1..-1]
-        if surnames
+
+        if surnames.any?
           "#{surnames.join(' ')}, #{given_name}"
         else
           given_name

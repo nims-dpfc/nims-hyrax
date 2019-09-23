@@ -36,6 +36,11 @@ RSpec.describe Hyrax::CitationsBehaviors::NameBehavior, :type => :helper do
       subject { helper.surname_first('LAST, First') }
       it { is_expected.to eql('LAST, First') }
     end
+
+    context 'without a surname' do
+      subject { helper.surname_first('Alice') }
+      it { is_expected.to eql('Alice') }
+    end
   end
 
   describe '#abbreviate_name' do
