@@ -18,7 +18,9 @@ module Hyrax
 
       # nims override to retrieve nested properties
       def setup_pub_date(presenter)
-        first_date = CGI.escapeHTML(presenter.solr_document['complex_date_published_ssm'].first)
+        pub_date = presenter.solr_document['complex_date_published_ssm'].try(:first)
+        return nil if pub_date.nil?
+        first_date = CGI.escapeHTML(pub_date)
         if first_date.present?
           first_date = CGI.escapeHTML(first_date)
           date_value = first_date.gsub(/[^0-9|n\.d\.]/, "")

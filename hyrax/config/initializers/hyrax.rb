@@ -54,10 +54,10 @@ Hyrax.config do |config|
   # Enable displaying usage statistics in the UI
   # Defaults to false
   # Requires a Google Analytics id and OAuth2 keyfile.  See README for more info
-  # config.analytics = false
+  config.analytics = ENV['GOOGLE_ANALYTICS_ID'].present?
 
   # Google Analytics tracking ID to gather usage statistics
-  # config.google_analytics_id = ENV['GOOGLE_ANALYTICS_ID'] || 'UA-99999999-1'
+  config.google_analytics_id = ENV['GOOGLE_ANALYTICS_ID'] || 'UA-99999999-1'
 
   # Date you wish to start collecting Google Analytic statistics for
   # Leaving it blank will set the start date to when ever the file was uploaded by
