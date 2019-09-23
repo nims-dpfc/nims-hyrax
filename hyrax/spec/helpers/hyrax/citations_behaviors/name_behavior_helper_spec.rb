@@ -1,17 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::CitationsBehaviors::NameBehavior, :type => :helper do
-  let(:current_ability) { Ability.new(nil) }
-  let(:solr_doc) { build(:publication, :with_people).to_solr }
-  let(:work_presenter) { Hyrax::WorkPresenter.new(solr_doc, current_ability) }
+  let(:publication) { build(:publication, :with_people) }
+  let(:presenter) { Hyrax::WorkPresenter.new(SolrDocument.new(publication.to_solr),  Ability.new(nil)) }
 
   describe '#author_list' do
-    subject { helper.author_list(work_presenter) }
+    subject { helper.author_list(presenter) }
     it { is_expected.to match_array(['Foo Bar', 'Small Buz']) }
   end
 
   describe '#all_authors' do
-    subject { helper.all_authors(work_presenter) }
+    subject { helper.all_authors(presenter) }
     it { is_expected.to match_array(['Foo Bar', 'Small Buz']) }
   end
 

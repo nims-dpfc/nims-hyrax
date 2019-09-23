@@ -1,27 +1,45 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper do
+  let(:presenter) { Hyrax::PublicationPresenter.new(SolrDocument.new(publication.to_solr),  Ability.new(nil)) }
 
   describe '#setup_doi' do
-    subject { helper.setup_doi(build(:publication, :with_doi)) }
-    skip 'work in progress'
-     # it { is_expected.to eql('fooo') }
+    let(:publication) { build(:publication, :with_complex_identifier) }
+    subject { helper.setup_doi(presenter) }
+     it { is_expected.to eql('10.0.1111. 10.0.2222') }
   end
 
   describe '#setup_pub_date' do
-    subject { helper.setup_pub_date(build(:publication, :with_date)) }
-    skip 'work in progress'
-    # it { is_expected.to eql('fooo') }
+    let(:publication) { build(:publication, :with_date) }
+    subject { helper.setup_pub_date(presenter) }
+    it { is_expected.to eql('0528') }
   end
 
   describe '#setup_pub_place' do
-    subject { helper.setup_pub_place(build(:publication, :with_place)) }
+    let(:publication) { build(:publication, :with_place) }
+    subject { helper.setup_pub_place(presenter) }
     it { is_expected.to eql('221B Baker Street') }
   end
 
   describe '#setup_pub_publisher' do
-    subject { helper.setup_pub_publisher(build(:publication, :with_publisher)) }
+    let(:publication) { build(:publication, :with_publisher) }
+    subject { helper.setup_pub_publisher(presenter) }
     it { is_expected.to eql('Foo Publisher') }
+  end
+
+  describe '#setup_pub_info' do
+    let(:publication) { build(:publication, :with_complex_identifier, :with_date, :with_place, :with_publisher) }
+    subject { helper.setup_pub_info(presenter, include_date) }
+
+    context 'without date' do
+      let(:include_date) { false }
+      it { is_expected.to eql('221B Baker Street: Foo Publisher. 10.0.1111. 10.0.2222') }
+    end
+
+    context 'with date' do
+      let(:include_date) { true }
+      it { is_expected.to eql('221B Baker Street: Foo Publisher, 0528. 10.0.1111. 10.0.2222') }
+    end
   end
 
   it 'has no singleton methods' do
