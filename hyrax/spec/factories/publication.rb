@@ -29,8 +29,18 @@ FactoryBot.define do
       }
     end
 
-    trait :with_doi do
-      complex_identifier_attributes { [{ identifier: '10.0.0132132', scheme: 'http://dx.doi.org', label: 'DOI' }] }
+    trait :with_complex_identifier do
+      complex_identifier_attributes {
+        [
+          { identifier: '10.0.1111', scheme: 'http://dx.doi.org', label: 'DOI' },
+          { identifier: '10.0.2222', scheme: 'HTTPS://DX.DOI.ORG', label: 'DOI' },
+          { identifier: '3333', label: 'Local ID' }
+        ]
+      }
+    end
+
+    trait :with_solr_document do
+      solr_document { {} }
     end
 
     trait :with_date do
