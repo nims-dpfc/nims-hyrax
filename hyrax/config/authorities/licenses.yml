@@ -1,4 +1,7 @@
 terms:
+    - id: http://rightsstatements.org/vocab/InC/1.0/
+      term: In Copyright
+      active: true
     - id: https://creativecommons.org/licenses/by/4.0/
       term: Creative Commons BY Attribution 4.0 International
       active: true
@@ -22,4 +25,13 @@ terms:
       active: true
     - id: http://creativecommons.org/publicdomain/mark/1.0/
       term: Creative Commons Public Domain Mark 1.0
+      active: true
+    - id: http://www.apache.org/licenses/LICENSE-2.0.txt
+      term: Apache License 2.0
+      active: true
+    - id: https://www.gnu.org/licenses/gpl.html
+      term: GNU General Public License
+      active: true
+    - id: https://opensource.org/licenses/MIT
+      term: MIT License
       active: true
