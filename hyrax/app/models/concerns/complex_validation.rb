@@ -108,10 +108,12 @@ module ComplexValidation
     #   27/8/2019 - temporarily remove required fields (#162)
     resource_class.send(:define_method, :instrument_blank) do |attributes|
       return true if attributes.blank?
+      title_blank = get_val_blank(attributes, :title)
       # identifiers_blank = get_id_blank(attributes, :complex_identifier_attributes)
       # date_blank = get_dt_blank(attributes, :complex_date_attributes)
       # person_blank = get_people_blank(attributes, :complex_person_attributes)
       # date_blank || identifiers_blank || person_blank
+      title_blank
     end
     # key_value_blank
     #   Requires label and description
@@ -197,8 +199,8 @@ module ComplexValidation
       # end
       # # description blank
       # desc_blank = get_val_blank(attributes, :description)
-      # title blank
-      # title_blank = get_val_blank(attributes, :title)
+      # # title blank
+      title_blank = get_val_blank(attributes, :title)
       # # combine them all
       # cc_blank ||
       # cs_blank ||
@@ -206,7 +208,7 @@ module ComplexValidation
       # id_blank ||
       # mt_blank ||
       # sf_blank ||
-      # title_blank
+      title_blank
     end
     # version_blank
     #   Requires version

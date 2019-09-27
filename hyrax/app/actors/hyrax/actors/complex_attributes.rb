@@ -9,10 +9,10 @@ module Hyrax
       end
 
       # Call execute on the ActiveTriple::Resources (ATR), like ComplexInstrument
-      # Due to a bug somewhere in ActiveFedora, changes to ATR
-      #  are not being committed to the resource graph because they are BufferedTransactions
+      # Due to a bug somewhere in active fedora, changes to ATR
+      #  are not being committed to the resource graph
       # This method runs execute on the graphs of each ATR
-      # Additionally adds all ATR to top-level property updates_subresources
+      # Additionally add all ATR to top-level property updates_subresources
       #  this seems to be necessary to get ATR nested within other ATR to update
       def update_complex_metadata(env, resource_to_update)
         complex_attributes.each do |attribute|
