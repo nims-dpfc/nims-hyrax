@@ -1,12 +1,9 @@
-version: '2.1'
+version: '3'
 
 volumes:
-  fcrepo:
-  solr_home:
+  solr:
   db:
-  redis:
-  file_uploads:
-  derivatives:
+  db-fcrepo:
 
 networks:
   internal:
@@ -16,66 +13,94 @@ services:
     image: ualbertalib/docker-fcrepo4:4.7
     expose:
       - 8080
-    volumes:
-      - fcrepo:/data
-    environment:
-      CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC -Dfcrepo.object.directory=\"/data/objects\" -Dfcrepo.binary.directory=\"/data/binaries\""
     depends_on:
-      - db
+      - fcrepodb
     networks:
       internal:
+    environment:
+      - CATALINA_OPTS=-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC -Dfcrepo.home=/data -Dfcrepo.object.directory=/data/objects -Dfcrepo.binary.directory=/data/binaries -Dfcrepo.postgresql.username=$POSTGRES_USER -Dfcrepo.postgresql.password=$POSTGRES_PASSWORD -Dfcrepo.postgresql.host=$POSTGRES_HOST_FCREPO -Dfcrepo.postgresql.port=$POSTGRES_PORT -Dfcrepo.modeshape.configuration=classpath:/config/jdbc-postgresql/repository.json
 
   solr:
-    build: docker/solr
-    volumes:
-      - solr_home:/solr_home
-      - file_uploads:/data/tmp/uploads
+    image: solr:7-alpine
     expose:
       - 8983
+    ports:
+      - 8983:8983
+    env_file:
+      - .env
     healthcheck:
-      test:
-        - CMD
-        - wget
-        - "-O"
-        - "/dev/null"
-        - http://localhost:8983/solr/
+      test: ["CMD-SHELL", "wget -O /dev/null http://localhost:8983/solr/"]
       interval: 30s
       timeout: 5s
       retries: 3
     networks:
       internal:
+    volumes:
+      - solr:/opt/solr/server/solr/mycores
+      - ./hyrax/solr/config:/opt/solr/solr_conf
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - ${SOLR_CORE}
+      - /opt/solr/solr_conf
 
-  db:
-    build: docker/db
+  db: &db
+    image: postgres:11-alpine
+    networks:
+      internal:
+    env_file:
+      - .env
+    expose:
+      - 5432
+  fcrepodb:
+    <<: *db
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB_FCREPO}
+    volumes:
+      - db-fcrepo:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "POSTGRES_PASSWORD=${POSTGRES_PASSWORD} pg_isready -U ${POSTGRES_USER} -h localhost -d ${POSTGRES_DB_FCREPO}"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  appdb:
+    <<: *db
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB_APP}
     volumes:
       - db:/var/lib/postgresql/data
-    env_file:
-      - .env
     healthcheck:
-      test: "CMD echo 'SELECT 1' | PGPASSWORD=password psql --host 127.0.0.1 --username postgres --dbname hyrax_development --quiet --no-align --tuples-only"
+      test: ["CMD-SHELL", "POSTGRES_PASSWORD=${POSTGRES_PASSWORD} pg_isready -U ${POSTGRES_USER} -h localhost -d ${POSTGRES_DB_APP}"]
       interval: 30s
       timeout: 5s
       retries: 3
-    networks:
-      internal:
 
-  app:
-    build: hyrax
+  app: &app
+    build:
+      context: hyrax
+      args:
+        RAILS_ENV: ${RAILS_ENV}
+        UPLOADS_PATH: ${UPLOADS_PATH}
+        DERIVATIVES_PATH: ${DERIVATIVES_PATH}
+        CACHE_PATH: ${CACHE_PATH}
+        FITS_PATH: ${FITS_PATH}
+        FITS_VERSION: ${FITS_VERSION}
+        AIRBRAKE_HOST: ${AIRBRAKE_HOST}
+        AIRBRAKE_PROJECT_ID: ${AIRBRAKE_PROJECT_ID}
+        AIRBRAKE_PROJECT_KEY: ${AIRBRAKE_PROJECT_KEY}
     env_file:
       - .env
-    volumes:
-      - file_uploads:/data/tmp/uploads
-      - /srv/ngdr/data/:/data/data
-      - derivatives:/derivatives
     networks:
       internal:
 
   web:
-    extends:
-      service: app
+    <<: *app
     command: bash -c "/bin/docker-entrypoint.sh"
+    environment:
+      - VIRTUAL_HOST=nims.docker
+      - VIRTUAL_PORT=3000
     depends_on:
-      - db
+      - appdb
       - solr
       - fcrepo
       - redis
@@ -83,13 +108,10 @@ services:
       - 3000
 
   workers:
-    extends:
-      service: app
+    <<: *app
     command: bundle exec sidekiq
-    environment:
-      - SETTINGS__FITS_PATH=/fits/fits-1.0.5/fits.sh
     depends_on:
-      - db
+      - appdb
       - solr
       - fcrepo
       - redis
@@ -97,17 +119,12 @@ services:
   redis:
     image: redis:5
     command: redis-server --appendonly yes
-    volumes:
-      - redis:/data
     expose:
       - 6379
     networks:
       internal:
     healthcheck:
-      test:
-        - CMD
-        - redis-cli
-        - ping
+      test: ["CMD-SHELL", "redis-cli ping"]
       interval: 30s
       timeout: 5s
       retries: 3

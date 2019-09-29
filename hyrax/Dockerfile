@@ -1,45 +1,56 @@
 FROM ruby:2.6
 
 # Setup build variables
-ARG RAILS_ENV=production
+ARG RAILS_ENV
+ARG DERIVATIVES_PATH
+ARG UPLOADS_PATH
+ARG CACHE_PATH
+ARG AIRBRAKE_HOST
+ARG AIRBRAKE_PROJECT_ID
+ARG AIRBRAKE_PROJECT_KEY
+ARG FITS_PATH
+ARG FITS_VERSION
 
-ENV RAILS_ENV="$RAILS_ENV" \
-    LANG=C.UTF-8 \
-    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre \
-    RAILS_LOG_TO_STDOUT=yes_please \
-    PATH=/fits/fits-1.0.5/:$PATH \
-    BUNDLE_JOBS=2 \
-    APP_PRODUCTION=/data/ \
-    APP_WORKDIR="/data"
+ENV APP_PRODUCTION=/data/ \
+    APP_WORKDIR=/data
 
 # Add backports to apt-get sources
 # Install libraries, dependencies, java and fits
 
-RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list \
-    && apt-get update -qq \
-    && apt-get install -y --no-install-recommends \
+RUN echo 'deb  http://deb.debian.org/debian buster main contrib non-free'
+RUN echo 'deb-src  http://deb.debian.org/debian buster main contrib non-free'
+
+RUN apt-get update -qq && \
+    apt-get -y install apt-transport-https && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    apt-get update -qq && apt-get install -y --no-install-recommends \ 
     libpq-dev \
     libxml2-dev libxslt1-dev \
-    # libqt4-webkit libqt4-dev xvfb \
     nodejs \
-    imagemagick \
     libreoffice \
-    ghostscript \
-    ffmpeg \
+    libass-dev libfreetype6-dev libmp3lame-dev libopus-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev \
+    libvpx-dev libvorbis-dev libx264-dev libx265-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm pkg-config \
+    texinfo wget yasm zlib1g-dev fonts-ipaexfont fonts-ipafont fonts-vlgothic \
+    libjpeg-dev libtiff-dev libpng-dev libraw-dev libwebp-dev libjxr-dev \
+    libcairo2-dev libgs-dev librsvg2-dev \
+    libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev \
+    ghostscript ffmpeg imagemagick \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
-    # install open-jdk and ca-certs from jessie-backports
-    && apt-get install -t jessie-backports -y --no-install-recommends openjdk-8-jre-headless ca-certificates-java \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && /var/lib/dpkg/info/ca-certificates-java.postinst configure
+    git \
+    openjdk-11-jre-headless \
+    yarn && \
+    yarn config set no-progress && \
+    yarn config set silent
 
 RUN mkdir -p /fits/ \
-    && wget -q http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip -O /fits/fits-1.0.5.zip \
-    && unzip -q /fits/fits-1.0.5.zip -d /fits \
-    && chmod a+x /fits/fits-1.0.5/fits.sh \
-    && rm /fits/fits-1.0.5.zip
+    && wget -q https://projects.iq.harvard.edu/files/fits/files/$FITS_VERSION.zip -O /fits/$FITS_VERSION.zip \
+    && unzip -q /fits/$FITS_VERSION.zip -d /fits/$FITS_VERSION \
+    && chmod a+x $FITS_PATH \
+    && rm /fits/$FITS_VERSION.zip
 
 # copy gemfiles to production folder
 COPY Gemfile Gemfile.lock $APP_PRODUCTION
@@ -57,8 +68,10 @@ RUN cd $APP_PRODUCTION && \
 # copy the seeds
 COPY ./seed /seed
 
-# create a folder to store derivatives
-RUN mkdir -p /derivatives
+# create a folder to store derivatives, file uploads and cache directory
+RUN mkdir -p $DERIVATIVES_PATH
+RUN mkdir -p $UPLOADS_PATH
+RUN mkdir -p $CACHE_PATH
 
 # copy the application
 COPY . $APP_PRODUCTION
@@ -72,12 +85,10 @@ RUN cd $APP_PRODUCTION \
 # generate production assets if production environment
 RUN if [ "$RAILS_ENV" = "production" ]; then \
         cd $APP_PRODUCTION \
+        && yarn install \
         && SECRET_KEY_BASE_PRODUCTION=0 bundle exec rake assets:clean assets:precompile; \
     fi
 
 WORKDIR $APP_WORKDIR
-
-ARG SECRET_KEY_BASE="ec6aebaf837655680ac99c7a60a7b4ef61d9bcc320a9d3e78ef989bf309f8c9d63ee51b2997a0c5543fe20df30aa253c5fb19e1f065bfaf2be1224258904d45f"
-ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
 
 RUN chmod +x /bin/docker-entrypoint.sh

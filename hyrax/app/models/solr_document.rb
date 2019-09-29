@@ -6,7 +6,6 @@ class SolrDocument
   # Adds Hyrax behaviors to the SolrDocument.
   include Hyrax::SolrDocumentBehavior
 
-
   # self.unique_key = 'id'
 
   # Email uses the semantic field mappings below to generate the body of an email.
@@ -38,12 +37,24 @@ class SolrDocument
     self[Solrizer.solr_name('complex_identifier', :displayable)]
   end
 
+  def complex_instrument
+    self[Solrizer.solr_name('complex_instrument', :displayable)]
+  end
+
+  def complex_organization
+    self[Solrizer.solr_name('complex_organization', :displayable)]
+  end
+
   def complex_person
     self[Solrizer.solr_name('complex_person', :displayable)]
   end
 
   def complex_rights
     self[Solrizer.solr_name('complex_rights', :displayable)]
+  end
+
+  def complex_specimen_type
+    self[Solrizer.solr_name('complex_specimen_type', :displayable)]
   end
 
   def complex_version
@@ -63,7 +74,7 @@ class SolrDocument
   end
 
   def instrument
-    self[Solrizer.solr_name('instrument', :displayable)]
+    self[Solrizer.solr_name('instrument', :stored_searchable)]
   end
 
   def origin_system_provenance
@@ -80,10 +91,6 @@ class SolrDocument
 
   def specimen_set
     self[Solrizer.solr_name('specimen_set', :stored_searchable)]
-  end
-
-  def specimen_type
-    self[Solrizer.solr_name('specimen_type', :displayable)]
   end
 
   def synthesis_and_processing
@@ -106,11 +113,20 @@ class SolrDocument
     self[Solrizer.solr_name('place', :stored_searchable)]
   end
 
+  def table_of_contents
+    self[Solrizer.solr_name('table_of_contents', :stored_searchable)]
+  end
+
   def total_number_of_pages
     self[Solrizer.solr_name('total_number_of_pages', :stored_searchable)]
+  end
+
+  def complex_source
+    self[Solrizer.solr_name('complex_source', :displayable)]
   end
 
   def status
     self[Solrizer.solr_name('status', :stored_searchable)]
   end
 end
+

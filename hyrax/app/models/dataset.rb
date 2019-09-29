@@ -3,6 +3,7 @@ class Dataset < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
 
   self.indexer = DatasetIndexer
+
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your dataset must have a title.' }
@@ -31,6 +32,9 @@ class Dataset < ActiveFedora::Base
   # property source - defined in the basic metadata
   # property subject - defined in the basic metadata
 
+  # Required due to bug saving nested resources
+  property :updated_subresources, predicate: ::RDF::URI.new('http://example.com/updatedSubresources'), class_name: "ActiveTriples::Resource"
+
   property :alternative_title, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|
     index.as :stored_searchable
   end
@@ -41,12 +45,11 @@ class Dataset < ActiveFedora::Base
 
   property :complex_person, predicate: ::RDF::Vocab::SIOC.has_creator, class_name:"ComplexPerson"
 
-  # TODO: Need more information
-  # property :complex_license, predicate: ::RDF::URI.new('http://www.niso.org/schemas/ali/1.0/license_ref'), class_name:"ComplexLicense"
-
   property :complex_rights, predicate: ::RDF::Vocab::DC11.rights, class_name:"ComplexRights"
 
-  property :complex_version, predicate: ::RDF::Vocab::NimsRdp['complex-version'], class_name:"ComplexVersion"
+  property :complex_version, predicate: ::RDF::Vocab::NimsRdp.version, class_name:"ComplexVersion"
+
+  property :complex_organization, predicate: ::RDF::Vocab::ORG.organization, class_name:"ComplexOrganization"
 
   property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'], multiple: false do |index|
     index.as :stored_searchable
@@ -61,7 +64,7 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
-  property :instrument, predicate: ::RDF::Vocab::NimsRdp['instrument'], class_name: "ComplexInstrument"
+  property :complex_instrument, predicate: ::RDF::Vocab::NimsRdp.instrument, class_name: "ComplexInstrument"
 
   property :origin_system_provenance, predicate: ::RDF::Vocab::NimsRdp['origin-system-provenance'], multiple: false do |index|
     index.as :stored_searchable
@@ -87,7 +90,8 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :specimen_type, predicate: ::RDF::Vocab::NimsRdp['specimen-type'], class_name: "ComplexSpecimenType"
+  property :complex_specimen_type, predicate: ::RDF::Vocab::NimsRdp['specimen-type'],
+  class_name: "ComplexSpecimenType"
 
   property :synthesis_and_processing, predicate: ::RDF::Vocab::NimsRdp['synthesis-and-processing'], multiple: false do |index|
     index.as :stored_searchable, :facetable
@@ -95,18 +99,21 @@ class Dataset < ActiveFedora::Base
 
   property :custom_property, predicate: ::RDF::Vocab::NimsRdp['custom-property'], class_name:"ComplexKeyValue"
 
+  property :supervisor_approval, predicate: ::RDF::Vocab::NimsRdp['supervisor-approval']
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
   include ComplexValidation
   accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
-  accepts_nested_attributes_for :instrument, reject_if: :instrument_blank, allow_destroy: true
-  # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_organization, reject_if: :organization_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
-  accepts_nested_attributes_for :specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
+  accepts_nested_attributes_for :updated_subresources, allow_destroy: true
 end

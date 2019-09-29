@@ -162,6 +162,13 @@ RSpec.describe Publication do
     end
   end
 
+  describe 'supervisor_approval' do
+    it 'has supervisor_approval' do
+      @obj = build(:publication, supervisor_approval: ['Kosuke Tanabe 2019.08.01'])
+      expect(@obj.supervisor_approval).to eq ['Kosuke Tanabe 2019.08.01']
+    end
+  end
+
   describe 'complex_rights' do
     it 'creates a complex rights active triple resource with rights' do
       @obj = build(:publication, complex_rights_attributes: [{
@@ -226,13 +233,13 @@ RSpec.describe Publication do
     it 'creates a date active triple resource with all the attributes' do
       @obj = build(:publication, complex_date_attributes: [
         {
-          date: '1978-10-28',
-          description: 'Some kind of a date',
+          date: '2019-05-28',
+          description: 'Published',
         }
       ])
       expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_date.first.date).to eq ['1978-10-28']
-      expect(@obj.complex_date.first.description).to eq ['Some kind of a date']
+      expect(@obj.complex_date.first.date).to eq ['2019-05-28']
+      expect(@obj.complex_date.first.description).to eq ['Published']
     end
 
     it 'creates a date active triple resource with just the date' do
@@ -258,11 +265,12 @@ RSpec.describe Publication do
 
   describe 'complex_identifier' do
     it 'creates an identifier active triple resource with all the attributes' do
-      @obj = build(:publication, complex_identifier_attributes: [{
-                                                                 identifier: '0000-0000-0000-0000',
-                                                                 scheme: 'uri_of_ORCID_scheme',
-                                                                 label: 'ORCID'
-                                                             }]
+      @obj = build(:publication,
+        complex_identifier_attributes: [{
+           identifier: '0000-0000-0000-0000',
+           scheme: 'uri_of_ORCID_scheme',
+           label: 'ORCID'
+         }]
       )
       expect(@obj.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_identifier.first.identifier).to eq ['0000-0000-0000-0000']
@@ -271,9 +279,10 @@ RSpec.describe Publication do
     end
 
     it 'creates an identifier active triple resource with just the identifier' do
-      @obj = build(:publication, complex_identifier_attributes: [{
-                                                                 identifier: '1234'
-                                                             }]
+      @obj = build(:publication,
+        complex_identifier_attributes: [{
+          identifier: '1234'
+        }]
       )
       expect(@obj.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_identifier.first.identifier).to eq ['1234']
@@ -282,9 +291,10 @@ RSpec.describe Publication do
     end
 
     it 'rejects an identifier active triple with no identifier' do
-      @obj = build(:publication, complex_identifier_attributes: [{
-                                                                 label: 'Local'
-                                                             }]
+      @obj = build(:publication,
+        complex_identifier_attributes: [{
+          label: 'Local'
+        }]
       )
       expect(@obj.complex_identifier).to be_empty
     end
@@ -292,15 +302,16 @@ RSpec.describe Publication do
 
   describe 'complex_person' do
     it 'creates a person active triple resource with name' do
-      @obj = build(:publication, complex_person_attributes: [{
-                                                             name: 'Anamika'
-                                                         }]
+      @obj = build(:publication,
+        complex_person_attributes: [{
+          name: 'Anamika'
+        }]
       )
       expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_person.first.name).to eq ['Anamika']
       expect(@obj.complex_person.first.first_name).to be_empty
       expect(@obj.complex_person.first.last_name).to be_empty
-      expect(@obj.complex_person.first.affiliation).to be_empty
+      expect(@obj.complex_person.first.complex_affiliation).to be_empty
       expect(@obj.complex_person.first.role).to be_empty
       expect(@obj.complex_person.first.complex_identifier).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
@@ -308,16 +319,28 @@ RSpec.describe Publication do
 
     it 'creates a person active triple resource with name, affiliation and role' do
       @obj = build(:publication, complex_person_attributes: [{
-                                                             name: 'Anamika',
-                                                             affiliation: 'Paradise',
-                                                             role: 'Creator'
-                                                         }]
+          name: 'Anamika',
+          complex_affiliation_attributes: [{
+            job_title: 'Master',
+            complex_organization_attributes: [{
+              organization: 'Org',
+              sub_organization: 'Sub org',
+              purpose: 'org purpose',
+            }]
+          }],
+          role: 'Creator'
+        }]
       )
       expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_person.first.name).to eq ['Anamika']
       expect(@obj.complex_person.first.first_name).to be_empty
       expect(@obj.complex_person.first.last_name).to be_empty
-      expect(@obj.complex_person.first.affiliation).to eq ['Paradise']
+      expect(@obj.complex_person.first.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_person.first.complex_affiliation.first.job_title).to eq ['Master']
+      expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.organization).to eq ['Org']
+      expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.sub_organization).to eq ['Sub org']
+      expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.purpose).to eq ['org purpose']
+      expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.complex_identifier).to be_empty
       expect(@obj.complex_person.first.role).to eq ['Creator']
       expect(@obj.complex_person.first.complex_identifier).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
@@ -325,8 +348,8 @@ RSpec.describe Publication do
 
     it 'rejects person active triple with no name and only uri' do
       @obj = build(:publication, complex_person_attributes: [{
-                                                             uri: 'http://example.com/person/123456'
-                                                         }]
+          uri: 'http://example.com/person/123456'
+        }]
       )
       expect(@obj.complex_person).to be_empty
     end
@@ -334,12 +357,13 @@ RSpec.describe Publication do
 
   describe 'complex_version' do
     it 'creates a version active triple resource with all the attributes' do
-      @obj = build(:publication, complex_version_attributes: [{
-                                                              date: '1978-10-28',
-                                                              description: 'Creating the first version',
-                                                              identifier: 'id1',
-                                                              version: '1.0'
-                                                          }]
+      @obj = build(:publication,
+        complex_version_attributes: [{
+          date: '1978-10-28',
+          description: 'Creating the first version',
+          identifier: 'id1',
+          version: '1.0'
+        }]
       )
       expect(@obj.complex_version.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_version.first.id).to include('#version')
@@ -350,9 +374,10 @@ RSpec.describe Publication do
     end
 
     it 'creates a version active triple resource with just the version' do
-      @obj = build(:publication, complex_version_attributes: [{
-                                                              version: '1.0'
-                                                          }]
+      @obj = build(:publication,
+        complex_version_attributes: [{
+          version: '1.0'
+        }]
       )
       expect(@obj.complex_version.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_version.first.id).to include('#version')
@@ -363,11 +388,12 @@ RSpec.describe Publication do
     end
 
     it 'rejects a version active triple with no version' do
-      @obj = build(:publication, complex_version_attributes: [{
-                                                              description: 'Local version',
-                                                              identifier: 'id1',
-                                                              date: '2018-01-01'
-                                                          }]
+      @obj = build(:publication,
+        complex_version_attributes: [{
+          description: 'Local version',
+          identifier: 'id1',
+          date: '2018-01-01'
+        }]
       )
       expect(@obj.complex_version).to be_empty
     end
@@ -394,9 +420,10 @@ RSpec.describe Publication do
     end
 
     it 'creates an event active triple resource with just the title' do
-      @obj = build(:publication, complex_event_attributes: [{
-                                                              title: 'Some Title'
-                                                            }]
+      @obj = build(:publication,
+        complex_event_attributes: [{
+          title: 'Some Title'
+        }]
       )
       expect(@obj.complex_event.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_event.first.id).to include('#event')
@@ -408,10 +435,11 @@ RSpec.describe Publication do
     end
 
     it 'rejects an event active triple with no title' do
-      @obj = build(:publication, complex_event_attributes: [{
-                                                              end_date: '2019-01-01',
-                                                              invitation_status: true
-                                                            }]
+      @obj = build(:publication,
+        complex_event_attributes: [{
+          end_date: '2019-01-01',
+          invitation_status: true
+        }]
       )
       expect(@obj.complex_event).to be_empty
     end
@@ -431,10 +459,92 @@ RSpec.describe Publication do
     end
   end
 
+  describe 'table_of_contents' do
+    it 'has table_of_contents' do
+      @obj = build(:publication, table_of_contents: "Some long table of text")
+      expect(@obj.table_of_contents).to eq "Some long table of text"
+    end
+  end
+
   describe 'total_number_of_pages' do
     it 'has total_number_of_pages' do
       @obj = build(:publication, total_number_of_pages: 1010)
       expect(@obj.total_number_of_pages).to eq 1010
     end
   end
+
+  describe 'complex_source' do
+    it 'creates a complex source active triple resource with an id and all properties' do
+      @obj = build(:publication,
+        complex_source_attributes: [{
+          alternative_title: 'Sub title for journal',
+          complex_person_attributes: [{
+            name: 'AR',
+            role: 'Editor'
+          }],
+          end_page: '12',
+          complex_identifier_attributes: [{
+            identifier: '1234567',
+            scheme: 'Local'
+          }],
+          issue: '34',
+          sequence_number: '1.2.2',
+          start_page: '4',
+          title: 'Test journal',
+          total_number_of_pages: '8',
+          volume: '3'
+        }]
+      )
+      expect(@obj.complex_source.first.id).to include('#source')
+      expect(@obj.complex_source.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_source.first.alternative_title).to eq ['Sub title for journal']
+      expect(@obj.complex_source.first.complex_person.first.name).to eq ['AR']
+      expect(@obj.complex_source.first.complex_person.first.role).to eq ['Editor']
+      expect(@obj.complex_source.first.end_page).to eq ['12']
+      expect(@obj.complex_source.first.complex_identifier.first.identifier).to eq ['1234567']
+      expect(@obj.complex_source.first.complex_identifier.first.scheme).to eq ['Local']
+      expect(@obj.complex_source.first.issue).to eq ['34']
+      expect(@obj.complex_source.first.sequence_number).to eq ['1.2.2']
+      expect(@obj.complex_source.first.start_page).to eq ['4']
+      expect(@obj.complex_source.first.title).to eq ['Test journal']
+      expect(@obj.complex_source.first.total_number_of_pages).to eq ['8']
+      expect(@obj.complex_source.first.volume).to eq ['3']
+    end
+
+    it 'creates a complex source active triple resource with title' do
+      @obj = build(:publication,
+        complex_source_attributes: [{
+          title: 'Anamika'
+        }]
+      )
+      expect(@obj.complex_source.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_source.first.title).to eq ['Anamika']
+      expect(@obj.complex_source.first.complex_person).to be_empty
+      expect(@obj.complex_source.first.end_page).to be_empty
+      expect(@obj.complex_source.first.issue).to be_empty
+      expect(@obj.complex_source.first.sequence_number).to be_empty
+      expect(@obj.complex_source.first.start_page).to be_empty
+      expect(@obj.complex_source.first.total_number_of_pages).to be_empty
+      expect(@obj.complex_source.first.volume).to be_empty
+    end
+
+    it 'rejects source active triple with no values ' do
+      @obj = build(:publication,
+        complex_source_attributes: [{
+          title: ''
+        }]
+      )
+      expect(@obj.complex_source).to be_empty
+    end
+
+    it 'rejects source active triple with nil values' do
+      @obj = build(:publication,
+        complex_source_attributes: [{
+          sequence_number: nil
+        }]
+      )
+      expect(@obj.complex_source).to be_empty
+    end
+  end
+
 end

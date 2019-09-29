@@ -25,7 +25,7 @@ RSpec.describe ComplexKeyValue do
     expect(@obj.custom_property.first.id).to include('#key_value')
   end
 
-  it 'creates a custom property active triple resource with all the attributes' do
+  it 'creates a custom property (additional metadata) active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {
       custom_property_attributes: [
@@ -51,7 +51,7 @@ RSpec.describe ComplexKeyValue do
       Object.send(:remove_const, :ExampleWork2)
     end
 
-    it 'rejects a custom property active triple with no label' do
+    it 'rejects a custom property (additional metadata) active triple with no label' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         custom_property_attributes: [
@@ -63,7 +63,7 @@ RSpec.describe ComplexKeyValue do
       expect(@obj.custom_property).to be_empty
     end
 
-    it 'rejects a custom property active triple with no description' do
+    it 'rejects a custom property (additional metadata) active triple with no description' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         custom_property_attributes: [

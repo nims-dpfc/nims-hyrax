@@ -77,10 +77,12 @@ capybara-*.html
 /db/*.sqlite3-journal
 /public/system
 /coverage/
+/hyrax/coverage
 /spec/tmp
 *.orig
 rerun.txt
 pickle-email-*.html
+hyrax/docs
 
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
 config/initializers/secret_token.rb
@@ -343,4 +345,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Environment variables file
 .env.production
+.env

@@ -4,6 +4,7 @@ class ComplexRights < ActiveTriples::Resource
   configure type: ::RDF::Vocab::NimsRdp['License']
   property :date, predicate: ::RDF::Vocab::DISCO.startDate
   property :rights, predicate: ::RDF::Vocab::DC.rights
+  property :label, predicate: ::RDF::Vocab::SKOS.prefLabel
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)

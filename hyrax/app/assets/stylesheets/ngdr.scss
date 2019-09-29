@@ -1,5 +1,11 @@
-// -------- form css --------
-form .listing {
+//-------------- colours ---------------
+$mdr-grey: #F4F4F4;
+$mdr-green: #AFCA0B;
+$mdr-green-light: #BEEB7D;
+
+//-------------- form css --------------
+form .listing,
+form .inner-listing {
   list-style: none;
 }
 
@@ -9,6 +15,8 @@ form .row {
 
 form .field-wrapper:not(:last-child) {
   padding-bottom: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid $mdr-green;
 }
 
 .multi-nested .form-group,
@@ -22,6 +30,8 @@ form .field-wrapper:not(:last-child) {
 
 .multi-nested {
   margin-bottom: 1em;
+  background-color: $mdr-grey;
+  padding: 10px;
 }
 
 form .field-wrapper label[required="required"]::after {
@@ -43,7 +53,63 @@ form .field-wrapper label[required="required"]::after {
 
 .nested-table > tbody > tr.end > th,
 .nested-table > tbody > tr.end > td {
-  border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
 }
-// ----------------
+
+.inner-listing {
+  padding-left: 0px;
+}
+
+.inner-nested {
+  margin-bottom: 1em;
+  padding: 10px;
+  background-color: $mdr-green-light;
+}
+//------------ display css -------------
+.each_metadata:not(:last-child) {
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ddd;
+}
+.label-row {
+  color: #999;
+}
+
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: grey;         /* adjust as needed */
+}
+.panel-heading.collapsed .accordion-toggle:after {
+    /* symbol for "collapsed" panels */
+    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}
+//--------------------------------------
+
+//------------ UNIVERSAL VIEWER (ported from Hyrax master) @todo remove on upgrade to Hyrax 3.x -------------
+
+/* pad the top and bottom universal viewer*/
+.viewer-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.viewer-wrapper iframe {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// Show various footer, header, left and right panels on larger screens only
+@media only screen and (min-width: 640px) {
+  .viewer-wrapper {
+    height: 640px;
+  }
+}
+
+//--------------------------------------

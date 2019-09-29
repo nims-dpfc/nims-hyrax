@@ -13,3 +13,7 @@
 <%= presenter.attribute_to_html(:complex_rights, render_as: :nested_rights, label: t('ngdr.fields.complex_rights'), html_dl: true) %>
 <%= presenter.attribute_to_html(:complex_version, render_as: :nested_version, label: t('ngdr.fields.complex_version'), html_dl: true) %>
 <%= presenter.attribute_to_html(:status, render_as: :faceted, label: "Status", html_dl: true) %>
+<%= presenter.attribute_to_html(:instrument, render_as: :faceted, html_dl: true) %>
+<%= presenter.attribute_to_html(:specimen_set, render_as: :faceted, label: t('ngdr.fields.specimen_set'), html_dl: true) %>
+<%= presenter.attribute_to_html(:complex_relation, render_as: :nested_relation, label: t('ngdr.fields.complex_relation'), html_dl: true) %>
+<%= presenter.attribute_to_html(:custom_property, render_as: :nested_custom_property, label: t('ngdr.fields.custom_property'), html_dl: true) %>

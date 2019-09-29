@@ -1,9 +1,12 @@
 terms:
-  - id: data identifier local
-    term: Data Identifier - Local
+  - id: identifier local
+    term: Identifier - Local
     active: true
-  - id: data identifier persistent
-    term: Data Identifier - Persistent
+  - id: identifier persistent
+    term: Identifier - Persistent
+    active: true
+  - id: DOI
+    term: DOI
     active: true
   - id: edu person principal name
     term: eduPersonPrincipalName
@@ -23,17 +26,17 @@ terms:
   - id: project id
     term: Project ID
     active: true
-  - id: referred data identifier local
-    term: Referred Data Identifier - Local
+  - id: referred identifier local
+    term: Referred Identifier - Local
     active: true
-  - id: referred data identifier persistent
-    term: Referred Data Identifier - Persistent
+  - id: referred identifier persistent
+    term: Referred Identifier - Persistent
     active: true
-  - id: related data identifier local
-    term: Related Data Identifier - Local
+  - id: related identifier local
+    term: Related Identifier - Local
     active: true
-  - id: related data identifier persistent
-    term: Related Data Identifier - Persistent
+  - id: related identifier persistent
+    term: Related Identifier - Persistent
     active: true
   - id: thumbnail image url
     term: Thumbnail Image URL
@@ -43,4 +46,10 @@ terms:
     active: true
   - id: previous identifier
     term: Previous identifier
+    active: true
+  - id: CAS
+    term: CAS
+    active: true
+  - id: other
+    term: Other
     active: true

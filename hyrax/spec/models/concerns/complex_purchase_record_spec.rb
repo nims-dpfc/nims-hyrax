@@ -26,18 +26,52 @@ RSpec.describe ComplexPurchaseRecord do
   it 'creates a purchase record active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {
-      complex_purchase_record_attributes: [
-        {
-          date: ['2018-02-14'],
+      complex_purchase_record_attributes: [{
+        date: ['2018-02-14'],
+        complex_identifier_attributes: [{
           identifier: ['123456'],
-          purchase_record_item: ['Has a purchase record item'],
-          title: 'Purchase record title'
-        }
-      ]
+          label: ['Local']
+        }],
+        supplier_attributes: [{
+          organization: 'Fooss',
+          sub_organization: 'Barss',
+          purpose: 'Supplier',
+          complex_identifier_attributes: [{
+            identifier: '123456789ss',
+            scheme: 'Local'
+          }]
+        }],
+        manufacturer_attributes: [{
+          organization: 'Foo',
+          sub_organization: 'Bar',
+          purpose: 'Manufacturer',
+          complex_identifier_attributes: [{
+            identifier: '123456789m',
+            scheme: 'Local'
+          }]
+        }],
+        purchase_record_item: ['Has a purchase record item'],
+        title: 'Purchase record title'
+      }]
     }
     expect(@obj.complex_purchase_record.first).to be_kind_of ActiveTriples::Resource
+    expect(@obj.complex_purchase_record.first.id).to include('#purchase_record')
     expect(@obj.complex_purchase_record.first.date).to eq ['2018-02-14']
-    expect(@obj.complex_purchase_record.first.identifier).to eq ['123456']
+    expect(@obj.complex_purchase_record.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+    expect(@obj.complex_purchase_record.first.complex_identifier.first.identifier).to eq ['123456']
+    expect(@obj.complex_purchase_record.first.complex_identifier.first.label).to eq ['Local']
+    expect(@obj.complex_purchase_record.first.supplier.first).to be_kind_of ActiveTriples::Resource
+    expect(@obj.complex_purchase_record.first.supplier.first.organization).to eq ['Fooss']
+    expect(@obj.complex_purchase_record.first.supplier.first.sub_organization).to eq ['Barss']
+    expect(@obj.complex_purchase_record.first.supplier.first.purpose).to eq ['Supplier']
+    expect(@obj.complex_purchase_record.first.supplier.first.complex_identifier.first.identifier).to eq ['123456789ss']
+    expect(@obj.complex_purchase_record.first.supplier.first.complex_identifier.first.scheme).to eq ['Local']
+    expect(@obj.complex_purchase_record.first.manufacturer.first).to be_kind_of ActiveTriples::Resource
+    expect(@obj.complex_purchase_record.first.manufacturer.first.organization).to eq ['Foo']
+    expect(@obj.complex_purchase_record.first.manufacturer.first.sub_organization).to eq ['Bar']
+    expect(@obj.complex_purchase_record.first.manufacturer.first.purpose).to eq ['Manufacturer']
+    expect(@obj.complex_purchase_record.first.manufacturer.first.complex_identifier.first.identifier).to eq ['123456789m']
+    expect(@obj.complex_purchase_record.first.manufacturer.first.complex_identifier.first.scheme).to eq ['Local']
     expect(@obj.complex_purchase_record.first.purchase_record_item).to eq ['Has a purchase record item']
     expect(@obj.complex_purchase_record.first.title).to eq ['Purchase record title']
   end
@@ -62,6 +96,7 @@ RSpec.describe ComplexPurchaseRecord do
         }]
       }
       expect(@obj.complex_purchase_record.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_purchase_record.first.id).to include('#purchase_record')
       expect(@obj.complex_purchase_record.first.date).to eq ['2018-01-28']
       expect(@obj.complex_purchase_record.first.title).to eq ['Purchase record title']
     end
@@ -90,7 +125,9 @@ RSpec.describe ComplexPurchaseRecord do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_purchase_record_attributes: [{
-          identifier: ['ewfqwefqwef'],
+          complex_identifier: [{
+            identifier: 'ewfqwefqwef'
+          }],
         }]
       }
       expect(@obj.complex_purchase_record).to be_empty

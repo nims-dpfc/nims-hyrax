@@ -8,10 +8,9 @@ module Hyrax
     self.terms -= [
       # Fields not interested in
       :based_near, :contributor, :creator, :date_created, :identifier, :license,
-      :related_url, :source,
+      :rights_statement, :related_url, :source,
       # Fields interested in, but removing to re-order
-      :title, :description, :keyword, :language, :publisher, :resource_type,
-      :rights_statement, :subject
+      :title, :description, :keyword, :language, :publisher, :resource_type, :subject
       # Fields that are not displayed
       # :import_url, :date_modified, :date_uploaded, :depositor, :bibliographic_citation,
       # :date_created, :label, :relative_path
@@ -20,23 +19,24 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :title, :alternative_title, :description, :keyword, :language,
-      :publisher, :resource_type, :complex_rights, :rights_statement, :subject,
-      :complex_date, :complex_identifier, :complex_person, :complex_version, :status
+      :publisher, :resource_type, :complex_rights, :subject,
+      :complex_date, :complex_identifier, :complex_person, :complex_version,
+      :status, :instrument, :specimen_set, :complex_relation, :custom_property
     ]
 
     self.required_fields -= [
       # Fields not interested in
-      :creator, :keyword,
+      :creator, :keyword, :rights_statement,
       # Fields interested in, but removing to re-order
-      :title, :rights_statement]
+      :title]
 
     self.required_fields += [
       # # Adding all required fields in order of display in form
       :title
     ]
 
-    NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,
-      :complex_person, :complex_rights, :complex_version].freeze
+    NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_person,
+      :complex_rights, :complex_version, :complex_relation, :custom_property].freeze
 
     protected
 
@@ -96,6 +96,28 @@ module Hyrax
       ]
     end
 
+    def self.permitted_relation_params
+      [:id,
+       :_destroy,
+       {
+         title: [],
+         url: [],
+         complex_identifier_attributes: permitted_identifier_params,
+         relationship: []
+       }
+      ]
+    end
+
+    def self.permitted_custom_property_params
+      [:id,
+       :_destroy,
+       {
+         label: [],
+         description: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
@@ -103,6 +125,8 @@ module Hyrax
       permitted << { complex_person_attributes: permitted_person_params }
       permitted << { complex_rights_attributes: permitted_rights_params }
       permitted << { complex_version_attributes: permitted_version_params }
+      permitted << { complex_relation_attributes: permitted_relation_params }
+      permitted << { custom_property_attributes: permitted_custom_property_params }
     end
 
   end
