@@ -60,16 +60,16 @@ protected
       field_value = value.send(field)
     end
     nested_fields = NestedDateInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Date</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Date</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another date</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- description
     field = :description
@@ -89,23 +89,23 @@ protected
     out << '</div>' # row
 
     # --- complex_identifier
-    field = :complex_identifier
-    field_value = value.send(field)
-    if field_value.blank?
-      value.complex_identifier.build
-      field_value = value.send(field)
-    end
-    nested_fields = NestedIdentifierInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Identifier</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #field = :complex_identifier
+    #field_value = value.send(field)
+    #if field_value.blank?
+    #  value.complex_identifier.build
+    #  field_value = value.send(field)
+    #end
+    #nested_fields = NestedIdentifierInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Identifier</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another identifier</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- instrument_function
     field = :instrument_function
@@ -114,17 +114,17 @@ protected
       value.instrument_function.build
       field_value = value.send(field)
     end
-    nested_fields = NestedInstrumentFunctionInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Instrument function</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedInstrumentFunctionInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Instrument function</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another instrument function</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- manufacturer
     field = :manufacturer
@@ -134,17 +134,17 @@ protected
       value.manufacturer[0].purpose = 'Manufacturer'
       field_value = value.send(field)
     end
-    nested_fields = NestedOrganizationInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_complex_orgnaization'>Manufacturer</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedOrganizationInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_complex_orgnaization'>Manufacturer</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another manufacturer</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- model_number
     field = :model_number
@@ -171,17 +171,17 @@ protected
       value.complex_person[0].role = 'operator'
       field_value = value.send(field)
     end
-    nested_fields = NestedPersonInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_complex_orgnaization'>Operator</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedPersonInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_complex_orgnaization'>Operator</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another operator</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # --- managing_organization
     field = :managing_organization
@@ -191,17 +191,17 @@ protected
       value.managing_organization[0].purpose = 'Managing organization'
       field_value = value.send(field)
     end
-    nested_fields = NestedOrganizationInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_complex_orgnaization'>Managing organization</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
+    #nested_fields = NestedOrganizationInput.new(@builder, field, nil, :multi_value, {})
+    #out << "<div class='inner-nested'>"
+    #out << "<div class='form-group'>"
+    #out << "  <label class='control-label optional' for='dataset_complex_orgnaization'>Managing organization</label>"
+    #out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    #out << "</div>"
     # out << "  <button type='button' class='btn btn-link add'>"
     # out << "    <span class='glyphicon glyphicon-plus'></span>"
     # out << "    <span class='controls-add-text'>Add another managing organization</span>"
     # out << "  </button>"
-    out << "</div>" # row
+    #out << "</div>" # row
 
     # last row
     # --- delete checkbox

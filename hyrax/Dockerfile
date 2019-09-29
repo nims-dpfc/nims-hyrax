@@ -46,6 +46,9 @@ RUN apt-get update -qq && \
     yarn config set no-progress && \
     yarn config set silent
 
+# Downgrade security level due to ORCID API
+RUN sed -i 's/SECLEVEL=2/SECLEVEL=1/' /etc/ssl/openssl.cnf
+
 RUN mkdir -p /fits/ \
     && wget -q https://projects.iq.harvard.edu/files/fits/files/$FITS_VERSION.zip -O /fits/$FITS_VERSION.zip \
     && unzip -q /fits/$FITS_VERSION.zip -d /fits/$FITS_VERSION \
