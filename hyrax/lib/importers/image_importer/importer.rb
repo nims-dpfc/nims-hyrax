@@ -53,7 +53,8 @@ module Importers
           end
 
           # Import image
-          work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
+          #work_id = attributes[:id] unless attributes.fetch(:id, nil).blank?
+          work_id = ::Noid::Rails::Service.new.minter.mint
           unless debug
             h = Importers::HyraxImporter.new('Image', attributes, files, collection_ids, work_id)
             begin

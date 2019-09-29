@@ -53,7 +53,7 @@ module Importers
           pid = properties['pid'][0]
           label = 'previous identifier'
           attributes[:complex_identifier_attributes] = [{identifier: pid, label: label}]
-          attributes[:id] = pid.split('/')[-1].gsub('escidoc:', '').split(':')[0]
+          #attributes[:id] = pid.split('/')[-1].gsub('escidoc:', '').split(':')[0]
         end
 
         # Visibility based on status
@@ -187,7 +187,7 @@ module Importers
           if file_metadata.fetch(:title, []).blank?
             file_metadata[:title] = Array(File.basename(filepath))
           end
-          files << file_info
+          files << file_info if properties[:visibility] == 'open'
         else
           file_info[:dirpath] = dir_path
           missing_files << file_info

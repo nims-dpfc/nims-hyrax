@@ -67,7 +67,8 @@ module Importers
           files_list = get_components(item)
           files = files_list[:files]
           missing_files = files_list[:missing_files]
-          work_id = attributes.fetch(:id, nil)
+          #work_id = attributes.fetch(:id, nil)
+          work_id = ::Noid::Rails::Service.new.minter.mint
           # puts work_id
           # Import publication
           unless debug
