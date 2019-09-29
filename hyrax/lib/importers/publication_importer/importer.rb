@@ -60,13 +60,15 @@ module Importers
           if attributes.any? and attributes.fetch(:visibility, nil).blank?
             attributes[:visibility] = 'restricted'
           end
+          next unless attributes[:visibility] == 'open'
           # set dummy supervisor approval
           attributes[:supervisor_approval] = ['imported from PubMan']
           # Get files
           files_list = get_components(item)
           files = files_list[:files]
           missing_files = files_list[:missing_files]
-          work_id = attributes.fetch(:id, nil)
+          #work_id = attributes.fetch(:id, nil)
+          work_id = ::Noid::Rails::Service.new.minter.mint
           # puts work_id
           # Import publication
           unless debug
