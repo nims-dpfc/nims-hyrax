@@ -28,6 +28,7 @@ module Importers
 
         count = 0
         images_metadata.each do |item|
+          next unless image_metadata[:metadata][:visibility] == 'open'
           # Each xml file has multiple images
           count += 1
           puts '-'*80
