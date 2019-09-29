@@ -14,10 +14,13 @@ terms:
   - id: http://purl.org/dc/terms/created
     term: Created
     active: true
+  - id: Deposited
+    term: Deposited
+    active: true
   - id: http://purl.org/dc/terms/issued
     term: Issued
     active: true
-  - id: http://purl.org/dc/terms/issued
+  - id: Published
     term: Published
     active: true
   - id: http://bibframe.org/vocab/providerDate

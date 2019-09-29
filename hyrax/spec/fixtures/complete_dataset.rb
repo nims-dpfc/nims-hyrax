@@ -40,7 +40,7 @@ dataset_attributes = {
   characterization_methods: 'charge distribution',
   computational_methods: 'computational methods',
   data_origin: ['informatics and data science'],
-  instrument_attributes: [{
+  complex_instrument_attributes: [{
     alternative_title: 'An instrument title',
     complex_date_attributes: [{
       date: ['2018-02-14'],
@@ -72,7 +72,7 @@ dataset_attributes = {
     }],
     relationship: 'isSupplementTo'
   }],
-  specimen_set: 'Specimen set',
+  specimen_set: 'Specimen',
   specimen_type_attributes: [{
     chemical_composition: 'chemical composition',
     crystallographic_structure: 'crystallographic structure',

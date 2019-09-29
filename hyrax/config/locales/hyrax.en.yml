@@ -6,53 +6,239 @@ en:
         facet:
           based_near_label_sim: Location
           creator_sim: Creator
+          complex_date_dtsim: Date
+          complex_date_accepted_dtsim: Date accepted
+          complex_date_available_dtsim: Date available
+          complex_date_copyrighted_dtsim: Date copyrighted
+          complex_date_collected_dtsim: Date collected
+          complex_date_created_dtsim: Date created
+          complex_date_issued_dtsim: Date issued
+          complex_date_published_dtsim: Date published
+          complex_date_submitted_dtsim: Date submitted
+          complex_date_updated_dtsim: Date updated
+          complex_date_valid_dtsim: Date valid
+          complex_date_processed_dtsim: Date processed
+          complex_date_purchased_dtsim: Date purchased
+          complex_date_other_dtsim: Date
+          complex_event_sim: Event
+          complex_material_sub_type_sim: Material sub type
+          complex_material_type_sim: Material type
+          complex_organization_sim: Organization
+          complex_person_other_sim: Creator
+          complex_person_author_sim: Author
+          complex_person_editor_sim: Editor
+          complex_person_translator_sim: Translator
+          complex_person_data_depositor_sim: Data depositor
+          complex_person_data_curator_sim: Data curator
+          complex_person_operator_sim: Operator
+          complex_person_organization_sim: Organization
+          complex_person_sub_organization_sim: Sub organization
+          complex_purchase_record_manufacturer_sim: Purchase record manufacturer
+          complex_purchase_record_manufacturer_sub_organization_sim: Purchase record manufacturer sub organization
+          complex_purchase_record_supplier_sim: Purchase record supplier
+          complex_purchase_record_supplier_sub_organization_sim: Purchase record supplier sub organization
+          complex_relation_relationship_sim: Relationship
+          complex_rights_sim: License
+          complex_structural_feature_category_sim: Structural feature category
+          complex_structural_feature_sub_category_sim: Structural feature sub category
+          complex_source_title_sim: Journal
+          complex_sub_organization_sim: Sub organization
+          complex_person_sim: Creator
+          computational_methods_sim: Computational methods
+          custom_property_sim: Additional metadata
+          data_origin_sim: Data origin
           file_format_sim: Format
           generic_type_sim: Type
+          human_readable_type_sim: Type of work
+          instrument_sim: Instrument
+          instrument_managing_organization_sim: Instrument managing organization
+          instrument_managing_sub_organization_sim: Instrument managing sub organization
+          instrument_manufacturer_sim: Instrument manufacturer
+          instrument_manufacturer_sub_organization_sim: Instrument manufacturer sub organization
+          instrument_model_number_sim: Instrument model number
+          instrument_organization_sim: Instrument organization
           keyword_sim: Keyword
           language_sim: Language
+          place_sim: Location
+          properties_addressed_sim: Properties addressed
           publisher_sim: Publisher
+          specimen_set_sim: Specimen
           subject_sim: Subject
+          synthesis_and_processing_sim: Synthesis and processing
         index:
           based_near_tesim: Location
+          characterization_methods_tesim: Characterization methods
           contributor_tesim: Contributor
           creator_tesim: Creator
+          complex_chemical_composition_tesim: Chemical composition
+          complex_chemical_composition_identifier_ssim: Chemical composition identifier
+          complex_crystallographic_structure_tesim: Crystallographic structure
+          complex_crystallographic_structure_identifier_ssim: Crystallographic structure identifier
+          complex_date_dtsim: Date
+          complex_date_accepted_dtsim: Date accepted
+          complex_date_available_dtsim: Date available
+          complex_date_copyrighted_dtsim: Date copyrighted
+          complex_date_collected_dtsim: Date collected
+          complex_date_created_dtsim: Date created
+          complex_date_issued_dtsim: Date issued
+          complex_date_published_dtsim: Date published
+          complex_date_submitted_dtsim: Date submitted
+          complex_date_updated_dtsim: Date updated
+          complex_date_valid_dtsim: Date valid
+          complex_date_processed_dtsim: Date processed
+          complex_date_purchased_dtsim: Date purchased
+          complex_date_other_dtsim: Date
+          complex_material_sub_type_tesim: Material sub type
+          complex_material_type_tesim: Material type
+          complex_material_type_description_tesim: Material type description
+          complex_material_type_identifier_ssim: Material identifier
+          complex_identifier_ssim: Identifier
+          complex_identifier_orcid_ssim: Orcid
+          complex_identifier_local_id_ssim: Local identifier
+          complex_person_other_tesim: Creator
+          complex_person_author_tesim: Author
+          complex_person_editor_tesim: Editor
+          complex_person_translator_tesim: Translator
+          complex_person_data_depositor_tesim: Data depositor
+          complex_person_data_curator_tesim: Data curator
+          complex_person_operator_tesim: Operator
+          complex_person_organization_tesim: Organization
+          complex_person_sub_organization_tesim: Sub organization
+          complex_purchase_record_item_tesim: Purchase record item
+          complex_purchase_record_title_tesim: Purchase record title
+          complex_purchase_record_identifier_ssim: Purchase record identifier
+          complex_purchase_record_manufacturer_tesim: Purchase record manufacturer
+          complex_purchase_record_manufacturer_sub_organization_tesim: Purchase record manufacturer sub organization
+          complex_purchase_record_supplier_tesim: Purchase record supplier
+          complex_purchase_record_supplier_sub_organization_tesim: Purchase record supplier sub organization
+          complex_relation_title_tesim: Title of related item
+          complex_shape_tesim: Shape
+          complex_shape_identifier_ssim: Shape identifier
+          complex_specimen_type_tesim: Specimen type
+          complex_specimen_type_description_tesim: Specimen description
+          complex_specimen_type_identifier_ssim: Specimen identifier
+          complex_state_of_matter_tesim: State of matter
+          complex_state_of_matter_identifier_ssim: State of matter identifier
+          complex_structural_feature_category_tesim: Structural feature category
+          complex_structural_feature_description_tesim: Structural feature description
+          complex_structural_feature_sub_category_tesim: Structural feature sub category
+          complex_structural_feature_identifier_ssim: Structural feature identifier
+          complex_version_ssim: Version
+          computational_methods_tesim: Computational methods
+          custom_property_tesim: Additional metadata
+          data_origin_tesim: Data origin
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
           file_format_tesim: File Format
           identifier_tesim: Identifier
+          instrument_alternative_title_tesim: Instrument alternative title
+          instrument_description_tesim: Instrument description
+          instrument_identifier_ssim: Instrument identifier
+          instrument_managing_organization_tesim: Instrument managing organization
+          instrument_managing_sub_organization_tesim: Instrument managing sub organization
+          instrument_manufacturer_tesim: Instrument manufacturer
+          instrument_manufacturer_sub_organization_tesim: Instrument manufacturer sub organization
+          instrument_model_number_tesim: Instrument model number
+          instrument_title_tesim: Instrument title
           keyword_tesim: Keyword
           language_tesim: Language
           license_tesim: License
+          origin_system_provenance_tesim: Origin system provenance
+          properties_addressed_tesim: Properties addressed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
+          specimen_set_tesim: Specimen
           subject_tesim: Subject
+          synthesis_and_processing_tesim: Synthesis and processing
         show:
+          alternative_title_tesim: Alternative title
           based_near_tesim: Location
+          characterization_methods_tesim: Characterization_methods
+          computational_methods_tesim: Computational methods
           contributor_tesim: Contributor
+          complex_date_ssm: "Date"
+          complex_date_accepted_ssm: Date accepted
+          complex_date_available_ssm: Date available
+          complex_date_copyrighted_ssm: Date copyrighted
+          complex_date_collected_ssm: Date collected
+          complex_date_created_ssm: Date created
+          complex_date_issued_ssm: Date issued
+          complex_date_published_ssm: Date published
+          complex_date_submitted_ssm: Date submitted
+          complex_date_updated_ssm: Date updated
+          complex_date_valid_ssm: Date valid
+          complex_date_processed_ssm: Date processed
+          complex_date_purchased_ssm: Date purchased
+          complex_date_other_ssm: Date
+          complex_event_ssm: Event
+          complex_identifier_ssm: Identifier
+          complex_instrument_ssm: Instrument
+          complex_organization_ssm: Organization
+          complex_person_ssm: Creator
+          complex_person_other_ssm: Creator
+          complex_person_author_ssm: Author
+          complex_person_editor_ssm: Editor
+          complex_person_translator_ssm: Translator
+          complex_person_data_depositor_ssm: Data depositor
+          complex_person_data_curator_ssm: Data curator
+          complex_person_operator_ssm: Operator
+          complex_person_organization_ssm: Organization
+          complex_person_sub_organization_ssm: Sub organization
+          complex_relation_ssm: Related item
+          complex_rights_ssm: License
+          complex_source_ssm: Journal
+          complex_specimen_type_ssm: Specimen type
+          complex_version_ssm: Version
           creator_tesim: Creator
+          custom_property_ssm: Additional metadata
+          data_origin_tesim: Data origin
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
           file_format_tesim: File Format
           identifier_tesim: Identifier
+          instrument_tesim: Instrument
+          issue_tesim: Issue
           keyword_tesim: Keyword
           language_tesim: Language
           license_tesim: License
+          origin_system_provenance_tesim: Origin system provenance
+          place_tesim: Location
+          properties_addressed_tesim: Properties processed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
+          specimen_set_tesim: Specimen
           subject_tesim: Subject
+          synthesis_and_processing_tesim: Synthesis and processing
+          table_of_contents_tesim: Table of contents
           title_tesim: Title
   hyrax:
     account_name: My Institution Account Id
     directory:
       suffix: "@example.org"
     footer:
-      copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
+      copyright_html: "Copyright &copy; National Institute for Materials Science"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
+      address_html: National Institute for Materials Science (NIMS) 1-2-1 Sengen, Tsukuba, Ibaraki 305-0047 JAPAN
     institution_name: Institution
     institution_name_full: The Institution Name
-    product_name: Hyrax
+    product_name: MDR
     product_twitter_handle: "@SamveraRepo"
+    works:
+      form:
+        tab:
+          files: Files
+          metadata: Descriptions
+          method: Method
+          instrument: Instruments
+          relationships: Relationships
+          share: Sharing
+          specimen: Specimen details
+    visibility:
+      embargo:
+        note_html: This option is not valid.
+      lease:
+        note_html: This option is not valid.

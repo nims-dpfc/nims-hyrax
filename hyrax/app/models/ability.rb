@@ -2,7 +2,11 @@ class Ability
   include Hydra::Ability
   
   include Hyrax::Ability
-  self.ability_logic += [:everyone_can_create_curation_concerns]
+  # Registered user can only create datasets and publications
+  self.ability_logic += [
+    :everyone_can_create_dataset,
+    :everyone_can_create_publication
+  ]
 
   # Define any customized permissions here.
   def custom_permissions
@@ -13,11 +17,23 @@ class Ability
     # end
     if current_user.admin?
       can [:create, :show, :add_user, :remove_user, :index, :edit, :update, :destroy], Role
+      # Admin user can create works of all work types
+      can :create, curation_concerns_models
     end
     # Limits creating new objects to a specific group
     #
     # if user_groups.include? 'special_group'
     #   can [:create], ActiveFedora::Base
     # end
+  end
+
+  def everyone_can_create_dataset
+    return unless registered_user?
+    can :create, [::Dataset]
+  end
+
+  def everyone_can_create_publication
+    return unless registered_user?
+    can :create, [::Publication]
   end
 end

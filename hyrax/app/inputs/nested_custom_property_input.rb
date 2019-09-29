@@ -2,10 +2,8 @@ class NestedCustomPropertyInput < NestedAttributesInput
 
 protected
 
-  def build_components(attribute_name, value, index, options)
+  def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
-
-    custom_property_statement = value
 
     # Inherit required for fields validated in nested attributes
     required  = false
@@ -13,11 +11,15 @@ protected
       required = true
     end
 
+    # Add remove elemnt only if element repeats
+    repeats = options.delete(:repeats)
+    repeats = true if repeats.nil?
+
     # --- label
     field = :label
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
-    field_value = custom_property_statement.send(field).first
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
+    field_value = value.send(field).first
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -35,9 +37,9 @@ protected
 
     # --- description
     field = :description
-    field_name = name_for(attribute_name, index, field)
-    field_id = id_for(attribute_name, index, field)
-    field_value = custom_property_statement.send(field).first
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
+    field_value = value.send(field).first
 
     out << "  <div class='col-md-3'>"
     out << template.label_tag(field_name, field.to_s.humanize, required: false)
@@ -49,10 +51,12 @@ protected
     out << '  </div>'
 
     # --- delete checkbox
-    field_label = 'Custom property'
-    out << "  <div class='col-md-3'>"
-    out << destroy_widget(attribute_name, index, field_label)
-    out << '  </div>'
+    if repeats == true
+      field_label = 'Additional metadata'
+      out << "  <div class='col-md-3'>"
+      out << destroy_widget(attribute_name, index, field_label, parent)
+      out << '  </div>'
+    end
 
     out << '</div>' # last row
     out

@@ -54,10 +54,10 @@ Hyrax.config do |config|
   # Enable displaying usage statistics in the UI
   # Defaults to false
   # Requires a Google Analytics id and OAuth2 keyfile.  See README for more info
-  # config.analytics = false
+  config.analytics = ENV['GOOGLE_ANALYTICS_ID'].present?
 
   # Google Analytics tracking ID to gather usage statistics
-  # config.google_analytics_id = ENV['GOOGLE_ANALYTICS_ID'] || 'UA-99999999-1'
+  config.google_analytics_id = ENV['GOOGLE_ANALYTICS_ID'] || 'UA-99999999-1'
 
   # Date you wish to start collecting Google Analytic statistics for
   # Leaving it blank will set the start date to when ever the file was uploaded by
@@ -66,7 +66,7 @@ Hyrax.config do |config|
 
   # Enables a link to the citations page for a work
   # Default is false
-  # config.citations = false
+  config.citations = true
 
   # Where to store tempfiles, leave blank for the system temp directory (e.g. /tmp)
   # config.temp_file_base = '/home/developer1'
@@ -75,7 +75,7 @@ Hyrax.config do |config|
   # config.persistent_hostpath = 'http://localhost/files/'
 
   # If you have ffmpeg installed and want to transcode audio and video set to true
-  # config.enable_ffmpeg = false
+  config.enable_ffmpeg = true
 
   # Hyrax uses NOIDs for files and collections instead of Fedora UUIDs
   # where NOID = 10-character string and UUID = 32-character string w/ hyphens
@@ -94,7 +94,7 @@ Hyrax.config do |config|
   # config.redis_namespace = "hyrax"
 
   # Path to the file characterization tool
-  config.fits_path = ENV['FITS_PATH'] || "/fits/fits-1.0.5/fits.sh"
+  config.fits_path = ENV['FITS_PATH'] || "/fits/fits-1.3.0/fits.sh"
 
   # Path to the file derivatives creation tool
   # config.libreoffice_path = "soffice"
@@ -143,22 +143,21 @@ Hyrax.config do |config|
   # Default is false
   config.iiif_image_server = true
 
+  if ENV.fetch('IIIF_TO_SERVE_SSL_URLS', 'false') == 'true'
+    protocol = 'https'
+  else
+    protocol = 'http'
+  end
   # Returns a URL that resolves to an image provided by a IIIF image server
   config.iiif_image_url_builder = lambda do |file_id, base_url, size|
-    Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size)
+    Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size, protocol: protocol)
   end
-  # config.iiif_image_url_builder = lambda do |file_id, base_url, size|
-  #   "#{base_url}/downloads/#{file_id.split('/').first}"
-  # end
 
   # Returns a URL that resolves to an info.json file provided by a IIIF image server
   config.iiif_info_url_builder = lambda do |file_id, base_url|
-    uri = Riiif::Engine.routes.url_helpers.info_url(file_id, host: base_url)
+    uri = Riiif::Engine.routes.url_helpers.info_url(file_id, host: base_url, protocol: protocol)
     uri.sub(%r{/info\.json\Z}, '')
   end
-  # config.iiif_info_url_builder = lambda do |_, _|
-  #   ""
-  # end
 
   # Returns a URL that indicates your IIIF image server compliance level
   # config.iiif_image_compliance_level_uri = 'http://iiif.io/api/image/2/level2.json'
@@ -170,7 +169,7 @@ Hyrax.config do |config|
   # config.iiif_metadata_fields = Hyrax::Forms::WorkForm.required_fields
 
   # Should a button with "Share my work" show on the front page to all users (even those not logged in)?
-  # config.display_share_button_when_not_logged_in = true
+  config.display_share_button_when_not_logged_in = false
 
   # The user who runs batch jobs. Update this if you aren't using emails
   # config.batch_user_key = 'batchuser@example.com'
@@ -183,17 +182,12 @@ Hyrax.config do |config|
 
   # Temporary paths to hold uploads before they are ingested into FCrepo
   # These must be lambdas that return a Pathname. Can be configured separately
-  #  config.upload_path = ->() { Rails.root + 'tmp' + 'uploads' }
-  #  config.cache_path = ->() { Rails.root + 'tmp' + 'uploads' + 'cache' }
+  config.upload_path = ->() { ENV.fetch('UPLOADS_PATH', Rails.root.join('tmp', 'uploads')) }
+  config.cache_path = ->() { ENV.fetch('CACHE_PATH', Rails.root.join('tmp', 'uploads', 'cache')) }
 
   # Location on local file system where derivatives will be stored
   # If you use a multi-server architecture, this MUST be a shared volume
-  # config.derivatives_path = Rails.root.join('tmp', 'derivatives')
-  if ENV['DERIVATIVES_PATH']
-    config.derivatives_path = Pathname.new(ENV['DERIVATIVES_PATH'])
-  else
-    config.derivatives_path = Rails.root.join('tmp', 'derivatives')
-  end
+  config.derivatives_path = ENV.fetch('DERIVATIVES_PATH', Rails.root.join('tmp', 'derivatives'))
 
   # Should schema.org microdata be displayed?
   # config.display_microdata = true
@@ -205,7 +199,7 @@ Hyrax.config do |config|
   # Location on local file system where uploaded files will be staged
   # prior to being ingested into the repository or having derivatives generated.
   # If you use a multi-server architecture, this MUST be a shared volume.
-  # config.working_path = Rails.root.join( 'tmp', 'uploads')
+  config.working_path = ENV.fetch('UPLOADS_PATH', Rails.root.join('tmp', 'uploads'))
 
   # Should the media display partial render a download link?
   # config.display_media_download_link = true

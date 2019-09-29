@@ -18,5 +18,20 @@ module ComplexField
         end
       end
     end
+
+    def self.identifier_search_fields
+      # solr fields that will be used for a search
+      fields = []
+      fields << Solrizer.solr_name('complex_identifier', :symbol)
+      fields
+    end
+
+    def self.identifier_show_fields
+      # solr fields that will be used to display results on the record page
+      fields = []
+      fields << Solrizer.solr_name('complex_identifier', :displayable)
+      fields
+    end
+
   end
 end

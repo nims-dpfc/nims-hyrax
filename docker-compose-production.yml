@@ -1,30 +1,9 @@
 # Overrides the docker-compose file for production environment
-# - Adds nginx with basic auth in front of the app
-# - Production env file for the app
+# - app accessible on port 3000
 
-version: '2.1'
-
-volumes:
-  nginx:
+version: '3'
 
 services:
-
-  app:
-    env_file:
-      - .env.production
-    volumes:
-      - /mnt/ngdr/:/mnt/ngdr
-
-  nginx:
-    image: nginx:stable-alpine
-    depends_on:
-      - web
-    volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./docker/nginx/.htpasswd:/etc/nginx/conf.d/.htpasswd:ro
+  web:
     ports:
-      - 81:80
-      - 3000:80
-      #- 443:443
-    networks:
-      internal:
+      - 3000:3000

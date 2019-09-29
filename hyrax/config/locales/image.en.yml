@@ -9,7 +9,7 @@ en:
   simple_form:
     labels:
       image:
-        complex_person:           "Person"
+        complex_person:           "Creator"
         complex_identifier:       "Identifier"
         part_of:                  "Part of"
         complex_date:             "Date"

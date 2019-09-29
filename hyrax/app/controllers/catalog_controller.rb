@@ -14,6 +14,8 @@ class CatalogController < ApplicationController
   end
 
   configure_blacklight do |config|
+    config.http_method = :post
+
     config.view.gallery.partials = [:index_header, :index]
     config.view.masonry.partials = [:index]
     config.view.slideshow.partials = [:index]
@@ -39,44 +41,16 @@ class CatalogController < ApplicationController
     config.index.display_type_field = solr_name("has_model", :symbol)
     config.index.thumbnail_field = 'thumbnail_path_ss'
 
+
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
-    config.add_facet_field solr_name('human_readable_type', :facetable), label: 'Type', limit: 5
-    config.add_facet_field solr_name('resource_type', :facetable), label: 'Resource Type', limit: 5
-    config.add_facet_field solr_name('creator', :facetable), limit: 5
-    config.add_facet_field solr_name('contributor', :facetable), label: 'Contributor', limit: 5
-    config.add_facet_field solr_name('keyword', :facetable), limit: 5
-    config.add_facet_field solr_name('subject', :facetable), limit: 5
-    config.add_facet_field solr_name('language', :facetable), limit: 5
-    config.add_facet_field solr_name('based_near_label', :facetable), limit: 5
-    config.add_facet_field solr_name('publisher', :facetable), limit: 5
-    config.add_facet_field solr_name('file_format', :facetable), limit: 5
-    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
-    config.add_facet_field solr_name('complex_person_author', :facetable), limit: 5, label: 'Author'
-    config.add_facet_field solr_name('complex_person_editor', :facetable), limit: 5, label: 'Editor'
-    config.add_facet_field solr_name('complex_person_translator', :facetable), limit: 5, label: 'Translator'
-    config.add_facet_field solr_name('complex_person_data_depositor', :facetable), limit: 5, label: 'Data depositor'
-    config.add_facet_field solr_name('complex_person_data_curator', :facetable), limit: 5, label: 'Data curator'
-    config.add_facet_field solr_name('complex_person_operator', :facetable), limit: 5, label: 'Operator'
-    config.add_facet_field solr_name('computational_methods', :facetable), limit: 5, label: 'Computational methods'
-    config.add_facet_field solr_name('specimen_type_material_types', :facetable), limit: 5, label: 'Material types'
-    config.add_facet_field solr_name('specimen_type_structural_features', :facetable), limit: 5, label: 'Structural features'
-    config.add_facet_field solr_name('synthesis_and_processing', :facetable), limit: 5, label: 'Synthesis and processing'
-    config.add_facet_field solr_name('complex_rights', :facetable), limit: 5, label: 'Rights'
-    config.add_facet_field solr_name('complex_date_accepted', :dateable), limit: 5, label: 'Date accepted'
-    config.add_facet_field solr_name('complex_date_available', :dateable), limit: 5, label: 'Date available'
-    config.add_facet_field solr_name('complex_date_copyrighted', :dateable), limit: 5, label: 'Date copyrighted'
-    config.add_facet_field solr_name('complex_date_collected', :dateable), limit: 5, label: 'Date collected'
-    config.add_facet_field solr_name('complex_date_created', :dateable), limit: 5, label: 'Date created'
-    config.add_facet_field solr_name('complex_date_issued', :dateable), limit: 5, label: 'Date issued'
-    config.add_facet_field solr_name('complex_date_published', :dateable), limit: 5, label: 'Date published'
-    config.add_facet_field solr_name('complex_date_submitted', :dateable), limit: 5, label: 'Date submitted'
-    config.add_facet_field solr_name('complex_date_updated', :dateable), limit: 5, label: 'Date updated'
-    config.add_facet_field solr_name('complex_date_valid', :dateable), limit: 5, label: 'Date valid'
-    config.add_facet_field solr_name('complex_date_processed', :dateable), limit: 5, label: 'Date processed'
-    config.add_facet_field solr_name('complex_date_purchased', :dateable), limit: 5, label: 'Date purchased'
-    config.add_facet_field solr_name('place', :facetable), limit: 5, label: 'Place'
-    config.add_facet_field solr_name('status', :facetable), limit: 5, label: 'Status'
+
+    facet_fields = (DatasetIndexer.facet_fields +
+                   PublicationIndexer.facet_fields +
+                   ImageIndexer.facet_fields).uniq
+    facet_fields.each do |fld|
+      config.add_facet_field fld, limit: 5
+    end
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
     config.add_facet_field solr_name('generic_type', :facetable), if: false
@@ -92,12 +66,19 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link
     config.add_index_field solr_name('keyword', :stored_searchable), itemprop: 'keywords', link_to_search: solr_name('keyword', :facetable)
     config.add_index_field solr_name('subject', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject', :facetable)
-    config.add_index_field solr_name('creator', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable)
-    config.add_index_field solr_name('contributor', :stored_searchable), itemprop: 'contributor', link_to_search: solr_name('contributor', :facetable)
+    # config.add_index_field solr_name('creator', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable)
+    # config.add_index_field solr_name('contributor', :stored_searchable), itemprop: 'contributor', link_to_search: solr_name('contributor', :facetable)
+    config.add_index_field solr_name('complex_person_other', :stored_searchable), itemprop: 'creator or contributor', link_to_search: solr_name('complex_person_other', :facetable)
+    config.add_index_field solr_name('complex_person_author', :stored_searchable), itemprop: 'author', link_to_search: solr_name('complex_person_author', :facetable)
+    config.add_index_field solr_name('complex_person_editor', :stored_searchable), itemprop: 'editor', link_to_search: solr_name('complex_person_editor', :facetable)
+    config.add_index_field solr_name('complex_person_translator', :stored_searchable), itemprop: 'translator', link_to_search: solr_name('complex_person_translator', :facetable)
+    config.add_index_field solr_name('complex_person_data_depositor', :stored_searchable), itemprop: 'data depositor', link_to_search: solr_name('complex_person_data_depositor', :facetable)
+    config.add_index_field solr_name('complex_person_data_curator', :stored_searchable), itemprop: 'data curator', link_to_search: solr_name('complex_person_data_curator', :facetable)
+    config.add_index_field solr_name('complex_person_operator', :stored_searchable), itemprop: 'operator', link_to_search: solr_name('complex_person_operator', :facetable)
     config.add_index_field solr_name('proxy_depositor', :symbol), label: 'Depositor', helper_method: :link_to_profile
     config.add_index_field solr_name('depositor'), label: 'Owner', helper_method: :link_to_profile
     config.add_index_field solr_name('publisher', :stored_searchable), itemprop: 'publisher', link_to_search: solr_name('publisher', :facetable)
-    config.add_index_field solr_name('based_near_label', :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name('based_near_label', :facetable)
+    # config.add_index_field solr_name('based_near_label', :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name('based_near_label', :facetable)
     config.add_index_field solr_name('language', :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name('language', :facetable)
     config.add_index_field solr_name('date_uploaded', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
@@ -115,26 +96,12 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field solr_name('title', :stored_searchable)
-    config.add_show_field solr_name('description', :stored_searchable)
-    config.add_show_field solr_name('keyword', :stored_searchable)
-    config.add_show_field solr_name('subject', :stored_searchable)
-    config.add_show_field solr_name('creator', :stored_searchable)
-    config.add_show_field solr_name('contributor', :stored_searchable)
-    config.add_show_field solr_name('publisher', :stored_searchable)
-    config.add_show_field solr_name('based_near_label', :stored_searchable)
-    config.add_show_field solr_name('language', :stored_searchable)
-    config.add_show_field solr_name('date_uploaded', :stored_searchable)
-    config.add_show_field solr_name('date_modified', :stored_searchable)
-    config.add_show_field solr_name('date_created', :stored_searchable)
-    config.add_show_field solr_name('rights_statement', :stored_searchable)
-    config.add_show_field solr_name('license', :stored_searchable)
-    config.add_show_field solr_name('resource_type', :stored_searchable), label: 'Resource Type'
-    config.add_show_field solr_name('format', :stored_searchable)
-    config.add_show_field solr_name('identifier', :stored_searchable)
-    config.add_show_field solr_name('place', :stored_searchable)
-    config.add_show_field solr_name('status', :stored_searchable)
-    config.add_show_field solr_name('issue', :stored_searchable)
+    show_fields = (DatasetIndexer.show_fields +
+                   PublicationIndexer.show_fields +
+                   ImageIndexer.show_fields).uniq
+    show_fields.each do |fld|
+      config.add_show_field fld
+    end
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -154,7 +121,9 @@ class CatalogController < ApplicationController
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
     config.add_search_field('all_fields', label: 'All Fields') do |field|
-      all_names = config.show_fields.values.map(&:field).join(" ")
+      all_names = (DatasetIndexer.search_fields +
+                   PublicationIndexer.search_fields +
+                   ImageIndexer.search_fields).uniq.join(" ")
       title_name = solr_name("title", :stored_searchable)
       field.solr_parameters = {
         qf: "#{all_names} file_format_tesim all_text_timv",
@@ -165,24 +134,13 @@ class CatalogController < ApplicationController
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
-    # creator, title, description, publisher, date_created,
-    # subject, language, resource_type, format, identifier, based_near,
-    config.add_search_field('contributor') do |field|
+    config.add_search_field('complex_person') do |field|
       # solr_parameters hash are sent to Solr as ordinary url query params.
-
       # :solr_local_parameters will be sent using Solr LocalParams
       # syntax, as eg {! qf=$title_qf }. This is neccesary to use
       # Solr parameter de-referencing like $title_qf.
       # See: http://wiki.apache.org/solr/LocalParams
-      solr_name = solr_name("contributor", :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('creator') do |field|
-      solr_name = solr_name("creator", :stored_searchable)
+      solr_name = solr_name("complex_person", :stored_searchable)
       field.solr_local_parameters = {
         qf: solr_name,
         pf: solr_name
@@ -256,15 +214,6 @@ class CatalogController < ApplicationController
 
     config.add_search_field('identifier') do |field|
       solr_name = solr_name("id", :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('based_near') do |field|
-      field.label = "Location"
-      solr_name = solr_name("based_near_label", :stored_searchable)
       field.solr_local_parameters = {
         qf: solr_name,
         pf: solr_name

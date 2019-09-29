@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_instrument,
+    as: :nested_instrument,
+    input_html: {
+      class: '',
+      data: {name: :complex_instrument}
+    },
+    required: f.object.required?(:complex_instrument)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another instrument</span>
+  </button>
+</div>

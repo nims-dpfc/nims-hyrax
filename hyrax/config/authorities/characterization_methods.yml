@@ -283,3 +283,6 @@ terms:
 - id: viscometry
   term: viscometry/粘度測定
   active: true
+- id: other
+  term: other/その他
+  active: true

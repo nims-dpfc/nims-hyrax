@@ -3,6 +3,18 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  # ==> LDAP Configuration
+  # config.ldap_logger = true
+  config.ldap_create_user = true
+  # config.ldap_update_password = true
+  # config.ldap_config = "#{Rails.root}/config/ldap.yml"
+  # config.ldap_check_group_membership = false
+  # config.ldap_check_group_membership_without_admin = false
+  # config.ldap_check_attributes = false
+  # config.ldap_check_attributes_presence = false
+  # config.ldap_use_admin_to_bind = false
+  # config.ldap_ad_group_check = false
+
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
@@ -180,7 +192,7 @@ Devise.setup do |config|
   # Defines which strategy will be used to lock an account.
   # :failed_attempts = Locks an account after a number of failed attempts to sign in.
   # :none            = No lock strategy. You should handle locking by yourself.
-  # config.lock_strategy = :failed_attempts
+  config.lock_strategy = :failed_attempts
 
   # Defines which key will be used when locking and unlocking an account
   config.unlock_keys = [:username]
@@ -190,14 +202,14 @@ Devise.setup do |config|
   # :time  = Re-enables login after a certain amount of time (see :unlock_in below)
   # :both  = Enables both strategies
   # :none  = No unlock strategy. You should handle unlocking by yourself.
-  # config.unlock_strategy = :both
+  config.unlock_strategy = :time
 
   # Number of authentication tries before locking an account if lock_strategy
   # is failed attempts.
-  # config.maximum_attempts = 20
+  config.maximum_attempts = 20
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
-  # config.unlock_in = 1.hour
+  config.unlock_in = 1.hour
 
   # Warn on the last attempt before the account is locked.
   # config.last_attempt_warning = true
