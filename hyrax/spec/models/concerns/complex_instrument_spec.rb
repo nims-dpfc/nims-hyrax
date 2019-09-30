@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe ComplexInstrument do
   before do
     class ExampleWork < ActiveFedora::Base
-      property :complex_instrument, predicate: ::RDF::Vocab::NimsRdp['instrument'],
-        class_name:"ComplexInstrument"
+      property :complex_instrument, predicate: ::RDF::Vocab::NimsRdp['instrument'], class_name:"ComplexInstrument"
       accepts_nested_attributes_for :complex_instrument
     end
   end
@@ -12,104 +11,115 @@ RSpec.describe ComplexInstrument do
     Object.send(:remove_const, :ExampleWork)
   end
 
-  it 'has the correct uri' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_instrument_attributes: [{
-        complex_date_attributes: [{
-          date: ['2018-01-28'],
-        }],
-        complex_identifier_attributes: [{
-          identifier: ['ewfqwefqwef'],
-        }],
-        complex_person_attributes: [{
-          name: ['operator 1'],
-          role: ['Operator']
-        }],
-        title: 'Instrument 1'
-      }]
-    }
-    expect(@obj.complex_instrument.first.id).to include('#instrument')
-  end
+  context 'accepts valid complex_instrument_attributes' do
+    subject do
+      ExampleWork
+          .new({ complex_instrument_attributes: complex_instrument_attributes })
+          .complex_instrument
+          .first
+    end
 
-  it 'creates an instrument active triple resource with all the attributes' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_instrument_attributes: [
-        {
-          alternative_title: 'An instrument title',
+    context 'with date, identifier, person and title' do
+      let(:complex_instrument_attributes) do
+        [{
           complex_date_attributes: [{
-            date: ['2018-02-14']
+            date: ['2018-01-28'],
           }],
-          description: 'Instrument description',
           complex_identifier_attributes: [{
-            identifier: ['123456'],
-            label: ['Local']
+            identifier: ['ewfqwefqwef'],
           }],
-          instrument_function_attributes: [{
-            column_number: 1,
-            category: 'some value',
-            sub_category: 'some other value',
-            description: 'Instrument function description'
-          }],
-          manufacturer_attributes: [{
-            organization: 'Foo',
-            sub_organization: 'Bar',
-            purpose: 'Manufacturer',
-            complex_identifier_attributes: [{
-              identifier: '123456789m',
-              scheme: 'Local'
-            }]
-          }],
-          model_number: '123xfty',
           complex_person_attributes: [{
-            name: ['Name of operator'],
+            name: ['operator 1'],
             role: ['Operator']
           }],
-          managing_organization_attributes: [{
-            organization: 'FooFoo',
-            sub_organization: 'BarBar',
-            purpose: 'Managing organization',
+          title: 'Instrument 1'
+        }]
+      end
+
+      it 'has the correct uri' do
+        expect(subject.id).to include('#instrument')
+      end
+    end
+
+    context 'with all the attributes' do
+      let(:complex_instrument_attributes) do
+        [{
+            alternative_title: 'An instrument title',
+            complex_date_attributes: [{
+              date: ['2018-02-14']
+            }],
+            description: 'Instrument description',
             complex_identifier_attributes: [{
-              identifier: '123456789mo',
-              scheme: 'Local'
-            }]
-          }],
-          title: 'Instrument title'
-        }
-      ]
-    }
-    expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_instrument.first.alternative_title).to eq ['An instrument title']
-    expect(@obj.complex_instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_instrument.first.complex_date.first.date).to eq ['2018-02-14']
-    expect(@obj.complex_instrument.first.description).to eq ['Instrument description']
-    expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['123456']
-    expect(@obj.complex_instrument.first.complex_identifier.first.label).to eq ['Local']
-    expect(@obj.complex_instrument.first.instrument_function.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_instrument.first.instrument_function.first.column_number).to eq [1]
-    expect(@obj.complex_instrument.first.instrument_function.first.category).to eq ['some value']
-    expect(@obj.complex_instrument.first.instrument_function.first.sub_category).to eq ['some other value']
-    expect(@obj.complex_instrument.first.instrument_function.first.description).to eq ['Instrument function description']
-    expect(@obj.complex_instrument.first.manufacturer.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_instrument.first.manufacturer.first.organization).to eq ['Foo']
-    expect(@obj.complex_instrument.first.manufacturer.first.sub_organization).to eq ['Bar']
-    expect(@obj.complex_instrument.first.manufacturer.first.purpose).to eq ['Manufacturer']
-    expect(@obj.complex_instrument.first.manufacturer.first.complex_identifier.first.identifier).to eq ['123456789m']
-    expect(@obj.complex_instrument.first.manufacturer.first.complex_identifier.first.scheme).to eq ['Local']
-    expect(@obj.complex_instrument.first.model_number).to eq ['123xfty']
-    expect(@obj.complex_instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_instrument.first.complex_person.first.name).to eq ['Name of operator']
-    expect(@obj.complex_instrument.first.complex_person.first.role).to eq ['Operator']
-    expect(@obj.complex_instrument.first.managing_organization.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_instrument.first.managing_organization.first.organization).to eq ['FooFoo']
-    expect(@obj.complex_instrument.first.managing_organization.first.sub_organization).to eq ['BarBar']
-    expect(@obj.complex_instrument.first.managing_organization.first.purpose).to eq ['Managing organization']
-    expect(@obj.complex_instrument.first.managing_organization.first.complex_identifier.first.identifier).to eq ['123456789mo']
-    expect(@obj.complex_instrument.first.managing_organization.first.complex_identifier.first.scheme).to eq ['Local']
-    expect(@obj.complex_instrument.first.title).to eq ['Instrument title']
+              identifier: ['123456'],
+              label: ['Local']
+            }],
+            instrument_function_attributes: [{
+              column_number: 1,
+              category: 'some value',
+              sub_category: 'some other value',
+              description: 'Instrument function description'
+            }],
+            manufacturer_attributes: [{
+              organization: 'Foo',
+              sub_organization: 'Bar',
+              purpose: 'Manufacturer',
+              complex_identifier_attributes: [{
+                identifier: '123456789m',
+                scheme: 'Local'
+              }]
+            }],
+            model_number: '123xfty',
+            complex_person_attributes: [{
+              name: ['Name of operator'],
+              role: ['Operator']
+            }],
+            managing_organization_attributes: [{
+              organization: 'FooFoo',
+              sub_organization: 'BarBar',
+              purpose: 'Managing organization',
+              complex_identifier_attributes: [{
+                identifier: '123456789mo',
+                scheme: 'Local'
+              }]
+            }],
+            title: 'Instrument title'
+        }]
+      end
+      it 'creates an instrument active triple resource with all the attributes' do
+        expect(subject).to be_kind_of ActiveTriples::Resource
+        expect(subject.alternative_title).to eq ['An instrument title']
+        expect(subject.complex_date.first).to be_kind_of ActiveTriples::Resource
+        expect(subject.complex_date.first.date).to eq ['2018-02-14']
+        expect(subject.description).to eq ['Instrument description']
+        expect(subject.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+        expect(subject.complex_identifier.first.identifier).to eq ['123456']
+        expect(subject.complex_identifier.first.label).to eq ['Local']
+        expect(subject.instrument_function.first).to be_kind_of ActiveTriples::Resource
+        expect(subject.instrument_function.first.column_number).to eq [1]
+        expect(subject.instrument_function.first.category).to eq ['some value']
+        expect(subject.instrument_function.first.sub_category).to eq ['some other value']
+        expect(subject.instrument_function.first.description).to eq ['Instrument function description']
+        expect(subject.manufacturer.first).to be_kind_of ActiveTriples::Resource
+        expect(subject.manufacturer.first.organization).to eq ['Foo']
+        expect(subject.manufacturer.first.sub_organization).to eq ['Bar']
+        expect(subject.manufacturer.first.purpose).to eq ['Manufacturer']
+        expect(subject.manufacturer.first.complex_identifier.first.identifier).to eq ['123456789m']
+        expect(subject.manufacturer.first.complex_identifier.first.scheme).to eq ['Local']
+        expect(subject.model_number).to eq ['123xfty']
+        expect(subject.complex_person.first).to be_kind_of ActiveTriples::Resource
+        expect(subject.complex_person.first.name).to eq ['Name of operator']
+        expect(subject.complex_person.first.role).to eq ['Operator']
+        expect(subject.managing_organization.first).to be_kind_of ActiveTriples::Resource
+        expect(subject.managing_organization.first.organization).to eq ['FooFoo']
+        expect(subject.managing_organization.first.sub_organization).to eq ['BarBar']
+        expect(subject.managing_organization.first.purpose).to eq ['Managing organization']
+        expect(subject.managing_organization.first.complex_identifier.first.identifier).to eq ['123456789mo']
+        expect(subject.managing_organization.first.complex_identifier.first.scheme).to eq ['Local']
+        expect(subject.title).to eq ['Instrument title']
+      end
+    end
   end
+
 
   describe "when reject_if is a symbol" do
     before do
@@ -122,93 +132,105 @@ RSpec.describe ComplexInstrument do
       Object.send(:remove_const, :ExampleWork2)
     end
 
-    it 'creates an instrument active triple resource with date, identifier and person' do
-      skip
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_instrument_attributes: [{
-          complex_date_attributes: [{
-            date: ['2018-01-28'],
-          }],
-          complex_identifier_attributes: [{
-            identifier: ['ewfqwefqwef'],
-          }],
-          complex_person_attributes: [{
-            name: ['operator 1'],
-            role: ['Operator']
-          }]
-        }]
-      }
-      expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.complex_date.first.date).to eq ['2018-01-28']
-      expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
-      expect(@obj.complex_instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.complex_person.first.name).to eq ['operator 1']
-      expect(@obj.complex_instrument.first.complex_person.first.role).to eq ['Operator']
+    context 'accepts valid complex_instrument_attributes' do
+      subject do
+        ExampleWork2
+            .new({ complex_instrument_attributes: complex_instrument_attributes })
+            .complex_instrument
+            .first
+      end
+
+      context 'date, identifier and person' do
+        let(:complex_instrument_attributes) do
+          [{
+               complex_date_attributes: [{ date: ['2018-01-28'] }],
+               complex_identifier_attributes: [{ identifier: ['ewfqwefqwef'] }],
+               complex_person_attributes: [{
+                                               name: ['operator 1'],
+                                               role: ['Operator']
+                                           }]
+           }]
+        end
+        it 'creates an instrument active triple resource with date, identifier and person' do
+          expect(subject).to be_kind_of ActiveTriples::Resource
+          expect(subject.complex_date.first).to be_kind_of ActiveTriples::Resource
+          expect(subject.complex_date.first.date).to eq ['2018-01-28']
+          expect(subject.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+          expect(subject.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
+          expect(subject.complex_person.first).to be_kind_of ActiveTriples::Resource
+          expect(subject.complex_person.first.name).to eq ['operator 1']
+          expect(subject.complex_person.first.role).to eq ['Operator']
+        end
+      end
     end
 
-    it 'rejects an instrument active triple with no date' do
-      skip
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_instrument_attributes: [{
-          complex_identifier_attributes: [{
-            identifier: ['ewfqwefqwef'],
-          }],
-          complex_person_attributes: [{
-            name: ['operator 1'],
-            role: ['Operator']
-          }]
-        }]
-      }
-      expect(@obj.complex_instrument).to be_empty
-    end
+    context 'rejects invalid complex_instrument_attributes' do
+      subject do
+        ExampleWork2
+            .new({ complex_instrument_attributes: complex_instrument_attributes })
+            .complex_instrument
+      end
 
-    it 'rejects an instrument active triple with no identifier' do
-      skip
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_instrument_attributes: [{
-          complex_date_attributes: [{
-            date: ['2018-01-28'],
-          }],
-          complex_person_attributes: [{
-            name: ['operator 1'],
-            role: ['Operator']
-          }]
-        }]
-      }
-      expect(@obj.complex_instrument).to be_empty
-    end
+      context 'rejects blank attributes' do
+        let(:complex_instrument_attributes) { [] }
+        it { is_expected.to be_empty }
+      end
 
-    it 'rejects an instrument active triple with no person' do
-      skip
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_instrument_attributes: [{
-          complex_date_attributes: [{
-            date: ['2018-01-28'],
-          }],
-          complex_identifier_attributes: [{
-            identifier: ['ewfqwefqwef'],
-          }]
-        }]
-      }
-      expect(@obj.complex_instrument).to be_empty
-    end
+      context "temporarily disabling attribute tests" do
+        # These tests are temporarily disabled because the attributes they are testing against have been temporariy disabled
+        # 27/8/2019 - temporarily remove required fields (#162)
+        before { skip 'temporarily disable required fields (#162)' }
 
-    it 'rejects an instrument active triple with no date, identifier and person' do
-      skip
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_instrument_attributes: [{
-          title: 'Instrument A',
-        }]
-      }
-      expect(@obj.complex_instrument).to be_empty
-    end
+        context 'rejects an instrument active triple with no date' do
+          let(:complex_instrument_attributes) do
+            [{
+              complex_identifier_attributes: [{
+                identifier: ['ewfqwefqwef'],
+              }],
+              complex_person_attributes: [{
+                name: ['operator 1'],
+                role: ['Operator']
+              }]
+            }]
+          end
 
+          it { is_expected.to be_empty }
+        end
+
+        context 'rejects an instrument active triple with no identifier' do
+          let(:complex_instrument_attributes) do
+            [{
+              complex_date_attributes: [{
+                date: ['2018-01-28'],
+              }],
+              complex_person_attributes: [{
+                name: ['operator 1'],
+                role: ['Operator']
+              }]
+            }]
+          end
+          it { is_expected.to be_empty }
+        end
+
+        context 'rejects an instrument active triple with no person' do
+          let(:complex_instrument_attributes) do
+            [{
+              complex_date_attributes: [{
+                date: ['2018-01-28'],
+              }],
+              complex_identifier_attributes: [{
+                identifier: ['ewfqwefqwef'],
+              }]
+            }]
+          end
+          it { is_expected.to be_empty }
+        end
+
+        context 'rejects an instrument active triple with no date, identifier and person' do
+          let(:complex_instrument_attributes) { [{ title: 'Instrument A' }] }
+          it { is_expected.to be_empty }
+        end
+      end
+    end
   end
 end
