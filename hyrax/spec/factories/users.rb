@@ -1,10 +1,8 @@
 # Based on: https://github.com/samvera/hyrax/blob/master/spec/factories/users.rb
 FactoryBot.define do
-
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }
     password { 'password' }
-
 
     transient do
       # Allow for custom groups when a user is instantiated.
@@ -24,12 +22,14 @@ FactoryBot.define do
       ::RSpec::Mocks.allow_message(user.class.group_service, :fetch_groups).with(user: user).and_return(Array.wrap(evaluator.groups))
     end
 
+    trait :guest do
+      guest { true }
+    end
 
+    trait :admin do
+      roles { build_list :role, 1, :admin }
+    end
 
-      # title { ["Publication"] }
-    # access_control
-    # skip_create
-    # override_new_record
   end
 
 end
