@@ -11,7 +11,7 @@ RSpec.describe ComplexPerson do
     Object.send(:remove_const, :ExampleWork)
   end
 
-  context 'complex_person_attributes' do
+  describe 'complex_person_attributes' do
     subject do
        ExampleWork.new({
         complex_person_attributes: [{
@@ -63,6 +63,11 @@ RSpec.describe ComplexPerson do
   end
 
   context 'uri with a #' do
+    before do
+      # special hack to force code path for testing
+      allow_any_instance_of(RDF::Node).to receive(:node?) { false }
+      allow_any_instance_of(RDF::Node).to receive(:start_with?) { true }
+    end
     subject do
       ExampleWork
           .new({ complex_person_attributes: [{uri: '#something'}]})
@@ -70,10 +75,8 @@ RSpec.describe ComplexPerson do
           .first
           .uri
     end
-
     it { is_expected.to eq ['#something'] }
   end
-
 
   describe "when reject_if is a symbol" do
     before do

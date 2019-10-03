@@ -12,6 +12,22 @@ RSpec.describe ComplexIdentifier do
     Object.send(:remove_const, :ExampleWork)
   end
 
+  context 'uri with a #' do
+    before do
+      # special hack to force code path for testing
+      allow_any_instance_of(RDF::Node).to receive(:node?) { false }
+      allow_any_instance_of(RDF::Node).to receive(:start_with?) { true }
+    end
+    subject do
+      ExampleWork
+          .new({ complex_identifier_attributes: [{ identifier: '0000-0000-0000-0000' }]})
+          .complex_identifier
+          .first
+          .identifier
+    end
+    it { is_expected.to eq ['0000-0000-0000-0000'] }
+  end
+
   it 'has the correct uri' do
     @obj = ExampleWork.new
     @obj.attributes = {
