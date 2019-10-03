@@ -11,6 +11,22 @@ RSpec.describe ComplexEvent do
     Object.send(:remove_const, :ExampleWork)
   end
 
+  context 'uri with a #' do
+    before do
+      # special hack to force code path for testing
+      allow_any_instance_of(RDF::Node).to receive(:node?) { false }
+      allow_any_instance_of(RDF::Node).to receive(:start_with?) { true }
+    end
+    subject do
+      ExampleWork
+          .new({ complex_event_attributes: [{ title: 'Title 1' }]})
+          .complex_event
+          .first
+          .title
+    end
+    it { is_expected.to eq ['Title 1'] }
+  end
+
   it 'has the correct uri' do
     @obj = ExampleWork.new
     @obj.attributes = {

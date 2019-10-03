@@ -11,6 +11,22 @@ RSpec.describe ComplexInstrument do
     Object.send(:remove_const, :ExampleWork)
   end
 
+  context 'uri with a #' do
+    before do
+      # special hack to force code path for testing
+      allow_any_instance_of(RDF::Node).to receive(:node?) { false }
+      allow_any_instance_of(RDF::Node).to receive(:start_with?) { true }
+    end
+    subject do
+      ExampleWork
+          .new({ complex_instrument_attributes: [{ title: 'Instrument 1' }]})
+          .complex_instrument
+          .first
+          .title
+    end
+    it { is_expected.to eq ['Instrument 1'] }
+  end
+
   context 'accepts valid complex_instrument_attributes' do
     subject do
       ExampleWork
