@@ -30,8 +30,6 @@ module ComplexFieldsBehavior
   #   this happens because we are validating nothing on instrument or speciment_type
   # This is temporary until proper validation is in place
   def cleanup_instrument_and_specimen_type(attribute)
-    require 'pry'
-    binding.pry
     # complex_instrument
     attribute['complex_instrument_attributes'].each_with_index do | complex_instrument, index |
       complex_instrument['complex_person_attributes'].each_with_index do | complex_person, i |
