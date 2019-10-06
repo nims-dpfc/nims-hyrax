@@ -11,6 +11,22 @@ RSpec.describe ComplexOrganization do
     Object.send(:remove_const, :ExampleWork)
   end
 
+  context 'uri with a #' do
+    before do
+      # special hack to force code path for testing
+      allow_any_instance_of(RDF::Node).to receive(:node?) { false }
+      allow_any_instance_of(RDF::Node).to receive(:start_with?) { true }
+    end
+    subject do
+      ExampleWork
+          .new({ complex_organization_attributes: [{ organization: 'Foo' }]})
+          .complex_organization
+          .first
+          .organization
+    end
+    it { is_expected.to eq ['Foo'] }
+  end
+
   it 'creates an organization active triple resource with an id and all properties' do
     @obj = ExampleWork.new
     @obj.attributes = {
