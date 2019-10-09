@@ -3,7 +3,5 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::Actors::PublicationActor do
-  it "has tests" do
-    skip "Add your tests here"
-  end
+  it { expect(described_class).to be < Hyrax::Actors::BaseActor }
 end
