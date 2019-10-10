@@ -162,6 +162,13 @@ RSpec.describe Dataset do
     end
   end
 
+  describe 'supervisor_approval' do
+    it 'has supervisor_approval' do
+      @obj = build(:dataset, supervisor_approval: ['Kosuke Tanabe 2019.08.01'])
+      expect(@obj.supervisor_approval).to eq ['Kosuke Tanabe 2019.08.01']
+    end
+  end
+
   describe 'complex_rights' do
     it 'creates a complex rights active triple resource with rights' do
       @obj = build(:dataset,
@@ -527,6 +534,7 @@ RSpec.describe Dataset do
     end
 
     it 'creates an complex_instrument active triple resource with date, identifier and person' do
+      skip
       @obj = build(:dataset,
         complex_instrument_attributes: [{
           complex_date_attributes: [{
@@ -552,6 +560,7 @@ RSpec.describe Dataset do
     end
 
     it 'rejects an complex_instrument active triple with no date, identifier and person' do
+      skip
       @obj = build(:dataset, complex_instrument_attributes: [{
           title: 'Instrument A',
         }]
@@ -647,8 +656,8 @@ RSpec.describe Dataset do
 
   describe 'specimen_set' do
     it 'has specimen_set' do
-      @obj = build(:dataset, specimen_set: 'Specimen set')
-      expect(@obj.specimen_set).to eq 'Specimen set'
+      @obj = build(:dataset, specimen_set: 'Specimen')
+      expect(@obj.specimen_set).to eq 'Specimen'
     end
   end
 
@@ -876,6 +885,7 @@ RSpec.describe Dataset do
     end
 
     it 'rejects a specimen type active triple with no identifier' do
+      skip
       @obj = build(:dataset,
         complex_specimen_type_attributes: [{
           complex_chemical_composition_attributes: [{
@@ -898,6 +908,7 @@ RSpec.describe Dataset do
     end
 
     it 'rejects a specimen type active triple with some required and some non-required information' do
+      skip
       @obj = build(:dataset,
         complex_specimen_type_attributes: [{
           complex_chemical_composition_attributes: [{
@@ -967,7 +978,7 @@ RSpec.describe Dataset do
   end
 
   describe 'custom_property' do
-    it 'creates a custom property active triple resource with all the attributes' do
+    it 'creates a custom property (additional metadata) active triple resource with all the attributes' do
       @obj = build(:dataset,
         custom_property_attributes: [{
           label: 'Full name',
@@ -980,7 +991,7 @@ RSpec.describe Dataset do
       expect(@obj.custom_property.first.description).to eq ['My full name is ...']
     end
 
-    it 'rejects a custom property active triple with no label' do
+    it 'rejects a custom property (additional metadata) active triple with no label' do
       @obj = build(:dataset,
         custom_property_attributes: [{
           description: 'Local date'
@@ -989,13 +1000,50 @@ RSpec.describe Dataset do
       expect(@obj.custom_property).to be_empty
     end
 
-    it 'rejects a custom property active triple with no description' do
+    it 'rejects a custom property (additional metadata) active triple with no description' do
       @obj = build(:dataset,
         custom_property_attributes: [{
           label: 'Local date'
         }]
       )
       expect(@obj.custom_property).to be_empty
+    end
+  end
+
+  describe 'complex_identifier' do
+    it 'creates an identifier active triple resource with all the attributes' do
+      @obj = build(:dataset,
+        complex_identifier_attributes: [{
+           identifier: '0000-0000-0000-0000',
+           scheme: 'uri_of_ORCID_scheme',
+           label: 'ORCID'
+         }]
+      )
+      expect(@obj.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_identifier.first.identifier).to eq ['0000-0000-0000-0000']
+      expect(@obj.complex_identifier.first.scheme).to eq ['uri_of_ORCID_scheme']
+      expect(@obj.complex_identifier.first.label).to eq ['ORCID']
+    end
+
+    it 'creates an identifier active triple resource with just the identifier' do
+      @obj = build(:publication,
+        complex_identifier_attributes: [{
+          identifier: '1234'
+        }]
+      )
+      expect(@obj.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_identifier.first.identifier).to eq ['1234']
+      expect(@obj.complex_identifier.first.label).to be_empty
+      expect(@obj.complex_identifier.first.scheme).to be_empty
+    end
+
+    it 'rejects an identifier active triple with no identifier' do
+      @obj = build(:publication,
+        complex_identifier_attributes: [{
+          label: 'Local'
+        }]
+      )
+      expect(@obj.complex_identifier).to be_empty
     end
   end
 end

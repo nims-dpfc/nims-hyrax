@@ -50,6 +50,9 @@ class Image < ActiveFedora::Base
 
   property :complex_person, predicate: ::RDF::Vocab::SIOC.has_creator, class_name: 'ComplexPerson'
 
+  # Required due to bug saving nested resources
+  property :updated_subresources, predicate: ::RDF::URI.new('http://example.com/updatedSubresources'), class_name: "ActiveTriples::Resource"
+
   # TODO: Need more information
   # property :complex_license, predicate: ::RDF::URI.new('http://www.niso.org/schemas/ali/1.0/license_ref'), class_name:'ComplexLicense'
 
@@ -87,4 +90,5 @@ class Image < ActiveFedora::Base
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
+  accepts_nested_attributes_for :updated_subresources, allow_destroy: true
 end

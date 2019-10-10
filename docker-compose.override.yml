@@ -8,18 +8,38 @@
 
 version: '3'
 
+volumes:
+  file_uploads:
+  derivatives:
+  cache:
+  fcrepo:
+  redis:
+
 services:
 
   fcrepo:
     ports:
       - 8080:8080
+    volumes:
+      - fcrepo:/data
 
   solr:
     ports:
       - 8983:8983
+
+  app:
+    volumes:
+      - file_uploads:${UPLOADS_PATH}
+      - derivatives:${DERIVATIVES_PATH}
+      - cache:${CACHE_PATH}
+      - /srv/ngdr/data/:/data/data
 
   web:
     ports:
       - 3000:3000
     environment:
     - RAILS_FORCE_SSL=false
+
+  redis:
+    volumes:
+      - redis:/data

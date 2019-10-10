@@ -12,6 +12,22 @@ RSpec.describe ComplexSpecimenType do
     Object.send(:remove_const, :ExampleWork)
   end
 
+  context 'uri with a #' do
+    before do
+      # special hack to force code path for testing
+      allow_any_instance_of(RDF::Node).to receive(:node?) { false }
+      allow_any_instance_of(RDF::Node).to receive(:start_with?) { true }
+    end
+    subject do
+      ExampleWork
+          .new({ complex_specimen_type_attributes: [{ title: 'Foo' }]})
+          .complex_specimen_type
+          .first
+          .title
+    end
+    it { is_expected.to eq ['Foo'] }
+  end
+
   it 'has the correct uri' do
     @obj = ExampleWork.new
     @obj.attributes = {
@@ -406,6 +422,7 @@ RSpec.describe ComplexSpecimenType do
     end
 
     it 'rejects a specimen type active triple with no chemical composition' do
+      skip
       @obj = ExampleWork2.new
         @obj.attributes = {
           complex_specimen_type_attributes: [{
@@ -429,6 +446,7 @@ RSpec.describe ComplexSpecimenType do
     end
 
     it 'rejects a specimen type active triple with no crystallographic structure' do
+      skip
       @obj = ExampleWork2.new
         @obj.attributes = {
           complex_specimen_type_attributes: [{
@@ -452,6 +470,7 @@ RSpec.describe ComplexSpecimenType do
     end
 
     it 'rejects a specimen type active triple with no description' do
+      skip
       @obj = ExampleWork2.new
         @obj.attributes = {
           complex_specimen_type_attributes: [{
@@ -477,6 +496,7 @@ RSpec.describe ComplexSpecimenType do
     end
 
     it 'rejects a specimen type active triple with no identifier' do
+      skip
       @obj = ExampleWork2.new
         @obj.attributes = {
           complex_specimen_type_attributes: [{
@@ -500,6 +520,7 @@ RSpec.describe ComplexSpecimenType do
     end
 
     it 'rejects a specimen type active triple with no material types' do
+      skip
       @obj = ExampleWork2.new
         @obj.attributes = {
           complex_specimen_type_attributes: [{
@@ -523,6 +544,7 @@ RSpec.describe ComplexSpecimenType do
     end
 
     it 'rejects a specimen type active triple with no structural features' do
+      skip
       @obj = ExampleWork2.new
         @obj.attributes = {
           complex_specimen_type_attributes: [{
@@ -546,6 +568,7 @@ RSpec.describe ComplexSpecimenType do
     end
 
     it 'rejects a specimen type active triple with no title' do
+      skip
       @obj = ExampleWork2.new
         @obj.attributes = {
           complex_specimen_type_attributes: [{
@@ -571,6 +594,7 @@ RSpec.describe ComplexSpecimenType do
     end
 
     it 'rejects a specimen type active triple with some required and some non-required information' do
+      skip
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_specimen_type_attributes: [{

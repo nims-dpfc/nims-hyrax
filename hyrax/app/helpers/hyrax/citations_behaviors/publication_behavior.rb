@@ -1,10 +1,26 @@
+require 'json'
 module Hyrax
   module CitationsBehaviors
     module PublicationBehavior
       include Hyrax::CitationsBehaviors::CommonBehavior
+
+      # nims override to add doi
+      def setup_doi(presenter)
+        JSON.parse(presenter.complex_identifier).
+            select{|i| i["scheme"].any?{|s| s =~/doi/i} }.
+            pluck('identifier').
+            flatten.
+            sort.
+            join('. ')
+      rescue JSON::ParserError # catch dodgy json
+        nil
+      end
+
       # nims override to retrieve nested properties
-      def setup_pub_date(work)
-        first_date = CGI.escapeHTML(work.solr_document['complex_date_published_ssm'].first) 
+      def setup_pub_date(presenter)
+        pub_date = presenter.solr_document['complex_date_published_ssm'].try(:first)
+        return nil if pub_date.nil?
+        first_date = CGI.escapeHTML(pub_date)
         if first_date.present?
           first_date = CGI.escapeHTML(first_date)
           date_value = first_date.gsub(/[^0-9|n\.d\.]/, "")
@@ -14,28 +30,32 @@ module Hyrax
         clean_end_punctuation(date_value) if date_value
       end
 
-      # @param [Hyrax::WorkShowPresenter] work_presenter
-      # nims override to retrieve nested properties
-      def setup_pub_place(work_presenter)
-        work_presenter.place&.first
+      # @param [Hyrax::PublicationPresenter] presenter
+      # nims override to retrieve place
+      def setup_pub_place(presenter)
+        # unclear whether place is a single value or multi-value
+        presenter.place.is_a?(String) ? presenter.place : presenter.place&.first
       end
 
-      def setup_pub_publisher(work)
-        work.publisher&.first
+      def setup_pub_publisher(presenter)
+        presenter.publisher&.first
       end
 
-      def setup_pub_info(work, include_date = false)
+      def setup_pub_info(presenter, include_date = false)
         pub_info = ""
-        if (place = setup_pub_place(work))
+        if (place = setup_pub_place(presenter))
           pub_info << CGI.escapeHTML(place)
         end
-        if (publisher = setup_pub_publisher(work))
+        if (publisher = setup_pub_publisher(presenter))
           pub_info << ": " << CGI.escapeHTML(publisher)
         end
 
-        pub_date = include_date ? setup_pub_date(work) : nil
+        pub_date = include_date ? setup_pub_date(presenter) : nil
         pub_info << ", " << pub_date unless pub_date.nil?
-
+        # nims override to add doi
+        pub_doi = setup_doi(presenter)
+        pub_info << ". " << pub_doi unless pub_doi.nil?
+        # end nims override to add doi
         pub_info.strip!
         pub_info.blank? ? nil : pub_info
       end
