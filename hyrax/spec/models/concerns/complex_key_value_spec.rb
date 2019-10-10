@@ -12,6 +12,22 @@ RSpec.describe ComplexKeyValue do
     Object.send(:remove_const, :ExampleWork)
   end
 
+  context 'uri with a #' do
+    before do
+      # special hack to force code path for testing
+      allow_any_instance_of(RDF::Node).to receive(:node?) { false }
+      allow_any_instance_of(RDF::Node).to receive(:start_with?) { true }
+    end
+    subject do
+      ExampleWork
+          .new({ custom_property_attributes: [{ label: 'Label 1' }]})
+          .custom_property
+          .first
+          .label
+    end
+    it { is_expected.to eq ['Label 1'] }
+  end
+
   it 'has the correct uri' do
     @obj = ExampleWork.new
     @obj.attributes = {
@@ -25,7 +41,7 @@ RSpec.describe ComplexKeyValue do
     expect(@obj.custom_property.first.id).to include('#key_value')
   end
 
-  it 'creates a custom property active triple resource with all the attributes' do
+  it 'creates a custom property (additional metadata) active triple resource with all the attributes' do
     @obj = ExampleWork.new
     @obj.attributes = {
       custom_property_attributes: [
@@ -51,7 +67,7 @@ RSpec.describe ComplexKeyValue do
       Object.send(:remove_const, :ExampleWork2)
     end
 
-    it 'rejects a custom property active triple with no label' do
+    it 'rejects a custom property (additional metadata) active triple with no label' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         custom_property_attributes: [
@@ -63,7 +79,7 @@ RSpec.describe ComplexKeyValue do
       expect(@obj.custom_property).to be_empty
     end
 
-    it 'rejects a custom property active triple with no description' do
+    it 'rejects a custom property (additional metadata) active triple with no description' do
       @obj = ExampleWork2.new
       @obj.attributes = {
         custom_property_attributes: [

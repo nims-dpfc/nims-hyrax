@@ -216,16 +216,16 @@ terms:
   term: mechanical/機械的性質 -- yield strength/降伏強度
   active: true
 - id: optical
-  term: optical/工学的性質
+  term: optical/光学的性質
   active: true
 - id: optical -- index of refraction
-  term: optical/工学的性質 -- index of refraction/屈折率
+  term: optical/光学的性質 -- index of refraction/屈折率
   active: true
 - id: optical -- luminescence
-  term: optical/工学的性質 -- luminescence/発光
+  term: optical/光学的性質 -- luminescence/発光
   active: true
 - id: optical -- photoconductivity
-  term: optical/工学的性質 -- photoconductivity/光伝導性
+  term: optical/光学的性質 -- photoconductivity/光伝導性
   active: true
 - id: rheological
   term: rheological/レオロジー(流動学)的性質

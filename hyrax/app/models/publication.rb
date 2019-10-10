@@ -39,6 +39,9 @@ class Publication < ActiveFedora::Base
   #   index.as :stored_searchable
   # end
 
+  # Required due to bug saving nested resources
+  property :updated_subresources, predicate: ::RDF::URI.new('http://example.com/updatedSubresources'), class_name: "ActiveTriples::Resource"
+
   # NGDR Hyrax Work Common
   property :alternative_title, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|
     index.as :stored_searchable
@@ -80,6 +83,8 @@ class Publication < ActiveFedora::Base
 
   property :complex_source, predicate: ::RDF::Vocab::ESciDocPublication.source, class_name: 'ComplexSource'
 
+  property :supervisor_approval, predicate: ::RDF::Vocab::NimsRdp['supervisor-approval']
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
@@ -92,4 +97,5 @@ class Publication < ActiveFedora::Base
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_event, reject_if: :event_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_source, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :updated_subresources, allow_destroy: true
 end

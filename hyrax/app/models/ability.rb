@@ -1,7 +1,7 @@
 class Ability
   include Hydra::Ability
-  
   include Hyrax::Ability
+
   # Registered user can only create datasets and publications
   self.ability_logic += [
     :everyone_can_create_dataset,

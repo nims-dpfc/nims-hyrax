@@ -25,6 +25,47 @@ module ComplexFieldsBehavior
     true
   end
 
+  # Delete person/organization from instrument and specimen_type where the record contains 
+  #   only role=operator (person) or purpose=manufacturer/supplier (organization)
+  #   this happens because we are validating nothing on instrument or speciment_type
+  # This is temporary until proper validation is in place
+  def cleanup_instrument_and_specimen_type(attribute)
+    # complex_instrument
+    attribute['complex_instrument_attributes'].each_with_index do | complex_instrument, index |
+      complex_instrument['complex_person_attributes'].each_with_index do | complex_person, i |
+        if complex_person['name'].blank? && complex_person['role'].include?('operator')
+          attribute['complex_instrument_attributes'][index]['complex_person_attributes'].delete_at(i)
+        end
+      end
+      complex_instrument['manufacturer_attributes'].each_with_index do | manufacturer, i |
+        if manufacturer['organization'].blank? && manufacturer['purpose'].include?('Manufacturer')
+          attribute['complex_instrument_attributes'][index]['manufacturer_attributes'].delete_at(i)
+        end
+      end
+      complex_instrument['managing_organization_attributes'].each_with_index do | managing_organization, i |
+        if managing_organization['organization'].blank? && managing_organization['purpose'].include?('Managing organization')
+          attribute['complex_instrument_attributes'][index]['managing_organization_attributes'].delete_at(i)
+        end
+      end
+    end
+    # complex_specimen_type
+    attribute['complex_specimen_type_attributes'].each_with_index do | complex_specimen_type, index |
+      complex_specimen_type['complex_purchase_record_attributes'].each_with_index do | complex_purchase_record, i |
+        complex_purchase_record['supplier_attributes'].each_with_index do | supplier, ii |
+          if supplier['organization'].blank? && supplier['purpose'].include?('Supplier')
+            attribute['complex_specimen_type_attributes'][index]['complex_purchase_record_attributes'][i]['supplier_attributes'].delete_at(ii)
+          end
+        end
+        complex_purchase_record['manufacturer_attributes'].each_with_index do | manufacturer, ii |
+          if manufacturer['organization'].blank? && manufacturer['purpose'].include?('Manufacturer')
+            attribute['complex_specimen_type_attributes'][index]['complex_purchase_record_attributes'][i]['manufacturer_attributes'].delete_at(ii)
+          end
+        end
+      end
+    end
+    attribute
+  end
+
   def cleanup_params(attribute)
     if attribute.kind_of? Hash and attribute.keys.all? {|k| k !~ /\D/ }
       # removes hashes with integer keys

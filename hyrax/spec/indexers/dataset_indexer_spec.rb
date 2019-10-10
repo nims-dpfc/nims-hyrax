@@ -896,7 +896,7 @@ RSpec.describe DatasetIndexer do
     end
   end
 
-  describe 'indexes a custom property active triple resource with all the attributes' do
+  describe 'indexes a custom property (additional metadata) active triple resource with all the attributes' do
     before do
       custom_properties = [
         {

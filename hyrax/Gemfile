@@ -64,6 +64,7 @@ group :development, :test do
   gem 'sqlite3', '~> 1.3.6'
   gem 'fcrepo_wrapper'
   gem 'rspec-rails'
+  gem 'pry'
 end
 
 gem 'sidekiq'
@@ -80,3 +81,5 @@ end
 
 gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'feature/prep_for_new_release'
 gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_oai_provider.git', branch: 'master'
+
+gem 'simplecov', require: false, group: :test

@@ -53,3 +53,7 @@ terms:
 - id: statistical mechanics
   term: statistical mechanics/統計力学
   active: true
+- id: other
+  term: other/その他
+  active: true
+  
