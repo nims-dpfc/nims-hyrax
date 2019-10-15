@@ -54,6 +54,18 @@ FactoryBot.define do
     trait :with_publisher do
       publisher { ['Foo Publisher'] }
     end
+
+    trait :with_complex_event do
+      complex_event_attributes {
+        [{
+             title: 'A Title',
+             invitation_status: true,
+             place: '221B Baker Street',
+             start_date: '2018-12-25',
+             end_date: '2019-01-01'
+        }]
+      }
+    end
   end
 
 end
