@@ -6,7 +6,7 @@ RSpec.describe NestedAffiliationInput, type: :input do
   let(:dataset) { build(:dataset, :with_complex_affiliation) }
   let(:object) { double(required?: true, model: dataset) }
   let(:builder) { SimpleForm::FormBuilder.new(:dataset, object, view, {}) }
-  let(:input) { NestedAffiliationInput.new(builder, :complex_affiliation, nil, :multi_value, {}) }
+  let(:input) { described_class.new(builder, :complex_affiliation, nil, :multi_value, {}) }
   let(:value) { dataset.complex_person.first.complex_affiliation.first }
   let(:index) { 0 }
   let(:options) { {} }
