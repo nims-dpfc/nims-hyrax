@@ -630,7 +630,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.description).to eq ['chemical composition 1']
       expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first.identifier).to eq ['chemical_composition/1234567']
-      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first.label).to be_empty
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first.label).to eq ['Identifier - Persistent']
       # crystallographic structure
       expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first.id).to include('#crystallographic_structure')
@@ -687,7 +687,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.description).to eq ['state of matter description']
       expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first.identifier).to eq ['state/123456']
-      expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first.label).to eq ['Local']
+      expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first.label).to eq ["Identifier - Persistent"]
       # structural feature
       expect(@obj.complex_specimen_type.first.complex_structural_feature.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_structural_feature.first.id).to include('#structural_feature')
@@ -696,7 +696,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_specimen_type.first.complex_structural_feature.first.sub_category).to eq ['structural feature sub category']
       expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first.identifier).to eq ['structural_feature/123456']
-      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first.label).to eq ['Local']
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first.label).to eq ["Identifier - Persistent"]
       # title
       expect(@obj.complex_specimen_type.first.title).to eq ['Specimen 1']
     end
