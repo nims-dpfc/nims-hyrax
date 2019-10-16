@@ -148,7 +148,9 @@ FactoryBot.define do
           complex_chemical_composition_attributes: [{
             description: 'chemical composition 1',
             complex_identifier_attributes: [{
-              identifier: 'chemical_composition/1234567'
+              identifier: 'chemical_composition/1234567',
+              scheme: 'identifier persistent',
+              label: 'Identifier - Persistent'
             }],
           }],
           complex_crystallographic_structure_attributes: [{
@@ -160,7 +162,9 @@ FactoryBot.define do
           }],
           description: 'Specimen description',
           complex_identifier_attributes: [{
-            identifier: 'specimen/1234567'
+            identifier: 'specimen/1234567',
+            scheme: 'identifier persistent',
+            label: 'Identifier - Persistent'
           }],
           complex_material_type_attributes: [{
             description: 'material description',
@@ -212,7 +216,8 @@ FactoryBot.define do
             description: 'state of matter description',
             complex_identifier_attributes: [{
               identifier: ['state/123456'],
-              label: ['Local']
+              scheme: 'identifier persistent',
+              label: 'Identifier - Persistent'
             }]
           }],
           complex_structural_feature_attributes: [{
@@ -221,7 +226,8 @@ FactoryBot.define do
             sub_category: 'structural feature sub category',
             complex_identifier_attributes: [{
               identifier: ['structural_feature/123456'],
-              label: ['Local']
+              scheme: 'identifier persistent',
+              label: 'Identifier - Persistent'
             }]
           }],
           title: 'Specimen 1'
@@ -248,6 +254,17 @@ FactoryBot.define do
         [{
           date: '1978-10-28',
           rights: 'http://creativecommons.org/publicdomain/zero/1.0/'
+        }]
+      }
+    end
+
+    trait :with_complex_version do
+      complex_version_attributes {
+        [{
+          date: '1978-10-28',
+          description: 'Creating the first version',
+          identifier: 'id1',
+          version: '1.0'
         }]
       }
     end
