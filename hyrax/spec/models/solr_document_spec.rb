@@ -317,4 +317,10 @@ RSpec.describe SolrDocument do
     subject { solr_document.status }
     it { is_expected.to eql ['Status'] }
   end
+
+  describe '#persistent_url' do
+    let(:model) { build(:dataset, id: '123456', title: ['Test']) }
+    subject { solr_document.persistent_url }
+    it { is_expected.to eql "http://localhost/concern/datasets/#{solr_document.id}" }
+  end
 end
