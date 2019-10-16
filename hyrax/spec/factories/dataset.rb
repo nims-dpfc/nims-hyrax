@@ -6,10 +6,15 @@ FactoryBot.define do
     skip_create
     override_new_record
 
-    trait :with_complex_affiliation do
+    trait :with_complex_person do
        complex_person_attributes {
          [{
           name: 'Anamika',
+          role: ['operator'],
+           complex_identifier_attributes: [{
+              identifier: '123456',
+              scheme: 'nims person id'
+            }],
           complex_affiliation_attributes: [{
             job_title: 'Principal Investigator',
             complex_organization_attributes: [{
@@ -17,8 +22,7 @@ FactoryBot.define do
               sub_organization: 'Department',
               purpose: 'Research'
             }]
-          }],
-          role: 'Creator'
+          }]
         }]
        }
     end
@@ -88,8 +92,9 @@ FactoryBot.define do
           }],
           description: 'Instrument description',
           complex_identifier_attributes: [{
-            identifier: ['123456'],
-            scheme: 'identifier persistent'
+            identifier: '123456',
+            scheme: 'identifier persistent',
+            label: 'Identifier Persistent'
           }],
           instrument_function_attributes: [{
             column_number: 1,
@@ -133,6 +138,116 @@ FactoryBot.define do
             }]
           }],
           title: 'Instrument title'
+        }]
+      }
+    end
+
+    trait :with_complex_specimen_type do
+      complex_specimen_type_attributes {
+        [{
+          complex_chemical_composition_attributes: [{
+            description: 'chemical composition 1',
+            complex_identifier_attributes: [{
+              identifier: 'chemical_composition/1234567'
+            }],
+          }],
+          complex_crystallographic_structure_attributes: [{
+            description: 'crystallographic_structure 1',
+            complex_identifier_attributes: [{
+              identifier: ['crystallographic_structure/123456'],
+              label: ['Local']
+            }],
+          }],
+          description: 'Specimen description',
+          complex_identifier_attributes: [{
+            identifier: 'specimen/1234567'
+          }],
+          complex_material_type_attributes: [{
+            description: 'material description',
+            material_type: 'some material type',
+            material_sub_type: 'some other material sub type',
+            complex_identifier_attributes: [{
+              identifier: ['material/ewfqwefqwef'],
+              scheme: 'identifier persistent',
+              label: 'Identifier - Persistent'
+            }],
+          }],
+          complex_purchase_record_attributes: [{
+            date: ['2018-02-14'],
+            complex_identifier_attributes: [{
+              identifier: ['purchase_record/123456'],
+              scheme: 'identifier persistent',
+              label: ['Identifier - Persistent']
+            }],
+            supplier_attributes: [{
+              organization: 'Fooss',
+              sub_organization: 'Barss',
+              purpose: 'Supplier',
+              complex_identifier_attributes: [{
+                identifier: 'supplier/123456789',
+                scheme: 'Local'
+              }]
+            }],
+            manufacturer_attributes: [{
+              organization: 'Foo',
+              sub_organization: 'Bar',
+              purpose: 'Manufacturer',
+              complex_identifier_attributes: [{
+                identifier: 'manufacturer/123456789',
+                scheme: 'Local'
+              }]
+            }],
+            purchase_record_item: ['Has a purchase record item'],
+            title: 'Purchase record title'
+          }],
+          complex_shape_attributes: [{
+            description: 'shape description',
+            complex_identifier_attributes: [{
+              identifier: ['shape/123456'],
+              scheme: 'identifier persistent',
+              label: 'Identifier - Persistent'
+            }]
+          }],
+          complex_state_of_matter_attributes: [{
+            description: 'state of matter description',
+            complex_identifier_attributes: [{
+              identifier: ['state/123456'],
+              label: ['Local']
+            }]
+          }],
+          complex_structural_feature_attributes: [{
+            description: 'structural feature description',
+            category: 'structural feature category',
+            sub_category: 'structural feature sub category',
+            complex_identifier_attributes: [{
+              identifier: ['structural_feature/123456'],
+              label: ['Local']
+            }]
+          }],
+          title: 'Specimen 1'
+        }]
+      }
+    end
+
+    trait :with_complex_relation do
+      complex_relation_attributes {
+        [{
+          title: 'A relation label',
+          url: 'http://example.com/relation',
+          complex_identifier_attributes: [{
+            identifier: ['123456'],
+            scheme: 'identifier persistent'
+          }],
+          relationship: 'isNewVersionOf'
+        }]
+      }
+    end
+
+    trait :with_complex_rights do
+      complex_rights_attributes {
+        [{
+          date: '1978-10-28',
+          rights: 'http://creativecommons.org/publicdomain/zero/1.0/'
         }]
       }
     end
