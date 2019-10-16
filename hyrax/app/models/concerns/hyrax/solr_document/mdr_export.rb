@@ -7,5 +7,3 @@ module Hyrax
     end
   end
 end
-
-SolrDocument.include Hyrax::SolrDocument::MdrExport
