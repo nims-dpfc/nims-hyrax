@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe NestedAffiliationInput, type: :input do
   it { expect(described_class).to be < NestedAttributesInput }
 
-  let(:dataset) { build(:dataset, :with_complex_affiliation) }
+  let(:dataset) { build(:dataset, :with_complex_person) }
   let(:object) { double(required?: true, model: dataset) }
   let(:builder) { SimpleForm::FormBuilder.new(:dataset, object, view, {}) }
   let(:input) { described_class.new(builder, :complex_affiliation, nil, :multi_value, {}) }
