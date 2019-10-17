@@ -4,6 +4,7 @@ volumes:
   solr:
   db:
   db-fcrepo:
+  app:
 
 networks:
   internal:
@@ -90,6 +91,10 @@ services:
         AIRBRAKE_PROJECT_KEY: ${AIRBRAKE_PROJECT_KEY}
     env_file:
       - .env
+    volumes:
+      - app:${UPLOADS_PATH}
+      - app:${DERIVATIVES_PATH}
+      - app:${CACHE_PATH}
     networks:
       internal:
 
