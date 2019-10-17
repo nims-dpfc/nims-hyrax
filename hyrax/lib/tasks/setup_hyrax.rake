@@ -45,5 +45,10 @@ namespace :ngdr do
     Rake::Task['hyrax:default_admin_set:create'].invoke
     Rake::Task['hyrax:workflow:load'].invoke
     Rake::Task['hyrax:default_collection_types:create'].invoke
+
+    ##############################################
+    # Create languages controlled vocabulary
+    ######
+    Rake::Task['hyrax:controlled_vocabularies:language'].invoke if Qa::Authorities::Local.subauthority_for('languages').all.size == 0
   end
 end
