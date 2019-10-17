@@ -6,9 +6,10 @@ class FileSet < ActiveFedora::Base
   end
 
   include ::Hyrax::FileSetBehavior
-  # override method in  lib/hydra/works/models/concerns/file_set/mime_types.rb
-  #   add text/plain
-  def office_document_mime_types
+  
+  # override method in lib/hydra/works/models/concerns/file_set/mime_types.rb
+    #   add text/plain
+  def self.office_document_mime_types
     ['text/plain',
      'text/rtf',
      'application/msword',
