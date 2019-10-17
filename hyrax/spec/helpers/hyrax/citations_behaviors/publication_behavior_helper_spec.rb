@@ -24,9 +24,16 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
   end
 
   describe '#setup_pub_place' do
-    let(:publication) { build(:publication, :with_place) }
-    subject { helper.setup_pub_place(presenter) }
-    it { is_expected.to eql('221B Baker Street') }
+    context 'with publication' do
+      let(:publication) { build(:publication, :with_place) }
+      subject { helper.setup_pub_place(presenter) }
+      it { is_expected.to eql('221B Baker Street') }
+    end
+    context 'with dataset' do
+      let(:publication) { build(:dataset) }
+      subject { helper.setup_pub_place(presenter) }
+      it { is_expected.to eql('') }
+    end
   end
 
   describe '#setup_pub_publisher' do
