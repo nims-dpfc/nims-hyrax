@@ -22,10 +22,8 @@ class SolrDocument
   # and Blacklight::Document::SemanticFields#to_semantic_values
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
-  # JA - add blacklight document for jpcoar
-  use_extension(Document::Jpcoar)
 
-  # JA - add field_semantics for oai_dc
+  # Add field_semantics for oai_dc
   field_semantics.merge!(
     contributor: '', # @todo - extract anything other than author from complex person, may need new solr field
     creator: 'complex_person_author_tesim',
@@ -39,63 +37,12 @@ class SolrDocument
     subject: 'subject_tesim',
     title: 'title_tesim',
     type: 'resource_type_tesim'
-    # todo add jpcoar fields
   )
 
-  # JA - to_jpcoar
-  def to_jpcoar
-    export_as('jpcoar_xml')
-  end
 
   # Do content negotiation for AF models.
 
   use_extension( Hydra::ContentNegotiation )
-
-  # JA - I wasn't sure whether the OaiDc was needed as I think Blacklight::Document::DublinCore is doing this already, when used with field_semantics I added
-  # include Formats::OaiDc
-
-  # I think my Document::Jpcoar above is doing the same as Jpcoar here, but needs additional processing
-  # include Formats::Jpcoar
-
-  # JA - commented out during testing Document::Jpcoar
-  #  I think this can be moved into Document::Jpcoar and used for building the xml there
-  # def process_mapping(xml, field, mapping)
-  #   if mapping.present?
-  #     if mapping.is_a?(Array)
-  #       mapping.each do |mapping_item|
-  #         # recurse and process each item in the array
-  #         process_mapping(xml, field, mapping_item)
-  #       end
-
-  #     elsif mapping.is_a?(Hash)
-  #       if mapping[:field].present?
-  #         Array.wrap(self[mapping[:field]]).each do |unparsed_value|
-  #           value = self.send(mapping[:'function'], unparsed_value, mapping[:'argument'] || '.')
-  #           xml.tag! field, value if value.present?
-  #         end
-  #       elsif mapping[:function].present?
-  #         value = self.send(mapping[:'function'], field, xml)
-  #       else
-  #         puts "WARNING: mapping #{mapping.inspect} is ignored"
-  #       end
-
-  #     elsif mapping.is_a?(String)
-  #       Array.wrap(self[mapping]).each do |value|
-  #         xml.tag! field, value
-  #       end
-  #     end
-
-  #   end
-  # end
-
-  # def xml_parse_and_select(unparsed_value, xpath_select)
-  #   # using some caching to avoid re-parsing the same content
-  #   key = unparsed_value.hash
-  #   @parsed_xml ||= {}
-  #   @parsed_xml[key] ||=  Nokogiri::XML(JSON.parse(unparsed_value).to_xml(root: 'root'))
-
-  #   @parsed_xml[key].xpath(xpath_select)
-  # end
 
   def alternative_title
     self[Solrizer.solr_name('alternative_title', :stored_searchable)]
