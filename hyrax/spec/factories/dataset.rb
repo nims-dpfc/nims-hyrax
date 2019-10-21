@@ -92,7 +92,7 @@ FactoryBot.define do
           }],
           description: 'Instrument description',
           complex_identifier_attributes: [{
-            identifier: '123456',
+            identifier: 'instrument/27213727',
             scheme: 'identifier persistent',
             label: 'Identifier Persistent'
           }],

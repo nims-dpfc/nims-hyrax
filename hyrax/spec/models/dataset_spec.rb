@@ -465,7 +465,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_instrument.first.complex_date.first.date).to eq ['2018-02-14']
       expect(@obj.complex_instrument.first.description).to eq ['Instrument description']
       expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['123456']
+      expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['instrument/27213727']
       expect(@obj.complex_instrument.first.complex_identifier.first.label).to eq ['Identifier Persistent']
       expect(@obj.complex_instrument.first.complex_identifier.first.scheme).to eq ['identifier persistent']
       expect(@obj.complex_instrument.first.instrument_function.first).to be_kind_of ActiveTriples::Resource
