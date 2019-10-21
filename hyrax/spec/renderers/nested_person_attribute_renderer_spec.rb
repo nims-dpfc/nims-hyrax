@@ -1,0 +1,32 @@
+require 'rails_helper'
+
+RSpec.describe NestedPersonAttributeRenderer do
+  let(:html) { described_class.new('Person', nested_value.to_json).render }
+  let(:nested_value) { build(:dataset, :with_complex_person).complex_person.first }
+  subject { Capybara.string(html) }
+  it 'generates the correct fields' do
+    is_expected.to have_css('th', text: 'Person')
+
+    is_expected.to have_css('div.row label', text: 'Name')
+    is_expected.to have_css('div.row a', text: 'Anamika')
+
+    is_expected.to have_css('div.row label', text: 'NIMS Person ID')
+    is_expected.to have_css('div.row', text: '123456')
+
+    is_expected.to have_css('div.row label', text: 'Affiliation')
+    is_expected.to have_css('div.row label', text: 'Job title')
+    is_expected.to have_css('div.row', text: 'Principal Investigator')
+
+    is_expected.to have_css('div.row label', text: 'Organization')
+    is_expected.to have_css('div.row a', text: 'University')
+
+    is_expected.to have_css('div.row label', text: 'Sub organization')
+    is_expected.to have_css('div.row', text: 'Department')
+
+    is_expected.to have_css('div.row label', text: 'Role')
+    is_expected.to have_css('div.row', text: 'Research')
+
+    is_expected.to have_css('div.row label', text: 'Role')
+    is_expected.to have_css('div.row', text: 'operator/データ測定者・計算者')
+  end
+end
