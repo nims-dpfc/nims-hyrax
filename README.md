@@ -221,3 +221,7 @@ There is [docker documentation](https://docs.docker.com/storage/volumes/#backup-
 * As mentioned above, there is a `.env` file containing application secrets. This **must not** be checked into version control!
 * The system is configured on start-up using the `docker-entrypoint.sh` script, which configures users in the `seed/setup.json` file.
 * Importers are run manually in the container using the rails console. See [The project wiki](https://github.com/antleaf/nims-hyrax/wiki) for more information.
+
+## Code Status
+
+[![Coverage Status](https://coveralls.io/repos/github/antleaf/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/antleaf/nims-hyrax?branch=develop)
