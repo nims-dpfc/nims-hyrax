@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="windows-31j"?>
+
+<!--  Test file used by spec/services/willow_sword/crosswalk_from_mdr_spec.rb  -->
+
+<ns0:depositUploadReq  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                       xmlns:ns0='https://gitlab.nims.go.jp/dpfc/general/api-definition/blob/master/depositUploadReq'
+                       xsi:schemaLocation='https://gitlab.nims.go.jp/dpfc/general/api-definition/blob/master/depositUploadReq api-fwk_depositUploadReq.xsd'>
+    <DCMIdataset>
+    </DCMIdataset>
+    <common-term disclosure="">
+        <basic-data-description>
+            <data-identifier updated="false" pid-validness="true">
+                <data-permanent-identifier></data-permanent-identifier>
+                <data-local-identifier>123456789unknown</data-local-identifier>
+            </data-identifier>
+            <stakeholders>
+                <author-identifier>
+                    <identifier-type>nims-internal</identifier-type>
+                    <nims-identifier>00112233</nims-identifier>
+                    <description>Test1, TEST1</description>
+                </author-identifier>
+                <data-depositor-identifier>
+                    <identifier-type>nims-internal</identifier-type>
+                    <nims-identifier>00445566</nims-identifier>
+                    <description>Test2, TEST2</description>
+                </data-depositor-identifier>
+                <data-curator-identifier>
+                    <identifier-type>nims-internal</identifier-type>
+                    <nims-identifier>00778899</nims-identifier>
+                    <description>Test3, TEST3</description>
+                </data-curator-identifier>
+                <contact-person-identifier>
+                    <identifier-type>nims-internal</identifier-type>
+                    <nims-identifier>09876543</nims-identifier>
+                    <description>Test4, TEST4</description>
+                </contact-person-identifier>
+            </stakeholders>
+            <organization>
+                <identifier-type>descriptional</identifier-type>
+                <organization-description>
+                    <title-major-organization>NIMS</title-major-organization>
+                </organization-description>
+            </organization>
+            <project authorized-project="true">
+                <project-identifier>project0012345*</project-identifier>
+            </project>
+            <system-history>
+                <data-origin-system>1234*</data-origin-system>
+                <data-delievery>
+                    <treating-core-system>Passing</treating-core-system>
+                    <directing-repository>true</directing-repository>
+                    <directed-systems></directed-systems>
+                </data-delievery>
+            </system-history>
+            <data-history>
+                <created-date-at-origin>2018-12-30</created-date-at-origin>
+                <latest-modified-date-at-origin>2018-12-31</latest-modified-date-at-origin>
+                <deposit-to-core-date></deposit-to-core-date>
+            </data-history>
+            <data-origin>experiments</data-origin>
+            <licenses>
+                <license>***</license>
+                <additional-description></additional-description>
+            </licenses>
+            <visibility>
+                <visibility>Public</visibility>
+            </visibility>
+        </basic-data-description>
+        <specimen-description>
+            <specimen-description>unknown</specimen-description>
+        </specimen-description>
+    </common-term>
+    <domain-specific-term disclosure="">
+        <specimen-types disclosure="">
+            <type>
+                <specimen-identifier>
+                    <pid></pid>
+                    <additional-identifier-type>local-identifier</additional-identifier-type>
+                    <local-identifier>999999999</local-identifier>
+                </specimen-identifier>
+                <description>unknown</description>
+            </type>
+        </specimen-types>
+    </domain-specific-term>
+    <additional-attachment-pointer>
+        <additional-for-attached-filename attached-order="1">
+		<object-path-name>work/specimen/unknown.zip</object-path-name>
+        </additional-for-attached-filename>
+        <spared-space-for-token attached-order="">
+            <object-data></object-data>
+        </spared-space-for-token>
+        <additional-for-attached-signature attached-order="">
+            <object-data></object-data>
+        </additional-for-attached-signature>
+    </additional-attachment-pointer>
+</ns0:depositUploadReq>
