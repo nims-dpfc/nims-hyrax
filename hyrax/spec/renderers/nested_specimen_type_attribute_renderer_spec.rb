@@ -7,7 +7,7 @@ RSpec.describe NestedSpecimenTypeAttributeRenderer do
 
   it 'generates the correct fields' do
     is_expected.to have_css('th', text: 'Speciman type')
-    
+
     is_expected.to have_css('div.row label', text: 'Title')
     is_expected.to have_css('div.row', text: 'Specimen 1')
 
