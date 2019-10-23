@@ -30,22 +30,7 @@ class CatalogController < ApplicationController
     config.view.gallery.partials = [:index_header, :index]
     config.view.slideshow.partials = [:index]
 
-    config.oai = {
-      provider: {
-        repository_name: 'NIMS NGDR',
-        #repository_url: 'https://ngdrdemo.cottagelabs.com/catalog/oai',
-        repository_url: 'http://localhost:3000/catalog/oai',
-        record_prefix: 'ngdrdemo',
-        admin_email: 'nims.ngdr@gmail.com',
-        sample_id: 'x059c7329'
-      },
-      document: {
-        limit: 25,            # number of records returned with each request, default: 15
-        set_fields: nil #[        # ability to define ListSets, optional, default: nil
-            #{ label: 'language', solr_field: 'language_facet' }
-        #]
-      }
-    }
+    config.oai = OAI_CONFIG
 
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
     config.default_solr_params = {
