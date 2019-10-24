@@ -59,6 +59,10 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
+  property :complex_characterization_method, predicate: ::RDF::Vocab::NimsRdp['complex-characterization-method'], class_name: 'ComplexCharacterizationMethod'
+
+  property :complex_computational_method, predicate: ::RDF::Vocab::NimsRdp['complex-computational-method'], class_name: 'ComplexComputationalMethod'
+
   # TODO - This is required
   property :data_origin, predicate: ::RDF::Vocab::NimsRdp['data-origin'] do |index|
     index.as :stored_searchable, :facetable
@@ -114,6 +118,8 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_characterization_method, reject_if: :key_value_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_computational_method, reject_if: :key_value_blank, allow_destroy: true
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
 end

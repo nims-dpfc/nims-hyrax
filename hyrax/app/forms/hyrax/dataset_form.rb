@@ -26,7 +26,8 @@ module Hyrax
       :complex_identifier,
       :data_origin, :complex_instrument, :origin_system_provenance,
       :properties_addressed, :complex_relation, :specimen_set,
-      :complex_specimen_type, :synthesis_and_processing, :custom_property
+      :complex_specimen_type, :synthesis_and_processing, :custom_property,
+      :complex_characterization_method, :complex_computational_method
     ]
 
     self.required_fields -= [
@@ -58,7 +59,9 @@ module Hyrax
         :characterization_methods, :computational_methods,
         # :origin_system_provenance, # not using this
         :properties_addressed,
-        :synthesis_and_processing
+        :synthesis_and_processing,
+        :complex_characterization_method,
+        :complex_computational_method,
       ]
     end
 
@@ -72,7 +75,8 @@ module Hyrax
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
       :complex_organization, :complex_person, :complex_relation, :complex_rights,
-      :complex_specimen_type, :complex_version, :custom_property].freeze
+      :complex_specimen_type, :complex_version, :complex_characterization_method,
+      :complex_computational_method, :custom_property].freeze
 
     protected
 
@@ -272,6 +276,22 @@ module Hyrax
       ]
     end
 
+    def self.permitted_characterization_method_params
+      [:id,
+       :_destroy,
+       {
+       }
+      ]
+    end
+
+    def self.permitted_computational_method_params
+      [:id,
+       :_destroy,
+       {
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
@@ -283,6 +303,8 @@ module Hyrax
       permitted << { complex_rights_attributes: permitted_rights_params }
       permitted << { complex_specimen_type_attributes: permitted_specimen_type_params }
       permitted << { complex_version_attributes: permitted_version_params }
+      permitted << { complex_characterization_method_attributes: permitted_characterization_method_params }
+      permitted << { complex_computational_method_attributes: permitted_computational_method_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
