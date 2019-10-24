@@ -119,7 +119,7 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_characterization_method, reject_if: :key_value_blank, allow_destroy: true
-  accepts_nested_attributes_for :complex_computational_method, reject_if: :key_value_blank, allow_destroy: true
-  accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_computational_method, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :custom_property, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
 end
