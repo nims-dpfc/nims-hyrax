@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe ComplexShape do
+RSpec.describe ComplexSynthesisAndProcessing do
   before do
     class ExampleWork < ActiveFedora::Base
-      property :complex_shape, predicate: ::RDF::Vocab::NimsRdp.shape,
-        class_name:"ComplexShape"
-      accepts_nested_attributes_for :complex_shape
+      property :complex_synthesis_and_processing, predicate: ::RDF::Vocab::NimsRdp['complex-synthesis-and-processing'],
+        class_name: "ComplexSynthesisAndProcessing"
+      accepts_nested_attributes_for :complex_synthesis_and_processing
     end
   end
   after do
@@ -20,8 +20,8 @@ RSpec.describe ComplexShape do
     end
     subject do
       ExampleWork
-          .new({ complex_shape_attributes: [{ description: 'Foo' }]})
-          .complex_shape
+          .new({ complex_synthesis_and_processing_attributes: [{ description: 'Foo' }]})
+          .complex_synthesis_and_processing
           .first
           .description
     end
@@ -31,92 +31,52 @@ RSpec.describe ComplexShape do
   it 'has the correct uri' do
     @obj = ExampleWork.new
     @obj.attributes = {
-      complex_shape_attributes: [{
-        complex_identifier_attributes: [{
-          identifier: ['ewfqwefqwef'],
-        }],
-        description: 'shape 1'
+      complex_synthesis_and_processing_attributes: [{
+        description: 'synthesis_and_processing 1'
       }]
     }
-    expect(@obj.complex_shape.first.id).to include('#shape')
-  end
-
-  it 'creates a shape active triple resource with all the attributes' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_shape_attributes: [{
-        description: 'shape description',
-        complex_identifier_attributes: [{
-          identifier: ['123456'],
-          label: ['Local']
-        }]
-      }]
-    }
-    expect(@obj.complex_shape.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_shape.first.id).to include('#shape')
-    expect(@obj.complex_shape.first.description).to eq ['shape description']
-    expect(@obj.complex_shape.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_shape.first.complex_identifier.first.identifier).to eq ['123456']
-    expect(@obj.complex_shape.first.complex_identifier.first.label).to eq ['Local']
+    expect(@obj.complex_synthesis_and_processing.first.id).to include('#complex-synthesis-and-processing')
   end
 
   describe "when reject_if is a symbol" do
     before do
       class ExampleWork2 < ExampleWork
         include ComplexValidation
-        accepts_nested_attributes_for :complex_shape, reject_if: :identifier_description_blank
+        accepts_nested_attributes_for :complex_synthesis_and_processing, reject_if: :all_blank
       end
     end
     after do
       Object.send(:remove_const, :ExampleWork2)
     end
 
-    it 'creates a shape active triple resource with description and identifier' do
+    it 'creates a synthesis_and_processing active triple resource with description and identifier' do
       @obj = ExampleWork2.new
       @obj.attributes = {
-        complex_shape_attributes: [{
+        complex_synthesis_and_processing_attributes: [{
           description: 'chemical composition 12',
-          complex_identifier_attributes: [{
+          instrument_identifier_attributes: [{
+            identifier: ['11223344'],
+          }],
+          standarized_procedure_attributes: [{
             identifier: ['ewfqwefqwef'],
           }]
         }]
       }
-      expect(@obj.complex_shape.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_shape.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_shape.first.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
-      expect(@obj.complex_shape.first.description).to eq ['chemical composition 12']
+      expect(@obj.complex_synthesis_and_processing.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_synthesis_and_processing.first.standarized_procedure.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_synthesis_and_processing.first.standarized_procedure.first.identifier).to eq ['ewfqwefqwef']
+      expect(@obj.complex_synthesis_and_processing.first.instrument_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_synthesis_and_processing.first.instrument_identifier.first.identifier).to eq ['11223344']
+      expect(@obj.complex_synthesis_and_processing.first.description).to eq ['chemical composition 12']
     end
 
-    it 'rejects a shape active triple with no description' do
+    it 'rejects a synthesis_and_processing active triple with no description' do
       @obj = ExampleWork2.new
       @obj.attributes = {
-        complex_shape_attributes: [{
-          complex_identifier_attributes: [{
-            identifier: ['ewfqwefqwef'],
-          }]
+        complex_synthesis_and_processing_attributes: [{
         }]
       }
-      expect(@obj.complex_shape).to be_empty
-    end
-
-    it 'rejects a shape active triple with no identifier' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_shape_attributes: [{
-          description: 'composition 1'
-        }]
-      }
-      expect(@obj.complex_shape).to be_empty
-      @obj2 = ExampleWork2.new
-      @obj2.attributes = {
-        complex_shape_attributes: [{
-          description: 'shape description',
-          complex_identifier_attributes: [{
-            label: ['Local']
-          }]
-        }]
-      }
-      expect(@obj2.complex_shape).to be_empty
+      expect(@obj.complex_synthesis_and_processing).to be_empty
     end
   end
 end
