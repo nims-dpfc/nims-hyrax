@@ -37,7 +37,7 @@ RSpec.describe ComplexCharacterizationMethod do
         }
       ]
     }
-    expect(@obj.complex_characterization_method.first.id).to include('#complex_characterization_method')
+    expect(@obj.complex_characterization_method.first.id).to include('#complex-characterization-method')
   end
 
   it 'creates an characterization_method active triple resource with all the attributes' do

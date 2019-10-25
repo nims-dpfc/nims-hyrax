@@ -10,7 +10,7 @@ class ComplexCharacterizationMethod < ActiveTriples::Resource
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)
     if uri.try(:node?)
-      uri = RDF::URI("#complex_characterization_method#{uri.to_s.gsub('_:', '')}")
+      uri = RDF::URI("#complex-characterization-method#{uri.to_s.gsub('_:', '')}")
     elsif uri.start_with?("#")
       uri = RDF::URI(uri)
     end

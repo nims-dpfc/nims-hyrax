@@ -37,7 +37,7 @@ RSpec.describe ComplexComputationalMethod do
         }
       ]
     }
-    expect(@obj.complex_computational_method.first.id).to include('#complex_computational_method')
+    expect(@obj.complex_computational_method.first.id).to include('#complex-computational-method')
   end
 
   it 'creates an computational_method active triple resource with all the attributes' do
