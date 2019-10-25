@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ComplexComputationalMethod do
   before do
     class ExampleWork < ActiveFedora::Base
-      property :complex_computational_method, predicate: ::RDF::Vocab::NimsRdp['complex-computational-method'], class_name: 'ComplexComputationalMethod',
+      property :complex_computational_method, predicate: ::RDF::Vocab::NimsRdp['complex-computational-method'],
         class_name: "ComplexComputationalMethod"
       accepts_nested_attributes_for :complex_computational_method
     end
