@@ -58,6 +58,7 @@ module Hyrax
           complex_event_date
           complex_characterization_method
           complex_computational_method
+          complex_synthesis_and_processing
 
         ]
       end
