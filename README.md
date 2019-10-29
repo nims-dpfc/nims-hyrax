@@ -224,4 +224,6 @@ There is [docker documentation](https://docs.docker.com/storage/volumes/#backup-
 
 ## Code Status
 
+[![Codeship Status for antleaf/nims-hyrax](https://app.codeship.com/projects/d4cc8560-e430-0136-fffd-6a7889452552/status?branch=master)](https://app.codeship.com/projects/319029)
+
 [![Coverage Status](https://coveralls.io/repos/github/antleaf/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/antleaf/nims-hyrax?branch=develop)
