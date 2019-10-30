@@ -5,8 +5,6 @@ include Warden::Test::Helpers
 RSpec.feature 'Create a Dataset', js: false do # NB: change to "js: true" to use Selenium/Firefox capybara driver
   include ActiveJob::TestHelper
 
-  # TODO: investigate how to run integration tests via capybara / cucumber
-
   context 'a logged in user' do
     let(:user) do
       User.new({ email: 'test@example.com', username: 'user' }) { |u| u.save(validate: false) }
