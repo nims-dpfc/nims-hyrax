@@ -51,7 +51,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'hyrax', '~> 2.4.1'
+gem 'hyrax', '~> 2.6'
 group :development, :test do
   gem 'solr_wrapper', '~> 2.0'
 end
@@ -88,3 +88,5 @@ group :test do
   gem 'webdrivers', '~> 4.1'
   # gem 'capybara-selenium', '~> 0.0.6'
 end
+
+gem 'coveralls', require: false
