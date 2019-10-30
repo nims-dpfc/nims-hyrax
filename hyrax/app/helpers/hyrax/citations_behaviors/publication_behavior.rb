@@ -1,3 +1,4 @@
+# override - hyrax-2.4.1
 require 'json'
 module Hyrax
   module CitationsBehaviors
@@ -6,6 +7,7 @@ module Hyrax
 
       # nims override to add doi
       def setup_doi(presenter)
+        return '' if presenter.complex_identifier == ["[]"]
         JSON.parse(presenter.complex_identifier).
             select{|i| i["scheme"].any?{|s| s =~/doi/i} }.
             pluck('identifier').
@@ -33,7 +35,9 @@ module Hyrax
       # @param [Hyrax::PublicationPresenter] presenter
       # nims override to retrieve place
       def setup_pub_place(presenter)
-        # unclear whether place is a single value or multi-value
+        return '' unless presenter.respond_to?(:place)
+        return '' if presenter.place.blank?
+        # place is a singular property, but returns here as an array (?)
         presenter.place.is_a?(String) ? presenter.place : presenter.place&.first
       end
 
