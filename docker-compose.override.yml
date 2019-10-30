@@ -32,7 +32,7 @@ services:
       - file_uploads:${UPLOADS_PATH}
       - derivatives:${DERIVATIVES_PATH}
       - cache:${CACHE_PATH}
-      - /srv/ngdr/data/:/data/data
+      - ${HOST_APP_DATA_PATH:-/srv/ngdr/data/}:/data/data
 
   web:
     ports:
