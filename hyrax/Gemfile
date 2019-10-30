@@ -84,4 +84,7 @@ gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :bra
 group :test do
   gem 'simplecov', require: false
   gem 'capybara'
+  gem 'launchy'
+  gem 'webdrivers', '~> 4.1'
+  # gem 'capybara-selenium', '~> 0.0.6'
 end
