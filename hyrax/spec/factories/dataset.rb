@@ -27,6 +27,27 @@ FactoryBot.define do
        }
     end
 
+    trait :with_complex_author do
+      complex_person_attributes {
+        [{
+         name: 'Anamika',
+         role: ['author'],
+          complex_identifier_attributes: [{
+             identifier: '123456',
+             scheme: 'nims person id'
+           }],
+         complex_affiliation_attributes: [{
+           job_title: 'Principal Investigator',
+           complex_organization_attributes: [{
+             organization: 'University',
+             sub_organization: 'Department',
+             purpose: 'Research'
+           }]
+         }]
+       }]
+      }
+   end
+
     trait :with_complex_chemical_composition do
       complex_specimen_type_attributes {
         [{

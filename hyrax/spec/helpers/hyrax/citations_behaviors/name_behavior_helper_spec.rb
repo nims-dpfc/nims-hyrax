@@ -55,6 +55,22 @@ RSpec.describe Hyrax::CitationsBehaviors::NameBehavior, :type => :helper do
     end
   end
 
+  describe 'dataset' do
+    let(:dataset) { build(:dataset, :with_complex_author) }
+    let(:presenter) { Hyrax::WorkPresenter.new(SolrDocument.new(dataset.to_solr),  Ability.new(nil)) }
+    
+    context '#all_authors contains an author' do
+      subject { helper.all_authors(presenter) }
+      it { is_expected.to match_array(['Anamika']) }
+    end
+
+    context '#all_authors is empty' do
+      let(:dataset) { build(:dataset, :with_complex_person) }
+      subject { helper.all_authors(presenter) }
+      it { is_expected.to match_array([]) }
+    end
+  end
+
   it 'has no singleton methods' do
     expect(subject.singleton_methods).to be_empty
   end
