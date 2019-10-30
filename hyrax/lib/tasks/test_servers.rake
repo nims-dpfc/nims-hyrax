@@ -1,45 +1,22 @@
-require 'solr_wrapper/rake_task'
-require 'fcrepo_wrapper/rake_task'
-require 'active_fedora/rake_support'
-
-SolrWrapper.default_instance_options = {
-    verbose: true,
-    cloud: false,
-    port: ENV['SOLR_TEST_PORT'] || '8985',
-    version: '7.7.2', # NB: ideally this should match the version in docker-compose.yml
-    download_dir: 'tmp',
-    instance_dir: 'tmp/solr-test',
-
-    # collection_config: 'solr/config/',
-    # solr_xml: 'solr/config/solrconfig.xml',
-    # collection_name: 'hydra-test',
-}
-
-FcrepoWrapper.default_instance({
-    verbose: true,
-    version: '4.7.3', # NB: ideally this should match the version in docker-compose.yml
-    instance_dir: 'tmp/fcrepo4-test',
-    fcrepo_home_dir: 'tmp/fcrepo4-test/home',
-    enable_jms: false,
-    download_dir: 'tmp',
-    port: ENV['FEDORA_TEST_PORT'] || '8986'
-})
-
-def solr
-  SolrWrapper.default_instance
-end
+FEDORA_PID_FILE = '.fedora-test.pid'
+SOLR_PID_FILE = '.solr-test.pid'
 
 namespace :test do
   namespace :servers do
 
     desc "Load the solr options and solr instance"
     task :environment do
-      fail "ERROR: must be run with RAILS_ENV=test (currently: #{ENV['RAILS_ENV']})" unless ENV['RAILS_ENV'] == 'test'
+      abort "ERROR: must be run with RAILS_ENV=test (currently: #{ENV['RAILS_ENV']})" unless ENV['RAILS_ENV'] == 'test'
+
+      SolrWrapper.default_instance_options =  { config: 'config/solr_wrapper_test.yml' }
       @solr_instance = SolrWrapper.default_instance
+      @fcrepo_instance = FcrepoWrapper.default_instance(config: 'config/fcrepo_wrapper_test.yml')
     end
 
     desc 'Starts a test Solr and Fedora instance for running cucumber tests'
     task :start => :environment do
+      abort "WARNING: Solr-test is already running; run \"rake test:servers:stop\" to stop it" if File.exists?(SOLR_PID_FILE)
+      abort "WARNING: Fedora-test is already running; run \"rake test:servers:stop\" to stop it" if File.exists?(FEDORA_PID_FILE)
 
       # clean out any old solr files
       @solr_instance.remove_instance_dir!
@@ -47,27 +24,32 @@ namespace :test do
 
       # start solr
       @solr_instance.start
+      # create the core - a bit of a bodge is required to get the correct collection options
+      collection_options = HashWithIndifferentAccess.new(@solr_instance.config.options[:collection].except(:name))
+      @solr_instance.create(collection_options)
+      File.write(SOLR_PID_FILE, @solr_instance.pid)
 
-      # create the core
-      @solr_instance.with_collection({name: 'hydra-test', dir: 'solr/config', persist: true}) { }
-
-      # require 'byebug'
-      # byebug
-
-      Rake::Task['fcrepo:clean'].invoke
-      Rake::Task['fcrepo:start'].invoke
-
-      puts "FEDORA CONFIG:"
-      puts ActiveFedora.config.credentials.inspect
-
-      puts "----\nSOLR CONFIG:"
-      puts ActiveFedora.solr_config.inspect
-
+      # start fedora
+      @fcrepo_instance.remove_instance_dir!
+      @fcrepo_instance.start
+      File.write(FEDORA_PID_FILE, @fcrepo_instance.pid)
     end
 
     task :stop => :environment do
-      Rake::Task['fcrepo:stop'].invoke
-      Rake::Task['solr:stop'].invoke
+      # kill fedora and clean up
+      if File.exists?(FEDORA_PID_FILE)
+        # NB: we cannot use @fcrepo_instance.stop here as the @instance does not know its PID, so kill in the conventional way instead
+        Process.kill 'HUP', File.read(FEDORA_PID_FILE).to_i
+        File.delete(FEDORA_PID_FILE)
+        @fcrepo_instance.remove_instance_dir!
+      end
+
+      # stop solr and clean up
+      if File.exists?(SOLR_PID_FILE)
+        @solr_instance.stop
+        File.delete(SOLR_PID_FILE)
+        @solr_instance.remove_instance_dir!
+      end
     end
   end
 end
