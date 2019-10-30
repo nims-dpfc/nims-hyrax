@@ -1,5 +1,5 @@
-FEDORA_PID_FILE = '.fedora-test.pid'
-SOLR_PID_FILE = '.solr-test.pid'
+FEDORA_PID_FILE = 'tmp/.fedora-test.pid'
+SOLR_PID_FILE = 'tmp/.solr-test.pid'
 
 namespace :test do
   namespace :servers do
@@ -41,6 +41,7 @@ namespace :test do
         # NB: we cannot use @fcrepo_instance.stop here as the @instance does not know its PID, so kill in the conventional way instead
         Process.kill 'HUP', File.read(FEDORA_PID_FILE).to_i
         File.delete(FEDORA_PID_FILE)
+        sleep(0.5)
         @fcrepo_instance.remove_instance_dir!
       end
 
