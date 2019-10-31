@@ -10,11 +10,11 @@ class ComplexSynthesisAndProcessing < ActiveTriples::Resource
   property :process_date, predicate: ::RDF::Vocab::VCARD.Date
   accepts_nested_attributes_for :complex_date
 
-  property :instrument_identifier, predicate: ::RDF::Vocab::NimsRdp['instrument_identifier'],
+  property :instrument_identifier, predicate: ::RDF::Vocab::NimsRdp['instrument-identifier'],
             class_name: "ComplexIdentifier"
   accepts_nested_attributes_for :instrument_identifier
 
-  property :standarized_procedure, predicate: ::RDF::Vocab::NimsRdp['standarized_procedure'],
+  property :standarized_procedure, predicate: ::RDF::Vocab::NimsRdp['standarized-procedure'],
             class_name: "ComplexIdentifier"
   accepts_nested_attributes_for :standarized_procedure
 
