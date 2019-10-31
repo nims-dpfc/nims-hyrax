@@ -1,5 +1,10 @@
+require 'coveralls'
 require 'simplecov'
+Coveralls.wear!
 SimpleCov.start 'rails' do
+  # we do not unit test importers, as this is run-once code
+  add_filter "lib/importers"
+
   # additional code coverage groups for Hyrax
   add_group 'Actors', 'app/actors'
   add_group 'Forms', 'app/forms'
