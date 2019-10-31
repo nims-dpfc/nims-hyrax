@@ -344,6 +344,9 @@ module Importers
         #   checksum-algorithm
         val = get_text(node, 'pid')
         properties[:pid] = val[0] if val.any?
+        unless properties[:pid]
+          properties[:pid] = "hdl:someHandle/test/#{component.attribute("href").value.split("/").last}"
+        end
         vals = get_text(node, 'visibility')
         val = 'restricted'
         if vals.any?
