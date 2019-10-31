@@ -86,7 +86,6 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'webdrivers', '~> 4.1'
-  # gem 'capybara-selenium', '~> 0.0.6'
 end
 
 gem 'coveralls', require: false
