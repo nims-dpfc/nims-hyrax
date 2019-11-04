@@ -1,11 +1,11 @@
 Feature: Create a dataset
 
   Background:
-    Given a user
-    And a default admin set, permission template and workflow
+    Given a default admin set, permission template and workflow
 
-  Scenario: Create a dataset as a valid user
-    Given I am logged in
+  Scenario: Create a dataset as a general user
+    Given I am logged in as a general user
+    And I have permission to deposit
     When I navigate to the new dataset page
     And I create the dataset with:
       | TITLE           | SUPERVISOR   | DATA_ORIGIN | CREATOR   | KEYWORD  |

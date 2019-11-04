@@ -1,11 +1,18 @@
 Feature: List of datasets
 
   Background:
-    Given there are exactly 5 datasets
+    Given a default admin set, permission template and workflow
+    Given there are exactly 5 open datasets
 
   Scenario: Anonymous user views the dataset list
     When I navigate to the dataset index page
     Then I should see no results found
+
+  Scenario: General user views the dataset list
+    Given I am logged in as a general user
+    And I have permission to view
+    When I navigate to the dataset index page
+    Then I should see links to all the datasets
 
 
 

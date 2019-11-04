@@ -4,6 +4,10 @@ FactoryBot.define do
     title { ["Dataset"] }
     access_control
 
+    trait :open do
+      visibility { 'open' }
+    end
+
     trait :with_complex_person do
        complex_person_attributes {
          [{
