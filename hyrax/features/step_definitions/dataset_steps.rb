@@ -1,8 +1,13 @@
-Given(/^there are exactly (\d+) datasets$/) do |number|
+Given(/^there are exactly (\d+) (\w+) datasets$/) do |number, access|
   # because cucumber tests do not clear fedora/solr between each test, there could be existing datasets from previous
   # tests - so we delete them first
   Dataset.destroy_all
-  FactoryBot.create_list(:dataset, number)
+  @datasets = FactoryBot.create_list(:dataset, number, access.to_sym)
+  @datasets.each { |obj| ActiveFedora::SolrService.add(obj.to_solr) }
+  ActiveFedora::SolrService.commit
+
+  # verify check the expected number of datasets are defined in @datasets
+  expect(@datasets.length)
 end
 
 When(/^I navigate to the new dataset page$/) do
@@ -56,4 +61,15 @@ When(/^I create the dataset with:$/) do |table|
   click_on('Save')
 
   expect(page).to have_content(values[:TITLE])
+end
+
+Then(/^I should see links to all the datasets$/) do
+  # first, verify @datasets is present and has some data
+  expect(@datasets).to be_present
+  expect(@datasets.length).to_not be_zero
+
+  # next, verify there is a link to each dataset (using a regular expression to allow for the locale parameter)
+  @datasets.each do |dataset|
+    expect(page).to have_link(dataset.title.first, href: Regexp.new(hyrax_dataset_path(dataset)))
+  end
 end
