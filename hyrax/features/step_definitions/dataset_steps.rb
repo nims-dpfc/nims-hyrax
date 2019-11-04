@@ -1,3 +1,10 @@
+Given(/^there are exactly (\d+) datasets$/) do |number|
+  # because cucumber tests do not clear fedora/solr between each test, there could be existing datasets from previous
+  # tests - so we delete them first
+  Dataset.destroy_all
+  FactoryBot.create_list(:dataset, number)
+end
+
 When(/^I navigate to the new dataset page$/) do
   visit '/dashboard'
   click_link "Works"
@@ -9,6 +16,12 @@ When(/^I navigate to the new dataset page$/) do
 
   # small hack to skip to create dataset page without requiring javascript
   visit new_hyrax_dataset_path
+end
+
+When(/^I navigate to the dataset index page$/) do
+  visit root_path
+  click_link 'Browse all datasets'
+  # visit search_catalog_path('f[human_readable_type_sim][]' => 'Dataset')
 end
 
 When(/^I create the dataset with:$/) do |table|
