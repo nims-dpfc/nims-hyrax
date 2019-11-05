@@ -1,4 +1,4 @@
-Given(/^there (?:are|is) (\d+) (public|restricted) datasets?$/) do |number, access|
+Given(/^there (?:are|is) (\d+) (open|authenticated|embargo|lease|restricted) datasets?$/) do |number, access|
   @datasets ||= {}
   @datasets[access] = FactoryBot.create_list(:dataset, number, access.to_sym).each do |obj|
     ActiveFedora::SolrService.add(obj.to_solr)
@@ -19,7 +19,7 @@ When(/^I navigate to the new dataset page$/) do
   visit new_hyrax_dataset_path
 end
 
-When(/^I navigate to the dataset index page$/) do
+When(/^I navigate to the dataset catalog page$/) do
   visit root_path
   click_link 'Browse all datasets'
   # visit search_catalog_path('f[human_readable_type_sim][]' => 'Dataset')
@@ -59,12 +59,7 @@ When(/^I create the dataset with:$/) do |table|
   expect(page).to have_content(values[:TITLE])
 end
 
-Then(/^I should see the public and restricted datasets$/) do
-  step 'I should see the public datasets'
-  step 'I should see the restricted datasets'
-end
-
-Then(/^I should see the (public|restricted) datasets?$/) do |access|
+Then(/^I should see the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
   # first, verify @datasets is present and has some data
   expect(@datasets).to be_present
   expect(@datasets[access]).to be_present
@@ -76,7 +71,7 @@ Then(/^I should see the (public|restricted) datasets?$/) do |access|
   end
 end
 
-Then(/^I should not see the (public|restricted) datasets?$/) do |access|
+Then(/^I should not see the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
   # first, verify @datasets is present and has some data
   expect(@datasets).to be_present
   expect(@datasets[access]).to be_present
