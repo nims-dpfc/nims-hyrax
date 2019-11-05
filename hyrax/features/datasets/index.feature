@@ -1,35 +1,31 @@
-Feature: Catalog of datasets
+Feature: Datasets catalog index
 
   Background:
     Given an initialised sysem with a default admin set, permission template and workflow
-    And there is 1 public dataset
-    And there are 2 restricted datasets
+    And there is 1 open dataset
+    And there are 2 authenticated datasets
+    And there is 1 restricted dataset
+    # NB: "restricted" means "private" in the user interface
 
-  Scenario: Unauthenticated user views the dataset catalog
-    When I navigate to the dataset index page
-    Then I should see the public datasets
-    And I should not see the restricted datasets
+  Scenario: Unauthenticated user can only view open datasets
+    When I navigate to the dataset catalog page
+    Then I should see the open datasets
+    But I should not see the authenticated datasets
+    And I should not see the restricted dataset
 
-  Scenario: General user views the dataset catalog
+  Scenario: General user can view open and authenticated datasets
     Given I am logged in as a general user
-    And I have permission to view
-    When I navigate to the dataset index page
-    Then I should see the public and restricted datasets
+    When I navigate to the dataset catalog page
+    Then I should see the open datasets
+    And I should see the authenticated datasets
+    But I should not see the restricted dataset
 
-
-
-#  Scenario: General user displays dataset list
-#    Given login as a general user
-#  5 given data are registered
-#    When Open the dataset list screen
-#  Then, 5 data are displayed.
-#
-#  Scenario: Administrator user displays dataset list
-#  Log in as a Given administrator
-#  5 given data are registered
-#    When Open the dataset list screen
-#  Then, 5 data are displayed.
-
+  Scenario: Admin user can view open, authenticated and restricted datasets
+    Given I am logged in as an admin user
+    When I navigate to the dataset catalog page
+    Then I should see the open datasets
+    And I should see the authenticated datasets
+    And I should see the restricted dataset
 
 #Feature: データセット一覧を参照する
 #  現在登録されているユーザを確認するため

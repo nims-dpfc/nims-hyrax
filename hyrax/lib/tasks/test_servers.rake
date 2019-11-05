@@ -1,5 +1,6 @@
 FEDORA_PID_FILE = 'tmp/.fedora-test.pid'
 SOLR_PID_FILE = 'tmp/.solr-test.pid'
+MINTER_FILE = 'tmp/minter'
 
 namespace :test do
   namespace :servers do
@@ -51,6 +52,9 @@ namespace :test do
         File.delete(SOLR_PID_FILE)
         @solr_instance.remove_instance_dir!
       end
+
+      # delete the test minter file
+      File.delete(MINTER_FILE) if File.exists?(MINTER_FILE)
     end
   end
 end

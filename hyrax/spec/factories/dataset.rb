@@ -4,12 +4,29 @@ FactoryBot.define do
     title { ["Dataset"] }
     access_control
 
-    trait :public do
+    trait :open do
       visibility { 'open' }
+      title { ["Open Dataset"] }
+    end
+
+    trait :authenticated do
+      visibility { 'authenticated' }
+      title { ["Authenticated Dataset"] }
+    end
+
+    trait :embargo do
+      visibility { 'embargo' }
+      title { ["Embargo Dataset"] }
+    end
+
+    trait :lease do
+      visibility { 'lease' }
+      title { ["Leased Dataset"] }
     end
 
     trait :restricted do
       visibility { 'restricted' }
+      title { ["Resstricted Dataset"] }
     end
 
     trait :with_complex_person do
