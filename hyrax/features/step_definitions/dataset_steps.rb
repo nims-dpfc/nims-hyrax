@@ -1,13 +1,9 @@
-Given(/^there are exactly (\d+) (\w+) datasets$/) do |number, access|
-  # because cucumber tests do not clear fedora/solr between each test, there could be existing datasets from previous
-  # tests - so we delete them first
-  Dataset.destroy_all
-  @datasets = FactoryBot.create_list(:dataset, number, access.to_sym)
-  @datasets.each { |obj| ActiveFedora::SolrService.add(obj.to_solr) }
+Given(/^there (?:are|is) (\d+) (public|restricted) datasets?$/) do |number, access|
+  @datasets ||= {}
+  @datasets[access] = FactoryBot.create_list(:dataset, number, access.to_sym).each do |obj|
+    ActiveFedora::SolrService.add(obj.to_solr)
+  end
   ActiveFedora::SolrService.commit
-
-  # verify check the expected number of datasets are defined in @datasets
-  expect(@datasets.length)
 end
 
 When(/^I navigate to the new dataset page$/) do
@@ -63,13 +59,31 @@ When(/^I create the dataset with:$/) do |table|
   expect(page).to have_content(values[:TITLE])
 end
 
-Then(/^I should see links to all the datasets$/) do
+Then(/^I should see the public and restricted datasets$/) do
+  step 'I should see the public datasets'
+  step 'I should see the restricted datasets'
+end
+
+Then(/^I should see the (public|restricted) datasets?$/) do |access|
   # first, verify @datasets is present and has some data
   expect(@datasets).to be_present
-  expect(@datasets.length).to_not be_zero
+  expect(@datasets[access]).to be_present
+  expect(@datasets[access].length).to_not be_zero
 
   # next, verify there is a link to each dataset (using a regular expression to allow for the locale parameter)
-  @datasets.each do |dataset|
+  @datasets[access].each do |dataset|
     expect(page).to have_link(dataset.title.first, href: Regexp.new(hyrax_dataset_path(dataset)))
+  end
+end
+
+Then(/^I should not see the (public|restricted) datasets?$/) do |access|
+  # first, verify @datasets is present and has some data
+  expect(@datasets).to be_present
+  expect(@datasets[access]).to be_present
+  expect(@datasets[access].length).to_not be_zero
+
+  # next, verify there is a link to each dataset (using a regular expression to allow for the locale parameter)
+  @datasets[access].each do |dataset|
+    expect(page).to_not have_link(dataset.title.first, href: Regexp.new(hyrax_dataset_path(dataset)))
   end
 end
