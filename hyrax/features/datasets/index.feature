@@ -1,18 +1,20 @@
-Feature: List of datasets
+Feature: Catalog of datasets
 
   Background:
-    Given a default admin set, permission template and workflow
-    Given there are exactly 5 open datasets
+    Given an initialised sysem with a default admin set, permission template and workflow
+    And there is 1 public dataset
+    And there are 2 restricted datasets
 
-  Scenario: Anonymous user views the dataset list
+  Scenario: Unauthenticated user views the dataset catalog
     When I navigate to the dataset index page
-    Then I should see no results found
+    Then I should see the public datasets
+    And I should not see the restricted datasets
 
-  Scenario: General user views the dataset list
+  Scenario: General user views the dataset catalog
     Given I am logged in as a general user
     And I have permission to view
     When I navigate to the dataset index page
-    Then I should see links to all the datasets
+    Then I should see the public and restricted datasets
 
 
 

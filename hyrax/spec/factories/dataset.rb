@@ -4,8 +4,12 @@ FactoryBot.define do
     title { ["Dataset"] }
     access_control
 
-    trait :open do
+    trait :public do
       visibility { 'open' }
+    end
+
+    trait :restricted do
+      visibility { 'restricted' }
     end
 
     trait :with_complex_person do

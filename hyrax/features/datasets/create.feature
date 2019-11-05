@@ -1,7 +1,7 @@
 Feature: Create a dataset
 
   Background:
-    Given a default admin set, permission template and workflow
+    Given an initialised sysem with a default admin set, permission template and workflow
 
   Scenario: Create a dataset as a general user
     Given I am logged in as a general user
