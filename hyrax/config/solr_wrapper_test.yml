@@ -1,8 +1,11 @@
 #config/solr_wrapper_test.yml
-# version: 6.1.0
+verbose: false
+cloud: false
 port: 8985
-instance_dir: tmp/solr-test
+version: '7.7.2' # NB: ideally this should match the version in docker-compose.yml
+download_dir: 'tmp'
+instance_dir: 'tmp/solr-test'
 collection:
+    name: 'hydra-test'
+    dir: 'solr/config'
     persist: false
-    dir: solr/config
-    name: hydra-test
