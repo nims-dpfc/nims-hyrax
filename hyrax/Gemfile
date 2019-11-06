@@ -84,6 +84,10 @@ gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :bra
 group :test do
   gem 'simplecov', require: false
   gem 'capybara'
+  gem 'launchy'
+  gem 'webdrivers', '~> 4.1'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
 end
 
 gem 'coveralls', require: false
