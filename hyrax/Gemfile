@@ -85,6 +85,10 @@ gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_o
 group :test do
   gem 'simplecov', require: false
   gem 'capybara'
+  gem 'launchy'
+  gem 'webdrivers', '~> 4.1'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
 end
 
 gem 'coveralls', require: false

@@ -349,3 +349,5 @@ $RECYCLE.BIN/
 # Environment variables file
 .env.production
 .env
+/hyrax/.fedora-test.pid
+/hyrax/.solr-test.pid
