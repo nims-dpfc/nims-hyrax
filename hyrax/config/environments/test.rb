@@ -40,5 +40,8 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  # Don't use redis for storing queued jobs when running tests
+  config.active_job.queue_adapter = :test
+
   Rails.application.routes.default_url_options = {protocol: 'http', host: 'localhost'}
 end
