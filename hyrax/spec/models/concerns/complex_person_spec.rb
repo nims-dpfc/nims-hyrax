@@ -11,51 +11,71 @@ RSpec.describe ComplexPerson do
     Object.send(:remove_const, :ExampleWork)
   end
 
-  it 'creates a person active triple resource with an id and all properties' do
-    @obj = ExampleWork.new
-    @obj.attributes = {
-      complex_person_attributes: [{
-        first_name: 'Foo',
-        last_name: 'Bar',
-        name: 'Foo Bar',
-        email: 'foo.bar@example.com',
-        role: 'Author',
-        complex_identifier_attributes: [{
-          identifier: '1234567',
-          scheme: 'Local'
-        }],
-        complex_affiliation_attributes: [{
-          job_title: 'Tester',
-          complex_organization_attributes: [{
-            organization: 'Org',
-            sub_organization: 'Sub org',
-            purpose: 'org purpose',
-            complex_identifier_attributes: [{
-              identifier: 'werqwerqwer',
-              scheme: 'Local'
-            }]
-          }]
-        }],
-        uri: 'http://localhost/person/1234567'
-      }]
-    }
-    expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_person.first.id).to include('#person')
-    expect(@obj.complex_person.first.first_name).to eq ['Foo']
-    expect(@obj.complex_person.first.last_name).to eq ['Bar']
-    expect(@obj.complex_person.first.name).to eq ['Foo Bar']
-    expect(@obj.complex_person.first.email).to eq ['foo.bar@example.com']
-    expect(@obj.complex_person.first.role).to eq ['Author']
-    expect(@obj.complex_person.first.complex_identifier.first.identifier).to eq ['1234567']
-    expect(@obj.complex_person.first.complex_identifier.first.scheme).to eq ['Local']
-    expect(@obj.complex_person.first.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
-    expect(@obj.complex_person.first.complex_affiliation.first.job_title).to eq ['Tester']
-    expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.organization).to eq ['Org']
-    expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.sub_organization).to eq ['Sub org']
-    expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.purpose).to eq ['org purpose']
-    expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.complex_identifier.first.identifier).to eq ['werqwerqwer']
-    expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.complex_identifier.first.scheme).to eq ['Local']
-    expect(@obj.complex_person.first.uri).to eq ['http://localhost/person/1234567']
+  describe 'complex_person_attributes' do
+    subject do
+       ExampleWork.new({
+        complex_person_attributes: [{
+          first_name: 'Foo',
+          last_name: 'Bar',
+          name: 'Foo Bar',
+          email: 'foo.bar@example.com',
+          role: 'Author',
+          complex_identifier_attributes: [{
+            identifier: '1234567',
+            scheme: 'Local'
+          }],
+          complex_affiliation_attributes: [{
+            job_title: 'Tester',
+            complex_organization_attributes: [{
+               organization: 'Org',
+               sub_organization: 'Sub org',
+               purpose: 'org purpose',
+               complex_identifier_attributes: [{
+                 identifier: 'werqwerqwer',
+                 scheme: 'Local'
+               }]
+             }]
+          }],
+          uri: 'http://localhost/person/1234567'
+        }]
+      }).complex_person.first
+    end
+
+    it 'creates a person active triple resource with an id and all properties' do
+      expect(subject).to be_kind_of ActiveTriples::Resource
+      expect(subject.id).to include('#person')
+      expect(subject.first_name).to eq ['Foo']
+      expect(subject.last_name).to eq ['Bar']
+      expect(subject.name).to eq ['Foo Bar']
+      expect(subject.email).to eq ['foo.bar@example.com']
+      expect(subject.role).to eq ['Author']
+      expect(subject.complex_identifier.first.identifier).to eq ['1234567']
+      expect(subject.complex_identifier.first.scheme).to eq ['Local']
+      expect(subject.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
+      expect(subject.complex_affiliation.first.job_title).to eq ['Tester']
+      expect(subject.complex_affiliation.first.complex_organization.first.organization).to eq ['Org']
+      expect(subject.complex_affiliation.first.complex_organization.first.sub_organization).to eq ['Sub org']
+      expect(subject.complex_affiliation.first.complex_organization.first.purpose).to eq ['org purpose']
+      expect(subject.complex_affiliation.first.complex_organization.first.complex_identifier.first.identifier).to eq ['werqwerqwer']
+      expect(subject.complex_affiliation.first.complex_organization.first.complex_identifier.first.scheme).to eq ['Local']
+      expect(subject.uri).to eq ['http://localhost/person/1234567']
+    end
+  end
+
+  context 'uri with a #' do
+    before do
+      # special hack to force code path for testing
+      allow_any_instance_of(RDF::Node).to receive(:node?) { false }
+      allow_any_instance_of(RDF::Node).to receive(:start_with?) { true }
+    end
+    subject do
+      ExampleWork
+          .new({ complex_person_attributes: [{uri: '#something'}]})
+          .complex_person
+          .first
+          .uri
+    end
+    it { is_expected.to eq ['#something'] }
   end
 
   describe "when reject_if is a symbol" do
@@ -69,168 +89,162 @@ RSpec.describe ComplexPerson do
       Object.send(:remove_const, :ExampleWork2)
     end
 
-    it 'creates a person active triple resource with name' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_person_attributes: [{
-          name: 'Anamika'
-        }]
-      }
-      expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_person.first.name).to eq ['Anamika']
-      expect(@obj.complex_person.first.first_name).to be_empty
-      expect(@obj.complex_person.first.last_name).to be_empty
-      expect(@obj.complex_person.first.email).to be_empty
-      expect(@obj.complex_person.first.role).to be_empty
-      expect(@obj.complex_person.first.complex_identifier).to be_empty
-      expect(@obj.complex_person.first.complex_affiliation).to be_empty
-      expect(@obj.complex_person.first.uri).to be_empty
+    context 'accepts valid complex_person_attributes' do
+      subject do
+        ExampleWork2
+            .new({ complex_person_attributes: complex_person_attributes })
+            .complex_person
+            .first
+      end
+
+      context 'name' do
+        let(:complex_person_attributes) { [{name: 'Anamika'}] }
+
+        it 'creates a person active triple resource with name' do
+          expect(subject).to be_kind_of ActiveTriples::Resource
+          expect(subject.name).to eq ['Anamika']
+          expect(subject.first_name).to be_empty
+          expect(subject.last_name).to be_empty
+          expect(subject.email).to be_empty
+          expect(subject.role).to be_empty
+          expect(subject.complex_identifier).to be_empty
+          expect(subject.complex_affiliation).to be_empty
+          expect(subject.uri).to be_empty
+        end
+      end
+
+      context 'first_name' do
+        let(:complex_person_attributes) { [{first_name: 'Anamika'}] }
+
+        it 'creates a person active triple resource with first name' do
+          expect(subject).to be_kind_of ActiveTriples::Resource
+          expect(subject.name).to be_empty
+          expect(subject.first_name).to eq ['Anamika']
+          expect(subject.last_name).to be_empty
+          expect(subject.email).to be_empty
+          expect(subject.role).to be_empty
+          expect(subject.complex_identifier).to be_empty
+          expect(subject.complex_affiliation).to be_empty
+          expect(subject.uri).to be_empty
+        end
+      end
+
+      context 'last_name' do
+        let(:complex_person_attributes) { [{last_name: 'Anamika'}] }
+
+        it 'creates a person active triple resource with last name' do
+          expect(subject).to be_kind_of ActiveTriples::Resource
+          expect(subject.name).to be_empty
+          expect(subject.first_name).to be_empty
+          expect(subject.last_name).to eq ['Anamika']
+          expect(subject.email).to be_empty
+          expect(subject.role).to be_empty
+          expect(subject.complex_identifier).to be_empty
+          expect(subject.complex_affiliation).to be_empty
+          expect(subject.uri).to be_empty
+        end
+      end
+
+      context 'name, affiliation and role' do
+        let(:complex_person_attributes) do
+          [{
+            name: 'Anamika',
+            complex_affiliation_attributes: [{
+              job_title: 'Paradise',
+            }],
+            role: 'Creator'
+          }]
+        end
+
+        it 'creates a person active triple resource with name, affiliation and role' do
+          expect(subject).to be_kind_of ActiveTriples::Resource
+          expect(subject.name).to eq ['Anamika']
+          expect(subject.first_name).to be_empty
+          expect(subject.last_name).to be_empty
+          expect(subject.email).to be_empty
+          expect(subject.role).to eq ['Creator']
+          expect(subject.complex_identifier).to be_empty
+          expect(subject.uri).to be_empty
+          expect(subject.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
+          expect(subject.complex_affiliation.first.job_title).to eq ['Paradise']
+          expect(subject.complex_affiliation.first.complex_organization).to be_empty
+        end
+      end
+
+      context 'name, affiliation org and role' do
+        let(:complex_person_attributes) do
+          [{
+             name: 'Anamika',
+             complex_affiliation_attributes: [{
+                complex_organization_attributes: [{ organization: 'My department' }]
+             }],
+             role: 'Creator'
+         }]
+        end
+
+        it 'creates a person active triple resource with name, affiliation org and role' do
+          expect(subject).to be_kind_of ActiveTriples::Resource
+          expect(subject.name).to eq ['Anamika']
+          expect(subject.first_name).to be_empty
+          expect(subject.last_name).to be_empty
+          expect(subject.email).to be_empty
+          expect(subject.role).to eq ['Creator']
+          expect(subject.complex_identifier).to be_empty
+          expect(subject.uri).to be_empty
+          expect(subject.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
+          expect(subject.complex_affiliation.first.job_title).to be_empty
+          expect(subject.complex_affiliation.first.complex_organization.first).to be_kind_of ActiveTriples::Resource
+          expect(subject.complex_affiliation.first.complex_organization.first.organization).to eq ['My department']
+        end
+      end
     end
 
-    it 'creates a person active triple resource with first name' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_person_attributes: [{
-          first_name: 'Anamika'
-        }]
-      }
-      expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_person.first.name).to be_empty
-      expect(@obj.complex_person.first.first_name).to eq ['Anamika']
-      expect(@obj.complex_person.first.last_name).to be_empty
-      expect(@obj.complex_person.first.email).to be_empty
-      expect(@obj.complex_person.first.role).to be_empty
-      expect(@obj.complex_person.first.complex_identifier).to be_empty
-      expect(@obj.complex_person.first.complex_affiliation).to be_empty
-      expect(@obj.complex_person.first.uri).to be_empty
-    end
+    context 'rejects person active triple with invalid complex_person_attributes' do
+      subject do
+        ExampleWork2
+            .new({ complex_person_attributes: complex_person_attributes })
+            .complex_person
+      end
 
-    it 'creates a person active triple resource with last name' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_person_attributes: [{
-          last_name: 'Anamika'
-        }]
-      }
-      expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_person.first.name).to be_empty
-      expect(@obj.complex_person.first.first_name).to be_empty
-      expect(@obj.complex_person.first.last_name).to eq ['Anamika']
-      expect(@obj.complex_person.first.email).to be_empty
-      expect(@obj.complex_person.first.role).to be_empty
-      expect(@obj.complex_person.first.complex_identifier).to be_empty
-      expect(@obj.complex_person.first.complex_affiliation).to be_empty
-      expect(@obj.complex_person.first.uri).to be_empty
-    end
+      context 'no name and only uri' do
+        let(:complex_person_attributes) { [{ uri: 'http://example.com/person/123456' }] }
+        it { is_expected.to be_empty }
+      end
 
-    it 'creates a person active triple resource with name, affiliation and role' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_person_attributes: [{
-          name: 'Anamika',
-          complex_affiliation_attributes: [{
-            job_title: 'Paradise',
-          }],
-          role: 'Creator'
-        }]
-      }
-      expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_person.first.name).to eq ['Anamika']
-      expect(@obj.complex_person.first.first_name).to be_empty
-      expect(@obj.complex_person.first.last_name).to be_empty
-      expect(@obj.complex_person.first.email).to be_empty
-      expect(@obj.complex_person.first.role).to eq ['Creator']
-      expect(@obj.complex_person.first.complex_identifier).to be_empty
-      expect(@obj.complex_person.first.uri).to be_empty
-      expect(@obj.complex_person.first.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_person.first.complex_affiliation.first.job_title).to eq ['Paradise']
-            expect(@obj.complex_person.first.complex_affiliation.first.complex_organization).to be_empty
-    end
+      context 'no name and only role' do
+        let(:complex_person_attributes) { [{ role: 'Creator' }] }
+        it { is_expected.to be_empty }
+      end
 
-    it 'creates a person active triple resource with name, affiliation org and role' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_person_attributes: [{
-          name: 'Anamika',
-          complex_affiliation_attributes: [{
-            complex_organization_attributes: [{
-              organization: 'My department'
-            }]
-          }],
-          role: 'Creator'
-        }]
-      }
-      expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_person.first.name).to eq ['Anamika']
-      expect(@obj.complex_person.first.first_name).to be_empty
-      expect(@obj.complex_person.first.last_name).to be_empty
-      expect(@obj.complex_person.first.email).to be_empty
-      expect(@obj.complex_person.first.role).to eq ['Creator']
-      expect(@obj.complex_person.first.complex_identifier).to be_empty
-      expect(@obj.complex_person.first.uri).to be_empty
-      expect(@obj.complex_person.first.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_person.first.complex_affiliation.first.job_title).to be_empty
-      expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_person.first.complex_affiliation.first.complex_organization.first.organization).to eq ['My department']
-    end
-
-    it 'rejects person active triple with no name and only uri' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_person_attributes: [{
-          uri: 'http://example.com/person/123456'
-        }]
-      }
-      expect(@obj.complex_person).to be_empty
-    end
-
-    it 'rejects person active triple with no name and only role' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_person_attributes: [{
-          role: 'Creator'
-        }]
-      }
-      expect(@obj.complex_person).to be_empty
-    end
-
-    it 'rejects person active triple with no name and only affiliation' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_person_attributes: [{
-          complex_affiliation_attributes: [{
-            job_title: 'Paradise',
-            complex_organization_attributes: [{
-              organization: 'My department'
+      context 'no name and only affiliation' do
+        let(:complex_person_attributes) do
+          [{
+            complex_affiliation_attributes: [{
+              job_title: 'Paradise',
+              complex_organization_attributes: [{
+                organization: 'My department'
+              }]
             }]
           }]
-        }]
-      }
-      expect(@obj.complex_person).to be_empty
-    end
+        end
+        it { is_expected.to be_empty }
+      end
 
-    it 'rejects person active triple with no name and only identifiers' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_person_attributes: [{
-          complex_identifier_attributes: [{
-            identifier: '123456'
+      context 'no name and only identifiers' do
+        let(:complex_person_attributes) do
+          [{
+            complex_identifier_attributes: [{
+              identifier: '123456'
+            }]
           }]
-        }]
-      }
-      expect(@obj.complex_person).to be_empty
+        end
+        it { is_expected.to be_empty }
+      end
+
+      context 'no name and only email' do
+        let(:complex_person_attributes) { [{ email: 'me@me.org' }] }
+        it { is_expected.to be_empty }
+      end
     end
-
-    it 'rejects person active triple with no name and only email' do
-      @obj = ExampleWork2.new
-      @obj.attributes = {
-        complex_person_attributes: [{
-          email: 'me@me.org'
-        }]
-      }
-      expect(@obj.complex_person).to be_empty
-    end
-
-
   end
 end

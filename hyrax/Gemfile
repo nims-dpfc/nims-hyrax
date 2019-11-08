@@ -51,7 +51,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'hyrax', '~> 2.4.1'
+gem 'hyrax', '~> 2.6'
 group :development, :test do
   gem 'solr_wrapper', '~> 2.0'
 end
@@ -81,4 +81,13 @@ end
 
 gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'feature/prep_for_new_release'
 
-gem 'simplecov', require: false, group: :test
+group :test do
+  gem 'simplecov', require: false
+  gem 'capybara'
+  gem 'launchy'
+  gem 'webdrivers', '~> 4.1'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
+end
+
+gem 'coveralls', require: false
