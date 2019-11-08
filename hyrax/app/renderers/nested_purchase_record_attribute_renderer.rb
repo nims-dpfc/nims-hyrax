@@ -8,7 +8,10 @@ class NestedPurchaseRecordAttributeRenderer < NestedAttributeRenderer
       # title
       if v.dig('title').present? and v['title'][0].present?
         label ="Title"
-        val = link_to(ERB::Util.h(v['title'][0]), search_path(v['title'][0]))
+        # call search_catalog_path directly to get correct search link
+        val = link_to(ERB::Util.h(v['title'][0]),
+          Rails.application.routes.url_helpers.search_catalog_path(:"f[complex_purchase_record_title_sim][]" => v['title'][0], locale: I18n.locale)
+        )
         each_html += get_row(label, val)
       end
       # date
@@ -19,19 +22,19 @@ class NestedPurchaseRecordAttributeRenderer < NestedAttributeRenderer
       unless v.dig('complex_identifier').blank?
         label = 'Identifier'
         renderer_class = NestedIdentifierAttributeRenderer
-        each_html += get_nested_output(label, v['complex_identifier'], renderer_class, false)
+        each_html += get_nested_output(field, label, v['complex_identifier'], renderer_class, false)
       end
       # supplier
       unless v.dig('supplier').blank?
         label = 'Supplier'
         renderer_class = NestedOrganizationAttributeRenderer
-        each_html += get_nested_output(label, v['supplier'], renderer_class, true)
+        each_html += get_nested_output(field, label, v['supplier'], renderer_class, true)
       end
       # manufacturer
       unless v.dig('manufacturer').blank?
         label = 'Manufacturer'
         renderer_class = NestedOrganizationAttributeRenderer
-        each_html += get_nested_output(label, v['manufacturer'], renderer_class, true)
+        each_html += get_nested_output(field, label, v['manufacturer'], renderer_class, true)
       end
       # purchase_record_item
       unless v.dig('purchase_record_item').blank?

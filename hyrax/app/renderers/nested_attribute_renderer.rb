@@ -48,12 +48,12 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
     row
   end
 
-  def get_nested_output(label, nested_value, renderer_class, display_label=false)
+  def get_nested_output(field, label, nested_value, renderer_class, display_label=false)
     output_html = ''
     unless nested_value.kind_of?(Array)
       nested_value = [nested_value]
     end
-    renderer = renderer_class.new(label, nested_value)
+    renderer = renderer_class.new(get_field(field, label), nested_value)
     nested_value.each do |val|
       inner_html = renderer.attribute_value_to_html(val)
       unless inner_html.blank?
@@ -82,5 +82,25 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
       html_out += '</div>'
     end
     html_out
+  end
+
+  # map the field/label pair to the correct facet search link
+  def get_field(field, label)
+    case
+    when field == :complex_person && label == 'Organization'
+      :complex_person_organization
+    when field == :complex_instrument && label == 'Manufacturer'
+      :instrument_manufacturer
+    when field == :complex_instrument && label == 'Operator'
+      :complex_person_operator
+    when field == :complex_instrument && label == 'Managing organization'
+      :instrument_managing_organization
+    when field == :complex_specimen_type && label == 'Supplier'
+      :complex_purchase_record_supplier
+    when field == :complex_specimen_type && label == 'Manufacturer'
+      :complex_purchase_record_manufacturer
+    else
+      field
+    end
   end
 end
