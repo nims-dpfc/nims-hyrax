@@ -13,7 +13,7 @@ class NestedDescIdAttributeRenderer < NestedAttributeRenderer
       unless v.dig('complex_identifier').blank?
         label = 'Identifier'
         renderer_class = NestedIdentifierAttributeRenderer
-        each_html += get_nested_output(label, v['complex_identifier'], renderer_class, false)
+        each_html += get_nested_output(field, label, v['complex_identifier'], renderer_class, false)
       end
       html += get_inner_html(each_html)
     end
