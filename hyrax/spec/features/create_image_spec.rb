@@ -5,12 +5,13 @@ include Warden::Test::Helpers
 
 # NOTE: If you generated more than one work, you have to set "js: true"
 RSpec.feature 'Create a Image', js: false do
+
+  # TODO: investigate how to run integration tests via capybara / cucumber
+  before { skip 'requires fedora/solr test infrastructure to run' }
+
   context 'a logged in user' do
-    let(:user_attributes) do
-      { email: 'test@example.com' }
-    end
     let(:user) do
-      User.new(user_attributes) { |u| u.save(validate: false) }
+      User.new({ email: 'test@example.com', username: 'user' }) { |u| u.save(validate: false) }
     end
     let(:admin_set_id) { AdminSet.find_or_create_default_admin_set_id }
     let(:permission_template) { Hyrax::PermissionTemplate.find_or_create_by!(source_id: admin_set_id) }

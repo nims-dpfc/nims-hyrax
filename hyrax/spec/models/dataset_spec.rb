@@ -458,57 +458,16 @@ RSpec.describe Dataset do
 
   describe 'complex_instrument' do
     it 'creates an instrument active triple resource with all the attributes' do
-      @obj = build(:dataset,
-        complex_instrument_attributes: [{
-          alternative_title: 'An instrument title',
-          complex_date_attributes: [{
-            date: ['2018-02-14']
-          }],
-          description: 'Instrument description',
-          complex_identifier_attributes: [{
-            identifier: ['123456'],
-            label: ['Local']
-          }],
-          instrument_function_attributes: [{
-            column_number: 1,
-            category: 'some value',
-            sub_category: 'some other value',
-            description: 'Instrument function description'
-          }],
-          manufacturer_attributes: [{
-            organization: 'Foo',
-            sub_organization: 'Bar',
-            purpose: 'Manufacturer',
-            complex_identifier_attributes: [{
-              identifier: '123456789m',
-              scheme: 'Local'
-            }]
-          }],
-          model_number: '123xfty',
-          complex_person_attributes: [{
-            name: ['Name of operator'],
-            role: ['Operator']
-          }],
-          managing_organization_attributes: [{
-            organization: 'FooFoo',
-            sub_organization: 'BarBar',
-            purpose: 'Managing organization',
-            complex_identifier_attributes: [{
-              identifier: '123456789mo',
-              scheme: 'Local'
-            }]
-          }],
-          title: 'Instrument title'
-        }]
-      )
+      @obj = build(:dataset, :with_complex_instrument)
       expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.alternative_title).to eq ['An instrument title']
       expect(@obj.complex_instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.complex_date.first.date).to eq ['2018-02-14']
       expect(@obj.complex_instrument.first.description).to eq ['Instrument description']
       expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['123456']
-      expect(@obj.complex_instrument.first.complex_identifier.first.label).to eq ['Local']
+      expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['instrument/27213727']
+      expect(@obj.complex_instrument.first.complex_identifier.first.label).to eq ['Identifier Persistent']
+      expect(@obj.complex_instrument.first.complex_identifier.first.scheme).to eq ['identifier persistent']
       expect(@obj.complex_instrument.first.instrument_function.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.instrument_function.first.column_number).to eq [1]
       expect(@obj.complex_instrument.first.instrument_function.first.category).to eq ['some value']
@@ -523,7 +482,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_instrument.first.model_number).to eq ['123xfty']
       expect(@obj.complex_instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.complex_person.first.name).to eq ['Name of operator']
-      expect(@obj.complex_instrument.first.complex_person.first.role).to eq ['Operator']
+      expect(@obj.complex_instrument.first.complex_person.first.role).to eq ['operator']
       expect(@obj.complex_instrument.first.managing_organization.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.managing_organization.first.organization).to eq ['FooFoo']
       expect(@obj.complex_instrument.first.managing_organization.first.sub_organization).to eq ['BarBar']
@@ -663,87 +622,7 @@ RSpec.describe Dataset do
 
   describe 'specimen_type' do
     it 'creates a specimen type active triple resource with all the attributes' do
-      @obj = build(:dataset,
-        complex_specimen_type_attributes: [{
-          complex_chemical_composition_attributes: [{
-            description: 'chemical composition 1',
-            complex_identifier_attributes: [{
-              identifier: 'chemical_composition/1234567'
-            }],
-          }],
-          complex_crystallographic_structure_attributes: [{
-            description: 'crystallographic_structure 1',
-            complex_identifier_attributes: [{
-              identifier: ['crystallographic_structure/123456'],
-              label: ['Local']
-            }],
-          }],
-          description: 'Specimen description',
-          complex_identifier_attributes: [{
-            identifier: 'specimen/1234567'
-          }],
-          complex_material_type_attributes: [{
-            description: 'material description',
-            material_type: 'some material type',
-            material_sub_type: 'some other material sub type',
-            complex_identifier_attributes: [{
-              identifier: ['material/ewfqwefqwef'],
-              label: ['Local']
-            }],
-          }],
-          complex_purchase_record_attributes: [{
-            date: ['2018-02-14'],
-            complex_identifier_attributes: [{
-              identifier: ['purchase_record/123456'],
-              label: ['Local']
-            }],
-            supplier_attributes: [{
-              organization: 'Fooss',
-              sub_organization: 'Barss',
-              purpose: 'Supplier',
-              complex_identifier_attributes: [{
-                identifier: 'supplier/123456789',
-                scheme: 'Local'
-              }]
-            }],
-            manufacturer_attributes: [{
-              organization: 'Foo',
-              sub_organization: 'Bar',
-              purpose: 'Manufacturer',
-              complex_identifier_attributes: [{
-                identifier: 'manufacturer/123456789',
-                scheme: 'Local'
-              }]
-            }],
-            purchase_record_item: ['Has a purchase record item'],
-            title: 'Purchase record title'
-          }],
-          complex_shape_attributes: [{
-            description: 'shape description',
-            complex_identifier_attributes: [{
-              identifier: ['shape/123456'],
-              label: ['Local']
-            }]
-          }],
-          complex_state_of_matter_attributes: [{
-            description: 'state of matter description',
-            complex_identifier_attributes: [{
-              identifier: ['state/123456'],
-              label: ['Local']
-            }]
-          }],
-          complex_structural_feature_attributes: [{
-            description: 'structural feature description',
-            category: 'structural feature category',
-            sub_category: 'structural feature sub category',
-            complex_identifier_attributes: [{
-              identifier: ['structural_feature/123456'],
-              label: ['Local']
-            }]
-          }],
-          title: 'Specimen 1'
-        }]
-      )
+      @obj = build(:dataset, :with_complex_specimen_type)
       expect(@obj.complex_specimen_type.first).to be_kind_of ActiveTriples::Resource
       # chemical composition
       expect(@obj.complex_specimen_type.first.complex_chemical_composition.first).to be_kind_of ActiveTriples::Resource
@@ -751,7 +630,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.description).to eq ['chemical composition 1']
       expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first.identifier).to eq ['chemical_composition/1234567']
-      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first.label).to be_empty
+      expect(@obj.complex_specimen_type.first.complex_chemical_composition.first.complex_identifier.first.label).to eq ['Identifier - Persistent']
       # crystallographic structure
       expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_crystallographic_structure.first.id).to include('#crystallographic_structure')
@@ -773,14 +652,14 @@ RSpec.describe Dataset do
       expect(@obj.complex_specimen_type.first.complex_material_type.first.material_sub_type).to eq ['some other material sub type']
       expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier.first.identifier).to eq ['material/ewfqwefqwef']
-      expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier.first.label).to eq ['Local']
+      expect(@obj.complex_specimen_type.first.complex_material_type.first.complex_identifier.first.label).to eq ['Identifier - Persistent']
       # purchase record
       expect(@obj.complex_specimen_type.first.complex_purchase_record.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_purchase_record.first.id).to include('#purchase_record')
       expect(@obj.complex_specimen_type.first.complex_purchase_record.first.date).to eq ['2018-02-14']
       expect(@obj.complex_specimen_type.first.complex_purchase_record.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_purchase_record.first.complex_identifier.first.identifier).to eq ['purchase_record/123456']
-      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.complex_identifier.first.label).to eq ['Local']
+      expect(@obj.complex_specimen_type.first.complex_purchase_record.first.complex_identifier.first.label).to eq ['Identifier - Persistent']
       expect(@obj.complex_specimen_type.first.complex_purchase_record.first.supplier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_purchase_record.first.supplier.first.organization).to eq ['Fooss']
       expect(@obj.complex_specimen_type.first.complex_purchase_record.first.supplier.first.sub_organization).to eq ['Barss']
@@ -801,14 +680,14 @@ RSpec.describe Dataset do
       expect(@obj.complex_specimen_type.first.complex_shape.first.description).to eq ['shape description']
       expect(@obj.complex_specimen_type.first.complex_shape.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_shape.first.complex_identifier.first.identifier).to eq ['shape/123456']
-      expect(@obj.complex_specimen_type.first.complex_shape.first.complex_identifier.first.label).to eq ['Local']
+      expect(@obj.complex_specimen_type.first.complex_shape.first.complex_identifier.first.label).to eq ['Identifier - Persistent']
       # state of matter
       expect(@obj.complex_specimen_type.first.complex_state_of_matter.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.id).to include('#state_of_matter')
       expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.description).to eq ['state of matter description']
       expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first.identifier).to eq ['state/123456']
-      expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first.label).to eq ['Local']
+      expect(@obj.complex_specimen_type.first.complex_state_of_matter.first.complex_identifier.first.label).to eq ["Identifier - Persistent"]
       # structural feature
       expect(@obj.complex_specimen_type.first.complex_structural_feature.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_structural_feature.first.id).to include('#structural_feature')
@@ -817,7 +696,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_specimen_type.first.complex_structural_feature.first.sub_category).to eq ['structural feature sub category']
       expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first.identifier).to eq ['structural_feature/123456']
-      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first.label).to eq ['Local']
+      expect(@obj.complex_specimen_type.first.complex_structural_feature.first.complex_identifier.first.label).to eq ["Identifier - Persistent"]
       # title
       expect(@obj.complex_specimen_type.first.title).to eq ['Specimen 1']
     end

@@ -81,14 +81,18 @@ Hyrax.config do |config|
   # where NOID = 10-character string and UUID = 32-character string w/ hyphens
   # config.enable_noids = true
 
-  # Template for your repository's NOID IDs
-  # config.noid_template = ".reeddeeddk"
+  # In a test environment, use the file-based NOID generator to avoid problems with the tables being wiped between tests
+  if ENV['RAILS_ENV'] == 'test'
+    puts 'Using file-based NOIDs for tests'
+    # Template for your repository's NOID IDs
+    config.noid_template = "test-.zdddd"
 
-  # Use the database-backed minter class
-  # config.noid_minter_class = Noid::Rails::Minter::Db
+    # Use the database-backed minter class
+    config.noid_minter_class = Noid::Rails::Minter::File
 
-  # Store identifier minter's state in a file for later replayability
-  # config.minter_statefile = '/tmp/minter-state'
+    # Store identifier minter's state in a file for later replayability
+    config.minter_statefile = 'tmp/minter'
+  end
 
   # Prefix for Redis keys
   # config.redis_namespace = "hyrax"

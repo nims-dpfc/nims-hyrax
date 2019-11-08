@@ -12,6 +12,22 @@ RSpec.describe ComplexAffiliation do
     Object.send(:remove_const, :ExampleWork)
   end
 
+  context 'uri with a #' do
+    before do
+      # special hack to force code path for testing
+      allow_any_instance_of(RDF::Node).to receive(:node?) { false }
+      allow_any_instance_of(RDF::Node).to receive(:start_with?) { true }
+    end
+    subject do
+      ExampleWork
+          .new({ complex_affiliation_attributes: [{job_title: 'Professor'}]})
+          .complex_affiliation
+          .first
+          .job_title
+    end
+    it { is_expected.to eq ['Professor'] }
+  end
+
   it 'creates an affiliation active triple resource with an id and all properties' do
     @obj = ExampleWork.new
     @obj.attributes = {
