@@ -1,0 +1,6 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" :  "^(https|http)://.*",
+  "name" : "NIMS-CAStest",
+  "id" : 1
+}
