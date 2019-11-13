@@ -37,9 +37,19 @@ services:
   web:
     ports:
       - 3000:3000
+    depends_on:
+      - cas
     environment:
-    - RAILS_FORCE_SSL=false
+      - RAILS_FORCE_SSL=false
 
   redis:
     volumes:
       - redis:/data
+
+  cas:
+    build:
+      context: cas
+    networks:
+      internal:
+    ports:
+      - 8443:8443

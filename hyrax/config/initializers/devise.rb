@@ -301,7 +301,9 @@ Devise.setup do |config|
   # config.cas_login_url = "https://cas.myorganization.com/login"
   # config.cas_logout_url = "https://cas.myorganization.com/logout"
   # config.cas_validate_url = "https://cas.myorganization.com/serviceValidate"
-  config.cas_validate_url = "https://castest:8443/cas/serviceValidate" # TODO: FIXME!
+  if ENV['CAS_VALIDATE_URL'].present?
+    config.cas_validate_url = ENV['CAS_VALIDATE_URL']
+  end
 
   # The CAS specification allows for the passing of a follow URL to be displayed when
   # a user logs out on the CAS server. RubyCAS-Server also supports redirecting to a
