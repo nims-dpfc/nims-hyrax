@@ -21,6 +21,15 @@ class User < ApplicationRecord
          :rememberable, :trackable, :lockable
          # NB: the :validatable module is not compatible with CAS authentication
 
+  # hack to ignore setting password when using CAS authentication
+  if ENV['MDR_DEVISE_AUTH_MODULE'] == 'cas_authenticatable'
+    attr_reader :password
+    def password=(new_password)
+      @password = new_password
+      self.encrypted_password = ''
+    end
+  end
+
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
   # the account.
