@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/CottageLabs/blacklight_oai_provider.git
+  revision: 73d5f34315e313fb22084cfc52939d71e3c0728a
+  branch: master
+  specs:
+    blacklight_oai_provider (1.4.1)
+      blacklight (>= 6.1)
+      oai (~> 0.4.0)
+      rails (>= 4.2)
+
+GIT
   remote: https://github.com/CottageLabs/willow_sword.git
   revision: ab456d99eaa4d07ed12d0510330be07909981204
   branch: feature/prep_for_new_release
@@ -295,6 +305,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday-encoding (0.0.4)
       faraday
+    faraday_middleware (0.13.1)
+      faraday (>= 0.7.4, < 1.0)
     fcrepo_wrapper (0.9.0)
       ruby-progressbar
     ffi (1.11.1)
@@ -564,6 +576,10 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogumbo (1.5.0)
       nokogiri
+    oai (0.4.0)
+      builder (>= 3.1.0)
+      faraday
+      faraday_middleware
     oauth (0.5.4)
     oauth2 (1.4.2)
       faraday (>= 0.8, < 2.0)
@@ -869,6 +885,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake (~> 5.0)
+  blacklight_oai_provider!
   bootstrap-datepicker-rails
   byebug
   capybara
