@@ -6,6 +6,16 @@ Given(/^there (?:are|is) (\d+) (open|authenticated|embargo|lease|restricted) dat
   ActiveFedora::SolrService.commit
 end
 
+Given(/^there is a dataset with:$/) do |table|
+  @dataset = FactoryBot.create(:dataset, *table.rows.flatten.map(&:to_sym))
+  ActiveFedora::SolrService.add(@dataset.to_solr)
+  ActiveFedora::SolrService.commit
+end
+
+Given(/^I am on dataset page$/) do
+  visit hyrax_dataset_path(@dataset)
+end
+
 When(/^I navigate to the new dataset page$/) do
   visit '/dashboard'
   click_link "Works"
