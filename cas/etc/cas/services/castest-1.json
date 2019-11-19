@@ -2,5 +2,6 @@
   "@class" : "org.apereo.cas.services.RegexRegisteredService",
   "serviceId" :  "^(https|http)://.*",
   "name" : "NIMS-CAStest",
-  "id" : 1
+  "id" : 1,
+  "logoutType" : "BACK_CHANNEL"
 }
