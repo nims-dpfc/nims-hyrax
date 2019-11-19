@@ -9,4 +9,11 @@ if ENV.fetch('AIRBRAKE_HOST', nil).present? and
     config.environment = Rails.env
     config.ignore_environments = %w(development test)
   end
+else
+  # disable Airbrake if the env vars are not present
+  puts 'Disabling Airbrake because the required env vars are not set'
+  Airbrake.configure do |c|
+    c.environment = Rails.env
+    c.ignore_environments = %w(development test production)
+  end
 end
