@@ -1,6 +1,7 @@
 class CatalogController < ApplicationController
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
+  include BlacklightOaiProvider::CatalogControllerBehavior
 
   # This filter applies the hydra access controls
   before_action :enforce_show_permissions, only: :show
@@ -28,6 +29,8 @@ class CatalogController < ApplicationController
     # Show gallery view
     config.view.gallery.partials = [:index_header, :index]
     config.view.slideshow.partials = [:index]
+
+    config.oai = OAI_CONFIG
 
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
     config.default_solr_params = {
