@@ -18,10 +18,17 @@ Feature: Search links on a dataset
       | with_complex_version                    |
 
 
-  Scenario: search links find the dataset
-    Given I am on dataset page
-    Then I see the following links:
-      | LABEL            | HREF                                                             |
-      | Anamika          | /catalog?f%5Bcomplex_person_sim%5D%5B%5D=Anamika                 |
-      | University       | /catalog?f%5Bcomplex_person_organization_sim%5D%5B%5D=University |
-      | Instrument title | /catalog?f%5Bcomplex_instrument_sim%5D%5B%5D=Instrument+title    |
+  Scenario: Search links are generated correctly
+    Given I am on the dataset page
+    Then I should see the following links:
+      | LABEL                      | HREF                                                                                  |
+      | Anamika                    | /catalog?f%5Bcomplex_person_sim%5D%5B%5D=Anamika                                      |
+      | University                 | /catalog?f%5Bcomplex_person_organization_sim%5D%5B%5D=University                      |
+      | Instrument title           | /catalog?f%5Bcomplex_instrument_sim%5D%5B%5D=Instrument+title                         |
+      | Foo                        | /catalog?f%5Binstrument_manufacturer_sim%5D%5B%5D=Foo                                 |
+      | Name of operator           | /catalog?f%5Bcomplex_person_operator_sim%5D%5B%5D=Name+of+operator                    |
+      | University                 | /catalog?f%5Bcomplex_person_operator_sim%5D%5B%5D=University                          |
+      | Managing organization name | /catalog?f%5Binstrument_managing_organization_sim%5D%5B%5D=Managing+organization+name |
+      | Purchase record title      | /catalog?f%5Bcomplex_purchase_record_title_sim%5D%5B%5D=Purchase+record+title         |
+      | Fooss                      | /catalog?f%5Bcomplex_purchase_record_supplier_sim%5D%5B%5D=Fooss                      |
+      | Foo                        | /catalog?f%5Bcomplex_purchase_record_manufacturer_sim%5D%5B%5D=Foo                    |

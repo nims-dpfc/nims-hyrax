@@ -347,7 +347,7 @@ RSpec.describe DatasetIndexer do
           }]
         }],
         managing_organization_attributes: [{
-          organization: 'FooFoo',
+          organization: 'Managing organization name',
           sub_organization: 'BarBar',
           purpose: 'Managing organization',
           complex_identifier_attributes: [{
@@ -464,10 +464,10 @@ RSpec.describe DatasetIndexer do
       expect(@solr_document['complex_person_operator_organization_sim']).to match_array(["Org 1", "Org 2"])
     end
     it 'indexes managing organization as stored searchable' do
-      expect(@solr_document['instrument_managing_organization_tesim']).to match_array(['FooFoo', 'BigBig'])
+      expect(@solr_document['instrument_managing_organization_tesim']).to match_array(['Managing organization name', 'BigBig'])
     end
     it 'indexes managing organization as facetable' do
-      expect(@solr_document['instrument_managing_organization_sim']).to match_array(['FooFoo', 'BigBig'])
+      expect(@solr_document['instrument_managing_organization_sim']).to match_array(['Managing organization name', 'BigBig'])
     end
     it 'indexes managing sub organization as stored searchable' do
       expect(@solr_document['instrument_managing_sub_organization_tesim']).to match_array(['BarBar', 'BazBaz'])
