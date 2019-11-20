@@ -36,4 +36,32 @@ class User < ApplicationRecord
     self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
     self.password = Devise.friendly_token[0, 20]
   end
+
+  def authenticated_nims_researcher?
+    # Coming in Phase 2 (Feb 2020)
+    # TODO: look at LDAP/CAS properties or user role?
+    registered_user?
+  end
+
+  def authenticated_nims_other?
+    # Coming in Phase 2 (Feb 2020)
+    # TODO: look at LDAP/CAS properties or user role?
+    false
+  end
+
+  def authenticated_nims?
+    authenticated_nims_researcher? || authenticated_nims_other?
+  end
+
+  def authenticated_external?
+    # Coming in Phase 3 (June 2020)
+    # TODO: look at LDAP/CAS properties or user role?
+    false
+  end
+
+  def authenticated?
+    authenticated_nims? || authenticated_external?
+  end
+
+  alias_method :unauthenticated?, :guest?
 end
