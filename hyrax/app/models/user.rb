@@ -3,12 +3,11 @@ class User < ApplicationRecord
   include Hydra::User
   # Connects this user object to Role-management behaviors.
   include Hydra::RoleManagement::UserRoles
-
+  include NIMSRoles
 
   # Connects this user object to Hyrax behaviors.
   include Hyrax::User
   include Hyrax::UserUsageStats
-
 
   if Blacklight::Utils.needs_attr_accessible?
     attr_accessible :username, :email, :password, :password_confirmation
@@ -32,36 +31,19 @@ class User < ApplicationRecord
     User.find_by('email' => user_key) || User.create!(username: username, email: user_key, password: Devise.friendly_token[0, 20])
   end
 
+  def after_ldap_authentication
+    # runs after the password is authenticated; synchronises the employeeType
+    Devise::LDAP::Adapter.get_ldap_param(self.username, "employeeType").tap do |employee_type|
+      if employee_type.present? && employee_type.first.present?
+        self.employee_type_code = employee_type.first.first
+      else
+        self.employee_type_code = nil
+      end
+    end
+  end
+
   def ldap_before_save
     self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
     self.password = Devise.friendly_token[0, 20]
   end
-
-  def authenticated_nims_researcher?
-    # Coming in Phase 2 (Feb 2020)
-    # TODO: look at LDAP/CAS properties or user role?
-    registered_user?
-  end
-
-  def authenticated_nims_other?
-    # Coming in Phase 2 (Feb 2020)
-    # TODO: look at LDAP/CAS properties or user role?
-    false
-  end
-
-  def authenticated_nims?
-    authenticated_nims_researcher? || authenticated_nims_other?
-  end
-
-  def authenticated_external?
-    # Coming in Phase 3 (June 2020)
-    # TODO: look at LDAP/CAS properties or user role?
-    false
-  end
-
-  def authenticated?
-    authenticated_nims? || authenticated_external?
-  end
-
-  alias_method :unauthenticated?, :guest?
 end
