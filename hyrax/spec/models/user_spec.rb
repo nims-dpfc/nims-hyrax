@@ -10,7 +10,7 @@ RSpec.describe ::User do
 
   describe '#ldap_before_save' do
     before do
-      allow(Devise::LDAP::Adapter).to receive(:get_ldap_param) { ['email@example.com'] }
+      allow(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.username, 'mail') { ['email@example.com'] }
       allow(Devise).to receive(:friendly_token) { 'password' }
       user.ldap_before_save
     end
@@ -47,6 +47,65 @@ RSpec.describe ::User do
 
       it 'sets the password' do
         expect(subject.password).to eql 'password'
+      end
+    end
+  end
+
+  describe '#after_ldap_authentication' do
+    context 'researcher' do
+      before do
+        allow(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.username, 'employeeType') { ['G1234'] }
+        user.after_ldap_authentication
+      end
+
+      it 'has an employee_type_code' do
+        expect(user.employee_type_code).to eql('G')
+      end
+
+      it 'is a researcher' do
+        expect(user.authenticated_nims_researcher?).to be true
+      end
+
+      it 'is not a non-researcher' do
+        expect(user.authenticated_nims_other?).to be false
+      end
+    end
+
+    context 'non-researcher' do
+      before do
+        allow(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.username, 'employeeType') { ['T4567'] }
+        user.after_ldap_authentication
+      end
+
+      it 'has an employee_type_code' do
+        expect(user.employee_type_code).to eql('T')
+      end
+
+      it 'is not a researcher' do
+        expect(user.authenticated_nims_researcher?).to be false
+      end
+
+      it 'is a non-researcher' do
+        expect(user.authenticated_nims_other?).to be true
+      end
+    end
+
+    context 'unknown' do
+      before do
+        allow(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.username, 'employeeType') { ['????'] }
+        user.after_ldap_authentication
+      end
+
+      it 'has an employee_type_code' do
+        expect(user.employee_type_code).to eql('?')
+      end
+
+      it 'is not a researcher' do
+        expect(user.authenticated_nims_researcher?).to be false
+      end
+
+      it 'is not a non-researcher' do
+        expect(user.authenticated_nims_other?).to be false
       end
     end
   end
