@@ -12,74 +12,73 @@
     <!-- Accordion body -->
     <div id="description" class="panel-collapse collapse in">
       <div class="panel-body">
-        <%= presenter.attribute_to_html(:alternative_title,
-          label: t('ngdr.fields.alternative_title'),
-          html_dl: true) %>
-        <%#=
-        <!-- This is displayed above the attributes row -->
-        # presenter.attribute_to_html(:description, html_dl: true)
-        %>
-        <%= presenter.attribute_to_html(:complex_person,
-          render_as: :nested_person,
-          label: t('ngdr.fields.complex_person'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:complex_organization,
-          render_as: :nested_organization,
-          label: t('ngdr.fields.complex_organization'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:keyword,
-          render_as: :faceted,
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:subject,
-          render_as: :faceted,
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:language,
-          render_as: :faceted,
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:publisher,
-          render_as: :faceted,
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:complex_date,
-          render_as: :nested_date,
-          label: t('ngdr.fields.complex_date'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:complex_identifier,
-          render_as: :nested_identifier,
-          label: t('ngdr.fields.complex_identifier'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:license,
-          render_as: :license,
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:complex_rights,
-          render_as: :nested_rights,
-          label: t('ngdr.fields.complex_rights'),
-          html_dl: true) %>
-        <%#= # presenter.attribute_to_html(:rights_statement,
-          render_as: :rights_statement,
-          html_dl: true) %>
-        <%#= # presenter.attribute_to_html(:rights_notes,
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:complex_version,
-          render_as: :nested_version,
-          label: t('ngdr.fields.complex_version'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:resource_type,
-          render_as: :faceted,
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:complex_relation,
-          render_as: :nested_relation,
-          label: t('ngdr.fields.complex_relation'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:source,
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:date_created,
-          render_as: :linked, search_field: 'date_created_tesim',
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:date_modified,
-          label: t('hyrax.base.show.last_modified'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:access_right,
-          html_dl: true) %>
+        <% if can? :read_alternative_title, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:alternative_title, label: t('ngdr.fields.alternative_title'), html_dl: true) %>
+        <% end %>
+
+        <!-- Description is displayed above the attributes row -->
+
+        <% if can? :read_creator, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_person, render_as: :nested_person, label: t('ngdr.fields.complex_person'), html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_organization, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_organization, render_as: :nested_organization, label: t('ngdr.fields.complex_organization'), html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_keyword, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_subject, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:subject, render_as: :faceted, html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_language, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:language, render_as: :faceted, html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_publisher, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:publisher, render_as: :faceted, html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_date, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_date, render_as: :nested_date, label: t('ngdr.fields.complex_date'), html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_identifier, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_identifier, render_as: :nested_identifier, label: t('ngdr.fields.complex_identifier'), html_dl: true) %>
+        <% end %>
+
+        <!-- no defined permission for license -->
+        <%= presenter.attribute_to_html(:license, render_as: :license, html_dl: true) %>
+
+        <% if can? :read_rights, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_rights, render_as: :nested_rights, label: t('ngdr.fields.complex_rights'), html_dl: true) %>
+          <%#= # presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
+          <%#= # presenter.attribute_to_html(:rights_notes, html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_version, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_version, render_as: :nested_version, label: t('ngdr.fields.complex_version'), html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_resource_type, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:resource_type, render_as: :faceted, html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_related, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_relation, render_as: :nested_relation, label: t('ngdr.fields.complex_relation'), html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_source, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:source, html_dl: true) %>
+        <% end %>
+
+        <!-- no defined permissions for date_created, date_modified, access_right -->
+        <%= presenter.attribute_to_html(:date_created, render_as: :linked, search_field: 'date_created_tesim', html_dl: true) %>
+        <%= presenter.attribute_to_html(:date_modified, label: t('hyrax.base.show.last_modified'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:access_right, html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Description accordion -->
@@ -95,36 +94,14 @@
     <!-- Accordion body -->
     <div id="experimentalMethod" class="panel-collapse collapse in">
       <div class="panel-body">
-        <%= presenter.attribute_to_html(:characterization_methods,
-          render_as: :faceted,
-          label: t('ngdr.fields.characterization_methods'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:computational_methods,
-          render_as: :faceted,
-          label: t('ngdr.fields.computational_methods'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:data_origin,
-          render_as: :faceted,
-          label: t('ngdr.fields.data_origin'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:origin_system_provenance,
-          label: t('ngdr.fields.origin_system_provenance'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:properties_addressed,
-          render_as: :faceted,
-          label: t('ngdr.fields.properties_addressed'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:specimen_set,
-          label: t('ngdr.fields.specimen_set'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:synthesis_and_processing,
-          render_as: :faceted,
-          label: t('ngdr.fields.synthesis_and_processing'),
-          html_dl: true) %>
-        <%= presenter.attribute_to_html(:custom_property,
-          render_as: :nested_custom_property,
-          label: t('ngdr.fields.custom_property'),
-          html_dl: true) %>
+        <%= presenter.attribute_to_html(:characterization_methods, render_as: :faceted, label: t('ngdr.fields.characterization_methods'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:computational_methods, render_as: :faceted, label: t('ngdr.fields.computational_methods'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:data_origin, render_as: :faceted, label: t('ngdr.fields.data_origin'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:origin_system_provenance, label: t('ngdr.fields.origin_system_provenance'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:properties_addressed, render_as: :faceted, label: t('ngdr.fields.properties_addressed'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:specimen_set, label: t('ngdr.fields.specimen_set'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:synthesis_and_processing, render_as: :faceted, label: t('ngdr.fields.synthesis_and_processing'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:custom_property, render_as: :nested_custom_property, label: t('ngdr.fields.custom_property'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Method accordion -->
@@ -140,10 +117,7 @@
     <!-- Accordion body -->
     <div id="instrument" class="panel-collapse collapse in">
       <div class="panel-body">
-        <%= presenter.attribute_to_html(:complex_instrument,
-          render_as: :nested_instrument,
-          label: t('ngdr.fields.instrument'),
-          html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_instrument, render_as: :nested_instrument, label: t('ngdr.fields.instrument'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Instruments accordion -->
@@ -159,10 +133,7 @@
     <!-- Accordion body -->
     <div id="specimenType" class="panel-collapse collapse in">
       <div class="panel-body">
-        <%= presenter.attribute_to_html(:complex_specimen_type,
-          render_as: :nested_specimen_type,
-          label: t('ngdr.fields.complex_specimen_type'),
-          html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_specimen_type, render_as: :nested_specimen_type, label: t('ngdr.fields.complex_specimen_type'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Specimen details accordion -->
