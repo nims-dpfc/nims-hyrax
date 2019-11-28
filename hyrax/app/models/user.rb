@@ -31,19 +31,17 @@ class User < ApplicationRecord
     User.find_by('email' => user_key) || User.create!(username: username, email: user_key, password: Devise.friendly_token[0, 20])
   end
 
-  def after_ldap_authentication
-    # runs after the password is authenticated; synchronises the employeeType
-    Devise::LDAP::Adapter.get_ldap_param(self.username, "employeeType").tap do |employee_type|
-      if employee_type.present? && employee_type.first.present?
-        self.employee_type_code = employee_type.first.first
-      else
-        self.employee_type_code = nil
-      end
-    end
-  end
+  # def after_database_authentication
+  #   puts "AFTER DATABASE AUTHENTICATION"
+  # end
+  #
+  # def after_ldap_authentication
+  #   puts "AFTER LDAP AUTHENTICATION"
+  # end
 
   def ldap_before_save
-    self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
-    self.password = Devise.friendly_token[0, 20]
+    puts "LDAP BEFORE SAVE"
+    # self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
+    # self.password = Devise.friendly_token[0, 20]
   end
 end
