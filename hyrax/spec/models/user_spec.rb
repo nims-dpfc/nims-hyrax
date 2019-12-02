@@ -51,62 +51,96 @@ RSpec.describe ::User do
     end
   end
 
-  describe '#after_ldap_authentication' do
-    context 'researcher' do
-      before do
-        allow(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.username, 'employeeType') { ['G1234'] }
-        user.after_ldap_authentication
+  describe 'NIMS Roles' do
+    let(:user) { described_class.new(employee_type_code: employee_type_code) }
+
+    describe '#authenticated_nims_researcher?' do
+      subject { user.authenticated_nims_researcher? }
+
+      context 'employee_type A' do
+        let(:employee_type_code) { 'A' }
+        it { is_expected.to be true }
       end
 
-      it 'has an employee_type_code' do
-        expect(user.employee_type_code).to eql('G')
+      context 'employee_type G' do
+        let(:employee_type_code) { 'G' }
+        it { is_expected.to be true }
       end
 
-      it 'is a researcher' do
-        expect(user.authenticated_nims_researcher?).to be true
+      context 'employee_type L' do
+        let(:employee_type_code) { 'L' }
+        it { is_expected.to be true }
       end
 
-      it 'is not a non-researcher' do
-        expect(user.authenticated_nims_other?).to be false
+      context 'employee_type Q' do
+        let(:employee_type_code) { 'Q' }
+        it { is_expected.to be true }
+      end
+
+      context 'employee_type R' do
+        let(:employee_type_code) { 'R' }
+        it { is_expected.to be true }
+      end
+
+      context 'employee_type S' do
+        let(:employee_type_code) { 'S' }
+        it { is_expected.to be true }
+      end
+
+      context 'employee_type X' do
+        let(:employee_type_code) { 'X' }
+        it { is_expected.to be false }
       end
     end
 
-    context 'non-researcher' do
-      before do
-        allow(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.username, 'employeeType') { ['T4567'] }
-        user.after_ldap_authentication
+    describe '#authenticated_nims_other?' do
+      subject { user.authenticated_nims_other? }
+
+      context 'employee_type T' do
+        let(:employee_type_code) { 'T' }
+        it { is_expected.to be true }
       end
 
-      it 'has an employee_type_code' do
-        expect(user.employee_type_code).to eql('T')
+      context 'employee_type Z' do
+        let(:employee_type_code) { 'Z' }
+        it { is_expected.to be true }
       end
 
-      it 'is not a researcher' do
-        expect(user.authenticated_nims_researcher?).to be false
-      end
-
-      it 'is a non-researcher' do
-        expect(user.authenticated_nims_other?).to be true
+      context 'employee_type X' do
+        let(:employee_type_code) { 'X' }
+        it { is_expected.to be false }
       end
     end
 
-    context 'unknown' do
-      before do
-        allow(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.username, 'employeeType') { ['????'] }
-        user.after_ldap_authentication
+    describe '#authenticated_nims?' do
+      subject { user.authenticated_nims? }
+
+      context 'employee_type A' do
+        let(:employee_type_code) { 'A' }
+        it { is_expected.to be true }
       end
 
-      it 'has an employee_type_code' do
-        expect(user.employee_type_code).to eql('?')
+      context 'employee_type T' do
+        let(:employee_type_code) { 'T' }
+        it { is_expected.to be true }
       end
 
-      it 'is not a researcher' do
-        expect(user.authenticated_nims_researcher?).to be false
+      context 'employee_type X' do
+        let(:employee_type_code) { 'X' }
+        it { is_expected.to be false }
       end
+    end
 
-      it 'is not a non-researcher' do
-        expect(user.authenticated_nims_other?).to be false
-      end
+    describe '#authenticated_external?' do
+      let(:employee_type_code) { nil }
+      subject { user.authenticated_external? }
+      it { is_expected.to be false }
+    end
+
+    describe '#authenticated?' do
+      let(:employee_type_code) { 'A' }
+      subject { user.authenticated? }
+      it { is_expected.to be true }
     end
   end
 end
