@@ -25,7 +25,7 @@ class UserAuthorisationService
         success = true
       end
     else
-      puts "ERROR: UserAuthorisationService failed to retrieve user attributes, check USER_AUTHORISATION_LDAP_HOST, USER_AUTHORISATION_LDAP_BASE, USER_AUTHORISATION_LDAP_ATTRIBUTE env vars"
+      puts "WARNING: UserAuthorisationService failed to retrieve user attributes, check USER_AUTHORISATION_LDAP_HOST, USER_AUTHORISATION_LDAP_BASE, USER_AUTHORISATION_LDAP_ATTRIBUTE env vars"
     end
     success
   end
