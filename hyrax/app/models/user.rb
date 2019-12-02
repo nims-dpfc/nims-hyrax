@@ -9,6 +9,8 @@ class User < ApplicationRecord
   include Hyrax::User
   include Hyrax::UserUsageStats
 
+  has_many :uploaded_files, class_name: 'Hyrax::UploadedFile', dependent: :nullify
+
   if Blacklight::Utils.needs_attr_accessible?
     attr_accessible :username, :email, :password, :password_confirmation
   end
@@ -31,17 +33,9 @@ class User < ApplicationRecord
     User.find_by('email' => user_key) || User.create!(username: username, email: user_key, password: Devise.friendly_token[0, 20])
   end
 
-  # def after_database_authentication
-  #   puts "AFTER DATABASE AUTHENTICATION"
-  # end
-  #
-  # def after_ldap_authentication
-  #   puts "AFTER LDAP AUTHENTICATION"
-  # end
-
   def ldap_before_save
-    puts "LDAP BEFORE SAVE"
-    # self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
-    # self.password = Devise.friendly_token[0, 20]
+    # Runs before saving a new user record in the database via LDAP Authentication
+    self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
+    self.password = Devise.friendly_token[0, 20]
   end
 end
