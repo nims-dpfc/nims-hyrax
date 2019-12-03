@@ -55,9 +55,9 @@ class Ability
     can :read_organization, [::Dataset, ::Publication]
     can :read_publisher, [::Dataset, ::Image, ::Publication]
     can :read_related, [::Dataset, ::Publication]
-    can :read_resource_type, [::Image, ::Publication]
+    can :read_resource_type, [::Dataset, ::Image, ::Publication] #NB: added Dataset to list
     can :read_rights, [::Dataset, ::Image, ::Publication]
-    can :read_source, [::Publication]
+    can :read_source, [::Dataset, ::Publication] #NB: added Dataset to the list
     can :read_subject, [::Dataset, ::Publication, ::Image]  # NB: added Image to list
     can :read_title, [::Dataset, ::Image, ::Publication]    # NB: not used in Publication
     can :read_version, [::Dataset, ::Image, ::Publication]

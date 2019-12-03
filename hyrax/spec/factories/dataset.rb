@@ -26,7 +26,35 @@ FactoryBot.define do
 
     trait :restricted do
       visibility { 'restricted' }
-      title { ["Resstricted Dataset"] }
+      title { ["Restricted Dataset"] }
+    end
+
+    trait :with_alternative_title do
+      alternative_title { 'Dataset Alternative Title' }
+    end
+
+    trait :with_keyword do
+      keyword { ['Keyword123'] }
+    end
+
+    trait :with_subject do
+      subject { ['Subject123'] }
+    end
+
+    trait :with_language do
+      language { ['Faroese'] }
+    end
+
+    trait :with_publisher do
+      publisher { ['Publisher123'] }
+    end
+
+    trait :with_resource_type do
+      resource_type { ['ResourceType123'] }
+    end
+
+    trait :with_source do
+      source { ['Source123'] }
     end
 
     trait :with_complex_person do
