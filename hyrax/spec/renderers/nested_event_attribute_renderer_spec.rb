@@ -7,10 +7,10 @@ RSpec.describe NestedEventAttributeRenderer do
   it 'generates the correct fields' do
     is_expected.to have_css('th', text: 'Event')
     is_expected.to have_css('div.row label', text: 'Title')
-    is_expected.to have_css('div.row', text: 'A Title')
+    is_expected.to have_css('div.row', text: 'Event-Title-123')
 
     is_expected.to have_css('div.row label', text: 'Location')
-    is_expected.to have_css('div.row', text: '221B Baker Street')
+    is_expected.to have_css('div.row', text: 'New Scotland Yard')
 
     is_expected.to have_css('div.row label', text: 'Start date')
     is_expected.to have_css('div.row', text: '2018-12-25')

@@ -15,8 +15,8 @@ RSpec.describe NestedEventInput, type: :input do
   subject { Capybara.string(html) }
 
   it 'generates the correct fields' do
-    is_expected.to have_field('publication_complex_event_attributes_0_title', type: :text, with: 'A Title')
-    is_expected.to have_field('publication_complex_event_attributes_0_place', type: :text, with: '221B Baker Street')
+    is_expected.to have_field('publication_complex_event_attributes_0_title', type: :text, with: 'Event-Title-123')
+    is_expected.to have_field('publication_complex_event_attributes_0_place', type: :text, with: 'New Scotland Yard')
     is_expected.to have_field('publication_complex_event_attributes_0_start_date', type: :text, with: '2018-12-25')
     is_expected.to have_field('publication_complex_event_attributes_0_end_date', type: :text, with: '2019-01-01')
     is_expected.to have_field('publication_complex_event_attributes_0_invitation_status', type: :text, with: 'true')

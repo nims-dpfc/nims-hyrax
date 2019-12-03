@@ -29,6 +29,46 @@ FactoryBot.define do
       }
     end
 
+    trait :with_alternative_title do
+      alternative_title { 'Publication Alternative Title' }
+    end
+
+    trait :with_keyword do
+      keyword { ['Keyword-123'] }
+    end
+
+    trait :with_subject do
+      subject { ['Subject-123'] }
+    end
+
+    trait :with_language do
+      language { ['Faroese'] }
+    end
+
+    trait :with_resource_type do
+      resource_type { ['Resource-Type-123'] }
+    end
+
+    trait :with_source do
+      source { ['Source-123'] }
+    end
+
+    trait :with_rights_statement do
+      rights_statement { ['Rights-Statement-123'] }
+    end
+
+    trait :with_issue do
+      issue { 'Issue-123' }
+    end
+
+    trait :with_table_of_contents do
+      table_of_contents { 'Table-of-Contents-123' }
+    end
+
+    trait :with_number_of_pages do
+      total_number_of_pages { 'Number-of-Pages-123' }
+    end
+
     trait :with_complex_identifier do
       complex_identifier_attributes {
         [
@@ -43,24 +83,24 @@ FactoryBot.define do
       solr_document { {} }
     end
 
-    trait :with_date do
+    trait :with_complex_date do
       complex_date_attributes { [{ date: '2019-05-28',  description: 'Published' }] }
     end
 
     trait :with_place do
-      place { '221B Baker Street' }
+      place { '221B Baker Street Place' }
     end
 
     trait :with_publisher do
-      publisher { ['Foo Publisher'] }
+      publisher { ['Publisher-123'] }
     end
 
     trait :with_complex_event do
       complex_event_attributes {
         [{
-             title: 'A Title',
+             title: 'Event-Title-123',
              invitation_status: true,
-             place: '221B Baker Street',
+             place: 'New Scotland Yard',
              start_date: '2018-12-25',
              end_date: '2019-01-01'
         }]
@@ -87,6 +127,26 @@ FactoryBot.define do
           total_number_of_pages: '8',
           volume: '3'
         }]
+      }
+    end
+
+    trait :with_complex_rights do
+      complex_rights_attributes {
+        [{
+           date: '1980-10-10',
+           rights: 'http://creativecommons.org/publicdomain/zero/1.0/'
+         }]
+      }
+    end
+
+    trait :with_complex_version do
+      complex_version_attributes {
+        [{
+           date: '1990-12-12',
+           description: 'Creating the first version',
+           identifier: 'id1',
+           version: '1.0'
+         }]
       }
     end
   end
