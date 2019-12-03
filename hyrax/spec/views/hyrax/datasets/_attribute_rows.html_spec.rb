@@ -15,7 +15,7 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
   end
 
   # NB: the visibility of individual metadata components is set in app/models/ability.rb
-  # This test confirms the current expected behaviour (which is most metadata is visible)
+  # This test confirms the current expected behaviour (which is that most metadata is visible)
 
   context 'unauthenticated user' do
     let(:user) { nil }
@@ -23,17 +23,17 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
       expect(rendered).to have_content('Dataset Alternative Title')
       expect(rendered).to have_content('Anamika')
       expect(rendered).to have_content('University')
-      expect(rendered).to have_content('Keyword123')
-      expect(rendered).to have_content('Subject123')
+      expect(rendered).to have_content('Keyword-123')
+      expect(rendered).to have_content('Subject-123')
       expect(rendered).to have_content('Faroese')
-      expect(rendered).to have_content('Publisher123')
+      expect(rendered).to have_content('Publisher-123')
       expect(rendered).to have_content('1978-10-28')
       expect(rendered).to have_content('10.0.1111')
       expect(rendered).to have_content('http://creativecommons.org/publicdomain/zero/1.0/')
       expect(rendered).to have_content('Creating the first version')
-      expect(rendered).to have_content('ResourceType123')
+      expect(rendered).to have_content('Resource-Type-123')
       expect(rendered).to have_content('A relation label')
-      expect(rendered).to have_content('Source123')
+      expect(rendered).to have_content('Source-123')
     end
   end
 
@@ -43,17 +43,17 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
       expect(rendered).to have_content('Dataset Alternative Title')
       expect(rendered).to have_content('Anamika')
       expect(rendered).to have_content('University')
-      expect(rendered).to have_content('Keyword123')
-      expect(rendered).to have_content('Subject123')
+      expect(rendered).to have_content('Keyword-123')
+      expect(rendered).to have_content('Subject-123')
       expect(rendered).to have_content('Faroese')
-      expect(rendered).to have_content('Publisher123')
+      expect(rendered).to have_content('Publisher-123')
       expect(rendered).to have_content('1978-10-28')
       expect(rendered).to have_content('10.0.1111')
       expect(rendered).to have_content('http://creativecommons.org/publicdomain/zero/1.0/')
       expect(rendered).to have_content('Creating the first version')
-      expect(rendered).to have_content('ResourceType123')
+      expect(rendered).to have_content('Resource-Type-123')
       expect(rendered).to have_content('A relation label')
-      expect(rendered).to have_content('Source123')
+      expect(rendered).to have_content('Source-123')
     end
   end
 end

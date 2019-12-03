@@ -34,11 +34,11 @@ FactoryBot.define do
     end
 
     trait :with_keyword do
-      keyword { ['Keyword123'] }
+      keyword { ['Keyword-123'] }
     end
 
     trait :with_subject do
-      subject { ['Subject123'] }
+      subject { ['Subject-123'] }
     end
 
     trait :with_language do
@@ -46,15 +46,15 @@ FactoryBot.define do
     end
 
     trait :with_publisher do
-      publisher { ['Publisher123'] }
+      publisher { ['Publisher-123'] }
     end
 
     trait :with_resource_type do
-      resource_type { ['ResourceType123'] }
+      resource_type { ['Resource-Type-123'] }
     end
 
     trait :with_source do
-      source { ['Source123'] }
+      source { ['Source-123'] }
     end
 
     trait :with_complex_person do
