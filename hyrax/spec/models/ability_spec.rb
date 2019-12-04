@@ -7,7 +7,7 @@ RSpec.describe Ability do
     subject { ability.can?(:create, ::Dataset) }
 
     context 'guest user' do
-      let(:user) { build(:user, :guest) }
+      let(:user) { create(:user, :guest) }
       it { is_expected.to be false }
     end
 
@@ -26,7 +26,7 @@ RSpec.describe Ability do
     subject { ability.can?(:create, ::Publication) }
 
     context 'guest user' do
-      let(:user) { build(:user, :guest) }
+      let(:user) { create(:user, :guest) }
       it { is_expected.to be false }
     end
 
@@ -38,6 +38,54 @@ RSpec.describe Ability do
     context 'admin user' do
       let(:user) { build(:user, :admin )}
       it { is_expected.to be true }
+    end
+  end
+
+  describe '#custom_permissions' do
+    let(:role_create) { ability.can?(:create, Role) }
+    let(:role_show) { ability.can?(:show, Role) }
+    let(:role_add_user) { ability.can?(:add_user, Role) }
+    let(:role_remove_user) { ability.can?(:remove_user, Role) }
+    let(:role_index) { ability.can?(:index, Role) }
+    let(:role_edit) { ability.can?(:edit, Role) }
+    let(:role_update) { ability.can?(:update, Role) }
+    let(:role_destroy) { ability.can?(:destroy, Role) }
+
+    let(:create_dataset) { ability.can?(:create, Dataset) }
+    let(:create_image) { ability.can?(:create, Image) }
+    let(:create_publication) { ability.can?(:create, Publication) }
+    let(:create_work) { ability.can?(:create, Work) }
+
+    context 'admin user' do
+      let(:user) { create(:user, :admin) }
+      it { expect(role_create).to be true }
+      it { expect(role_show).to be true }
+      it { expect(role_add_user).to be true }
+      it { expect(role_remove_user).to be true }
+      it { expect(role_index).to be true }
+      it { expect(role_edit).to be true }
+      it { expect(role_update).to be true }
+      it { expect(role_destroy).to be true }
+      it { expect(create_dataset).to be true }
+      it { expect(create_image).to be true }
+      it { expect(create_publication).to be true }
+      it { expect(create_work).to be true }
+    end
+
+    context 'guest user' do
+      let(:user) { create(:user, :guest) }
+      it { expect(role_create).to be false }
+      it { expect(role_show).to be false }
+      it { expect(role_add_user).to be false }
+      it { expect(role_remove_user).to be false }
+      it { expect(role_index).to be false }
+      it { expect(role_edit).to be false }
+      it { expect(role_update).to be false }
+      it { expect(role_destroy).to be false }
+      it { expect(create_dataset).to be false }
+      it { expect(create_image).to be false }
+      it { expect(create_publication).to be false }
+      it { expect(create_work).to be false }
     end
   end
 

@@ -1,6 +1,6 @@
 class Ability
   include Hydra::Ability
-  include Hyrax::Ability
+  include Hyrax::Ability # NB: not the same as the line above!
 
   # Registered user can only create datasets and publications
   self.ability_logic += [
