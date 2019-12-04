@@ -76,7 +76,7 @@ gem 'devise_cas_authenticatable'
 
 gem 'riiif', '~> 2.0'
 
-group :production do
+group :production, :development do
   gem 'airbrake', '~> 5.0'
 end
 
