@@ -19,6 +19,10 @@ When(/^I navigate to the new dataset page$/) do
   visit new_hyrax_dataset_path
 end
 
+When /^I try to navigate to the new dataset page$/ do
+  visit new_hyrax_dataset_path
+end
+
 When(/^I navigate to the dataset catalog page$/) do
   visit root_path
   click_link 'Browse all datasets'

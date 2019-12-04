@@ -3,44 +3,6 @@ require 'rails_helper'
 RSpec.describe Ability do
   let(:ability) { Ability.new(user) }
 
-  describe '#everyone_can_create_dataset' do
-    subject { ability.can?(:create, ::Dataset) }
-
-    context 'guest user' do
-      let(:user) { create(:user, :guest) }
-      it { is_expected.to be false }
-    end
-
-    context 'general user' do
-      let(:user) { create(:user) }
-      it { is_expected.to be true }
-    end
-
-    context 'admin user' do
-      let(:user) { build(:user, :admin )}
-      it { is_expected.to be true }
-    end
-  end
-
-  describe '#everyone_can_create_publication' do
-    subject { ability.can?(:create, ::Publication) }
-
-    context 'guest user' do
-      let(:user) { create(:user, :guest) }
-      it { is_expected.to be false }
-    end
-
-    context 'general user' do
-      let(:user) { create(:user) }
-      it { is_expected.to be true }
-    end
-
-    context 'admin user' do
-      let(:user) { build(:user, :admin )}
-      it { is_expected.to be true }
-    end
-  end
-
   describe '#custom_permissions' do
     let(:role_create) { ability.can?(:create, Role) }
     let(:role_show) { ability.can?(:show, Role) }
@@ -86,6 +48,46 @@ RSpec.describe Ability do
       it { expect(create_image).to be false }
       it { expect(create_publication).to be false }
       it { expect(create_work).to be false }
+    end
+  end
+
+  describe '#create_content' do
+    let(:models) { [::Dataset, ::Image, ::Publication] }
+
+    context 'unauthenticated user' do
+      let(:user) { build(:user, :guest) }
+      it 'cannot create content' do
+        models.each do |model|
+          expect(ability.can?(:create, model)).to be false
+        end
+      end
+    end
+
+    context 'authenticated NIMS non-Researcher' do
+      let(:user) { build(:user, :nims_other) }
+      it 'cannot create content' do
+        models.each do |model|
+          expect(ability.can?(:create, model)).to be false
+        end
+      end
+    end
+
+    context 'authenticated NIMS Researcher' do
+      let(:user) { build(:user, :nims_researcher) }
+      it 'can create content' do
+        models.each do |model|
+          expect(ability.can?(:create, model)).to be true
+        end
+      end
+    end
+
+    context 'admin user' do
+      let(:user) { build(:user, :admin) }
+      it 'can create content' do
+        models.each do |model|
+          expect(ability.can?(:create, model)).to be true
+        end
+      end
     end
   end
 

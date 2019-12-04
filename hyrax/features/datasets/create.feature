@@ -3,8 +3,14 @@ Feature: Create a dataset
   Background:
     Given an initialised sysem with a default admin set, permission template and workflow
 
-  Scenario: Create a dataset as a general user
-    Given I am logged in as a general user
+  Scenario: Cannot create a dataset as a Non-Researcher user
+    Given I am logged in as a nims_other user
+    And I have permission to deposit
+    When I try to navigate to the new dataset page
+    Then I should not be authorized to access the page
+
+  Scenario: Create a dataset as a NIMS Researcher user
+    Given I am logged in as a nims_researcher user
     And I have permission to deposit
     When I navigate to the new dataset page
     And I create the dataset with:

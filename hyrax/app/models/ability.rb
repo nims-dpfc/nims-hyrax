@@ -5,8 +5,7 @@ class Ability
   # Registered user can only create datasets and publications
   self.ability_logic += [
     :read_metadata,
-    :everyone_can_create_dataset,
-    :everyone_can_create_publication
+    :create_content
   ]
 
   # Define any customized permissions here.
@@ -28,14 +27,9 @@ class Ability
     # end
   end
 
-  def everyone_can_create_dataset
-    return unless registered_user?
-    can :create, [::Dataset]
-  end
-
-  def everyone_can_create_publication
-    return unless registered_user?
-    can :create, [::Publication]
+  def create_content
+    # only NIMS Researchers may upload new content
+    can :create, [::Dataset, ::Publication, ::Image] if current_user.authenticated_nims_researcher?
   end
 
   def read_metadata
