@@ -20,7 +20,7 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
   context 'unauthenticated user' do
     let(:user) { nil }
     it 'shows the correct metadata' do
-      expect(rendered).to have_content('Dataset Alternative Title')
+      expect(rendered).to have_content('Alternative-Title-123')
       expect(rendered).to have_content('Anamika')
       expect(rendered).to have_content('University')
       expect(rendered).to have_content('Keyword-123')
@@ -40,7 +40,7 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
   context 'authenticated NIMS Researcher' do
     let(:user) { create(:user, :nims_researcher) }
     it 'shows the correct metadata' do
-      expect(rendered).to have_content('Dataset Alternative Title')
+      expect(rendered).to have_content('Alternative-Title-123')
       expect(rendered).to have_content('Anamika')
       expect(rendered).to have_content('University')
       expect(rendered).to have_content('Keyword-123')

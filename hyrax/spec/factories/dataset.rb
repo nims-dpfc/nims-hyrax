@@ -30,7 +30,7 @@ FactoryBot.define do
     end
 
     trait :with_alternative_title do
-      alternative_title { 'Dataset Alternative Title' }
+      alternative_title { 'Alternative-Title-123' }
     end
 
     trait :with_keyword do
