@@ -318,6 +318,10 @@ Devise.setup do |config|
   # e.g. the following option will change it from 'destination' to 'url'
   # config.cas_destination_logout_param_name = 'url'
 
+  # NB: these two parameters are necessary for single-sign-out to work correctly on the NIMS CAS server (Apereo CAS 6)
+  config.cas_logout_url_param = 'destination'
+  config.cas_destination_logout_param_name = 'service'
+
   # By default, devise_cas_authenticatable will create users.  If you would rather
   # require user records to already exist locally before they can authenticate via
   # CAS, uncomment the following line.
