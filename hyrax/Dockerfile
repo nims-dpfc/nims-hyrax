@@ -61,7 +61,7 @@ RUN cd $APP_PRODUCTION && \
     && if [ "$RAILS_ENV" = "production" ]; then \
             bundle install --without test:development; \
         else \
-            bundle install --no-deployment; \
+            bundle install --without production --no-deployment; \
         fi \
     && mv Gemfile.lock Gemfile.lock.built_by_docker
 
