@@ -43,25 +43,8 @@ class User < ApplicationRecord
   end
 
   def ldap_before_save
+    # Runs before saving a new user record in the database via LDAP Authentication
     self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
     self.password = Devise.friendly_token[0, 20]
-  end
-
-  def cas_extra_attributes=(extra_attributes)
-    extra_attributes.each do |name, value|
-      case name.to_sym
-      # TODO: change these mappings to match NIMS CAS schema
-      when :mail
-        self.email = value
-      when :eduPersonNickname
-        self.display_name = value
-      when :cn
-        self.email = value
-      # when :fullname
-      #   self.fullname = value
-      # when :email
-      #   self.email = value
-      end
-    end
   end
 end
