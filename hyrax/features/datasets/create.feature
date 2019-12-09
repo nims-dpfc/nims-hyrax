@@ -1,7 +1,7 @@
 Feature: Create a dataset
 
   Background:
-    Given an initialised sysem with a default admin set, permission template and workflow
+    Given an initialised system with a default admin set, permission template and workflow
 
   Scenario: Cannot create a dataset as a Non-Researcher user
     Given I am logged in as a nims_other user
