@@ -7,6 +7,11 @@ FactoryBot.define do
     override_new_record
   end
 
+  trait :open do
+    visibility { 'open' }
+    title { ["Open Image"] }
+  end
+
   trait :with_alternative_title do
     alternative_title { 'Alternative-Title-123' }
   end

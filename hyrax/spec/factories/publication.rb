@@ -6,6 +6,11 @@ FactoryBot.define do
     skip_create
     override_new_record
 
+    trait :open do
+      visibility { 'open' }
+      title { ["Open Publication"] }
+    end
+
     trait :with_people do
       complex_person_attributes {
         [
