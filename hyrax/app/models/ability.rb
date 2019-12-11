@@ -3,9 +3,11 @@ class Ability
   include Hyrax::Ability
 
   # Registered user can only create datasets and publications
+  # Only admin can view the user list
   self.ability_logic += [
     :everyone_can_create_dataset,
-    :everyone_can_create_publication
+    :everyone_can_create_publication,
+    :only_admin_can_view_user_list
   ]
 
   # Define any customized permissions here.
@@ -35,5 +37,13 @@ class Ability
   def everyone_can_create_publication
     return unless registered_user?
     can :create, [::Publication]
+  end
+
+  def only_admin_can_view_user_list
+    if current_user.admin?
+      can :index, ::User
+    else
+      cannot :index, ::User
+    end
   end
 end
