@@ -35,7 +35,11 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
     return row if val.blank?
     row += '<div class="row">'
     row += "<div class=\"col-md-3\"><label>#{label}</label></div>"
-    row += "<div class=\"col-md-9\">#{val}</div>"
+    if label =~ /^doi$/i
+      row += "<div class=\"col-md-9\">#{get_doi_hyperlink(val)}</div>"
+    else
+      row += "<div class=\"col-md-9\">#{val}</div>"
+    end
     row += "</div>"
     row
   end
@@ -46,6 +50,11 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
     row += "<div class=\"col-md-12\"><label>#{label}</label></div>"
     row += "</div>"
     row
+  end
+
+  def get_doi_hyperlink(val)
+    doi = DOI.new(val)
+    link_to(doi.label, doi.url, target: '_blank')
   end
 
   def get_nested_output(label, nested_value, renderer_class, display_label=false)
