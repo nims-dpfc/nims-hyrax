@@ -99,6 +99,8 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
       :complex_purchase_record_supplier
     when field == :complex_specimen_type && label == 'Manufacturer'
       :complex_purchase_record_manufacturer
+    when field == :complex_person_operator && label == 'Organization'
+      :complex_person_operator_organization
     else
       field
     end
