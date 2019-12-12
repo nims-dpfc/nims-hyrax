@@ -7,6 +7,6 @@ RSpec.describe NestedIdentifierAttributeRenderer do
   it 'generates the correct fields' do
     is_expected.to have_css('th', text: 'Identifier')
     is_expected.to have_css('div.row label', text: 'DOI')
-    is_expected.to have_css('div.row', text: '10.0.1111')
+    is_expected.to have_css('div.row a[href="https://doi.org/10.0.1111"]', text: 'doi:10.0.1111')
   end
 end
