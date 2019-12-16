@@ -13,6 +13,11 @@ RSpec.describe DOI do
       subject { doi.label }
       it { is_expected.to eql('doi:10.5555/12345678') }
     end
+
+    context 'identifier' do
+      subject { doi.identifier }
+      it { is_expected.to eql('10.5555/12345678') }
+    end
   end
 
   context 'http:// prefix' do
@@ -44,6 +49,17 @@ RSpec.describe DOI do
     end
     context 'without whitespace' do
       let(:value) { 'doi:10.5555/12345678' }
+      it_behaves_like 'doi'
+    end
+  end
+
+  context 'info:doi/ prefix' do
+    context 'with whitespace' do
+      let(:value) { 'info: doi/10.5555/12345678' }
+      it_behaves_like 'doi'
+    end
+    context 'without whitespace' do
+      let(:value) { 'info:doi/10.5555/12345678' }
       it_behaves_like 'doi'
     end
   end
