@@ -116,4 +116,17 @@ class NestedAttributesInput < MultiValueInput
     def id_for(attribute_name, index, field, parent=@builder.object_name)
       [parent, "#{attribute_name}_attributes", index, field].join('_'.freeze)
     end
+
+    def class_for(attribute_name, field, model_class=@builder.object.class.model_class)
+      requirements = model_class.requirements_for(attribute_name)
+      if requirements[:required] && requirements[:required].flatten.include?(field.to_s)
+        'require-if-any'
+      elsif requirements[:conditional] && requirements[:conditional][field].present?
+        cl = []
+        requirements[:conditional][field].each do | conditional_field |
+          cl << "require-if-#{conditional_field}"
+        end
+        cl.join(' ')
+      end
+    end
 end
