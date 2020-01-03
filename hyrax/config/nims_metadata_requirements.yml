@@ -1,0 +1,41 @@
+# config/nims_metadata_requirements.yml
+nims:
+  default:
+    complex_person:
+      # required: the fields MUST be present in order to save the resource
+        # required fields are used for form validation
+        # required fields are used for model validation
+        # required is an array of arrays where each line prefaced with - represents AND
+        # and array contents on each line represent OR
+        # for example:
+          # - ['name', 'full_name']
+          # - ['birthdate']
+        # = (name OR full_name) AND birthdate MUST be provided to save a complex_person
+      required:
+        - ['name', 'first_name', 'last_name']
+      # conditional: the fields MUST be present if any of the listed fields includes data
+        # conditional requirements are used for form validation
+        # conditional requirements are NOT used for model validation
+        # for example:
+          # role:
+          #   - ['name']
+        # = role MUST be provided if name has been entered
+      conditional:
+        role:
+          - 'name'
+    complex_organization:
+      required:
+        - ['organization']
+    complex_identifier:
+      required:
+        - ['identifier']
+    complex_rights:
+      required:
+        - ['rights']
+    complex_date:
+      required:
+        - ['date']
+  # Customise for specific models below
+  dataset:
+  publication:
+  image:

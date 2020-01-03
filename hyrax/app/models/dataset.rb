@@ -1,6 +1,7 @@
 require "./lib/vocabularies/nims_rdp"
 class Dataset < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include ComplexRequirements
 
   self.indexer = DatasetIndexer
 
