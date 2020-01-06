@@ -8,19 +8,19 @@ module Hyrax
              locals.merge(file_set: presenter)
     end
 
-    def nims_media_display_partial(file_set)
+    def nims_media_display_partial(presenter)
       'hyrax/file_sets/media_display/' +
-          if file_set.image?
+          if presenter.image?
             'image'
-          elsif file_set.video?
+          elsif presenter.video?
             'video'
-          elsif file_set.audio?
+          elsif presenter.audio?
             'audio'
-          elsif file_set.pdf?
+          elsif presenter.pdf?
             'pdf'
-          elsif file_set.office_document?
+          elsif presenter.office_document?
             'office_document'
-          elsif file_set.csv?
+          elsif presenter.csv?
             'csv'
           else
             'default'
