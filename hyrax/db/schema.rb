@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190930025332) do
+ActiveRecord::Schema.define(version: 20200108111832) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -548,8 +548,10 @@ ActiveRecord::Schema.define(version: 20190930025332) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "remember_token"
+    t.string "user_identifier"
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["user_identifier"], name: "index_users_on_user_identifier"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
