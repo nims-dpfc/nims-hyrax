@@ -1,5 +1,5 @@
 <% if local_assigns[:datatable] %>
-  <div class="csv-preview panel panel-default" data-url="<%= main_app.export_file_path(file_set)%>">
+  <div class="csv-preview panel panel-default" data-url="<%= main_app.export_file_path(file_set.id)%>">
     <a name="csv-preview-panel-<%= file_set.id %>"></a>
     <div class="panel-heading" data-toggle="collapse" data-target="#csv-preview-<%= file_set.id %>">
       <h4 class="panel-title">
@@ -9,7 +9,7 @@
     <div id="csv-preview-<%= file_set.id %>" class="panel-collapse collapse in">
       <div class="panel-body">
         <div class="csv-preview-error" style="display: none;">There was an error generating the CSV preview; please download the file instead.</div>
-        <table class="csv-preview-datatable display full-width"></table>
+        <table class="csv-preview-datatable display full-width" style="width:100%"></table>
       </div>
       <div class="panel-footer csv-preview-size" style="display: none;">
         <!-- size -->
@@ -20,4 +20,9 @@
   <div>
     <a data-turbolinks="false" href="#csv-preview-panel-<%= file_set.id %>">Preview</a>
   </div>
+  <% if Hyrax.config.display_media_download_link? %>
+    <div>
+      <%= link_to t('hyrax.file_set.show.download'), hyrax.download_path(file_set.id), id: "file_download", data: { label: file_set.id }, target: "_new" %>
+    </div>
+  <% end %>
 <% end %>

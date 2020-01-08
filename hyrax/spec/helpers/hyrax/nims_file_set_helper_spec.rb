@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Hyrax::NimsFileSetHelper, type: :helper do
   let(:presenter) { Hyrax::NimsFileSetPresenter.new(solr_document, nil) }
-  let(:solr_document) { SolrDocument.new(mime_type_ssi: mime_type) }
+  let(:solr_document) { SolrDocument.new(mime_type_ssi: mime_type, id: '12345') }
 
   describe '#nims_media_display' do
     let(:mime_type) { 'text/csv' }
     subject { helper.nims_media_display(presenter) }
     it { is_expected.to have_css('a', text: 'Preview') }
+    it { is_expected.to have_css('a', text: 'Download the file') }
   end
 
   describe '#nims_media_display_partial' do

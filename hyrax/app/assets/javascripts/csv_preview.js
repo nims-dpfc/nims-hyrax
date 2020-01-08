@@ -8,7 +8,7 @@ $( document ).on('turbolinks:load', function() {
                 preview.find('.csv-preview-datatable').DataTable({
                     data: data.data,
                     columns: data.columns.map(function (name) {
-                        return {title: name}
+                        return { title: name.replace(/[\_\-]/g, ' ') };
                     })
                 });
                 preview.find('.csv-preview-title').text('Preview: ' + data.file_name);
