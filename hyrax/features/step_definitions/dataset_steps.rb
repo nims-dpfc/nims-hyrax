@@ -7,7 +7,7 @@ Given(/^there (?:are|is) (\d+) (open|authenticated|embargo|lease|restricted) dat
 end
 
 When(/^I navigate to the new dataset page$/) do
-  visit '/dashboard'
+  visit hyrax.dashboard_path  # /dashboard
   click_link "Works"
   click_link "Add new work"
 
