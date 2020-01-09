@@ -8,10 +8,11 @@ Feature: Users index page
     Then I should not see the general users
     And I should be redirected to the login page
 
-  Scenario: General user can view users
+  Scenario: General user cannot view users
     Given I am logged in as an general user
     When I navigate to the users list
-    Then I should see the general users
+    Then I should not see the general users
+    And I should be redirected to the home page
 
   Scenario: Admin user can view users
     Given I am logged in as an admin user
