@@ -46,7 +46,7 @@ RSpec.describe NestedInstrumentInput, type: :input do
     is_expected.to have_field('dataset[instrument_attributes][0][complex_person_attributes][0][complex_affiliation_attributes][0]_complex_organization_attributes_0_sub_organization', type: :text, with: 'Department')
     is_expected.to have_field('dataset[instrument_attributes][0][complex_person_attributes][0][complex_affiliation_attributes][0]_complex_organization_attributes_0_purpose', type: :text, with: 'Research')
 
-    is_expected.to have_field('dataset[instrument_attributes][0]_managing_organization_attributes_0_organization', type: :text, with: 'FooFoo')
+    is_expected.to have_field('dataset[instrument_attributes][0]_managing_organization_attributes_0_organization', type: :text, with: 'Managing organization name')
     is_expected.to have_field('dataset[instrument_attributes][0]_managing_organization_attributes_0_sub_organization', type: :text, with: 'BarBar')
     is_expected.to have_field('dataset[instrument_attributes][0]_managing_organization_attributes_0_purpose', type: :text, with: 'Managing organization')
   end

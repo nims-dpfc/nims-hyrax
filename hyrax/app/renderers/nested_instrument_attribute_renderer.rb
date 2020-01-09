@@ -8,6 +8,7 @@ class NestedInstrumentAttributeRenderer < NestedAttributeRenderer
       # title
       if v.dig('title').present? and v['title'][0].present?
         label ="Title"
+        # @todo - fixme
         val = link_to(ERB::Util.h(v['title'][0]), search_path(v['title'][0]))
         each_html += get_row(label, val)
       end
@@ -21,7 +22,7 @@ class NestedInstrumentAttributeRenderer < NestedAttributeRenderer
       unless v.dig('complex_date').blank?
         label = 'Date'
         renderer_class = NestedDateAttributeRenderer
-        each_html += get_nested_output(label, v['complex_date'], renderer_class, false)
+        each_html += get_nested_output(field, label, v['complex_date'], renderer_class, false)
       end
       # description
       unless v.dig('description').blank?
@@ -33,19 +34,19 @@ class NestedInstrumentAttributeRenderer < NestedAttributeRenderer
       unless v.dig('complex_identifier').blank?
         label = 'Identifier'
         renderer_class = NestedIdentifierAttributeRenderer
-        each_html += get_nested_output(label, v['complex_identifier'], renderer_class, false)
+        each_html += get_nested_output(field, label, v['complex_identifier'], renderer_class, false)
       end
       # instrument function
       unless v.dig('instrument_function').blank?
         label = 'Instrument function'
         renderer_class = NestedInstrumentFunctionAttributeRenderer
-        each_html += get_nested_output(label, v['instrument_function'], renderer_class, true)
+        each_html += get_nested_output(field, label, v['instrument_function'], renderer_class, true)
       end
       # manufacturer
       unless v.dig('manufacturer').blank?
         label = 'Manufacturer'
         renderer_class = NestedOrganizationAttributeRenderer
-        each_html += get_nested_output(label, v['manufacturer'], renderer_class, true)
+        each_html += get_nested_output(field, label, v['manufacturer'], renderer_class, true)
       end
       # model_number
       unless v.dig('model_number').blank?
@@ -57,13 +58,13 @@ class NestedInstrumentAttributeRenderer < NestedAttributeRenderer
       unless v.dig('complex_person').blank?
         label = 'Operator'
         renderer_class = NestedPersonAttributeRenderer
-        each_html += get_nested_output(label, v['complex_person'], renderer_class, true)
+        each_html += get_nested_output(field, label, v['complex_person'], renderer_class, true)
       end
       # managing_organization
       unless v.dig('managing_organization').blank?
         label = 'Managing organization'
         renderer_class = NestedOrganizationAttributeRenderer
-        each_html += get_nested_output(label, v['managing_organization'], renderer_class, true)
+        each_html += get_nested_output(field, label, v['managing_organization'], renderer_class, true)
       end
       html += get_inner_html(each_html)
     end

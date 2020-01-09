@@ -6,6 +6,7 @@ en:
         facet:
           based_near_label_sim: Location
           creator_sim: Creator
+          characterization_methods_sim: Characterization methods
           complex_date_dtsim: Date
           complex_date_accepted_dtsim: Date accepted
           complex_date_available_dtsim: Date available

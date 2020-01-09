@@ -6,6 +6,16 @@ Given(/^there (?:are|is) (\d+) (open|authenticated|embargo|lease|restricted) dat
   ActiveFedora::SolrService.commit
 end
 
+Given(/^there is a dataset with:$/) do |table|
+  @dataset = FactoryBot.create(:dataset, *table.rows.flatten.map(&:to_sym))
+  ActiveFedora::SolrService.add(@dataset.to_solr)
+  ActiveFedora::SolrService.commit
+end
+
+Given(/^I am on the dataset page$/) do
+  visit hyrax_dataset_path(@dataset)
+end
+
 When(/^I navigate to the new dataset page$/) do
   visit hyrax.dashboard_path  # /dashboard
   click_link "Works"
@@ -80,5 +90,11 @@ Then(/^I should not see the (open|authenticated|embargo|lease|restricted) datase
   # next, verify there is a link to each dataset (using a regular expression to allow for the locale parameter)
   @datasets[access].each do |dataset|
     expect(page).to_not have_link(dataset.title.first, href: Regexp.new(hyrax_dataset_path(dataset)))
+  end
+end
+
+Then(/^I should see the following links:$/) do |table|
+  table.symbolic_hashes.each do |row|
+    expect(page).to have_link(row[:label], href: Regexp.new(Regexp.quote(row[:href])))
   end
 end

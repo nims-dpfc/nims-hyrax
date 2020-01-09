@@ -201,7 +201,7 @@ FactoryBot.define do
              }]
           }],
           managing_organization_attributes: [{
-            organization: 'FooFoo',
+            organization: 'Managing organization name',
             sub_organization: 'BarBar',
             purpose: 'Managing organization',
             complex_identifier_attributes: [{
