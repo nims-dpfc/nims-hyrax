@@ -49,14 +49,13 @@ RSpec.describe PublicationIndexer do
       ids = [
         {
           identifier: '0000-0000-0000-0000',
-          scheme: 'uri_of_ORCID_scheme',
-          label: 'ORCID'
+          scheme: 'ORCID'
         }, {
           identifier: '1234',
-          label: 'Local ID'
+          scheme: 'identifier local'
         }, {
           identifier: '12345345234',
-          label: 'Orcid'
+          scheme: 'Orcid'
         }
       ]
       obj = build(:publication, complex_identifier_attributes: ids)
@@ -71,7 +70,7 @@ RSpec.describe PublicationIndexer do
     end
     it 'indexes each type as symbol' do
       expect(@solr_document['complex_identifier_orcid_ssim']).to match_array(['0000-0000-0000-0000', '12345345234'])
-      expect(@solr_document['complex_identifier_local_id_ssim']).to match_array(['1234'])
+      expect(@solr_document['complex_identifier_identifier_local_ssim']).to match_array(['1234'])
     end
   end
 
