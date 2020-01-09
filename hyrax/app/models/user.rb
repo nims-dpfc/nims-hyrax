@@ -3,12 +3,13 @@ class User < ApplicationRecord
   include Hydra::User
   # Connects this user object to Role-management behaviors.
   include Hydra::RoleManagement::UserRoles
-
+  include NIMSRoles
 
   # Connects this user object to Hyrax behaviors.
   include Hyrax::User
   include Hyrax::UserUsageStats
 
+  has_many :uploaded_files, class_name: 'Hyrax::UploadedFile', dependent: :nullify
 
   if Blacklight::Utils.needs_attr_accessible?
     attr_accessible :username, :email, :password, :password_confirmation
@@ -33,6 +34,7 @@ class User < ApplicationRecord
   end
 
   def ldap_before_save
+    # Runs before saving a new user record in the database via LDAP Authentication
     self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
     self.password = Devise.friendly_token[0, 20]
   end

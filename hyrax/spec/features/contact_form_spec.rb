@@ -12,7 +12,7 @@ RSpec.feature 'Show Contact form', js: false do
 
     scenario "should display contact form" do
       visit '/contact'
-      expect(page).to have_field 'Your Name', with: user.username, readonly: true
+      expect(page).to have_field 'Your Name', with: user.display_name, readonly: true
       expect(page).to have_field 'Your Email', with: user.email, readonly: true
     end
   end
