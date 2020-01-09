@@ -599,7 +599,7 @@ GEM
       method_source (~> 0.9.0)
     public_suffix (4.0.1)
     pul_uv_rails (2.0.1)
-    puma (3.12.1)
+    puma (3.12.2)
     qa (2.2.0)
       activerecord-import
       deprecation
@@ -906,7 +906,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   pg
   pry
-  puma (~> 3.0)
+  puma (~> 3.12)
   rails (>= 5.0.6)
   redis (~> 3.0)
   riiif (~> 2.0)
