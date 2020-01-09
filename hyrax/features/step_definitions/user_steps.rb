@@ -45,3 +45,7 @@ end
 Then(/^I should be redirected to the login page$/) do
   expect(current_path).to eql(new_user_session_path)
 end
+
+Then(/^I should be redirected to the home page$/) do
+  expect(current_path).to eql(root_path)
+end
