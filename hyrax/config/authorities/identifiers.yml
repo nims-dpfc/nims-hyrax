@@ -8,6 +8,9 @@ terms:
   - id: DOI
     term: DOI
     active: true
+  - id: handle identifier
+    term: Handle identifier
+    active: true
   - id: edu person principal name
     term: eduPersonPrincipalName
     active: true
