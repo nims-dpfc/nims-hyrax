@@ -1,17 +1,55 @@
 <%= presenter.attribute_to_html(:date_modified, label: t('hyrax.base.show.last_modified'), html_dl: true) %>
-<%= presenter.attribute_to_html(:alternative_title, label: t('ngdr.fields.alternative_title'), html_dl: true) %>
-<%= presenter.attribute_to_html(:subject, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:publisher, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:language, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
+
+<% if can? :read_alternative_title, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:alternative_title, label: t('ngdr.fields.alternative_title'), html_dl: true) %>
+<% end %>
+
+<% if can? :read_subject, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:subject, render_as: :faceted, html_dl: true) %>
+<% end %>
+
+<% if can? :read_publisher, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:publisher, render_as: :faceted, html_dl: true) %>
+<% end %>
+
+<% if can? :read_language, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:language, render_as: :faceted, html_dl: true) %>
+<% end %>
+
+<% if can? :read_keyword, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
+<% end %>
+
 <%= presenter.attribute_to_html(:date_created, render_as: :linked, search_field: 'date_created_tesim', html_dl: true) %>
-<%= presenter.attribute_to_html(:resource_type, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
-<%= presenter.attribute_to_html(:complex_date, render_as: :nested_date, label: t('ngdr.fields.complex_date'), html_dl: true) %>
-<%= presenter.attribute_to_html(:complex_identifier, render_as: :nested_identifier, label: t('ngdr.fields.complex_identifier'), html_dl: true) %>
-<%= presenter.attribute_to_html(:complex_person, render_as: :nested_person, label: t('ngdr.fields.complex_person'), html_dl: true) %>
-<%= presenter.attribute_to_html(:complex_rights, render_as: :nested_rights, label: t('ngdr.fields.complex_rights'), html_dl: true) %>
-<%= presenter.attribute_to_html(:complex_version, render_as: :nested_version, label: t('ngdr.fields.complex_version'), html_dl: true) %>
+
+<% if can? :read_resource_type, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:resource_type, render_as: :faceted, html_dl: true) %>
+<% end %>
+
+<% if can? :read_rights, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
+<% end %>
+
+<% if can? :read_date, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:complex_date, render_as: :nested_date, label: t('ngdr.fields.complex_date'), html_dl: true) %>
+<% end %>
+
+<% if can? :read_identifier, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:complex_identifier, render_as: :nested_identifier, label: t('ngdr.fields.complex_identifier'), html_dl: true) %>
+<% end %>
+
+<% if can? :read_creator, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:complex_person, render_as: :nested_person, label: t('ngdr.fields.complex_person'), html_dl: true) %>
+<% end %>
+
+<% if can? :read_rights, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:complex_rights, render_as: :nested_rights, label: t('ngdr.fields.complex_rights'), html_dl: true) %>
+<% end %>
+
+<% if can? :read_version, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:complex_version, render_as: :nested_version, label: t('ngdr.fields.complex_version'), html_dl: true) %>
+<% end %>
+
 <%= presenter.attribute_to_html(:status, render_as: :faceted, label: "Status", html_dl: true) %>
 <%= presenter.attribute_to_html(:instrument, render_as: :faceted, html_dl: true) %>
 <%= presenter.attribute_to_html(:specimen_set, render_as: :faceted, label: t('ngdr.fields.specimen_set'), html_dl: true) %>
