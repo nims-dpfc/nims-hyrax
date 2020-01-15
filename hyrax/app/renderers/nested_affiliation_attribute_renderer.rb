@@ -13,7 +13,7 @@ class NestedAffiliationAttributeRenderer < NestedAttributeRenderer
       unless v.dig('complex_organization').blank?
         label = 'Organization'
         renderer_class = NestedOrganizationAttributeRenderer
-        each_html += get_nested_output(label, v['complex_organization'], renderer_class, false)
+        each_html += get_nested_output(field, label, v['complex_organization'], renderer_class, false)
       end
       html += get_inner_html(each_html)
     end

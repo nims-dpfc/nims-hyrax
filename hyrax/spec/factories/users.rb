@@ -3,6 +3,7 @@ FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }
     sequence(:username) { |n| "user#{n}" }
+    sequence(:display_name) { |n| "User #{n}"}
     password { 'password' }
 
     transient do
@@ -37,5 +38,16 @@ FactoryBot.define do
       roles { build_list :role, 1, :admin }
     end
 
+    trait :nims_researcher do
+      sequence(:display_name) { |n| "Researcher #{n}"}
+      guest { false }
+      employee_type_code { 'A' }
+    end
+
+    trait :nims_other do
+      sequence(:display_name) { |n| "Non-Researcher #{n}"}
+      guest { false }
+      employee_type_code { 'T' }
+    end
   end
 end

@@ -19,12 +19,12 @@ class NestedSourceAttributeRenderer < NestedAttributeRenderer
       unless v.dig('complex_person').blank?
         label = 'Contributor'
         renderer_class = NestedPersonAttributeRenderer
-        each_html += get_nested_output(label, v['complex_person'], renderer_class, true)
+        each_html += get_nested_output(field, label, v['complex_person'], renderer_class, true)
       end
       unless v.dig('complex_identifier').blank?
         label = 'Identifier'
         renderer_class = NestedIdentifierAttributeRenderer
-        each_html += get_nested_output(label, v['complex_identifier'], renderer_class, false)
+        each_html += get_nested_output(field, label, v['complex_identifier'], renderer_class, false)
       end
       unless v.dig('issue').blank?
         label = 'Issue'

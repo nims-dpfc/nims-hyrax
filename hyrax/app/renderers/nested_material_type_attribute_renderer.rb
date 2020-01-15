@@ -19,7 +19,7 @@ class NestedMaterialTypeAttributeRenderer < NestedAttributeRenderer
       unless v.dig('complex_identifier').blank?
         label = 'Identifier'
         renderer_class = NestedIdentifierAttributeRenderer
-        html += get_nested_output(label, v['complex_identifier'], renderer_class, false)
+        html += get_nested_output(field, label, v['complex_identifier'], renderer_class, false)
       end
       # description
       unless v.dig('description').blank?
