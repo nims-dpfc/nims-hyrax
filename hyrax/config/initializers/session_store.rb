@@ -11,6 +11,3 @@ Rails.application.config.session_store :redis_session_store, {
         url: "redis://#{redis_config[:host]}:#{redis_config[:port]}/0",
     }
 }
-
-# monkey patch single sign out method
-require_relative '../../lib/extensions/devise_cas_authenticatable/single_sign_out/single_sign_out'
