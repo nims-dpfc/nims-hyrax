@@ -704,6 +704,9 @@ GEM
     redis (3.3.5)
     redis-namespace (1.6.0)
       redis (>= 3.0.4)
+    redis-session-store (0.11.1)
+      actionpack (>= 3)
+      redis (>= 3, < 5)
     redlock (1.0.1)
       redis (>= 3.0.0, < 5.0)
     regexp_parser (1.6.0)
@@ -915,6 +918,7 @@ DEPENDENCIES
   puma (~> 3.12)
   rails (>= 5.0.6)
   redis (~> 3.0)
+  redis-session-store (~> 0.11.1)
   riiif (~> 2.0)
   rsolr (>= 1.0)
   rspec-rails

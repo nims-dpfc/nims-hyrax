@@ -4,8 +4,9 @@ RUN build.sh package
 
 RUN keytool -genkeypair -alias cas -keyalg RSA -keypass changeit \
             -storepass changeit -keystore /cas-overlay/etc/cas/thekeystore \
-            -dname "CN=cas.example.org,OU=Example,OU=Org,C=AU" \
-            -ext SAN="dns:example.org,dns:localhost,ip:127.0.0.1"
+            -dname "CN=cas.mdr.nims.test,OU=MDR,OU=NIMS,OU=Test,C=JP" \
+            -ext SAN="dns:cas.mdr.nims.test,dns:localhost,ip:127.0.0.1" \
+            -validity 365
 COPY etc/cas/config/* /cas-overlay/etc/cas/config/
 COPY etc/cas/services/* /cas-overlay/etc/cas/services/
 COPY etc/cas/users.json /cas-overlay/etc/cas/
