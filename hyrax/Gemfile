@@ -72,6 +72,7 @@ gem 'hydra-role-management'
 gem 'bootstrap-datepicker-rails'
 gem 'pg'
 gem 'devise_ldap_authenticatable'
+gem 'faraday_middleware'
 
 gem 'riiif', '~> 2.0'
 
