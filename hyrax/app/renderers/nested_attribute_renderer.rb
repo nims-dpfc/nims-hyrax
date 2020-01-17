@@ -35,7 +35,13 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
     return row if val.blank?
     row += '<div class="row">'
     row += "<div class=\"col-md-3\"><label>#{label}</label></div>"
-    row += "<div class=\"col-md-9\">#{val}</div>"
+    if label =~ /^doi$/i || DOI.match_doi_prefix(val)
+      row += "<div class=\"col-md-9\">#{get_doi_hyperlink(val)}</div>"
+    elsif Handle.match_hdl_prefix(val)
+      row += "<div class=\"col-md-9\">#{get_handle_hyperlink(val)}</div>"
+    else
+      row += "<div class=\"col-md-9\">#{val}</div>"
+    end
     row += "</div>"
     row
   end
@@ -48,12 +54,22 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
     row
   end
 
-  def get_nested_output(label, nested_value, renderer_class, display_label=false)
+  def get_doi_hyperlink(val)
+    doi = DOI.new(val)
+    link_to(doi.label, doi.url, target: '_blank')
+  end
+
+  def get_handle_hyperlink(val)
+    handle = Handle.new(val)
+    link_to(handle.label, handle.url, target: '_blank')
+  end
+
+  def get_nested_output(field, label, nested_value, renderer_class, display_label=false)
     output_html = ''
     unless nested_value.kind_of?(Array)
       nested_value = [nested_value]
     end
-    renderer = renderer_class.new(label, nested_value)
+    renderer = renderer_class.new(get_field(field, label), nested_value)
     nested_value.each do |val|
       inner_html = renderer.attribute_value_to_html(val)
       unless inner_html.blank?
@@ -82,5 +98,27 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
       html_out += '</div>'
     end
     html_out
+  end
+
+  # map the field/label pair to the correct facet search link
+  def get_field(field, label)
+    case
+    when field == :complex_person && label == 'Organization'
+      :complex_person_organization
+    when field == :complex_instrument && label == 'Manufacturer'
+      :instrument_manufacturer
+    when field == :complex_instrument && label == 'Operator'
+      :complex_person_operator
+    when field == :complex_instrument && label == 'Managing organization'
+      :instrument_managing_organization
+    when field == :complex_specimen_type && label == 'Supplier'
+      :complex_purchase_record_supplier
+    when field == :complex_specimen_type && label == 'Manufacturer'
+      :complex_purchase_record_manufacturer
+    when field == :complex_person_operator && label == 'Organization'
+      :complex_person_operator_organization
+    else
+      field
+    end
   end
 end
