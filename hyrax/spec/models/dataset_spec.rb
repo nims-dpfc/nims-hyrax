@@ -484,7 +484,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_instrument.first.complex_person.first.name).to eq ['Name of operator']
       expect(@obj.complex_instrument.first.complex_person.first.role).to eq ['operator']
       expect(@obj.complex_instrument.first.managing_organization.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.managing_organization.first.organization).to eq ['FooFoo']
+      expect(@obj.complex_instrument.first.managing_organization.first.organization).to eq ['Managing organization name']
       expect(@obj.complex_instrument.first.managing_organization.first.sub_organization).to eq ['BarBar']
       expect(@obj.complex_instrument.first.managing_organization.first.purpose).to eq ['Managing organization']
       expect(@obj.complex_instrument.first.managing_organization.first.complex_identifier.first.identifier).to eq ['123456789mo']

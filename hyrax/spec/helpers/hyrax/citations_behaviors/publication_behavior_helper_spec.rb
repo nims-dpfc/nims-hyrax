@@ -18,7 +18,7 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
   end
 
   describe '#setup_pub_date' do
-    let(:publication) { build(:publication, :with_date) }
+    let(:publication) { build(:publication, :with_complex_date) }
     subject { helper.setup_pub_date(presenter) }
     it { is_expected.to eql('0528') }
   end
@@ -27,7 +27,7 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
     context 'with publication' do
       let(:publication) { build(:publication, :with_place) }
       subject { helper.setup_pub_place(presenter) }
-      it { is_expected.to eql('221B Baker Street') }
+      it { is_expected.to eql('221B Baker Street Place') }
     end
     context 'with dataset' do
       let(:publication) { build(:dataset) }
@@ -39,21 +39,21 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
   describe '#setup_pub_publisher' do
     let(:publication) { build(:publication, :with_publisher) }
     subject { helper.setup_pub_publisher(presenter) }
-    it { is_expected.to eql('Foo Publisher') }
+    it { is_expected.to eql('Publisher-123') }
   end
 
   describe '#setup_pub_info' do
-    let(:publication) { build(:publication, :with_complex_identifier, :with_date, :with_place, :with_publisher) }
+    let(:publication) { build(:publication, :with_complex_identifier, :with_complex_date, :with_place, :with_publisher) }
     subject { helper.setup_pub_info(presenter, include_date) }
 
     context 'without date' do
       let(:include_date) { false }
-      it { is_expected.to eql('221B Baker Street: Foo Publisher. 10.0.1111. 10.0.2222') }
+      it { is_expected.to eql('221B Baker Street Place: Publisher-123. 10.0.1111. 10.0.2222') }
     end
 
     context 'with date' do
       let(:include_date) { true }
-      it { is_expected.to eql('221B Baker Street: Foo Publisher, 0528. 10.0.1111. 10.0.2222') }
+      it { is_expected.to eql('221B Baker Street Place: Publisher-123, 0528. 10.0.1111. 10.0.2222') }
     end
   end
 

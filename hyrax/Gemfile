@@ -73,7 +73,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'pg'
 gem 'devise_ldap_authenticatable'
 gem 'faraday_middleware'
-
+gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > hydra-editor
 gem 'riiif', '~> 2.0'
 
 group :production do

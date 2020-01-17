@@ -888,6 +888,7 @@ DEPENDENCIES
   blacklight_oai_provider!
   bootstrap-datepicker-rails
   byebug
+  cancancan (~> 1.17)
   capybara
   coffee-rails (~> 4.2)
   coveralls
