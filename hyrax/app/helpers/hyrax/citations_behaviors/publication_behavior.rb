@@ -7,8 +7,11 @@ module Hyrax
 
       # nims override to add doi
       def setup_doi(presenter)
-        return '' if presenter.complex_identifier == ["[]"]
-        JSON.parse(presenter.complex_identifier).
+        ci = presenter.complex_identifier
+        if presenter.complex_identifier.is_a?(Array)
+          ci = presenter.complex_identifier.first
+        end
+        JSON.parse(ci).
             select{|i| i["scheme"].any?{|s| s =~/doi/i} }.
             pluck('identifier').
             flatten.

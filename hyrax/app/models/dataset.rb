@@ -52,7 +52,7 @@ class Dataset < ActiveFedora::Base
   property :complex_organization, predicate: ::RDF::Vocab::ORG.organization, class_name:"ComplexOrganization"
 
   property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'], multiple: false do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :computational_methods, predicate: ::RDF::Vocab::NimsRdp['computational-methods'], multiple: false do |index|

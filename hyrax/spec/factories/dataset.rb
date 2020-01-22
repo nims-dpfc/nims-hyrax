@@ -213,7 +213,7 @@ FactoryBot.define do
              }]
           }],
           managing_organization_attributes: [{
-            organization: 'FooFoo',
+            organization: 'Managing organization name',
             sub_organization: 'BarBar',
             purpose: 'Managing organization',
             complex_identifier_attributes: [{
@@ -325,7 +325,7 @@ FactoryBot.define do
           title: 'A relation label',
           url: 'http://example.com/relation',
           complex_identifier_attributes: [{
-            identifier: ['123456'],
+            identifier: ['info:hdl/4263537/400'],
             scheme: 'identifier persistent'
           }],
           relationship: 'isNewVersionOf'

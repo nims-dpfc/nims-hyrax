@@ -90,7 +90,7 @@ RSpec.describe ComplexInstrument do
               role: ['Operator']
             }],
             managing_organization_attributes: [{
-              organization: 'FooFoo',
+              organization: 'Managing organization name',
               sub_organization: 'BarBar',
               purpose: 'Managing organization',
               complex_identifier_attributes: [{
@@ -126,7 +126,7 @@ RSpec.describe ComplexInstrument do
         expect(subject.complex_person.first.name).to eq ['Name of operator']
         expect(subject.complex_person.first.role).to eq ['Operator']
         expect(subject.managing_organization.first).to be_kind_of ActiveTriples::Resource
-        expect(subject.managing_organization.first.organization).to eq ['FooFoo']
+        expect(subject.managing_organization.first.organization).to eq ['Managing organization name']
         expect(subject.managing_organization.first.sub_organization).to eq ['BarBar']
         expect(subject.managing_organization.first.purpose).to eq ['Managing organization']
         expect(subject.managing_organization.first.complex_identifier.first.identifier).to eq ['123456789mo']

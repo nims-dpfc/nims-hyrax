@@ -6,8 +6,18 @@ Given(/^there (?:are|is) (\d+) (open|authenticated|embargo|lease|restricted) dat
   ActiveFedora::SolrService.commit
 end
 
+Given(/^there is a dataset with:$/) do |table|
+  @dataset = FactoryBot.create(:dataset, *table.rows.flatten.map(&:to_sym))
+  ActiveFedora::SolrService.add(@dataset.to_solr)
+  ActiveFedora::SolrService.commit
+end
+
+Given(/^I am on the dataset page$/) do
+  visit hyrax_dataset_path(@dataset)
+end
+
 When(/^I navigate to the new dataset page$/) do
-  visit '/dashboard'
+  visit hyrax.dashboard_path  # /dashboard
   click_link "Works"
   click_link "Add new work"
 
@@ -112,5 +122,11 @@ Then(/^I should see both the public and restricted metadata of the (open|authent
       expect(page).to have_css('div.metadata dl dt', text: Regexp.new(field.to_s, Regexp::IGNORECASE))
       expect(page).to have_css('div.metadata dl dd', text: dataset.send(field).first)
     end
+  end
+end
+
+Then(/^I should see the following links:$/) do |table|
+  table.symbolic_hashes.each do |row|
+    expect(page).to have_link(row[:label], href: Regexp.new(Regexp.quote(row[:href])))
   end
 end

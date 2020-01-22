@@ -49,14 +49,13 @@ RSpec.describe DatasetIndexer do
       ids = [
         {
           identifier: '0000-0000-0000-0000',
-          scheme: 'uri_of_ORCID_scheme',
-          label: 'ORCID'
+          scheme: 'ORCID'
         }, {
           identifier: '1234',
-          label: 'Local ID'
+          scheme: 'identifier local'
         }, {
           identifier: '12345345234',
-          label: 'Orcid'
+          scheme: 'Orcid'
         }
       ]
       obj = build(:dataset, complex_identifier_attributes: ids)
@@ -71,7 +70,7 @@ RSpec.describe DatasetIndexer do
     end
     it 'indexes each type as symbol' do
       expect(@solr_document['complex_identifier_orcid_ssim']).to match_array(['0000-0000-0000-0000', '12345345234'])
-      expect(@solr_document['complex_identifier_local_id_ssim']).to match_array(['1234'])
+      expect(@solr_document['complex_identifier_identifier_local_ssim']).to match_array(['1234'])
     end
   end
 
@@ -337,10 +336,17 @@ RSpec.describe DatasetIndexer do
         model_number: '123xfty',
         complex_person_attributes: [{
           name: ['Name of operator'],
-          role: ['Operator']
+          role: ['Operator'],
+          complex_affiliation_attributes: [{
+            job_title: 'Technician',
+            complex_organization_attributes: [{
+              organization: 'Org 1',
+              sub_organization: 'Sub org 1'
+            }]
+          }]
         }],
         managing_organization_attributes: [{
-          organization: 'FooFoo',
+          organization: 'Managing organization name',
           sub_organization: 'BarBar',
           purpose: 'Managing organization',
           complex_identifier_attributes: [{
@@ -378,7 +384,14 @@ RSpec.describe DatasetIndexer do
         model_number: 'ABC12E',
         complex_person_attributes: [{
           name: ['Name of operator 2'],
-          role: ['Operator']
+          role: ['Operator'],
+          complex_affiliation_attributes: [{
+            job_title: 'Technician',
+            complex_organization_attributes: [{
+              organization: 'Org 2',
+              sub_organization: 'Sub org 2'
+            }]
+          }]
         }],
         managing_organization_attributes: [{
           organization: 'BigBig',
@@ -397,6 +410,9 @@ RSpec.describe DatasetIndexer do
     it 'indexes as displayable' do
       expect(@solr_document).to include('complex_instrument_ssm')
       expect(JSON.parse(@solr_document['complex_instrument_ssm'])).not_to be_empty
+    end
+    it 'indexes title as facetable to complex_instrument_sim' do
+      expect(@solr_document['complex_instrument_sim']).to match_array(['Instrument title', 'Instrument title 2'])
     end
     it 'indexes title as stored searchable' do
       expect(@solr_document['instrument_title_tesim']).to match_array(['Instrument title', 'Instrument title 2'])
@@ -437,14 +453,20 @@ RSpec.describe DatasetIndexer do
     it 'indexes person by role as stored searchable' do
       expect(@solr_document['complex_person_operator_tesim']).to match_array(['Name of operator', 'Name of operator 2'])
     end
-    it 'imdexes person by role as facetable' do
+    it 'indexes person by role as facetable' do
       expect(@solr_document['complex_person_operator_sim']).to match_array(['Name of operator', 'Name of operator 2'])
     end
+    it 'indexes person affiliation by role as stored searchable' do
+      expect(@solr_document['complex_person_operator_organization_tesim']).to match_array(["Org 1", "Org 2"])
+    end
+    it 'indexes person affiliation by role as facetable' do
+      expect(@solr_document['complex_person_operator_organization_sim']).to match_array(["Org 1", "Org 2"])
+    end
     it 'indexes managing organization as stored searchable' do
-      expect(@solr_document['instrument_managing_organization_tesim']).to match_array(['FooFoo', 'BigBig'])
+      expect(@solr_document['instrument_managing_organization_tesim']).to match_array(['Managing organization name', 'BigBig'])
     end
     it 'indexes managing organization as facetable' do
-      expect(@solr_document['instrument_managing_organization_sim']).to match_array(['FooFoo', 'BigBig'])
+      expect(@solr_document['instrument_managing_organization_sim']).to match_array(['Managing organization name', 'BigBig'])
     end
     it 'indexes managing sub organization as stored searchable' do
       expect(@solr_document['instrument_managing_sub_organization_tesim']).to match_array(['BarBar', 'BazBaz'])
@@ -795,6 +817,10 @@ RSpec.describe DatasetIndexer do
     end
     it 'indexes purchase record title as stored_searchable' do
       expect(@solr_document['complex_purchase_record_title_tesim']).to match_array(
+        ['Purchase record title', 'Purchase record title 2', 'Purchase record title 3'])
+    end
+    it 'indexes purchase record title as facetable' do
+      expect(@solr_document['complex_purchase_record_title_sim']).to match_array(
         ['Purchase record title', 'Purchase record title 2', 'Purchase record title 3'])
     end
     it 'indexes purchase record date as dateable' do
