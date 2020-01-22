@@ -23,8 +23,8 @@ RSpec.describe SolrDocument do
             complex_chemical_composition_attributes: [{ description: 'chemical composition 1' }]
           }],
           complex_version_attributes: [{ version: '1.0' }],
-          characterization_methods: 'Characterization methods',
-          computational_methods: 'computational methods',
+          characterization_methods: ['Characterization methods'],
+          computational_methods: ['computational methods'],
           data_origin: ['data origin'],
           origin_system_provenance: 'Origin A',
           properties_addressed: ['Properties Addressed'],
@@ -35,7 +35,7 @@ RSpec.describe SolrDocument do
             relationship: 'IsPartOf'
           }],
           specimen_set: 'Specimen Set',
-          synthesis_and_processing: 'Synthesis and processing methods',
+          synthesis_and_processing: ['Synthesis and processing methods'],
           custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }]
     )
   end
