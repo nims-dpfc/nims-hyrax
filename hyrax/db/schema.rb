@@ -279,7 +279,6 @@ ActiveRecord::Schema.define(version: 20191125140832) do
     t.string "uri"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["local_authority_id", "label"], name: "index_qa_local_authority_entries_on_lower_label"
     t.index ["local_authority_id"], name: "index_qa_local_authority_entries_on_local_authority_id"
     t.index ["uri"], name: "index_qa_local_authority_entries_on_uri", unique: true
   end

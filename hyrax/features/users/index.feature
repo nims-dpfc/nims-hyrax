@@ -1,23 +1,29 @@
 Feature: Users index page
 
   Background:
-    Given there are 3 general users
+    Given there are 3 nims_researcher users
 
   Scenario: Unauthenticated user cannot view users
     When I navigate to the users list
-    Then I should not see the general users
+    Then I should not see the nims_researcher users
     And I should be redirected to the login page
 
-  Scenario: General user cannot view users
-    Given I am logged in as an general user
+  Scenario: nims_other user cannot view users
+    Given I am logged in as an nims_other user
     When I navigate to the users list
-    Then I should not see the general users
+    Then I should not see the nims_researcher users
+    And I should be redirected to the home page
+
+  Scenario: nims_researcher user cannot view users
+    Given I am logged in as an nims_researcher user
+    When I navigate to the users list
+    Then I should not see the nims_researcher users
     And I should be redirected to the home page
 
   Scenario: Admin user can view users
     Given I am logged in as an admin user
     When I navigate to the users list
-    Then I should see the general users
+    Then I should see the nims_researcher users
 
 #Feature: ユーザ一覧を参照する
 #現在登録されているユーザを確認するため
