@@ -21,7 +21,6 @@ class CatalogController < ApplicationController
     config.view.masonry.partials = [:index]
     config.view.slideshow.partials = [:index]
 
-
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
     config.search_builder_class = Hyrax::CatalogSearchBuilder
@@ -71,18 +70,22 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('subject', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject', :facetable)
     # config.add_index_field solr_name('creator', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable)
     # config.add_index_field solr_name('contributor', :stored_searchable), itemprop: 'contributor', link_to_search: solr_name('contributor', :facetable)
-    config.add_index_field solr_name('complex_person_other', :stored_searchable), itemprop: 'creator or contributor', link_to_search: solr_name('complex_person_other', :facetable)
     config.add_index_field solr_name('complex_person_author', :stored_searchable), itemprop: 'author', link_to_search: solr_name('complex_person_author', :facetable)
-    config.add_index_field solr_name('complex_person_editor', :stored_searchable), itemprop: 'editor', link_to_search: solr_name('complex_person_editor', :facetable)
-    config.add_index_field solr_name('complex_person_translator', :stored_searchable), itemprop: 'translator', link_to_search: solr_name('complex_person_translator', :facetable)
+    # config.add_index_field solr_name('complex_person_editor', :stored_searchable), itemprop: 'editor', link_to_search: solr_name('complex_person_editor', :facetable)
+    # config.add_index_field solr_name('complex_person_translator', :stored_searchable), itemprop: 'translator', link_to_search: solr_name('complex_person_translator', :facetable)
     config.add_index_field solr_name('complex_person_data_depositor', :stored_searchable), itemprop: 'data depositor', link_to_search: solr_name('complex_person_data_depositor', :facetable)
     config.add_index_field solr_name('complex_person_data_curator', :stored_searchable), itemprop: 'data curator', link_to_search: solr_name('complex_person_data_curator', :facetable)
     config.add_index_field solr_name('complex_person_operator', :stored_searchable), itemprop: 'operator', link_to_search: solr_name('complex_person_operator', :facetable)
-    config.add_index_field solr_name('proxy_depositor', :symbol), label: 'Depositor', helper_method: :link_to_profile
-    config.add_index_field solr_name('depositor'), label: 'Owner', helper_method: :link_to_profile
+    config.add_index_field solr_name('complex_person_other', :stored_searchable), itemprop: 'creator or contributor', link_to_search: solr_name('complex_person_other', :facetable)
+    # config.add_index_field solr_name('proxy_depositor', :symbol), label: 'Depositor', helper_method: :link_to_profile
+    #  config.add_index_field solr_name('depositor'), label: 'Owner', helper_method: :link_to_profile
+    config.add_index_field solr_name('data_origin', :stored_searchable), itemprop: 'data_origin', link_to_search: solr_name('data_origin', :facetable)
+    config.add_index_field solr_name('complex_specimen_type', :stored_searchable), itemprop: 'specimen'
+    config.add_index_field solr_name('complex_source_title', :stored_searchable), itemprop: 'journal'
+    config.add_index_field solr_name('complex_date_published', :stored_searchable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('publisher', :stored_searchable), itemprop: 'publisher', link_to_search: solr_name('publisher', :facetable)
     # config.add_index_field solr_name('based_near_label', :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name('based_near_label', :facetable)
-    config.add_index_field solr_name('language', :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name('language', :facetable)
+    # config.add_index_field solr_name('language', :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name('language', :facetable)
     config.add_index_field solr_name('date_uploaded', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
     config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
