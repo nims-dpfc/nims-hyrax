@@ -97,10 +97,12 @@ en:
           complex_identifier_orcid_ssim: Orcid
           complex_identifier_local_id_ssim: Local identifier
           complex_person_other_tesim: Creator
-          complex_person_author_tesim: Author
+          # use Creator for label in search results - see i131  (was Author)
+          complex_person_author_tesim: Creator
           complex_person_editor_tesim: Editor
           complex_person_translator_tesim: Translator
-          complex_person_data_depositor_tesim: Data depositor
+          # use Creator for label - see i131 (was Data depositor)
+          complex_person_data_depositor_tesim: Creator
           complex_person_data_curator_tesim: Data curator
           complex_person_operator_tesim: Operator
           complex_person_organization_tesim: Organization
@@ -115,6 +117,7 @@ en:
           complex_relation_title_tesim: Title of related item
           complex_shape_tesim: Shape
           complex_shape_identifier_ssim: Shape identifier
+          complex_source_title_tesim: Journal
           complex_specimen_type_tesim: Specimen type
           complex_specimen_type_description_tesim: Specimen description
           complex_specimen_type_identifier_ssim: Specimen identifier
@@ -211,7 +214,7 @@ en:
           properties_addressed_tesim: Properties processed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
-          specimen_set_tesim: Specimen
+          specimen_type_tesim: Specimen
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
           table_of_contents_tesim: Table of contents
