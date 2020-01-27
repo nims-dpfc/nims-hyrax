@@ -1,7 +1,7 @@
 Feature: Datasets catalog index
 
   Background:
-    Given an initialised sysem with a default admin set, permission template and workflow
+    Given an initialised system with a default admin set, permission template and workflow
     And there is 1 open dataset
     And there are 2 authenticated datasets
     And there is 1 restricted dataset
@@ -10,14 +10,26 @@ Feature: Datasets catalog index
   Scenario: Unauthenticated user can only view open datasets
     When I navigate to the dataset catalog page
     Then I should see the open datasets
+    And I should see only the public metadata of the open datasets
     But I should not see the authenticated datasets
     And I should not see the restricted dataset
 
-  Scenario: General user can view open and authenticated datasets
-    Given I am logged in as a general user
+  Scenario: Non-researcher user can view open and authenticated datasets
+    Given I am logged in as a nims_other user
     When I navigate to the dataset catalog page
     Then I should see the open datasets
     And I should see the authenticated datasets
+    And I should see both the public and restricted metadata of the open datasets
+    And I should see both the public and restricted metadata of the authenticated datasets
+    But I should not see the restricted dataset
+
+  Scenario: Researcher user can view open and authenticated datasets
+    Given I am logged in as a nims_researcher user
+    When I navigate to the dataset catalog page
+    Then I should see the open datasets
+    And I should see the authenticated datasets
+    And I should see both the public and restricted metadata of the open datasets
+    And I should see both the public and restricted metadata of the authenticated datasets
     But I should not see the restricted dataset
 
   Scenario: Admin user can view open, authenticated and restricted datasets
@@ -26,6 +38,9 @@ Feature: Datasets catalog index
     Then I should see the open datasets
     And I should see the authenticated datasets
     And I should see the restricted dataset
+    And I should see both the public and restricted metadata of the open datasets
+    And I should see both the public and restricted metadata of the authenticated datasets
+    And I should see both the public and restricted metadata of the restricted datasets
 
 #Feature: データセット一覧を参照する
 #  現在登録されているユーザを確認するため

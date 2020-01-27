@@ -1,6 +1,6 @@
 Feature: Search links on a dataset
   Background:
-    Given an initialised sysem with a default admin set, permission template and workflow
+    Given an initialised system with a default admin set, permission template and workflow
     And there is a dataset with:
       | TRAIT                                   |
       | open                                    |

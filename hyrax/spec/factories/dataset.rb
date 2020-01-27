@@ -29,6 +29,10 @@ FactoryBot.define do
       title { ["Restricted Dataset"] }
     end
 
+    trait :with_description_seq do
+      sequence(:description) { |n| ["Abstract-Description-#{n}"] }
+    end
+
     trait :with_alternative_title do
       alternative_title { 'Alternative-Title-123' }
     end
@@ -37,8 +41,16 @@ FactoryBot.define do
       keyword { ['Keyword-123'] }
     end
 
+    trait :with_keyword_seq do
+      sequence(:keyword) { |n| ["Keyword-#{n}"] }
+    end
+
     trait :with_subject do
       subject { ['Subject-123'] }
+    end
+
+    trait :with_subject_seq do
+      sequence(:subject) { |n| ["Subject-#{n}"] }
     end
 
     trait :with_language do

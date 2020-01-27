@@ -1,0 +1,8 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" :  "^(https|http)://.*",
+  "name" : "cas.mdr.nims.test",
+  "id" : 1,
+  "logoutType" : "BACK_CHANNEL",
+  "logoutUrl" : "http://mdr.nims.test:3000/users/service"
+}
