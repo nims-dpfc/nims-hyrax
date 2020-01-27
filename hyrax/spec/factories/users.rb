@@ -26,10 +26,6 @@ FactoryBot.define do
       end
     end
 
-    trait :general do
-      guest { false }
-    end
-
     trait :guest do
       guest { true }
     end

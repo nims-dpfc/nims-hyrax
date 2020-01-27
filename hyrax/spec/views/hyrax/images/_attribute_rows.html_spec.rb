@@ -3,11 +3,11 @@ include Warden::Test::Helpers
 
 RSpec.describe 'hyrax/images/_attribute_rows' do
   let(:partial) { 'hyrax/images/attribute_rows' }
-  let(:image) { build(:image, :with_alternative_title, :with_subject, :with_publisher, :with_language,
+  let(:image) { build(:image, :open, :with_alternative_title, :with_subject, :with_publisher, :with_language,
                             :with_keyword, :with_resource_type, :with_rights_statement, :with_complex_date,
                             :with_complex_identifier, :with_complex_person, :with_complex_rights,
                             :with_complex_version) }
-  let(:presenter) { Hyrax::ImagePresenter.new(SolrDocument.new(image.to_solr), Ability.new(user)) }
+  let(:presenter) { Hyrax::ImagePresenter.new(SolrDocument.new(image.to_solr), Ability.new(user), controller.request) }
 
   before do
     allow(controller).to receive(:current_user).and_return(user)
