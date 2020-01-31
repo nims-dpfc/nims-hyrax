@@ -480,6 +480,7 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.2.0)
+    json-api-vanilla (1.0.2)
     json-ld (3.0.2)
       multi_json (~> 1.12)
       rdf (>= 2.2.8, < 4.0)
@@ -925,6 +926,7 @@ DEPENDENCIES
   hyrax (~> 2.6)
   jbuilder (~> 2.5)
   jquery-rails
+  json-api-vanilla (~> 1.0.2)
   launchy
   listen (~> 3.0.5)
   pg
