@@ -81,6 +81,7 @@ gem 'devise_cas_authenticatable'
 gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > hydra-editor
 
 gem 'riiif', '~> 2.0'
+gem 'json-api-vanilla', '~> 1.0.2'
 
 gem 'ro-crate-ruby', git: 'https://github.com/fbacall/ro-crate-ruby'
 
