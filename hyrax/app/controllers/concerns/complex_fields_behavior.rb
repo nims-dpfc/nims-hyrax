@@ -19,7 +19,7 @@ module ComplexFieldsBehavior
     other_keys = hash_param.keys - %w[id _destroy]
     return false unless other_keys.blank?
     if hash_param.fetch('id', nil) && hash_param.fetch('_destroy', nil)
-      return false if hash_param['_destroy'] == 'true'
+      return false if ['true', '1', true, 1].include? hash_param['_destroy']
     end
     true
   end
@@ -44,6 +44,11 @@ module ComplexFieldsBehavior
       complex_instrument['managing_organization_attributes'].each_with_index do |managing_organization, i|
         if managing_organization['organization'].blank? && managing_organization['purpose'].include?('Managing organization')
           attribute['complex_instrument_attributes'][index]['managing_organization_attributes'].delete_at(i)
+        end
+      end
+      complex_instrument['complex_date_attributes'].each_with_index do |complex_date, i|
+        if complex_date['date'].blank? && complex_date['description'].include?('Processed')
+          attribute['complex_instrument_attributes'][index]['complex_date_attributes'].delete_at(i)
         end
       end
     end
