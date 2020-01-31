@@ -11,8 +11,7 @@ class ComplexInstrument < ActiveTriples::Resource
 
   property :description, predicate: ::RDF::Vocab::DC11.description
 
-  property :complex_identifier, predicate: ::RDF::Vocab::MODS.identifierGroup,
-            class_name:"ComplexIdentifier"
+  property :complex_identifier, predicate: ::RDF::Vocab::MODS.identifierGroup, class_name:"ComplexIdentifier"
   accepts_nested_attributes_for :complex_identifier
 
   property :instrument_function, predicate: ::RDF::Vocab::NimsRdp["instrument-function"],
@@ -25,8 +24,7 @@ class ComplexInstrument < ActiveTriples::Resource
 
   property :model_number, predicate: ::RDF::Vocab::NimsRdp["instrument-model-number"]
 
-  property :complex_person, predicate: ::RDF::Vocab::NimsRdp["instrument-operator"],
-            class_name:"ComplexPerson"
+  property :complex_person, predicate: ::RDF::Vocab::NimsRdp["instrument-operator"], class_name:"ComplexPerson"
   accepts_nested_attributes_for :complex_person
 
   property :managing_organization, predicate: ::RDF::Vocab::NimsRdp["instrument-organization"],

@@ -105,13 +105,13 @@ module ComplexValidation
     end
     # instrument_blank
     #   Requires date, identifier and person
-    #   27/8/2019 - temporarily remove required fields (#162)
+    #   27/8/2019 - temporarily remove required fields (#162)     31/1/2020 - reinstate required fields (#218)
     resource_class.send(:define_method, :instrument_blank) do |attributes|
       return true if attributes.blank?
-      # identifiers_blank = get_id_blank(attributes, :complex_identifier_attributes)
-      # date_blank = get_dt_blank(attributes, :complex_date_attributes)
-      # person_blank = get_people_blank(attributes, :complex_person_attributes)
-      # date_blank || identifiers_blank || person_blank
+      identifiers_blank = get_id_blank(attributes, :complex_identifier_attributes)
+      date_blank = get_dt_blank(attributes, :complex_date_attributes)
+      person_blank = get_people_blank(attributes, :complex_person_attributes)
+      date_blank || identifiers_blank || person_blank
     end
     # key_value_blank
     #   Requires label and description
@@ -164,49 +164,49 @@ module ComplexValidation
     #   Requires
     #     chemical_composition, crystallographic_structure, description,
     #     identifier, material_type, structural_feature and title
-    #   27/8/2019 - temporarily remove required fields (#162)
+    #   27/8/2019 - temporarily remove required fields (#162)   31/1/2020 - reinstate required fields (#218)
     resource_class.send(:define_method, :specimen_type_blank) do |attributes|
       return true if attributes.blank?
-      # # complex_chemical_composition blank
-      # cc_blank = true
-      # nested_to_array(attributes, :complex_chemical_composition_attributes).each do |cc|
-      #   cc_blank = cc_blank && get_val_blank(cc, :description)
-      # end
-      # # complex_crystallographic_structure blank
-      # cs_blank = true
-      # nested_to_array(attributes, :complex_crystallographic_structure_attributes).each do |cs|
-      #   cs_blank = cs_blank && get_val_blank(cs, :description)
-      # end
-      # # identifier blank
-      # id_blank = get_id_blank(attributes, :complex_identifier_attributes)
-      # # complex_material_type blank
-      # mt_blank = true
-      # nested_to_array(attributes, :complex_material_type_attributes).each do |mt|
-      #   mt_blank = mt_blank &&
-      #              get_val_blank(mt, :description) &&
-      #              get_val_blank(mt, :material_type) &&
-      #              get_val_blank(mt, :material_sub_type)
-      # end
-      # # complex_structural_feature blank
-      # sf_blank = true
-      # Array(attributes[:complex_structural_feature_attributes]).each do |sf|
-      #   sf_blank = sf_blank &&
-      #              get_val_blank(sf, :description) &&
-      #              get_val_blank(sf, :category) &&
-      #              get_val_blank(sf, :sub_category)
-      # end
-      # # description blank
-      # desc_blank = get_val_blank(attributes, :description)
+      # complex_chemical_composition blank
+      cc_blank = true
+      nested_to_array(attributes, :complex_chemical_composition_attributes).each do |cc|
+        cc_blank = cc_blank && get_val_blank(cc, :description)
+      end
+      # complex_crystallographic_structure blank
+      cs_blank = true
+      nested_to_array(attributes, :complex_crystallographic_structure_attributes).each do |cs|
+        cs_blank = cs_blank && get_val_blank(cs, :description)
+      end
+      # identifier blank
+      id_blank = get_id_blank(attributes, :complex_identifier_attributes)
+      # complex_material_type blank
+      mt_blank = true
+      nested_to_array(attributes, :complex_material_type_attributes).each do |mt|
+        mt_blank = mt_blank &&
+                   get_val_blank(mt, :description) &&
+                   get_val_blank(mt, :material_type) &&
+                   get_val_blank(mt, :material_sub_type)
+      end
+      # complex_structural_feature blank
+      sf_blank = true
+      Array(attributes[:complex_structural_feature_attributes]).each do |sf|
+        sf_blank = sf_blank &&
+                   get_val_blank(sf, :description) &&
+                   get_val_blank(sf, :category) &&
+                   get_val_blank(sf, :sub_category)
+      end
+      # description blank
+      desc_blank = get_val_blank(attributes, :description)
       # title blank
-      # title_blank = get_val_blank(attributes, :title)
-      # # combine them all
-      # cc_blank ||
-      # cs_blank ||
-      # desc_blank ||
-      # id_blank ||
-      # mt_blank ||
-      # sf_blank ||
-      # title_blank
+      title_blank = get_val_blank(attributes, :title)
+      # combine them all
+      cc_blank ||
+      cs_blank ||
+      desc_blank ||
+      id_blank ||
+      mt_blank ||
+      sf_blank ||
+      title_blank
     end
     # version_blank
     #   Requires version
