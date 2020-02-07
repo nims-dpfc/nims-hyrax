@@ -13,7 +13,7 @@
                     "methods": [
                         "Hyrax::Workflow::GrantEditToDepositor",
                         "Hyrax::Workflow::ActivateObject",
-                        "Workflow::SynchronisePIDs"
+                        "Workflow::GetPID"
                     ]
                 }
             ]
