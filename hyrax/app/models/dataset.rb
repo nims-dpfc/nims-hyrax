@@ -51,11 +51,11 @@ class Dataset < ActiveFedora::Base
 
   property :complex_organization, predicate: ::RDF::Vocab::ORG.organization, class_name:"ComplexOrganization"
 
-  property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'], multiple: false do |index|
+  property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'] do |index|
     index.as :stored_searchable, :facetable
   end
 
-  property :computational_methods, predicate: ::RDF::Vocab::NimsRdp['computational-methods'], multiple: false do |index|
+  property :computational_methods, predicate: ::RDF::Vocab::NimsRdp['computational-methods'] do |index|
     index.as :stored_searchable, :facetable
   end
 
@@ -93,7 +93,7 @@ class Dataset < ActiveFedora::Base
   property :complex_specimen_type, predicate: ::RDF::Vocab::NimsRdp['specimen-type'],
   class_name: "ComplexSpecimenType"
 
-  property :synthesis_and_processing, predicate: ::RDF::Vocab::NimsRdp['synthesis-and-processing'], multiple: false do |index|
+  property :synthesis_and_processing, predicate: ::RDF::Vocab::NimsRdp['synthesis-and-processing'] do |index|
     index.as :stored_searchable, :facetable
   end
 
