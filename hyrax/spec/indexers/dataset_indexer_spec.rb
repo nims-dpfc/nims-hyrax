@@ -272,7 +272,7 @@ RSpec.describe DatasetIndexer do
 
   describe 'indexes characterization methods' do
     before do
-      obj = build(:dataset, characterization_methods: 'Method D')
+      obj = build(:dataset, characterization_methods: ['Method D'])
       @solr_document = obj.to_solr
     end
     it 'indexes as stored searchable' do
@@ -282,7 +282,7 @@ RSpec.describe DatasetIndexer do
 
   describe 'indexes computational methods' do
     before do
-      obj = build(:dataset, computational_methods: 'Method D')
+      obj = build(:dataset, computational_methods: ['Method D'])
       @solr_document = obj.to_solr
     end
     it 'indexes as stored searchable' do
@@ -911,7 +911,7 @@ RSpec.describe DatasetIndexer do
 
   describe 'indexes synthesis and processing' do
     before do
-      obj = build(:dataset, synthesis_and_processing: 'synthesis A')
+      obj = build(:dataset, synthesis_and_processing: ['synthesis A'])
       @solr_document = obj.to_solr
     end
     it 'indexes as stored searchable' do
