@@ -15,6 +15,16 @@ RSpec.describe "OAI PMH Support", type: :feature do
 
     it 'retrieves a list of records' do
       visit oai_provider_catalog_path(verb: 'ListRecords', metadataPrefix: 'oai_dc')
+
+      puts "----------"
+      puts "#{ENV['OAI_RECORD_PREFIX']}:#{identifier}"
+      puts page.body.inspect
+
+      # require 'byebug'
+      # byebug
+
+
+
       expect(page).to have_content("#{ENV['OAI_RECORD_PREFIX']}:#{identifier}")
       expect(page).to have_content(work.title.first)
     end

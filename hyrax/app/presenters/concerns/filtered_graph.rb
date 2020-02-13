@@ -12,7 +12,9 @@ module FilteredGraph
   end
 
   def exclude?(statement)
-    (statement.predicate.ends_with?('purl.org/dc/elements/1.1/description') && @current_ability.cannot?(:read_abstract, model_name.name.constantize)) ||
-        (statement.predicate.ends_with?('www.nims.go.jp/vocabs/ngdr/supervisor-approval'))
+    # Returns true if the statement should be filtered out of the graph
+    model = model_name.name.constantize
+    (statement.predicate.ends_with?('purl.org/dc/elements/1.1/description') && @current_ability.cannot?(:read_abstract, model)) ||
+      (statement.predicate.ends_with?('www.nims.go.jp/vocabs/ngdr/supervisor-approval') && @current_ability.cannot?(:read_supervisor_approval, model))
   end
 end

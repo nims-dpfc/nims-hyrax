@@ -21,7 +21,7 @@ RSpec.describe Hyrax::DatasetPresenter do
       ]
     }
     let(:abstract_regex) { %r(<http://purl.org/dc/elements/1.1/description> "Abstract-Description-123";) }
-    let(:supervisor_regex) { %r(<http://www.nims.go.jp/vocabs/ngdr/supervisor-approval> "Professor Supervisor Approval";) }
+    let(:supervisor_regex) { %r(<http://www.nims.go.jp/vocabs/ngdr/supervisor-approval> "Professor-Supervisor-Approval";) }
 
     it 'exports' do
       export_regex.each do |regex|
@@ -54,7 +54,7 @@ RSpec.describe Hyrax::DatasetPresenter do
       ]
     }
     let(:abstract_regex) { %r(<http://example.org/concern/datasets/#{dataset.id}> <http://purl.org/dc/elements/1.1/description> "Abstract-Description-123") }
-    let(:supervisor_regex) { %r(<http://example.org/concern/datasets/#{dataset.id}> <http://www.nims.go.jp/vocabs/ngdr/supervisor-approval> "Professor Supervisor Approval") }
+    let(:supervisor_regex) { %r(<http://example.org/concern/datasets/#{dataset.id}> <http://www.nims.go.jp/vocabs/ngdr/supervisor-approval> "Professor-Supervisor-Approval") }
 
     it 'exports' do
       export_regex.each do |regex|
@@ -97,13 +97,13 @@ RSpec.describe Hyrax::DatasetPresenter do
 
     context 'anonymous user' do
       it { is_expected.not_to include("dc11:description" => "Abstract-Description-123") }
-      it { is_expected.not_to include("nimsrdp:supervisor-approval" => "Professor Supervisor Approval") }
+      it { is_expected.not_to include("nimsrdp:supervisor-approval" => "Professor-Supervisor-Approval") }
     end
 
     context 'authenticated user' do
       let(:user) { create(:user, :nims_other) }
       it { is_expected.to include("dc11:description" => "Abstract-Description-123") }
-      it { is_expected.not_to include("nimsrdp:supervisor-approval" => "Professor Supervisor Approval") }
+      it { is_expected.not_to include("nimsrdp:supervisor-approval" => "Professor-Supervisor-Approval") }
     end
   end
 end

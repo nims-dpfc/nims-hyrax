@@ -38,6 +38,8 @@ class Ability
     can :read_abstract, [::Dataset, ::Image, ::Publication] if current_user.authenticated?
     can :read_alternative_title, [::Dataset, ::Image, ::Publication]
     # NB: no users can :read_application_number
+    # NB: no users can :read_supervisor_approval (though it is visible on the edit form to users with permission to edit)
+    cannot :read_supervisor_approval, [::Dataset, ::Image, ::Publication]
     can :read_creator, [::Dataset, ::Image, ::Publication]
     can :read_date, [::Dataset, ::Image, ::Publication]
     can :read_event, [::Publication]
