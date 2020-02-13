@@ -358,7 +358,7 @@ FactoryBot.define do
     end
 
     trait :with_supervisor_approval do
-      supervisor_approval { ['Professor Supervisor Approval'] }
+      supervisor_approval { ['Professor-Supervisor-Approval'] }
     end
   end
 end

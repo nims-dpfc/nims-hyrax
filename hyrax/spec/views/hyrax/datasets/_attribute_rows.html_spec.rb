@@ -5,7 +5,8 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
   let(:partial) { 'hyrax/datasets/attribute_rows' }
   let(:dataset) { create(:dataset, :open, :with_alternative_title, :with_complex_person, :with_keyword, :with_subject,
                         :with_language, :with_publisher, :with_complex_date, :with_complex_identifier, :with_complex_rights,
-                        :with_complex_version, :with_resource_type, :with_complex_relation, :with_source) }
+                        :with_complex_version, :with_resource_type, :with_complex_relation, :with_source,
+                        :with_description_abstract, :with_supervisor_approval) }
   let(:presenter) { Hyrax::DatasetPresenter.new(SolrDocument.new(dataset.to_solr), Ability.new(user), controller.request) }
 
   before do
@@ -34,6 +35,8 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
       expect(rendered).to have_content('Resource-Type-123')
       expect(rendered).to have_content('A relation label')
       expect(rendered).to have_content('Source-123')
+      expect(rendered).not_to have_content('Abstract-Description-123') # Abstract/Description is not displayed in this table partial
+      expect(rendered).not_to have_content('Professor-Supervisor-Approval')
     end
   end
 
@@ -54,6 +57,8 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
       expect(rendered).to have_content('Resource-Type-123')
       expect(rendered).to have_content('A relation label')
       expect(rendered).to have_content('Source-123')
+      expect(rendered).not_to have_content('Abstract-Description-123') # Abstract/Description is not displayed in this table partial
+      expect(rendered).not_to have_content('Professor-Supervisor-Approval')
     end
   end
 end
