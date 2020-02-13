@@ -437,15 +437,15 @@ RSpec.describe Dataset do
 
   describe 'characterization_methods' do
     it 'has characterization_methods' do
-      @obj = build(:dataset, characterization_methods: 'Characterization methods')
-      expect(@obj.characterization_methods).to eq 'Characterization methods'
+      @obj = build(:dataset, characterization_methods: ['Characterization methods'])
+      expect(@obj.characterization_methods).to eq ['Characterization methods']
     end
   end
 
   describe 'computational_methods' do
     it 'has computational_methods' do
-      @obj = build(:dataset, computational_methods: 'computational methods')
-      expect(@obj.computational_methods).to eq 'computational methods'
+      @obj = build(:dataset, computational_methods: ['computational methods'])
+      expect(@obj.computational_methods).to eq ['computational methods']
     end
   end
 
@@ -851,8 +851,8 @@ RSpec.describe Dataset do
 
   describe 'synthesis_and_processing' do
     it 'has synthesis_and_processing' do
-      @obj = build(:dataset, synthesis_and_processing: 'Synthesis and processing methods')
-      expect(@obj.synthesis_and_processing).to eq 'Synthesis and processing methods'
+      @obj = build(:dataset, synthesis_and_processing: ['Synthesis and processing methods'])
+      expect(@obj.synthesis_and_processing).to eq ['Synthesis and processing methods']
     end
   end
 
