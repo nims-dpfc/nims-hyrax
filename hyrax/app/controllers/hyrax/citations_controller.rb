@@ -3,6 +3,7 @@ module Hyrax
     include WorksControllerBehavior
     include Breadcrumbs
     include SingularSubresourceController
+    prepend ::DisableApiBehavior
 
     # Overrides decide_layout from WorksControllerBehavior
     with_themed_layout '1_column'

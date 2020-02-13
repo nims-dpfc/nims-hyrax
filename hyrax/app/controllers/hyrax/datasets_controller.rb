@@ -7,6 +7,8 @@ module Hyrax
     include Hyrax::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     include ::ComplexFieldsBehavior
+    prepend ::DisableApiBehavior
+
     self.curation_concern_type = ::Dataset
 
     # Use this line if you want to use a custom presenter
