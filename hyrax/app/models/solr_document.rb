@@ -28,7 +28,7 @@ class SolrDocument
     contributor: 'complex_person_other_tesim', # @todo - extract anything other than author from complex person, may need new solr field
     creator: 'complex_person_author_tesim',
     date: 'date_tesim',
-    description: 'description_tesim',
+    # description: 'description_tesim', # hide description/abstract field for OAI-PMH feed
     identifier: 'complex_identifier_tesim',
     language: 'language_tesim',
     publisher: 'publisher_tesim',
