@@ -437,15 +437,15 @@ RSpec.describe Dataset do
 
   describe 'characterization_methods' do
     it 'has characterization_methods' do
-      @obj = build(:dataset, characterization_methods: 'Characterization methods')
-      expect(@obj.characterization_methods).to eq 'Characterization methods'
+      @obj = build(:dataset, characterization_methods: ['Characterization methods'])
+      expect(@obj.characterization_methods).to eq ['Characterization methods']
     end
   end
 
   describe 'computational_methods' do
     it 'has computational_methods' do
-      @obj = build(:dataset, computational_methods: 'computational methods')
-      expect(@obj.computational_methods).to eq 'computational methods'
+      @obj = build(:dataset, computational_methods: ['computational methods'])
+      expect(@obj.computational_methods).to eq ['computational methods']
     end
   end
 
@@ -484,7 +484,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_instrument.first.complex_person.first.name).to eq ['Name of operator']
       expect(@obj.complex_instrument.first.complex_person.first.role).to eq ['operator']
       expect(@obj.complex_instrument.first.managing_organization.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.managing_organization.first.organization).to eq ['FooFoo']
+      expect(@obj.complex_instrument.first.managing_organization.first.organization).to eq ['Managing organization name']
       expect(@obj.complex_instrument.first.managing_organization.first.sub_organization).to eq ['BarBar']
       expect(@obj.complex_instrument.first.managing_organization.first.purpose).to eq ['Managing organization']
       expect(@obj.complex_instrument.first.managing_organization.first.complex_identifier.first.identifier).to eq ['123456789mo']
@@ -851,8 +851,8 @@ RSpec.describe Dataset do
 
   describe 'synthesis_and_processing' do
     it 'has synthesis_and_processing' do
-      @obj = build(:dataset, synthesis_and_processing: 'Synthesis and processing methods')
-      expect(@obj.synthesis_and_processing).to eq 'Synthesis and processing methods'
+      @obj = build(:dataset, synthesis_and_processing: ['Synthesis and processing methods'])
+      expect(@obj.synthesis_and_processing).to eq ['Synthesis and processing methods']
     end
   end
 

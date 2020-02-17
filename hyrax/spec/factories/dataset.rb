@@ -26,7 +26,47 @@ FactoryBot.define do
 
     trait :restricted do
       visibility { 'restricted' }
-      title { ["Resstricted Dataset"] }
+      title { ["Restricted Dataset"] }
+    end
+
+    trait :with_description_seq do
+      sequence(:description) { |n| ["Abstract-Description-#{n}"] }
+    end
+
+    trait :with_alternative_title do
+      alternative_title { 'Alternative-Title-123' }
+    end
+
+    trait :with_keyword do
+      keyword { ['Keyword-123'] }
+    end
+
+    trait :with_keyword_seq do
+      sequence(:keyword) { |n| ["Keyword-#{n}"] }
+    end
+
+    trait :with_subject do
+      subject { ['Subject-123'] }
+    end
+
+    trait :with_subject_seq do
+      sequence(:subject) { |n| ["Subject-#{n}"] }
+    end
+
+    trait :with_language do
+      language { ['Faroese'] }
+    end
+
+    trait :with_publisher do
+      publisher { ['Publisher-123'] }
+    end
+
+    trait :with_resource_type do
+      resource_type { ['Resource-Type-123'] }
+    end
+
+    trait :with_source do
+      source { ['Source-123'] }
     end
 
     trait :with_complex_person do
@@ -173,7 +213,7 @@ FactoryBot.define do
              }]
           }],
           managing_organization_attributes: [{
-            organization: 'FooFoo',
+            organization: 'Managing organization name',
             sub_organization: 'BarBar',
             purpose: 'Managing organization',
             complex_identifier_attributes: [{
@@ -285,7 +325,7 @@ FactoryBot.define do
           title: 'A relation label',
           url: 'http://example.com/relation',
           complex_identifier_attributes: [{
-            identifier: ['123456'],
+            identifier: ['info:hdl/4263537/400'],
             scheme: 'identifier persistent'
           }],
           relationship: 'isNewVersionOf'

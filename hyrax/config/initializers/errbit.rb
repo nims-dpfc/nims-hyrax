@@ -12,4 +12,11 @@ if Rails.env == 'production'
     config.project_id = ENV['AIRBRAKE_PROJECT_ID']
     config.project_key = ENV['AIRBRAKE_PROJECT_KEY']
   end
+elsif defined?(Airbrake)
+  # disable Airbrake if the env vars are not present
+  puts 'Disabling Airbrake because the required env vars are not set'
+  Airbrake.configure do |c|
+    c.environment = Rails.env
+    c.ignore_environments = %w(development test production)
+  end
 end
