@@ -228,6 +228,9 @@ GEM
       warden (~> 1.2.3)
     devise-guests (0.7.0)
       devise
+    devise_cas_authenticatable (1.10.4)
+      devise (>= 1.2.0)
+      rubycas-client (>= 2.2.1)
     devise_ldap_authenticatable (0.8.6)
       devise (>= 3.4.1)
       net-ldap (>= 0.16.0)
@@ -701,6 +704,9 @@ GEM
     redis (3.3.5)
     redis-namespace (1.6.0)
       redis (>= 3.0.4)
+    redis-session-store (0.11.1)
+      actionpack (>= 3)
+      redis (>= 3, < 5)
     redlock (1.0.1)
       redis (>= 3.0.0, < 5.0)
     regexp_parser (1.6.0)
@@ -747,6 +753,8 @@ GEM
       multipart-post
       oauth2
     ruby-progressbar (1.10.1)
+    rubycas-client (2.3.9)
+      activesupport
     rubyzip (2.0.0)
     samvera-nesting_indexer (2.0.0)
       dry-equalizer
@@ -888,6 +896,7 @@ DEPENDENCIES
   blacklight_oai_provider!
   bootstrap-datepicker-rails
   byebug
+  cancancan (~> 1.17)
   capybara
   coffee-rails (~> 4.2)
   coveralls
@@ -895,6 +904,7 @@ DEPENDENCIES
   database_cleaner
   devise
   devise-guests (~> 0.6)
+  devise_cas_authenticatable
   devise_ldap_authenticatable
   factory_bot_rails
   fcrepo_wrapper
@@ -909,6 +919,7 @@ DEPENDENCIES
   puma (~> 3.12)
   rails (>= 5.0.6)
   redis (~> 3.0)
+  redis-session-store (~> 0.11.1)
   riiif (~> 2.0)
   rsolr (>= 1.0)
   rspec-rails
