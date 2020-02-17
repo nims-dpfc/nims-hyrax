@@ -29,12 +29,13 @@ class User < ApplicationRecord
 
   def self.find_or_create_system_user(user_key)
     username = user_key.split('@')[0]
-    User.find_by('email' => user_key) || User.create!(username: username, email: user_key, password: Devise.friendly_token[0, 20])
+    User.find_by('email' => user_key) || User.create!(username: username, email: user_key, password: Devise.friendly_token[0, 20], user_identifier: Noid::Rails::Service.new.mint)
   end
 
   def ldap_before_save
     self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
     self.password = Devise.friendly_token[0, 20]
+    # TODO: This will be replaced by NIMS PID when the CAS server is online
     self.user_identifier = Noid::Rails::Service.new.mint
   end
 
