@@ -279,6 +279,7 @@ ActiveRecord::Schema.define(version: 20200108111832) do
     t.string "uri"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["local_authority_id", "label"], name: "index_qa_local_authority_entries_on_lower_label"
     t.index ["local_authority_id"], name: "index_qa_local_authority_entries_on_local_authority_id"
     t.index ["uri"], name: "index_qa_local_authority_entries_on_uri", unique: true
   end
@@ -548,10 +549,12 @@ ActiveRecord::Schema.define(version: 20200108111832) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "remember_token"
+    t.string "employee_type_code"
     t.string "user_identifier"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["employee_type_code"], name: "index_users_on_employee_type_code"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["user_identifier"], name: "index_users_on_user_identifier"
+    t.index ["user_identifier"], name: "index_users_on_user_identifier", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
