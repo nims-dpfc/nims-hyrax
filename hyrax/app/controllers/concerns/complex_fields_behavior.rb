@@ -19,7 +19,7 @@ module ComplexFieldsBehavior
     other_keys = hash_param.keys - %w[id _destroy]
     return false unless other_keys.blank?
     if hash_param.fetch('id', nil) && hash_param.fetch('_destroy', nil)
-      return false if hash_param['_destroy'] == 'true'
+      return false if ['true', '1', true, 1].include? hash_param['_destroy']
     end
     true
   end
@@ -31,33 +31,52 @@ module ComplexFieldsBehavior
   def cleanup_instrument_and_specimen_type(attribute)
     # complex_instrument
     attribute['complex_instrument_attributes'].each_with_index do |complex_instrument, index|
-      complex_instrument['complex_person_attributes'].each_with_index do |complex_person, i|
-        if complex_person['name'].blank? && complex_person['role'].include?('operator')
-          attribute['complex_instrument_attributes'][index]['complex_person_attributes'].delete_at(i)
+      if complex_instrument['complex_person_attributes'].present?
+        complex_instrument['complex_person_attributes'].each_with_index do |complex_person, i|
+          if complex_person['name'].blank? && complex_person['role'].include?('operator')
+            attribute['complex_instrument_attributes'][index]['complex_person_attributes'].delete_at(i)
+          end
         end
       end
-      complex_instrument['manufacturer_attributes'].each_with_index do |manufacturer, i|
-        if manufacturer['organization'].blank? && manufacturer['purpose'].include?('Manufacturer')
-          attribute['complex_instrument_attributes'][index]['manufacturer_attributes'].delete_at(i)
+      if complex_instrument['manufacturer_attributes'].present?
+        complex_instrument['manufacturer_attributes'].each_with_index do |manufacturer, i|
+          if manufacturer['organization'].blank? && manufacturer['purpose'].include?('Manufacturer')
+            attribute['complex_instrument_attributes'][index]['manufacturer_attributes'].delete_at(i)
+          end
         end
       end
-      complex_instrument['managing_organization_attributes'].each_with_index do |managing_organization, i|
-        if managing_organization['organization'].blank? && managing_organization['purpose'].include?('Managing organization')
-          attribute['complex_instrument_attributes'][index]['managing_organization_attributes'].delete_at(i)
+      if complex_instrument['managing_organization_attributes'].present?
+        complex_instrument['managing_organization_attributes'].each_with_index do |managing_organization, i|
+          if managing_organization['organization'].blank? && managing_organization['purpose'].include?('Managing organization')
+            attribute['complex_instrument_attributes'][index]['managing_organization_attributes'].delete_at(i)
+          end
+        end
+      end
+      if complex_instrument['complex_date_attributes'].present?
+        complex_instrument['complex_date_attributes'].each_with_index do |complex_date, i|
+          if complex_date.present?
+            if complex_date['date'].blank? && complex_date['description'].include?('Processed')
+              attribute['complex_instrument_attributes'][index]['complex_date_attributes'].delete_at(i)
+            end
+          end
         end
       end
     end
     # complex_specimen_type
     attribute['complex_specimen_type_attributes'].each_with_index do |complex_specimen_type, index|
-      complex_specimen_type['complex_purchase_record_attributes'].each_with_index do |complex_purchase_record, i|
-        complex_purchase_record['supplier_attributes'].each_with_index do |supplier, ii|
-          if supplier['organization'].blank? && supplier['purpose'].include?('Supplier')
-            attribute['complex_specimen_type_attributes'][index]['complex_purchase_record_attributes'][i]['supplier_attributes'].delete_at(ii)
+      if complex_specimen_type['complex_purchase_record_attributes'].present?
+        complex_specimen_type['complex_purchase_record_attributes'].each_with_index do |complex_purchase_record, i|
+          if complex_purchase_record['supplier_attributes'].present?
+            complex_purchase_record['supplier_attributes'].each_with_index do |supplier, ii|
+              if supplier['organization'].blank? && supplier['purpose'].include?('Supplier')
+                attribute['complex_specimen_type_attributes'][index]['complex_purchase_record_attributes'][i]['supplier_attributes'].delete_at(ii)
+              end
+            end
           end
-        end
-        complex_purchase_record['manufacturer_attributes'].each_with_index do |manufacturer, ii|
-          if manufacturer['organization'].blank? && manufacturer['purpose'].include?('Manufacturer')
-            attribute['complex_specimen_type_attributes'][index]['complex_purchase_record_attributes'][i]['manufacturer_attributes'].delete_at(ii)
+          complex_purchase_record['manufacturer_attributes'].each_with_index do |manufacturer, ii|
+            if manufacturer['organization'].blank? && manufacturer['purpose'].include?('Manufacturer')
+              attribute['complex_specimen_type_attributes'][index]['complex_purchase_record_attributes'][i]['manufacturer_attributes'].delete_at(ii)
+            end
           end
         end
       end
@@ -68,7 +87,7 @@ module ComplexFieldsBehavior
   def cleanup_params(attribute)
     if attribute.is_a?(Hash) && attribute.keys.all? { |k| k !~ /\D/ }
       # removes hashes with integer keys
-      attribute = cleanup_params(attribute.values)
+      cleanup_params(attribute.values)
     elsif attribute.is_a? Hash
       new_attribute = {}
       attribute.each do |k, v|

@@ -16,13 +16,15 @@ module Hyrax
 
     def create
       safe_dataset_params = params['dataset'].permit(::Hyrax::DatasetForm.build_permitted_params)
-      params['dataset'] = cleanup_instrument_and_specimen_type(cleanup_params(safe_dataset_params.to_h))
+      # NB: need to cleanup twice
+      params['dataset'] = cleanup_params(cleanup_instrument_and_specimen_type(cleanup_params(safe_dataset_params.to_h)))
       super
     end
 
     def update
       safe_dataset_params = params['dataset'].permit(::Hyrax::DatasetForm.build_permitted_params)
-      params['dataset'] = cleanup_instrument_and_specimen_type(cleanup_params(safe_dataset_params.to_h))
+      # NB: need to cleanup twice
+      params['dataset'] = cleanup_params(cleanup_instrument_and_specimen_type(cleanup_params(safe_dataset_params.to_h)))
       super
     end
 
