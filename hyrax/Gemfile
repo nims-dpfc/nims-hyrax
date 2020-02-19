@@ -74,6 +74,7 @@ gem 'sidekiq'
 gem 'hydra-role-management'
 gem 'bootstrap-datepicker-rails'
 gem 'pg'
+gem 'faraday_middleware'
 gem 'devise_ldap_authenticatable'
 gem 'devise_cas_authenticatable'
 
