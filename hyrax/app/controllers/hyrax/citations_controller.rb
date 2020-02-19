@@ -19,7 +19,7 @@ module Hyrax
       # which is intended to find works (not files)
       solr_file = ::SolrDocument.find(params[:id])
       authorize! :show, solr_file
-      @presenter = FileSetPresenter.new(solr_file, current_ability, request)
+      @presenter = NimsFileSetPresenter.new(solr_file, current_ability, request)
       show
     end
 
