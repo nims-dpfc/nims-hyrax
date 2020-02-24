@@ -23,7 +23,7 @@ module ComplexField
       # add year
       years = dates_utc.map {|d| DateTime.parse(d).strftime("%Y")} 
       solr_doc[Solrizer.solr_name('complex_year', :stored_searchable)] = years unless dates.blank?
-      solr_doc[Solrizer.solr_name('complex_', :facetable)] = years unless dates.blank?
+      solr_doc[Solrizer.solr_name('complex_year', :facetable)] = years unless dates.blank?
       object.complex_date.each do |d|
         next if d.date.reject(&:blank?).blank?
         label = 'other'
