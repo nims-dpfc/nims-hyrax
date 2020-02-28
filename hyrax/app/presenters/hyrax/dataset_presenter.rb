@@ -9,6 +9,7 @@ module Hyrax
       :complex_relation, :specimen_set, :complex_specimen_type,
       :synthesis_and_processing, :custom_property, to: :solr_document
 
+    Hyrax::MemberPresenterFactory.file_presenter_class = Hyrax::NimsFileSetPresenter
     prepend ::FilteredGraph
   end
 end

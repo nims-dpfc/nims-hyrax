@@ -12,14 +12,29 @@ FactoryBot.define do
       Hydra::Works::UploadFileToFileSet.call(file, evaluator.content) if evaluator.content
     end
 
-    factory :file_with_work do
-      after(:build) do |file, _evaluator|
-        file.title = ['testfile']
-      end
-      after(:create) do |file, evaluator|
-        Hydra::Works::UploadFileToFileSet.call(file, evaluator.content) if evaluator.content
-        create(:work, user: evaluator.user).members << file
-      end
+    trait :open do
+      visibility { 'open' }
+      title { ["Open File Set"] }
+    end
+
+    trait :authenticated do
+      visibility { 'authenticated' }
+      title { ["Authenticated File Set"] }
+    end
+
+    trait :embargo do
+      visibility { 'embargo' }
+      title { ["Embargo File Set"] }
+    end
+
+    trait :lease do
+      visibility { 'lease' }
+      title { ["Leased File Set"] }
+    end
+
+    trait :restricted do
+      visibility { 'restricted' }
+      title { ["Resstricted File Set"] }
     end
   end
 end
