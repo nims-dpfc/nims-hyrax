@@ -39,10 +39,8 @@ class SolrDocument
     type: 'resource_type_tesim'
   )
 
-
-  # Do content negotiation for AF models.
-
-  use_extension( Hydra::ContentNegotiation )
+  # Using custom extension for content negotiation for ActiveFedora models
+  use_extension( ::Hyrax::SolrDocument::ContentNegotiation )
 
   def alternative_title
     self[Solrizer.solr_name('alternative_title', :stored_searchable)]
