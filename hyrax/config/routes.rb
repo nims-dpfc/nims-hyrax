@@ -37,6 +37,12 @@ Rails.application.routes.draw do
     concerns :exportable
   end
 
+  resources :files, only: [] do
+    member do
+      get :export, controller: :exports
+    end
+  end
+
   resources :welcome, only: 'index'
   root 'hyrax/homepage#index'
 

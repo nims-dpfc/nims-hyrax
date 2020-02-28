@@ -907,6 +907,7 @@ DEPENDENCIES
   devise_cas_authenticatable
   devise_ldap_authenticatable
   factory_bot_rails
+  faraday_middleware
   fcrepo_wrapper
   hydra-role-management
   hyrax (~> 2.6)
