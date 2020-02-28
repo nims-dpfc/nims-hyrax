@@ -280,4 +280,15 @@ class CatalogController < ApplicationController
   def render_bookmarks_control?
     false
   end
+
+  def show
+    @response, @document = fetch params[:id]
+    respond_to do |format|
+      format.html { setup_next_and_previous_documents }
+      format.json do
+        @presenter = Blacklight::JsonPresenter.new(@response, @document, facets_from_request, blacklight_config)
+      end
+      additional_export_formats(@document, format)
+    end
+  end
 end

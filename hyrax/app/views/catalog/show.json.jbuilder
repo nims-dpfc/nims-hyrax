@@ -1,6 +1,6 @@
 json.response do
-  json.docs do
-    json.array! @presenter.documents do |document|
+  json.document do
+    @presenter.documents.tap do |document|
       json.id document.id
       index_fields(document).each do |field_name, field|
         if should_render_index_field? document, field
@@ -9,6 +9,4 @@ json.response do
       end
     end
   end
-  json.facets @presenter.search_facets_as_json
-  json.pages @presenter.pagination_info
 end
