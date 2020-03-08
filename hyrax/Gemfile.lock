@@ -19,6 +19,14 @@ GIT
       rails (~> 5.1.6.1)
       rubyzip (>= 1.0.0)
 
+GIT
+  remote: https://github.com/fbacall/ro-crate-ruby
+  revision: 0982279c5e3613e718e34125a6182f1575222306
+  specs:
+    ro-crate-ruby (0.0.3)
+      addressable
+      rubyzip
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -922,6 +930,7 @@ DEPENDENCIES
   redis (~> 3.0)
   redis-session-store (~> 0.11.1)
   riiif (~> 2.0)
+  ro-crate-ruby!
   rsolr (>= 1.0)
   rspec-rails
   sass-rails (~> 5.0)
