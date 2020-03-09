@@ -13,7 +13,8 @@ $( document ).on('turbolinks:load', function() {
                         } else {
                             return {title: name.replace(/[\_\-]/g, ' ')};
                         }
-                    })
+                    }),
+                    order: []
                 });
                 preview.find('.csv-preview-title').text('Preview: ' + data.file_name);
                 if (data.total_rows > data.maximum_rows) {
