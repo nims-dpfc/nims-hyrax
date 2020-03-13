@@ -76,7 +76,7 @@ FactoryBot.define do
           role: ['operator'],
            complex_identifier_attributes: [{
               identifier: '123456',
-              scheme: 'nims person id'
+              scheme: 'identifier local'
             }],
           complex_affiliation_attributes: [{
             job_title: 'Principal Investigator',
@@ -97,7 +97,7 @@ FactoryBot.define do
          role: ['author'],
           complex_identifier_attributes: [{
              identifier: '123456',
-             scheme: 'nims person id'
+             scheme: 'identifier local'
            }],
          complex_affiliation_attributes: [{
            job_title: 'Principal Investigator',
@@ -201,7 +201,7 @@ FactoryBot.define do
             role: ['operator'],
             complex_identifier_attributes: [{
               identifier: '123456789mo',
-              scheme: 'nims person id'
+              scheme: 'identifier local'
             }],
             complex_affiliation_attributes: [{
               job_title: 'Principal Investigator',

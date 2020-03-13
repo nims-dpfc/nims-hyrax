@@ -39,7 +39,7 @@ RSpec.describe NestedInstrumentInput, type: :input do
 
     is_expected.to have_field('dataset[instrument_attributes][0]_complex_person_attributes_0_name', type: :text, with: 'Name of operator')
     is_expected.to have_select('dataset[instrument_attributes][0]_complex_person_attributes_0_role', selected: 'operator/データ測定者・計算者')
-    is_expected.to have_select('dataset[instrument_attributes][0][complex_person_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'NIMS Person ID')
+    is_expected.to have_select('dataset[instrument_attributes][0][complex_person_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Local')
     is_expected.to have_field('dataset[instrument_attributes][0][complex_person_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: '123456789mo')
     is_expected.to have_field('dataset[instrument_attributes][0][complex_person_attributes][0]_complex_affiliation_attributes_0_job_title', type: :text, with: 'Principal Investigator')
     is_expected.to have_field('dataset[instrument_attributes][0][complex_person_attributes][0][complex_affiliation_attributes][0]_complex_organization_attributes_0_organization', type: :text, with: 'University')
