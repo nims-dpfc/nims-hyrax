@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe ::User do
-  let(:user) { described_class.new(username: 'username') }
+  let(:user) { described_class.new(username: 'username', display_name: 'Test user') }
 
   describe '#to_s' do
     subject { user.to_s }
-    it { is_expected.to eql 'username'}
+    it { is_expected.to eql 'Test user'}
   end
 
   describe '#ldap_before_save' do
