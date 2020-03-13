@@ -1,0 +1,15 @@
+
+<%# Only show the download all button if there are file_sets, and the total size is > 0 and < 100Mb %>
+<% if presenter.member_presenters.length > 1 %>
+<% file_set_ids = presenter.member_presenters.map {|fs| fs.id }.compact %>
+  <% if within_file_size_threshold?(file_set_ids) %>
+    <div class="download-all">
+      <%= link_to t(:'hyrax.download_all'),
+        main_app.download_all_path(presenter.id, format: :zip),
+        id: "download-all",
+        class: "btn btn-default",
+        target: "_new"
+        %>
+    </div>
+  <% end %>
+<% end %>
