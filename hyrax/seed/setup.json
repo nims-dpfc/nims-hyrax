@@ -4,7 +4,8 @@
       "username": "admin_hyrax",
       "password": "password",
       "name": "hyrax Admin",
-      "role": "admin"
+      "role": "admin",
+      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:8c5f864c-c315-49c0-a49d-609895a8925d"
     },
     {
       "email": "user@hyrax",
@@ -12,14 +13,16 @@
       "password": "demouser",
       "name": "Demo User",
       "role": "user",
-      "depositor": true
+      "depositor": true,
+      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:ebb7db80-27ef-4d3c-896d-e5956ee22ca5"
     },
     {
       "email": "workflow@hyrax",
       "username": "workflow_hyrax",
       "password": "workflow",
       "name": "Workflow Admin",
-      "role": "admin"
+      "role": "admin",
+      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:5a882edb-377f-4f35-85b1-a0963293c261"
     }
   ]
 }
