@@ -13,7 +13,7 @@ RSpec.describe NestedPersonAttributeRenderer do
       is_expected.to have_css('div.row label', text: 'Name')
       is_expected.to have_css('div.row a', text: 'Anamika')
 
-      is_expected.to have_css('div.row label', text: 'NIMS Person ID')
+      is_expected.to have_css('div.row label', text: 'Identifier - Local')
       is_expected.to have_css('div.row', text: '123456')
 
       is_expected.to have_css('div.row label', text: 'Affiliation')
