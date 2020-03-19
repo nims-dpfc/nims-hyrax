@@ -75,6 +75,8 @@
           <%= presenter.attribute_to_html(:source, html_dl: true) %>
         <% end %>
 
+        <%= presenter.attribute_to_html(:custom_property, render_as: :nested_custom_property, label: t('ngdr.fields.custom_property'), html_dl: true) %>
+
         <!-- no defined permissions for date_created, date_modified, access_right -->
         <%= presenter.attribute_to_html(:date_created, render_as: :linked, search_field: 'date_created_tesim', html_dl: true) %>
         <%= presenter.attribute_to_html(:date_modified, label: t('hyrax.base.show.last_modified'), html_dl: true) %>
@@ -101,7 +103,6 @@
         <%= presenter.attribute_to_html(:properties_addressed, render_as: :faceted, label: t('ngdr.fields.properties_addressed'), html_dl: true) %>
         <%= presenter.attribute_to_html(:specimen_set, label: t('ngdr.fields.specimen_set'), html_dl: true) %>
         <%= presenter.attribute_to_html(:synthesis_and_processing, render_as: :faceted, label: t('ngdr.fields.synthesis_and_processing'), html_dl: true) %>
-        <%= presenter.attribute_to_html(:custom_property, render_as: :nested_custom_property, label: t('ngdr.fields.custom_property'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Method accordion -->
