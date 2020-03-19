@@ -32,6 +32,10 @@ RSpec.describe DatasetIndexer do
       expect(@solr_document['complex_date_dtsim']).to match_array(
         ["1988-10-28T00:00:00Z", "2018-01-01T00:00:00Z"])
     end
+    it 'indexes year as facetable' do
+      expect(@solr_document['complex_year_sim']).to match_array(
+        ["1988", "2018"])
+    end
     it 'indexes each type as sortable' do
       skip 'this cannot be multi-valued'
       expect(@solr_document['complex_date_submitted_dtsi']).to match_array("1988-10-28T00:00:00Z")
@@ -41,6 +45,9 @@ RSpec.describe DatasetIndexer do
     end
     it 'indexes each type as displayable' do
       expect(@solr_document['complex_date_submitted_ssm']).to match_array(["1988-10-28"])
+    end
+    it 'indexes each year as facetable' do
+      expect(@solr_document['complex_year_submitted_sim']).to match_array(["1988"])
     end
   end
 
