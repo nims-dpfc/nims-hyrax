@@ -187,6 +187,9 @@ module Hyrax
        {
          name: [],
          role: [],
+         orcid: [],
+         organization: [],
+         sub_organization: [],
          complex_affiliation_attributes: permitted_affiliation_params,
          complex_identifier_attributes: permitted_identifier_params,
          uri: []
