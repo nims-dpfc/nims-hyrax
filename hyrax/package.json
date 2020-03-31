@@ -3,7 +3,7 @@
   "private": true,
   "repository": "git@github.com:antleaf/nims-hyrax.git",
   "dependencies": {
-  "universalviewer": "^3.0.16"
+  "universalviewer": "3.0.16"
 },
 "scripts": {
   "preinstall": "rm -rf ./public/uv",
