@@ -112,4 +112,14 @@ Rails.application.configure do
     port: ENV['SMTP_PORT'],
     enable_starttls_auto: false
   }
+
+  config.middleware.use ExceptionNotification::Rack,
+    ignore_if: lambda { |env, exception| !env.nil? },
+    email: {
+      email_prefix: '[MDR] ',
+      sender_address: ENV['NOTIFICATIONS_EMAIL_DEFAULT_FROM_ADDRESS'],
+      exception_recipients: [ENV['NOTIFICATIONS_EMAIL_DEFAULT_FROM_ADDRESS']]
+    }
+
+  ExceptionNotifier::Rake.configure
 end

@@ -83,7 +83,8 @@ gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > h
 gem 'riiif', '~> 2.0'
 
 group :production do
-  gem 'airbrake', '~> 5.0'
+  gem 'exception_notification', '~> 4.4'
+  gem 'exception_notification-rake', '~> 0.3.1'
 end
 
 gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'feature/prep_for_new_release'
