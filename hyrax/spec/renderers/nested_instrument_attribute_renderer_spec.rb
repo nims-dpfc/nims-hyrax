@@ -54,7 +54,7 @@ RSpec.describe NestedInstrumentAttributeRenderer do
     is_expected.to have_css('div.row label', text: 'Name')
     is_expected.to have_css('div.row a', text: 'Name of operator')
 
-    is_expected.to have_css('div.row label', text: 'NIMS Person ID')
+    is_expected.to have_css('div.row label', text: 'Identifier - Local')
     is_expected.to have_css('div.row', text: '123456789mo')
 
     is_expected.to have_css('div.row label', text: 'Affiliation')
