@@ -26,6 +26,8 @@
             <%#= render 'social_media' %> <!-- No social media buttons -->
           </div>
           <div class="col-sm-9">
+            <%= render 'relationships', presenter: @presenter %>
+
             <% if can? :read_abstract, @presenter.model_name.name.constantize %>
               <%= render 'work_description', presenter: @presenter %>
             <% end %>
@@ -34,7 +36,6 @@
           </div>
 
           <div class="col-sm-12">
-            <%= render 'relationships', presenter: @presenter %>
             <%= render 'items', presenter: @presenter %>
             <%# TODO: we may consider adding these partials in the future %>
             <%# = render 'sharing_with', presenter: @presenter %>
