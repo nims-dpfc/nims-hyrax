@@ -45,10 +45,10 @@ export class RequiredFields {
 				// Find the immediate field-wrapper
 				// Gather the inputs
 				this.inputs = $(required).closest('li.field-wrapper').find(':input');
-				// Skip the current elem, any hidden fields and any buttons, skip operator (role) (pre-filled but should not be required)
+				// Skip the current elem, any hidden fields and any buttons, skip operator (role), Processed (date) (pre-filled but should not be required)
 				if (this.inputs.filter((n, el) => {
 					if ( 
-						!el.parentNode.className.includes("hidden") && !el.className.includes('btn') && !el.className.includes('remove-hidden') && el != required && el.value !== 'operator' ) {
+						!el.parentNode.className.includes("hidden") && !el.className.includes('btn') && !el.className.includes('remove-hidden') && el != required && el.value !== 'operator' && el.value !== 'Processed' ) {
 						return (el.value !== '');
 					}
 				} ).length > 0) {
