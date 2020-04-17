@@ -37,6 +37,8 @@ class User < ApplicationRecord
   def ldap_before_save
     # Runs before saving a new user record in the database via LDAP Authentication
     self.email = Devise::LDAP::Adapter.get_ldap_param(username, "mail").first
+    self.display_name = Devise::LDAP::Adapter.get_ldap_param(username, "cn").first
+    self.employee_type_code = Devise::LDAP::Adapter.get_ldap_param(username, "employeeType").first.try(:first)
     self.password = Devise.friendly_token[0, 20]
     # TODO: This will be replaced by NIMS PID when the CAS server is online
     self.user_identifier = Noid::Rails::Service.new.mint
