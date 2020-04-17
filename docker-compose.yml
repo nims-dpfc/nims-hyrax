@@ -95,6 +95,7 @@ services:
       - app:${UPLOADS_PATH}
       - app:${DERIVATIVES_PATH}
       - app:${CACHE_PATH}
+      - app:/data/public/branding
     networks:
       internal:
 
