@@ -116,7 +116,7 @@ Rails.application.configure do
   config.middleware.use ExceptionNotification::Rack,
     ignore_if: lambda { |env, exception| !env.nil? },
     email: {
-      email_prefix: '[MDR] ',
+      email_prefix: 'MDR [Hyrax] ',
       sender_address: ENV['NOTIFICATIONS_EMAIL_DEFAULT_FROM_ADDRESS'],
       exception_recipients: [ENV['NOTIFICATIONS_EMAIL_DEFAULT_FROM_ADDRESS']]
     }
