@@ -40,7 +40,7 @@ module HyraxHelper
   end
 
   def total_size_file_sets(ids)
-    @total_size_file_sets ||= file_sets(ids).map { |fs| fs['file_size_lts'] }.inject(:+) || 0
+    @total_size_file_sets ||= file_sets(ids).map { |fs| fs['file_size_lts'] }.compact.inject(:+) || 0
   end
 
   def file_sets(ids)
