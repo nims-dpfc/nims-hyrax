@@ -115,7 +115,7 @@ class DownloadAllController < Hyrax::DownloadsController
   end
 
   def file_name
-    current_user.present? ? "#{asset.id}_user#{current_user.id}" : asset.id.to_s
+    current_user.present? ? "#{asset.id}_user#{current_user.user_identifier.to_s}" : asset.id.to_s
   end
 
   # Override from LocalFileDownloadsControllerBehavior
