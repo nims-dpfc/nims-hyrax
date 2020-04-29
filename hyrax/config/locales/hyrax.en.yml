@@ -236,6 +236,7 @@ en:
     account_name: My Institution Account Id
     directory:
       suffix: "@example.org"
+    download_all: Download All Files (Zip)
     footer:
       copyright_html: "Copyright &copy; National Institute for Materials Science"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
