@@ -131,10 +131,12 @@ module ComplexValidation
     #   Requires first name or last name or name
     resource_class.send(:define_method, :person_blank) do |attributes|
       return true if attributes.blank?
-      first_name_blank = get_val_blank(attributes, :first_name)
-      last_name_blank = get_val_blank(attributes, :last_name)
-      name_blank = get_val_blank(attributes, :name)
-      first_name_blank && last_name_blank && name_blank
+      data_present = []
+      requirements = has_model.first.constantize.requirements_for(:complex_person)
+      requirements[:required].each do |outer_and|
+        data_present << outer_and.map { |inner_if| get_val_blank(attributes, inner_if.intern) }.include?(false)
+      end
+      data_present.include?(false)
     end
     # purchase_record_blank
     #   Requires title and date

@@ -2,6 +2,7 @@ require './lib/vocabularies/escidoc_publication'
 
 class Publication < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include ComplexRequirements
 
   self.indexer = PublicationIndexer
   # Change this to restrict which works can be added as a child.
