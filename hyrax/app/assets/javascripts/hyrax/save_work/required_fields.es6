@@ -11,7 +11,7 @@ export class RequiredFields {
   }
 
   get areComplete() {
-    var missing = this.requiredFields.filter((n, elem) => { return !this.isNeededValuePresent(elem) } )
+    var missing = this.requiredFields.filter((n, elem) => { return this.isRequiredButBlank(elem) } )
     return missing.length === 0
 	}
 	
@@ -33,23 +33,23 @@ export class RequiredFields {
 		$(elem).css('box-shadow','0px 0px 0px 2px red');
   }
 
-	isNeededValuePresent(elem) {
+	isRequiredButBlank(elem) {
     // if the value is filled in, do not check further
-    if($(elem).hasVal()) return true
+    if($(elem).hasVal()) return false
 
-    var present = true
+    var requiredButBlank = false
     if($(elem).data('required')){
       var requirements = $(elem).data('required').split(';')
 
       // Special "any" case
       if(requirements.includes('any')){
         $(elem).parents('.form-group').find(':input').not('[type=hidden], [data-skip=true]').each(function(i) {
-          if($(this).hasVal()) return (present = false)
+          if($(this).hasVal()) return (requiredButBlank = true)
         })
       } else {
         // Go through each requirement
         $.each(requirements, function(i, e) {
-          if($(`input[data-name=${e}]`).hasVal()) return (present = false)
+          if($(`input[data-name=${e}]`).hasVal()) return (requiredButBlank = true)
         })
       }
 
@@ -58,14 +58,14 @@ export class RequiredFields {
       // to match on for block with square brackets
       var label = $(`label[for=${elem.id.replace(/\[|\]/g, '_')}]`)
       // only run css updates if they are needed, as they are expensive
-      if(present && label.hasClass('required')) {
+      if(!requiredButBlank && label.hasClass('required')) {
         this.notRequired(elem, label)
-      } else if( !present && !label.hasClass('required')) {
+      } else if( requiredButBlank && !label.hasClass('required')) {
         this.required(elem, label)
       }
-      return present
+      return requiredButBlank
     } else {
-      return false
+      return true
     }
 	}
 
