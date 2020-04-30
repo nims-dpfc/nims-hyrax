@@ -15,7 +15,7 @@
       <%= render 'show_details' %>
 
       <%= nims_media_display(@presenter, datatable: true) if @presenter.respond_to?(:csv?) && @presenter.csv? %>
-      <%= render 'hyrax/users/activity_log', events: @presenter.events %>
+      <%# render 'hyrax/users/activity_log', events: @presenter.events %>
     </div><!-- /columns second -->
   </div> <!-- /.row -->
 </div><!-- /.container-fluid -->
