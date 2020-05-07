@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :file_set do
     transient do
       user { create(:user) }
-      content { nil }
+      content { File.open('spec/fixtures/csv/example.csv', 'r') }
     end
     after(:build) do |fs, evaluator|
       fs.apply_depositor_metadata evaluator.user.user_key
@@ -34,7 +34,7 @@ FactoryBot.define do
 
     trait :restricted do
       visibility { 'restricted' }
-      title { ["Resstricted File Set"] }
+      title { ["Restricted File Set"] }
     end
   end
 end

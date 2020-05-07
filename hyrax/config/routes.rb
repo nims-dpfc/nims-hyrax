@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :download_all, only: :show
+
   resources :welcome, only: 'index'
   root 'hyrax/homepage#index'
 
