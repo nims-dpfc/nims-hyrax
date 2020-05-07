@@ -27,8 +27,8 @@
         </div>
     <% end %>
   </div>
-  <div class="panel-footer">
-    Your data will not be made public yet! After you push the button, send the URL of the next screen to <a href="mailto:<%= ENV['CONTACT_EMAIL']%>"><%= ENV['CONTACT_EMAIL'] %></a>.
+  <div class="panel-footer label-warning">
+    <strong>&#x26a0; Your data will not be made public yet! After you push the button, send the URL of the next screen to <a href="mailto:<%= ENV['CONTACT_EMAIL']%>"><%= ENV['CONTACT_EMAIL'] %></a>.</strong>
   </div>
   <div class="panel-footer text-center">
     <% if ::Flipflop.show_deposit_agreement? %>
