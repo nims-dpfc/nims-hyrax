@@ -26,6 +26,7 @@ class PublicationIndexer < NgdrIndexer
       fields << Solrizer.solr_name('issue', :stored_searchable)
       fields << Solrizer.solr_name('place', :stored_searchable)
       fields << Solrizer.solr_name('table_of_contents', :stored_searchable)
+      fields << Solrizer.solr_name('doi', :stored_searchable)
       fields.concat ComplexField::DateIndexer.date_search_fields
       fields.concat ComplexField::IdentifierIndexer.identifier_search_fields
       fields.concat ComplexField::PersonIndexer.person_search_fields
