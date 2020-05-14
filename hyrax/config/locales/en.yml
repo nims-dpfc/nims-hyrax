@@ -54,3 +54,7 @@ en:
       sub_organization:         "Sub organization"
       synthesis_and_processing: "Synthesis and processing"
       total_number_of_pages:    "Number of pages"
+  simple_form:
+    hints:
+      defaults:
+        title: A name to aid in identifying a work. English is preferred.
