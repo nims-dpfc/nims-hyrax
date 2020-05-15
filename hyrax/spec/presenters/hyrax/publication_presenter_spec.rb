@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::PublicationPresenter do
-  let(:publication) { create(:publication, :open, :with_alternative_title, :with_description_abstract, :with_supervisor_approval) }
+  let(:publication) { create(:publication, :open, :with_alternative_title, :with_description_abstract, :with_supervisor_approval, depositor: 'depositor') }
   let(:solr_document) { SolrDocument.new(publication.to_solr) }
   let(:host) { double(host: 'http://example.org') }
   let(:user) { nil }
@@ -22,6 +22,7 @@ RSpec.describe Hyrax::PublicationPresenter do
     }
     let(:abstract_regex) { %r(<http://purl.org/dc/elements/1.1/description> "Abstract-Description-123";) }
     let(:supervisor_regex) { %r(<http://www.nims.go.jp/vocabs/ngdr/supervisor-approval> "Professor-Supervisor-Approval";) }
+    let(:depositor_regex) { %r(<http://example.org/concern/publications/#{publication.id}> <http://id.loc.gov/vocabulary/relators/dpt> "depositor") }
 
     it 'exports' do
       export_regex.each do |regex|
@@ -32,12 +33,14 @@ RSpec.describe Hyrax::PublicationPresenter do
     context 'anonymous user' do
       it { is_expected.not_to match(abstract_regex) }
       it { is_expected.not_to match(supervisor_regex) }
+      it { is_expected.not_to match(depositor_regex) }
     end
 
     context 'authenticated user' do
       let(:user) { create(:user, :nims_other) }
       it { is_expected.to match(abstract_regex) }
       it { is_expected.not_to match(supervisor_regex) }
+      it { is_expected.not_to match(depositor_regex) }
     end
   end
 
@@ -55,6 +58,7 @@ RSpec.describe Hyrax::PublicationPresenter do
     }
     let(:abstract_regex) { %r(<http://example.org/concern/publications/#{publication.id}> <http://purl.org/dc/elements/1.1/description> "Abstract-Description-123") }
     let(:supervisor_regex) { %r(<http://example.org/concern/publications/#{publication.id}> <http://www.nims.go.jp/vocabs/ngdr/supervisor-approval> "Professor-Supervisor-Approval") }
+    let(:depositor_regex) { %r(<http://example.org/concern/publications/#{publication.id}> <http://id.loc.gov/vocabulary/relators/dpt> "depositor") }
 
     it 'exports' do
       export_regex.each do |regex|
@@ -65,12 +69,14 @@ RSpec.describe Hyrax::PublicationPresenter do
     context 'anonymous user' do
       it { is_expected.not_to match(abstract_regex) }
       it { is_expected.not_to match(supervisor_regex) }
+      it { is_expected.not_to match(depositor_regex) }
     end
 
     context 'authenticated user' do
       let(:user) { create(:user, :nims_other) }
       it { is_expected.to match(abstract_regex) }
       it { is_expected.not_to match(supervisor_regex) }
+      it { is_expected.not_to match(depositor_regex) }
     end
   end
 
@@ -98,12 +104,14 @@ RSpec.describe Hyrax::PublicationPresenter do
     context 'anonymous user' do
       it { is_expected.not_to include("dc11:description" => "Abstract-Description-123") }
       it { is_expected.not_to include("nimsrdp:supervisor-approval" => "Professor-Supervisor-Approval") }
+      it { is_expected.not_to include("marcrelators:dpt" => "depositor") }
     end
 
     context 'authenticated user' do
       let(:user) { create(:user, :nims_other) }
       it { is_expected.to include("dc11:description" => "Abstract-Description-123") }
       it { is_expected.not_to include("nimsrdp:supervisor-approval" => "Professor-Supervisor-Approval") }
+      it { is_expected.not_to include("marcrelators:dpt" => "depositor") }
     end
   end
 end
