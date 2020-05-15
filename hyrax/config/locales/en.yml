@@ -60,4 +60,4 @@ en:
       defaults:
         title: A name to aid in identifying a work. English is preferred.
         publisher: The person or group making the work available.
-        first_published_url: The DOI of the article related to this dataset or the URL where this dataset was first made public. DOI example: https://doi.org/10.xxxx/xxxxx
+        first_published_url: "The DOI of the article related to this dataset or the URL where this dataset was first made public. DOI example: https://doi.org/10.xxxx/xxxxx"
