@@ -35,7 +35,7 @@ class Ability
   end
 
   def read_metadata
-    can :read_abstract, [::Dataset, ::Image, ::Publication] if current_user.authenticated?
+    can :read_abstract, [::Dataset, ::Image, ::Publication]
     can :read_alternative_title, [::Dataset, ::Image, ::Publication]
     # NB: no users can :read_application_number
     can :read_creator, [::Dataset, ::Image, ::Publication]

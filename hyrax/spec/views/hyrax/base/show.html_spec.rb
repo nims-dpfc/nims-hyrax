@@ -17,8 +17,8 @@ RSpec.describe 'hyrax/base/show' do
     let(:user) { nil }
     it 'does not show the abstract' do
       expect(rendered).to have_css('h2', text: dataset.title.first)
-      expect(rendered).not_to have_css('p.work_description', text: dataset.description.first)
-      expect(rendered).not_to have_css("span.Z3988[title*='rft.description=#{CGI.escape(dataset.description.first)}']")
+      expect(rendered).to have_css('p.work_description', text: dataset.description.first)
+      expect(rendered).to have_css("span.Z3988[title*='rft.description=#{CGI.escape(dataset.description.first)}']")
     end
   end
 
