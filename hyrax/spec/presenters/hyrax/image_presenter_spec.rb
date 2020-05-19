@@ -34,7 +34,7 @@ RSpec.describe Hyrax::ImagePresenter do
 
     context 'authenticated user' do
       let(:user) { create(:user, :nims_other) }
-      it { is_expected.to match(abstract_regex) }
+      it { is_expected.not_to match(abstract_regex) }
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe Hyrax::ImagePresenter do
 
     context 'authenticated user' do
       let(:user) { create(:user, :nims_other) }
-      it { is_expected.to match(abstract_regex) }
+      it { is_expected.not_to match(abstract_regex) }
     end
   end
 
@@ -95,7 +95,7 @@ RSpec.describe Hyrax::ImagePresenter do
 
     context 'authenticated user' do
       let(:user) { create(:user, :nims_other) }
-      it { is_expected.to include("dc11:description" => "Abstract-Description-123") }
+      it { is_expected.not_to include("dc11:description" => "Abstract-Description-123") }
     end
   end
 end
