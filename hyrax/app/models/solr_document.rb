@@ -147,5 +147,9 @@ class SolrDocument
   def status
     self[Solrizer.solr_name('status', :stored_searchable)]
   end
+
+  def doi
+    self[Solrizer.solr_name('doi', :stored_searchable)]
+  end
 end
 
