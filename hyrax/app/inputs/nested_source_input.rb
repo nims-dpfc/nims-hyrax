@@ -45,8 +45,8 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
-    # --- start_page
-    field = :start_page
+    # --- volume
+    field = :volume
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
     field_value = value.send(field).first
@@ -56,24 +56,7 @@ protected
     out << template.label_tag(field_name, field.to_s.humanize, required: false)
     out << '  </div>'
 
-    out << "  <div class='col-md-9'>"
-    out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id, required: false))
-    out << '  </div>'
-    out << '</div>' # row
-
-    # --- end_page
-    field = :end_page
-    field_name = name_for(attribute_name, index, field, parent)
-    field_id = id_for(attribute_name, index, field, parent)
-    field_value = value.send(field).first
-
-    out << "<div class='row'>"
-    out << "  <div class='col-md-3'>"
-    out << template.label_tag(field_name, field.to_s.humanize, required: false)
-    out << '  </div>'
-
-    out << "  <div class='col-md-9'>"
+    out << "  <div class='col-md-6'>"
     out << @builder.text_field(field_name,
         options.merge(value: field_value, name: field_name, id: field_id, required: false))
     out << '  </div>'
@@ -90,7 +73,7 @@ protected
     out << template.label_tag(field_name, field.to_s.humanize, required: false)
     out << '  </div>'
 
-    out << "  <div class='col-md-9'>"
+    out << "  <div class='col-md-6'>"
     out << @builder.text_field(field_name,
         options.merge(value: field_value, name: field_name, id: field_id, required: false))
     out << '  </div>'
@@ -107,14 +90,14 @@ protected
     out << template.label_tag(field_name, field.to_s.humanize, required: false)
     out << '  </div>'
 
-    out << "  <div class='col-md-9'>"
+    out << "  <div class='col-md-6'>"
     out << @builder.text_field(field_name,
         options.merge(value: field_value, name: field_name, id: field_id, required: false))
     out << '  </div>'
     out << '</div>' # row
 
-    # --- total_number_of_pages
-    field = :total_number_of_pages
+    # --- start_page
+    field = :start_page
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
     field_value = value.send(field).first
@@ -124,7 +107,24 @@ protected
     out << template.label_tag(field_name, field.to_s.humanize, required: false)
     out << '  </div>'
 
-    out << "  <div class='col-md-9'>"
+    out << "  <div class='col-md-6'>"
+    out << @builder.text_field(field_name,
+        options.merge(value: field_value, name: field_name, id: field_id, required: false))
+    out << '  </div>'
+    out << '</div>' # row
+
+    # --- end_page
+    field = :end_page
+    field_name = name_for(attribute_name, index, field, parent)
+    field_id = id_for(attribute_name, index, field, parent)
+    field_value = value.send(field).first
+
+    out << "<div class='row'>"
+    out << "  <div class='col-md-3'>"
+    out << template.label_tag(field_name, field.to_s.humanize, required: false)
+    out << '  </div>'
+
+    out << "  <div class='col-md-6'>"
     out << @builder.text_field(field_name,
         options.merge(value: field_value, name: field_name, id: field_id, required: false))
     out << '  </div>'
@@ -133,8 +133,8 @@ protected
     # last row
     out << "<div class='row'>"
 
-    # --- volume
-    field = :volume
+    # --- total_number_of_pages
+    field = :total_number_of_pages
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
     field_value = value.send(field).first
