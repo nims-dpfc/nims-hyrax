@@ -7,8 +7,7 @@ module Hyrax
       :characterization_methods, :computational_methods, :data_origin,
       :complex_instrument, :origin_system_provenance, :properties_addressed,
       :complex_relation, :specimen_set, :complex_specimen_type,
-      :synthesis_and_processing, :custom_property, :first_published_url,
-      to: :solr_document
+      :synthesis_and_processing, :custom_property, to: :solr_document
 
     Hyrax::MemberPresenterFactory.file_presenter_class = Hyrax::NimsFileSetPresenter
   end
