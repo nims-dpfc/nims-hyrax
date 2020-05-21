@@ -4,7 +4,7 @@ json.response do
       json.id document.id
       index_fields(document).each do |field_name, field|
         if should_render_index_field? document, field
-          unless field.name == 'depositor'
+          unless ['description_tesim', 'depositor_ti'].include?(field_name)
             json.set! field_name, document[field_name]
           end
         end

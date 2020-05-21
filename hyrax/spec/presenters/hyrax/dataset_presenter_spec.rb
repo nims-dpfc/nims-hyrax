@@ -38,7 +38,7 @@ RSpec.describe Hyrax::DatasetPresenter do
 
     context 'authenticated user' do
       let(:user) { create(:user, :nims_other) }
-      it { is_expected.to match(abstract_regex) }
+      it { is_expected.not_to match(abstract_regex) }
       it { is_expected.not_to match(supervisor_regex) }
       it { is_expected.not_to match(depositor_regex) }
     end
@@ -74,7 +74,7 @@ RSpec.describe Hyrax::DatasetPresenter do
 
     context 'authenticated user' do
       let(:user) { create(:user, :nims_other) }
-      it { is_expected.to match(abstract_regex) }
+      it { is_expected.not_to match(abstract_regex) }
       it { is_expected.not_to match(supervisor_regex) }
       it { is_expected.not_to match(depositor_regex) }
     end
@@ -109,7 +109,7 @@ RSpec.describe Hyrax::DatasetPresenter do
 
     context 'authenticated user' do
       let(:user) { create(:user, :nims_other) }
-      it { is_expected.to include("dc11:description" => "Abstract-Description-123") }
+      it { is_expected.not_to include("dc11:description" => "Abstract-Description-123") }
       it { is_expected.not_to include("nimsrdp:supervisor-approval" => "Professor-Supervisor-Approval") }
       it { is_expected.not_to include("marcrelators:dpt" => "depositor") }
     end
