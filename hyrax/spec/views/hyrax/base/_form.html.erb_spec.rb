@@ -19,7 +19,7 @@ RSpec.describe 'hyrax/base/_form.html.erb', type: :view do
   describe 'tabs' do
     it 'does not show the relationships tab' do
       render
-      expect(rendered).not_to have_selector('#relationships[role="tabpanel"]')
+      expect(rendered).to have_selector('#relationships[role="tabpanel"]')
       expect(rendered).to have_selector('#metadata[role="tabpanel"]')
       expect(rendered).to have_selector('#files[role="tabpanel"]')
       expect(rendered).to have_selector('#share[data-param-key="publication"]')
