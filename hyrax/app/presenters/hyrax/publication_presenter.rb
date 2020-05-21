@@ -8,5 +8,6 @@ module Hyrax
              to: :solr_document
 
     Hyrax::MemberPresenterFactory.file_presenter_class = Hyrax::NimsFileSetPresenter
+    prepend ::FilteredGraph
   end
 end

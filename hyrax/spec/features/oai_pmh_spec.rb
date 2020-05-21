@@ -7,9 +7,7 @@ RSpec.describe "OAI PMH Support", type: :feature do
 
   before { work }
 
-  scenario 'oai interface with works present' do
-    skip 'Temporarily disable API behaviour, see https://github.com/antleaf/nims-mdr-development/issues/241'
-
+  context 'oai interface with works present' do
     it 'lists metadata prefixess' do
       visit oai_provider_catalog_path(verb: 'ListMetadataFormats')
       expect(page).to have_content('oai_dc')

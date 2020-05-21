@@ -7,5 +7,6 @@ module Hyrax
       :complex_relation, :custom_property, to: :solr_document
 
     Hyrax::MemberPresenterFactory.file_presenter_class = Hyrax::NimsFileSetPresenter
+    prepend ::FilteredGraph
   end
 end

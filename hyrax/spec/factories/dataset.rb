@@ -29,6 +29,10 @@ FactoryBot.define do
       title { ["Restricted Dataset"] }
     end
 
+    trait :with_description_abstract do
+      description { ["Abstract-Description-123"] }
+    end
+
     trait :with_description_seq do
       sequence(:description) { |n| ["Abstract-Description-#{n}"] }
     end
@@ -351,6 +355,10 @@ FactoryBot.define do
           version: '1.0'
         }]
       }
+    end
+
+    trait :with_supervisor_approval do
+      supervisor_approval { ['Professor-Supervisor-Approval'] }
     end
   end
 end

@@ -10,5 +10,6 @@ module Hyrax
       :synthesis_and_processing, :custom_property, :doi, to: :solr_document
 
     Hyrax::MemberPresenterFactory.file_presenter_class = Hyrax::NimsFileSetPresenter
+    prepend ::FilteredGraph
   end
 end
