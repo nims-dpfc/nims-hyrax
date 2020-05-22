@@ -18,7 +18,7 @@ module Hyrax
 
     self.terms += [
       # Adding all fields in order of display in form
-      :supervisor_approval, :first_published_url,
+      :first_published_url, :supervisor_approval,
       :title, :alternative_title, :complex_person, :description, :keyword,
       :publisher, :resource_type, :complex_rights,
       :complex_date, :complex_identifier, :complex_source, :complex_version,
@@ -33,7 +33,7 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :supervisor_approval, :first_published_url, :title, :resource_type,
+      :first_published_url, :supervisor_approval, :title, :resource_type,
       :description, :keyword
     ]
 
