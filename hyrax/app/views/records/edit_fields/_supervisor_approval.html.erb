@@ -1,8 +1,5 @@
 <%= f.input :supervisor_approval,
   required: f.object.required?(key),
   as: :multi_value,
-  hint: raw("Fill in the name of your supervisor and the date of approval. If you have already got approval on the NIMS Research Presentation Management System （発表許可申請システム）, please also fill in the application number （申請番号）.
-  The content (Dataset or Publication) submitted here will be published to the public with yours and your supervisor's consent. See <a href='https://komorido.nims.go.jp/mdr/' target='_blank' rel='noopener'>the User's Manual</a> for details.
-<br />
-e.g. Butsuzai, Taro 2019-09-30 2019A00xxxA"),
+  hint: raw("If you entered a DOI above, enter \"approved\". If you entered a non-DOI URL above, fill in the name of your supervisor and the date of their approval. See <a href='https://komorido.nims.go.jp/mdr/' target='_blank' rel='noopener'>the User's Manual</a> for details."),
   input_html: {class: 'form-control'} %>
