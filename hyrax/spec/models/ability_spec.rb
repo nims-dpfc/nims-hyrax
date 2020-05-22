@@ -75,9 +75,13 @@ RSpec.describe Ability do
     context 'authenticated NIMS Researcher' do
       let(:user) { build(:user, :nims_researcher) }
       it 'can create content' do
-        models.each do |model|
+        [::Dataset, ::Publication].each do |model|
           expect(ability.can?(:create, model)).to be true
         end
+      end
+
+      it 'cannot create Image' do
+        expect(ability.can?(:create, ::Image)).to be false
       end
     end
 

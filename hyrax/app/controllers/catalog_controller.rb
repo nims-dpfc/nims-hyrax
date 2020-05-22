@@ -2,7 +2,6 @@ class CatalogController < ApplicationController
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
   include BlacklightOaiProvider::CatalogControllerBehavior
-  include DisableApiBehavior
 
   # This filter applies the hydra access controls
   before_action :enforce_show_permissions, only: :show
@@ -280,5 +279,16 @@ class CatalogController < ApplicationController
   # this method is not called in that context.
   def render_bookmarks_control?
     false
+  end
+
+  def show
+    @response, @document = fetch params[:id]
+    respond_to do |format|
+      format.html { setup_next_and_previous_documents }
+      format.json do
+        @presenter = Blacklight::JsonPresenter.new(@response, @document, facets_from_request, blacklight_config)
+      end
+      additional_export_formats(@document, format)
+    end
   end
 end

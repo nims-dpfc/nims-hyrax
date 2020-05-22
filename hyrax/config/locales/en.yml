@@ -28,11 +28,11 @@ en:
       complex_structural_feature: "Structural feature"
       complex_version:          "Version"
       data_origin:              "Data origin"
-      first_name:               "First name"
+      first_name:               "Given name"
       instrument:               "Instrument"
       issue:                    "Issue"
       instrument_function:      "Instrument function"
-      last_name:                "Last name"
+      last_name:                "Surname"
       managing_organization:    "Managing organization"
       material_sub_type:        "Material sub type"
       material_type:            "Material type"
@@ -55,3 +55,9 @@ en:
       synthesis_and_processing: "Synthesis and processing"
       total_number_of_pages:    "Number of pages"
       first_published_url:      "First published at"
+  simple_form:
+    hints:
+      defaults:
+        title: A name to aid in identifying a work. English is preferred.
+        publisher: The person or group making the work available.
+        first_published_url: "The DOI of the article related to this dataset or the URL where this dataset was first made public. DOI example: https://doi.org/10.xxxx/xxxxx"
