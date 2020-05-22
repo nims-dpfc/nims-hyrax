@@ -33,7 +33,8 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :supervisor_approval, :first_published_url, :title, :resource_type
+      :supervisor_approval, :first_published_url, :title, :resource_type,
+      :description, :keyword
     ]
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,

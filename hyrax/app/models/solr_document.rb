@@ -28,7 +28,7 @@ class SolrDocument
     contributor: 'complex_person_other_tesim', # @todo - extract anything other than author from complex person, may need new solr field
     creator: 'complex_person_author_tesim',
     date: 'date_tesim',
-    description: 'description_tesim',
+    # description: 'description_tesim', # hide description/abstract field for OAI-PMH feed
     identifier: 'complex_identifier_tesim',
     language: 'language_tesim',
     publisher: 'publisher_tesim',
@@ -39,10 +39,8 @@ class SolrDocument
     type: 'resource_type_tesim'
   )
 
-
-  # Do content negotiation for AF models.
-
-  use_extension( Hydra::ContentNegotiation )
+  # Using custom extension for content negotiation for ActiveFedora models
+  use_extension( ::Hyrax::SolrDocument::ContentNegotiation )
 
   def alternative_title
     self[Solrizer.solr_name('alternative_title', :stored_searchable)]
@@ -146,6 +144,10 @@ class SolrDocument
 
   def status
     self[Solrizer.solr_name('status', :stored_searchable)]
+  end
+
+  def doi
+    self[Solrizer.solr_name('doi', :stored_searchable)]
   end
 end
 

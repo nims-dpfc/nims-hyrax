@@ -57,7 +57,8 @@ class DatasetIndexer < NgdrIndexer
         'properties_addressed',
         'specimen_set',
         'synthesis_and_processing',
-        'first_published_url'
+        'first_published_url',
+        'doi'
       ]
       dataset_search_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :stored_searchable)
