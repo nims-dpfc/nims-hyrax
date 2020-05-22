@@ -101,6 +101,10 @@ class Dataset < ActiveFedora::Base
 
   property :supervisor_approval, predicate: ::RDF::Vocab::NimsRdp['supervisor-approval']
 
+  property :first_published_url, predicate: ::RDF::Vocab::NimsRdp['first_published_url'], multiple: false do |index|
+    index.as :stored_searchable
+  end
+
   property :doi, predicate: ::RDF::Vocab::Identifiers.doi, multiple: false do |index|
     index.as :stored_searchable
   end

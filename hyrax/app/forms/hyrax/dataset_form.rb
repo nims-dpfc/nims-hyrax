@@ -18,7 +18,7 @@ module Hyrax
 
     self.terms += [
       # Adding all fields in order of display in form
-      :supervisor_approval,
+      :first_published_url, :supervisor_approval,
       :title, :alternative_title, :description, :keyword, :language,
       :publisher, :complex_rights, :subject, :complex_date, :complex_person,
       :complex_version, :characterization_methods, :computational_methods,
@@ -37,14 +37,14 @@ module Hyrax
 
     self.required_fields += [
       # # Adding all required fields in order of display in form
-      :supervisor_approval, :title, :data_origin,
+      :first_published_url, :supervisor_approval, :title, :data_origin,
       :description, :keyword
     ]
 
     def metadata_tab_terms
       [
         # Description tab order determined here
-        :supervisor_approval,
+        :first_published_url, :supervisor_approval,
         :title, :alternative_title, :data_origin, :description, :keyword,
         :specimen_set, :complex_person, 
         :complex_identifier, # not using this

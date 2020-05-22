@@ -71,6 +71,10 @@
   <%= presenter.attribute_to_html(:total_number_of_pages, label: "Number of pages", html_dl: true) %>
 <% end %>
 
+<% if can? :read_related, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:first_published_url, label: t('ngdr.fields.first_published_url'), html_dl: true) %>
+<% end %>
+
 <% if can? :read_source, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:source, label: "Source", html_dl: true) %>
   <%= presenter.attribute_to_html(:complex_source, render_as: :nested_source, label: t('ngdr.fields.complex_source'), html_dl: true) %>
