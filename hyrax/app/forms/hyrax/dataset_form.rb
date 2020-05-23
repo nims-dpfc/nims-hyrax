@@ -82,7 +82,7 @@ module Hyrax
        :_destroy,
        {
          job_title: [],
-	       complex_organization_attributes: permitted_organization_params,
+         complex_organization_attributes: permitted_organization_params,
        }
       ]
     end
@@ -186,6 +186,8 @@ module Hyrax
       [:id,
        :_destroy,
        {
+         last_name: [],
+         first_name: [],
          name: [],
          role: [],
          orcid: [],
