@@ -10,7 +10,7 @@ Feature: Datasets catalog index
   Scenario: Unauthenticated user can only view open datasets
     When I navigate to the dataset catalog page
     Then I should see the open datasets
-    And I should see only the public metadata of the open datasets
+    And I should see both the public and restricted metadata of the open datasets
     But I should not see the authenticated datasets
     And I should not see the restricted dataset
 

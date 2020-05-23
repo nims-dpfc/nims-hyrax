@@ -123,7 +123,7 @@ RSpec.describe Ability do
 
       context 'dataset' do
         let(:model) { ::Dataset}
-        it { expect(read_abstract).to be false }
+        it { expect(read_abstract).to be true }
         it { expect(read_alternative_title).to be true }
         it { expect(read_creator).to be true }
         it { expect(read_date).to be true }
@@ -148,7 +148,7 @@ RSpec.describe Ability do
 
       context 'image' do
         let(:model) { ::Image}
-        it { expect(read_abstract).to be false }
+        it { expect(read_abstract).to be true }
         it { expect(read_alternative_title).to be true }
         it { expect(read_creator).to be true }
         it { expect(read_date).to be true }
@@ -173,7 +173,7 @@ RSpec.describe Ability do
 
       context 'publication' do
         let(:model) { ::Publication}
-        it { expect(read_abstract).to be false }
+        it { expect(read_abstract).to be true }
         it { expect(read_alternative_title).to be true }
         it { expect(read_creator).to be true }
         it { expect(read_date).to be true }
