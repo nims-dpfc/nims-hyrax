@@ -86,9 +86,6 @@ services:
         CACHE_PATH: ${CACHE_PATH}
         FITS_PATH: ${FITS_PATH}
         FITS_VERSION: ${FITS_VERSION}
-        AIRBRAKE_HOST: ${AIRBRAKE_HOST}
-        AIRBRAKE_PROJECT_ID: ${AIRBRAKE_PROJECT_ID}
-        AIRBRAKE_PROJECT_KEY: ${AIRBRAKE_PROJECT_KEY}
     env_file:
       - .env
     volumes:
