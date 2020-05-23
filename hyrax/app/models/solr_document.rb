@@ -146,6 +146,10 @@ class SolrDocument
     self[Solrizer.solr_name('status', :stored_searchable)]
   end
 
+  def first_published_url
+    self[Solrizer.solr_name('first_published_url', :stored_searchable)]
+  end
+
   def doi
     self[Solrizer.solr_name('doi', :stored_searchable)]
   end
