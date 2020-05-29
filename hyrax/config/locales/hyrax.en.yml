@@ -238,13 +238,15 @@ en:
       suffix: "@example.org"
     download_all: Download All Files (Zip)
     footer:
-      copyright_html: "Copyright &copy; National Institute for Materials Science"
-      service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
+      copyright_html: "&copy; 2020 National Institute for Materials Science<br>Works are available under licenses specified on their page."
+      service_html: <a href="https://library.nims.go.jp/" target="_blank" rel="noopener">NIMS Digital Library</a>
+      platform_html: <a href="https://dice.nims.go.jp/" target="_blank" rel="noopener">DICE</a>
+      privacy_html: <a href="https://www.nims.go.jp/eng/siteinfo/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
       address_html: National Institute for Materials Science (NIMS) 1-2-1 Sengen, Tsukuba, Ibaraki 305-0047 JAPAN
-    institution_name: Institution
-    institution_name_full: The Institution Name
+    institution_name: NIMS
+    institution_name_full: National Institute for Materials Science
     product_name: MDR
-    product_twitter_handle: "@SamveraRepo"
+    product_twitter_handle: "@nims_library"
     works:
       form:
         tab:
