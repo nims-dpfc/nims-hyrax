@@ -1,3 +1,7 @@
+@import "bootstrap-sprockets";
+@import "bootstrap-default-overrides";
+@import "bootstrap";
+
 //----------- fonts to be used ---------
 @font-face {
   font-family: "Galano Grotesque";
@@ -11,9 +15,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
-//------------ Variables ---------------
-$footer-height: 200px;
 
 //---------- colours to be used --------
 $mdr-grey: #F4F4F4;
@@ -193,10 +194,31 @@ nav.searchbar {
 }
 
 // ------------- footer ----------------
+// Some lines taken from Hyrax's _variables.scss and _footer.scss.
+// Declaring these properties in advance to use a custom footer-height value.
+$footer-top-margin: 3 * $padding-small-vertical;
+$footer-height: 170px;
+
+body {
+  margin-bottom: $footer-height + $footer-top-margin;
+}
+
 .site-footer {
   padding: 20px;
   background-color: $mdr-black;
   color: #fff;
+  position: absolute;
+  bottom: 0;
+  height: $footer-height;
+}
+
+@media (max-width: $screen-sm) {
+  body {
+    margin-bottom: 2 * $footer-height + $footer-top-margin;
+  }
+  .site-footer {
+    height: 2 * $footer-height;
+  }
 }
 
 .site-footer h2 {
