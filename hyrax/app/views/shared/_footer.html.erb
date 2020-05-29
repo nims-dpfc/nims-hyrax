@@ -1,7 +1,12 @@
 <footer class="navbar navbar-inverse site-footer">
   <div class="row">
     <div class="col-sm-6 text-left">
-      <ul class="nav navbar-nav">
+      <h2><%= t('hyrax.institution_name_full') %></h2>
+      <p><%= t('hyrax.division_name_full') %> (<%= t('hyrax.division_name') %>)<br><%= t('hyrax.center_name') %></p>
+      <small><%= t('hyrax.footer.copyright_html') %></small>
+    </div>
+    <div class="col-sm-6 text-right">
+      <ul class="list-unstyled">
         <li>
           <a href="/terms"><%= t('hyrax.pages.tabs.terms_page') %></a>
         </li>
@@ -15,9 +20,6 @@
           <%= t('hyrax.footer.platform_html') %>
         </li>
       </ul>
-    </div>
-    <div class="col-sm-6 text-right">
-      <p><%= t('hyrax.footer.copyright_html') %></p>
     </div>
   </div>
 </footer>
