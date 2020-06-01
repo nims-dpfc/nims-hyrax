@@ -9,26 +9,24 @@ FactoryBot.define do
       title { ["Open Publication"] }
     end
 
-    trait :with_people do
+    trait :with_complex_author do
       complex_person_attributes {
-        [
-          {
-              first_name: ['Foo'],
-              last_name: 'Bar',
-              role: "author"
-          }, {
-              name: 'Big Baz',
-              role: "editor"
-          }, {
-              name: 'Small Buz',
-              role: "author"
-          }, {
-              first_name: ['Moo'],
-              last_name: 'Milk',
-              name: 'Moo Milk',
-              role: "data depositor"
-          }
-        ]
+        [{
+         name: 'Anamika',
+         role: ['author'],
+          complex_identifier_attributes: [{
+             identifier: '123456',
+             scheme: 'identifier local'
+           }],
+         complex_affiliation_attributes: [{
+           job_title: 'Principal Investigator',
+           complex_organization_attributes: [{
+             organization: 'University',
+             sub_organization: 'Department',
+             purpose: 'Research'
+           }]
+         }]
+       }]
       }
     end
 
