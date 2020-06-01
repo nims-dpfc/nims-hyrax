@@ -31,4 +31,8 @@ class ApplicationController < ActionController::Base
     # Trying fix for redirect loop
     stored_path || new_path
   end
+
+  def guest_username_authentication_key(key)
+    "guest_" + guest_user_unique_suffix
+  end
 end
