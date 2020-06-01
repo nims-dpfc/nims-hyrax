@@ -244,6 +244,7 @@ en:
     institution_name: Institution
     institution_name_full: The Institution Name
     product_name: MDR
+    product_name_full: "MDR: NIMS Materials Data Repository"
     product_twitter_handle: "@SamveraRepo"
     works:
       form:
