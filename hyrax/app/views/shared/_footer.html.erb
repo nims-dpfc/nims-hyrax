@@ -1,8 +1,14 @@
 <footer class="site-footer">
   <div class="row">
     <div class="col-sm-9 text-left">
-      <h2><%= t('hyrax.institution_name_full') %></h2>
-      <p><%= t('hyrax.division_name_full') %> (<%= t('hyrax.division_name') %>)<br><%= t('hyrax.center_name_full') %></p>
+      <h2>
+        <a href="https://www.nims.go.jp/eng/" target="_blank" rel="noopener"><%= t('hyrax.institution_name_full') %></a>
+      </h2>
+      <p>
+        <a href="https://www.nims.go.jp/eng/research/MaDIS/" target="_blank" rel="noopener"><%= t('hyrax.division_name_full') %> (<%= t('hyrax.division_name') %>)</a>
+        <br>
+        <a href="https://www.nims.go.jp/eng/research/materials-data-pf/" target="_blank" rel="noopener"><%= t('hyrax.center_name_full') %></a>
+      </p>
       <small><%= t('hyrax.footer.copyright_html') %></small>
     </div>
     <div class="col-sm-3 text-left">
