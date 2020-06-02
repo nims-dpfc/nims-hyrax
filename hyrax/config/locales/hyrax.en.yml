@@ -250,6 +250,7 @@ en:
     division_name: MaDIS
     division_name_full: Research and Services Division of Materials Data and Integrated System 
     product_name: MDR
+    product_name_full: "MDR: NIMS Materials Data Repository"
     product_twitter_handle: "@nims_library"
     works:
       form:

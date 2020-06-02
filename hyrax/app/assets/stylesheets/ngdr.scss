@@ -122,3 +122,20 @@ div#announcement {
 .csv-preview-size {
   text-align: right;
 }
+
+// Hiding Relationships and Sharing tab contents from casual users
+// https://github.com/antleaf/nims-mdr-development/issues/292 
+
+#relationships > .form-tab-content::before {
+  content: "Relationships settings are not available.";
+}
+
+#relationships > .form-tab-content > * {
+  visibility: hidden;
+}
+
+#share > .form-tab-content > p,
+#share > .form-tab-content > h2,
+#share > .form-tab-content > fieldset {
+  display: none;
+}
