@@ -240,7 +240,7 @@ en:
     footer:
       copyright_html: "&copy; 2020 National Institute for Materials Science. Works are available under licenses specified on their pages."
       service_html: <a href="https://library.nims.go.jp/" target="_blank" rel="noopener">NIMS Digital Library</a>
-      platform_html: <a href="https://dice.nims.go.jp/" target="_blank" rel="noopener">DICE</a>
+      platform_html: <a href="https://dice.nims.go.jp/" target="_blank" rel="noopener">Data Platform DICE</a>
       privacy_html: <a href="https://www.nims.go.jp/eng/siteinfo/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
       address_html: National Institute for Materials Science (NIMS) 1-2-1 Sengen, Tsukuba, Ibaraki 305-0047 JAPAN
     institution_name: NIMS
