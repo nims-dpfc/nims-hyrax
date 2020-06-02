@@ -68,15 +68,17 @@ module Hyrax
       end
 
       def setup_pub_source(presenter)
-        return nil unless presenter.complex_source.first
-        source = JSON.parse(presenter.complex_source).first
-
+        return if presenter.complex_source.empty?
+        cs = presenter.complex_source
+        if presenter.complex_source.is_a?(Array)
+          cs = presenter.complex_source.first
+        end
+        source = JSON.parse(cs).first
         pub_source = ''
 
         if source['title'].present?
-          pub_source << '"'
           pub_source << source['title'].first
-          pub_source << '." '
+          pub_source << '. '
         end
 
         if source['volume'].present?
@@ -99,8 +101,12 @@ module Hyrax
       end
 
       def setup_pub_page(presenter)
-        return nil unless presenter.complex_source.first
-        source = JSON.parse(presenter.complex_source).first
+        return if presenter.complex_source.empty?
+        cs = presenter.complex_source
+        if presenter.complex_source.is_a?(Array)
+          cs = presenter.complex_source.first
+        end
+        source = JSON.parse(cs).first
         pub_page = ''
 
         if source['start_page'].present? && source['end_page'].present?
