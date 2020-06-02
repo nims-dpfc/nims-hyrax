@@ -60,4 +60,16 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
   it 'has no singleton methods' do
     expect(subject.singleton_methods).to be_empty
   end
+
+  describe '#setup_pub_source' do
+    let(:publication) { build(:publication, :with_complex_source) }
+    subject { helper.setup_pub_source(presenter) }
+    it { is_expected.to eql('"Test journal." 3, no. 34. 1.2.2.') }
+  end
+
+  describe '#setup_pub_page' do
+    let(:publication) { build(:publication, :with_complex_source) }
+    subject { helper.setup_pub_page(presenter) }
+    it { is_expected.to eql('4-12.') }
+  end
 end
