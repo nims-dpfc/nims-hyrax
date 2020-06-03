@@ -28,13 +28,13 @@ authorizations: &AUTHORIZATIONS
 ## Environment
 
 development:
-  host: localhost
-  port: 389
-  attribute: cn
-  base: ou=people,dc=test,dc=com
-  admin_user: cn=admin,dc=test,dc=com
-  admin_password: admin_password
-  ssl: false
+  host: <%= ENV['LDAP_HOST'] %>
+  port: <%= ENV['LDAP_PORT'] %>
+  attribute: <%= ENV['LDAP_ATTRIBUTE'] %>
+  base: <%= ENV['LDAP_BASE'] %>
+  admin_user: <%= ENV['LDAP_ADMIN_USER'] %>
+  admin_password: <%= ENV['LDAP_ADMIN_PASSWORD'] %>
+  ssl: <%= ENV['LDAP_SSL'] %>
   # <<: *AUTHORIZATIONS
 
 test:

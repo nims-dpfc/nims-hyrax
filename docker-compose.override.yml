@@ -12,6 +12,7 @@ volumes:
   file_uploads:
   derivatives:
   cache:
+  brand:
   fcrepo:
   redis:
 
@@ -32,6 +33,8 @@ services:
       - file_uploads:${UPLOADS_PATH}
       - derivatives:${DERIVATIVES_PATH}
       - cache:${CACHE_PATH}
+      - brand:${BRAND_PATH}
+      - ./hyrax:/data
       - ${HOST_APP_DATA_PATH:-/srv/ngdr/data/}:/data/data
 
   web:
@@ -39,6 +42,12 @@ services:
       - 3000:3000
     depends_on:
       - cas
+    volumes:
+      - file_uploads:${UPLOADS_PATH}
+      - derivatives:${DERIVATIVES_PATH}
+      - cache:${CACHE_PATH}
+      - brand:${BRAND_PATH}
+      - ./hyrax:/data
     environment:
       - RAILS_FORCE_SSL=false
     networks:
