@@ -5,7 +5,7 @@ class ExportsController < Hyrax::DownloadsController
   MAXIMUM_ROWS = 100
 
   def export
-    if file.present? && file != default_file && file.mime_type.present? && file.mime_type =~ /^(?:text|application)\/csv$/i
+    if file.present? && file.mime_type.present? && file.mime_type =~ /^(?:text|application)\/csv$/i
       render json: csv_as_datatable
     else
       render :json => { error: 'Unknown or unsupported file type' }, :status => :bad_request
