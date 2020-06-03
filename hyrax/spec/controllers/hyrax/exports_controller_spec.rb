@@ -10,7 +10,7 @@ RSpec.describe ExportsController do
     let(:json) { JSON.parse(response.body) }
 
     context 'no file' do
-      let(:file_set) { create(:file_set, :open) }
+      let(:file_set) { create(:file_set, :open, content: nil) }
       it 'should return an error' do
         expect(status).to eql(400)
         expect(json['error']).to eql('Unknown or unsupported file type')
