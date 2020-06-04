@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    <%= name || "RO Crate" %>
+  </title>
+  <script type="application/ld+json"><%= metadata.generate %></script>
+  <meta name="generator" content="https://github.com/fbacall/ro-crate-ruby">
+  <meta name="keywords" content="RO Crate">
+  <style>
+    html,body,h1,h2,h3,h4,h5,h6 {font-family: sans-serif;}
+  </style>
+</head>
+<body>
+<h1>
+  <%= name || "RO Crate" %>
+</h1>
+
+<%if url.present? %>
+<p>
+  <a href="<%= url %>" target="_blank"><%= url %></a>
+</p>
+<%end %>
+<p>
+  <%= description %>
+</p>
+<dl>
+  <%if author.present? %>
+    <dt>
+      Creator(s)
+    </dt>
+    <dd>
+      <%= author %>
+    </dd>
+  <%end %>
+  <%if publisher.present? %>
+    <dt>
+      Publisher
+    </dt>
+    <dd>
+      <%= publisher %>
+    </dd>
+  <%end %>
+  <%if license.present? %>
+    <dt>
+      License
+    </dt>
+    <dd>
+      <%= license %>
+    </dd>
+  <%end %>
+</dl>
+<h2>
+  Contents
+</h2>
+<ul>
+  <% data_entities.each do |data_entity| %>
+    <li id="__data_entity_<%= data_entity.id.gsub(/\s/, '-') %>">
+      <strong><a href="<%= data_entity.id %>"><%= data_entity.name || data_entity.id %></a></strong>
+      <% if data_entity.content_size %>
+        <br/>Size: <%= data_entity.content_size %>
+      <% end %>
+      <% if data_entity.encoding_format %>
+        <br/>Format: <%= data_entity.encoding_format %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<hr />
+<div style="text-align: right">
+  <img src="nims_logo.png" title="National Institute for Materials Science" alt="NIMS logo" />
+</div>
+</body>
+</html>
