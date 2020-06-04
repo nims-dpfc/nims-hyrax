@@ -234,6 +234,9 @@ en:
           title_tesim: Title
   hyrax:
     account_name: My Institution Account Id
+    base:
+      citations:
+        header: 'Export:'
     directory:
       suffix: "@example.org"
     download_all: Download All Files (Zip)

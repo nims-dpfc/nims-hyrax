@@ -42,15 +42,17 @@ module Hyrax
           '%I' => [:publisher],
           '%J' => [:series_title],
           '%@' => [:isbn],
-          '%U' => [:related_url],
+          '%U' => [:persistent_url],
           '%7' => [:edition_statement],
-          '%R' => [:persistent_url],
+          '%R' => [:doi],
+          '%(' => [:first_published_url],
           '%X' => [:description],
           '%G' => [:language],
           '%[' => [:date_modified],
           '%9' => [:resource_type],
-          '%~' => I18n.t('hyrax.product_name'),
-          '%W' => Institution.name
+          '%K' => [:keyword],
+          '%~' => I18n.t('hyrax.product_name_full'),
+          '%W' => Institution.name_full
         }
       end
     end
