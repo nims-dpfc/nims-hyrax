@@ -11,6 +11,8 @@ RSpec.describe ::User do
   describe '#ldap_before_save' do
     before do
       allow(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.username, 'mail') { ['email@example.com'] }
+      allow(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.username, 'cn') { ['Example user'] }
+      allow(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.username, 'employeeType') { ['A'] }
       allow(Devise).to receive(:friendly_token) { 'password' }
       user.ldap_before_save
     end
