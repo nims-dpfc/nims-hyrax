@@ -10,11 +10,23 @@ RSpec.describe 'hyrax/datasets/_form.html.erb', type: :view do
   let(:form) do
     Hyrax::DatasetForm.new(work, ability, controller)
   end
+  let(:options_presenter) { double(select_options: []) }
 
   before do
     view.lookup_context.prefixes += ['hyrax/base']
+    allow(Hyrax::AdminSetOptionsPresenter).to receive(:new).and_return(options_presenter)
+    stub_template('hyrax/base/_form_progress.html.erb' => 'Progress')
+    # TODO: stub_model is not stubbing new_record? correctly on ActiveFedora models.
+    allow(work).to receive(:new_record?).and_return(true)
+    allow(work).to receive(:member_ids).and_return([1, 2])
     allow(controller).to receive(:current_user).and_return(user)
     assign(:form, form)
+    allow(controller).to receive(:controller_name).and_return('batch_uploads')
+    allow(controller).to receive(:action_name).and_return('new')
+
+    allow(form).to receive(:permissions).and_return([])
+    allow(form).to receive(:visibility).and_return('public')
+    stub_template 'hyrax/base/_form_files.html.erb' => 'files'
   end
 
   describe 'tabs' do
