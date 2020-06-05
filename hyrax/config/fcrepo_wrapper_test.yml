@@ -1,4 +1,4 @@
-port: 8986
+port: 8080
 verbose: false
 version: '4.7.3' # NB: ideally this should match the version in docker-compose.yml
 instance_dir: 'tmp/fcrepo4-test'
