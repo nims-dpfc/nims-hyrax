@@ -234,6 +234,13 @@ en:
           title_tesim: Title
   hyrax:
     account_name: My Institution Account Id
+    base:
+      citations:
+        citations: Citations
+        endnote: EndNote
+        header: 'Export:'
+        mendeley: Mendeley
+        zotero: Zotero
     directory:
       suffix: "@example.org"
     download_all: Download All Files (Zip)
