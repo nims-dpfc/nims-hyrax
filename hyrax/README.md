@@ -8,6 +8,7 @@ The application contains
 Requires:
 * redis
 * Ruby 2.3 - 2.5
+* fits
 
 ### Set up ruby with `rbenv`
 1. Install `rbenv` on your system per the [installation instructions](https://github.com/rbenv/rbenv#installation)
@@ -19,6 +20,17 @@ Requires:
     ```
     RBENV_VERSION=2.5.3 gem install bundler
     ```
+
+### Characterization
+(copied with edits from https://github.com/samvera/hyrax/blob/master/README.md#characterization)
+FITS can be installed on OSX using Homebrew by running the command: `brew install fits`
+
+**OR**
+
+1. Go to http://projects.iq.harvard.edu/fits/downloads and download a copy of FITS (see above to pick a known working version) & unpack it somewhere on your machine.
+1. Mark fits.sh as executable: `chmod a+x fits.sh`
+1. Run `fits.sh -h` from the command line and see a help message to ensure FITS is properly installed
+1. Set FITS_PATH in your .env to the installed fits.sh location
 
 ### Steps to install the application 
 1.  Clone this project
