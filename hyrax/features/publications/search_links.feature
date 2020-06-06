@@ -16,6 +16,6 @@ Feature: Search links on a publication
     Given I am on the publication page
     Then I should see the following links to publications:
       | LABEL                      | HREF                                                                                  |
-      | Anamika                    | /catalog?f%5Bcomplex_person_sim%5D%5B%5D=Anamika                                      |
+      | Foo Bar                    | /catalog?f%5Bcomplex_person_sim%5D%5B%5D=Foo+Bar                                      |
       | University                 | /catalog?f%5Bcomplex_person_organization_sim%5D%5B%5D=University                      |
       | Test journal               | /catalog?f%5Bcomplex_source_title_sim%5D%5B%5D=Test+journal                           |
