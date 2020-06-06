@@ -74,6 +74,8 @@ module Hyrax
           cs = presenter.complex_source.first
         end
         source = JSON.parse(cs).first
+        return if source.blank?
+
         pub_source = ''
 
         if source['title'].present?
