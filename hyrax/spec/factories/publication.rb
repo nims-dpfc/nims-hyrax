@@ -12,21 +12,35 @@ FactoryBot.define do
     trait :with_complex_author do
       complex_person_attributes {
         [{
-         name: 'Anamika',
-         role: ['author'],
+          name: ['Foo Bar'],
+          role: ['author'],
+          orcid: ['https://orcid.example.org/0000-1111-2222-3333'],
+          organization: ['National Institute for Materials Science'],
+          sub_organization: ['MaDIS DPFC'],
           complex_identifier_attributes: [{
-             identifier: '123456',
-             scheme: 'identifier local'
-           }],
-         complex_affiliation_attributes: [{
-           job_title: 'Principal Investigator',
-           complex_organization_attributes: [{
-             organization: 'University',
-             sub_organization: 'Department',
-             purpose: 'Research'
-           }]
-         }]
-       }]
+            identifier: '123456',
+            scheme: 'identifier local'
+          }],
+          complex_affiliation_attributes: [{
+            job_title: 'Principal Investigator',
+            complex_organization_attributes: [{
+              organization: 'University',
+              sub_organization: 'Department',
+              purpose: 'Research'
+            }]
+          }
+        ]}, {
+          name: ['Big Buz'],
+          role: ['editor'],
+        }, {
+          name: ['Small Buz'],
+          role: ['author'],
+        }, {
+          first_name: ['Moo'],
+          last_name: ['Milk'],
+          name: ['Moo Milk'],
+          role: ['data depositor']
+        }]
       }
     end
 
