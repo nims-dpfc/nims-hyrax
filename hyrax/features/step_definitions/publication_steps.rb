@@ -1,6 +1,6 @@
 Given(/^there (?:are|is) (\d+) (open|authenticated|embargo|lease|restricted) publications?$/) do |number, access|
   @publications ||= {}
-  @publications[access] = FactoryBot.create_list(:publication, number, access.to_sym, :with_source).each do |obj|
+  @publications[access] = FactoryBot.create_list(:publication, number, access.to_sym, :with_source, :with_complex_author).each do |obj|
     ActiveFedora::SolrService.add(obj.to_solr)
   end
   ActiveFedora::SolrService.commit
