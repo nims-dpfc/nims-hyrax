@@ -2,7 +2,7 @@
 <ul>
   <% @presenter.depositors.each do |usr| %>
     <li>
-      <%= link_to_profile(usr.name) %>
+      <%= link_to_profile(usr[:user]) %>
       deposited <%= pluralize(usr[:deposits], "file") %>
     </li>
   <% end %>
