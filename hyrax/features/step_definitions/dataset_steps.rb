@@ -125,7 +125,7 @@ Then(/^I should see both the public and restricted metadata of the (open|authent
   end
 end
 
-Then(/^I should see the following links:$/) do |table|
+Then(/^I should see the following links to datasets:$/) do |table|
   table.symbolic_hashes.each do |row|
     expect(page).to have_link(row[:label], href: Regexp.new(Regexp.quote(row[:href])))
   end
