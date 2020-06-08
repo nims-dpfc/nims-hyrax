@@ -9,7 +9,7 @@
 <ul>
   <% @presenter.recent_users.each do |usr| %>
     <li>
-      <%= link_to_profile(usr.name) %>
+      <%= link_to_profile(usr) %>
       <%- if usr.department %>
         of <%= usr.department %>
       <%- end %>
