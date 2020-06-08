@@ -2,6 +2,11 @@
 
 [Nims-Hyrax](https://github.com/antleaf/nims-hyrax/) is an implementation of the Hyrax stack by [Cottage Labs](http://cottagelabs.com/) and [AntLeaf](http://antleaf.com/). It is built with Docker containers, which simplify development and deployment onto live services.
 
+## Code Status
+
+[![Codeship Status for antleaf/nims-hyrax](https://app.codeship.com/projects/d4cc8560-e430-0136-fffd-6a7889452552/status?branch=develop)](https://app.codeship.com/projects/319029)
+
+[![Coverage Status](https://coveralls.io/repos/github/antleaf/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/antleaf/nims-hyrax?branch=develop)
 
 ## Getting Started
 
@@ -269,9 +274,3 @@ There is [docker documentation](https://docs.docker.com/storage/volumes/#backup-
 * As mentioned above, there is a `.env` file containing application secrets. This **must not** be checked into version control!
 * The system is configured on start-up using the `docker-entrypoint.sh` script, which configures users in the `seed/setup.json` file.
 * Importers are run manually in the container using the rails console. See [The project wiki](https://github.com/antleaf/nims-hyrax/wiki) for more information.
-
-## Code Status
-
-[![Codeship Status for antleaf/nims-hyrax](https://app.codeship.com/projects/d4cc8560-e430-0136-fffd-6a7889452552/status?branch=develop)](https://app.codeship.com/projects/319029)
-
-[![Coverage Status](https://coveralls.io/repos/github/antleaf/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/antleaf/nims-hyrax?branch=develop)
