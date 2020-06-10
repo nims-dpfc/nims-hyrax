@@ -70,4 +70,31 @@ RSpec.describe 'hyrax/citations/work' do
       end
     end
   end
+
+  context 'dataset without creators' do
+    let(:dataset) { build(:dataset, :open) }
+    let(:ability) { double }
+    let(:presenter) { Hyrax::DatasetPresenter.new(SolrDocument.new(dataset.to_solr), Ability.new(user), controller.request) }
+
+    before do
+      allow(controller).to receive(:current_user).and_return(user)
+      login_as user if user.present?
+      assign(:presenter, presenter)
+      render
+    end
+
+    context 'unauthenticated user' do
+      let(:user) { nil }
+      it 'shows the correct metadata' do
+        expect(rendered).to have_content("\"Open Dataset\".\n\n():")
+      end
+    end
+
+    context 'authenticated NIMS Researcher' do
+      let(:user) { create(:user, :nims_researcher) }
+      it 'shows the correct metadata' do
+        expect(rendered).to have_content("\"Open Dataset\".\n\n():")
+      end
+    end
+  end
 end
