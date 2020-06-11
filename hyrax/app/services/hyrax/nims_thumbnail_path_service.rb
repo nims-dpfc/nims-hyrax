@@ -1,5 +1,3 @@
-#require_dependency Rails.root.join('app/services/hyrax/work_thumbnail_path_service')
-
 module Hyrax
   module NimsThumbnailPathService
     def default_image
@@ -19,5 +17,3 @@ class Hyrax::WorkThumbnailPathService
     prepend Hyrax::NimsThumbnailPathService
   end
 end
-
-#Hyrax::ThumbnailPathService.singleton_class.prepend Hyrax::NimsThumbnailPathService
