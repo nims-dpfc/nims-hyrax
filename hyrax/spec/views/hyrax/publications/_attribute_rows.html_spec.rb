@@ -27,7 +27,7 @@ RSpec.describe 'hyrax/publications/_attribute_rows' do
       expect(rendered).to have_content('Faroese')
       expect(rendered).to have_content('Keyword-123')
       expect(rendered).to have_content('Resource-Type-123')
-      expect(rendered).to have_content('Rights-Statement-123')
+      #expect(rendered).to have_content('Rights-Statement-123')
       expect(rendered).to have_content('28/05/2019') # NB: complex date is reformatted to dd/mm/yyyy
       expect(rendered).to have_content('10.0.1111')
       expect(rendered).to have_content('Foo Bar')
@@ -54,7 +54,7 @@ RSpec.describe 'hyrax/publications/_attribute_rows' do
       expect(rendered).to have_content('Faroese')
       expect(rendered).to have_content('Keyword-123')
       expect(rendered).to have_content('Resource-Type-123')
-      expect(rendered).to have_content('Rights-Statement-123')
+      #expect(rendered).to have_content('Rights-Statement-123')
       expect(rendered).to have_content('28/05/2019') # NB: complex date is reformatted to dd/mm/yyyy
       expect(rendered).to have_content('10.0.1111')
       expect(rendered).to have_content('Foo Bar')
