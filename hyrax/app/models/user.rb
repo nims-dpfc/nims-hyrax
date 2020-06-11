@@ -45,6 +45,6 @@ class User < ApplicationRecord
   end
 
   def self.from_url_component(component)
-    User.find_by(user_identifier: component) || User.find_by_user_key(component.gsub(/-dot-/, '.'))
+    User.find_by(user_identifier: component)
   end
 end

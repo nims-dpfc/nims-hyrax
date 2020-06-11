@@ -68,6 +68,7 @@ module Hyrax
       end
 
       def setup_pub_source(presenter)
+        return unless presenter.respond_to?(:complex_source)
         return if presenter.complex_source.empty?
         cs = presenter.complex_source
         if presenter.complex_source.is_a?(Array)
