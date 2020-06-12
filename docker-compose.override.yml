@@ -4,7 +4,6 @@
 # - No nginx in front of the app
 # - app accessible on port 3000
 
-# todo: nginx to serve static files
 
 version: '3'
 
