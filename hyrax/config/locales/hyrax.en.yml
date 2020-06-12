@@ -6,20 +6,34 @@ en:
         facet:
           based_near_label_sim: Location
           creator_sim: Creator
+          characterization_methods_sim: Characterization methods
           complex_date_dtsim: Date
           complex_date_accepted_dtsim: Date accepted
+          complex_year_accepted_sim: Date accepted
           complex_date_available_dtsim: Date available
+          complex_year_available_sim: Date available
           complex_date_copyrighted_dtsim: Date copyrighted
+          complex_year_copyrighted_sim: Date copyrighted
           complex_date_collected_dtsim: Date collected
+          complex_year_collected_sim: Date collected
           complex_date_created_dtsim: Date created
+          complex_year_created_sim: Date created
           complex_date_issued_dtsim: Date issued
+          complex_year_issued_sim: Date issued
           complex_date_published_dtsim: Date published
+          complex_year_published_sim: Date published
           complex_date_submitted_dtsim: Date submitted
+          complex_year_submitted_sim: Date submitted
           complex_date_updated_dtsim: Date updated
+          complex_year_updated_sim: Date updated
           complex_date_valid_dtsim: Date valid
+          complex_year_valid_sim: Date valid
           complex_date_processed_dtsim: Date processed
+          complex_year_processed_sim: Date processed
           complex_date_purchased_dtsim: Date purchased
+          complex_year_purchased_sim: Date purchased
           complex_date_other_dtsim: Date
+          complex_year_other_sim: Date
           complex_event_sim: Event
           complex_material_sub_type_sim: Material sub type
           complex_material_type_sim: Material type
@@ -96,10 +110,12 @@ en:
           complex_identifier_orcid_ssim: Orcid
           complex_identifier_local_id_ssim: Local identifier
           complex_person_other_tesim: Creator
-          complex_person_author_tesim: Author
+          # use Creator for label in search results - see i131  (was Author)
+          complex_person_author_tesim: Creator
           complex_person_editor_tesim: Editor
           complex_person_translator_tesim: Translator
-          complex_person_data_depositor_tesim: Data depositor
+          # use Creator for label - see i131 (was Data depositor)
+          complex_person_data_depositor_tesim: Creator
           complex_person_data_curator_tesim: Data curator
           complex_person_operator_tesim: Operator
           complex_person_organization_tesim: Organization
@@ -114,6 +130,7 @@ en:
           complex_relation_title_tesim: Title of related item
           complex_shape_tesim: Shape
           complex_shape_identifier_ssim: Shape identifier
+          complex_source_title_tesim: Journal
           complex_specimen_type_tesim: Specimen type
           complex_specimen_type_description_tesim: Specimen description
           complex_specimen_type_identifier_ssim: Specimen identifier
@@ -210,23 +227,38 @@ en:
           properties_addressed_tesim: Properties processed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
-          specimen_set_tesim: Specimen
+          specimen_type_tesim: Specimen
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
           table_of_contents_tesim: Table of contents
           title_tesim: Title
   hyrax:
     account_name: My Institution Account Id
+    base:
+      citations:
+        citations: Citations
+        endnote: EndNote
+        header: 'Export:'
+        mendeley: Mendeley
+        zotero: Zotero
     directory:
       suffix: "@example.org"
+    download_all: Download All Files (Zip)
     footer:
-      copyright_html: "Copyright &copy; National Institute for Materials Science"
-      service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
+      copyright_html: "&copy; 2020 National Institute for Materials Science. Works are available under licenses specified on their pages."
+      service_html: <a href="https://library.nims.go.jp/" target="_blank" rel="noopener">NIMS Digital Library</a>
+      platform_html: <a href="https://dice.nims.go.jp/" target="_blank" rel="noopener">Data Platform DICE</a>
+      privacy_html: <a href="https://www.nims.go.jp/eng/siteinfo/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
       address_html: National Institute for Materials Science (NIMS) 1-2-1 Sengen, Tsukuba, Ibaraki 305-0047 JAPAN
-    institution_name: Institution
-    institution_name_full: The Institution Name
+    institution_name: NIMS
+    institution_name_full: National Institute for Materials Science
+    center_name: DPFC
+    center_name_full: Materials Data Platform Center
+    division_name: MaDIS
+    division_name_full: Research and Services Division of Materials Data and Integrated System 
     product_name: MDR
-    product_twitter_handle: "@SamveraRepo"
+    product_name_full: "MDR: NIMS Materials Data Repository"
+    product_twitter_handle: "@nims_library"
     works:
       form:
         tab:

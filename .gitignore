@@ -351,3 +351,4 @@ $RECYCLE.BIN/
 .env
 /hyrax/.fedora-test.pid
 /hyrax/.solr-test.pid
+cas/.mvn/jvm.config

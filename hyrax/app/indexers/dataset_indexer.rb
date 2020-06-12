@@ -27,7 +27,8 @@ class DatasetIndexer < NgdrIndexer
         'computational_methods',
         'data_origin',
         'properties_addressed',
-        'synthesis_and_processing'
+        'synthesis_and_processing',
+        'characterization_methods'
       ]
       dataset_facet_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :facetable)
@@ -56,6 +57,8 @@ class DatasetIndexer < NgdrIndexer
         'properties_addressed',
         'specimen_set',
         'synthesis_and_processing',
+        'first_published_url',
+        'doi'
       ]
       dataset_search_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :stored_searchable)

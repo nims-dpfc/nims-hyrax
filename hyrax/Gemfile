@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.6'
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.12'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -27,6 +27,9 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
+# Using redis to store sessions in the redis cache (rather than cookies) - this is to support single sign out
+# NB: Once we upgrade to rails >= 5.2 the gem can probably be removed as redis sessions are built in
+gem 'redis-session-store', '~> 0.11.1'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -71,15 +74,23 @@ gem 'sidekiq'
 gem 'hydra-role-management'
 gem 'bootstrap-datepicker-rails'
 gem 'pg'
+gem 'faraday_middleware'
 gem 'devise_ldap_authenticatable'
+gem 'devise_cas_authenticatable'
+
+gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > hydra-editor
 
 gem 'riiif', '~> 2.0'
 
+gem 'ro-crate-ruby', git: 'https://github.com/fbacall/ro-crate-ruby'
+
 group :production do
-  gem 'airbrake', '~> 5.0'
+  gem 'exception_notification', '~> 4.4'
+  gem 'exception_notification-rake', '~> 0.3.1'
 end
 
 gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'feature/prep_for_new_release'
+gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_oai_provider.git', branch: 'master'
 
 group :test do
   gem 'simplecov', require: false

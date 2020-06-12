@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 class SolrDocument
   include Blacklight::Solr::Document
+  include BlacklightOaiProvider::SolrDocumentBehavior
   include Blacklight::Gallery::OpenseadragonSolrDocument
 
   # Adds Hyrax behaviors to the SolrDocument.
@@ -22,9 +23,24 @@ class SolrDocument
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
 
-  # Do content negotiation for AF models.
+  # Add field_semantics for oai_dc
+  field_semantics.merge!(
+    contributor: 'complex_person_other_tesim', # @todo - extract anything other than author from complex person, may need new solr field
+    creator: 'complex_person_author_tesim',
+    date: 'date_tesim',
+    # description: 'description_tesim', # hide description/abstract field for OAI-PMH feed
+    identifier: 'complex_identifier_tesim',
+    language: 'language_tesim',
+    publisher: 'publisher_tesim',
+    relation: '', # @todo have a think about what to map here
+    rights: 'rights_tesim',
+    subject: 'subject_tesim',
+    title: 'title_tesim',
+    type: 'resource_type_tesim'
+  )
 
-  use_extension( Hydra::ContentNegotiation )
+  # Using custom extension for content negotiation for ActiveFedora models
+  use_extension( ::Hyrax::SolrDocument::ContentNegotiation )
 
   def alternative_title
     self[Solrizer.solr_name('alternative_title', :stored_searchable)]
@@ -128,6 +144,14 @@ class SolrDocument
 
   def status
     self[Solrizer.solr_name('status', :stored_searchable)]
+  end
+
+  def first_published_url
+    self[Solrizer.solr_name('first_published_url', :stored_searchable)]
+  end
+
+  def doi
+    self[Solrizer.solr_name('doi', :stored_searchable)]
   end
 end
 

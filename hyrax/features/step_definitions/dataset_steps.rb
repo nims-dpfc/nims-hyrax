@@ -1,13 +1,23 @@
 Given(/^there (?:are|is) (\d+) (open|authenticated|embargo|lease|restricted) datasets?$/) do |number, access|
   @datasets ||= {}
-  @datasets[access] = FactoryBot.create_list(:dataset, number, access.to_sym).each do |obj|
+  @datasets[access] = FactoryBot.create_list(:dataset, number, access.to_sym, :with_description_seq, :with_keyword_seq, :with_subject_seq).each do |obj|
     ActiveFedora::SolrService.add(obj.to_solr)
   end
   ActiveFedora::SolrService.commit
 end
 
+Given(/^there is a dataset with:$/) do |table|
+  @dataset = FactoryBot.create(:dataset, *table.rows.flatten.map(&:to_sym))
+  ActiveFedora::SolrService.add(@dataset.to_solr)
+  ActiveFedora::SolrService.commit
+end
+
+Given(/^I am on the dataset page$/) do
+  visit hyrax_dataset_path(@dataset)
+end
+
 When(/^I navigate to the new dataset page$/) do
-  visit '/dashboard'
+  visit hyrax.dashboard_path  # /dashboard
   click_link "Works"
   click_link "Add new work"
 
@@ -16,6 +26,10 @@ When(/^I navigate to the new dataset page$/) do
   click_button "Create work"
 
   # small hack to skip to create dataset page without requiring javascript
+  visit new_hyrax_dataset_path
+end
+
+When /^I try to navigate to the new dataset page$/ do
   visit new_hyrax_dataset_path
 end
 
@@ -61,9 +75,7 @@ end
 
 Then(/^I should see the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
   # first, verify @datasets is present and has some data
-  expect(@datasets).to be_present
   expect(@datasets[access]).to be_present
-  expect(@datasets[access].length).to_not be_zero
 
   # next, verify there is a link to each dataset (using a regular expression to allow for the locale parameter)
   @datasets[access].each do |dataset|
@@ -73,12 +85,48 @@ end
 
 Then(/^I should not see the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
   # first, verify @datasets is present and has some data
-  expect(@datasets).to be_present
   expect(@datasets[access]).to be_present
-  expect(@datasets[access].length).to_not be_zero
 
   # next, verify there is a link to each dataset (using a regular expression to allow for the locale parameter)
   @datasets[access].each do |dataset|
     expect(page).to_not have_link(dataset.title.first, href: Regexp.new(hyrax_dataset_path(dataset)))
+  end
+end
+
+Then(/^I should see only the public metadata of the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
+  # first, verify @datasets is present and has some data
+  expect(@datasets[access]).to be_present
+
+  @datasets[access].each do |dataset|
+    # check public metadata is visible
+    [:subject, :keyword].each do |field|
+      expect(page).to have_css('div.metadata dl dt', text: Regexp.new(field.to_s, Regexp::IGNORECASE))
+      expect(page).to have_css('div.metadata dl dd', text: dataset.send(field).first)
+    end
+
+    # check restricted metadata is not visible
+    [:description].each do |field|
+      expect(page).not_to have_css('div.metadata dl dt', text: Regexp.new(field.to_s, Regexp::IGNORECASE))
+      expect(page).not_to have_css('div.metadata dl dd', text: dataset.send(field).first)
+    end
+  end
+end
+
+Then(/^I should see both the public and restricted metadata of the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
+  # first, verify @datasets is present and has some data
+  expect(@datasets[access]).to be_present
+
+  @datasets[access].each do |dataset|
+    # check public and restricted metadata is visible
+    [:description, :subject, :keyword].each do |field|
+      expect(page).to have_css('div.metadata dl dt', text: Regexp.new(field.to_s, Regexp::IGNORECASE))
+      expect(page).to have_css('div.metadata dl dd', text: dataset.send(field).first)
+    end
+  end
+end
+
+Then(/^I should see the following links to datasets:$/) do |table|
+  table.symbolic_hashes.each do |row|
+    expect(page).to have_link(row[:label], href: Regexp.new(Regexp.quote(row[:href])))
   end
 end

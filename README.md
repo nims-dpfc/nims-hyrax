@@ -2,6 +2,11 @@
 
 [Nims-Hyrax](https://github.com/antleaf/nims-hyrax/) is an implementation of the Hyrax stack by [Cottage Labs](http://cottagelabs.com/) and [AntLeaf](http://antleaf.com/). It is built with Docker containers, which simplify development and deployment onto live services.
 
+## Code Status
+
+[![Codeship Status for antleaf/nims-hyrax](https://app.codeship.com/projects/d4cc8560-e430-0136-fffd-6a7889452552/status?branch=develop)](https://app.codeship.com/projects/319029)
+
+[![Coverage Status](https://coveralls.io/repos/github/antleaf/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/antleaf/nims-hyrax?branch=develop)
 
 ## Getting Started
 
@@ -212,6 +217,54 @@ $ curl -L https://github.com/docker/compose/releases/download/[INSERT_DESIRED_DO
 4. Open a console and try running `docker -h` and `docker-compose -h` to verify they are both accessible.
 
 
+### Using a local Docker-based CAS server for Single Sign-On and Single Sign-Off
+
+If you would like to use a local Docker-based CAS server for single sign-on and sign off, a little more configuration is 
+required. Note that these steps are optional: you could use database authentication or LDAP authentication, or a remote 
+CAS server instead.
+
+1. In your system's `/etc/hosts` file, add the following two entries which will redirect the specified hostnames to localhost:
+
+    ```
+    127.0.0.1       mdr.nims.test
+    127.0.0.1       cas.mdr.nims.test
+    ``` 
+
+2. In your `.env` file, set the following variables:
+
+    ```
+    MDR_DEVISE_AUTH_MODULE=cas_authenticatable
+    CAS_BASE_URL=https://cas.mdr.nims.test:8443/cas/
+    ```
+
+3. Now build and run the `web` and `cas` containers:
+
+    ```bash
+    docker-compose build web cas
+    docker-compose up web cas
+    ```
+
+4. Open a browser and goto the MDR website: http://mdr.nims.test:3000/
+    Click on Login and you should be directed to https://cas.mdr.nims.test:8443/cas/
+
+    At this point your web browser will likely complain that the SSL certificate is invalid / untrusted. Grant the 
+    certificate `cas.mdr.nims.test` full trust:
+ 
+    * In Chrome, view the certificate and export it (or drag it) to your desktop
+    * Next, double-click on the certificate file (`cas.mdr.nims.test.cer`) and mark it as Always Trust (see: https://support.apple.com/en-gb/guide/keychain-access/kyca11871/mac)
+    * Check that reloading https://cas.mdr.nims.test:8443/cas/ should now present the valid CAS website without any certificate warnings or other errors
+
+5. To test single sign-on, open a browser window and go to to the MDR website: http://mdr.nims.test:3000/
+    
+    * Click on "login" and you will be redirected to the CAS website. 
+    * Log in as `user1` / `password`.
+    * After completing the login on the CAS website you will be redirected back to the MDR website and now logged in as `user1`
+    
+6. To test single sign-off, after logging in as `user1` on MDR (see previous step), open an extra browser window and navigate directly to the CAS website: https://cas.mdr.nims.test:8443/cas
+    
+    * Logout of the CAS system (by clicking on "log out" in "please log out and exit your web browser")
+    * Then reload the *other* browser window which had the user logged in to MDR and verify that they are now logged out.
+
 ## Backups
 
 There is [docker documentation](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes) advising how to back up volumes and their data.
@@ -221,9 +274,3 @@ There is [docker documentation](https://docs.docker.com/storage/volumes/#backup-
 * As mentioned above, there is a `.env` file containing application secrets. This **must not** be checked into version control!
 * The system is configured on start-up using the `docker-entrypoint.sh` script, which configures users in the `seed/setup.json` file.
 * Importers are run manually in the container using the rails console. See [The project wiki](https://github.com/antleaf/nims-hyrax/wiki) for more information.
-
-## Code Status
-
-[![Codeship Status for antleaf/nims-hyrax](https://app.codeship.com/projects/d4cc8560-e430-0136-fffd-6a7889452552/status?branch=develop)](https://app.codeship.com/projects/319029)
-
-[![Coverage Status](https://coveralls.io/repos/github/antleaf/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/antleaf/nims-hyrax?branch=develop)
