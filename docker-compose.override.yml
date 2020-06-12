@@ -4,7 +4,6 @@
 # - No nginx in front of the app
 # - app accessible on port 3000
 
-# todo: nginx to serve static files
 
 version: '3'
 
@@ -37,9 +36,28 @@ services:
   web:
     ports:
       - 3000:3000
+    depends_on:
+      - cas
     environment:
-    - RAILS_FORCE_SSL=false
+      - RAILS_FORCE_SSL=false
+    networks:
+      internal:
+        aliases:
+          - web
+          - mdr.nims.test
 
   redis:
     volumes:
       - redis:/data
+
+  cas:
+    build:
+      context: cas
+    networks:
+      internal:
+        aliases:
+          - cas
+          - cas.mdr.nims.test
+
+    ports:
+      - 8443:8443

@@ -5,3 +5,7 @@ end
 Then(/^I should see no results found$/) do
   expect(page).to have_content 'No results found for your search'
 end
+
+Then(/^I should not be authorized to access the page$/) do
+  expect(page).to have_content "You are not authorized to access this page."
+end

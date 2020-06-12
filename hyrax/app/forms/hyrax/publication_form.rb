@@ -18,7 +18,7 @@ module Hyrax
 
     self.terms += [
       # Adding all fields in order of display in form
-      :supervisor_approval,
+      :first_published_url, :supervisor_approval,
       :title, :alternative_title, :complex_person, :description, :keyword,
       :publisher, :resource_type, :complex_rights,
       :complex_date, :complex_identifier, :complex_source, :complex_version,
@@ -33,7 +33,8 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :supervisor_approval, :title, :resource_type
+      :first_published_url, :supervisor_approval, :title, :resource_type,
+      :description, :keyword
     ]
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,
@@ -88,8 +89,13 @@ module Hyrax
       [:id,
        :_destroy,
        {
+         last_name: [],
+         first_name: [],
          name: [],
          role: [],
+         orcid: [],
+         organization: [],
+         sub_organization: [],
          complex_affiliation_attributes: permitted_affiliation_params,
          complex_identifier_attributes: permitted_identifier_params,
          uri: []

@@ -9,6 +9,15 @@ module ComplexField
     def index_instrument(solr_doc)
       solr_doc[Solrizer.solr_name('complex_instrument', :displayable)] = object.complex_instrument.to_json
       solr_doc[Solrizer.solr_name('instrument_title', :stored_searchable)] = object.complex_instrument.map { |i| i.title.reject(&:blank?) }.flatten!
+      # use the instrument title for the complex_instrument_sim facet
+      solr_doc[Solrizer.solr_name('complex_instrument', :facetable)] = object.complex_instrument.map { |i| i.title.reject(&:blank?) }.flatten!
+      
+      fld_name = Solrizer.solr_name('instrument_title', :facetable)
+      solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+      vals = object.complex_instrument.map { |i| i.title.reject(&:blank?) }
+      solr_doc[fld_name] << vals
+      solr_doc[fld_name].flatten!
+      
       solr_doc[Solrizer.solr_name('instrument_alternative_title', :stored_searchable)] = object.complex_instrument.map { |i| i.alternative_title.reject(&:blank?) }.flatten!
       solr_doc[Solrizer.solr_name('instrument_description', :stored_searchable)] = object.complex_instrument.map { |i| i.description.reject(&:blank?) }.flatten!
       solr_doc[Solrizer.solr_name('instrument_model_number', :stored_searchable)] = object.complex_instrument.map { |i| i.model_number.reject(&:blank?) }.flatten!
@@ -70,6 +79,29 @@ module ComplexField
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
           solr_doc[fld_name] << person_name
           solr_doc[fld_name].flatten!
+          # Affiliation
+          pn.complex_affiliation.each do |ca|
+            ca.complex_organization.each do |co|
+              vals = co.organization.reject(&:blank?)
+              fld_name = Solrizer.solr_name("complex_person_#{label}_organization", :stored_searchable)
+              solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+              solr_doc[fld_name] << vals
+              solr_doc[fld_name] = solr_doc[fld_name].flatten.uniq
+              fld_name = Solrizer.solr_name("complex_person_#{label}_organization", :facetable)
+              solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+              solr_doc[fld_name] << vals
+              solr_doc[fld_name] = solr_doc[fld_name].flatten.uniq
+              vals = co.sub_organization.reject(&:blank?)
+              fld_name = Solrizer.solr_name("complex_person_#{label}_sub_organization", :stored_searchable)
+              solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+              solr_doc[fld_name] << vals
+              solr_doc[fld_name] = solr_doc[fld_name].flatten.uniq
+              fld_name = Solrizer.solr_name("complex_person_#{label}_sub_organization", :facetable)
+              solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+              solr_doc[fld_name] << vals
+              solr_doc[fld_name] = solr_doc[fld_name].flatten.uniq
+            end
+          end
         end
         i.managing_organization.each do |org|
           fld_name = Solrizer.solr_name('instrument_managing_organization', :stored_searchable)
@@ -95,6 +127,7 @@ module ComplexField
     def self.instrument_facet_fields
       # solr fields that will be treated as facets
       fields = []
+      #fields << Solrizer.solr_name('instrument_title', :facetable)
       fields << Solrizer.solr_name('instrument_manufacturer', :facetable)
       fields << Solrizer.solr_name('instrument_manufacturer_sub_organization', :facetable)
       fields << Solrizer.solr_name('instrument_model_number', :facetable)

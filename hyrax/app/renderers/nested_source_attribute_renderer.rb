@@ -8,7 +8,8 @@ class NestedSourceAttributeRenderer < NestedAttributeRenderer
       # title
       if v.dig('title').present? and v['title'][0].present?
         label = "Title"
-        val = link_to(ERB::Util.h(v['title'][0]), search_path(v['title'][0]))
+        val = link_to(ERB::Util.h(v['title'][0]),
+          Rails.application.routes.url_helpers.search_catalog_path(:"f[complex_source_title_sim][]" => v['title'][0], locale: I18n.locale))
         each_html += get_row(label, val)
       end
       unless v.dig('alternative_title').blank?
@@ -19,12 +20,12 @@ class NestedSourceAttributeRenderer < NestedAttributeRenderer
       unless v.dig('complex_person').blank?
         label = 'Contributor'
         renderer_class = NestedPersonAttributeRenderer
-        each_html += get_nested_output(label, v['complex_person'], renderer_class, true)
+        each_html += get_nested_output(field, label, v['complex_person'], renderer_class, true)
       end
       unless v.dig('complex_identifier').blank?
         label = 'Identifier'
         renderer_class = NestedIdentifierAttributeRenderer
-        each_html += get_nested_output(label, v['complex_identifier'], renderer_class, false)
+        each_html += get_nested_output(field, label, v['complex_identifier'], renderer_class, false)
       end
       unless v.dig('issue').blank?
         label = 'Issue'

@@ -25,17 +25,42 @@ class NestedPersonAttributeRenderer < NestedAttributeRenderer
           each_html += get_row(label, val)
         end
       end
+
+      # Workaround for nested properties
+      # orcid
+      unless v.dig('orcid').blank?
+        label = 'ORCID'
+        val = v['orcid'][0]
+        each_html += get_row(label, val)
+      end
+
+      # Workaround for nested properties
+      # organization
+      unless v.dig('organization').blank?
+        label = 'Organization'
+        val = v['organization'][0]
+        each_html += get_row(label, val)
+      end
+
+      # Workaround for nested properties
+      # sub_organization
+      unless v.dig('sub_organization').blank?
+        label = 'Sub organization'
+        val = v['sub_organization'][0]
+        each_html += get_row(label, val)
+      end
+
       # complex_identifier
       unless v.dig('complex_identifier').blank?
         label = 'Identifier'
         renderer_class = NestedIdentifierAttributeRenderer
-        each_html += get_nested_output(label, v['complex_identifier'], renderer_class, false)
+        each_html += get_nested_output(field, label, v['complex_identifier'], renderer_class, false)
       end
       # complex_affiliation
       unless v.dig('complex_affiliation').blank?
         label = 'Affiliation'
         renderer_class = NestedAffiliationAttributeRenderer
-        each_html += get_nested_output(label, v['complex_affiliation'], renderer_class, true)
+        each_html += get_nested_output(field, label, v['complex_affiliation'], renderer_class, true)
       end
       # role
       unless v.dig('role').blank?
