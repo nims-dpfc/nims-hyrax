@@ -8,7 +8,8 @@ class NestedSourceAttributeRenderer < NestedAttributeRenderer
       # title
       if v.dig('title').present? and v['title'][0].present?
         label = "Title"
-        val = link_to(ERB::Util.h(v['title'][0]), search_path(v['title'][0]))
+        val = link_to(ERB::Util.h(v['title'][0]),
+          Rails.application.routes.url_helpers.search_catalog_path(:"f[complex_source_title_sim][]" => v['title'][0], locale: I18n.locale))
         each_html += get_row(label, val)
       end
       unless v.dig('alternative_title').blank?
