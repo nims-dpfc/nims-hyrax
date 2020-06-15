@@ -44,6 +44,7 @@ en:
           complex_person_translator_sim: Translator
           complex_person_data_depositor_sim: Data depositor
           complex_person_data_curator_sim: Data curator
+          complex_person_contact_person_sim: Contact person
           complex_person_operator_sim: Operator
           complex_person_organization_sim: Organization
           complex_person_sub_organization_sim: Sub organization
