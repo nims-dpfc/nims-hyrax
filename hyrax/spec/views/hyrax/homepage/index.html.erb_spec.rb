@@ -38,6 +38,6 @@ RSpec.describe 'hyrax/homepage/index.html.erb', type: :view do
     render template: 'hyrax/homepage/index', layout: 'layouts/homepage'
     expect(rendered).to have_css('meta[name="twitter:card"][content="product"]', visible: false )
     expect(rendered).to have_css('meta[name="twitter:site"][content="@nims_library"]', visible: false )
-    expect(rendered).to have_css('meta[name="og:url"][content="http://test.host/"]', visible: false )
+    expect(rendered).to have_css('meta[property="og:url"][content="http://test.host/"]', visible: false )
   end
 end
