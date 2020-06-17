@@ -18,9 +18,11 @@ module Hyrax
     config.active_job.queue_adapter = :sidekiq
 
     # The locale is set by a query parameter, so if it's not found render 404
-    config.action_dispatch.rescue_responses.merge!(
-      'I18n::InvalidLocale' => :not_found
-    )
+    #config.action_dispatch.rescue_responses.merge!(
+    #  'I18n::InvalidLocale' => :not_found
+    #)
+    config.i18n.default_locale = :en
+    config.i18n.enforce_available_locales = false
 
     config.action_dispatch.default_headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
   end
