@@ -39,5 +39,6 @@ RSpec.describe 'hyrax/homepage/index.html.erb', type: :view do
     expect(rendered).to have_css('meta[name="twitter:card"][content="product"]', visible: false )
     expect(rendered).to have_css('meta[name="twitter:site"][content="@nims_library"]', visible: false )
     expect(rendered).to have_css('meta[property="og:url"][content="http://test.host/"]', visible: false )
+    expect(rendered).to have_css('meta[property="og:image"][content="http://test.host/assets/MDR-linear-577c04662e94c91ddfee75379b972f63d2b8c24a97898625954ea29a4339afb2.png"]', visible: false )
   end
 end
