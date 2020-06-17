@@ -80,6 +80,8 @@ en:
           specimen_set_sim: Specimen
           subject_sim: Subject
           synthesis_and_processing_sim: Synthesis and processing
+          complex_state_of_matter_tesim: State of matter
+          complex_state_of_matter_identifier_ssim: State of matter identifier
         index:
           based_near_tesim: Location
           characterization_methods_tesim: Characterization methods
@@ -135,8 +137,6 @@ en:
           complex_specimen_type_tesim: Specimen type
           complex_specimen_type_description_tesim: Specimen description
           complex_specimen_type_identifier_ssim: Specimen identifier
-          complex_state_of_matter_tesim: State of matter
-          complex_state_of_matter_identifier_ssim: State of matter identifier
           complex_structural_feature_category_tesim: Structural feature category
           complex_structural_feature_description_tesim: Structural feature description
           complex_structural_feature_sub_category_tesim: Structural feature sub category
