@@ -23,15 +23,22 @@ RSpec.describe 'hyrax/homepage/index.html.erb', type: :view do
     stub_template "hyrax/homepage/_home_content.html.erb" => "home content"
     stub_template "_controls.html.erb" => "controls"
     stub_template "_masthead.html.erb" => "masthead"
-  end
-
-  it "shows the product's full name" do
     without_partial_double_verification {
       allow(view).to receive(:search_state).and_return(search_state)
       allow(presenter).to receive(:display_share_button?).and_return(true)
     }
+  end
 
+  it "shows the product's full name" do
     render template: 'hyrax/homepage/index', layout: 'layouts/homepage'
     expect(page).to have_title t('hyrax.product_name_full')
+  end
+
+  it 'renders twitter meta tags' do
+    render template: 'hyrax/homepage/index', layout: 'layouts/homepage'
+    expect(rendered).to have_css('meta[name="twitter:card"][content="product"]', visible: false )
+    expect(rendered).to have_css('meta[name="twitter:site"][content="@nims_library"]', visible: false )
+    expect(rendered).to have_css('meta[property="og:url"][content="http://test.host/"]', visible: false )
+    expect(rendered).to have_css('meta[property="og:image"][content="http://test.host/assets/MDR-linear-577c04662e94c91ddfee75379b972f63d2b8c24a97898625954ea29a4339afb2.png"]', visible: false )
   end
 end
