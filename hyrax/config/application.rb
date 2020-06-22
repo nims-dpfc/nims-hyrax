@@ -25,8 +25,6 @@ module Hyrax
     config.i18n.available_locales = [:en, :ja]
     config.i18n.fallbacks = [:en]
 
-    config.autoload_paths << Rails.root.join("lib")
-
     config.action_dispatch.default_headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
   end
 end
