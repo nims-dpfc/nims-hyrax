@@ -14,7 +14,7 @@ RSpec.describe Hyrax::PublicationsController do
     end
 
     context 'with invalid locale' do
-      it 'returns a success response' do
+      it 'raises InvalidLocale error' do
         expect{
           get :show, params: { id: dataset.id, locale: 'zzz' }
         }.to raise_error I18n::InvalidLocale
