@@ -31,7 +31,13 @@ RSpec.describe 'hyrax/homepage/index.html.erb', type: :view do
 
   it "shows the product's full name" do
     render template: 'hyrax/homepage/index', layout: 'layouts/homepage'
-    expect(page).to have_title t('hyrax.product_name_full')
+    expect(page).to have_title 'MDR: NIMS Materials Data Repository'
+  end
+
+  it "shows its full name in the default locale" do
+    view.locale = :ja
+    render template: 'hyrax/homepage/index', layout: 'layouts/homepage'
+    expect(page).to have_title 'MDR: NIMS Materials Data Repository'
   end
 
   it 'renders twitter meta tags' do

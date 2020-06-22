@@ -21,6 +21,11 @@ module Hyrax
     config.action_dispatch.rescue_responses.merge!(
       'I18n::InvalidLocale' => :not_found
     )
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [:en, :ja]
+    config.i18n.fallbacks = [:en]
+
+    config.autoload_paths << Rails.root.join("lib")
 
     config.action_dispatch.default_headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
   end
