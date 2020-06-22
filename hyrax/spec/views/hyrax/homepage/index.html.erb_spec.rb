@@ -38,8 +38,8 @@ RSpec.describe 'hyrax/homepage/index.html.erb', type: :view do
     render template: 'hyrax/homepage/index', layout: 'layouts/homepage'
     expect(rendered).to have_css('meta[name="twitter:card"][content="product"]', visible: false )
     expect(rendered).to have_css('meta[name="twitter:site"][content="@nims_library"]', visible: false )
-    expect(rendered).to have_css('meta[name="twitter:image"][content="http://test.host/assets/mdr-ogp-ca0cb54aaafa68d02aa9bc0dc81bbb2dce71fd20a5af5fb21c939655e01617bc.png"]', visible: false )
+    expect(rendered).to have_css('meta[name="twitter:image"][content="http://test.host/assets/mdr-ogp-stacked-685ef3f1e803827523976360c6500d991e9eddf54890380c26867e21595946f1.png"]', visible: false )
     expect(rendered).to have_css('meta[property="og:url"][content="http://test.host/"]', visible: false )
-    expect(rendered).to have_css('meta[property="og:image"][content="http://test.host/assets/mdr-ogp-ca0cb54aaafa68d02aa9bc0dc81bbb2dce71fd20a5af5fb21c939655e01617bc.png"]', visible: false )
+    expect(rendered).to have_css('meta[property="og:image"][content="http://test.host/assets/mdr-ogp-linear-ca0cb54aaafa68d02aa9bc0dc81bbb2dce71fd20a5af5fb21c939655e01617bc.png"]', visible: false )
   end
 end
