@@ -2,10 +2,10 @@
 require 'rails_helper'
 
 RSpec.describe "OAI PMH Support", type: :feature do
-  let(:work) { create(:dataset, :open) }
+  let!(:work) { create(:dataset, :open) }
   let(:identifier) { work.id }
 
-  before { work }
+  before { OAI_CONFIG[:document][:limit] = 500 }
 
   context 'oai interface with works present' do
     it 'lists metadata prefixess' do
