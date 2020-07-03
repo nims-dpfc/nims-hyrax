@@ -21,8 +21,16 @@ namespace :ngdr do
     depositor = false
     admin = Role.where(name: "admin").first_or_create!
     seed["users"].each do |user|
-      newuser = User.where(username: user["username"]).first_or_create!(password: user["password"], display_name: user["name"], email: user["email"])
-      newuser.user_identifier = 'user_identifier'
+      newuser = User.find_by(username: user["username"])
+      newuser = User.create!(
+        username: user["username"],
+        password: user["password"],
+        display_name: user["name"],
+        email: user["email"],
+        user_identifier: user['user_identifier'],
+        employee_type_code: user['employee_type_code']
+      ) unless newuser
+
       if user["role"] == "admin"
         unless admin.users.include?(newuser)
           admin.users << newuser
