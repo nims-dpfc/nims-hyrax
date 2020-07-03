@@ -87,7 +87,7 @@ class Dataset < ActiveFedora::Base
 
   # TODO - This is required
   property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'], multiple: false do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :complex_specimen_type, predicate: ::RDF::Vocab::NimsRdp['specimen-type'],
