@@ -570,6 +570,9 @@ RSpec.describe DatasetIndexer do
     it 'indexes as stored searchable' do
       expect(@solr_document['specimen_set_tesim']).to match_array(['specimen A'])
     end
+    it 'indexes as facetable' do
+      expect(@solr_document['specimen_set_sim']).to match_array(['specimen A'])
+    end
   end
 
   describe 'indexes specimen type with all the attributes' do
