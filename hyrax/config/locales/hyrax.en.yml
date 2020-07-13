@@ -242,6 +242,11 @@ en:
         header: 'Export:'
         mendeley: Mendeley
         zotero: Zotero
+    content_blocks:
+      tabs:
+        announcement_text: Announcement Text
+        featured_researcher: News Text
+        marketing_text: Marketing Text
     directory:
       suffix: "@example.org"
     download_all: Download All Files (Zip)
@@ -251,6 +256,11 @@ en:
       platform_html: <a href="https://dice.nims.go.jp/" target="_blank" rel="noopener">Data Platform DICE</a>
       privacy_html: <a href="https://www.nims.go.jp/eng/siteinfo/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
       address_html: National Institute for Materials Science (NIMS) 1-2-1 Sengen, Tsukuba, Ibaraki 305-0047 JAPAN
+    homepage:
+      featured_researcher:
+        missing: Nothing posted.
+        tab_label: News
+        title: News
     institution_name: NIMS
     institution_name_full: National Institute for Materials Science
     center_name: DPFC
