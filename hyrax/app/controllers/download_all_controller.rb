@@ -10,7 +10,7 @@ class DownloadAllController < Hyrax::DownloadsController
   def show
     respond_to do |format|
       format.zip { send_zip }
-      format.any { head :unsupported }
+      format.any { head :unsupported_media_type }
     end
   end
 
