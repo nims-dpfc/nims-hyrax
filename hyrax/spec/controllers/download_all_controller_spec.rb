@@ -26,7 +26,7 @@ RSpec.describe DownloadAllController, type: :controller do
       context 'request anything other than application/zip' do
         it 'returns a failed response' do
           get :show, params: { id: dataset.id, format: :html }
-          expect(response).to have_http_status(406) # :not_acceptable
+          expect(response).to have_http_status(415) # :unsupported_media_type
         end
       end
     end
