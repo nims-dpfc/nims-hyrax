@@ -82,7 +82,7 @@ class DownloadAllController < Hyrax::DownloadsController
       next if original.blank?
 
       File.write(
-        File.join(zip_file_path, original.file_name.first),
+        File.join(zip_file_path, CGI.unescape(original.file_name.first)),
         URI.parse(original.uri).open.read,
         mode: 'wb'
       )
