@@ -50,6 +50,10 @@ RSpec.describe ::User do
       it 'sets the password' do
         expect(subject.password).to eql 'password'
       end
+
+      it 'sets the user identifier' do
+        expect(subject.user_identifier).to be_present
+      end
     end
   end
 
