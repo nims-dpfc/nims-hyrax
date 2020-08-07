@@ -46,7 +46,7 @@ class DownloadAllController < Hyrax::DownloadsController
       # Hyrax::LocalFileDownloadsControllerBehavior#send_local_content
       send_local_content
     else
-      head :unsupported
+      head :unsupported_media_type
     end
   end
 
