@@ -1,4 +1,9 @@
+require 'coveralls'
 require 'simplecov'
+require 'webdrivers'
+require 'sidekiq/testing' # use fake Redis for testing
+
+Coveralls.wear!
 SimpleCov.start 'rails' do
   # we do not unit test importers, as this is run-once code
   add_filter "lib/importers"
