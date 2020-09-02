@@ -99,6 +99,7 @@ group :test do
   gem 'webdrivers', '~> 4.1'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+  gem 'rspec-activemodel-mocks'
 end
 
 gem 'coveralls', require: false
