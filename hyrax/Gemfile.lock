@@ -10,13 +10,13 @@ GIT
 
 GIT
   remote: https://github.com/CottageLabs/willow_sword.git
-  revision: ab456d99eaa4d07ed12d0510330be07909981204
-  branch: feature/prep_for_new_release
+  revision: 838fe5e75ed74ff9cddf46d03660d4c1e6e2cd64
+  branch: develop
   specs:
     willow_sword (0.2.0)
       bagit (~> 0.4.1)
       libxml-ruby (~> 3.1.0)
-      rails (~> 5.1.6.1)
+      rails (>= 5.1.6)
       rubyzip (>= 1.0.0)
 
 GIT
@@ -117,7 +117,7 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     backports (3.15.0)
-    bagit (0.4.3)
+    bagit (0.4.4)
       docopt (~> 0.5.0)
       validatable (~> 1.6)
     bcp47 (0.3.3)
