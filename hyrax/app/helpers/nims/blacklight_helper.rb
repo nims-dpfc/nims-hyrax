@@ -19,7 +19,7 @@ module Nims
     # @param [Hash] args from get_field_values
     def render_truncated_description(args)
       content_tag :div, class: 'truncate-description' do
-        snippit(args) + link_to("View More »", url_for(args[:document]), class: 'btn btn-link btn-xs').to_s
+        snippit(args) + link_to("View More »", main_app.url_for(args[:document]), class: 'btn btn-link btn-xs').to_s
       end
     end
   end
