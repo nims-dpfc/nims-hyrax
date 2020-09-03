@@ -5,7 +5,7 @@ class ExportsController < Hyrax::DownloadsController
   MAXIMUM_ROWS = 100
 
   def export
-    if file.present? && file.format_label && file.format_label.detect { |f| f.match(/CSV|TSV|Tab-separated/i) }
+    if is_csv?(file) || is_tsv?(file)
       render json: csv_as_datatable
     else
       render :json => { error: 'Unknown or unsupported file type' }, :status => :bad_request
@@ -20,7 +20,7 @@ class ExportsController < Hyrax::DownloadsController
     # (as the world is moving that way) and scrub out any characters which do not conform to UTF-8. This "lossy" approach
     # should be ok as this export is merely used to provide a preview of the file, rather than the actual file itself.
     content = file.content.force_encoding(Encoding::UTF_8).scrub
-    csv = file.format_label.detect { |f| f.match(/TSV|Tab-separated/i) } ? CSV.parse(content, headers: true, col_sep: "\t", quote_char: "Ƃ") : CSV.parse(content, headers: true)
+    csv = is_tsv?(file) ? CSV.parse(content, headers: true, col_sep: "\t", quote_char: "Ƃ") : CSV.parse(content, headers: true)
     csv =
     {
         columns: csv.headers,
@@ -29,5 +29,17 @@ class ExportsController < Hyrax::DownloadsController
         maximum_rows: MAXIMUM_ROWS,
         file_name: file_name
     }
+  end
+
+  def is_csv?(file)
+    return false unless file.present?
+    return true if file.format_label && file.format_label.detect { |f| f.match(/CSV|Comma-separated/i) }
+    return true if file.mime_type.present? && file.mime_type =~ /^(?:text|application)\/csv$/i
+  end
+
+  def is_tsv?(file)
+    return false unless file.present?
+    return true if file.format_label && file.format_label.detect { |f| f.match(/TSV|Tab-separated/i) }
+    return true if file.mime_type.present? && file.mime_type =~ /^(?:text|application)\/tab-separated-values$/i
   end
 end
