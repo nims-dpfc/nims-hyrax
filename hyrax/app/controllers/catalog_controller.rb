@@ -259,6 +259,8 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.show.document_actions = {}
+
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
