@@ -11,7 +11,7 @@ module Hyrax
     end
 
     def tsv?
-      mime_type.present? && mime_type =~ /^(?:text|application)\/tab-separated-values$/i
+      file_format =~ /Tab-separated/i || (mime_type.present? && mime_type =~ /^(?:text|application)\/tab-separated-values$/i)
     end
 
     def csv_or_tsv?
