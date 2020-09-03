@@ -738,6 +738,7 @@ GEM
       deprecation (>= 1.0.0)
       iiif-image-api (~> 0.1.0)
       railties (>= 4.2, < 6)
+    rinku (2.0.6)
     rsolr (2.3.0)
       builder (>= 2.1.2)
       faraday (>= 0.9.0)
@@ -933,6 +934,7 @@ DEPENDENCIES
   redis (~> 3.0)
   redis-session-store (~> 0.11.1)
   riiif (~> 2.0)
+  rinku
   ro-crate-ruby!
   rsolr (>= 1.0)
   rspec-rails
