@@ -26,7 +26,7 @@ class ExportsController < Hyrax::DownloadsController
         data: csv.take(MAXIMUM_ROWS).map(&:values_at),
         total_rows: csv.size,
         maximum_rows: MAXIMUM_ROWS,
-        file_name: file_name
+        file_name: file_name.force_encoding(Encoding::UTF_8)
     }
   end
 end
