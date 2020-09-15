@@ -7,11 +7,15 @@ module Hyrax
     end
 
     def csv?
-      if mime_type.present? && mime_type =~ /^(?:text|application)\/csv$/i
-        true
-      else
-        false
-      end
+      mime_type.present? && mime_type =~ /^(?:text|application)\/csv$/i
+    end
+
+    def tsv?
+      file_format =~ /Tab-separated/i || (mime_type.present? && mime_type =~ /^(?:text|application)\/tab-separated-values$/i)
+    end
+
+    def csv_or_tsv?
+      csv? || tsv?
     end
 
   end
