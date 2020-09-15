@@ -741,6 +741,10 @@ GEM
     rsolr (2.3.0)
       builder (>= 2.1.2)
       faraday (>= 0.9.0)
+    rspec-activemodel-mocks (1.1.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.4)
@@ -935,6 +939,7 @@ DEPENDENCIES
   riiif (~> 2.0)
   ro-crate-ruby!
   rsolr (>= 1.0)
+  rspec-activemodel-mocks
   rspec-rails
   sass-rails (~> 5.0)
   sidekiq
