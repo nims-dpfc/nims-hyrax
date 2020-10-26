@@ -20,7 +20,7 @@ module Hyrax
       # Adding all fields in order of display in form
       :title, :alternative_title, :description, :keyword, :language,
       :publisher, :resource_type, :subject,
-      :complex_date, :complex_identifier, :complex_person, :complex_version,
+      :complex_identifier, :complex_person, :complex_version,
       :status, :instrument, :specimen_set, :complex_relation, :custom_property
     ]
 
@@ -35,7 +35,7 @@ module Hyrax
       :title
     ]
 
-    NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_person,
+    NESTED_ASSOCIATIONS = [:complex_identifier, :complex_person,
       :complex_version, :complex_relation, :custom_property].freeze
 
     protected
@@ -121,7 +121,6 @@ module Hyrax
     def self.build_permitted_params
       permitted = super
       permitted << :licensed_date
-      permitted << { complex_date_attributes: permitted_date_params }
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_person_attributes: permitted_person_params }
       permitted << { complex_version_attributes: permitted_version_params }
