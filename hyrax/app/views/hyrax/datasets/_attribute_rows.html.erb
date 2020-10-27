@@ -86,6 +86,7 @@
         <!-- no defined permissions for date_created, date_modified, access_right -->
         <%= presenter.attribute_to_html(:date_created, render_as: :linked, search_field: 'date_created_tesim', html_dl: true) %>
         <%= presenter.attribute_to_html(:date_modified, label: t('hyrax.base.show.last_modified'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:date_published, html_dl: true) %>
 
         <%= presenter.attribute_to_html(:access_right, html_dl: true) %>
       </div> <!-- panel body -->
