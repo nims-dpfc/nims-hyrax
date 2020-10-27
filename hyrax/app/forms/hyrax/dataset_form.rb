@@ -19,7 +19,8 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
-      :title, :alternative_title, :description, :keyword, :publisher, :language, :licensed_date,
+      :title, :alternative_title, :description, :keyword, :publisher, :language, :licensed_date, 
+      :date_created, :date_published,
       :publisher, :subject, :complex_person,
       :complex_version, :characterization_methods, :computational_methods,
       :complex_organization,
@@ -49,7 +50,7 @@ module Hyrax
         :specimen_set, :complex_person,
         :complex_identifier, # not using this
         :complex_version, :complex_relation,
-        :custom_property, :language
+        :custom_property, :language, :date_created, :date_published
       ]
     end
 
