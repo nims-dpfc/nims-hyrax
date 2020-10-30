@@ -101,6 +101,10 @@ class Publication < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
+  property :date_published, predicate: ::RDF::Vocab::NimsRdp['date_published'], multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
