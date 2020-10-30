@@ -10,6 +10,10 @@
   <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
 <% end %>
 
+<% if can? :read_date_published, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:date_published, html_dl: true) %>
+<% end %>
+
 <% if can? :read_subject, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:subject, render_as: :faceted, html_dl: true) %>
 <% end %>

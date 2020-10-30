@@ -19,7 +19,7 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :title, :alternative_title, :description, :keyword, :language,
-      :publisher, :resource_type, :subject,
+      :publisher, :date_published, :resource_type, :subject,
       :complex_identifier, :complex_person, :complex_version,
       :status, :instrument, :specimen_set, :complex_relation, :custom_property
     ]
@@ -32,7 +32,7 @@ module Hyrax
 
     self.required_fields += [
       # # Adding all required fields in order of display in form
-      :title
+      :title, :date_published
     ]
 
     NESTED_ASSOCIATIONS = [:complex_identifier, :complex_person,

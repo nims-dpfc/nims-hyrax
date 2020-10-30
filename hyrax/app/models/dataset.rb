@@ -113,7 +113,7 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
-  property :date_published, predicate: ::RDF::Vocab::VMD.published, multiple: false do |index|
+  property :date_published, predicate: ::RDF::Vocab::NimsRdp['date_published'], multiple: false do |index|
     index.as :stored_searchable, :facetable
   end
 
@@ -122,7 +122,7 @@ class Dataset < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
   include ComplexValidation
-  accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
+  # accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_organization, reject_if: :organization_blank, allow_destroy: true
