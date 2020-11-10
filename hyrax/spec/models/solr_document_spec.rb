@@ -4,7 +4,7 @@ RSpec.describe SolrDocument do
   let(:model) do
     build(:dataset,
           alternative_title: 'Alternative Title',
-          complex_date_attributes: [{ date: ['2018-02-14'], description: 'Published Date' }],
+          date_published: '2018-02-14',
           complex_identifier_attributes: [{ identifier: ['123456'], label: ['Local'] }],
           complex_instrument_attributes: [{
             complex_date_attributes: [{ date: ['2018-01-28'] }],
