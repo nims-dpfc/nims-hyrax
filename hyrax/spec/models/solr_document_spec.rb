@@ -34,7 +34,7 @@ RSpec.describe SolrDocument do
             complex_identifier_attributes: [{ identifier: ['123456'] }],
             relationship: 'IsPartOf'
           }],
-          specimen_set: 'Specimen Set',
+          specimen_set: ['Specimen Set'],
           synthesis_and_processing: ['Synthesis and processing methods'],
           custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }]
     )
