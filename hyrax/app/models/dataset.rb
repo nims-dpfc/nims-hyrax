@@ -122,7 +122,7 @@ class Dataset < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
   include ComplexValidation
-  # accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_organization, reject_if: :organization_blank, allow_destroy: true
