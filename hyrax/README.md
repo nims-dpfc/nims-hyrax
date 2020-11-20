@@ -81,4 +81,6 @@ for all tests, and e.g.
 for tests in a specific file.
 
 Before running specs, you will need to setup the test db with the following command:
+```
 docker-compose exec appdb bash -l -c "createdb -U postges hyrax_test"
+```
