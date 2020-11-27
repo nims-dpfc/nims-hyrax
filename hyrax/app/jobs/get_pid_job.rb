@@ -6,6 +6,7 @@ class GetPIDJob < ApplicationJob
 
   def perform(work)
     raise('Missing PID_API_URL env var') unless ENV['PID_API_URL'].present?
+    raise('Missing PID_API_USER_PID env var') unless ENV['PID_API_USER_PID'].present?
     raise('Missing PID_API_AUTHORIZATION env var') unless ENV['PID_API_AUTHORIZATION'].present?
 
     puts "Getting PID for work: #{work.id}"
