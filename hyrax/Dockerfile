@@ -25,7 +25,7 @@ RUN apt-get update -qq && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-    apt-get update -qq && apt-get install -y --no-install-recommends \ 
+    apt-get update -qq && apt-get install -y --no-install-recommends \
     libpq-dev \
     libxml2-dev libxslt1-dev \
     nodejs \
@@ -51,6 +51,9 @@ RUN mkdir -p /fits/ \
     && unzip -q /fits/$FITS_VERSION.zip -d /fits/$FITS_VERSION \
     && chmod a+x $FITS_PATH \
     && rm /fits/$FITS_VERSION.zip
+
+# copy the imagemagick policy over
+COPY ops/imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
 
 # copy gemfiles to production folder
 COPY Gemfile Gemfile.lock $APP_PRODUCTION

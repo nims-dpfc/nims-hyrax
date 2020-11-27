@@ -48,8 +48,8 @@ When(/^I create the dataset with:$/) do |table|
   expect(page).to have_content /Add files/i
   expect(page).to have_content /Add folder/i
   within('span#addfiles') do
-    attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
-    attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
+    attach_file("files[]", File.join(fixture_path,  'image.jp2'), visible: false)
+    attach_file("files[]", File.join(fixture_path, 'jp2_fits.xml'), visible: false)
   end
 
   click_link "Descriptions" # switch tab
@@ -125,7 +125,7 @@ Then(/^I should see both the public and restricted metadata of the (open|authent
   end
 end
 
-Then(/^I should see the following links:$/) do |table|
+Then(/^I should see the following links to datasets:$/) do |table|
   table.symbolic_hashes.each do |row|
     expect(page).to have_link(row[:label], href: Regexp.new(Regexp.quote(row[:href])))
   end

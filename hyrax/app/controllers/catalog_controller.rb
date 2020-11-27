@@ -2,6 +2,7 @@ class CatalogController < ApplicationController
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
   include BlacklightOaiProvider::CatalogControllerBehavior
+  include Nims::BlacklightHelper
 
   # This filter applies the hydra access controls
   before_action :enforce_show_permissions, only: :show
@@ -65,7 +66,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false
-    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link, if: lambda { |context, field_config, document| context.can?(:read_abstract, document.hydra_model) }
+    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :render_truncated_description, if: lambda { |context, field_config, document| context.can?(:read_abstract, document.hydra_model) }
     config.add_index_field solr_name('keyword', :stored_searchable), itemprop: 'keywords', link_to_search: solr_name('keyword', :facetable), if: lambda { |context, field_config, document| context.can?(:read_keyword, document.hydra_model) }
     config.add_index_field solr_name('subject', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject', :facetable), if: lambda { |context, field_config, document| context.can?(:read_subject, document.hydra_model) }
     # config.add_index_field solr_name('creator', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable)
@@ -93,7 +94,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('license', :stored_searchable), helper_method: :license_links
     config.add_index_field solr_name('resource_type', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('resource_type', :facetable), if: lambda { |context, field_config, document| context.can?(:read_resource_type, document.hydra_model) }
     config.add_index_field solr_name('file_format', :stored_searchable), link_to_search: solr_name('file_format', :facetable)
-    config.add_index_field solr_name('identifier', :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
+    #config.add_index_field solr_name('identifier', :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
     config.add_index_field solr_name('embargo_release_date', :stored_sortable, type: :date), label: 'Embargo release date', helper_method: :human_readable_date
     config.add_index_field solr_name('lease_expiration_date', :stored_sortable, type: :date), label: 'Lease expiration date', helper_method: :human_readable_date
     config.add_index_field solr_name('place', :stored_searchable), itemprop: 'place', link_to_search: solr_name('place', :facetable)
@@ -257,6 +258,8 @@ class CatalogController < ApplicationController
         pf: solr_name
       }
     end
+
+    config.show.document_actions = {}
 
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and

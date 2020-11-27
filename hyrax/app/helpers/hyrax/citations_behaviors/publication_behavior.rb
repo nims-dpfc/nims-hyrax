@@ -66,6 +66,59 @@ module Hyrax
         pub_info.strip!
         pub_info.blank? ? nil : pub_info
       end
+
+      def setup_pub_source(presenter)
+        return unless presenter.respond_to?(:complex_source)
+        return if presenter.complex_source.empty?
+        cs = presenter.complex_source
+        if presenter.complex_source.is_a?(Array)
+          cs = presenter.complex_source.first
+        end
+        source = JSON.parse(cs).first
+        return if source.blank?
+
+        pub_source = ''
+
+        if source['title'].present?
+          pub_source << source['title'].first
+          pub_source << '. '
+        end
+
+        if source['volume'].present?
+          pub_source << source['volume'].first
+          pub_source << ', '
+        end
+
+        if source['issue'].present?
+          pub_source << 'no. '
+          pub_source << source['issue'].first
+          pub_source << '. '
+        end
+
+        if source['sequence_number'].present?
+          pub_source << source['sequence_number'].first
+          pub_source << '. '
+        end
+
+        pub_source.blank? ? nil : pub_source.strip
+      end
+
+      def setup_pub_page(presenter)
+        return if presenter.complex_source.empty?
+        cs = presenter.complex_source
+        if presenter.complex_source.is_a?(Array)
+          cs = presenter.complex_source.first
+        end
+        source = JSON.parse(cs).first
+        pub_page = ''
+
+        if source['start_page'].present? && source['end_page'].present?
+          pub_page << "#{source['start_page'].first}-#{source['end_page'].first}"
+          pub_page << '. '
+        end
+
+        pub_page.blank? ? nil : pub_page.strip
+      end
     end
   end
 end
