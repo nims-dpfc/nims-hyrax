@@ -15,7 +15,7 @@ class GetPIDJob < ApplicationJob
     pidrequest = PIDRequest.new(
         id: work.id,
         localId: work_url,
-        creator: { canonicalId: "urn:USER_IDENTIFIER.dpfc.nims.go.jp:c8e6baaf-3cc7-4d21-86fd-3ffd8193f688" }, # TODO: get NIMS PID of user when developed (see https://github.com/antleaf/nims-mdr-development/issues/226#issuecomment-584936488)
+        creator: { canonicalId: ENV['PID_API_USER_PID'] },
         pidCategory: 'DATA_IDENTIFIER',
         disclosureLevel:'PRIVATE'
     )
