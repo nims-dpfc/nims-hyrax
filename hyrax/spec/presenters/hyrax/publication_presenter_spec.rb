@@ -98,7 +98,7 @@ RSpec.describe Hyrax::PublicationPresenter do
       expect(subject["dc:alternative"]).to eql "Alternative-Title-123"
       expect(subject["model:hasModel"]).to eql "Publication"
       expect(subject["acl:accessControl"]).to include("@id")
-      expect(subject["@type"]).to match_array %w(pcdmterms:Object worksterms:Work)
+      expect(subject["@type"]).to match_array %w(pcdm:Object worksterms:Work)
     end
 
     context 'anonymous user' do

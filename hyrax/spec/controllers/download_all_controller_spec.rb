@@ -57,5 +57,23 @@ RSpec.describe DownloadAllController, type: :controller do
         end
       end
     end
+
+    context 'with a long filename' do
+      before do
+        allow(subject).to receive(:authorize_download!).and_return(true)
+        allow(subject).to receive(:available_file_set_ids).and_return([file_set.id])
+        CharacterizeJob.perform_now(file_set, file_set.original_file.id)
+      end
+
+      let(:file_set) { create(:file_set, :long_filename) }
+      let(:dataset) { create(:dataset, members: [file_set]) }
+
+      context 'request application/zip' do
+        it 'returns a success response' do
+          get :show, params: { id: dataset.id, format: :zip }
+          expect(response).to be_successful
+        end
+      end
+    end
   end
 end
