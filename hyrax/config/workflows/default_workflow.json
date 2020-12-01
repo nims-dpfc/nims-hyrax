@@ -12,7 +12,8 @@
                     "transition_to": "deposited",
                     "methods": [
                         "Hyrax::Workflow::GrantEditToDepositor",
-                        "Hyrax::Workflow::ActivateObject"
+                        "Hyrax::Workflow::ActivateObject",
+                        "Workflow::GetPID"
                     ]
                 }
             ]
