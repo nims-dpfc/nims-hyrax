@@ -30,6 +30,10 @@ module NIMSRoles
     false
   end
 
+  def email_user?
+    true if employee_type_code == '60'
+  end
+
   def authenticated?
     authenticated_nims? || authenticated_external?
   end

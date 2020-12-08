@@ -68,4 +68,15 @@ class Ability
       cannot :index, ::User
     end
   end
+
+  def user_groups
+    return @user_groups if @user_groups
+
+    @user_groups = default_user_groups
+    unless current_user.new_record?
+      @user_groups |= current_user.groups if current_user.respond_to? :groups
+      @user_groups |= ['registered'] unless current_user.email_user?
+    end
+    @user_group
+  end
 end
