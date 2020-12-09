@@ -31,6 +31,12 @@ FactoryBot.define do
       guest { true }
     end
 
+    trait :email do
+      sequence(:display_name) { |n| "Email user #{n}"}
+      guest { true }
+      employee_type_code { '60' }
+    end
+
     trait :admin do
       roles { build_list :role, 1, :admin }
     end
