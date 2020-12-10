@@ -71,6 +71,12 @@ autodetach on
 ```
 
 ### Steps to run the tests
+
+Before running specs, you will need to setup the test db with the following command:
+```
+docker-compose exec appdb bash -l -c "createdb -U postges hyrax_test"
+```
+
 When the app is set up, from `hyrax/`:
 
     bundle exec rspec
