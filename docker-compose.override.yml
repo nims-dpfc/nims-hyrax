@@ -39,8 +39,8 @@ services:
       - file_uploads:${UPLOADS_PATH}
       - derivatives:${DERIVATIVES_PATH}
       - cache:${CACHE_PATH}
-      - ./hyrax/data:/data/data
       - ${HOST_APP_DATA_PATH:-/srv/ngdr/data/}:/data/data
+      - ./hyrax:/data:cached
     networks:
       internal:
         aliases:
@@ -52,8 +52,8 @@ services:
       - file_uploads:${UPLOADS_PATH}
       - derivatives:${DERIVATIVES_PATH}
       - cache:${CACHE_PATH}
-      - ./hyrax/data:/data/data
       - ${HOST_APP_DATA_PATH:-/srv/ngdr/data/}:/data/data
+      - ./hyrax:/data:cached
 
   redis:
     volumes:
