@@ -13,7 +13,6 @@ Feature: Search links on a dataset
       | with_complex_instrument                 |
       | with_complex_specimen_type              |
       | with_complex_relation                   |
-      | with_complex_rights                     |
       | with_complex_version                    |
 
 

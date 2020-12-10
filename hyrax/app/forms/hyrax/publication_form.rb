@@ -19,7 +19,7 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
-      :title, :alternative_title, :complex_person, :description, :keyword, :date_published,
+      :title, :alternative_title, :rights_statement, :complex_person, :description, :keyword, :date_published,
       :publisher, :resource_type,
       :complex_identifier, :complex_source, :complex_version,
       :complex_event, :language, :licensed_date
@@ -29,12 +29,12 @@ module Hyrax
       # Fields not interested in
       :creator, :keyword,
       # Fields interested in, but removing to re-order
-      :title]
+      :title, :rights_statement]
 
     self.required_fields += [
       # Adding all required fields in order of display in form
       :supervisor_approval, :title, :resource_type,
-      :description, :keyword, :date_published
+      :description, :keyword, :date_published, :rights_statement
     ]
 
     NESTED_ASSOCIATIONS = [:complex_identifier,
