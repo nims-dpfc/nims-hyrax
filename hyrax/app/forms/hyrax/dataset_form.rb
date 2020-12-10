@@ -19,7 +19,7 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
-      :title, :alternative_title, :description, :keyword, :publisher, :language, :licensed_date, 
+      :title, :alternative_title, :description, :keyword, :publisher, :language, :licensed_date,
       :date_created, :date_published,
       :publisher, :subject, :complex_person,
       :complex_version, :characterization_methods, :computational_methods,
@@ -184,7 +184,8 @@ module Hyrax
 
     def self.permitted_person_params
       [:id,
-       :_destroy,
+        :_destroy,
+        :contact_person,
        {
          last_name: [],
          first_name: [],

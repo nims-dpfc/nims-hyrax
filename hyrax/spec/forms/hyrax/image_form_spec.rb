@@ -8,10 +8,8 @@ RSpec.describe Hyrax::ImageForm do
 
     context 'permitted params' do
       it do
-        expect(described_class).to receive(:permitted_date_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_identifier_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_person_params).at_least(:once).and_call_original
-        expect(described_class).to receive(:permitted_rights_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_version_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_relation_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_custom_property_params).at_least(:once).and_call_original

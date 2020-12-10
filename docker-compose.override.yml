@@ -23,6 +23,8 @@ services:
       - fcrepo:/data
 
   solr:
+    environment:
+      - OOM=script
     ports:
       - 8983:8983
 
@@ -37,7 +39,7 @@ services:
       - file_uploads:${UPLOADS_PATH}
       - derivatives:${DERIVATIVES_PATH}
       - cache:${CACHE_PATH}
-      - ${HOST_APP_DATA_PATH:-/srv/ngdr/data/}:/data/data
+      - ./hyrax/data:/data/data
       - ./hyrax:/data:cached
     networks:
       internal:
@@ -50,7 +52,7 @@ services:
       - file_uploads:${UPLOADS_PATH}
       - derivatives:${DERIVATIVES_PATH}
       - cache:${CACHE_PATH}
-      - ${HOST_APP_DATA_PATH:-/srv/ngdr/data/}:/data/data
+      - ./hyrax/data:/data/data
       - ./hyrax:/data:cached
 
   redis:
