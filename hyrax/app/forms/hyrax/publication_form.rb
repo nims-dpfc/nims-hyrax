@@ -87,7 +87,8 @@ module Hyrax
 
     def self.permitted_person_params
       [:id,
-       :_destroy,
+        :_destroy,
+        :contact_person,
        {
          last_name: [],
          first_name: [],

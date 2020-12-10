@@ -12,8 +12,8 @@ RSpec.describe Hyrax::DatasetForm do
     describe '#metadata_tab_terms' do
       subject { form.metadata_tab_terms }
       it { is_expected.to include(:supervisor_approval, :title, :alternative_title, :data_origin, :description,
-                                  :keyword, :specimen_set, :complex_person, :complex_identifier, :complex_date,
-                                  :complex_rights, :complex_version, :complex_relation, :custom_property) }
+                                  :keyword, :specimen_set, :complex_person, :complex_identifier, :first_published_url,
+                                  :complex_version, :complex_relation, :custom_property, :language, :date_created) }
     end
 
     describe '#method_tab_terms' do
@@ -39,13 +39,11 @@ RSpec.describe Hyrax::DatasetForm do
 
     context 'permitted params' do
       it do
-        expect(described_class).to receive(:permitted_date_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_identifier_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_instrument_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_person_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_organization_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_relation_params).at_least(:once).and_call_original
-        expect(described_class).to receive(:permitted_rights_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_specimen_type_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_version_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_custom_property_params).at_least(:once).and_call_original
