@@ -18,7 +18,7 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
   end
 
   describe '#setup_pub_date' do
-    let(:publication) { build(:publication, :with_complex_date) }
+    let(:publication) { build(:publication, :with_date_published) }
     subject { helper.setup_pub_date(presenter) }
     it { is_expected.to eql('0528') }
   end
@@ -43,7 +43,7 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
   end
 
   describe '#setup_pub_info' do
-    let(:publication) { build(:publication, :with_complex_identifier, :with_complex_date, :with_place, :with_publisher) }
+    let(:publication) { build(:publication, :with_complex_identifier, :with_date_published, :with_place, :with_publisher) }
     subject { helper.setup_pub_info(presenter, include_date) }
 
     context 'without date' do
