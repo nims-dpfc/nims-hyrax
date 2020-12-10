@@ -28,10 +28,9 @@ RSpec.describe 'hyrax/publications/_attribute_rows' do
       expect(rendered).to have_content('Keyword-123')
       expect(rendered).to have_content('Resource-Type-123')
       expect(rendered).to have_content('Rights-Statement-123')
-      expect(rendered).to have_content('28/05/2019') # NB: complex date is reformatted to dd/mm/yyyy
+      expect(rendered).to have_content('2019-05-28') # NB: complex date is reformatted to dd/mm/yyyy
       expect(rendered).to have_content('10.0.1111')
       expect(rendered).to have_content('Foo Bar')
-      expect(rendered).to have_content('https://orcid.example.org/0000-1111-2222-3333')
       expect(rendered).to have_content('MaDIS DPFC')
       expect(rendered).to have_content('Creating the first version')
       expect(rendered).to have_content('Event-Title-123')
@@ -54,7 +53,7 @@ RSpec.describe 'hyrax/publications/_attribute_rows' do
       expect(rendered).to have_content('Keyword-123')
       expect(rendered).to have_content('Resource-Type-123')
       expect(rendered).to have_content('Rights-Statement-123')
-      expect(rendered).to have_content('28/05/2019') # NB: complex date is reformatted to dd/mm/yyyy
+      expect(rendered).to have_content('2019-05-28')
       expect(rendered).to have_content('10.0.1111')
       expect(rendered).to have_content('Foo Bar')
       expect(rendered).to have_content('https://orcid.example.org/0000-1111-2222-3333')

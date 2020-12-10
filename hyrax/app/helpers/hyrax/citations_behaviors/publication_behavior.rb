@@ -23,12 +23,12 @@ module Hyrax
 
       # nims override to retrieve nested properties
       def setup_pub_date(presenter)
-        pub_date = presenter.solr_document['complex_date_published_ssm'].try(:first)
+        pub_date = presenter&.solr_document&.date_published&.first
         return nil if pub_date.nil?
         first_date = CGI.escapeHTML(pub_date)
         if first_date.present?
           first_date = CGI.escapeHTML(first_date)
-          date_value = first_date.gsub(/[^0-9|n\.d\.]/, "")
+          date_value = Date.parse(first_date).strftime("%m%d")
           date_value = date_value.reverse[0, 4].reverse unless date_value.nil?
           return nil if date_value.nil?
         end
