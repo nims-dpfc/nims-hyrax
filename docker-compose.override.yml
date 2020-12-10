@@ -40,7 +40,7 @@ services:
       - derivatives:${DERIVATIVES_PATH}
       - cache:${CACHE_PATH}
       - ./hyrax/data:/data/data
-      - ./hyrax:/data:cached
+      - ${HOST_APP_DATA_PATH:-/srv/ngdr/data/}:/data/data
     networks:
       internal:
         aliases:
@@ -53,7 +53,7 @@ services:
       - derivatives:${DERIVATIVES_PATH}
       - cache:${CACHE_PATH}
       - ./hyrax/data:/data/data
-      - ./hyrax:/data:cached
+      - ${HOST_APP_DATA_PATH:-/srv/ngdr/data/}:/data/data
 
   redis:
     volumes:
