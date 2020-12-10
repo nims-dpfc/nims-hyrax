@@ -219,40 +219,6 @@ RSpec.describe Image do
     end
   end
 
-  describe 'complex_date' do
-    it 'creates a date active triple resource with all the attributes' do
-      @obj = build(:image, complex_date_attributes: [
-        {
-          date: '1978-10-28',
-          description: 'Some kind of a date',
-        }
-      ])
-      expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_date.first.date).to eq ['1978-10-28']
-      expect(@obj.complex_date.first.description).to eq ['Some kind of a date']
-    end
-
-    it 'creates a date active triple resource with just the date' do
-      @obj = build(:image,
-        complex_date_attributes: [{
-          date: '1984-09-01'
-        }]
-      )
-      expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_date.first.date).to eq ['1984-09-01']
-      expect(@obj.complex_date.first.description).to be_empty
-    end
-
-    it 'rejects a date active triple with no date' do
-      @obj = build(:image,
-        complex_date_attributes: [{
-          description: 'Local date'
-        }]
-      )
-      expect(@obj.complex_date).to be_empty
-    end
-  end
-
   describe 'complex_identifier' do
     it 'creates an identifier active triple resource with all the attributes' do
       @obj = build(:image, complex_identifier_attributes: [

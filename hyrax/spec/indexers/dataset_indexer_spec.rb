@@ -564,7 +564,7 @@ RSpec.describe DatasetIndexer do
 
   describe 'indexes specimen set' do
     before do
-      obj = build(:dataset, specimen_set: 'specimen A')
+      obj = build(:dataset, specimen_set: ['specimen A'])
       @solr_document = obj.to_solr
     end
     it 'indexes as stored searchable' do

@@ -17,6 +17,7 @@ module RDF
       property 'characterization-methods'
       property 'chemical-composition'
       property 'computational-methods'
+      property 'contact-person'
       property 'crystallographic-structure'
       property 'custom-property'
       property 'data-origin'

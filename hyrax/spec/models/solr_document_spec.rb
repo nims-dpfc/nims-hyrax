@@ -46,18 +46,6 @@ RSpec.describe SolrDocument do
     it { is_expected.to eql ['Alternative Title'] }
   end
 
-  describe '#complex_date' do
-    let(:complex_date) { JSON.parse(solr_document.complex_date).first }
-    describe 'date' do
-      subject { complex_date['date'] }
-      it { is_expected.to eql ['2018-02-14'] }
-    end
-    describe 'description' do
-      subject { complex_date['description'] }
-      it { is_expected.to eql ['Published Date'] }
-    end
-  end
-
   describe '#complex_identifier' do
     let(:complex_identifier) { JSON.parse(solr_document.complex_identifier).first }
     describe 'identifier' do

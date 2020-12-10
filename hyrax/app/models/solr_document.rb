@@ -46,6 +46,10 @@ class SolrDocument
     self[Solrizer.solr_name('alternative_title', :stored_searchable)]
   end
 
+  def date_published
+    self[Solrizer.solr_name('date_published', :stored_searchable)]
+  end
+
   def complex_date
     self[Solrizer.solr_name('complex_date', :displayable)]
   end

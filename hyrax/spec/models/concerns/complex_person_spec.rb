@@ -59,7 +59,7 @@ RSpec.describe ComplexPerson do
       expect(subject.complex_affiliation.first.complex_organization.first.purpose).to eq ['org purpose']
       expect(subject.complex_affiliation.first.complex_organization.first.complex_identifier.first.identifier).to eq ['werqwerqwer']
       expect(subject.complex_affiliation.first.complex_organization.first.complex_identifier.first.scheme).to eq ['Local']
-      expect(subject.contact_person).to eq true
+      expect(subject.contact_person).to eq [true]
       expect(subject.uri).to eq ['http://localhost/person/1234567']
     end
   end
@@ -111,7 +111,7 @@ RSpec.describe ComplexPerson do
           expect(subject.role).to be_empty
           expect(subject.complex_identifier).to be_empty
           expect(subject.complex_affiliation).to be_empty
-          expect(subject.contact_person).to be_nil
+          expect(subject.contact_person).to be_empty
           expect(subject.uri).to be_empty
         end
       end
