@@ -10,10 +10,10 @@ RSpec.feature 'Show Contact form', js: false do
       login_as user
     end
 
-    scenario "should display contact form" do
+    scenario "should display contact link" do
       visit '/contact'
-      expect(page).to have_field 'Your Name', with: user.display_name, readonly: true
-      expect(page).to have_field 'Your Email', with: user.email, readonly: true
+      expect(page).to have_content 'Contact'
+      expect(page).to have_link 'Materials Data Platform DICE Contact Form', 'https://dice.nims.go.jp/en/contact/form.html'
     end
   end
 end
