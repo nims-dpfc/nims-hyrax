@@ -13,7 +13,7 @@ RSpec.feature 'Show Contact form', js: false do
     scenario "should display contact link" do
       visit '/contact'
       expect(page).to have_content 'Contact'
-      expect(page).to have_link 'Materials Data Platform DICE Contact Form', 'https://dice.nims.go.jp/en/contact/form.html'
+      expect(page).to have_link 'Materials Data Platform DICE Contact Form', href: 'https://dice.nims.go.jp/en/contact/form.html'
     end
   end
 end
