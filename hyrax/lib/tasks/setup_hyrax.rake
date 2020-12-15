@@ -48,11 +48,10 @@ namespace :ngdr do
 
 
     ##############################################
-    # Create default administrative set
+    # Create default administrative set and load customized NIMS workflow
     ######
-    Rake::Task['hyrax:default_admin_set:create'].invoke
-    Rake::Task['hyrax:workflow:load'].invoke
     Rake::Task['hyrax:default_collection_types:create'].invoke
+    Rake::Task['ngdr:setup_workflow'].invoke
 
     ##############################################
     # Create languages controlled vocabulary
