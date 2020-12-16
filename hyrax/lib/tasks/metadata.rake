@@ -44,6 +44,20 @@ namespace :metadata do
           # Resource Type (row 9)
           # N/A
 
+          # Contact Person (row 23)
+          work.complex_person.each do |complex_person|
+            if complex_person.role.match(/contact person/i)
+              work.complex_person_attributes = [complex_person.attributes.merge("contact_person" => ["0"])]
+            end
+          end
+
+          # Published date (row 24)
+          if work.published_date.blank?
+            work.complex_date.each do |complex_date|
+              next if complex_date.type != 'Published'
+              work.published_date << complex_date.date
+            end
+          end
           work.save!
         end
       rescue => e
