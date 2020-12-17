@@ -73,6 +73,46 @@ When(/^I create the dataset with:$/) do |table|
   expect(page).to have_content(values[:TITLE])
 end
 
+When(/^I create a draft dataset with:$/) do |table|
+  values = table.hashes.first # table is a table.hashes.keys # => [:TITLE, :SUPERVISOR, :DATA_ORIGIN, :CREATOR, :KEYWORD]
+
+  expect(page).to have_content /Add New Dataset/i
+
+  click_link "Files" # switch tab
+  expect(page).to have_content /Add files/i
+  expect(page).to have_content /Add folder/i
+  within('span#addfiles') do
+    attach_file("files[]", File.join(fixture_path,  'image.jp2'), visible: false)
+    attach_file("files[]", File.join(fixture_path, 'jp2_fits.xml'), visible: false)
+  end
+
+  click_link "Descriptions" # switch tab
+  fill_in('Title', with: values[:TITLE])
+  fill_in('Supervisor', with: values[:SUPERVISOR])
+  select(values[:DATA_ORIGIN], from: 'Data origin')
+  fill_in('dataset[complex_person_attributes][0][name][]', with: values[:CREATOR])
+  fill_in('Keyword', with: values[:KEYWORD])
+  select('Creative Commons BY-SA Attribution-ShareAlike 4.0 International', from: 'dataset[complex_rights_attributes][0][rights][]')
+
+  # With selenium and the chrome driver, focus remains on the
+  # select box. Click outside the box so the next line can't find
+  # its element
+  find('body').click
+  choose('dataset_visibility_open')
+  expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
+  check('agreement')
+
+  click_on('Save Draft')
+
+  expect(page).to have_content(values[:TITLE])
+end
+
+Then("the dataset that is created should be in a draft workflow state") do
+  dataset = Dataset.last
+  workflow_state = dataset.to_sipity_entity.reload.workflow_state_name
+  expect(workflow_state).to eq "draft"
+end
+
 Then(/^I should see the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
   # first, verify @datasets is present and has some data
   expect(@datasets[access]).to be_present

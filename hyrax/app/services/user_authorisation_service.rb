@@ -16,6 +16,9 @@ class UserAuthorisationService
   end
 
   def update_attributes
+    # REMOVE THIS -- FOR LOCAL TESTING ONLY
+    return true
+    
     success = false
     if enabled? && records.length == 1
       records.first.tap do |record|

@@ -64,6 +64,18 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
+  ##
+  # We need a local term to store whether the work is a draft
+  property :draft, predicate: 'http://local.authority/draft'
+
+  ##
+  # Convenience method to determine whether a work is in a draft state
+  def draft?
+    return false if draft.empty?
+    return false unless draft.first.to_s == 'true'
+    true
+  end
+
   property :complex_instrument, predicate: ::RDF::Vocab::NimsRdp.instrument, class_name: "ComplexInstrument"
 
   property :origin_system_provenance, predicate: ::RDF::Vocab::NimsRdp['origin-system-provenance'], multiple: false do |index|
