@@ -120,46 +120,25 @@ a.btn-primary:active {
 
 // ------------- label -----------------
 .label {
-//  background-color: inherit;
   border: none;
   border-radius: 0em;
 }
 
-.label-primary {
-//  color: $mdr-green;
-}
-
-.label-success {
-//  color: $mdr-green;
-}
-
-.label-info {
-//  color: #2c76c7;
-}
-
-.label-warning {
-//  color: #e65c00;
-}
-
-.label-danger {
-//  color: #FF0000;
-}
-
 .label-title label {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .label-row label {
-    color: #000000;
-    font-style: italic;
+  color: #000000;
+  font-style: italic;
 }
 
 .status-labels {
-    padding: 15px 0;
+  padding: 15px 0;
 }
 
 .status-labels > span.label {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 // ------------- dropdown --------------
