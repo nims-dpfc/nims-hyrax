@@ -14,8 +14,10 @@ module Hyrax
 
     def create
       safe_dataset_params = params['dataset'].permit(::Hyrax::DatasetForm.build_permitted_params)
+
       # NB: need to cleanup twice
       params['dataset'] = cleanup_params(cleanup_instrument_and_specimen_type(cleanup_params(safe_dataset_params.to_h)))
+      params['dataset']['draft'] = ['true'] if params["save_draft_with_files"] == "Save Draft"
       super
     end
 

@@ -26,7 +26,8 @@ module Hyrax
       :complex_identifier,
       :data_origin, :complex_instrument, :origin_system_provenance,
       :properties_addressed, :complex_relation, :specimen_set,
-      :complex_specimen_type, :synthesis_and_processing, :custom_property
+      :complex_specimen_type, :synthesis_and_processing, :custom_property,
+      :draft
     ]
 
     self.required_fields -= [
@@ -46,7 +47,7 @@ module Hyrax
         # Description tab order determined here
         :first_published_url, :supervisor_approval,
         :title, :alternative_title, :data_origin, :description, :keyword,
-        :specimen_set, :complex_person, 
+        :specimen_set, :complex_person,
         :complex_identifier, # not using this
         :complex_date, :complex_rights, :complex_version, :complex_relation,
         :custom_property

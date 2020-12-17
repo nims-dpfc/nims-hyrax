@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Default workflow', type: :request do
+RSpec.describe 'NIMS workflow', type: :request do
 
   context 'a newly created admin set' do
     let(:admin) { FactoryBot.create(:user, :admin) }
@@ -13,6 +13,12 @@ RSpec.describe 'Default workflow', type: :request do
       a.save
       Hyrax::AdminSetCreateService.call(admin_set: a, creating_user: admin)
       expect(a.active_workflow.name).to eq "nims_mediated_deposit"
+    end
+  end
+
+  context 'workflow states' do
+    xit "has a draft state" do
+
     end
   end
 end
