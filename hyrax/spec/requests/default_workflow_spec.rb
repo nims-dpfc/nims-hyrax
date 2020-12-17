@@ -16,9 +16,34 @@ RSpec.describe 'NIMS workflow', type: :request do
     end
   end
 
-  context 'workflow states' do
-    xit "has a draft state" do
+  describe 'workflow states' do
+    let(:admin) { FactoryBot.create(:user, :admin) }
+    let(:attributes_for_actor) { { } }
 
+    before do
+      DefaultAdminSetWorkflowService.run
+    end
+
+    context 'not a draft' do
+      let(:dataset) { FactoryBot.build(:dataset, title: ['Not a Draft'], depositor: admin.user_key) }
+
+      it "has a pending_review workflow state" do
+        env = Hyrax::Actors::Environment.new(dataset, ::Ability.new(admin), attributes_for_actor)
+        Hyrax::CurationConcern.actor.create(env)
+        post_actor_stack_dataset = Dataset.last
+        expect(post_actor_stack_dataset.to_sipity_entity.workflow_state_name).to eq "pending_review"
+      end
+    end
+
+    context 'is a draft' do
+      let(:dataset) { FactoryBot.build(:dataset, title: ['Draft Dataset'], draft: ['true'], depositor: admin.user_key) }
+
+      it "has a draft workflow state" do
+        env = Hyrax::Actors::Environment.new(dataset, ::Ability.new(admin), attributes_for_actor)
+        Hyrax::CurationConcern.actor.create(env)
+        post_actor_stack_dataset = Dataset.last
+        expect(post_actor_stack_dataset.to_sipity_entity.workflow_state_name).to eq "draft"
+      end
     end
   end
 end
