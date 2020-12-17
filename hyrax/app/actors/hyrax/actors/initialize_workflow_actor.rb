@@ -1,5 +1,6 @@
 module Hyrax
   module Actors
+    # This file copied from Hyrax 2.9.0 so we can customize the behavior of the `create_workflow` method.
     # Responsible for generating the workflow for the given curation_concern.
     # Done through direct collaboration with the configured Hyrax::Actors::InitializeWorkflowActor.workflow_factory
     #

@@ -65,6 +65,18 @@ class Publication < ActiveFedora::Base
 
   property :complex_event, predicate: ::RDF::Vocab::ESciDocPublication.event, class_name: 'ComplexEvent'
 
+  ##
+  # We need a local term to store whether the work is a draft
+  property :draft, predicate: 'http://local.authority/draft'
+
+  ##
+  # Convenience method to determine whether a work is in a draft state
+  def draft?
+    return false if draft.empty?
+    return false unless draft.first.to_s == 'true'
+    true
+  end
+
   property :issue, predicate: ::RDF::Vocab::ESciDocPublication.issue, multiple: false do |index|
     index.as :stored_searchable
   end
