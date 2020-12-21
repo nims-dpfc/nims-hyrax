@@ -4,6 +4,11 @@
 version: '3'
 
 services:
+  app: &app
+    build:
+      args:
+        FLUENTD_URL: ${FLUENTD_URL}
+
   web:
     ports:
       - 3000:3000
