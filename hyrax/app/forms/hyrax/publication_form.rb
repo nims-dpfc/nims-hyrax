@@ -194,6 +194,7 @@ module Hyrax
       permitted << :licensed_date
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_person_attributes: permitted_person_params }
+      permitted << { complex_relation_attributes: permitted_relation_params }
       permitted << { complex_version_attributes: permitted_version_params }
       permitted << { complex_event_attributes: permitted_event_params }
       permitted << { complex_source_attributes: permitted_source_params }
