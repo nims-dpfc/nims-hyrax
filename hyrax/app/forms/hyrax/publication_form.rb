@@ -125,6 +125,18 @@ module Hyrax
       ]
     end
 
+    def self.permitted_relation_params
+      [:id,
+       :_destroy,
+       {
+         title: [],
+         url: [],
+         complex_identifier_attributes: permitted_identifier_params,
+         relationship: []
+       }
+      ]
+    end
+
     def self.permitted_rights_params
       [:id,
        :_destroy,

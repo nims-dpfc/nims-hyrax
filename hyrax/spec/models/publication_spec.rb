@@ -553,4 +553,27 @@ RSpec.describe Publication do
       expect(@obj.note_to_admin).to eq 'This is a sample publication'
     end
   end
+
+  describe 'complex_relation' do
+    it 'creates a relation active triple resource with all the attributes' do
+      @obj = build(:publication,
+        complex_relation_attributes: [{
+          title: 'A related item',
+          url: 'http://example.com/relation',
+          complex_identifier_attributes: [{
+            identifier: ['123456'],
+            label: ['local']
+          }],
+          relationship: 'IsPartOf'
+        }]
+      )
+      expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_relation.first.title).to eq ['A related item']
+      expect(@obj.complex_relation.first.url).to eq ['http://example.com/relation']
+      expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
+      expect(@obj.complex_relation.first.complex_identifier.first.label).to eq ['local']
+      expect(@obj.complex_relation.first.relationship).to eq ['IsPartOf']
+    end
+  end
 end
