@@ -121,5 +121,6 @@ class Publication < ActiveFedora::Base
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_event, reject_if: :event_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_source, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
 end
