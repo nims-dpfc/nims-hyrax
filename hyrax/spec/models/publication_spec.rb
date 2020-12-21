@@ -547,4 +547,10 @@ RSpec.describe Publication do
     end
   end
 
+  describe 'note_to_admin' do
+    it 'has note_to_admin as singular' do
+      @obj = build(:publication, note_to_admin: 'This is a sample publication')
+      expect(@obj.note_to_admin).to eq 'This is a sample publication'
+    end
+  end
 end
