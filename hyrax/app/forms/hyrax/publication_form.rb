@@ -22,7 +22,7 @@ module Hyrax
       :title, :alternative_title, :rights_statement, :complex_person, :description, :keyword, :date_published,
       :publisher, :resource_type,
       :complex_identifier, :complex_source, :complex_version, :complex_relation,
-      :complex_event, :language, :licensed_date, :custom_property
+      :complex_event, :language, :licensed_date, :custom_property, :note_to_admin
     ]
 
     self.required_fields -= [
@@ -44,7 +44,7 @@ module Hyrax
         :title, :alternative_title, :language, :resource_type, :description, :keyword,
         :complex_person, :publisher, :date_published, :rights_statement, :licensed_date,
         :complex_identifier, :complex_source, :complex_version, :complex_relation,
-        :custom_property
+        :custom_property, :note_to_admin
       ]
     end
 
