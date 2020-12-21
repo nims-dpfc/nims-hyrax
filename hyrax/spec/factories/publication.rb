@@ -149,7 +149,8 @@ FactoryBot.define do
           start_page: '4',
           title: 'Test journal',
           total_number_of_pages: '8',
-          volume: '3'
+          volume: '3',
+          issn: '1234-5678'
         }]
       }
     end

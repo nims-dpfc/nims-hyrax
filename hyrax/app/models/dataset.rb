@@ -51,6 +51,8 @@ class Dataset < ActiveFedora::Base
 
   property :complex_organization, predicate: ::RDF::Vocab::ORG.organization, class_name:"ComplexOrganization"
 
+  property :complex_event, predicate: ::RDF::Vocab::ESciDocPublication.event, class_name: 'ComplexEvent'
+
   property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'] do |index|
     index.as :stored_searchable, :facetable
   end
@@ -84,6 +86,8 @@ class Dataset < ActiveFedora::Base
   #   This could be used to describe relationships by giving more context to the relation
   #   could be used in place of part_of and related_url
   property :complex_relation, predicate: ::RDF::Vocab::DC.relation, class_name:"ComplexRelation"
+
+  property :complex_source, predicate: ::RDF::Vocab::ESciDocPublication.source, class_name: 'ComplexSource'
 
   # TODO - This is required
   property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'] do |index|
@@ -132,6 +136,8 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_event, reject_if: :event_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_source, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
 end
