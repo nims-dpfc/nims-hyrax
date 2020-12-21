@@ -12,6 +12,7 @@ RSpec.describe Hyrax::PublicationForm do
       it do
         expect(described_class).to receive(:permitted_identifier_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_person_params).at_least(:once).and_call_original
+        expect(described_class).to receive(:permitted_relation_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_version_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_event_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_source_params).at_least(:once).and_call_original
