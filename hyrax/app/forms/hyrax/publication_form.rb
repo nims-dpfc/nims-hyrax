@@ -171,7 +171,8 @@ module Hyrax
          start_page: [],
          title: [],
          total_number_of_pages: [],
-         volume: []
+         volume: [],
+         issn: []
        }
       ]
     end

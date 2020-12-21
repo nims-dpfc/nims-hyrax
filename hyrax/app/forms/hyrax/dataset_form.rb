@@ -26,7 +26,7 @@ module Hyrax
       :complex_organization,
       :complex_identifier,
       :data_origin, :complex_instrument, :origin_system_provenance,
-      :properties_addressed, :complex_relation, :specimen_set,
+      :properties_addressed, :complex_relation, :complex_event, :specimen_set,
       :complex_specimen_type, :synthesis_and_processing, :custom_property,
       :note_to_admin
     ]
@@ -75,7 +75,7 @@ module Hyrax
     end
 
     NESTED_ASSOCIATIONS = [:complex_identifier, :complex_instrument,
-      :complex_organization, :complex_person, :complex_relation,
+      :complex_organization, :complex_person, :complex_relation, :complex_event,
       :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
@@ -281,6 +281,36 @@ module Hyrax
       ]
     end
 
+    def self.permitted_event_params
+      [:id,
+       :_destroy,
+       {
+         title: [],
+         place: [],
+         start_date: [],
+         end_date: [],
+         invitation_status: []
+       }
+      ]
+    end
+
+    def self.permitted_source_params
+      [:id,
+       :_destroy,
+       {
+         alternative_title: [],
+         end_page: [],
+         issue: [],
+         sequence_number: [],
+         start_page: [],
+         title: [],
+         total_number_of_pages: [],
+         volume: [],
+         issn: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << :licensed_date
@@ -291,6 +321,8 @@ module Hyrax
       permitted << { complex_relation_attributes: permitted_relation_params }
       permitted << { complex_specimen_type_attributes: permitted_specimen_type_params }
       permitted << { complex_version_attributes: permitted_version_params }
+      permitted << { complex_event_attributes: permitted_event_params }
+      permitted << { complex_source_attributes: permitted_source_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
