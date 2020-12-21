@@ -81,7 +81,11 @@ class Publication < ActiveFedora::Base
     index.as :stored_searchable, :sortable, type: :integer
   end
 
+  property :complex_relation, predicate: ::RDF::Vocab::DC.relation, class_name: 'ComplexRelation'
+
   property :complex_source, predicate: ::RDF::Vocab::ESciDocPublication.source, class_name: 'ComplexSource'
+
+  property :custom_property, predicate: ::RDF::Vocab::NimsRdp['custom-property'], class_name: 'ComplexKeyValue'
 
   property :supervisor_approval, predicate: ::RDF::Vocab::NimsRdp['supervisor-approval']
 
