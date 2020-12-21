@@ -21,8 +21,8 @@ module Hyrax
       :first_published_url, :supervisor_approval,
       :title, :alternative_title, :rights_statement, :complex_person, :description, :keyword, :date_published,
       :publisher, :resource_type,
-      :complex_identifier, :complex_source, :complex_version,
-      :complex_event, :language, :licensed_date
+      :complex_identifier, :complex_source, :complex_version, :complex_relation,
+      :complex_event, :language, :licensed_date, :custom_property
     ]
 
     self.required_fields -= [
@@ -37,6 +37,17 @@ module Hyrax
       :description, :keyword, :date_published, :rights_statement
     ]
 
+    def metadata_tab_terms
+      [
+        # Description tab order determined here
+        :first_published_url, :supervisor_approval,
+        :title, :alternative_title, :language, :resource_type, :description, :keyword,
+        :complex_person, :publisher, :date_published, :rights_statement, :licensed_date,
+        :complex_identifier, :complex_source, :complex_version, :complex_relation,
+        :custom_property
+      ]
+    end
+
     NESTED_ASSOCIATIONS = [:complex_identifier,
       :complex_person, :complex_version, :complex_event, :complex_source].freeze
 
@@ -48,6 +59,16 @@ module Hyrax
        {
          job_title: [],
          complex_organization_attributes: permitted_organization_params,
+       }
+      ]
+    end
+
+    def self.permitted_custom_property_params
+      [:id,
+       :_destroy,
+       {
+         label: [],
+         description: []
        }
       ]
     end
@@ -163,6 +184,7 @@ module Hyrax
       permitted << { complex_version_attributes: permitted_version_params }
       permitted << { complex_event_attributes: permitted_event_params }
       permitted << { complex_source_attributes: permitted_source_params }
+      permitted << { custom_property_attributes: permitted_custom_property_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end
