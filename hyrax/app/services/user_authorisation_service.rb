@@ -1,7 +1,7 @@
 require 'net/ldap'
 class UserAuthorisationService
   # This service is called immediately after authentication (see config/initializers/devise.rb). It updates the user's
-  # authorisation attributes from an LDAP source (USER_AUTHORISATION_LDAP_HOST). This is necessary as the CAS server
+  # authorisation attributes from an LDAP source (LDAP_HOST). This is necessary as the CAS server
   # does not provide employeeType/email etc.
   # NB: In the future, this service may query a TSV file on a network drive rather than an LDAP server.
 
@@ -10,9 +10,7 @@ class UserAuthorisationService
   end
 
   def enabled?
-    ENV['USER_AUTHORISATION_LDAP_HOST'].present? &&
-        ENV['USER_AUTHORISATION_LDAP_BASE'].present? &&
-        ENV['USER_AUTHORISATION_LDAP_ATTRIBUTE'].present?
+    ENV['MDR_DEVISE_AUTH_MODULE'] == 'ldap_authenticatable'
   end
 
   def update_attributes
@@ -25,7 +23,7 @@ class UserAuthorisationService
         success = true
       end
     else
-      puts "WARNING: UserAuthorisationService failed to retrieve user attributes, check USER_AUTHORISATION_LDAP_HOST, USER_AUTHORISATION_LDAP_BASE, USER_AUTHORISATION_LDAP_ATTRIBUTE env vars"
+      puts "WARNING: UserAuthorisationService failed to retrieve user attributes, check MDR_DEVISE_AUTH_MODULE, LDAP_HOST, LDAP_BASE, LDAP_ATTRIBUTE env vars"
     end
     success
   end
@@ -33,10 +31,10 @@ class UserAuthorisationService
   private
 
   def server
-    @server ||= Net::LDAP.new(host: ENV['USER_AUTHORISATION_LDAP_HOST'], port: ENV.fetch('USER_AUTHORISATION_LDAP_PORT', 389))
+    @server ||= Net::LDAP.new(host: ENV['LDAP_HOST'], port: ENV.fetch('LDAP_PORT', 389))
   end
 
   def records
-    @records ||= server.search(base: ENV['USER_AUTHORISATION_LDAP_BASE'], filter: Net::LDAP::Filter.eq(ENV['USER_AUTHORISATION_LDAP_ATTRIBUTE'], @user.username))
+    @records ||= server.search(base: ENV['LDAP_BASE'], filter: Net::LDAP::Filter.eq(ENV['LDAP_ATTRIBUTE'], @user.username))
   end
 end

@@ -2,6 +2,7 @@ class CatalogController < ApplicationController
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
   include BlacklightOaiProvider::CatalogControllerBehavior
+  include Nims::BlacklightHelper
 
   # This filter applies the hydra access controls
   before_action :enforce_show_permissions, only: :show
@@ -65,7 +66,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false
-    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link, if: lambda { |context, field_config, document| context.can?(:read_abstract, document.hydra_model) }
+    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :render_truncated_description, if: lambda { |context, field_config, document| context.can?(:read_abstract, document.hydra_model) }
     config.add_index_field solr_name('keyword', :stored_searchable), itemprop: 'keywords', link_to_search: solr_name('keyword', :facetable), if: lambda { |context, field_config, document| context.can?(:read_keyword, document.hydra_model) }
     config.add_index_field solr_name('subject', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject', :facetable), if: lambda { |context, field_config, document| context.can?(:read_subject, document.hydra_model) }
     # config.add_index_field solr_name('creator', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable)
@@ -257,6 +258,8 @@ class CatalogController < ApplicationController
         pf: solr_name
       }
     end
+
+    config.show.document_actions = {}
 
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and

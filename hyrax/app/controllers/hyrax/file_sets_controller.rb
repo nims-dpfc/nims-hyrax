@@ -39,7 +39,7 @@ module Hyrax
     def show
       respond_to do |wants|
         wants.html { presenter }
-        wants.json { presenter }
+        # wants.json { presenter }
         additional_response_formats(wants)
       end
     end

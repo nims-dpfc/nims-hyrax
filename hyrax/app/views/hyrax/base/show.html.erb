@@ -32,7 +32,9 @@
               <%= render 'work_description', presenter: @presenter %>
             <% end %>
             <%= render 'metadata', presenter: @presenter %>
-            <%= nims_media_display(@presenter.representative_presenter, datatable: true) if @presenter&.representative_presenter&.respond_to?(:csv?) && @presenter&.representative_presenter&.csv? %>
+            <% @presenter.member_presenters.each do |member_presenter| %>
+              <%= nims_media_display(member_presenter, datatable: true) if member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv? %>
+            <% end %>
           </div>
 
           <div class="col-sm-12">
