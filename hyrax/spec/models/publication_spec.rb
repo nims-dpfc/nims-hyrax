@@ -547,6 +547,13 @@ RSpec.describe Publication do
     end
   end
 
+  describe 'nims_pid' do
+    it 'has note_to_admin as singular' do
+      @obj = build(:publication, nims_pid: 'nims:12345678')
+      expect(@obj.nims_pid).to eq 'nims:12345678'
+    end
+  end
+
   describe 'note_to_admin' do
     it 'has note_to_admin as singular' do
       @obj = build(:publication, note_to_admin: 'This is a sample publication')
