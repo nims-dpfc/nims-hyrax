@@ -20,7 +20,7 @@ module Hyrax
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
       :title, :alternative_title, :rights_statement, :complex_person, :description, :keyword, :date_published,
-      :publisher, :resource_type,
+      :publisher, :resource_type, :complex_date, :manuscript_type,
       :complex_identifier, :complex_source, :complex_version, :complex_relation,
       :complex_event, :language, :licensed_date, :custom_property, :note_to_admin
     ]
@@ -42,13 +42,14 @@ module Hyrax
         # Description tab order determined here
         :first_published_url, :supervisor_approval,
         :title, :alternative_title, :language, :resource_type, :description, :keyword,
-        :complex_person, :publisher, :date_published, :rights_statement, :licensed_date,
+        :complex_person, :manuscript_type, :publisher, :date_published, :rights_statement,
+        :licensed_date,
         :complex_identifier, :complex_source, :complex_version, :complex_relation,
         :custom_property, :note_to_admin
       ]
     end
 
-    NESTED_ASSOCIATIONS = [:complex_identifier,
+    NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,
       :complex_person, :complex_version, :complex_event, :complex_source].freeze
 
     protected
@@ -191,6 +192,7 @@ module Hyrax
 
     def self.build_permitted_params
       permitted = super
+      permitted << { complex_date_attributes: permitted_date_params }
       permitted << :licensed_date
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_person_attributes: permitted_person_params }

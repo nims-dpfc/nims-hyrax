@@ -20,8 +20,8 @@ module Hyrax
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
       :title, :alternative_title, :rights_statement, :description, :keyword,
-      :publisher, :language, :licensed_date, :date_created, :date_published,
-      :publisher, :subject, :complex_person,
+      :publisher, :language, :manuscript_type, :licensed_date, :date_created,
+      :date_published, :publisher, :subject, :complex_person, :complex_date,
       :complex_version, :characterization_methods, :computational_methods,
       :complex_organization,
       :complex_identifier,
@@ -47,10 +47,11 @@ module Hyrax
       [
         # Description tab order determined here
         :first_published_url, :supervisor_approval,
-        :title, :alternative_title, :rights_statement, :data_origin, :description, :keyword, :date_published, :publisher,
-        :specimen_set, :complex_person,
+        :title, :alternative_title, :rights_statement, :data_origin,
+        :description, :keyword, :date_published, :publisher,
+        :specimen_set, :complex_person, :manuscript_type,
         :complex_identifier, # not using this
-        :complex_version, :complex_relation,
+        :complex_date, :complex_version, :complex_relation,
         :custom_property, :language, :date_created,
         :note_to_admin
       ]
@@ -74,7 +75,7 @@ module Hyrax
       [ :complex_specimen_type ]
     end
 
-    NESTED_ASSOCIATIONS = [:complex_identifier, :complex_instrument,
+    NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
       :complex_organization, :complex_person, :complex_relation, :complex_event,
       :complex_specimen_type, :complex_version, :custom_property].freeze
 
@@ -136,6 +137,7 @@ module Hyrax
        :_destroy,
        {
          alternative_title: [],
+         complex_date_attributes: permitted_date_params,
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
          instrument_function_attributes: permitted_instrument_function_params,
@@ -313,6 +315,7 @@ module Hyrax
 
     def self.build_permitted_params
       permitted = super
+      permitted << { complex_date_attributes: permitted_date_params }
       permitted << :licensed_date
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_instrument_attributes: permitted_instrument_params }
