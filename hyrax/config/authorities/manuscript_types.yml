@@ -1,0 +1,13 @@
+terms:
+  - id: Original
+    term: Author's original (Preprint)
+    active: true
+  - id: Accepted
+    term: Accepted manuscript
+    active: true
+  - id: Proof
+    term: Proof
+    active: true
+  - id: Version
+    term: Version of record (Published version)
+    active: true

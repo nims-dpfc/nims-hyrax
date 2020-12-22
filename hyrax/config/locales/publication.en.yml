@@ -9,7 +9,7 @@ en:
   simple_form:
     labels:
       publication:
-        complex_date:             "Date"
+        complex_date:             "Other Date"
         complex_event:            "Conference/Event"
         complex_identifier:       "Identifier"
         complex_organization:     "Organization"

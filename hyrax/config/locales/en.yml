@@ -11,7 +11,7 @@ en:
       complex_affiliation:      "Affiliation"
       complex_chemical_composition: "Chemical composition"
       complex_crystallographic_structure: "Crystallographic structure"
-      complex_date:             "Date"
+      complex_date:             "Other Date"
       complex_event:            "Event"
       complex_identifier:       "Identifier"
       complex_instrument:       "Instrument"

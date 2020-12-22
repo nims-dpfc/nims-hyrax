@@ -1,4 +1,6 @@
 require "./lib/vocabularies/nims_rdp"
+require "./lib/vocabularies/oaire_terms"
+
 class Dataset < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
 
@@ -118,6 +120,10 @@ class Dataset < ActiveFedora::Base
   end
 
   property :date_published, predicate: ::RDF::Vocab::NimsRdp['date_published'], multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :manuscript_type, predicate: ::RDF::Vocab::OaireTerms.version, multiple: false do |index|
     index.as :stored_searchable, :facetable
   end
 
