@@ -2,7 +2,7 @@
   "name": "nims-hyrax",
   "private": true,
   "repository": "git@github.com:antleaf/nims-hyrax.git",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "dependencies": {
     "universalviewer": "3.0.16"
   },
