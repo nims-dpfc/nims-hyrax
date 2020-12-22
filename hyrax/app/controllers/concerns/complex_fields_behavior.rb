@@ -93,7 +93,15 @@ module ComplexFieldsBehavior
       attribute.each do |k, v|
         v = cleanup_params(v) if is_complex?(k)
         v = cleanup_params(v) if v.is_a? Array
-        next if v.blank?
+
+        # Instead of skipping blanks, force them to empty strings so dirty tracking works
+        next if k == "find_child_work"
+
+        if v.blank? && v.is_a?(Array)
+          v = ['']
+        elsif v.blank?
+          v = ''
+        end
         new_attribute[k] = if skip_controlled.include?(k) || k.end_with?('_attributes')
                              v
                            else

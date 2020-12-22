@@ -28,7 +28,8 @@ class DatasetIndexer < NgdrIndexer
         'data_origin',
         'properties_addressed',
         'synthesis_and_processing',
-        'characterization_methods'
+        'characterization_methods',
+        'specimen_set'
       ]
       dataset_facet_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :facetable)

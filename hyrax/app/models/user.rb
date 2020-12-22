@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   has_many :uploaded_files, class_name: 'Hyrax::UploadedFile', dependent: :nullify
 
+  before_create :set_user_identifier
+
   if Blacklight::Utils.needs_attr_accessible?
     attr_accessible :username, :email, :password, :password_confirmation
   end
@@ -40,6 +42,9 @@ class User < ApplicationRecord
     self.display_name = Devise::LDAP::Adapter.get_ldap_param(username, "cn").first
     self.employee_type_code = Devise::LDAP::Adapter.get_ldap_param(username, "employeeType").first.try(:first)
     self.password = Devise.friendly_token[0, 20]
+  end
+
+  def set_user_identifier
     # TODO: This will be replaced by NIMS PID when the CAS server is online
     self.user_identifier = Noid::Rails::Service.new.mint
   end

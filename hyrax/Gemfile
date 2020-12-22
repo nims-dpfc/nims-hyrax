@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '>= 5.0.6'
+gem 'rails', '~> 5.2.4', '>= 5.2.4.4'
 # Use Puma as the app server
 gem 'puma', '~> 3.12'
 # Use SCSS for stylesheets
@@ -54,7 +54,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'hyrax', '~> 2.6'
+gem 'hyrax', '~> 2.9'
 group :development, :test do
   gem 'solr_wrapper', '~> 2.0'
 end
@@ -81,6 +81,8 @@ gem 'devise_cas_authenticatable'
 gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > hydra-editor
 
 gem 'riiif', '~> 2.0'
+gem 'jsonapi-rails', '~> 0.4.0'
+gem 'faraday'
 
 gem 'ro-crate-ruby', git: 'https://github.com/fbacall/ro-crate-ruby'
 
@@ -89,7 +91,7 @@ group :production do
   gem 'exception_notification-rake', '~> 0.3.1'
 end
 
-gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'feature/prep_for_new_release'
+gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'develop'
 gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_oai_provider.git', branch: 'master'
 
 group :test do
@@ -99,6 +101,8 @@ group :test do
   gem 'webdrivers', '~> 4.1'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+  gem 'rspec-activemodel-mocks'
 end
 
 gem 'coveralls', require: false
+gem 'rinku'
