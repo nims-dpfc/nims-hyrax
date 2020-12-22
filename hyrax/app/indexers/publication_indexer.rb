@@ -7,6 +7,7 @@ class PublicationIndexer < NgdrIndexer
   include ComplexField::PersonIndexer
   include ComplexField::RightsIndexer
   include ComplexField::VersionIndexer
+  include ComplexField::RelationIndexer
   include ComplexField::EventIndexer
   include ComplexField::SourceIndexer
 

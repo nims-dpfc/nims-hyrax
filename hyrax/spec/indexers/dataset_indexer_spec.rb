@@ -962,4 +962,91 @@ RSpec.describe DatasetIndexer do
     end
   end
 
+  describe 'indexes a complex event' do
+    before do
+      events = [
+        {
+          end_date: '2019-01-01',
+          invitation_status: true,
+          place: '221B Baker Street',
+          start_date: '2018-12-25',
+          title: 'A Title'
+        }, {
+          end_date: '2019-02-02',
+          invitation_status: true,
+          place: 'number 32',
+          start_date: '2018-12-26',
+          title: '2nd Title'
+        }, {
+          end_date: '2019-03-03',
+          invitation_status: true,
+          place: 'number 64',
+          start_date: '2018-12-27',
+          title: '3rd event'
+        }
+      ]
+      obj = build(:dataset, complex_event_attributes: events)
+      @solr_document = obj.to_solr
+    end
+    it 'indexes as displayable' do
+      expect(@solr_document).to include('complex_event_ssm')
+      expect(JSON.parse(@solr_document['complex_event_ssm'])).not_to be_empty
+    end
+    it 'indexes title as stored searchable' do
+      expect(@solr_document['complex_event_title_tesim']).to match_array(['A Title', '2nd Title', '3rd event'])
+    end
+    it 'indexes place as stored searchable' do
+      expect(@solr_document['complex_event_place_tesim']).to match_array(['221B Baker Street', 'number 32', 'number 64'])
+    end
+  end
+
+  describe 'indexes a complex source' do
+    before do
+      source = [
+        {
+          complex_person_attributes: [{
+            name: 'AR',
+            role: 'Editor'
+          }],
+          end_page: '12',
+          issue: '34',
+          sequence_number: '1.2.2',
+          start_page: '4',
+          title: 'Test journal',
+          total_number_of_pages: '8',
+          volume: '3'
+        }, {
+          complex_person_attributes: [{
+            name: 'RN',
+            role: 'Joint editor'
+          }],
+          end_page: '47',
+          issue: '2.3',
+          sequence_number: '2.3.7',
+          start_page: '41',
+          title: 'Journal 2',
+          total_number_of_pages: '7',
+          volume: '376'
+        }
+      ]
+      obj = build(:publication, complex_source_attributes: source)
+      @solr_document = obj.to_solr
+    end
+    it 'indexes source as displayable' do
+      expect(@solr_document).to include('complex_source_ssm')
+      expect(JSON.parse(@solr_document['complex_source_ssm'])).not_to be_empty
+    end
+    it 'indexes title as stored searchable' do
+      expect(@solr_document['complex_source_title_tesim']).to match_array(['Test journal', 'Journal 2'])
+    end
+    it 'indexes issue as stored searchable' do
+      expect(@solr_document['complex_source_issue_tesim']).to match_array(['34', '2.3'])
+    end
+    it 'indexes sequence_number as stored searchable' do
+      expect(@solr_document['complex_source_sequence_number_tesim']).to match_array(['1.2.2', '2.3.7'])
+    end
+    it 'indexes volume as stored searchable' do
+      expect(@solr_document['complex_source_volume_tesim']).to match_array(['3', '376'])
+    end
+  end
 end
