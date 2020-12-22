@@ -1028,8 +1028,7 @@ RSpec.describe DatasetIndexer do
           volume: '376'
         }
       ]
-    end
-    obj = build(:dataset, complex_source_attributes: source)
+      obj = build(:publication, complex_source_attributes: source)
       @solr_document = obj.to_solr
     end
     it 'indexes source as displayable' do
@@ -1047,14 +1046,6 @@ RSpec.describe DatasetIndexer do
     end
     it 'indexes volume as stored searchable' do
       expect(@solr_document['complex_source_volume_tesim']).to match_array(['3', '376'])
-    end
-    it 'index by person role as stored searchable' do
-      expect(@solr_document['complex_person_editor_tesim']).to match_array(['AR'])
-      expect(@solr_document['complex_person_joint_editor_tesim']).to match_array(['RN'])
-    end
-    it 'index by person role as facetable' do
-      expect(@solr_document['complex_person_editor_sim']).to match_array(['AR'])
-      expect(@solr_document['complex_person_joint_editor_sim']).to match_array(['RN'])
     end
   end
 end
