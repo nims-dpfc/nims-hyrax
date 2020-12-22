@@ -318,7 +318,8 @@ RSpec.describe DatasetIndexer do
       instruments = [{
         alternative_title: 'Another instrument title',
         complex_date_attributes: [{
-          date: ['2018-02-14']
+          date: ['2018-02-14'],
+          description: ['Registered']
         }],
         description: 'Instrument description',
         complex_identifier_attributes: [{
@@ -366,7 +367,7 @@ RSpec.describe DatasetIndexer do
         alternative_title: 'Another instrument title 2',
         complex_date_attributes: [{
           date: ['2019-02-14'],
-          description: ['Processed']
+          description: ['Registered']
         }],
         description: 'Instrument description 2',
         complex_identifier_attributes: [{
@@ -428,10 +429,10 @@ RSpec.describe DatasetIndexer do
       expect(@solr_document['instrument_alternative_title_tesim']).to match_array(['Another instrument title', 'Another instrument title 2'])
     end
     it 'indexes date by type as dateable' do
-      expect(@solr_document['complex_date_processed_dtsim']).to match_array(["2018-02-14T00:00:00Z", "2019-02-14T00:00:00Z"])
+      expect(@solr_document['complex_date_registered_dtsim']).to match_array(["2018-02-14T00:00:00Z", "2019-02-14T00:00:00Z"])
     end
     it 'indexes date by type as displayable' do
-      expect(@solr_document['complex_date_processed_ssm']).to match_array(["2018-02-14", "2019-02-14"])
+      expect(@solr_document['complex_date_registered_ssm']).to match_array(["2018-02-14", "2019-02-14"])
     end
     it 'indexes description as stored searchable' do
       expect(@solr_document['instrument_description_tesim']).to match_array(['Instrument description', 'Instrument description 2'])
