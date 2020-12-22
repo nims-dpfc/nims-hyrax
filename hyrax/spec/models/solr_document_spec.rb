@@ -4,7 +4,7 @@ RSpec.describe SolrDocument do
   let(:model) do
     build(:dataset,
           alternative_title: 'Alternative Title',
-          complex_date_attributes: [{ date: ['2018-02-14'], description: 'Published Date' }],
+          date_published: '2018-02-14',
           complex_identifier_attributes: [{ identifier: ['123456'], label: ['Local'] }],
           complex_instrument_attributes: [{
             complex_date_attributes: [{ date: ['2018-01-28'] }],
@@ -34,7 +34,7 @@ RSpec.describe SolrDocument do
             complex_identifier_attributes: [{ identifier: ['123456'] }],
             relationship: 'IsPartOf'
           }],
-          specimen_set: 'Specimen Set',
+          specimen_set: ['Specimen Set'],
           synthesis_and_processing: ['Synthesis and processing methods'],
           custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }]
     )
@@ -44,18 +44,6 @@ RSpec.describe SolrDocument do
   describe '#alternative_title' do
     subject { solr_document.alternative_title }
     it { is_expected.to eql ['Alternative Title'] }
-  end
-
-  describe '#complex_date' do
-    let(:complex_date) { JSON.parse(solr_document.complex_date).first }
-    describe 'date' do
-      subject { complex_date['date'] }
-      it { is_expected.to eql ['2018-02-14'] }
-    end
-    describe 'description' do
-      subject { complex_date['description'] }
-      it { is_expected.to eql ['Published Date'] }
-    end
   end
 
   describe '#complex_identifier' do

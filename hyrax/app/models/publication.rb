@@ -81,7 +81,11 @@ class Publication < ActiveFedora::Base
     index.as :stored_searchable, :sortable, type: :integer
   end
 
+  property :complex_relation, predicate: ::RDF::Vocab::DC.relation, class_name: 'ComplexRelation'
+
   property :complex_source, predicate: ::RDF::Vocab::ESciDocPublication.source, class_name: 'ComplexSource'
+
+  property :custom_property, predicate: ::RDF::Vocab::NimsRdp['custom-property'], class_name: 'ComplexKeyValue'
 
   property :supervisor_approval, predicate: ::RDF::Vocab::NimsRdp['supervisor-approval']
 
@@ -93,6 +97,24 @@ class Publication < ActiveFedora::Base
     index.as :stored_searchable
   end
 
+  property :licensed_date, predicate: ::RDF::Vocab::NimsRdp['licenced-date'], multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'] do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :date_published, predicate: ::RDF::Vocab::NimsRdp['date_published'], multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :nims_pid, predicate: ::RDF::Vocab::NimsRdp['nims-pid'], multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :note_to_admin, predicate: ::RDF::Vocab::NimsRdp['note-to-admin'], multiple: false
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
@@ -101,9 +123,11 @@ class Publication < ActiveFedora::Base
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_relation, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_event, reject_if: :event_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_source, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
 end
