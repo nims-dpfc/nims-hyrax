@@ -99,7 +99,16 @@ FactoryBot.define do
     end
 
     trait :with_complex_date do
-      complex_date_attributes { [{ date: '2019-05-28',  description: 'Published' }] }
+      complex_date_attributes {
+        [{
+          date: '1978-10-28',
+          description: 'Published'
+         }]
+      }
+    end
+
+    trait :with_date_published do
+      date_published { '2019-05-28' }
     end
 
     trait :with_place do
@@ -140,7 +149,8 @@ FactoryBot.define do
           start_page: '4',
           title: 'Test journal',
           total_number_of_pages: '8',
-          volume: '3'
+          volume: '3',
+          issn: '1234-5678'
         }]
       }
     end

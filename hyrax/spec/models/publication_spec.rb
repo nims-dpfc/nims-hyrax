@@ -547,4 +547,40 @@ RSpec.describe Publication do
     end
   end
 
+  describe 'nims_pid' do
+    it 'has note_to_admin as singular' do
+      @obj = build(:publication, nims_pid: 'nims:12345678')
+      expect(@obj.nims_pid).to eq 'nims:12345678'
+    end
+  end
+
+  describe 'note_to_admin' do
+    it 'has note_to_admin as singular' do
+      @obj = build(:publication, note_to_admin: 'This is a sample publication')
+      expect(@obj.note_to_admin).to eq 'This is a sample publication'
+    end
+  end
+
+  describe 'complex_relation' do
+    it 'creates a relation active triple resource with all the attributes' do
+      @obj = build(:publication,
+        complex_relation_attributes: [{
+          title: 'A related item',
+          url: 'http://example.com/relation',
+          complex_identifier_attributes: [{
+            identifier: ['123456'],
+            label: ['local']
+          }],
+          relationship: 'IsPartOf'
+        }]
+      )
+      expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_relation.first.title).to eq ['A related item']
+      expect(@obj.complex_relation.first.url).to eq ['http://example.com/relation']
+      expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
+      expect(@obj.complex_relation.first.complex_identifier.first.label).to eq ['local']
+      expect(@obj.complex_relation.first.relationship).to eq ['IsPartOf']
+    end
+  end
 end
