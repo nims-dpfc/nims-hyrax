@@ -11,13 +11,13 @@ module ComplexField
       solr_doc[Solrizer.solr_name('instrument_title', :stored_searchable)] = object.complex_instrument.map { |i| i.title.reject(&:blank?) }.flatten!
       # use the instrument title for the complex_instrument_sim facet
       solr_doc[Solrizer.solr_name('complex_instrument', :facetable)] = object.complex_instrument.map { |i| i.title.reject(&:blank?) }.flatten!
-      
+
       fld_name = Solrizer.solr_name('instrument_title', :facetable)
       solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
       vals = object.complex_instrument.map { |i| i.title.reject(&:blank?) }
       solr_doc[fld_name] << vals
       solr_doc[fld_name].flatten!
-      
+
       solr_doc[Solrizer.solr_name('instrument_alternative_title', :stored_searchable)] = object.complex_instrument.map { |i| i.alternative_title.reject(&:blank?) }.flatten!
       solr_doc[Solrizer.solr_name('instrument_description', :stored_searchable)] = object.complex_instrument.map { |i| i.description.reject(&:blank?) }.flatten!
       solr_doc[Solrizer.solr_name('instrument_model_number', :stored_searchable)] = object.complex_instrument.map { |i| i.model_number.reject(&:blank?) }.flatten!
