@@ -24,7 +24,7 @@ module Hyrax
       :date_published, :publisher, :subject, :complex_person, :complex_date,
       :complex_version, :characterization_methods, :computational_methods,
       :complex_organization,
-      :complex_identifier,
+      :complex_identifier, :complex_source,
       :data_origin, :complex_instrument, :origin_system_provenance,
       :properties_addressed, :complex_relation, :complex_event,
       :specimen_set_ordered, :managing_organization_ordered,
@@ -53,6 +53,7 @@ module Hyrax
         :specimen_set_ordered, :managing_organization_ordered,
         :complex_person, :manuscript_type,
         :complex_identifier, # not using this
+        :complex_source,
         :complex_date, :complex_version, :complex_relation,
         :custom_property, :language,
         :note_to_admin
@@ -79,7 +80,7 @@ module Hyrax
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
       :complex_organization, :complex_person, :complex_relation, :complex_event,
-      :complex_specimen_type, :complex_version, :custom_property].freeze
+      :complex_source, :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
 
