@@ -45,7 +45,7 @@ module Hyrax
         :title, :alternative_title, :language, :resource_type, :description, :keyword_ordered,
         :complex_person, :manuscript_type, :publisher, :specimen_set_ordered, :managing_organization_ordered,
         :date_published, :rights_statement, :licensed_date,
-        :complex_identifier, :complex_source, :complex_version, :complex_relation,
+        :complex_identifier, :complex_source, :complex_version, :complex_relation, :complex_date,
         :custom_property, :note_to_admin
       ]
     end
