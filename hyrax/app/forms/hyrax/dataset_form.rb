@@ -192,6 +192,7 @@ module Hyrax
       [:id,
         :_destroy,
         :contact_person,
+        :display_order,
        {
          last_name: [],
          first_name: [],

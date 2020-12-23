@@ -35,6 +35,7 @@ module RDF
       property 'material-type'
       property 'sub-category'
       property 'material-sub-type'
+      property 'order'
       property 'origin-system-provenance'
       property 'properties-addressed'
       property 'purchase-date'
