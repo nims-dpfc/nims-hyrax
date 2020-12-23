@@ -91,7 +91,6 @@ class Dataset < ActiveFedora::Base
 
   property :complex_source, predicate: ::RDF::Vocab::ESciDocPublication.source, class_name: 'ComplexSource'
 
-  # TODO - This is required
   property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'] do |index|
     index.as :stored_searchable, :facetable
   end
@@ -124,6 +123,10 @@ class Dataset < ActiveFedora::Base
   end
 
   property :manuscript_type, predicate: ::RDF::Vocab::OaireTerms.version, multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :managing_organization, predicate: ::RDF::Vocab::NimsRdp['contributor'] do |index|
     index.as :stored_searchable, :facetable
   end
 

@@ -113,6 +113,10 @@ class Publication < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
+  property :managing_organization, predicate: ::RDF::Vocab::NimsRdp['contributor'] do |index|
+    index.as :stored_searchable, :facetable
+  end
+
   property :nims_pid, predicate: ::RDF::Vocab::NimsRdp['nims-pid'], multiple: false do |index|
     index.as :stored_searchable
   end

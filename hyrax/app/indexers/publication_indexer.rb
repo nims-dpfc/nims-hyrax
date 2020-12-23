@@ -59,6 +59,10 @@ class PublicationIndexer < NgdrIndexer
     super.tap do |solr_doc|
       solr_doc['keyword_tesim'] = object.keyword_ordered
       solr_doc['keyword_sim'] = object.keyword_ordered
+      solr_doc['managing_organization_tesim'] = object.managing_organization_ordered
+      solr_doc['managing_organization_sim'] = object.managing_organization_ordered
+      solr_doc['specimen_set_tesim'] = object.specimen_set_ordered
+      solr_doc['specimen_set_sim'] = object.specimen_set_ordered
     end
   end
 end
