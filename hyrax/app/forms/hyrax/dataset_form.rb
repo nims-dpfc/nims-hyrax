@@ -54,7 +54,7 @@ module Hyrax
         :complex_person, :manuscript_type,
         :complex_identifier, # not using this
         :complex_source,
-        :complex_date, :complex_version, :complex_relation,
+        :complex_date, :complex_version, :complex_relation, :complex_event,
         :custom_property, :language,
         :note_to_admin
       ]
