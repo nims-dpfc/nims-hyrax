@@ -348,7 +348,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_person.first.email).to be_empty
       expect(@obj.complex_person.first.role).to eq ['Creator']
       expect(@obj.complex_person.first.complex_identifier).to be_empty
-      expect(@obj.complex_person.first.display_order).to eq(1)
+      expect(@obj.complex_person.first.display_order).to eq([1])
       expect(@obj.complex_person.first.uri).to be_empty
       expect(@obj.complex_person.first.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_person.first.complex_affiliation.first.job_title).to eq ['Paradise']
