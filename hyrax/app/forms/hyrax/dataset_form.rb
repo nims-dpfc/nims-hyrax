@@ -20,7 +20,7 @@ module Hyrax
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
       :title, :alternative_title, :rights_statement, :description, :keyword_ordered,
-      :publisher, :language, :manuscript_type, :licensed_date, :date_created,
+      :publisher, :language, :manuscript_type, :licensed_date,
       :date_published, :publisher, :subject, :complex_person, :complex_date,
       :complex_version, :characterization_methods, :computational_methods,
       :complex_organization,
@@ -54,7 +54,7 @@ module Hyrax
         :complex_person, :manuscript_type,
         :complex_identifier, # not using this
         :complex_date, :complex_version, :complex_relation,
-        :custom_property, :language, :date_created,
+        :custom_property, :language,
         :note_to_admin
       ]
     end
