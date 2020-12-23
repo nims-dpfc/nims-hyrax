@@ -19,7 +19,7 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
-      :title, :alternative_title, :rights_statement, :description, :keyword,
+      :title, :alternative_title, :rights_statement, :description, :keyword_ordered,
       :publisher, :language, :manuscript_type, :licensed_date, :date_created,
       :date_published, :publisher, :subject, :complex_person, :complex_date,
       :complex_version, :characterization_methods, :computational_methods,
@@ -40,7 +40,7 @@ module Hyrax
     self.required_fields += [
       # # Adding all required fields in order of display in form
       :supervisor_approval, :title, :data_origin,
-      :description, :keyword, :date_published
+      :description, :keyword_ordered, :date_published
     ]
 
     def metadata_tab_terms
@@ -48,7 +48,7 @@ module Hyrax
         # Description tab order determined here
         :first_published_url, :supervisor_approval,
         :title, :alternative_title, :rights_statement, :data_origin,
-        :description, :keyword, :date_published, :publisher,
+        :description, :keyword_ordered, :date_published, :publisher,
         :specimen_set, :complex_person, :manuscript_type,
         :complex_identifier, # not using this
         :complex_date, :complex_version, :complex_relation,
@@ -331,4 +331,5 @@ module Hyrax
       permitted << :find_child_work
     end
   end
+
 end

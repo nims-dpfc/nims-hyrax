@@ -55,4 +55,10 @@ class PublicationIndexer < NgdrIndexer
     end
   end
 
+  def generate_solr_document
+    super.tap do |solr_doc|
+      solr_doc['keyword_tesim'] = object.keyword_ordered
+      solr_doc['keyword_sim'] = object.keyword_ordered
+    end
+  end
 end

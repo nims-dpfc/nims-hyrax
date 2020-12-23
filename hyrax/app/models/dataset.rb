@@ -126,7 +126,7 @@ class Dataset < ActiveFedora::Base
   property :manuscript_type, predicate: ::RDF::Vocab::OaireTerms.version, multiple: false do |index|
     index.as :stored_searchable, :facetable
   end
-  
+
   property :nims_pid, predicate: ::RDF::Vocab::NimsRdp['nims-pid'], multiple: false do |index|
     index.as :stored_searchable
   end
@@ -137,6 +137,7 @@ class Dataset < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
   include ComplexValidation
+  include OrderedFields
   accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
@@ -150,4 +151,5 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_source, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
+
 end

@@ -18,6 +18,7 @@ en:
         complex_rights:           "Rights"
         complex_source:           "Journal/Book/Proceedings/Database"
         complex_version:          "Version"
+        keyword_ordered:          "Keyword"
         part_of:                  "Part of"
         issue:                    "Issue"
         place:                    "Location"
