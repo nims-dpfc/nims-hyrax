@@ -90,6 +90,7 @@ class Image < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
   include ComplexValidation
+  include OrderedFields
   # accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
