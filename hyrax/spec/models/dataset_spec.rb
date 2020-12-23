@@ -100,8 +100,16 @@ RSpec.describe Dataset do
 
   describe 'keyword' do
     it 'has keyword' do
-      @obj = build(:dataset, keyword: ['keyword 1', 'keyword 2'])
-      expect(@obj.keyword).to eq ['keyword 1', 'keyword 2']
+      @obj = build(:dataset, keyword: ['keyword 2', '3 keyword', 'keyword 1'])
+      expect(@obj.keyword).to eq ['keyword 2', '3 keyword', 'keyword 1']
+    end
+
+    it 'preserves keyword order' do
+      @obj = Dataset.create(attributes_for(:dataset, keyword_ordered: ['keyword 2', '3 keyword', 'keyword 1']))
+      after = Dataset.find(@obj.id)
+      expect(after.keyword).to match_array ['0 ~ keyword 2', '1 ~ 3 keyword', '2 ~ keyword 1']
+      expect(after.keyword_ordered).to eq ['keyword 2', '3 keyword', 'keyword 1']
+
     end
   end
 
