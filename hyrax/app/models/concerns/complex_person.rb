@@ -19,6 +19,7 @@ class ComplexPerson < ActiveTriples::Resource
   property :orcid, predicate: ::RDF::Vocab::DataCite.hasIdentifier
   property :organization, predicate: ::RDF::Vocab::ORG.organization
   property :sub_organization, predicate: ::RDF::Vocab::ORG.hasSubOrganization
+  property :contact_person, predicate: ::RDF::Vocab::NimsRdp['contact-person'], multiple: false
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)

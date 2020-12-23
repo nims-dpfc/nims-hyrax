@@ -629,8 +629,8 @@ RSpec.describe Dataset do
 
   describe 'specimen_set' do
     it 'has specimen_set' do
-      @obj = build(:dataset, specimen_set: 'Specimen')
-      expect(@obj.specimen_set).to eq 'Specimen'
+      @obj = build(:dataset, specimen_set: ['Specimen'])
+      expect(@obj.specimen_set).to eq ['Specimen']
     end
   end
 
@@ -919,7 +919,7 @@ RSpec.describe Dataset do
     end
 
     it 'creates an identifier active triple resource with just the identifier' do
-      @obj = build(:publication,
+      @obj = build(:dataset,
         complex_identifier_attributes: [{
           identifier: '1234'
         }]
@@ -931,12 +931,86 @@ RSpec.describe Dataset do
     end
 
     it 'rejects an identifier active triple with no identifier' do
-      @obj = build(:publication,
+      @obj = build(:dataset,
         complex_identifier_attributes: [{
           label: 'Local'
         }]
       )
       expect(@obj.complex_identifier).to be_empty
+    end
+  end
+
+  describe 'nims_pid' do
+    it 'has note_to_admin as singular' do
+      @obj = build(:dataset, nims_pid: 'nims:12345678')
+      expect(@obj.nims_pid).to eq 'nims:12345678'
+    end
+  end
+
+  describe 'note_to_admin' do
+    it 'has note_to_admin as singular' do
+      @obj = build(:dataset, note_to_admin: 'This is a sample dataset')
+      expect(@obj.note_to_admin).to eq 'This is a sample dataset'
+    end
+  end
+
+  describe 'complex_event' do
+    it 'creates an event active triple resource with all the attributes' do
+      @obj = build(:dataset, complex_event_attributes: [
+        {
+          end_date: '2019-01-01',
+          invitation_status: true,
+          place: '221B Baker Street',
+          start_date: '2018-12-25',
+          title: 'A Title'
+        }
+      ])
+      expect(@obj.complex_event.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_event.first.id).to include('#event')
+      expect(@obj.complex_event.first.end_date).to eq ['2019-01-01']
+      expect(@obj.complex_event.first.invitation_status).to eq [true]
+      expect(@obj.complex_event.first.place).to eq ['221B Baker Street']
+      expect(@obj.complex_event.first.start_date).to eq ['2018-12-25']
+      expect(@obj.complex_event.first.title).to eq ['A Title']
+    end
+  end
+
+  describe 'complex_source' do
+    it 'creates a complex source active triple resource with an id and all properties' do
+      @obj = build(:dataset,
+        complex_source_attributes: [{
+          alternative_title: 'Sub title for journal',
+          complex_person_attributes: [{
+            name: 'AR',
+            role: 'Editor'
+          }],
+          end_page: '12',
+          complex_identifier_attributes: [{
+            identifier: '1234567',
+            scheme: 'Local'
+          }],
+          issue: '34',
+          sequence_number: '1.2.2',
+          start_page: '4',
+          title: 'Test journal',
+          total_number_of_pages: '8',
+          volume: '3'
+        }]
+      )
+      expect(@obj.complex_source.first.id).to include('#source')
+      expect(@obj.complex_source.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_source.first.alternative_title).to eq ['Sub title for journal']
+      expect(@obj.complex_source.first.complex_person.first.name).to eq ['AR']
+      expect(@obj.complex_source.first.complex_person.first.role).to eq ['Editor']
+      expect(@obj.complex_source.first.end_page).to eq ['12']
+      expect(@obj.complex_source.first.complex_identifier.first.identifier).to eq ['1234567']
+      expect(@obj.complex_source.first.complex_identifier.first.scheme).to eq ['Local']
+      expect(@obj.complex_source.first.issue).to eq ['34']
+      expect(@obj.complex_source.first.sequence_number).to eq ['1.2.2']
+      expect(@obj.complex_source.first.start_page).to eq ['4']
+      expect(@obj.complex_source.first.title).to eq ['Test journal']
+      expect(@obj.complex_source.first.total_number_of_pages).to eq ['8']
+      expect(@obj.complex_source.first.volume).to eq ['3']
     end
   end
 end

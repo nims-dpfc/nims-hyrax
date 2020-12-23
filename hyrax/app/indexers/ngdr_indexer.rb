@@ -40,6 +40,7 @@ class NgdrIndexer < Hyrax::WorkIndexer
       Solrizer.solr_name('language', :stored_searchable),
       Solrizer.solr_name('date_uploaded', :stored_searchable),
       Solrizer.solr_name('date_modified', :stored_searchable),
+      Solrizer.solr_name('date_published', :stored_searchable),
       Solrizer.solr_name('date_created', :stored_searchable),
       Solrizer.solr_name('rights_statement', :stored_searchable),
       Solrizer.solr_name('license', :stored_searchable),
@@ -48,7 +49,8 @@ class NgdrIndexer < Hyrax::WorkIndexer
       Solrizer.solr_name('identifier', :stored_searchable),
       Solrizer.solr_name('place', :stored_searchable),
       Solrizer.solr_name('status', :stored_searchable),
-      Solrizer.solr_name('issue', :stored_searchable)
+      Solrizer.solr_name('issue', :stored_searchable),
+      Solrizer.solr_name('licensed_date', :stored_searchable)
     ]
   end
 
@@ -66,6 +68,7 @@ class NgdrIndexer < Hyrax::WorkIndexer
       Solrizer.solr_name('language', :stored_searchable),
       Solrizer.solr_name('date_uploaded', :stored_searchable),
       Solrizer.solr_name('date_modified', :stored_searchable),
+      Solrizer.solr_name('date_published', :stored_searchable),
       Solrizer.solr_name('date_created', :stored_searchable),
       Solrizer.solr_name('rights_statement', :stored_searchable),
       Solrizer.solr_name('license', :stored_searchable),
@@ -74,7 +77,8 @@ class NgdrIndexer < Hyrax::WorkIndexer
       Solrizer.solr_name('identifier', :stored_searchable),
       Solrizer.solr_name('place', :stored_searchable),
       Solrizer.solr_name('status', :stored_searchable),
-      Solrizer.solr_name('issue', :stored_searchable)
+      Solrizer.solr_name('issue', :stored_searchable),
+      Solrizer.solr_name('licensed_date', :stored_searchable)
     ]
   end
 end

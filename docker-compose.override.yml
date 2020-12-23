@@ -23,6 +23,8 @@ services:
       - fcrepo:/data
 
   solr:
+    environment:
+      - OOM=script
     ports:
       - 8983:8983
 
