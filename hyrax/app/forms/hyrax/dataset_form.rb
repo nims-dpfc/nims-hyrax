@@ -26,7 +26,8 @@ module Hyrax
       :complex_organization,
       :complex_identifier,
       :data_origin, :complex_instrument, :origin_system_provenance,
-      :properties_addressed, :complex_relation, :complex_event, :specimen_set,
+      :properties_addressed, :complex_relation, :complex_event,
+      :specimen_set_ordered, :managing_organization_ordered,
       :complex_specimen_type, :synthesis_and_processing, :custom_property,
       :note_to_admin
     ]
@@ -40,7 +41,7 @@ module Hyrax
     self.required_fields += [
       # # Adding all required fields in order of display in form
       :supervisor_approval, :title, :data_origin,
-      :description, :keyword_ordered, :date_published
+      :description, :keyword_ordered, :date_published, :specimen_set_ordered
     ]
 
     def metadata_tab_terms
@@ -49,7 +50,8 @@ module Hyrax
         :first_published_url, :supervisor_approval,
         :title, :alternative_title, :rights_statement, :data_origin,
         :description, :keyword_ordered, :date_published, :publisher,
-        :specimen_set, :complex_person, :manuscript_type,
+        :specimen_set_ordered, :managing_organization_ordered,
+        :complex_person, :manuscript_type,
         :complex_identifier, # not using this
         :complex_date, :complex_version, :complex_relation,
         :custom_property, :language, :date_created,

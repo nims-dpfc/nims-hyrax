@@ -18,6 +18,7 @@ module RDF
       property 'chemical-composition'
       property 'computational-methods'
       property 'contact-person'
+      property 'contributor'
       property 'crystallographic-structure'
       property 'custom-property'
       property 'data-origin'
