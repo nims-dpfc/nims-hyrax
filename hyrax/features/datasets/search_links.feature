@@ -9,12 +9,10 @@ Feature: Search links on a dataset
       | with_complex_chemical_composition       |
       | with_complex_crystallographic_structure |
       | with_custom_property                    |
-      | with_complex_date                       |
       | with_complex_identifier                 |
       | with_complex_instrument                 |
       | with_complex_specimen_type              |
       | with_complex_relation                   |
-      | with_complex_rights                     |
       | with_complex_version                    |
 
 

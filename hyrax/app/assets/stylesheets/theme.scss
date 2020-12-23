@@ -55,8 +55,15 @@ h1, .h1 {
 
 h2, .modal-title, .h2 {
   font-family: Montserrat,Meiryo,sans-serif;
+  font-size: 20px;
+  color: $mdr-black;
   font-weight: bold;
-  font-size: 18px;
+}
+
+.work-title, .item-title, .collection-title {
+  font-family: Montserrat,Meiryo,sans-serif;
+  font-size: 28px;
+  font-weight: bold;
   color: $mdr-black;
 }
 
@@ -113,28 +120,25 @@ a.btn-primary:active {
 
 // ------------- label -----------------
 .label {
-  background-color: inherit;
   border: none;
+  border-radius: 0em;
 }
 
-.label-primary {
-  color: $mdr-green;
+.label-title label {
+  font-size: 14px;
 }
 
-.label-success {
-  color: $mdr-green;
+.label-row label {
+  color: #000000;
+  font-style: italic;
 }
 
-.label-info {
-  color: #2c76c7;
+.status-labels {
+  padding: 15px 0;
 }
 
-.label-warning {
-    color: #e65c00;
-}
-
-.label-danger {
-  color: #FF0000;
+.status-labels > span.label {
+  font-size: 14px;
 }
 
 // ------------- dropdown --------------
@@ -240,6 +244,7 @@ body {
 .site-footer h2 {
   margin: 0;
   color: #fff;
+  font-weight: bold;
 }
 
 .site-footer a,
@@ -289,7 +294,7 @@ body.dashboard {
 
 //--------------- work show ------------
 .work-type-tag {
-  color: $mdr-green;
+  color: $mdr-green-dark;
 }
 
 //-------------- Search ----------------

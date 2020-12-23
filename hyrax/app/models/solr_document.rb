@@ -46,6 +46,10 @@ class SolrDocument
     self[Solrizer.solr_name('alternative_title', :stored_searchable)]
   end
 
+  def date_published
+    self[Solrizer.solr_name('date_published', :stored_searchable)]
+  end
+
   def complex_date
     self[Solrizer.solr_name('complex_date', :displayable)]
   end
@@ -88,6 +92,10 @@ class SolrDocument
 
   def data_origin
     self[Solrizer.solr_name('data_origin', :stored_searchable)]
+  end
+
+  def licensed_date
+    self[Solrizer.solr_name('licensed_date', :stored_searchable)]
   end
 
   def instrument

@@ -8,9 +8,9 @@ module Hyrax
     self.terms -= [
       # Fields not interested in
       :based_near, :contributor, :creator, :date_created, :identifier, :license,
-      :related_url, :resource_type, :rights_statement, :source,
+      :related_url, :source,
       # Fields interested in, but removing to re-order
-      :title, :description, :keyword, :language, :publisher, :resource_type, :subject
+      :title, :description, :keyword, :language, :publisher, :subject
       # Fields that are not displayed
       # :import_url, :date_modified, :date_uploaded, :depositor, :bibliographic_citation,
       # :date_created, :label, :relative_path
@@ -19,38 +19,40 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
-      :title, :alternative_title, :description, :keyword, :language,
-      :publisher, :complex_rights, :subject, :complex_date, :complex_person,
+      :title, :alternative_title, :rights_statement, :description, :keyword,
+      :publisher, :language, :licensed_date, :date_created, :date_published,
+      :publisher, :subject, :complex_person,
       :complex_version, :characterization_methods, :computational_methods,
       :complex_organization,
       :complex_identifier,
       :data_origin, :complex_instrument, :origin_system_provenance,
-      :properties_addressed, :complex_relation, :specimen_set,
+      :properties_addressed, :complex_relation, :complex_event, :specimen_set,
       :complex_specimen_type, :synthesis_and_processing, :custom_property,
-      :draft
+      :note_to_admin, :draft
     ]
 
     self.required_fields -= [
       # Fields not interested in
-      :creator, :keyword, :rights_statement,
+      :creator, :keyword,
       # Fields interested in, but removing to re-order
       :title]
 
     self.required_fields += [
       # # Adding all required fields in order of display in form
-      :first_published_url, :supervisor_approval, :title, :data_origin,
-      :description, :keyword
+      :supervisor_approval, :title, :data_origin,
+      :description, :keyword, :date_published
     ]
 
     def metadata_tab_terms
       [
         # Description tab order determined here
         :first_published_url, :supervisor_approval,
-        :title, :alternative_title, :data_origin, :description, :keyword,
+        :title, :alternative_title, :rights_statement, :data_origin, :description, :keyword, :date_published, :publisher,
         :specimen_set, :complex_person,
         :complex_identifier, # not using this
-        :complex_date, :complex_rights, :complex_version, :complex_relation,
-        :custom_property
+        :complex_version, :complex_relation,
+        :custom_property, :language, :date_created,
+        :note_to_admin
       ]
     end
 
@@ -72,8 +74,8 @@ module Hyrax
       [ :complex_specimen_type ]
     end
 
-    NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
-      :complex_organization, :complex_person, :complex_relation, :complex_rights,
+    NESTED_ASSOCIATIONS = [:complex_identifier, :complex_instrument,
+      :complex_organization, :complex_person, :complex_relation, :complex_event,
       :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
@@ -134,7 +136,6 @@ module Hyrax
        :_destroy,
        {
          alternative_title: [],
-         complex_date_attributes: permitted_date_params,
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
          instrument_function_attributes: permitted_instrument_function_params,
@@ -185,7 +186,8 @@ module Hyrax
 
     def self.permitted_person_params
       [:id,
-       :_destroy,
+        :_destroy,
+        :contact_person,
        {
          last_name: [],
          first_name: [],
@@ -279,17 +281,48 @@ module Hyrax
       ]
     end
 
+    def self.permitted_event_params
+      [:id,
+       :_destroy,
+       {
+         title: [],
+         place: [],
+         start_date: [],
+         end_date: [],
+         invitation_status: []
+       }
+      ]
+    end
+
+    def self.permitted_source_params
+      [:id,
+       :_destroy,
+       {
+         alternative_title: [],
+         end_page: [],
+         issue: [],
+         sequence_number: [],
+         start_page: [],
+         title: [],
+         total_number_of_pages: [],
+         volume: [],
+         issn: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
-      permitted << { complex_date_attributes: permitted_date_params }
+      permitted << :licensed_date
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_instrument_attributes: permitted_instrument_params }
       permitted << { complex_person_attributes: permitted_person_params }
       permitted << { complex_organization_attributes: permitted_organization_params }
       permitted << { complex_relation_attributes: permitted_relation_params }
-      permitted << { complex_rights_attributes: permitted_rights_params }
       permitted << { complex_specimen_type_attributes: permitted_specimen_type_params }
       permitted << { complex_version_attributes: permitted_version_params }
+      permitted << { complex_event_attributes: permitted_event_params }
+      permitted << { complex_source_attributes: permitted_source_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
