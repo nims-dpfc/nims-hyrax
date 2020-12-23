@@ -10,7 +10,7 @@ module Hyrax
       :based_near, :contributor, :creator, :date_created, :identifier, :license,
       :related_url, :source,
       # Fields interested in, but removing to re-order
-      :title, :description, :keyword, :language, :publisher, :subject
+      :title, :description, :keyword, :language, :publisher, :resource_type, :subject
       # Fields that are not displayed
       # :import_url, :date_modified, :date_uploaded, :depositor, :bibliographic_citation,
       # :date_created, :label, :relative_path
@@ -20,7 +20,7 @@ module Hyrax
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
       :title, :alternative_title, :rights_statement, :description, :keyword_ordered,
-      :publisher, :language, :manuscript_type, :licensed_date,
+      :publisher, :resource_type, :language, :manuscript_type, :licensed_date,
       :date_published, :publisher, :subject, :complex_person, :complex_date,
       :complex_version, :characterization_methods, :computational_methods,
       :complex_organization,
@@ -40,7 +40,7 @@ module Hyrax
 
     self.required_fields += [
       # # Adding all required fields in order of display in form
-      :supervisor_approval, :title, :data_origin,
+      :supervisor_approval, :title, :resource_type, :data_origin,
       :description, :keyword_ordered, :date_published, :specimen_set_ordered
     ]
 
@@ -48,8 +48,8 @@ module Hyrax
       [
         # Description tab order determined here
         :first_published_url, :supervisor_approval,
-        :title, :alternative_title, :rights_statement, :data_origin,
-        :description, :keyword_ordered, :date_published, :publisher,
+        :title, :alternative_title, :rights_statement, :licensed_date, :data_origin,
+        :resource_type, :description, :keyword_ordered, :date_published, :publisher,
         :specimen_set_ordered, :managing_organization_ordered,
         :complex_person, :manuscript_type,
         :complex_identifier, # not using this
