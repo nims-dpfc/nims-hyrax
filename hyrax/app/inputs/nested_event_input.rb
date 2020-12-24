@@ -95,8 +95,8 @@ protected
     out << '  </div>'
 
     out << "  <div class='col-md-6'>"
-    out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id, required: false))
+    out << @builder.check_box(field_name,
+      options.merge(checked: field_value, name: field_name, id: field_id, required: false))
     out << '  </div>'
 
     # --- delete checkbox
