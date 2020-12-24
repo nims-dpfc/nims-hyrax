@@ -13,7 +13,7 @@ RSpec.describe Hyrax::DatasetForm do
       subject { form.metadata_tab_terms }
       it { is_expected.to include(:supervisor_approval, :title, :alternative_title, :data_origin, :description,
                                   :keyword, :specimen_set, :complex_person, :complex_identifier, :first_published_url,
-                                  :complex_version, :complex_relation, :custom_property, :language, :date_created) }
+                                  :complex_version, :complex_relation, :custom_property, :language, :date_created, :complex_date) }
     end
 
     describe '#method_tab_terms' do
@@ -39,6 +39,7 @@ RSpec.describe Hyrax::DatasetForm do
 
     context 'permitted params' do
       it do
+        expect(described_class).to receive(:permitted_date_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_identifier_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_instrument_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_person_params).at_least(:once).and_call_original

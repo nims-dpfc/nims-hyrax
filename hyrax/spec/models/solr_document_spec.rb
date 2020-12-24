@@ -3,40 +3,41 @@ require 'rails_helper'
 RSpec.describe SolrDocument do
   let(:model) do
     build(:dataset,
-          alternative_title: 'Alternative Title',
-          date_published: '2018-02-14',
-          complex_identifier_attributes: [{ identifier: ['123456'], label: ['Local'] }],
-          complex_instrument_attributes: [{
-            complex_date_attributes: [{ date: ['2018-01-28'] }],
-            complex_identifier_attributes: [{ identifier: ['ewfqwefqwef'] }],
-            complex_person_attributes: [{ name: ['operator 1'] }],
-            title: 'Instrument 1'
-          }],
-          complex_organization_attributes: [{
-            organization: 'Foo',
-            sub_organization: 'Bar',
-            purpose: 'org purpose'
-          }],
-          complex_person_attributes: [{ name: ['Anamika'] }],
-          complex_rights_attributes: [{ rights: 'cc0' }],
-          complex_specimen_type_attributes: [{
-            complex_chemical_composition_attributes: [{ description: 'chemical composition 1' }]
-          }],
-          complex_version_attributes: [{ version: '1.0' }],
-          characterization_methods: ['Characterization methods'],
-          computational_methods: ['computational methods'],
-          data_origin: ['data origin'],
-          origin_system_provenance: 'Origin A',
-          properties_addressed: ['Properties Addressed'],
-          complex_relation_attributes: [{
-            title: 'A related item',
-            url: 'http://example.com/relation',
-            complex_identifier_attributes: [{ identifier: ['123456'] }],
-            relationship: 'IsPartOf'
-          }],
-          specimen_set: ['Specimen Set'],
-          synthesis_and_processing: ['Synthesis and processing methods'],
-          custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }]
+      alternative_title: 'Alternative Title',
+      complex_date_attributes: [{ date: ['2018-02-14'], description: 'Published Date' }],
+      date_published: '2018-02-14',
+      complex_identifier_attributes: [{ identifier: ['123456'], label: ['Local'] }],
+      complex_instrument_attributes: [{
+        complex_date_attributes: [{ date: ['2018-01-28'] }],
+        complex_identifier_attributes: [{ identifier: ['ewfqwefqwef'] }],
+        complex_person_attributes: [{ name: ['operator 1'] }],
+        title: 'Instrument 1'
+      }],
+      complex_organization_attributes: [{
+        organization: 'Foo',
+        sub_organization: 'Bar',
+        purpose: 'org purpose'
+      }],
+      complex_person_attributes: [{ name: ['Anamika'] }],
+      complex_rights_attributes: [{ rights: 'cc0' }],
+      complex_specimen_type_attributes: [{
+        complex_chemical_composition_attributes: [{ description: 'chemical composition 1' }]
+      }],
+      complex_version_attributes: [{ version: '1.0' }],
+      characterization_methods: ['Characterization methods'],
+      computational_methods: ['computational methods'],
+      data_origin: ['data origin'],
+      origin_system_provenance: 'Origin A',
+      properties_addressed: ['Properties Addressed'],
+      complex_relation_attributes: [{
+        title: 'A related item',
+        url: 'http://example.com/relation',
+        complex_identifier_attributes: [{ identifier: ['123456'] }],
+        relationship: 'IsPartOf'
+      }],
+      specimen_set: ['Specimen Set'],
+      synthesis_and_processing: ['Synthesis and processing methods'],
+      custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }]
     )
   end
   let(:solr_document) { described_class.new(model.to_solr) }
@@ -44,6 +45,18 @@ RSpec.describe SolrDocument do
   describe '#alternative_title' do
     subject { solr_document.alternative_title }
     it { is_expected.to eql ['Alternative Title'] }
+  end
+
+  describe '#complex_date' do
+    let(:complex_date) { JSON.parse(solr_document.complex_date).first }
+    describe 'date' do
+      subject { complex_date['date'] }
+      it { is_expected.to eql ['2018-02-14'] }
+    end
+    describe 'description' do
+      subject { complex_date['description'] }
+      it { is_expected.to eql ['Published Date'] }
+    end
   end
 
   describe '#complex_identifier' do
@@ -197,13 +210,13 @@ RSpec.describe SolrDocument do
 
   describe '#complex_event' do
     let(:model) { build(:publication,
-          complex_event_attributes: [{
-            end_date: '2019-01-01',
-            invitation_status: true,
-            place: '221B Baker Street',
-            start_date: '2018-12-25',
-            title: 'A Title'
-          }]
+      complex_event_attributes: [{
+        end_date: '2019-01-01',
+        invitation_status: true,
+        place: '221B Baker Street',
+        start_date: '2018-12-25',
+        title: 'A Title'
+      }]
     )}
     let(:complex_event) { JSON.parse(solr_document.complex_event).first }
     describe 'end_date' do

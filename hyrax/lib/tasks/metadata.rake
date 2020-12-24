@@ -22,6 +22,14 @@ namespace :metadata do
             end
           end
 
+          # Published date (row 24)
+          if work.published_date.blank?
+            work.complex_date.each do |complex_date|
+              next unless ['Published', 'Issued'].include?(complex_date.type)
+              work.published_date << complex_date.date
+            end
+          end
+
           work.save!
         end
       rescue => e
@@ -54,7 +62,7 @@ namespace :metadata do
           # Published date (row 24)
           if work.published_date.blank?
             work.complex_date.each do |complex_date|
-              next if complex_date.type != 'Published'
+              next unless ['Published', 'Issued'].include?(complex_date.type)
               work.published_date << complex_date.date
             end
           end
