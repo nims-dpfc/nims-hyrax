@@ -109,6 +109,10 @@ class Publication < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
+  property :manuscript_type, predicate: ::RDF::Vocab::OaireTerms.version, multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+  
   property :nims_pid, predicate: ::RDF::Vocab::NimsRdp['nims-pid'], multiple: false do |index|
     index.as :stored_searchable
   end

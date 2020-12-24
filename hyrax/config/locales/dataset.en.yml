@@ -14,7 +14,7 @@ en:
       dataset:
         analysis_field:           "Analysis field"
         characterization_methods: "Characterization methods"
-        complex_date:             "Date"
+        complex_date:             "Other Date"
         complex_identifier:       "Identifier"
         complex_organization:     "Organization"
         complex_person:           "Creator"
