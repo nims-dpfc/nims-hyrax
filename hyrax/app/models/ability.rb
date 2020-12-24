@@ -52,6 +52,7 @@ class Ability
     can :read_number_of_pages, [::Publication]
     can :read_organization, [::Dataset, ::Publication]
     can :read_publisher, [::Dataset, ::Image, ::Publication]
+    can :read_date_published, [::Dataset, ::Image, ::Publication]
     can :read_related, [::Dataset, ::Publication]
     can :read_resource_type, [::Dataset, ::Image, ::Publication] #NB: added Dataset to list
     can :read_rights, [::Dataset, ::Image, ::Publication]

@@ -12,6 +12,11 @@ class NestedSourceAttributeRenderer < NestedAttributeRenderer
           Rails.application.routes.url_helpers.search_catalog_path(:"f[complex_source_title_sim][]" => v['title'][0], locale: I18n.locale))
         each_html += get_row(label, val)
       end
+      unless v.dig('issn').blank?
+        label = 'ISSN'
+        val = v['issn'][0]
+        each_html += get_row(label, val)
+      end
       unless v.dig('alternative_title').blank?
         label = 'Alternative title'
         val = v['alternative_title'][0]

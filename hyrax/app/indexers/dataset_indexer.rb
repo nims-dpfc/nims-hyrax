@@ -11,6 +11,8 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::OrganizationIndexer
   include ComplexField::InstrumentIndexer
   include ComplexField::RelationIndexer
+  include ComplexField::EventIndexer
+  include ComplexField::SourceIndexer
   include ComplexField::SpecimenTypeIndexer
   include ComplexField::ChemicalCompositionIndexer
   include ComplexField::CrystallographicStructureIndexer

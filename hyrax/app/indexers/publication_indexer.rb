@@ -7,11 +7,13 @@ class PublicationIndexer < NgdrIndexer
   include ComplexField::PersonIndexer
   include ComplexField::RightsIndexer
   include ComplexField::VersionIndexer
+  include ComplexField::RelationIndexer
   include ComplexField::EventIndexer
   include ComplexField::SourceIndexer
 
   def self.facet_fields
     super.tap do |fields|
+      fields << Solrizer.solr_name('specimen_set', :stored_searchable)
       fields << Solrizer.solr_name('place', :facetable)
       fields.concat ComplexField::DateIndexer.date_facet_fields
       fields.concat ComplexField::PersonIndexer.person_facet_fields
@@ -23,6 +25,7 @@ class PublicationIndexer < NgdrIndexer
 
   def self.search_fields
     super.tap do |fields|
+      fields << Solrizer.solr_name('specimen_set', :stored_searchable)
       fields << Solrizer.solr_name('issue', :stored_searchable)
       fields << Solrizer.solr_name('place', :stored_searchable)
       fields << Solrizer.solr_name('table_of_contents', :stored_searchable)
@@ -39,6 +42,7 @@ class PublicationIndexer < NgdrIndexer
 
   def self.show_fields
     super.tap do |fields|
+      fields << Solrizer.solr_name('specimen_set', :stored_searchable)
       fields << Solrizer.solr_name('issue', :stored_searchable)
       fields << Solrizer.solr_name('place', :stored_searchable)
       fields << Solrizer.solr_name('table_of_contents', :stored_searchable)

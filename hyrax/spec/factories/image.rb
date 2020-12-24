@@ -37,12 +37,9 @@ FactoryBot.define do
       rights_statement { ['Rights-Statement-123'] }
     end
 
-    trait :with_complex_date do
-      complex_date_attributes {
-        [{
-           date: '2019-05-28',
-           description: 'Published'
-         }]
+    trait :with_date_published do
+      date_published {
+          '2019-05-28'
       }
     end
 
@@ -90,4 +87,3 @@ FactoryBot.define do
     end
   end
 end
-

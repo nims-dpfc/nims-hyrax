@@ -89,6 +89,7 @@ class CatalogController < ApplicationController
     # config.add_index_field solr_name('language', :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name('language', :facetable)
     config.add_index_field solr_name('date_uploaded', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
+    config.add_index_field solr_name('date_published', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
     config.add_index_field solr_name('rights_statement', :stored_searchable), helper_method: :rights_statement_links, if: lambda { |context, field_config, document| context.can?(:read_rights, document.hydra_model) }
     config.add_index_field solr_name('license', :stored_searchable), helper_method: :license_links
