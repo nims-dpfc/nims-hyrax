@@ -12,6 +12,10 @@
   <%= presenter.attribute_to_html(:publisher, render_as: :faceted, html_dl: true) %>
 <% end %>
 
+<% if can? :read_date_published, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:date_published, html_dl: true) %>
+<% end %>
+
 <% if can? :read_language, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:language, render_as: :faceted, html_dl: true) %>
 <% end %>
@@ -30,9 +34,7 @@
   <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
 <% end %>
 
-<% if can? :read_date, presenter.model_name.name.constantize %>
-  <%= presenter.attribute_to_html(:complex_date, render_as: :nested_date, label: t('ngdr.fields.complex_date'), html_dl: true) %>
-<% end %>
+<%= presenter.attribute_to_html(:licensed_date, label: t('ngdr.fields.licensed_date'), html_dl: true) %>
 
 <% if can? :read_identifier, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:complex_identifier, render_as: :nested_identifier, label: t('ngdr.fields.complex_identifier'), html_dl: true) %>
@@ -40,10 +42,6 @@
 
 <% if can? :read_creator, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:complex_person, render_as: :nested_person, label: t('ngdr.fields.complex_person'), html_dl: true) %>
-<% end %>
-
-<% if can? :read_rights, presenter.model_name.name.constantize %>
-  <%= presenter.attribute_to_html(:complex_rights, render_as: :nested_rights, label: t('ngdr.fields.complex_rights'), html_dl: true) %>
 <% end %>
 
 <% if can? :read_version, presenter.model_name.name.constantize %>

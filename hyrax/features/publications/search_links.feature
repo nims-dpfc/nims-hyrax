@@ -5,7 +5,6 @@ Feature: Search links on a publication
       | TRAIT                                   |
       | open                                    |
       | with_complex_author                     |
-      | with_complex_date                       |
       | with_complex_identifier                 |
       | with_complex_rights                     |
       | with_complex_version                    |

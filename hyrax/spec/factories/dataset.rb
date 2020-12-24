@@ -157,8 +157,12 @@ FactoryBot.define do
         [{
           date: '1978-10-28',
           description: 'Published'
-        }]
+         }]
       }
+    end
+
+    trait :with_date_published do
+      date_published { '1978-10-28' }
     end
 
     trait :with_complex_identifier do
@@ -337,12 +341,11 @@ FactoryBot.define do
       }
     end
 
-    trait :with_complex_rights do
-      complex_rights_attributes {
-        [{
-          date: '1978-10-28',
-          rights: 'http://creativecommons.org/publicdomain/zero/1.0/'
-        }]
+    trait :with_rights do
+      rights_statement {
+        [
+          'http://creativecommons.org/publicdomain/zero/1.0/'
+        ]
       }
     end
 

@@ -71,8 +71,9 @@ form .field-wrapper label[required="required"]::after {
   padding-bottom: 1em;
   border-bottom: 1px solid #ddd;
 }
-.label-row {
-  color: #999;
+.label-row label {
+  font-style: italic;
+  font-weight: normal;
 }
 
 .panel-heading .accordion-toggle:after {

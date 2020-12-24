@@ -10,9 +10,7 @@ class UserAuthorisationService
   end
 
   def enabled?
-    ENV['LDAP_HOST'].present? &&
-        ENV['LDAP_BASE'].present? &&
-        ENV['LDAP_ATTRIBUTE'].present?
+    ENV['MDR_DEVISE_AUTH_MODULE'] == 'ldap_authenticatable'
   end
 
   def update_attributes
@@ -25,7 +23,7 @@ class UserAuthorisationService
         success = true
       end
     else
-      puts "WARNING: UserAuthorisationService failed to retrieve user attributes, check LDAP_HOST, LDAP_BASE, LDAP_ATTRIBUTE env vars"
+      puts "WARNING: UserAuthorisationService failed to retrieve user attributes, check MDR_DEVISE_AUTH_MODULE, LDAP_HOST, LDAP_BASE, LDAP_ATTRIBUTE env vars"
     end
     success
   end
