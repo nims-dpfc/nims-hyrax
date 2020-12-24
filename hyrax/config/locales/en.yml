@@ -32,6 +32,7 @@ en:
       instrument:               "Instrument"
       issue:                    "Issue"
       instrument_function:      "Instrument function"
+      keyword_ordered:          "Keyword"
       last_name:                "Surname"
       managing_organization:    "Managing organization"
       material_sub_type:        "Material sub type"

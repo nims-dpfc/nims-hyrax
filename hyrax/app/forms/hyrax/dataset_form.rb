@@ -10,7 +10,7 @@ module Hyrax
       :based_near, :contributor, :creator, :date_created, :identifier, :license,
       :related_url, :source,
       # Fields interested in, but removing to re-order
-      :title, :description, :keyword, :language, :publisher, :subject
+      :title, :description, :keyword, :language, :publisher, :resource_type, :subject
       # Fields that are not displayed
       # :import_url, :date_modified, :date_uploaded, :depositor, :bibliographic_citation,
       # :date_created, :label, :relative_path
@@ -19,14 +19,15 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
-      :title, :alternative_title, :rights_statement, :description, :keyword,
-      :publisher, :language, :manuscript_type, :licensed_date, :date_created,
+      :title, :alternative_title, :rights_statement, :description, :keyword_ordered,
+      :publisher, :resource_type, :language, :manuscript_type, :licensed_date,
       :date_published, :publisher, :subject, :complex_person, :complex_date,
       :complex_version, :characterization_methods, :computational_methods,
       :complex_organization,
-      :complex_identifier,
+      :complex_identifier, :complex_source,
       :data_origin, :complex_instrument, :origin_system_provenance,
-      :properties_addressed, :complex_relation, :complex_event, :specimen_set,
+      :properties_addressed, :complex_relation, :complex_event,
+      :specimen_set_ordered, :managing_organization_ordered,
       :complex_specimen_type, :synthesis_and_processing, :custom_property,
       :note_to_admin
     ]
@@ -39,20 +40,22 @@ module Hyrax
 
     self.required_fields += [
       # # Adding all required fields in order of display in form
-      :supervisor_approval, :title, :data_origin,
-      :description, :keyword, :date_published
+      :supervisor_approval, :title, :resource_type, :data_origin,
+      :description, :keyword_ordered, :date_published, :specimen_set_ordered
     ]
 
     def metadata_tab_terms
       [
         # Description tab order determined here
         :first_published_url, :supervisor_approval,
-        :title, :alternative_title, :rights_statement, :data_origin,
-        :description, :keyword, :date_published, :publisher,
-        :specimen_set, :complex_person, :manuscript_type,
+        :title, :alternative_title, :rights_statement, :licensed_date, :data_origin,
+        :resource_type, :description, :keyword_ordered, :date_published, :publisher,
+        :specimen_set_ordered, :managing_organization_ordered,
+        :complex_person, :manuscript_type,
         :complex_identifier, # not using this
-        :complex_date, :complex_version, :complex_relation,
-        :custom_property, :language, :date_created,
+        :complex_source,
+        :complex_date, :complex_version, :complex_relation, :complex_event,
+        :custom_property, :language,
         :note_to_admin
       ]
     end
@@ -77,7 +80,7 @@ module Hyrax
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
       :complex_organization, :complex_person, :complex_relation, :complex_event,
-      :complex_specimen_type, :complex_version, :custom_property].freeze
+      :complex_source, :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
 
@@ -190,6 +193,7 @@ module Hyrax
       [:id,
         :_destroy,
         :contact_person,
+        :display_order,
        {
          last_name: [],
          first_name: [],
@@ -331,4 +335,5 @@ module Hyrax
       permitted << :find_child_work
     end
   end
+
 end

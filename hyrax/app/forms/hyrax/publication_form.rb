@@ -19,10 +19,11 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :first_published_url, :supervisor_approval,
-      :title, :alternative_title, :rights_statement, :complex_person, :description, :keyword, :date_published,
+      :title, :alternative_title, :rights_statement, :complex_person, :description, :keyword_ordered, :date_published,
       :publisher, :resource_type, :complex_date, :manuscript_type,
       :complex_identifier, :complex_source, :complex_version, :complex_relation,
-      :complex_event, :language, :licensed_date, :custom_property, :note_to_admin
+      :complex_event, :specimen_set_ordered, :managing_organization_ordered,
+      :language, :licensed_date, :custom_property, :note_to_admin
     ]
 
     self.required_fields -= [
@@ -33,18 +34,19 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :supervisor_approval, :title, :resource_type,
-      :description, :keyword, :date_published, :rights_statement
+      :supervisor_approval, :title, :resource_type, :specimen_set_ordered,
+      :description, :keyword_ordered, :date_published, :rights_statement
     ]
 
     def metadata_tab_terms
       [
         # Description tab order determined here
         :first_published_url, :supervisor_approval,
-        :title, :alternative_title, :language, :resource_type, :description, :keyword,
-        :complex_person, :manuscript_type, :publisher, :date_published, :rights_statement,
-        :licensed_date,
+        :title, :alternative_title, :language, :resource_type, :description, :keyword_ordered,
+        :complex_person, :manuscript_type, :publisher, :specimen_set_ordered, :managing_organization_ordered,
+        :date_published, :rights_statement, :licensed_date,
         :complex_identifier, :complex_source, :complex_version, :complex_relation,
+        :complex_date, :complex_event,
         :custom_property, :note_to_admin
       ]
     end
@@ -111,6 +113,7 @@ module Hyrax
       [:id,
         :_destroy,
         :contact_person,
+        :display_order,
        {
          last_name: [],
          first_name: [],

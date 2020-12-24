@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   curation_concerns_basic_routes
 
+  resources :local_terms, only: [:index]
   resources :bookmarks do
     concerns :exportable
     collection do
