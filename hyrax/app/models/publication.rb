@@ -112,7 +112,11 @@ class Publication < ActiveFedora::Base
   property :manuscript_type, predicate: ::RDF::Vocab::OaireTerms.version, multiple: false do |index|
     index.as :stored_searchable, :facetable
   end
-  
+
+  property :managing_organization, predicate: ::RDF::Vocab::NimsRdp['contributor'] do |index|
+    index.as :stored_searchable, :facetable
+  end
+
   property :nims_pid, predicate: ::RDF::Vocab::NimsRdp['nims-pid'], multiple: false do |index|
     index.as :stored_searchable
   end
@@ -123,6 +127,7 @@ class Publication < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
   include ComplexValidation
+  include OrderedFields
   accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true

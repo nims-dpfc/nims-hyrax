@@ -39,6 +39,8 @@
   <%= presenter.attribute_to_html(:complex_identifier, render_as: :nested_identifier, label: t('ngdr.fields.complex_identifier'), html_dl: true) %>
 <% end %>
 
+<%= presenter.attribute_to_html(:specimen_set, label: t('ngdr.fields.specimen_set'), html_dl: true) %>
+
 <% if can? :read_rights, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
 <% end %>
