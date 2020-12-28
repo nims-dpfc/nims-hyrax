@@ -156,7 +156,7 @@ FactoryBot.define do
       complex_date_attributes {
         [{
           date: '1978-10-28',
-          description: 'Published'
+          description: 'Collected'
          }]
       }
     end
@@ -180,7 +180,7 @@ FactoryBot.define do
           alternative_title: 'An instrument title',
           complex_date_attributes: [{
             date: '2018-02-14',
-            description: 'Published'
+            description: 'Collected'
           }],
           description: 'Instrument description',
           complex_identifier_attributes: [{
