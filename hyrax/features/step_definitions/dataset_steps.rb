@@ -92,7 +92,7 @@ When(/^I create a draft dataset with:$/) do |table|
   select(values[:DATA_ORIGIN], from: 'Data origin')
   fill_in('dataset[complex_person_attributes][0][name][]', with: values[:CREATOR])
   fill_in('Keyword', with: values[:KEYWORD])
-  select('Creative Commons BY-SA Attribution-ShareAlike 4.0 International', from: 'dataset[complex_rights_attributes][0][rights][]')
+  find('#dataset_rights_statement').select('MIT License')
 
   # With selenium and the chrome driver, focus remains on the
   # select box. Click outside the box so the next line can't find
