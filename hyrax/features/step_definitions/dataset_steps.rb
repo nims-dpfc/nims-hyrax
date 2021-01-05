@@ -119,6 +119,22 @@ Then("the dataset that is created is editable by the nims_researcher who deposit
   expect(dataset.edit_users).to include(dataset.depositor)
 end
 
+Then("the dataset can be submitted for approval") do
+  dataset = Dataset.last
+  visit edit_hyrax_dataset_path(dataset)
+  # Go through all required fields and ensure they are all populated
+  Hyrax::DatasetForm.required_fields.each do |required_input|
+    input_name = "#dataset_" + required_input.to_s
+    form_field = find(input_name)
+    next if !!form_field.value
+    raise "missing required field: #{required_input}"
+  end
+  find('#with_files_submit').click
+  dataset.reload
+  workflow_state = dataset.to_sipity_entity.reload.workflow_state_name
+  expect(workflow_state).to eq "pending_review"
+end
+
 Then(/^I should see the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
   # first, verify @datasets is present and has some data
   expect(@datasets[access]).to be_present
