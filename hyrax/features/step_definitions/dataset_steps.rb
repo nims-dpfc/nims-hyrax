@@ -113,6 +113,12 @@ Then("the dataset that is created should be in a draft workflow state") do
   expect(workflow_state).to eq "draft"
 end
 
+Then("the dataset that is created is editable by the nims_researcher who deposited it") do
+  dataset = Dataset.last
+  nims_researcher = User.find_by(username: dataset.depositor)
+  expect(dataset.edit_users).to include(dataset.depositor)
+end
+
 Then(/^I should see the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
   # first, verify @datasets is present and has some data
   expect(@datasets[access]).to be_present
