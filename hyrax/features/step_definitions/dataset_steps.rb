@@ -135,6 +135,24 @@ Then("the dataset can be submitted for approval") do
   expect(workflow_state).to eq "pending_review"
 end
 
+Then("after it is approved, it is no longer editable by the nims_researcher who deposited it") do
+  dataset = Dataset.last
+  admin = FactoryBot.create(:user, :admin)
+  workflow = dataset.active_workflow
+  workflow_roles = Sipity::WorkflowRole.where(workflow_id: workflow.id)
+  workflow_roles.each do |workflow_role|
+    workflow.update_responsibilities(role: Sipity::Role.where(id: workflow_role.role_id), agents: admin)
+  end
+  subject = Hyrax::WorkflowActionInfo.new(dataset, admin)
+  sipity_workflow_action = PowerConverter.convert_to_sipity_action("approve", scope: subject.entity.workflow) { nil }
+  Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
+  dataset.reload
+  workflow_state = dataset.to_sipity_entity.reload.workflow_state_name
+  expect(workflow_state).to eq "deposited"
+  nims_researcher = User.find_by(username: dataset.depositor)
+  expect(dataset.edit_users).not_to include(dataset.depositor)
+end
+
 Then(/^I should see the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
   # first, verify @datasets is present and has some data
   expect(@datasets[access]).to be_present

@@ -29,3 +29,4 @@ Feature: Create a dataset
     And the dataset that is created should be in a draft workflow state
     And the dataset that is created is editable by the nims_researcher who deposited it
     And the dataset can be submitted for approval
+    And after it is approved, it is no longer editable by the nims_researcher who deposited it
