@@ -29,6 +29,20 @@ RSpec.describe Dataset do
     end
   end
 
+  ##
+  # Is this work in a draft state?
+  describe '#draft?' do
+    it 'is false if the draft field is blank' do
+      @obj = build(:dataset)
+      expect(@obj.draft?).to eq false
+    end
+    it "is true if the draft field is true" do
+      @obj = build(:dataset)
+      @obj.draft = ['true']
+      expect(@obj.draft?).to eq true
+    end
+  end
+
   describe 'title' do
     it 'requires title' do
       @obj = build(:dataset, title: nil)

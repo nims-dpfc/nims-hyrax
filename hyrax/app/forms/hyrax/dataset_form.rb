@@ -29,7 +29,7 @@ module Hyrax
       :properties_addressed, :complex_relation, :complex_event,
       :specimen_set_ordered, :managing_organization_ordered,
       :complex_specimen_type, :synthesis_and_processing, :custom_property,
-      :note_to_admin
+      :note_to_admin, :draft
     ]
 
     self.required_fields -= [
