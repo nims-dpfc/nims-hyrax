@@ -279,7 +279,12 @@ en:
           share: Sharing
           specimen: Specimen details
     visibility:
+      authenticated:
+        note_html: Restrict access to MDR Shared users.
+        text: MDR Shared
       embargo:
         note_html: This option is not valid.
       lease:
         note_html: This option is not valid.
+      open:
+        text: MDR Open
