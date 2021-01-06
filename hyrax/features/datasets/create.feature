@@ -17,3 +17,16 @@ Feature: Create a dataset
       | TITLE           | SUPERVISOR   | DATA_ORIGIN | CREATOR   | KEYWORD  |
       | My Test Dataset | Jones, Janet | experiments | Doe, Jane | big data |
     Then I should see a message that my files are being processed
+
+  Scenario: Create a DRAFT dataset as a NIMS Researcher user
+    Given I am logged in as a nims_researcher user
+    And I have permission to deposit
+    When I navigate to the new dataset page
+    And I create a draft dataset with:
+      | TITLE           | SUPERVISOR   | DATA_ORIGIN | CREATOR   | KEYWORD  |
+      | My Test Dataset | Jones, Janet | experiments | Doe, Jane | big data |
+    Then I should see a message that my files are being processed
+    And the dataset that is created should be in a draft workflow state
+    And the dataset that is created is editable by the nims_researcher who deposited it
+    And the dataset can be submitted for approval
+    And after it is approved, it is no longer editable by the nims_researcher who deposited it
