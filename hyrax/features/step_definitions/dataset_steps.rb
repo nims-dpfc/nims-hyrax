@@ -113,6 +113,46 @@ Then("the dataset that is created should be in a draft workflow state") do
   expect(workflow_state).to eq "draft"
 end
 
+Then("the dataset that is created is editable by the nims_researcher who deposited it") do
+  dataset = Dataset.last
+  nims_researcher = User.find_by(username: dataset.depositor)
+  expect(dataset.edit_users).to include(dataset.depositor)
+end
+
+Then("the dataset can be submitted for approval") do
+  dataset = Dataset.last
+  visit edit_hyrax_dataset_path(dataset)
+  # Go through all required fields and ensure they are all populated
+  Hyrax::DatasetForm.required_fields.each do |required_input|
+    input_name = "#dataset_" + required_input.to_s
+    form_field = find(input_name)
+    next if !!form_field.value
+    raise "missing required field: #{required_input}"
+  end
+  find('#with_files_submit').click
+  dataset.reload
+  workflow_state = dataset.to_sipity_entity.reload.workflow_state_name
+  expect(workflow_state).to eq "pending_review"
+end
+
+Then("after it is approved, it is no longer editable by the nims_researcher who deposited it") do
+  dataset = Dataset.last
+  admin = FactoryBot.create(:user, :admin)
+  workflow = dataset.active_workflow
+  workflow_roles = Sipity::WorkflowRole.where(workflow_id: workflow.id)
+  workflow_roles.each do |workflow_role|
+    workflow.update_responsibilities(role: Sipity::Role.where(id: workflow_role.role_id), agents: admin)
+  end
+  subject = Hyrax::WorkflowActionInfo.new(dataset, admin)
+  sipity_workflow_action = PowerConverter.convert_to_sipity_action("approve", scope: subject.entity.workflow) { nil }
+  Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
+  dataset.reload
+  workflow_state = dataset.to_sipity_entity.reload.workflow_state_name
+  expect(workflow_state).to eq "deposited"
+  nims_researcher = User.find_by(username: dataset.depositor)
+  expect(dataset.edit_users).not_to include(dataset.depositor)
+end
+
 Then(/^I should see the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
   # first, verify @datasets is present and has some data
   expect(@datasets[access]).to be_present
