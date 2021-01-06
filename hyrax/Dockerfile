@@ -10,6 +10,7 @@ ARG AIRBRAKE_PROJECT_ID
 ARG AIRBRAKE_PROJECT_KEY
 ARG FITS_PATH
 ARG FITS_VERSION
+ARG FLUENTD_URL
 
 ENV APP_PRODUCTION=/data/ \
     APP_WORKDIR=/data
@@ -89,7 +90,7 @@ RUN cd $APP_PRODUCTION \
 RUN if [ "$RAILS_ENV" = "production" ]; then \
         cd $APP_PRODUCTION \
         && yarn install \
-        && SECRET_KEY_BASE_PRODUCTION=0 bundle exec rake assets:clean assets:precompile; \
+        && SECRET_KEY_BASE_PRODUCTION=0 FLUENTD_URL=$FLUENTD_URL bundle exec rake assets:clean assets:precompile; \
     fi
 
 WORKDIR $APP_WORKDIR
