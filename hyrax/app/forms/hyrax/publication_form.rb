@@ -23,7 +23,7 @@ module Hyrax
       :publisher, :resource_type, :complex_date, :manuscript_type,
       :complex_identifier, :complex_source, :complex_version, :complex_relation,
       :complex_event, :specimen_set_ordered, :managing_organization_ordered,
-      :language, :licensed_date, :custom_property, :note_to_admin
+      :language, :licensed_date, :custom_property, :note_to_admin, :draft
     ]
 
     self.required_fields -= [

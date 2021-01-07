@@ -15,12 +15,18 @@ module Hyrax
     def create
       safe_params = params['publication'].permit(::Hyrax::PublicationForm.build_permitted_params)
       params['publication'] = cleanup_params(safe_params.to_h)
+      params['publication']['draft'] = ['true'] if params["save_draft_with_files"] == "Save Draft"
       super
     end
 
     def update
       safe_params = params['publication'].permit(::Hyrax::PublicationForm.build_permitted_params)
       params['publication'] = cleanup_params(safe_params.to_h)
+      if params["save_draft_with_files"] == "Save Draft"
+        params['publication']['draft'] = ['true']
+      else
+        params['publication']['draft'] = ['false']
+      end
       super
     end
 
