@@ -4,6 +4,7 @@ module Hyrax
   # Generated form for Publication
   class PublicationForm < Hyrax::Forms::WorkForm
     self.model_class = ::Publication
+    delegate :keyword_ordered, :specimen_set_ordered, :managing_organization_ordered, to: :model
     self.terms -= [
       # Fields not interested in
       :based_near, :contributor, :creator, :date_created, :identifier, :license,
