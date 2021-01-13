@@ -4,6 +4,7 @@ module Hyrax
   # Generated form for Dataset
   class DatasetForm < Hyrax::Forms::WorkForm
     self.model_class = ::Dataset
+    delegate :keyword_ordered, :specimen_set_ordered, :managing_organization_ordered, to: :model
 
     self.terms -= [
       # Fields not interested in
