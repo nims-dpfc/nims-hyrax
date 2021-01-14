@@ -52,4 +52,8 @@ class User < ApplicationRecord
   def self.from_url_component(component)
     User.find_by(user_identifier: component)
   end
+
+  def mailboxer_email(_object)
+    email
+  end
 end
