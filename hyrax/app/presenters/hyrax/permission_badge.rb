@@ -27,11 +27,8 @@ module Hyrax
       end
 
       def text
-        if registered?
-          Institution.name
-        else
-          I18n.t("hyrax.visibility.#{@visibility}.text")
-        end
+        I18n.t("hyrax.visibility.#{@visibility}.text")
+        # Hyrax default was if registered? Institution.name
       end
 
       def registered?
