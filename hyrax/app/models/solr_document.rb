@@ -162,7 +162,7 @@ class SolrDocument
     self[Solrizer.solr_name('manuscript_type', :stored_searchable)]
   end
 
-  def manuscript_type
+  def managing_organization
     self[Solrizer.solr_name('managing_organization', :stored_searchable)]
   end
 
