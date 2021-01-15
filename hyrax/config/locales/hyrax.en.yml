@@ -240,6 +240,9 @@ en:
         header: 'Export:'
         mendeley: Mendeley
         zotero: Zotero
+      form_progress:
+        save_draft: Save Draft
+        save: Submit
     content_blocks:
       tabs:
         announcement_text: Announcement Text
