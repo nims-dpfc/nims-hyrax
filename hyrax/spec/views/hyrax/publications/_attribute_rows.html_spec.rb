@@ -34,6 +34,7 @@ RSpec.describe 'hyrax/publications/_attribute_rows' do
       expect(rendered).to have_content('MaDIS DPFC')
       expect(rendered).to have_content('Creating the first version')
       expect(rendered).to have_content('Event-Title-123')
+      expect(rendered).to have_content('New Scotland Yard')
       expect(rendered).to have_content('Issue-123')
       expect(rendered).to have_content('221B Baker Street Place')
       expect(rendered).to have_content('Table-of-Contents-123')
