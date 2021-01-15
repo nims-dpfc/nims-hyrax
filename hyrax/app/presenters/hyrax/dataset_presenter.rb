@@ -6,7 +6,7 @@ module Hyrax
       :complex_person, :complex_organization, :complex_rights, :complex_version,
       :characterization_methods, :computational_methods, :data_origin,
       :complex_instrument, :origin_system_provenance, :properties_addressed,
-      :complex_relation, :specimen_set, :complex_specimen_type,
+      :complex_relation, :specimen_set, :complex_specimen_type, :complex_event,
       :synthesis_and_processing, :custom_property, :first_published_url, :doi,
       :creator, :licensed_date, :date_published, to: :solr_document
 
