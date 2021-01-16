@@ -39,6 +39,10 @@ module Hyrax
             subject = Hyrax::WorkflowActionInfo.new(env.curation_concern, env.user)
             sipity_workflow_action = PowerConverter.convert_to_sipity_action("deposit_draft", scope: subject.entity.workflow) { nil }
             Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
+          elsif env.curation_concern.visibility == 'authenticated' # MDR shared / Institution
+            subject = Hyrax::WorkflowActionInfo.new(env.curation_concern, env.user)
+            sipity_workflow_action = PowerConverter.convert_to_sipity_action("approve", scope: subject.entity.workflow) { nil }
+            Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
           else
             subject = Hyrax::WorkflowActionInfo.new(env.curation_concern, env.user)
             sipity_workflow_action = PowerConverter.convert_to_sipity_action("deposit", scope: subject.entity.workflow) { nil }
