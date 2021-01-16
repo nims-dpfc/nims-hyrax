@@ -42,7 +42,7 @@ class Ability
     cannot :read_supervisor_approval, [::Dataset, ::Image, ::Publication]
     can :read_creator, [::Dataset, ::Image, ::Publication]
     can :read_date, [::Dataset, ::Image, ::Publication]
-    can :read_event, [::Publication]
+    can :read_event, [::Dataset, ::Publication]
     can :read_identifier, [::Dataset, ::Image, ::Publication]
     can :read_issue, [::Publication]
     can :read_table_of_contents, [::Publication]

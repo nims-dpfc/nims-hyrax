@@ -127,7 +127,7 @@ RSpec.describe Ability do
         it { expect(read_alternative_title).to be true }
         it { expect(read_creator).to be true }
         it { expect(read_date).to be true }
-        it { expect(read_event).to be false }
+        it { expect(read_event).to be true }
         it { expect(read_identifier).to be true }
         it { expect(read_issue).to be false }
         it { expect(read_table_of_contents).to be false }
@@ -206,7 +206,7 @@ RSpec.describe Ability do
         it { expect(read_alternative_title).to be true }
         it { expect(read_creator).to be true }
         it { expect(read_date).to be true }
-        it { expect(read_event).to be false }
+        it { expect(read_event).to be true }
         it { expect(read_identifier).to be true }
         it { expect(read_issue).to be false }
         it { expect(read_table_of_contents).to be false }
