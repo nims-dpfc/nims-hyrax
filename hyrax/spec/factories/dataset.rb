@@ -363,5 +363,17 @@ FactoryBot.define do
     trait :with_supervisor_approval do
       supervisor_approval { ['Professor-Supervisor-Approval'] }
     end
+
+    trait :with_complex_event do
+      complex_event_attributes {
+        [{
+             title: 'Event-Title-123',
+             invitation_status: true,
+             place: 'New Scotland Yard',
+             start_date: '2018-12-25',
+             end_date: '2019-01-01'
+        }]
+      }
+    end
   end
 end
