@@ -30,6 +30,10 @@
   <%= presenter.attribute_to_html(:manuscript_type, html_dl: true) %>
 <% end %>
 
+<% if can? :read_managing_organization, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:managing_organization, html_dl: true) %>
+<% end %>
+
 <% if can? :read_date, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:complex_date, render_as: :nested_date, label: t('ngdr.fields.complex_date'), html_dl: true) %>
 <% end %>
