@@ -32,7 +32,7 @@ module OrderedFields
 
   # unordered people go to the bottom
   def complex_person_ordered
-    @complex_person_ordered ||= self.complex_person.sort_by { |c| c.display_order.presence || 500 }
+    @complex_person_ordered ||= self.complex_person.sort_by { |c| c.display_order&.first&.to_i || 500 }
   end
 
 end
