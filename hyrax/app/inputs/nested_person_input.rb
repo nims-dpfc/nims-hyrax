@@ -158,7 +158,7 @@ protected
     field = :display_order
     field_name = singular_input_name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = value.send(field).present? ? true : false
+    field_value = value.send(field)&.first&.to_i
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
