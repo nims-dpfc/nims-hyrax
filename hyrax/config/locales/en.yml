@@ -62,3 +62,4 @@ en:
         title: A name to aid in identifying a work. English is preferred.
         publisher: The person or group making the work available.
         first_published_url: "The DOI of the article related to this dataset or the URL where this dataset was first made public. DOI example: https://doi.org/10.xxxx/xxxxx"
+        complex_person: '<span class="label label-info required-tag">required</span> Authors or contributors to the work. Enter the Surname, the Given name, and the full name again in "Name", and select their Role.'
