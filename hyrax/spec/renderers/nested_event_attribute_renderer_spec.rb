@@ -18,7 +18,6 @@ RSpec.describe NestedEventAttributeRenderer do
     is_expected.to have_css('div.row label', text: 'End date')
     is_expected.to have_css('div.row', text: '2019-01-01')
 
-    is_expected.to have_css('div.row label', text: 'Invitation status')
-    is_expected.to have_css('div.row', text: 'true')
+    is_expected.to have_css('div.row', text: 'Invited')
   end
 end
