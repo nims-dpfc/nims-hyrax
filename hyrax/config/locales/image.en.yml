@@ -4,7 +4,7 @@ en:
       image:     'fa fa-file-text-o'
     select_type:
       image:
-        description:        "Image works"
+        description:        "Image works [DEPRECATED]"
         name:               "Image"
   simple_form:
     labels:
