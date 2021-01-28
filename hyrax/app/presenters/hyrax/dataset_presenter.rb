@@ -14,7 +14,7 @@ module Hyrax
     prepend ::FilteredGraph
 
     def page_title
-      "#{title.first} | #{I18n.t('hyrax.product_name')}"
+      "#{title.first} // #{I18n.t('hyrax.product_name')}"
     end
 
     def manuscript_type
