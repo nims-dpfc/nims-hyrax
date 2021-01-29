@@ -110,7 +110,7 @@ en:
           complex_material_type_description_tesim: Material type description
           complex_material_type_identifier_ssim: Material identifier
           complex_identifier_ssim: Identifier
-          complex_identifier_orcid_ssim: Orcid
+          complex_identifier_orcid_ssim: ORCID
           complex_identifier_local_id_ssim: Local identifier
           complex_person_other_tesim: Creator
           complex_person_author_tesim: Author

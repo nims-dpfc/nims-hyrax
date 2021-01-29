@@ -99,7 +99,7 @@ protected
 
     out << "  <div class='col-md-9'>"
     out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id, required: required, placeholder: "ORCID"))
+        options.merge(value: field_value, name: field_name, id: field_id, required: required, placeholder: "https://orcid.org/0000-0000-0000-0000"))
     out << '  </div>'
     out << '</div>' # row
 
@@ -116,7 +116,7 @@ protected
 
     out << "  <div class='col-md-9'>"
     out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id, required: required, placeholder: "Alphabets"))
+        options.merge(value: field_value, name: field_name, id: field_id, required: required, placeholder: "Alphabets, unabbreviated"))
     out << '  </div>'
     out << '</div>' # row
 
