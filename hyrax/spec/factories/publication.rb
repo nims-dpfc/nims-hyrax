@@ -14,7 +14,7 @@ FactoryBot.define do
         [{
           name: ['Foo Bar'],
           role: ['author'],
-          orcid: ['https://orcid.example.org/0000-1111-2222-3333'],
+          orcid: ['https://orcid.org/0000-0002-1825-0097'],
           organization: ['National Institute for Materials Science'],
           sub_organization: ['MaDIS DPFC'],
           complex_identifier_attributes: [{
