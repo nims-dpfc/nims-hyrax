@@ -4,7 +4,7 @@ en:
       publication:     'fa fa-file-text-o'
     select_type:
       publication:
-        description:        "Publication works"
+        description:        "Journal articles, conference proceedings, presentations..."
         name:               "Publication"
   simple_form:
     labels:
