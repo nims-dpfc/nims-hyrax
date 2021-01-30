@@ -4,7 +4,7 @@ en:
       dataset:     'fa fa-file-text-o'
     select_type:
       dataset:
-        description:        "Dataset works"
+        description:        "Experimental data, calculated data, software, multimedia..."
         name:               "Dataset"
     browse_dataset:         "Browse all datasets"
     browse_publication:     "Browse all publications"
