@@ -11,6 +11,10 @@ module Hyrax
     Hyrax::MemberPresenterFactory.file_presenter_class = Hyrax::NimsFileSetPresenter
     prepend ::FilteredGraph
 
+    def page_title
+      "#{title.first} // #{I18n.t('hyrax.product_name')}"
+    end
+
     def manuscript_type
       ManuscriptTypeService.new.find_by_id(solr_document.manuscript_type.first)&.[](:label) if solr_document.manuscript_type.present?
     end
