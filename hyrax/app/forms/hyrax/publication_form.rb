@@ -35,7 +35,7 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :supervisor_approval, :title, :resource_type, :specimen_set_ordered,
+      :supervisor_approval, :title, :resource_type, :managing_organization_ordered,
       :description, :keyword_ordered, :date_published, :rights_statement
     ]
 
