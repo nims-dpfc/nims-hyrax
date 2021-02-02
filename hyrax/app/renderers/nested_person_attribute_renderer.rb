@@ -71,7 +71,7 @@ class NestedPersonAttributeRenderer < NestedAttributeRenderer
         each_html += get_row(label, val)
       end
       # role
-      unless v.dig('contact_person').blank?
+      unless v.dig('contact_person')&.first.to_i.zero?
         label = ''
         val = 'Contact person'
         each_html += get_row(label, val)

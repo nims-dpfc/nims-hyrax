@@ -44,6 +44,15 @@ RSpec.describe NestedPersonAttributeRenderer do
     end
   end
 
+  context 'without contact_person' do
+    let(:nested_value) { { first_name: ['Foo'], last_name: ['Bar'], contact_person: '0' } }
+
+    it 'generates the correct fields' do
+      is_expected.to have_css('div.row label', text: '')
+      is_expected.not_to have_css('div.row div.col-md-9', text: 'Contact person')
+    end
+  end
+
   context 'with contact_person' do
     let(:nested_value) { { first_name: ['Foo'], last_name: ['Bar'], contact_person: '1' } }
 
