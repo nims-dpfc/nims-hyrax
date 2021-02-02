@@ -252,7 +252,7 @@ en:
       suffix: "@example.org"
     download_all: Download All Files (Zip)
     footer:
-      copyright_html: "&copy; 2020 National Institute for Materials Science. Works are available under licenses specified on their pages."
+      copyright_html: "&copy; 2020&ndash;%{year} National Institute for Materials Science. Works are available under licenses specified on their pages."
       service_html: <a href="https://library.nims.go.jp/" target="_blank" rel="noopener">NIMS Digital Library</a>
       platform_html: <a href="https://dice.nims.go.jp/" target="_blank" rel="noopener">Data Platform DICE</a>
       privacy_html: <a href="https://www.nims.go.jp/eng/siteinfo/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
