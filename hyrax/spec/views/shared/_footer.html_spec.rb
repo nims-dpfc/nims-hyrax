@@ -18,7 +18,7 @@ RSpec.describe 'shared/_footer' do
     context 'unauthenticated user' do
       let(:user) { nil }
       it 'shows the abstract' do
-        expect(rendered).to have_content("2001-#{Date.today.year} National Institute for Materials Science")
+        expect(rendered).to have_content("2020–#{Date.today.year} National Institute for Materials Science")
       end
     end
   end
