@@ -123,7 +123,7 @@ FactoryBot.define do
       complex_event_attributes {
         [{
              title: 'Event-Title-123',
-             invitation_status: true,
+             invitation_status: '1',
              place: 'New Scotland Yard',
              start_date: '2018-12-25',
              end_date: '2019-01-01'
