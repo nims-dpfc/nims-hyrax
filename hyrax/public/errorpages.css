@@ -1,0 +1,170 @@
+/* "Montserrat" is licensed under the SIL Open Font License, Version 1.1.
+ * Copyright 2011 The Montserrat Project Authors (https://github.com/JulietaUla/Montserrat)
+ * The license is available with a FAQ at: http://scripts.sil.org/OFL
+ */
+@font-face {
+  font-family: Montserrat; /* regular */
+  src: url('/fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: Montserrat; /* bold */
+  src: url('/fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: Montserrat; /* italic */
+  src: url('/fonts/montserrat/Montserrat-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: Montserrat; /* bolditalic */
+  src: url('/fonts/montserrat/Montserrat-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;  
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #1e2022;
+  margin: 0;
+  margin-bottom: 185px;
+  font-weight: 300;
+}
+
+strong {
+  font-weight: 700;
+}
+
+a, a:hover, a:active {
+  color: #51791a;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+header {
+  color: #afca0b;
+  background-color: #1e2022;
+  margin: 0;
+  min-height: 80px;
+}
+
+.logo {
+  width: 332px;
+  height: 50px;
+  float: left;
+  padding: 15px;
+}
+
+nav {
+  padding: 30px;
+  font-weight: 300;
+}
+header nav a { 
+  color: #dcdcdc;
+  text-decoration: none;  
+  padding: 20px;
+}
+header nav a:hover, header nav a:active {
+  color: white;
+}
+.list-unstyled {
+  list-style-type: none;
+}
+nav ul {
+  float: right;
+  margin: 0;
+}
+nav li {
+  display: block;
+  float: left;
+}
+#content-wrapper {
+  margin: auto;
+  max-width: 700px;
+  padding: 50px; 
+  font-size: 16px;
+}
+#content-wrapper a {
+  font-weight: bold;
+}
+
+h1 {
+  background-color: #7db928;
+  text-align: center;
+  margin: 0;
+  padding: 15px;
+  font-weight: bold;
+}
+
+.btn {
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 6px 12px;
+  margin: auto;
+}
+.btn-primary {
+  background-color: #1e2022;
+}
+
+.mainaction {
+  text-align: right;
+}
+
+a.btn-primary, a.btn-primary:focus, a.btn-primary:hover, a.btn-primary:active {
+  color: #afca0b;
+  text-decoration: none;
+}
+
+.site-footer {
+  margin-top: 15px;
+  padding: 20px 0;
+  background-color: #1e2022;
+  color: #ffffff;
+  position: absolute;
+  bottom: 0;
+  height: 170px;
+  width: 100%;
+  font-weight: 300;
+}
+
+.site-footer h2 {
+  margin: 0;
+  color: #fff;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer ul {
+  margin: 0;
+}
+
+.site-footer a,
+.site-footer a:hover,
+.site-footer a:focus {
+  color: #fff;
+}
+.row div {
+  float: left;
+}
+.col-sm-9 {
+  width: 70%;
+}
+.col-sm-9 > * {
+  padding-left: 15px;
+}
+.col-sm-3 {
+  width: 25%;
+}
