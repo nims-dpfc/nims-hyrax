@@ -152,14 +152,21 @@ Hyrax.config do |config|
   else
     protocol = 'http'
   end
+
+  if Rails.env.development?
+    port = ENV.fetch('PORT', 3000)
+  else
+    port = nil
+  end
+
   # Returns a URL that resolves to an image provided by a IIIF image server
   config.iiif_image_url_builder = lambda do |file_id, base_url, size|
-    Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size, protocol: protocol, port: ENV.fetch('PORT', 3000))
+    Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size, protocol: protocol, port: port)
   end
 
   # Returns a URL that resolves to an info.json file provided by a IIIF image server
   config.iiif_info_url_builder = lambda do |file_id, base_url|
-    uri = Riiif::Engine.routes.url_helpers.info_url(file_id, host: base_url, protocol: protocol, port: ENV.fetch('PORT', 3000))
+    uri = Riiif::Engine.routes.url_helpers.info_url(file_id, host: base_url, protocol: protocol, port: port)
     uri.sub(%r{/info\.json\Z}, '')
   end
 
