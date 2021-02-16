@@ -327,6 +327,30 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_source do
+      complex_source_attributes {
+        [{
+          alternative_title: 'Sub title for journal',
+          complex_person_attributes: [{
+            name: 'AR',
+            role: 'Editor'
+          }],
+          end_page: '12',
+          complex_identifier_attributes: [{
+            identifier: '1234567',
+            scheme: 'Local'
+          }],
+          issue: '34',
+          sequence_number: '1.2.2',
+          start_page: '4',
+          title: 'Test journal',
+          total_number_of_pages: '8',
+          volume: '3',
+          issn: '1234-5678'
+        }]
+      }
+    end
+
     trait :with_complex_relation do
       complex_relation_attributes {
         [{
