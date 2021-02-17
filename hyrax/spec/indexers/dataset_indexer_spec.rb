@@ -19,10 +19,21 @@ RSpec.describe DatasetIndexer do
           description: 'http://bibframe.org/vocab/providerDate',
         }, {
           date: '2018-01-01'
+        }, {
+          description: 'http://bibframe.org/vocab/changeDate'
+        }, {
+          description: 'http://purl.org/dc/terms/dateAccepted',
+          date: ''
         }
       ]
       obj = build(:dataset, complex_date_attributes: dates)
       @solr_document = obj.to_solr
+    end
+    it 'rejects blank dates' do
+      expect(@solr_document).not_to include('complex_date_updated_ssm')
+      expect(@solr_document).not_to include('complex_year_updated_sim')
+      expect(@solr_document).not_to include('complex_date_accepted_ssm')
+      expect(@solr_document).not_to include('complex_year_accepted_sim')
     end
     it 'indexes as displayable' do
       expect(@solr_document).to include('complex_date_ssm')
