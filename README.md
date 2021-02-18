@@ -96,6 +96,14 @@ You could setup an alias for docker-compose on your local machine, to ease typin
 alias ngdrdocker='docker-compose -f docker-compose.yml -f docker-compose.override.yml'
 ```
 
+### Yarn and static assets
+
+Static asset build is only run in `production` environment to speed up container creation in develop. To see features such as the IIIF viewer, `yarn install` must be run on the web container once it's up.
+
+```
+ngdrdocker run web yarn install
+```
+
 ## Running in production
 
 When running in production, prepare your .env file using .env.template as the template (not .env.template.development). You need to use `docker-compose -f docker-compose.yml -f docker-compose-production.yml`, replacing docker-compose.override.yml with docker-compose-production.yml. To assist this, an alias similar to that below can be useful:
