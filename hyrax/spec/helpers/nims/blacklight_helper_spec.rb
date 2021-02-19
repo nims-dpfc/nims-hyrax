@@ -56,12 +56,12 @@ RSpec.describe Nims::BlacklightHelper, type: :helper, clean: true do
       args = { value: description,
                document: { controller: 'catalog', action: 'index' } }
       p helper.render_truncated_description(args)
-      expect(Capybara.string(helper.render_truncated_description(args))).to have_link('View More')
+      expect(Capybara.string(helper.render_truncated_description(args))).not_to have_link('View More')
     end
     it 'has a "View More" button' do
       args = { value: description,
                document: { controller: 'hyrax/publications', id: publication.id, action: 'show' } }
-      expect(Capybara.string(helper.render_truncated_description(args))).to have_link('View More')
+      expect(Capybara.string(helper.render_truncated_description(args))).not_to have_link('View More')
     end
     it 'has an ellipsis' do
       args = { value: description,
