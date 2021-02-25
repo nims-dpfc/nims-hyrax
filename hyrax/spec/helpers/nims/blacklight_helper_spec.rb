@@ -52,13 +52,13 @@ RSpec.describe Nims::BlacklightHelper, type: :helper, clean: true do
   describe '#render_truncated_description' do
     let(:publication) { FactoryBot.create(:publication) }
     let(:description) { ['A long description that is quite long. Long long long long long long long long long long. Extremely extremely extremely long long long long long long long.'] }
-    it 'has a "View More" button in catalog view' do
+    it 'does not have a "View More" button in catalog view' do
       args = { value: description,
                document: { controller: 'catalog', action: 'index' } }
       p helper.render_truncated_description(args)
       expect(Capybara.string(helper.render_truncated_description(args))).not_to have_link('View More')
     end
-    it 'has a "View More" button' do
+    it 'does not have a "View More" button' do
       args = { value: description,
                document: { controller: 'hyrax/publications', id: publication.id, action: 'show' } }
       expect(Capybara.string(helper.render_truncated_description(args))).not_to have_link('View More')
