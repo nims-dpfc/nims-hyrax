@@ -215,7 +215,7 @@ terms:
   term: spectroscopy/分光法
   active: true
 - id: spectroscopy -- x-ray absorption fine structure
-  term: xpectroscopy/分光法 -- x-ray absorption fine structure/X線吸収微細構造
+  term: spectroscopy/分光法 -- x-ray absorption fine structure/X線吸収微細構造
   active: true
 - id: spectroscopy -- EXAFS
   term: spectroscopy/分光法 -- EXAFS/EXAFS
