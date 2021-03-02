@@ -141,7 +141,7 @@ protected
     field = :contact_person
     field_name = singular_input_name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = value.send(field).present? ? true : false
+    field_value = value.send(field)&.first.to_i.zero? ? false : true
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
