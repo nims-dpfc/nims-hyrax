@@ -60,6 +60,7 @@
 <% end %>
 
 <% if can? :read_related, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:complex_relation, render_as: :nested_relation, label: t('ngdr.fields.complex_relation'), html_dl: true) %>
   <%= presenter.attribute_to_html(:first_published_url, label: t('ngdr.fields.first_published_url'), html_dl: true) %>
 <% end %>
 
@@ -71,6 +72,8 @@
   <%= presenter.attribute_to_html(:source, label: "Source", html_dl: true) %>
   <%= presenter.attribute_to_html(:complex_source, render_as: :nested_source, label: t('ngdr.fields.complex_source'), html_dl: true) %>
 <% end %>
+
+<%= presenter.attribute_to_html(:custom_property, render_as: :nested_custom_property, label: t('ngdr.fields.custom_property'), html_dl: true) %>
 
 <% if can? :read_issue, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:issue, label: "Issue", html_dl: true) %>
