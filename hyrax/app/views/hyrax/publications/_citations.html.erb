@@ -1,0 +1,12 @@
+<% content_for(:gscholar_meta) do %>
+  <% 
+    ds = setup_pub_citation_info(@presenter) 
+  %>
+  <% if ds.present? %>
+    <meta name="citation_journal_title" content="<%= ds.fetch(:title, '') %>"/>
+    <meta name="citation_volume" content="<%= ds.fetch(:volume, '') %>"/>
+    <meta name="citation_issue" content="<%= ds.fetch(:issue, '') %>"/>
+    <meta name="citation_firstpage" content="<%= ds.fetch(:start_page, '') %>"/>
+    <meta name="citation_lastpage" content="<%= ds.fetch(:end_page, '')%>"/>
+  <% end %>
+<% end %>
