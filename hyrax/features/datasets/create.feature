@@ -11,6 +11,7 @@ Feature: Create a dataset
   
   Scenario: Create an open dataset as a NIMS Researcher user
     Given I am logged in as a nims_researcher user
+    And I have permission to deposit
     When I navigate to the new dataset page
     And I create the dataset with:
       | TITLE           | SUPERVISOR   | DATA_ORIGIN | CREATOR   | KEYWORD  | VISIBILITY |
@@ -30,6 +31,7 @@ Feature: Create a dataset
 
   Scenario: Create a DRAFT dataset as a NIMS Researcher user
     Given I am logged in as a nims_researcher user
+    And I have permission to deposit
     When I navigate to the new dataset page
     And I create a draft dataset with:
       | TITLE           | SUPERVISOR   | DATA_ORIGIN | CREATOR   | KEYWORD  |
