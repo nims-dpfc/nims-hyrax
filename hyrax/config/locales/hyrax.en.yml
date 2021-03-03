@@ -146,7 +146,7 @@ en:
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
-          description_tesim: Description
+          description_tesim: Description/Abstract
           file_format_tesim: File Format
           identifier_tesim: Identifier
           instrument_alternative_title_tesim: Instrument alternative title
@@ -213,7 +213,7 @@ en:
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
-          description_tesim: Description
+          description_tesim: Description/Abstract
           file_format_tesim: File Format
           identifier_tesim: Identifier
           instrument_tesim: Instrument
@@ -226,7 +226,7 @@ en:
           properties_addressed_tesim: Properties processed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
-          specimen_type_tesim: Material/Specimen
+          specimen_set_tesim: Material/Specimen
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
           table_of_contents_tesim: Table of contents
