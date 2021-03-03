@@ -15,7 +15,7 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
       markup << inner_markup
       markup << %(</ul></dd>)
     end
-    markup.html_safe
+    sanitize(markup)
   end
 
   private
