@@ -81,5 +81,7 @@ en:
         note_to_admin: Text written here will not be publicly visible.
     placeholders:
       defaults:
-        first_published_url: "https://doi.org/10.xxx/xxxx"
+        first_published_url: "https://doi.org/10.xxx/xxx"
+        managing_organization: NIMS
         managing_organization_ordered: NIMS
+        supervisor_approval: approved
