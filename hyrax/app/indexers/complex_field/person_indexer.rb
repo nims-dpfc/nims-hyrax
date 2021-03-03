@@ -7,13 +7,13 @@ module ComplexField
     end
 
     def index_person(solr_doc)
-      creators = object.complex_person.map { |c| (c.first_name + c.last_name).reject(&:blank?).join(' ') }
-      creators << object.complex_person.map { |c| c.name.reject(&:blank?) }
+      creators = object.complex_person_ordered.map { |c| (c.first_name + c.last_name).reject(&:blank?).join(' ') }
+      creators << object.complex_person_ordered.map { |c| c.name.reject(&:blank?) }
       creators = creators.flatten.uniq.reject(&:blank?)
       solr_doc[Solrizer.solr_name('complex_person', :stored_searchable)] = creators
       solr_doc[Solrizer.solr_name('complex_person', :facetable)] = creators
-      solr_doc[Solrizer.solr_name('complex_person', :displayable)] = object.complex_person.to_json
-      object.complex_person.each do |c|
+      solr_doc[Solrizer.solr_name('complex_person', :displayable)] = object.complex_person_ordered.to_json
+      object.complex_person_ordered.each do |c|
         # index creator by role
         person_name = c.name.reject(&:blank?)
         person_name = (c.first_name + c.last_name).reject(&:blank?).join(' ') if person_name.blank?
@@ -38,6 +38,10 @@ module ComplexField
         solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
         solr_doc[fld_name] << vals
         solr_doc[fld_name] = solr_doc[fld_name].flatten.uniq
+        # display_order
+        fld_name = Solrizer.solr_name('complex_person_display_order', :symbol)
+        val = c.display_order
+        solr_doc[fld_name] = val
         # Affiliation
         c.complex_affiliation.each do |ca|
           ca.complex_organization.each do |co|

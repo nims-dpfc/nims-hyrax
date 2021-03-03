@@ -114,8 +114,16 @@ RSpec.describe Dataset do
 
   describe 'keyword' do
     it 'has keyword' do
-      @obj = build(:dataset, keyword: ['keyword 1', 'keyword 2'])
-      expect(@obj.keyword).to eq ['keyword 1', 'keyword 2']
+      @obj = build(:dataset, keyword: ['keyword 2', '3 keyword', 'keyword 1'])
+      expect(@obj.keyword).to eq ['keyword 2', '3 keyword', 'keyword 1']
+    end
+
+    it 'preserves keyword order' do
+      @obj = Dataset.create(attributes_for(:dataset, keyword_ordered: ['keyword 2', '3 keyword', 'keyword 1']))
+      after = Dataset.find(@obj.id)
+      expect(after.keyword).to match_array ['0 ~ keyword 2', '1 ~ 3 keyword', '2 ~ keyword 1']
+      expect(after.keyword_ordered).to eq ['keyword 2', '3 keyword', 'keyword 1']
+
     end
   end
 
@@ -332,6 +340,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_person.first.complex_affiliation).to be_empty
       expect(@obj.complex_person.first.role).to be_empty
       expect(@obj.complex_person.first.complex_identifier).to be_empty
+      expect(@obj.complex_person.first.display_order).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
     end
 
@@ -342,7 +351,8 @@ RSpec.describe Dataset do
           complex_affiliation_attributes: [{
             job_title: 'Paradise',
           }],
-          role: 'Creator'
+          role: 'Creator',
+          display_order: 1
         }]
       )
       expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
@@ -352,6 +362,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_person.first.email).to be_empty
       expect(@obj.complex_person.first.role).to eq ['Creator']
       expect(@obj.complex_person.first.complex_identifier).to be_empty
+      expect(@obj.complex_person.first.display_order).to eq([1])
       expect(@obj.complex_person.first.uri).to be_empty
       expect(@obj.complex_person.first.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_person.first.complex_affiliation.first.job_title).to eq ['Paradise']
