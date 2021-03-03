@@ -46,6 +46,18 @@
           <%= presenter.attribute_to_html(:publisher, render_as: :faceted, html_dl: true) %>
         <% end %>
 
+        <% if can? :read_manuscript_type, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:manuscript_type, html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_managing_organization, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:managing_organization, html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_date, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_date, render_as: :nested_date, label: t('ngdr.fields.complex_date'), html_dl: true) %>
+        <% end %>
+
         <% if can? :read_identifier, presenter.model_name.name.constantize %>
           <%= presenter.attribute_to_html(:doi, label: 'DOI', html_dl: true) %>
           <%= presenter.attribute_to_html(:complex_identifier, render_as: :nested_identifier, label: t('ngdr.fields.complex_identifier'), html_dl: true) %>
@@ -77,8 +89,13 @@
           <%= presenter.attribute_to_html(:first_published_url, label: t('ngdr.fields.first_published_url'), html_dl: true) %>
         <% end %>
 
+        <% if can? :read_event, presenter.model_name.name.constantize %>
+           <%= presenter.attribute_to_html(:complex_event, render_as: :nested_event, label: "Event", html_dl: true) %>
+        <% end %>
+
         <% if can? :read_source, presenter.model_name.name.constantize %>
-          <%= presenter.attribute_to_html(:source, html_dl: true) %>
+          <%= presenter.attribute_to_html(:source, label: "Source", html_dl: true) %>
+          <%= presenter.attribute_to_html(:complex_source, render_as: :nested_source, label: t('ngdr.fields.complex_source'), html_dl: true) %>
         <% end %>
 
         <%= presenter.attribute_to_html(:custom_property, render_as: :nested_custom_property, label: t('ngdr.fields.custom_property'), html_dl: true) %>

@@ -158,6 +158,14 @@ class SolrDocument
     self[Solrizer.solr_name('first_published_url', :stored_searchable)]
   end
 
+  def manuscript_type
+    self[Solrizer.solr_name('manuscript_type', :stored_searchable)]
+  end
+
+  def managing_organization
+    self[Solrizer.solr_name('managing_organization', :stored_searchable)]
+  end
+
   def doi
     self[Solrizer.solr_name('doi', :stored_searchable)]
   end

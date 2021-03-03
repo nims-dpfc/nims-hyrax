@@ -16,16 +16,32 @@ module Hyrax
         next_actor.create(env) && create_workflow(env)
       end
 
+      def update(env)
+        next_actor.update(env) && update_workflow(env)
+      end
+
       private
 
         # @return [TrueClass]
         def create_workflow(env)
           workflow_factory.create(env.curation_concern, env.attributes, env.user)
+          determine_workflow_state(env)
+        end
 
+        # @return [TrueClass]
+        def update_workflow(env)
+          determine_workflow_state(env)
+        end
+
+        def determine_workflow_state(env)
           # Put the work into a draft workflow state if env.curation_concern.draft? == true
           if env.curation_concern.draft?
             subject = Hyrax::WorkflowActionInfo.new(env.curation_concern, env.user)
             sipity_workflow_action = PowerConverter.convert_to_sipity_action("deposit_draft", scope: subject.entity.workflow) { nil }
+            Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
+          elsif env.curation_concern.visibility == 'authenticated' # MDR shared / Institution
+            subject = Hyrax::WorkflowActionInfo.new(env.curation_concern, env.user)
+            sipity_workflow_action = PowerConverter.convert_to_sipity_action("approve", scope: subject.entity.workflow) { nil }
             Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
           else
             subject = Hyrax::WorkflowActionInfo.new(env.curation_concern, env.user)

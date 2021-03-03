@@ -1,0 +1,5 @@
+<%= f.input :manuscript_type,
+   required: f.object.required?(key),
+   as: :select,
+   collection: ManuscriptTypeService.new.select_all_options,
+   input_html: {class: 'form-control'} %>

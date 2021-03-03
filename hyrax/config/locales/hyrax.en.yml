@@ -110,7 +110,7 @@ en:
           complex_material_type_description_tesim: Material type description
           complex_material_type_identifier_ssim: Material identifier
           complex_identifier_ssim: Identifier
-          complex_identifier_orcid_ssim: Orcid
+          complex_identifier_orcid_ssim: ORCID
           complex_identifier_local_id_ssim: Local identifier
           complex_person_other_tesim: Creator
           complex_person_author_tesim: Author
@@ -240,6 +240,9 @@ en:
         header: 'Export:'
         mendeley: Mendeley
         zotero: Zotero
+      form_progress:
+        save_draft: Save Draft
+        save: Submit
     content_blocks:
       tabs:
         announcement_text: Announcement Text
@@ -249,7 +252,7 @@ en:
       suffix: "@example.org"
     download_all: Download All Files (Zip)
     footer:
-      copyright_html: "&copy; 2020 National Institute for Materials Science. Works are available under licenses specified on their pages."
+      copyright_html: "&copy; 2020&ndash;%{year} National Institute for Materials Science. Works are available under licenses specified on their pages."
       service_html: <a href="https://library.nims.go.jp/" target="_blank" rel="noopener">NIMS Digital Library</a>
       platform_html: <a href="https://dice.nims.go.jp/" target="_blank" rel="noopener">Data Platform DICE</a>
       privacy_html: <a href="https://www.nims.go.jp/eng/siteinfo/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
@@ -279,7 +282,12 @@ en:
           share: Sharing
           specimen: Specimen details
     visibility:
+      authenticated:
+        note_html: Restrict access to MDR Shared users.
+        text: MDR Shared
       embargo:
         note_html: This option is not valid.
       lease:
         note_html: This option is not valid.
+      open:
+        text: MDR Open

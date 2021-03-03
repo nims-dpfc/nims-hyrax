@@ -58,14 +58,14 @@ When(/^I create the dataset with:$/) do |table|
   select(values[:DATA_ORIGIN], from: 'Data origin')
   fill_in('dataset[complex_person_attributes][0][name][]', with: values[:CREATOR])
   fill_in('Keyword', with: values[:KEYWORD])
-  select('Creative Commons BY-SA Attribution-ShareAlike 4.0 International', from: 'dataset[rights_statement]')
+  select('Creative Commons BY-SA Attribution-ShareAlike 4.0 International', from: 'dataset[rights_statement][]')
 
   # With selenium and the chrome driver, focus remains on the
   # select box. Click outside the box so the next line can't find
   # its element
   find('body').click
   choose('dataset_visibility_open')
-  expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
+  expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as MDR Open) may be viewed as publishing which could impact your ability to')
   check('agreement')
 
   click_on('Save')
@@ -92,14 +92,14 @@ When(/^I create a draft dataset with:$/) do |table|
   select(values[:DATA_ORIGIN], from: 'Data origin')
   fill_in('dataset[complex_person_attributes][0][name][]', with: values[:CREATOR])
   fill_in('Keyword', with: values[:KEYWORD])
-  select('Creative Commons BY-SA Attribution-ShareAlike 4.0 International', from: 'dataset[complex_rights_attributes][0][rights][]')
+  find('#dataset_rights_statement').select('MIT License')
 
   # With selenium and the chrome driver, focus remains on the
   # select box. Click outside the box so the next line can't find
   # its element
   find('body').click
   choose('dataset_visibility_open')
-  expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
+  expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as MDR Open) may be viewed as publishing which could impact your ability to')
   check('agreement')
 
   click_on('Save Draft')
@@ -107,10 +107,20 @@ When(/^I create a draft dataset with:$/) do |table|
   expect(page).to have_content(values[:TITLE])
 end
 
-Then("the dataset that is created should be in a draft workflow state") do
+Then("the dataset can be submitted for approval") do
   dataset = Dataset.last
+  visit edit_hyrax_dataset_path(dataset)
+  # Go through all required fields and ensure they are all populated
+  Hyrax::DatasetForm.required_fields.each do |required_input|
+    input_name = "#dataset_" + required_input.to_s
+    form_field = find(input_name)
+    next if !!form_field.value
+    raise "missing required field: #{required_input}"
+  end
+  find('#with_files_submit').click
+  dataset.reload
   workflow_state = dataset.to_sipity_entity.reload.workflow_state_name
-  expect(workflow_state).to eq "draft"
+  expect(workflow_state).to eq "pending_review"
 end
 
 Then(/^I should see the (open|authenticated|embargo|lease|restricted) datasets?$/) do |access|
