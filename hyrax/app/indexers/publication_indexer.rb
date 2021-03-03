@@ -4,6 +4,7 @@ class PublicationIndexer < NgdrIndexer
   # Custom indexers for publication model
   include ComplexField::DateIndexer
   include ComplexField::IdentifierIndexer
+  include ComplexField::CustomPropertyIndexer
   include ComplexField::PersonIndexer
   include ComplexField::RightsIndexer
   include ComplexField::VersionIndexer
@@ -32,6 +33,7 @@ class PublicationIndexer < NgdrIndexer
       fields << Solrizer.solr_name('first_published_url', :stored_searchable)
       fields << Solrizer.solr_name('doi', :stored_searchable)
       fields.concat ComplexField::DateIndexer.date_search_fields
+      fields.concat ComplexField::CustomPropertyIndexer.custom_property_search_fields
       fields.concat ComplexField::IdentifierIndexer.identifier_search_fields
       fields.concat ComplexField::PersonIndexer.person_search_fields
       fields.concat ComplexField::RightsIndexer.rights_search_fields
@@ -47,6 +49,7 @@ class PublicationIndexer < NgdrIndexer
       fields << Solrizer.solr_name('place', :stored_searchable)
       fields << Solrizer.solr_name('table_of_contents', :stored_searchable)
       fields.concat ComplexField::DateIndexer.date_show_fields
+      fields.concat ComplexField::CustomPropertyIndexer.custom_property_show_fields
       fields.concat ComplexField::IdentifierIndexer.identifier_show_fields
       fields.concat ComplexField::PersonIndexer.person_show_fields
       fields.concat ComplexField::RightsIndexer.rights_show_fields
