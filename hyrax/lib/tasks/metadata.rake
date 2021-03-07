@@ -17,27 +17,27 @@ namespace :metadata do
             work.rights_statement += complex_right.rights
             work.licensed_date = complex_right.date.first if work.licensed_date.blank?
           end
-
-          # Resource Type (row 9)
-          work.resource_type << 'Dataset' unless work.resource_type.present?
-
-          # Contact Person (row 23)
-          work.complex_person.each do |complex_person|
-            if complex_person.role.detect { |r| r.match(/contact person/i) }
-              work.complex_person_attributes = [complex_person.attributes.merge("contact_person" => ["1"])]
-            end
-          end
-
-          # Published date (row 24)
-          if work.date_published.blank?
-            work.complex_date.each do |complex_date|
-              next unless complex_date.description.detect { |d| d.match(/published|issued/i) }
-              work.date_published = complex_date.date.first
-            end
-          end
-
-          work.save!
         end
+
+        # Resource Type (row 9)
+        work.resource_type << 'Dataset' unless work.resource_type.present?
+
+        # Contact Person (row 23)
+        work.complex_person.each do |complex_person|
+          if complex_person.role.detect { |r| r.match(/contact person/i) }
+            work.complex_person_attributes = [complex_person.attributes.merge("contact_person" => ["1"])]
+          end
+        end
+
+        # Published date (row 24)
+        if work.date_published.blank?
+          work.complex_date.each do |complex_date|
+            next unless complex_date.description.detect { |d| d.match(/published|issued/i) }
+            work.date_published = complex_date.date.first
+          end
+        end
+
+        work.save!
       rescue => e
         errors << {work: work, exception: e.message, backtrace: e.backtrace}
         Rails.logger.error "error for work: #{work.id} - #{e.message}"
@@ -56,26 +56,26 @@ namespace :metadata do
             work.rights_statement += complex_right.rights
             work.licensed_date = complex_right.date.first if work.licensed_date.blank?
           end
-
-          # Resource Type (row 9)
-          # N/A
-
-          # Contact Person (row 23)
-          work.complex_person.each do |complex_person|
-            if complex_person.role.detect { |r| r.match(/contact person/i) }
-              work.complex_person_attributes = [complex_person.attributes.merge("contact_person" => ["1"])]
-            end
-          end
-
-          # Published date (row 24)
-          if work.date_published.blank?
-            work.complex_date.each do |complex_date|
-              next unless complex_date.description.detect { |d| d.match(/published|issued/i) }
-              work.date_published = complex_date.date.first
-            end
-          end
-          work.save!
         end
+
+        # Resource Type (row 9)
+        # N/A
+
+        # Contact Person (row 23)
+        work.complex_person.each do |complex_person|
+          if complex_person.role.detect { |r| r.match(/contact person/i) }
+            work.complex_person_attributes = [complex_person.attributes.merge("contact_person" => ["1"])]
+          end
+        end
+
+        # Published date (row 24)
+        if work.date_published.blank?
+          work.complex_date.each do |complex_date|
+            next unless complex_date.description.detect { |d| d.match(/published|issued/i) }
+            work.date_published = complex_date.date.first
+          end
+        end
+        work.save!
       rescue => e
         errors << {work: work, exception: e.message, backtrace: e.backtrace}
         Rails.logger.error "error for work: #{work.id} - #{e.message}"
