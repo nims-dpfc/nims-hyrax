@@ -67,13 +67,13 @@ class NestedPersonAttributeRenderer < NestedAttributeRenderer
         label = 'Role'
         val = v['role'][0]
         term = RoleService.new.find_by_id(val)
-        val = term['label'] if term.any?
+        val = term['id'] if term.any? #using id as proxy for English-only text
         each_html += get_row(label, val)
       end
       # role
       unless v.dig('contact_person')&.first.to_i.zero?
         label = ''
-        val = 'Contact person'
+        val = 'corresponding author'
         each_html += get_row(label, val)
       end
       html += get_inner_html(each_html)
