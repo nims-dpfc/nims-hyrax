@@ -30,7 +30,7 @@ RSpec.describe NestedPersonAttributeRenderer do
       is_expected.to have_css('div.row', text: 'Research')
 
       is_expected.to have_css('div.row label', text: 'Role')
-      is_expected.to have_css('div.row', text: 'operator/データ測定者・計算者')
+      is_expected.to have_css('div.row', text: 'operator')
     end
   end
 
