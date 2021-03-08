@@ -40,7 +40,6 @@ RSpec.describe NestedPersonAttributeRenderer do
       is_expected.to have_css('th', text: 'Person')
       is_expected.to have_css('div.row label', text: 'Name')
       is_expected.to have_css('div.row a', text: 'Foo Bar')
-      is_expected.not_to have_css('div.row div.col-md-9', text: 'Contact person')
     end
   end
 
@@ -49,7 +48,7 @@ RSpec.describe NestedPersonAttributeRenderer do
 
     it 'generates the correct fields' do
       is_expected.to have_css('div.row label', text: '')
-      is_expected.not_to have_css('div.row div.col-md-9', text: 'Contact person')
+      is_expected.not_to have_css('div.row div.col-md-9', text: 'corresponding author')
     end
   end
 
@@ -58,7 +57,7 @@ RSpec.describe NestedPersonAttributeRenderer do
 
     it 'generates the correct fields' do
       is_expected.to have_css('div.row label', text: '')
-      is_expected.to have_css('div.row div.col-md-9', text: 'Contact person')
+      is_expected.to have_css('div.row div.col-md-9', text: 'corresponding author')
     end
   end
 end
