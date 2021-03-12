@@ -273,6 +273,7 @@ en:
     product_twitter_handle: "@nims_library"
     works:
       form:
+        submit_caution_html: <strong>Note:</strong> After your work has been submitted and successfully deposited, you will not be able to edit it.
         tab:
           files: Files
           metadata: Descriptions
