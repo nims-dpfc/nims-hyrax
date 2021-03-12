@@ -20,7 +20,11 @@ namespace :metadata do
         end
 
         # Resource Type (row 9)
-        work.resource_type << 'Dataset' unless work.resource_type.present?
+        if work.identifier.first =~ /^http:\/\/imeji\.nims\.go\.jp\//
+          work.resource_type = ['Image']
+        elsif work.resource_type.empty?
+          work.resource_type = ['Dataset']
+        end
 
         # Contact Person (row 23)
         work.complex_person.each do |complex_person|
@@ -30,11 +34,20 @@ namespace :metadata do
         end
 
         # Published date (row 24)
-        if work.date_published.blank?
-          work.complex_date.each do |complex_date|
-            next unless complex_date.description.detect { |d| d.match(/published|issued/i) }
-            work.date_published = complex_date.date.first
+        date_issued = date_published = nil
+        work.complex_date.each do |complex_date|
+          if complex_date.description.detect{ |d| complex_date.date.first if d.match(/issued/i) } && date_issued.nil?
+            date_issued = complex_date.date.first
           end
+          if complex_date.description.detect{ |d| complex_date.date.first if d.match(/published/i) } && date_published.nil?
+            date_published = complex_date.date.first
+          end
+        end
+
+        if date_issued
+          work.date_published = date_issued
+        elsif date_published
+          work.date_published = date_published
         end
 
         work.save!
@@ -69,12 +82,22 @@ namespace :metadata do
         end
 
         # Published date (row 24)
-        if work.date_published.blank?
-          work.complex_date.each do |complex_date|
-            next unless complex_date.description.detect { |d| d.match(/published|issued/i) }
-            work.date_published = complex_date.date.first
+        date_issued = date_published = nil
+        work.complex_date.each do |complex_date|
+          if complex_date.description.detect{ |d| complex_date.date.first if d.match(/issued/i) } && date_issued.nil?
+            date_issued = complex_date.date.first
+          end
+          if complex_date.description.detect{ |d| complex_date.date.first if d.match(/published/i) } && date_published.nil?
+            date_published = complex_date.date.first
           end
         end
+
+        if date_issued
+          work.date_published = date_issued
+        elsif date_published
+          work.date_published = date_published
+        end
+
         work.save!
       rescue => e
         errors << {work: work, exception: e.message, backtrace: e.backtrace}
