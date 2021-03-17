@@ -6,9 +6,7 @@ module Hyrax
     # @return [Boolean] true if the passed in field is a multivalued field
     def self.multiple?(model_class, field)
       case field.to_s
-      when 'rights_statement'
-        false
-      when 'keyword_ordered', 'specimen_set_ordered', 'managing_organization_ordered',
+      when 'rights_statement', 'keyword_ordered', 'specimen_set_ordered', 'managing_organization_ordered',
           'ordered_member_ids', 'in_works_ids', 'member_of_collection_ids'
         true
       else
