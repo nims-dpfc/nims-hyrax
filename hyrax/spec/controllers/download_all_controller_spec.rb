@@ -45,11 +45,10 @@ RSpec.describe DownloadAllController, type: :controller do
       end
       let(:dataset) { create(:dataset, members: @file_sets) }
 
-
-      it 'it returns the file set ids' do
+      it 'returns all the file set ids' do
         skip "This test doesn't work"
         get :show, params: { id: dataset.id, format: :zip }
-        expect(subject).to receive(:file_set_ids).and_return(@file_set_ids)
+        expect(subject.send(:file_set_ids)).to eq @file_set_ids
       end
     end
 
