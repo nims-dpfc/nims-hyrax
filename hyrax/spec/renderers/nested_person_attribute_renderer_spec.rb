@@ -43,8 +43,8 @@ RSpec.describe NestedPersonAttributeRenderer do
     end
   end
 
-  context 'without contact_person' do
-    let(:nested_value) { { first_name: ['Foo'], last_name: ['Bar'], contact_person: '0' } }
+  context 'without corresponding_author' do
+    let(:nested_value) { { first_name: ['Foo'], last_name: ['Bar'], corresponding_author: '0' } }
 
     it 'generates the correct fields' do
       is_expected.to have_css('div.row label', text: '')
@@ -52,8 +52,8 @@ RSpec.describe NestedPersonAttributeRenderer do
     end
   end
 
-  context 'with contact_person' do
-    let(:nested_value) { { first_name: ['Foo'], last_name: ['Bar'], contact_person: '1' } }
+  context 'with corresponding_author' do
+    let(:nested_value) { { first_name: ['Foo'], last_name: ['Bar'], corresponding_author: '1' } }
 
     it 'generates the correct fields' do
       is_expected.to have_css('div.row label', text: '')

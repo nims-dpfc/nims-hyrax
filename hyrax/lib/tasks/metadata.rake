@@ -29,7 +29,7 @@ namespace :metadata do
         # Contact Person (row 23)
         work.complex_person.each do |complex_person|
           if complex_person.role.detect { |r| r.match(/contact person/i) }
-            work.complex_person_attributes = [complex_person.attributes.merge("contact_person" => ["1"])]
+            work.complex_person_attributes = [complex_person.attributes.merge("corresponding_author" => ["1"])]
           end
         end
 
@@ -77,7 +77,7 @@ namespace :metadata do
         # Contact Person (row 23)
         work.complex_person.each do |complex_person|
           if complex_person.role.detect { |r| r.match(/contact person/i) }
-            work.complex_person_attributes = [complex_person.attributes.merge("contact_person" => ["1"])]
+            work.complex_person_attributes = [complex_person.attributes.merge("corresponding_author" => ["1"])]
           end
         end
 
