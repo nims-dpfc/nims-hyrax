@@ -28,5 +28,6 @@ RSpec.describe NestedPersonInput, type: :input do
     is_expected.to have_field('dataset_complex_person_attributes_0_orcid', type: :text)
     is_expected.to have_field('dataset_complex_person_attributes_0_organization', type: :text)
     is_expected.to have_field('dataset_complex_person_attributes_0_sub_organization', type: :text)
+    is_expected.to have_field('dataset_complex_person_attributes_0_corresponding_author', type: :checkbox, with: 1)
   end
 end
