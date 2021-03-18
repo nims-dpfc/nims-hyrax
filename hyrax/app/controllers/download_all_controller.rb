@@ -37,7 +37,9 @@ class DownloadAllController < Hyrax::DownloadsController
   end
 
   def file_set_ids
-    @file_set_ids ||= available_file_set_ids(asset, current_ability)
+    work.file_sets.select do |p|
+      current_ability.can?(:read, p.id)
+    end.collect(&:id)
   end
 
   def send_zip
@@ -74,8 +76,8 @@ class DownloadAllController < Hyrax::DownloadsController
 
   # Add all file_sets
   def add_files
-    file_sets(file_set_ids).each do |fs|
-      file_set = FileSet.find(fs['id'])
+    file_set_ids.each do |id|
+      file_set = FileSet.find(id)
       next if file_set.blank?
 
       original = file_set.original_file
