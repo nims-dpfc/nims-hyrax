@@ -99,6 +99,7 @@ FactoryBot.define do
         [{
          name: 'Anamika',
          role: ['author'],
+         corresponding_author: true,
           complex_identifier_attributes: [{
              identifier: '123456',
              scheme: 'identifier local'
