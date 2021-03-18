@@ -78,6 +78,7 @@ module ComplexField
       fields << Solrizer.solr_name('complex_person_data_depositor', :facetable)
       fields << Solrizer.solr_name('complex_person_data_curator', :facetable)
       fields << Solrizer.solr_name('complex_person_operator', :facetable)
+      fields << Solrizer.solr_name('complex_person_contact_person', :facetable)
       fields << Solrizer.solr_name('complex_person_organization', :facetable)
       fields << Solrizer.solr_name('complex_person_sub_organization', :facetable)
       fields
