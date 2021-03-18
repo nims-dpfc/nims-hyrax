@@ -180,7 +180,9 @@ protected
     @collection ||= begin
                         val = object.send(attribute_name)
                         col = val.respond_to?(:to_ary) ? val.to_ary : val
-                        col.reject { |value| value.to_s.strip.blank? }
+                        col = col.reject { |value| value.to_s.strip.blank? }
+                        col = col + [''] if col.blank?
+                        col
                     end
     end
 end
