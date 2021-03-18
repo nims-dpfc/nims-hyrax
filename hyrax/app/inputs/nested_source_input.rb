@@ -174,4 +174,13 @@ protected
     out << '</div>' # last row
     out
   end
+
+  def collection
+    # Remove the extra set in collection
+    @collection ||= begin
+                        val = object.send(attribute_name)
+                        col = val.respond_to?(:to_ary) ? val.to_ary : val
+                        col.reject { |value| value.to_s.strip.blank? }
+                    end
+    end
 end
