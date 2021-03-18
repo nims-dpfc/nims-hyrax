@@ -24,4 +24,11 @@ RSpec.describe NestedSourceInput, type: :input do
     is_expected.to have_field('publication_complex_source_attributes_0_total_number_of_pages', type: :text, with: '8')
     is_expected.to have_field('publication_complex_source_attributes_0_volume', type: :text, with: '3')
   end
+
+  let(:out) { input.input({}) }
+  # let(:out) { input.send(:collection) }
+  subject { Capybara.string(out) }  
+  it 'generates the correct collection size' do
+    is_expected.not_to have_field('publication_complex_source_attributes_1_title')
+  end
 end
