@@ -35,8 +35,21 @@ RSpec.describe DownloadAllController, type: :controller do
       before do
         @file_set_ids = []
         @file_sets = []
-        12.times do |i|
-          file_set = create(:file_set)
+        @user = create(:user)
+        4.times do |i|
+          file_set = create(:file_set, :open, user: @user)
+          @file_sets.append(file_set)
+          @file_set_ids.append(file_set.id)
+          CharacterizeJob.perform_now(file_set, file_set.original_file.id)
+        end
+        4.times do |i|
+          file_set = create(:file_set, :authenticated, user: @user)
+          @file_sets.append(file_set)
+          @file_set_ids.append(file_set.id)
+          CharacterizeJob.perform_now(file_set, file_set.original_file.id)
+        end
+        4.times do |i|
+          file_set = create(:file_set, :restricted, user: @user)
           @file_sets.append(file_set)
           @file_set_ids.append(file_set.id)
           CharacterizeJob.perform_now(file_set, file_set.original_file.id)
@@ -44,11 +57,27 @@ RSpec.describe DownloadAllController, type: :controller do
         allow(subject).to receive(:authorize_download!).and_return(true)
       end
       let(:dataset) { create(:dataset, members: @file_sets) }
+      let(:user) { create(:user) }
 
-      it 'returns all the file set ids' do
-        skip "This test doesn't work"
+      it 'returns the open file set ids when not logged in' do
         get :show, params: { id: dataset.id, format: :zip }
-        expect(subject.send(:file_set_ids)).to eq @file_set_ids
+        expect(subject.send(:file_set_ids).sort).to eq @file_set_ids[0..3].sort
+        expect(subject.send(:file_set_ids).size).to eq 4
+      end
+
+      it 'returns the open and authenticated file set ids when logged in as an user' do
+        # File depositors can download their files while the work is depositted by another user
+        sign_in user
+        get :show, params: { id: dataset.id, format: :zip }
+        expect(subject.send(:file_set_ids).sort).to eq @file_set_ids[0..7].sort
+        expect(subject.send(:file_set_ids).size).to eq 8
+      end
+
+      it 'returns all the file set ids when logged in as a depositor' do
+        sign_in @user
+        get :show, params: { id: dataset.id, format: :zip }
+        expect(subject.send(:file_set_ids).sort).to eq @file_set_ids.sort
+        expect(subject.send(:file_set_ids).size).to eq 12
       end
     end
 
