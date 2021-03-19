@@ -8,6 +8,7 @@ RSpec.describe 'hyrax/citations/work' do
                         :with_complex_version, :with_resource_type, :with_source, :with_issue, :with_complex_source, :with_complex_event,
                         :with_place, :with_table_of_contents, :with_number_of_pages,
                         doi: 'https://doi.org/10.5555/12345678',
+                        date_published: '2021-03-19',
                         creator: ['Asahiko Matsuda, Kosuke Tanabe']) }
     let(:ability) { double }
     let(:presenter) { Hyrax::PublicationPresenter.new(SolrDocument.new(publication.to_solr), Ability.new(user), controller.request) }
@@ -26,7 +27,7 @@ RSpec.describe 'hyrax/citations/work' do
       let(:user) { nil }
       it 'shows the correct metadata' do
         expect(rendered).to have_content('Asahiko Matsuda, Kosuke Tanabe.')
-        expect(rendered).to have_content("\"Open Publication\".\nTest journal. 3, no. 34. 1.2.2.\n(0528):")
+        expect(rendered).to have_content("\"Open Publication\".\nTest journal. 3, no. 34. 1.2.2.\n(2021):")
         expect(rendered).to have_content('https://doi.org/10.5555/12345678')
       end
     end
@@ -35,7 +36,7 @@ RSpec.describe 'hyrax/citations/work' do
       let(:user) { create(:user, :nims_researcher) }
       it 'shows the correct metadata' do
         expect(rendered).to have_content('Asahiko Matsuda, Kosuke Tanabe.')
-        expect(rendered).to have_content("\"Open Publication\".\nTest journal. 3, no. 34. 1.2.2.\n(0528):")
+        expect(rendered).to have_content("\"Open Publication\".\nTest journal. 3, no. 34. 1.2.2.\n(2021):")
         expect(rendered).to have_content('https://doi.org/10.5555/12345678')
       end
     end
@@ -59,14 +60,14 @@ RSpec.describe 'hyrax/citations/work' do
     context 'unauthenticated user' do
       let(:user) { nil }
       it 'shows the correct metadata' do
-        expect(rendered).to have_content("\"Open Publication\".\n\n():")
+        expect(rendered).to have_content("\"Open Publication\".\n\n")
       end
     end
 
     context 'authenticated NIMS Researcher' do
       let(:user) { create(:user, :nims_researcher) }
       it 'shows the correct metadata' do
-        expect(rendered).to have_content("\"Open Publication\".\n\n():")
+        expect(rendered).to have_content("\"Open Publication\".\n\n")
       end
     end
   end
@@ -86,14 +87,14 @@ RSpec.describe 'hyrax/citations/work' do
     context 'unauthenticated user' do
       let(:user) { nil }
       it 'shows the correct metadata' do
-        expect(rendered).to have_content("\"Open Dataset\".\n\n():")
+        expect(rendered).to have_content("\"Open Dataset\".\n\n")
       end
     end
 
     context 'authenticated NIMS Researcher' do
       let(:user) { create(:user, :nims_researcher) }
       it 'shows the correct metadata' do
-        expect(rendered).to have_content("\"Open Dataset\".\n\n():")
+        expect(rendered).to have_content("\"Open Dataset\".\n\n")
       end
     end
   end
