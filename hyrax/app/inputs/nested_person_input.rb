@@ -141,7 +141,8 @@ protected
     field = :corresponding_author
     field_name = singular_input_name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = value.send(field)&.first.to_i.zero? ? false : true
+    field_value = value.send(field)&.first.to_i
+    field_checked = field_value.zero? ? false : true
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
@@ -150,7 +151,7 @@ protected
 
     out << "  <div class='col-md-2'>"
     out << @builder.check_box(field_name,
-      options.merge(checked: field_value, name: field_name, id: field_id, required: required))
+      options.merge(checked: field_checked, value: field_value, name: field_name, id: field_id, required: required))
     out << '  </div>'
     out << '</div>' # row
 
