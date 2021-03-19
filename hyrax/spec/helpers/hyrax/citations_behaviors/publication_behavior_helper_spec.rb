@@ -17,12 +17,6 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
     end
   end
 
-  describe '#setup_pub_date' do
-    let(:publication) { build(:publication, :with_date_published) }
-    subject { helper.setup_pub_date(presenter) }
-    it { is_expected.to eql('0528') }
-  end
-
   describe '#setup_pub_place' do
     context 'with publication' do
       let(:publication) { build(:publication, :with_place) }

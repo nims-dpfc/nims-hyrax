@@ -5,7 +5,7 @@
 "<%= @presenter.title.first %>".
 <%= setup_pub_source(@presenter) %>
 <% if @presenter.date_published.present? %>
-  (<%= Date.parse(@presenter.date_published&.first).year %>):
+(<%= Date.parse(@presenter.date_published&.first).year %>):
 <% end %>
 <%= @presenter.doi&.first %>
 </span>
