@@ -7,7 +7,8 @@ RSpec.describe 'hyrax/citations/work' do
                         :with_publisher, :with_date_published, :with_complex_identifier, :with_rights_statement, :with_complex_rights,
                         :with_complex_version, :with_resource_type, :with_source, :with_issue, :with_complex_source, :with_complex_event,
                         :with_place, :with_table_of_contents, :with_number_of_pages,
-                        doi: 'https://doi.org/10.5555/12345678',
+                        first_published_url: 'https://doi.org/10.5555/12345678',
+                        doi: 'https://doi.org/10.5555/98765432',
                         date_published: '2021-03-19',
                         creator: ['Asahiko Matsuda, Kosuke Tanabe']) }
     let(:ability) { double }
@@ -43,7 +44,11 @@ RSpec.describe 'hyrax/citations/work' do
   end
 
   context 'publication without creators' do
-    let(:publication) { build(:publication, :open) }
+    let(:publication) { build(:publication, :open,
+                          first_published_url: 'https://doi.org/10.5555/12345678',
+                          doi: 'https://doi.org/10.5555/98765432',
+                          date_published: '2021-03-19'
+                         ) }
     let(:ability) { double }
     let(:presenter) { Hyrax::PublicationPresenter.new(SolrDocument.new(publication.to_solr), Ability.new(user), controller.request) }
 
@@ -60,20 +65,25 @@ RSpec.describe 'hyrax/citations/work' do
     context 'unauthenticated user' do
       let(:user) { nil }
       it 'shows the correct metadata' do
-        expect(rendered).to have_content("\"Open Publication\".\n\n")
+        expect(rendered).to have_content("\"Open Publication\".\n\n(2021):")
       end
     end
 
     context 'authenticated NIMS Researcher' do
       let(:user) { create(:user, :nims_researcher) }
       it 'shows the correct metadata' do
-        expect(rendered).to have_content("\"Open Publication\".\n\n")
+        expect(rendered).to have_content("\"Open Publication\".\n\n(2021):")
       end
     end
   end
 
   context 'dataset without creators' do
-    let(:dataset) { build(:dataset, :open) }
+    let(:dataset) { build(:dataset, :open,
+                          first_published_url: 'https://doi.org/10.5555/12345678',
+                          doi: 'https://doi.org/10.5555/98765432',
+                          date_published: '2021-03-19',
+                          creator: ['Asahiko Matsuda, Kosuke Tanabe']
+                         ) }
     let(:ability) { double }
     let(:presenter) { Hyrax::DatasetPresenter.new(SolrDocument.new(dataset.to_solr), Ability.new(user), controller.request) }
 
@@ -87,14 +97,14 @@ RSpec.describe 'hyrax/citations/work' do
     context 'unauthenticated user' do
       let(:user) { nil }
       it 'shows the correct metadata' do
-        expect(rendered).to have_content("\"Open Dataset\".\n\n")
+        expect(rendered).to have_content("\"Open Dataset\".\n\n(2021):")
       end
     end
 
     context 'authenticated NIMS Researcher' do
       let(:user) { create(:user, :nims_researcher) }
       it 'shows the correct metadata' do
-        expect(rendered).to have_content("\"Open Dataset\".\n\n")
+        expect(rendered).to have_content("\"Open Dataset\".\n\n(2021):")
       end
     end
   end

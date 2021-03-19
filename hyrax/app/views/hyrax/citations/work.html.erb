@@ -4,10 +4,14 @@
 <%= @presenter.creator.first %>.
 "<%= @presenter.title.first %>".
 <%= setup_pub_source(@presenter) %>
-<% if @presenter.date_published.present? %>
+<%- if @presenter.date_published.present? -%>
 (<%= Date.parse(@presenter.date_published&.first).year %>):
-<% end %>
+<%- end -%>
+<% if @presenter.first_published_url.first =~ /https?:\/\/(dx\.)?doi\.org\// %>
+<%= @presenter.first_published_url.first %>
+<% else %>
 <%= @presenter.doi&.first %>
+<% end %>
 </span>
 
 <br /><br />
