@@ -42,12 +42,12 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
 
     context 'without date' do
       let(:include_date) { false }
-      it { is_expected.to eql('221B Baker Street Place: Publisher-123. 10.0.1111. 10.0.2222') }
+      it { is_expected.to eql('221B Baker Street Place: Publisher-123, 2019. 10.0.1111. 10.0.2222') }
     end
 
     context 'with date' do
       let(:include_date) { true }
-      it { is_expected.to eql('221B Baker Street Place: Publisher-123, 0528. 10.0.1111. 10.0.2222') }
+      it { is_expected.to eql('221B Baker Street Place: Publisher-123, 2019. 10.0.1111. 10.0.2222') }
     end
   end
 
