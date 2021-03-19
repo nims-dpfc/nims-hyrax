@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'hyrax/datasets/_form.html.erb', type: :view do
-  let(:work) { Dataset.new }
+  let(:work) { create(:dataset, :open, :with_complex_person, :with_complex_source) }
   let(:ability) { double }
   let(:user) { FactoryBot.build(:user) }
 
@@ -36,6 +36,22 @@ RSpec.describe 'hyrax/datasets/_form.html.erb', type: :view do
       expect(rendered).to have_selector('#metadata[role="tabpanel"]')
       expect(rendered).to have_selector('#files[role="tabpanel"]')
       expect(rendered).to have_selector('#share[data-param-key="dataset"]')
+    end
+  end
+
+  describe 'form' do
+    it 'generates the correct fields' do
+      render
+      expect(rendered).to have_field('dataset_complex_source_attributes_0_title', type: :text, with: 'Test journal')
+      expect(rendered).to have_field('dataset_complex_source_attributes_0_alternative_title', type: :text, with: 'Sub title for journal')
+      expect(rendered).to have_field('dataset_complex_source_attributes_0_start_page', type: :text, with: '4')
+      expect(rendered).to have_field('dataset_complex_source_attributes_0_end_page', type: :text, with: '12')
+      expect(rendered).to have_field('dataset_complex_source_attributes_0_issue', type: :text, with: '34')
+      expect(rendered).to have_field('dataset_complex_source_attributes_0_sequence_number', type: :text, with: '1.2.2')
+      expect(rendered).to have_field('dataset_complex_source_attributes_0_total_number_of_pages', type: :text, with: '8')
+      expect(rendered).to have_field('dataset_complex_source_attributes_0_volume', type: :text, with: '3')
+      expect(rendered).to have_field('dataset_complex_person_attributes_0_name', type: :text)
+      expect(rendered).not_to have_field('dataset_complex_source_attributes_1_volume', type: :text)
     end
   end
 end
