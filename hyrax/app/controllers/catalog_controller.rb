@@ -82,6 +82,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('complex_person_data_depositor', :stored_searchable), itemprop: 'data depositor', link_to_search: solr_name('complex_person_data_depositor', :facetable)
     config.add_index_field solr_name('complex_person_data_curator', :stored_searchable), itemprop: 'data curator', link_to_search: solr_name('complex_person_data_curator', :facetable)
     config.add_index_field solr_name('complex_person_operator', :stored_searchable), itemprop: 'operator', link_to_search: solr_name('complex_person_operator', :facetable)
+    config.add_index_field solr_name('complex_person_contact_person', :stored_searchable), itemprop: 'contact person', link_to_search: solr_name('complex_person_contact_person', :facetable)
     config.add_index_field solr_name('complex_person_other', :stored_searchable), itemprop: 'creator or contributor', link_to_search: solr_name('complex_person_other', :facetable)
     # config.add_index_field solr_name('proxy_depositor', :symbol), label: 'Depositor', helper_method: :link_to_profile
     #  config.add_index_field solr_name('depositor'), label: 'Owner', helper_method: :link_to_profile
