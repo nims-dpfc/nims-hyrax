@@ -21,20 +21,6 @@ module Hyrax
         nil
       end
 
-      # nims override to retrieve nested properties
-      def setup_pub_date(presenter)
-        pub_date = presenter&.solr_document&.date_published&.first
-        return nil if pub_date.nil?
-        first_date = CGI.escapeHTML(pub_date)
-        if first_date.present?
-          first_date = CGI.escapeHTML(first_date)
-          date_value = Date.parse(first_date).strftime("%m%d")
-          date_value = date_value.reverse[0, 4].reverse unless date_value.nil?
-          return nil if date_value.nil?
-        end
-        clean_end_punctuation(date_value) if date_value
-      end
-
       # @param [Hyrax::PublicationPresenter] presenter
       # nims override to retrieve place
       def setup_pub_place(presenter)
@@ -57,8 +43,12 @@ module Hyrax
           pub_info << ": " << CGI.escapeHTML(publisher)
         end
 
-        pub_date = include_date ? setup_pub_date(presenter) : nil
-        pub_info << ", " << pub_date unless pub_date.nil?
+        pub_year = begin
+                    Date.parse(presenter.date_published.first).year
+                   rescue Date::Error, TypeError
+                    nil
+                   end
+        pub_info << ", " << pub_year unless pub_year.nil?
         # nims override to add doi
         pub_doi = setup_doi(presenter)
         pub_info << ". " << pub_doi unless pub_doi.nil?
