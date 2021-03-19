@@ -72,4 +72,10 @@ RSpec.describe Hyrax::CitationsBehaviors::PublicationBehavior, :type => :helper 
     subject { helper.setup_pub_page(presenter) }
     it { is_expected.to eql('4-12.') }
   end
+
+  describe '#setup_pub_citation_info' do
+    let(:publication) { build(:publication, :with_complex_source) }
+    subject { helper.setup_pub_citation_info(presenter) }
+    it { is_expected.to eql({title: 'Test journal', volume: '3', issue: '34', start_page: '4', end_page: '12'}) }
+  end
 end

@@ -87,3 +87,6 @@ en:
         managing_organization: NIMS
         managing_organization_ordered: NIMS
         supervisor_approval: approved
+  date:
+    formats:
+      google_scholar: '%Y/%m/%d'
