@@ -48,7 +48,7 @@ module Hyrax
                    rescue Date::Error, TypeError
                     nil
                    end
-        pub_info << ", " << pub_year unless pub_year.nil?
+        pub_info << ", " << pub_year.to_s unless pub_year.nil?
         # nims override to add doi
         pub_doi = setup_doi(presenter)
         pub_info << ". " << pub_doi unless pub_doi.nil?
