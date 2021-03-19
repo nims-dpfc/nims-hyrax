@@ -27,8 +27,10 @@ en:
       complex_state_of_matter:  "State of matter"
       complex_structural_feature: "Structural feature"
       complex_version:          "Version"
+      contact_person:           "Corresponding author"
       data_origin:              "Data origin"
       first_name:               "Given name"
+      full_name:                "Full name"
       instrument:               "Instrument"
       issue:                    "Issue"
       instrument_function:      "Instrument function"
@@ -81,8 +83,10 @@ en:
         note_to_admin: Text written here will not be publicly visible.
     placeholders:
       defaults:
-        first_published_url: "https://doi.org/10.xxx/xxxx"
+        first_published_url: "https://doi.org/10.xxx/xxx"
+        managing_organization: NIMS
         managing_organization_ordered: NIMS
+        supervisor_approval: approved
   date:
     formats:
       google_scholar: '%Y/%m/%d'

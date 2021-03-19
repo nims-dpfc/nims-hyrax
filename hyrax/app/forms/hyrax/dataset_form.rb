@@ -19,18 +19,44 @@ module Hyrax
 
     self.terms += [
       # Adding all fields in order of display in form
+
+      # description
+      :managing_organization_ordered,
       :first_published_url, :supervisor_approval,
-      :title, :alternative_title, :rights_statement, :description, :keyword_ordered,
-      :publisher, :resource_type, :language, :manuscript_type, :licensed_date,
-      :date_published, :publisher, :subject, :complex_person, :complex_date,
-      :complex_version, :characterization_methods, :computational_methods,
-      :complex_organization,
-      :complex_identifier, :complex_source,
-      :data_origin, :complex_instrument, :origin_system_provenance,
-      :properties_addressed, :complex_relation, :complex_event,
-      :specimen_set_ordered, :managing_organization_ordered,
-      :complex_specimen_type, :synthesis_and_processing, :custom_property,
-      :note_to_admin, :draft
+      :title, :alternative_title, 
+      :resource_type, :data_origin, 
+      :description, :keyword_ordered,
+      :specimen_set_ordered, 
+      :publisher, :date_published, 
+      :rights_statement, :licensed_date,
+      :complex_person, 
+      :complex_source, :manuscript_type, 
+      :complex_event,
+      :language, 
+      :complex_date,
+      :complex_identifier, 
+      :complex_version, 
+      :complex_relation, 
+      :custom_property,
+      :note_to_admin, 
+
+      # method
+      :characterization_methods, 
+      :computational_methods,
+      :properties_addressed, 
+      :synthesis_and_processing,
+
+      # instruments
+      :complex_instrument, 
+
+      # specimen details
+      :complex_specimen_type, 
+      
+      # not used
+      :complex_organization, :origin_system_provenance, :subject, # not used
+      
+      # draft
+      :draft
     ]
 
     self.required_fields -= [
@@ -40,23 +66,31 @@ module Hyrax
       :title]
 
     self.required_fields += [
-      # # Adding all required fields in order of display in form
-      :supervisor_approval, :title, :resource_type, :data_origin, :managing_organization_ordered,
+      # Adding all required fields in order of display in form
+      :managing_organization_ordered, :supervisor_approval, :title, :resource_type, :data_origin, 
       :description, :keyword_ordered, :date_published, :rights_statement
     ]
 
     def metadata_tab_terms
       [
         # Description tab order determined here
+        :managing_organization_ordered,
         :first_published_url, :supervisor_approval,
-        :title, :alternative_title, :rights_statement, :licensed_date, :data_origin,
-        :resource_type, :description, :keyword_ordered, :date_published, :publisher,
-        :specimen_set_ordered, :managing_organization_ordered,
-        :complex_person, :manuscript_type,
-        :complex_identifier, # not using this
-        :complex_source,
-        :complex_date, :complex_version, :complex_relation, :complex_event,
-        :custom_property, :language,
+        :title, :alternative_title, 
+        :resource_type, :data_origin,
+        :description, :keyword_ordered, 
+        :specimen_set_ordered, 
+        :publisher, :date_published, 
+        :rights_statement, :licensed_date, 
+        :complex_person, 
+        :complex_source, :manuscript_type,
+        :complex_event,
+        :language,
+        :complex_date, 
+        :complex_identifier, 
+        :complex_version, 
+        :complex_relation,
+        :custom_property, 
         :note_to_admin
       ]
     end
