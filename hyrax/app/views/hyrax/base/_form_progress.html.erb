@@ -55,6 +55,9 @@
     <%= f.submit t('.save_draft'), class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "with_files_submit_draft", name: "save_draft_with_files" %>
     <%= f.submit t('.save'), class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "with_files_submit", name: "save_with_files" %>
   </div>
+  <div class="panel-footer text-muted">
+    <p><%= t('hyrax.works.form.submit_caution_html') %></p>
+  </div>
 
   <%# Provide immediate feedback after the form is submitted while the subsequent page is loading %>
   <div class="panel-footer hidden">
