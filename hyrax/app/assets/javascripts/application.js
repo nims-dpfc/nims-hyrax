@@ -38,7 +38,7 @@ Blacklight.onLoad(function() {
   if ($("#workflow_action_name_comment_only").length == 1) {
   	var parent_ele = $("#workflow_action_name_comment_only").closest('div.radio');
   	var sibling_ele = parent_ele.prev();
-  	parent_ele.remove();
+  	parent_ele.hide();
   	sibling_ele.find('input[type=radio]').first().prop('checked', 'checked');
   }
 })
