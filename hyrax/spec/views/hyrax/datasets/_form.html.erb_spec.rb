@@ -40,7 +40,14 @@ RSpec.describe 'hyrax/datasets/_form.html.erb', type: :view do
   end
 
   describe 'form' do
-    it 'generates the correct fields' do
+    it 'generates the correct fields with an additional blank set for person' do
+      render
+      expect(rendered).to have_field('dataset_complex_person_attributes_0_name', type: :text)
+      expect(rendered).to have_field('dataset_complex_person_attributes_0__destroy', type: :hidden)
+      expect(rendered).to have_field('dataset_complex_person_attributes_1_name', type: :text)
+      expect(rendered).to have_field('dataset_complex_person_attributes_1__destroy', type: :hidden)
+    end
+    it 'generates the correct fields without an additional blank set for journal' do
       render
       expect(rendered).to have_field('dataset_complex_source_attributes_0_title', type: :text, with: 'Test journal')
       expect(rendered).to have_field('dataset_complex_source_attributes_0_alternative_title', type: :text, with: 'Sub title for journal')
@@ -50,7 +57,7 @@ RSpec.describe 'hyrax/datasets/_form.html.erb', type: :view do
       expect(rendered).to have_field('dataset_complex_source_attributes_0_sequence_number', type: :text, with: '1.2.2')
       expect(rendered).to have_field('dataset_complex_source_attributes_0_total_number_of_pages', type: :text, with: '8')
       expect(rendered).to have_field('dataset_complex_source_attributes_0_volume', type: :text, with: '3')
-      expect(rendered).to have_field('dataset_complex_person_attributes_0_name', type: :text)
+      expect(rendered).not_to have_field('dataset_complex_source_attributes_0__destroy', type: :hidden)
       expect(rendered).not_to have_field('dataset_complex_source_attributes_1_volume', type: :text)
     end
   end
