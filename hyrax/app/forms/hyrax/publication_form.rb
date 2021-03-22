@@ -130,7 +130,7 @@ module Hyrax
     def self.permitted_person_params
       [:id,
         :_destroy,
-        :contact_person,
+        :corresponding_author,
         :display_order,
        {
          last_name: [],

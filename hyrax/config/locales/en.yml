@@ -27,7 +27,7 @@ en:
       complex_state_of_matter:  "State of matter"
       complex_structural_feature: "Structural feature"
       complex_version:          "Version"
-      contact_person:           "Corresponding author"
+      corresponding_author:     "Corresponding author"
       data_origin:              "Data origin"
       first_name:               "Given name"
       full_name:                "Full name"
