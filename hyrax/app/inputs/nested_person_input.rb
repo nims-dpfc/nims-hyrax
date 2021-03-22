@@ -141,8 +141,12 @@ protected
     field = :corresponding_author
     field_name = singular_input_name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
-    field_value = value.send(field)&.first.to_i
-    field_checked = field_value.zero? ? false : true
+    field_value = if value.send(field)
+                    value.send(field).first || 0
+                  else
+                    1
+                  end
+    field_checked = field_value.to_i.zero? ? false : true
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
