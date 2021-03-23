@@ -155,7 +155,7 @@ protected
 
     out << "  <div class='col-md-2'>"
     out << @builder.check_box(field_name,
-      options.merge(checked: field_checked, value: field_value, name: field_name, id: field_id, required: required))
+      options.merge(checked: field_checked, value: field_value, name: field_name, id: field_id, required: required, class: 'corresponding_author'))
     out << '  </div>'
     out << '</div>' # row
 
