@@ -34,4 +34,11 @@ Blacklight.onLoad(function() {
     var form = button.parents('form')[0]
     $(form).append(`<input type="hidden" id="${this.id}-hidden" name="${this.name}" value="${this.value}"></input>`)
   });
+  // Remove comment radio option in workflow
+  if ($("#workflow_action_name_comment_only").length == 1) {
+  	var parent_ele = $("#workflow_action_name_comment_only").closest('div.radio');
+  	var sibling_ele = parent_ele.prev();
+  	parent_ele.hide();
+  	sibling_ele.find('input[type=radio]').first().prop('checked', 'checked');
+  }
 })
