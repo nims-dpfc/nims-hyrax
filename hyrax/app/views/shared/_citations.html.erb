@@ -23,7 +23,7 @@
   <% @presenter.creator.each do |creator| %>
     <meta name="citation_author" content="<%= creator %>" />
   <% end %>
-  <meta name="citation_publication_date" content="<%=l Date.parse(@presenter.date_published.first), format: :google_scholar if @presenter.date_published.present? %>" />
+  <meta name="citation_publication_date" content="<%= google_scholar_pub_date(@presenter) %>" />
   <meta name="citation_pdf_url" content="<%= @presenter.download_url %>" />
   <% 
     ds = setup_pub_citation_info(@presenter) 

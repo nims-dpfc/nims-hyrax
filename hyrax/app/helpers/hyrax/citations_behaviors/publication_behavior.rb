@@ -157,6 +157,14 @@ module Hyrax
         end
         pub_sources.blank? ? nil : pub_sources.first
       end
+
+      def google_scholar_pub_date(presenter)
+        return if presenter.date_published.blank?
+
+        Date.parse(presenter.date_published.first).strftime("%Y/%m/%d")
+      rescue ArgumentError
+        presenter.date_published.first
+      end
     end
   end
 end
