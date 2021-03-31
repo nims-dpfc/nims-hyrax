@@ -161,9 +161,9 @@ module Hyrax
       def google_scholar_pub_date(presenter)
         return if presenter.date_published.blank?
 
-        Date.parse(presenter.date_published).strftime("%Y/%m/%d")
-      rescue Date::Error
-        presenter.date_published
+        Date.parse(presenter.date_published.first).strftime("%Y/%m/%d")
+      rescue ArgumentError
+        presenter.date_published.first
       end
     end
   end
