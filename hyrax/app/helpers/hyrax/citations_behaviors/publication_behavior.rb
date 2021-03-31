@@ -158,6 +158,14 @@ module Hyrax
         pub_sources.blank? ? nil : pub_sources.first
       end
 
+      def setup_pub_year(presenter)
+        return if presenter.date_published.blank?
+
+        Date.parse(presenter.date_published.first).year
+      rescue ArgumentError
+        presenter.date_published.first
+      end
+
       def google_scholar_pub_date(presenter)
         return if presenter.date_published.blank?
 
