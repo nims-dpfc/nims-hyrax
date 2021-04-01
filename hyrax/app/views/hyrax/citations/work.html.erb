@@ -5,9 +5,9 @@
 "<%= @presenter.title.first %>".
 <%= setup_pub_source(@presenter) %>
 <%- if @presenter.date_published.present? -%>
-(<%= Date.parse(@presenter.date_published&.first).year %>):
+(<%= setup_pub_year(@presenter) %>):
 <%- end -%>
-<% if @presenter.first_published_url.first =~ /https?:\/\/(dx\.)?doi\.org\// %>
+<% if @presenter.first_published_url&.first =~ /https?:\/\/(dx\.)?doi\.org\// %>
 <%= @presenter.first_published_url.first %>
 <% else %>
 <%= @presenter.doi&.first %>
