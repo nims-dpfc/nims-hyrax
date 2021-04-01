@@ -62,7 +62,7 @@ en:
     hints:
       defaults:
         first_published_url: The DOI (in URL form) of the article related to this dataset or the URL where this dataset was first made public.
-        supervisor_approval: "If you entered a DOI above, enter \"approved\". If you entered a non-DOI URL above, fill in the name of your supervisor and the date of their approval. See <a href='https://dice.nims.go.jp/nimsonly/MDR/manual/html/' target='_blank' rel='noopener'>the User's Manual</a> for details."
+        supervisor_approval: "If you entered a DOI above, enter \"approved\". If you entered a non-DOI URL above, fill in the name of your supervisor and the date of their approval. See <a href='https://dice.nims.go.jp/services/MDR/manual/html/deposit.html#entering-metadata' target='_blank' rel='noopener'>the User's Manual</a> for details."
         title: English is preferred.
         alternative_title: Alternative title or the title in other language, if applicable.
         rights_statement: "Copyright and license for your work. If none apply, select \"In Copyright\". <a href='https://dice.nims.go.jp/services/MDR/manual/html/terminology.html#term-license' target='_blank' rel='noopener'>See the User's Manual</a> for further information."
