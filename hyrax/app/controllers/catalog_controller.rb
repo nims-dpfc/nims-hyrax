@@ -91,7 +91,7 @@ class CatalogController < ApplicationController
     # config.add_index_field solr_name('complex_date_published', :stored_searchable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_published', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
 
-    config.add_index_field solr_name('rights_statement', :stored_searchable), helper_method: :rights_statement_links, if: lambda { |context, field_config, document| context.can?(:read_rights, document.hydra_model) }
+    # config.add_index_field solr_name('rights_statement', :stored_searchable), helper_method: :rights_statement_links, if: lambda { |context, field_config, document| context.can?(:read_rights, document.hydra_model) }
     config.add_index_field solr_name('license', :stored_searchable), helper_method: :license_links
 
     config.add_index_field solr_name('complex_source_title', :stored_searchable), itemprop: 'journal'

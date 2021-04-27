@@ -2,14 +2,15 @@ module ComplexFieldsBehavior
   private
 
   def is_complex?(attribute_name)
-    # Did not include managing_organization, 
-    #  as the same field appears in dataset and is not complex
+    # Renamed managing_organization to managing_organization_attributes
+    #  as managing_organization appears in dataset and is not complex
     complex_prefixes = %w[
       complex
       instrument_function
       manufacturer
       supplier
       custom_property
+      managing_organization_attributes
     ]
     complex_prefixes.each { |prefix| return true if attribute_name.to_s.start_with? prefix }
     false

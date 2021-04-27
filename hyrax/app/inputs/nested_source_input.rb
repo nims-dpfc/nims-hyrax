@@ -165,13 +165,18 @@ protected
         options.merge(value: field_value, name: field_name, id: field_id, required: false))
     out << '  </div>'
 
-    # --- delete checkbox
-    field_label = 'Source'
-    out << "  <div class='col-md-3'>"
-    out << destroy_widget(attribute_name, index, field_label, parent)
-    out << '  </div>'
-
     out << '</div>' # last row
     out
   end
+
+  def collection
+    # Remove the extra set in collection
+    @collection ||= begin
+                        val = object.send(attribute_name)
+                        col = val.respond_to?(:to_ary) ? val.to_ary : val
+                        col = col.reject { |value| value.to_s.strip.blank? }
+                        col = col + [''] if col.blank?
+                        col
+                    end
+    end
 end
