@@ -400,5 +400,9 @@ FactoryBot.define do
         }]
       }
     end
+
+    trait :with_material_type do
+      material_type { ['Cu-containing'] }
+    end
   end
 end

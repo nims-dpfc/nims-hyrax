@@ -155,6 +155,7 @@
     <!-- Accordion body -->
     <div id="specimenType" class="panel-collapse collapse in">
       <div class="panel-body">
+        <%= presenter.attribute_to_html(:material_type, label: t('ngdr.fields.material_type'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_specimen_type, render_as: :nested_specimen_type, label: t('ngdr.fields.complex_specimen_type'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
