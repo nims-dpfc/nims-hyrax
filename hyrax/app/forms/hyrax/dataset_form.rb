@@ -80,6 +80,7 @@ module Hyrax
         :resource_type, :data_origin,
         :description, :keyword_ordered, 
         :specimen_set_ordered, 
+        :material_type,
         :publisher, :date_published, 
         :rights_statement, :licensed_date, 
         :complex_person, 

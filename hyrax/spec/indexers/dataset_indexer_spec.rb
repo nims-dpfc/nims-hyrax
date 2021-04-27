@@ -587,6 +587,19 @@ RSpec.describe DatasetIndexer do
     end
   end
 
+  describe 'indexes material type' do
+    before do
+      obj = build(:dataset, material_type: ['Cu-containing'])
+      @solr_document = obj.to_solr
+    end
+    it 'indexes as stored searchable' do
+      expect(@solr_document['material_type_tesim']).to match_array(['Cu-containing'])
+    end
+    it 'indexes as facetable' do
+      expect(@solr_document['material_type_sim']).to match_array(['Cu-containing'])
+    end
+  end
+
   describe 'indexes specimen type with all the attributes' do
     before do
       specimen_types = [

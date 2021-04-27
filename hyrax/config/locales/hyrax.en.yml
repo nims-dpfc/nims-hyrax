@@ -83,6 +83,7 @@ en:
           synthesis_and_processing_sim: Synthesis and processing
           complex_state_of_matter_tesim: State of matter
           complex_state_of_matter_identifier_ssim: State of matter identifier
+          material_type_sim: Material type
         index:
           based_near_tesim: Location
           characterization_methods_tesim: Characterization methods
