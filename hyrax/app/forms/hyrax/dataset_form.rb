@@ -50,7 +50,8 @@ module Hyrax
       :complex_instrument, 
 
       # specimen details
-      :complex_specimen_type, 
+      :complex_specimen_type,
+      :material_type,
       
       # not used
       :complex_organization, :origin_system_provenance, :subject, # not used

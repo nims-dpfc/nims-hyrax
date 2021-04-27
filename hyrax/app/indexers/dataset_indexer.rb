@@ -16,7 +16,7 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::SpecimenTypeIndexer
   include ComplexField::ChemicalCompositionIndexer
   include ComplexField::CrystallographicStructureIndexer
-  # include ComplexField::MaterialTypeIndexer
+  include ComplexField::MaterialTypeIndexer
   include ComplexField::PurchaseRecordIndexer
   include ComplexField::ShapeIndexer
   include ComplexField::StateOfMatterIndexer
@@ -78,7 +78,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_search_fields
       fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_search_fields
       fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_search_fields
-      # fields.concat ComplexField::MaterialTypeIndexer.material_type_search_fields
+      fields.concat ComplexField::MaterialTypeIndexer.material_type_search_fields
       fields.concat ComplexField::PurchaseRecordIndexer.purchase_record_search_fields
       fields.concat ComplexField::ShapeIndexer.shape_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_search_fields
