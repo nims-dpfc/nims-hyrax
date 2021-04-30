@@ -14,7 +14,6 @@ RSpec.describe Ability do
     let(:role_destroy) { ability.can?(:destroy, Role) }
 
     let(:create_dataset) { ability.can?(:create, Dataset) }
-    let(:create_image) { ability.can?(:create, Image) }
     let(:create_publication) { ability.can?(:create, Publication) }
     let(:create_work) { ability.can?(:create, Work) }
 
@@ -29,7 +28,6 @@ RSpec.describe Ability do
       it { expect(role_update).to be true }
       it { expect(role_destroy).to be true }
       it { expect(create_dataset).to be true }
-      it { expect(create_image).to be true }
       it { expect(create_publication).to be true }
       it { expect(create_work).to be true }
     end
@@ -45,14 +43,13 @@ RSpec.describe Ability do
       it { expect(role_update).to be false }
       it { expect(role_destroy).to be false }
       it { expect(create_dataset).to be false }
-      it { expect(create_image).to be false }
       it { expect(create_publication).to be false }
       it { expect(create_work).to be false }
     end
   end
 
   describe '#create_content' do
-    let(:models) { [::Dataset, ::Image, ::Publication] }
+    let(:models) { [::Dataset, ::Publication] }
 
     context 'unauthenticated user' do
       let(:user) { build(:user, :guest) }
@@ -78,10 +75,6 @@ RSpec.describe Ability do
         [::Dataset, ::Publication].each do |model|
           expect(ability.can?(:create, model)).to be true
         end
-      end
-
-      it 'cannot create Image' do
-        expect(ability.can?(:create, ::Image)).to be false
       end
     end
 
@@ -146,31 +139,6 @@ RSpec.describe Ability do
         it { expect(read_version).to be true }
       end
 
-      context 'image' do
-        let(:model) { ::Image}
-        it { expect(read_abstract).to be true }
-        it { expect(read_alternative_title).to be true }
-        it { expect(read_creator).to be true }
-        it { expect(read_date).to be true }
-        it { expect(read_event).to be false }
-        it { expect(read_identifier).to be true }
-        it { expect(read_issue).to be false }
-        it { expect(read_table_of_contents).to be false }
-        it { expect(read_keyword).to be true }
-        it { expect(read_language).to be true }
-        it { expect(read_location).to be false }
-        it { expect(read_number_of_pages).to be false }
-        it { expect(read_organization).to be false }
-        it { expect(read_publisher).to be true }
-        it { expect(read_related).to be false }
-        it { expect(read_resource_type).to be true }
-        it { expect(read_rights).to be true }
-        it { expect(read_source).to be false }
-        it { expect(read_subject).to be true }
-        it { expect(read_title).to be true }
-        it { expect(read_version).to be true }
-      end
-
       context 'publication' do
         let(:model) { ::Publication}
         it { expect(read_abstract).to be true }
@@ -220,31 +188,6 @@ RSpec.describe Ability do
         it { expect(read_resource_type).to be true }
         it { expect(read_rights).to be true }
         it { expect(read_source).to be true }
-        it { expect(read_subject).to be true }
-        it { expect(read_title).to be true }
-        it { expect(read_version).to be true }
-      end
-
-      context 'image' do
-        let(:model) { ::Image}
-        it { expect(read_abstract).to be true }
-        it { expect(read_alternative_title).to be true }
-        it { expect(read_creator).to be true }
-        it { expect(read_date).to be true }
-        it { expect(read_event).to be false }
-        it { expect(read_identifier).to be true }
-        it { expect(read_issue).to be false }
-        it { expect(read_table_of_contents).to be false }
-        it { expect(read_keyword).to be true }
-        it { expect(read_language).to be true }
-        it { expect(read_location).to be false }
-        it { expect(read_number_of_pages).to be false }
-        it { expect(read_organization).to be false }
-        it { expect(read_publisher).to be true }
-        it { expect(read_related).to be false }
-        it { expect(read_resource_type).to be true }
-        it { expect(read_rights).to be true }
-        it { expect(read_source).to be false }
         it { expect(read_subject).to be true }
         it { expect(read_title).to be true }
         it { expect(read_version).to be true }
