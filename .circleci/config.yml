@@ -10,8 +10,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Which bundler?
+          name: bundle install
           command: |
             cd hyrax
-            bundle -v
-      - ruby/bundle-install
+            bundle install
