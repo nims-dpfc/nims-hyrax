@@ -7,7 +7,7 @@ RSpec.describe Hyrax::Workflow::CommentNotification do
   let(:depositor) { FactoryBot.create(:user) }
   let(:to_user) { FactoryBot.create(:user) }
   let(:cc_user) { FactoryBot.create(:user) }
-  let(:work) { create(:publication, user: depositor) }
+  let(:work) { create(:publication, depositor: depositor.username) }
   let(:entity) { create(:sipity_entity, proxy_for_global_id: work.to_global_id.to_s) }
   let(:comment) { double("comment", comment: 'A pleasant read') }
   let(:recipients) { { 'to' => [to_user], 'cc' => [cc_user] } }
