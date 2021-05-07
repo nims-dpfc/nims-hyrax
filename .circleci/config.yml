@@ -13,12 +13,17 @@ jobs:
       - image: circleci/redis:6.2
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - rails-demo-{{ checksum "Gemfile.lock" }}
+            - rails-demo-
       - run:
-          name: bundle install --jobs 4 --retry 3
+          name: bundle install
           command: |
             cd hyrax
-            bundle install
+            bundle install --jobs 4 --retry 3
       - run:
+          name: apt install
           command: |
             sudo apt update
             sudo apt install -y openjdk-8-jre-headless libmediainfo-dev
@@ -33,6 +38,7 @@ jobs:
             chmod a+x ${FITS_ROOT}/fits-1.3.0/fits.sh
             rm ${FITS_ROOT}/fits-1.3.0.zip
       - run:
+          name: prepare database
           command: |
             cd hyrax
             bundle exec rake db:test:prepare
