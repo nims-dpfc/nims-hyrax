@@ -13,8 +13,8 @@ jobs:
     working_directory: ~/nims-hyrax/hyrax
     steps:
       - checkout
-      - name: bundle install
       - run:
+          name: bundle install
           command: |
             cd hyrax
             bundle install
