@@ -4,7 +4,7 @@
 
 ## Code Status
 
-[![CircleCI Status for nims-dpfc/nims-hyrax]((https://circleci.com/gh/nims-dpfc/nims-hyrax/tree/develop.svg?style=svg)](https://circleci.com/gh/nims-dpfc/nims-hyrax))
+[![CircleCI Status for nims-dpfc/nims-hyrax](https://circleci.com/gh/nims-dpfc/nims-hyrax/tree/develop.svg?style=svg)](https://circleci.com/gh/nims-dpfc/nims-hyrax)
 
 [![Coverage Status](https://coveralls.io/repos/github/nims-dpfc/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/nims-dpfc/nims-hyrax?branch=develop)
 
