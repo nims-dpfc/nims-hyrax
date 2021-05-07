@@ -29,13 +29,12 @@ jobs:
       - run:
           name: download fits
           command: |
-            export FITS_ROOT=~/nims-hyrax/fits
+            export FITS_ROOT=~/nims-hyrax/
             mkdir -p ${FITS_ROOT}
             wget -q https://projects.iq.harvard.edu/files/fits/files/fits-1.3.0.zip -O ${FITS_ROOT}/fits-1.3.0.zip
             unzip -q ${FITS_ROOT}/fits-1.3.0.zip -d ${FITS_ROOT}/fits-1.3.0
             chmod a+x ${FITS_ROOT}/fits-1.3.0/fits.sh
             rm ${FITS_ROOT}/fits-1.3.0.zip
-            export FITS_PATH=${FITS_ROOT}/fits-1.3.0/fits.sh
       - run:
           command: |
             cd hyrax
@@ -44,5 +43,6 @@ jobs:
           name: run tests
           command: |
             cd hyrax
+            export FITS_PATH=~/nims-hyrax/fits-1.3.0/fits.sh
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
             if test -f "lib/tasks/test_servers.rake"; then echo 'Running full tests' && bundle exec rake test:servers:start && bundle exec rspec && bundle exec cucumber && bundle exec rake test:servers:stop; else echo "Running limited tests"; bundle exec rspec --exclude-pattern "**/features/*_spec.rb"; fi
