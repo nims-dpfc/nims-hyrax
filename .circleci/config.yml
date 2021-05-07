@@ -14,12 +14,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: bundle install
+          name: bundle install --jobs 4 --retry 3
           command: |
             cd hyrax
             bundle install
-      - run:
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           command: |
             sudo apt update
