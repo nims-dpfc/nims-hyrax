@@ -21,9 +21,9 @@ jobs:
       - run:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-          command: sudo apt install -y openjdk-11-jre-headless
+          command: sudo apt install -y openjdk-8-jre-headless
       - run:
-          command: sudo update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/jre/bin/java
+          command: sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
       - run: bundle exec rake db:test:prepare
       - run: bundle exec rake test:servers:start RAILS_ENV=test
       - run: spec/dummy/bin/yarn install
