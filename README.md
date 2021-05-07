@@ -4,9 +4,9 @@
 
 ## Code Status
 
-[![Codeship Status for antleaf/nims-hyrax](https://app.codeship.com/projects/d4cc8560-e430-0136-fffd-6a7889452552/status?branch=develop)](https://app.codeship.com/projects/319029)
+[![CircleCI Status for nims-dpfc/nims-hyrax]((https://circleci.com/gh/nims-dpfc/nims-hyrax/tree/develop.svg?style=svg)](https://circleci.com/gh/nims-dpfc/nims-hyrax))
 
-[![Coverage Status](https://coveralls.io/repos/github/antleaf/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/antleaf/nims-hyrax?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/antleaf/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/nims-dpfc/nims-hyrax?branch=develop)
 
 ## Getting Started
 
