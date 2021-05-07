@@ -10,7 +10,7 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: hyrax_test
-    working_directory: ~/hyrax
+    working_directory: ~/nims-hyrax/hyrax
     executor: ruby/default
     steps:
       - checkout
