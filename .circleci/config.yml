@@ -11,10 +11,13 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: hyrax_test
     working_directory: ~/nims-hyrax/hyrax
-    executor: ruby/default
     steps:
       - checkout
-      - ruby/bundle-install
+      - name: bundle install
+      - run:
+          command: |
+            cd hyrax
+            bundle install
       - run:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
