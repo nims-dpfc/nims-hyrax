@@ -15,7 +15,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - rails-demo-{{ checksum "Gemfile.lock" }}
+            - rails-demo-{{ checksum "hyrax/Gemfile.lock" }}
             - rails-demo-
       - run:
           name: bundle install
