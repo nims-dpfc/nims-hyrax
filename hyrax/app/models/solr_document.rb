@@ -173,4 +173,8 @@ class SolrDocument
   def file_size
     self[Solrizer.solr_name("file_size", 'lts')]
   end
+
+  def material_type
+    self[Solrizer.solr_name('material_type', :stored_searchable)]
+  end
 end
