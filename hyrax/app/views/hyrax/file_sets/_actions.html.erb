@@ -34,7 +34,7 @@
                     hyrax.download_path(file_set),
                     title: t('.download_title', file_set: file_set),
                     target: "_blank",
-                    id: "file_download",
+                    id: "file_download_"+file_set.id,
                     data: { label: file_set.id } %>
       </li>
     <% end %>
