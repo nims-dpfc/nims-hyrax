@@ -150,12 +150,6 @@ RSpec.describe SolrDocument do
     it { is_expected.to eql ['data origin'] }
   end
 
-  describe '#instrument' do
-    let(:model) { build(:image, instrument: ['Instrument']) }
-    subject { solr_document.instrument }
-    it { is_expected.to eql ['Instrument'] }
-  end
-
   describe '#origin_system_provenance' do
     subject { solr_document.origin_system_provenance }
     it { is_expected.to eql ['Origin A'] }
@@ -313,22 +307,10 @@ RSpec.describe SolrDocument do
     end
   end
 
-  describe '#status' do
-    let(:model) { build(:image, status: 'Status') }
-    subject { solr_document.status }
-    it { is_expected.to eql ['Status'] }
-  end
-
   describe '#persistent_url (Dataset)' do
     let(:model) { build(:dataset, id: '123456', title: ['Test']) }
     subject { solr_document.persistent_url }
     it { is_expected.to eql "http://localhost/concern/datasets/#{solr_document.id}" }
-  end
-
-  describe '#persistent_url (Image)' do
-    let(:model) { build(:image, id: '123456', title: ['Test']) }
-    subject { solr_document.persistent_url }
-    it { is_expected.to eql "http://localhost/concern/images/#{solr_document.id}" }
   end
 
   describe '#persistent_url (Publication)' do
