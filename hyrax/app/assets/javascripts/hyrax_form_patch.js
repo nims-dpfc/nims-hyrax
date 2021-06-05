@@ -1,7 +1,6 @@
 // Patch hyrax form submit to keep the submit button values
 // so that they get to Rails even when they are disabled
 Blacklight.onLoad(function() {
-    console.log("Loading draft save file method");
     $("form[data-behavior='work-form'] input[type=submit]").click(function (e) {
         var button = $(this);
         var form = button.parents('form')[0]
