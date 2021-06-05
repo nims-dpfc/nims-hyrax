@@ -18,6 +18,7 @@
 //
 // Required by Blacklight
 //= require blacklight/blacklight
+//= require hydra-editor/editMetadata
 //= require csv_preview
 
 //= require_tree .
