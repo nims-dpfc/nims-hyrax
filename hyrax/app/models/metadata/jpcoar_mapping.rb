@@ -2,53 +2,50 @@ module Metadata
   module JpcoarMapping
 
     def jpcoar_managing_organization(_field, xml)
+      return if managing_organization.blank? or managing_organization[0].blank?
       # jpcoar:contributor@contributorType="HostingInstitution"/jpcoar:affiliation/jpcoar:affiliationName
       # language attribute: TRUE
       # Note: Only mapping the first value
       # if self.has? "managing_organization_tesim" and self["managing_organization_tesim"].present?
-      if managing_organization.present? and managing_organization.first.present?
-        val = managing_organization.first
-        xml.tag!('jpcoar:contributor', "contributorType" => "HostingInstitution") do
-          xml.tag!("jpcoar:affiliation") do
-            xml.tag!('jpcoar:affiliationName', val, "xml:lang" => "en")
-          end
+      val = managing_organization.first
+      xml.tag!('jpcoar:contributor', "contributorType" => "HostingInstitution") do
+        xml.tag!("jpcoar:affiliation") do
+          xml.tag!('jpcoar:affiliationName', val, "xml:lang" => "en")
         end
       end
     end
 
     def jpcoar_first_published_url(_field, xml)
+      return if first_published_url.blank? or first_published_url[0].blank?
       # jpcoar:relation@relationType="isVersionOf"/jpcoar:relatedIdentifier@identifierType="DOI"
       # language attribute: FALSE
       # Note: Only mapping the first value
-      if first_published_url.present? and first_published_url.first.present?
-        val = first_published_url.first
-        xml.tag!('jpcoar:relation', "relationType" => "isVersionOf") do
-          xml.tag!('jpcoar:relatedIdentifier', val, "identifierType" => "DOI")
-        end
+      val = first_published_url.first
+      xml.tag!('jpcoar:relation', "relationType" => "isVersionOf") do
+        xml.tag!('jpcoar:relatedIdentifier', val, "identifierType" => "DOI")
       end
     end
 
     def jpcoar_title(_field, xml)
+      return if title.blank? or title[0].blank?
       # dc:title
       # language attribute: TRUE
       # Note: Only mapping the first value
-      if title.present? and title.first.present?
-        val = title.first
-        xml.tag!('dc:title', val, "xml:lang" => "en")
-      end
+      val = title.first
+      xml.tag!('dc:title', val, "xml:lang" => "en")
     end
 
     def jpcoar_alternative_title(_field, xml)
+      return if alternative_title.blank?
       # Alternative title		dcterms:alternative
       # language attribute: TRUE
-      if alternative_title.present?
-        alternative_title.each do |val|
-          xml.tag!('dc:alternative', val, "xml:lang" => "en") unless val.blank?
-        end
+      alternative_title.each do |val|
+        xml.tag!('dc:alternative', val, "xml:lang" => "en") unless val.blank?
       end
     end
 
     def jpcoar_resource_type(_field, xml)
+      return if resource_type.blank?
       # dc:type@rdf:resource="COAR Resource Type URI" See Resource Type sheet
       # language attribute: FALSE
       # Note: If the mapping is not defined, it will not be included
@@ -69,69 +66,63 @@ module Metadata
         'Video' => 'http://purl.org/coar/resource_type/c_12ce',
         'Other' => 'http://purl.org/coar/resource_type/c_1843',
       }
-      if resource_type.present?
-        resource_type.each do |val|
-          next if val.blank?
-          next unless resource_type_map.include?(val)
-          xml.tag!('dc:type', val, "rdf:resource" => resource_type_map[val])
-        end
+      resource_type.each do |val|
+        next if val.blank?
+        next unless resource_type_map.include?(val)
+        xml.tag!('dc:type', val, "rdf:resource" => resource_type_map[val])
       end
     end
 
     def jpcoar_description(_field, xml)
+      return if description.blank?
       # datacite:description@descriptionType="Abstract"
       # language attribute: TRUE
-      if description.present?
-        description.each do |val|
-          xml.tag!('datacite:description', val, "descriptionType" => "Abstract", "xml:lang" => "en") unless val.blank?
-        end
+      description.each do |val|
+        xml.tag!('datacite:description', val, "descriptionType" => "Abstract", "xml:lang" => "en") unless val.blank?
       end
     end
 
     def jpcoar_keyword(_field, xml)
+      return if keyword.blank?
       # jpcoar:subject@subjectScheme="Other"
       # language attribute: TRUE
-      if keyword.present?
-        keyword.each do |val|
-          xml.tag!('jpcoar:subject', val, "subjectScheme" => "Other", "xml:lang" => "en") unless val.blank?
-        end
+      keyword.each do |val|
+        xml.tag!('jpcoar:subject', val, "subjectScheme" => "Other", "xml:lang" => "en") unless val.blank?
       end
     end
 
     def jpcoar_publisher(_field, xml)
+      return if publisher.blank?
       # dc:publisher
       # language attribute: TRUE
-      if publisher.present?
-        publisher.each do |val|
-          xml.tag!('dc:publisher', val, "xml:lang" => "en") unless val.blank?
-        end
+      publisher.each do |val|
+        xml.tag!('dc:publisher', val, "xml:lang" => "en") unless val.blank?
       end
     end
 
     def jpcoar_date_published(_field, xml)
+      return if date_published.blank? or date_published[0].blank?
       # datacite:date@dateType="Issued"
       # language attribute: FALSE
       # Note: Only mapping the first value
-      if date_published.present? and date_published.first.present?
-        val = date_published.first
-        xml.tag!('datacite:date', val, "dateType" => "Issued")
-      end
+      val = date_published.first
+      xml.tag!('datacite:date', val, "dateType" => "Issued")
     end
 
     def jpcoar_rights_statement(_field, xml)
+      return if rights_statement.blank?
       # dc:rights@rdf:resource="URI"
       # language attribute: TRUE
-      if rights_statement.present?
-        rights_statement.each do |val|
-          next if val.blank?
-          term = RightsStatementService.new.find_by_id(val)
-          label = term.any? ? term['label'] : val
-          xml.tag!('dc:rights', label, "rdf:resource" => val, "xml:lang" => "en")
-        end
+      rights_statement.each do |val|
+        next if val.blank?
+        term = RightsStatementService.new.find_by_id(val)
+        label = term.any? ? term['label'] : val
+        xml.tag!('dc:rights', label, "rdf:resource" => val, "xml:lang" => "en")
       end
     end
 
     def jpcoar_complex_person(_field, xml)
+      return if complex_person.blank? or complex_person[0].blank?
       role_map = {
         'author' => 'creator',
         'editor' => 'Editor',
@@ -197,6 +188,7 @@ module Metadata
     end
 
     def jpcoar_complex_source(_field, xml)
+      return if complex_source.blank? or complex_source[0].blank?
       sources = JSON.parse(complex_source[0])
       sources.each do |source|
         # Title		jpcoar:sourceTitle	TRUE
@@ -224,6 +216,7 @@ module Metadata
     end
 
     def jpcoar_manuscript_type(_field, xml)
+      return if manuscript_type.blank?
       # oaire:version@rdf:resource="[COAR Resource Type URI]” See Manuscipt type sheet	FALSE
       manuscript_type_map = {
         'Original' => {'uri' => 'http://purl.org/coar/version/c_b1a7d7d4d402bcce', 'label' => 'AO'},
@@ -232,16 +225,15 @@ module Metadata
         'Version' => {'uri' => 'http://purl.org/coar/version/c_970fb48d4fbd8a85', 'label' => 'VoR' },
         'other' => {'uri' => 'http://purl.org/coar/version/c_be7fb7dd8ff6fe43', 'label' => 'NA'},
       }
-      if manuscript_type.present?
-        manuscript_type.each do |val|
-          next if val.blank?
-          mapped_val = manuscript_type_map.include?(val) ? manuscript_type_map[val] : manuscript_type_map['other']
-          xml.tag!('oaire:version', mapped_val['label'], "rdf:resource" => mapped_val['uri'])
-        end
+      manuscript_type.each do |val|
+        next if val.blank?
+        mapped_val = manuscript_type_map.include?(val) ? manuscript_type_map[val] : manuscript_type_map['other']
+        xml.tag!('oaire:version', mapped_val['label'], "rdf:resource" => mapped_val['uri'])
       end
     end
 
     def jpcoar_complex_event(_field, xml)
+      return if complex_event.blank? or complex_event[0].blank?
       events = JSON.parse(complex_event[0])
       events.each do |event|
         xml.tag!('jpcoar:conference') do
@@ -292,6 +284,7 @@ module Metadata
     end
 
     def jpcoar_complex_date(_field, xml)
+      return if complex_date.blank? or complex_date[0].blank?
       # datacite:date@dateType="[(JPCOAR vocabulary)]" See Other date sheet
       # language attribute: FALSE
       complex_date_map = {
@@ -303,6 +296,7 @@ module Metadata
         'http://bibframe.org/vocab/providerDate' => 'Submitted',
         'http://bibframe.org/vocab/changeDate' => 'Updated',
       }
+
       dates = JSON.parse(complex_date[0])
       dates.each do |date_val|
         label = nil
@@ -320,6 +314,7 @@ module Metadata
     end
 
     def jpcoar_complex_identifier(_field, xml)
+      return if complex_identifier.blank? or complex_identifier[0].blank?
       # jpcoar:identifier@identifierType="DOI"
       complex_id_map = {
         'DOI' => 'DOI'
@@ -341,6 +336,7 @@ module Metadata
     end
 
     def jpcoar_complex_version(_field, xml)
+      return if complex_version.blank? or complex_version[0].blank?
       # datacite:version
       versions = JSON.parse(complex_version[0])
       versions.each do |version|
@@ -353,6 +349,7 @@ module Metadata
     end
 
     def jpcoar_complex_relation(_field, xml)
+      return if complex_relation.blank? or complex_relation[0].blank?
       complex_relation_map = {
         'isNewVersionOf' => 'isVersionOf',
         'isPreviousVersionOf' => 'hasVersion',
