@@ -265,7 +265,8 @@ Hyrax.config do |config|
   # If browse-everything has been configured, load the configs.  Otherwise, set to nil.
   begin
     if defined? BrowseEverything
-      config.browse_everything = BrowseEverything.config
+      # https://github.com/antleaf/nims-mdr-development/issues/457#issuecomment-861401697
+      config.browse_everything = nil # BrowseEverything.config
     else
       Rails.logger.warn "BrowseEverything is not installed"
     end
