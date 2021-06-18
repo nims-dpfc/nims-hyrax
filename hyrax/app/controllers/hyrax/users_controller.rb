@@ -9,7 +9,7 @@ class Hyrax::UsersController
 
   def show
     user = User.find_by(user_identifier: params[:id])
-    if user.orcid
+    if user.orcid.present?
       redirect_to "https://samurai.nims.go.jp/orcid/#{Hyrax::OrcidValidator.match(user.orcid)}"
       return
     end
