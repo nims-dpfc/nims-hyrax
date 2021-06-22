@@ -20,6 +20,7 @@ Host github.com
 EOF
         bundle install
     fi
+    # We could delete the files in /root/.ssh and unset $SSH_KEY
 # fi
 
 if [ "$RAILS_ENV" = "production" ]; then
