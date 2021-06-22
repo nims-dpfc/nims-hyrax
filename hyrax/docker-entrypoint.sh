@@ -2,6 +2,25 @@
 
 echo "Creating log folder"
 mkdir -p $APP_WORKDIR/log
+# if [ "$RAILS_ENV" = "production" ]; then
+    if [ ! -f /root/.ssh/config ]; then
+        echo "Installing dcs"
+        echo "gem 'dcs', git: 'git@github.com:nims-dpfc/mdr-dcs.git'" >> Gemfile
+        mkdir -p /root/.ssh
+        cp $SSH_KEY /root/.ssh/github_id_rsa
+        chmod 600 /root/.ssh/github_id_rsa
+        touch /root/.ssh/known_hosts
+        ssh-keyscan github.com >> /root/.ssh/known_hosts
+        cat >> /root/.ssh/config << EOF
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile /root/.ssh/github_id_rsa
+    IdentitiesOnly yes
+EOF
+        bundle install
+    fi
+# fi
 
 if [ "$RAILS_ENV" = "production" ]; then
     # Verify all the production gems are installed
