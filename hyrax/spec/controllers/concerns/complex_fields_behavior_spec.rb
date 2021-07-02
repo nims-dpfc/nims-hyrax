@@ -416,7 +416,6 @@ def publication_attributes_from_form
 	    {"title"=>[""], "url"=>[""], "relationship"=>[""], "_destroy"=>"false"}},
 	 "custom_property_attributes"=>
 	  {"0"=>{"label"=>[""], "description"=>[""], "_destroy"=>"false"}},
-	 "note_to_admin"=>"",
 	 "admin_set_id"=>"admin_set/default",
 	 "member_of_collection_ids"=>"",
 	 "find_child_work"=>"",
@@ -521,7 +520,6 @@ def publication_attributes_from_form_cleaned
 	    "id"=>
 	     "http://fcrepo:8080/fcrepo/rest/dev/q5/24/jn/76/q524jn76v#relationg69952538857800"}],
 	 "custom_property_attributes"=>[],
-	 "note_to_admin"=>"",
 	 "admin_set_id"=>"admin_set/default",
 	 "member_of_collection_ids"=>"",
 	 "permissions_attributes"=>
