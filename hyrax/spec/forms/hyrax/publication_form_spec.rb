@@ -17,7 +17,7 @@ RSpec.describe Hyrax::PublicationForm do
       :managing_organization_ordered,
       :date_published, :rights_statement, :licensed_date, :complex_identifier, :complex_source,
       :complex_version, :complex_relation, :complex_date, :complex_event,
-      :custom_property, :note_to_admin) }
+      :custom_property) }
   end
 
   describe '#build_permitted_params' do
