@@ -11,16 +11,11 @@ mkdir -p $APP_WORKDIR/log
         chmod 600 /root/.ssh/github_id_rsa
         touch /root/.ssh/known_hosts
         ssh-keyscan github.com >> /root/.ssh/known_hosts
-        cat >> /root/.ssh/config << EOF
-Host github.com
-    HostName github.com
-    User git
-    IdentityFile /root/.ssh/github_id_rsa
-    IdentitiesOnly yes
-EOF
+        cp $SSH_CONFIG /root/.ssh/config
         bundle install
     fi
-    # We could delete the files in /root/.ssh and unset $SSH_KEY
+    # We could delete the files in /root/.ssh, touch /root/.ssh/config 
+    # and unset $SSH_KEY and $SSH_CONFIG at this point, if needed.
 # fi
 
 if [ "$RAILS_ENV" = "production" ]; then
