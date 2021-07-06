@@ -38,7 +38,6 @@ module Hyrax
       :complex_version, 
       :complex_relation, 
       :custom_property,
-      :note_to_admin, 
 
       # method
       :characterization_methods, 
@@ -92,8 +91,7 @@ module Hyrax
         :complex_identifier, 
         :complex_version, 
         :complex_relation,
-        :custom_property, 
-        :note_to_admin
+        :custom_property
       ]
     end
 
