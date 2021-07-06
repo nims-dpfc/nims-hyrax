@@ -33,7 +33,7 @@ module Hyrax
       :language, 
       :complex_date, 
       :complex_identifier, :complex_version, :complex_relation,
-      :custom_property, :note_to_admin, :draft
+      :custom_property, :draft
     ]
 
     self.required_fields -= [
@@ -65,7 +65,7 @@ module Hyrax
         :language, 
         :complex_date, 
         :complex_identifier, :complex_version, :complex_relation,
-        :custom_property, :note_to_admin
+        :custom_property
       ]
     end
 

@@ -16,7 +16,7 @@ RSpec.describe Hyrax::DatasetForm do
         :publisher, :resource_type, :licensed_date, :material_type,
         :first_published_url, :managing_organization_ordered, :complex_event,
         :complex_version, :complex_relation, :custom_property, :language, :date_published, :complex_date,
-        :note_to_admin, :rights_statement) }
+        :rights_statement) }
     end
 
     describe '#method_tab_terms' do

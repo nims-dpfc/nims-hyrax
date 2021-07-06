@@ -952,16 +952,9 @@ RSpec.describe Dataset do
   end
 
   describe 'nims_pid' do
-    it 'has note_to_admin as singular' do
+    it 'has nims_pid as singular' do
       @obj = build(:dataset, nims_pid: 'nims:12345678')
       expect(@obj.nims_pid).to eq 'nims:12345678'
-    end
-  end
-
-  describe 'note_to_admin' do
-    it 'has note_to_admin as singular' do
-      @obj = build(:dataset, note_to_admin: 'This is a sample dataset')
-      expect(@obj.note_to_admin).to eq 'This is a sample dataset'
     end
   end
 

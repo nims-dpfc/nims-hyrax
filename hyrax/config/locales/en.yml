@@ -80,7 +80,6 @@ en:
         complex_source: '<span class="label label-info required-tag">required for journal articles</span>'
         complex_event: '<span class="label label-info required-tag">required for conference presentations</span>'
         custom_property: You may add custom properties not covered by the fields above.
-        note_to_admin: Text written here will not be publicly visible.
     placeholders:
       defaults:
         first_published_url: "https://doi.org/10.xxx/xxx"
