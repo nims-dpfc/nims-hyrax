@@ -33,7 +33,7 @@ class Ability
     # only NIMS Researchers may upload new content
     can :create, [::Dataset, ::Publication] if current_user.authenticated_nims_researcher?
     can :create, [::Dataset, ::Publication] if current_user.authenticated_external?
-    can :create, [::Dataset, ::Publication, ::Image] if current_user.admin?
+    can :create, [::Dataset, ::Publication] if current_user.admin?
   end
 
   def read_metadata
