@@ -3,17 +3,33 @@
 @import "bootstrap";
 
 //----------- fonts to be used ---------
+/* "Montserrat" is licensed under the SIL Open Font License, Version 1.1.
+ * Copyright 2011 The Montserrat Project Authors (https://github.com/JulietaUla/Montserrat)
+ * The license is available with a FAQ at: http://scripts.sil.org/OFL
+ */
 @font-face {
-  font-family: "Galano Grotesque";
-  src: font-url('GalanoGrotesqueBold.otf');
+  font-family: Montserrat; /* regular */
+  src: font-url('Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: Montserrat; /* bold */
+  src: font-url('Montserrat-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
-  font-family: "Galano Grotesque";
-  src: font-url('GalanoGrotesqueLight.otf');
+  font-family: Montserrat; /* italic */
+  src: font-url('Montserrat-Italic.ttf') format('truetype');
   font-weight: normal;
-  font-style: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: Montserrat; /* bolditalic */
+  src: font-url('Montserrat-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
 }
 
 //---------- colours to be used --------
@@ -25,7 +41,7 @@ $mdr-green-dark: #51791A;
 
 //-------------- Fonts -----------------
 body {
-  font-family: "Galano Grotesque";
+  font-family: Montserrat,Meiryo,sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
   color: $mdr-black;
@@ -33,19 +49,26 @@ body {
 
 //-------------- Headings --------------
 h1, .h1 {
-  font-family: "Galano Grotesque";
+  font-family: Montserrat,Meiryo,sans-serif;
   font-size: 32px;
 }
 
 h2, .modal-title, .h2 {
-  font-family: "Galano Grotesque";
+  font-family: Montserrat,Meiryo,sans-serif;
+  font-size: 20px;
+  color: $mdr-black;
   font-weight: bold;
-  font-size: 18px;
+}
+
+.work-title, .item-title, .collection-title {
+  font-family: Montserrat,Meiryo,sans-serif;
+  font-size: 28px;
+  font-weight: bold;
   color: $mdr-black;
 }
 
 h3, .h3 {
-  font-family: "Galano Grotesque";
+  font-family: Montserrat,Meiryo,sans-serif;
   font-weight: bold;
   font-size: 14px;
   color: $mdr-black;
@@ -97,28 +120,25 @@ a.btn-primary:active {
 
 // ------------- label -----------------
 .label {
-  background-color: inherit;
   border: none;
+  border-radius: 0em;
 }
 
-.label-primary {
-  color: $mdr-green;
+.label-title label {
+  font-size: 14px;
 }
 
-.label-success {
-  color: $mdr-green;
+.label-row label {
+  color: #000000;
+  font-style: italic;
 }
 
-.label-info {
-  color: #2c76c7;
+.status-labels {
+  padding: 15px 0;
 }
 
-.label-warning {
-    color: #e65c00;
-}
-
-.label-danger {
-  color: #FF0000;
+.status-labels > span.label {
+  font-size: 14px;
 }
 
 // ------------- dropdown --------------
@@ -224,6 +244,7 @@ body {
 .site-footer h2 {
   margin: 0;
   color: #fff;
+  font-weight: bold;
 }
 
 .site-footer a,
@@ -273,7 +294,7 @@ body.dashboard {
 
 //--------------- work show ------------
 .work-type-tag {
-  color: $mdr-green;
+  color: $mdr-green-dark;
 }
 
 //-------------- Search ----------------

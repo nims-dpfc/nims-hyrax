@@ -14,7 +14,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  # To display stack traces in production, you want 
+  # To display stack traces in production, you want
   # config.consider_all_requests_local       = true
   # To hide stack traces in production, set this to false.
   config.consider_all_requests_local       = false
@@ -37,7 +37,7 @@ Rails.application.configure do
   end
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = Uglifier.new(harmony: true)
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
@@ -119,7 +119,7 @@ Rails.application.configure do
   }
 
   config.middleware.use ExceptionNotification::Rack,
-    ignore_exceptions: ['I18n::InvalidLocale', 'Riiif::ConversionError'] + ExceptionNotifier.ignored_exceptions,
+    ignore_exceptions: ['I18n::InvalidLocale', 'Riiif::ConversionError', 'Blacklight::Exceptions::RecordNotFound'] + ExceptionNotifier.ignored_exceptions,
     error_grouping: true,
     email: {
       email_prefix: "[MDR #{ENV['ERROR_NOTIFICATION_SUBJECT_PREFIX']}] ",
@@ -128,4 +128,9 @@ Rails.application.configure do
     }
 
   ExceptionNotifier::Rake.configure
+
+  config.log_level = :info
+  config.logger = ActFluentLoggerRails::Logger.new
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Json.new
 end

@@ -99,6 +99,7 @@ FactoryBot.define do
         [{
          name: 'Anamika',
          role: ['author'],
+         corresponding_author: '1',
           complex_identifier_attributes: [{
              identifier: '123456',
              scheme: 'identifier local'
@@ -156,9 +157,13 @@ FactoryBot.define do
       complex_date_attributes {
         [{
           date: '1978-10-28',
-          description: 'Published'
-        }]
+          description: 'Collected'
+         }]
       }
+    end
+
+    trait :with_date_published do
+      date_published { '1978-10-28' }
     end
 
     trait :with_complex_identifier do
@@ -176,7 +181,7 @@ FactoryBot.define do
           alternative_title: 'An instrument title',
           complex_date_attributes: [{
             date: '2018-02-14',
-            description: 'Published'
+            description: 'Collected'
           }],
           description: 'Instrument description',
           complex_identifier_attributes: [{
@@ -323,6 +328,30 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_source do
+      complex_source_attributes {
+        [{
+          alternative_title: 'Sub title for journal',
+          complex_person_attributes: [{
+            name: 'AR',
+            role: 'Editor'
+          }],
+          end_page: '12',
+          complex_identifier_attributes: [{
+            identifier: '1234567',
+            scheme: 'Local'
+          }],
+          issue: '34',
+          sequence_number: '1.2.2',
+          start_page: '4',
+          title: 'Test journal',
+          total_number_of_pages: '8',
+          volume: '3',
+          issn: '1234-5678'
+        }]
+      }
+    end
+
     trait :with_complex_relation do
       complex_relation_attributes {
         [{
@@ -337,12 +366,11 @@ FactoryBot.define do
       }
     end
 
-    trait :with_complex_rights do
-      complex_rights_attributes {
-        [{
-          date: '1978-10-28',
-          rights: 'http://creativecommons.org/publicdomain/zero/1.0/'
-        }]
+    trait :with_rights do
+      rights_statement {
+        [
+          'http://creativecommons.org/publicdomain/zero/1.0/'
+        ]
       }
     end
 
@@ -359,6 +387,22 @@ FactoryBot.define do
 
     trait :with_supervisor_approval do
       supervisor_approval { ['Professor-Supervisor-Approval'] }
+    end
+
+    trait :with_complex_event do
+      complex_event_attributes {
+        [{
+             title: 'Event-Title-123',
+             invitation_status: '1',
+             place: 'New Scotland Yard',
+             start_date: '2018-12-25',
+             end_date: '2019-01-01'
+        }]
+      }
+    end
+
+    trait :with_material_type do
+      material_type { ['Cu-containing'] }
     end
   end
 end

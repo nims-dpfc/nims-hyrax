@@ -1,4 +1,5 @@
 Blacklight.onLoad(function() {
+    $.fn.dataTable.ext.errMode = 'none';
     $('.csv-preview').each(function() {
         var preview = $(this);
         if(preview.hasClass('done')) {

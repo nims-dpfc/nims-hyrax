@@ -39,11 +39,10 @@ services:
     volumes:
       - solr:/opt/solr/server/solr/mycores
       - ./hyrax/solr/config:/opt/solr/solr_conf
-    entrypoint:
-      - docker-entrypoint.sh
-      - solr-precreate
-      - ${SOLR_CORE}
-      - /opt/solr/solr_conf
+    command:
+      - sh
+      - "-c"
+      - "precreate-core hydra-test /opt/solr/solr_conf; solr-precreate ${SOLR_CORE} /opt/solr/solr_conf"
 
   db: &db
     image: postgres:11-alpine

@@ -74,4 +74,8 @@ class User < ApplicationRecord
 
     self.guest = true if email_user?
   end
+  
+  def mailboxer_email(_object)
+    email
+  end
 end

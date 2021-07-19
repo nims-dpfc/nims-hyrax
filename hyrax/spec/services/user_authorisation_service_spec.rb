@@ -6,6 +6,7 @@ RSpec.describe UserAuthorisationService do
 
   context 'without env vars' do
     before do
+      allow(ENV).to receive(:[]).with('MDR_DEVISE_AUTH_MODULE').and_return('database_authenticatable')
       allow(ENV).to receive(:[]).with('LDAP_HOST').and_return(nil)
       allow(ENV).to receive(:[]).with('LDAP_BASE').and_return(nil)
       allow(ENV).to receive(:[]).with('LDAP_ATTRIBUTE').and_return(nil)
@@ -16,6 +17,7 @@ RSpec.describe UserAuthorisationService do
 
   context 'with env vars' do
     before do
+      allow(ENV).to receive(:[]).with('MDR_DEVISE_AUTH_MODULE').and_return('ldap_authenticatable')
       allow(ENV).to receive(:[]).with('LDAP_HOST').and_return('localhost')
       allow(ENV).to receive(:[]).with('LDAP_BASE').and_return('ou=people,dc=test,dc=com')
       allow(ENV).to receive(:[]).with('LDAP_ATTRIBUTE').and_return('uid')
