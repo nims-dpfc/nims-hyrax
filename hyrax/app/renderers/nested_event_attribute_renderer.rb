@@ -25,9 +25,9 @@ class NestedEventAttributeRenderer < NestedAttributeRenderer
         val = v['end_date'][0]
         each_html += get_row(label, val)
       end
-      unless v.dig('invitation_status').blank?
-        label = 'Invitation status'
-        val = v['invitation_status'][0]
+      unless v.dig('invitation_status')&.first.to_i.zero?
+        label = ''
+        val = 'Invited'
         each_html += get_row(label, val)
       end
       html += get_inner_html(each_html)

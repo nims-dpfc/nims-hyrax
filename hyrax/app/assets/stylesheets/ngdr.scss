@@ -65,14 +65,23 @@ form .field-wrapper label[required="required"]::after {
   padding: 10px;
   background-color: $mdr-green-light;
 }
+
+// thumbnail img in home page and search results
+#recent_docs img,
+.list-thumbnail img {
+  max-height: 90px;
+  width: auto;
+}
+
 //------------ display css -------------
 .each_metadata:not(:last-child) {
   margin-bottom: 1em;
   padding-bottom: 1em;
   border-bottom: 1px solid #ddd;
 }
-.label-row {
-  color: #999;
+.label-row label {
+  font-style: italic;
+  font-weight: normal;
 }
 
 .panel-heading .accordion-toggle:after {

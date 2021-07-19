@@ -11,7 +11,7 @@ en:
       complex_affiliation:      "Affiliation"
       complex_chemical_composition: "Chemical composition"
       complex_crystallographic_structure: "Crystallographic structure"
-      complex_date:             "Date"
+      complex_date:             "Other Date"
       complex_event:            "Event"
       complex_identifier:       "Identifier"
       complex_instrument:       "Instrument"
@@ -27,11 +27,14 @@ en:
       complex_state_of_matter:  "State of matter"
       complex_structural_feature: "Structural feature"
       complex_version:          "Version"
+      corresponding_author:     "Corresponding author"
       data_origin:              "Data origin"
       first_name:               "Given name"
+      full_name:                "Full name"
       instrument:               "Instrument"
       issue:                    "Issue"
       instrument_function:      "Instrument function"
+      keyword_ordered:          "Keyword"
       last_name:                "Surname"
       managing_organization:    "Managing organization"
       material_sub_type:        "Material sub type"
@@ -44,7 +47,7 @@ en:
       processing_environment:   "Processing environment"
       properties_addressed:     "Properties addressed"
       purchase_record_item:     "Purchase record item"
-      specimen_set:             "Specimen"
+      specimen_set:             "Material/Specimen"
       specimen_type:            "Specimen type"
       status:                   "Status"
       status_at_end:            "Status at end"
@@ -58,6 +61,28 @@ en:
   simple_form:
     hints:
       defaults:
-        title: A name to aid in identifying a work. English is preferred.
+        first_published_url: The DOI (in URL form) of the article related to this dataset or the URL where this dataset was first made public.
+        supervisor_approval: "If you entered a DOI above, enter \"approved\". If you entered a non-DOI URL above, fill in the name of your supervisor and the date of their approval. See <a href='https://dice.nims.go.jp/services/MDR/manual/html/deposit.html#entering-metadata' target='_blank' rel='noopener'>the User's Manual</a> for details."
+        title: English is preferred.
+        alternative_title: Alternative title or the title in other language, if applicable.
+        rights_statement: "Copyright and license for your work. If none apply, select \"In Copyright\". <a href='https://dice.nims.go.jp/services/MDR/manual/html/terminology.html#term-license' target='_blank' rel='noopener'>See the User's Manual</a> for further information."
+        licensed_date: Date when the work was released under the license selected above.
+        data_origin: Type of research.
+        resource_type: Type of content. More than one type may be selected.
+        description: Abstract or a free-text description for the work.
+        keyword_ordered: '<strong>Note:</strong> To enter multiple keywords, click on "Add another Keyword." Do not list them in a single field.'
         publisher: The person or group making the work available.
-        first_published_url: "The DOI of the article related to this dataset or the URL where this dataset was first made public. DOI example: https://doi.org/10.xxxx/xxxxx"
+        specimen_set_ordered: Short description of the material/specimen studied in this work.
+        managing_organization_ordered: Organization in charge of this work. Usually this is your affiliation. May be abbreviated.
+        complex_person: '<span class="label label-info required-tag">required</span> Authors or contributors to the work. Enter the Surname, the Given name, and the full name again in "Name", and select their Role.'
+        manuscript_type: Version of the manuscript, if you are uploading a journal article.
+        complex_identifier: External identifiers, if applicable.
+        complex_source: '<span class="label label-info required-tag">required for journal articles</span>'
+        complex_event: '<span class="label label-info required-tag">required for conference presentations</span>'
+        custom_property: You may add custom properties not covered by the fields above.
+    placeholders:
+      defaults:
+        first_published_url: "https://doi.org/10.xxx/xxx"
+        managing_organization: NIMS
+        managing_organization_ordered: NIMS
+        supervisor_approval: approved

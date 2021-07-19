@@ -26,9 +26,10 @@
           <%= f.input :on_behalf_of, collection: current_user.can_make_deposits_for.map(&:user_key), prompt: "Yourself" %>
         </div>
     <% end %>
-  </div>
-  <div class="panel-footer label-warning">
-    <strong>&#x26a0; Your data will not be made public yet! After you push the button, send the URL of the next screen to <a href="mailto:<%= ENV['CONTACT_EMAIL']%>"><%= ENV['CONTACT_EMAIL'] %></a>.</strong>
+
+    <% form_progress_sections_for(form: f.object).each do |section| %>
+      <%= render "form_progress_#{section}", f: f %>
+    <% end %>
   </div>
   <div class="panel-footer text-center">
     <% if ::Flipflop.show_deposit_agreement? %>
@@ -51,7 +52,11 @@
     <%# TODO: If we start using ActionCable, we could listen for object updates and
               alert the user that the object has changed by someone else %>
     <%= f.input Hyrax::Actors::OptimisticLockValidator.version_field, as: :hidden if f.object.persisted? %>
-    <%= f.submit class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "with_files_submit", name: "save_with_files" %>
+    <%= f.submit t('.save_draft'), class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "with_files_submit_draft", name: "save_draft_with_files" %>
+    <%= f.submit t('.save'), class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "with_files_submit", name: "save_with_files" %>
+  </div>
+  <div class="panel-footer text-muted">
+    <p><%= t('hyrax.works.form.submit_caution_html') %></p>
   </div>
 
   <%# Provide immediate feedback after the form is submitted while the subsequent page is loading %>

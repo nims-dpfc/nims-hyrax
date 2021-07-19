@@ -45,6 +45,7 @@ en:
           complex_person_data_depositor_sim: Data depositor
           complex_person_data_curator_sim: Data curator
           complex_person_contact_person_sim: Contact person
+          complex_person_corresponding_author_sim: Corresponding author
           complex_person_operator_sim: Operator
           complex_person_organization_sim: Organization
           complex_person_sub_organization_sim: Sub organization
@@ -77,11 +78,12 @@ en:
           place_sim: Location
           properties_addressed_sim: Properties addressed
           publisher_sim: Publisher
-          specimen_set_sim: Specimen
+          specimen_set_sim: Material/Specimen
           subject_sim: Subject
           synthesis_and_processing_sim: Synthesis and processing
           complex_state_of_matter_tesim: State of matter
           complex_state_of_matter_identifier_ssim: State of matter identifier
+          material_type_sim: Material type
         index:
           based_near_tesim: Location
           characterization_methods_tesim: Characterization methods
@@ -110,7 +112,7 @@ en:
           complex_material_type_description_tesim: Material type description
           complex_material_type_identifier_ssim: Material identifier
           complex_identifier_ssim: Identifier
-          complex_identifier_orcid_ssim: Orcid
+          complex_identifier_orcid_ssim: ORCID
           complex_identifier_local_id_ssim: Local identifier
           complex_person_other_tesim: Creator
           complex_person_author_tesim: Author
@@ -119,6 +121,7 @@ en:
           complex_person_data_depositor_tesim: Data depositor
           complex_person_data_curator_tesim: Data curator
           complex_person_operator_tesim: Operator
+          complex_person_contact_person_tesim: Contact person
           complex_person_organization_tesim: Organization
           complex_person_sub_organization_tesim: Sub organization
           complex_purchase_record_item_tesim: Purchase record item
@@ -146,7 +149,7 @@ en:
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
-          description_tesim: Description
+          description_tesim: Description/Abstract
           file_format_tesim: File Format
           identifier_tesim: Identifier
           instrument_alternative_title_tesim: Instrument alternative title
@@ -165,7 +168,7 @@ en:
           properties_addressed_tesim: Properties addressed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
-          specimen_set_tesim: Specimen
+          specimen_set_tesim: Material/Specimen
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
         show:
@@ -200,6 +203,7 @@ en:
           complex_person_data_depositor_ssm: Data depositor
           complex_person_data_curator_ssm: Data curator
           complex_person_operator_ssm: Operator
+          complex_person_contact_person_ssm: Contact person
           complex_person_organization_ssm: Organization
           complex_person_sub_organization_ssm: Sub organization
           complex_relation_ssm: Related item
@@ -213,7 +217,7 @@ en:
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
-          description_tesim: Description
+          description_tesim: Description/Abstract
           file_format_tesim: File Format
           identifier_tesim: Identifier
           instrument_tesim: Instrument
@@ -226,7 +230,7 @@ en:
           properties_addressed_tesim: Properties processed
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
-          specimen_type_tesim: Specimen
+          specimen_set_tesim: Material/Specimen
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
           table_of_contents_tesim: Table of contents
@@ -240,6 +244,9 @@ en:
         header: 'Export:'
         mendeley: Mendeley
         zotero: Zotero
+      form_progress:
+        save_draft: Save Draft
+        save: Submit
     content_blocks:
       tabs:
         announcement_text: Announcement Text
@@ -249,7 +256,7 @@ en:
       suffix: "@example.org"
     download_all: Download All Files (Zip)
     footer:
-      copyright_html: "&copy; 2020 National Institute for Materials Science. Works are available under licenses specified on their pages."
+      copyright_html: "&copy; 2020&ndash;%{year} National Institute for Materials Science. Works are available under licenses specified on their pages."
       service_html: <a href="https://library.nims.go.jp/" target="_blank" rel="noopener">NIMS Digital Library</a>
       platform_html: <a href="https://dice.nims.go.jp/" target="_blank" rel="noopener">Data Platform DICE</a>
       privacy_html: <a href="https://www.nims.go.jp/eng/siteinfo/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
@@ -264,12 +271,13 @@ en:
     center_name: DPFC
     center_name_full: Materials Data Platform Center
     division_name: MaDIS
-    division_name_full: Research and Services Division of Materials Data and Integrated System 
+    division_name_full: Research and Services Division of Materials Data and Integrated System
     product_name: MDR
     product_name_full: "MDR: NIMS Materials Data Repository"
     product_twitter_handle: "@nims_library"
     works:
       form:
+        submit_caution_html: <strong>Note:</strong> After your work has been submitted and successfully deposited, you will not be able to edit it.
         tab:
           files: Files
           metadata: Descriptions
@@ -279,7 +287,12 @@ en:
           share: Sharing
           specimen: Specimen details
     visibility:
+      authenticated:
+        note_html: Restrict access to MDR Shared users.
+        text: MDR Shared
       embargo:
         note_html: This option is not valid.
       lease:
         note_html: This option is not valid.
+      open:
+        text: MDR Open

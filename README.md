@@ -1,22 +1,22 @@
 ## Introduction
 
-[Nims-Hyrax](https://github.com/antleaf/nims-hyrax/) is an implementation of the Hyrax stack by [Cottage Labs](http://cottagelabs.com/) and [AntLeaf](http://antleaf.com/). It is built with Docker containers, which simplify development and deployment onto live services.
+[Nims-Hyrax](https://github.com/nims-dpfc/nims-hyrax/) is an implementation of the Hyrax stack by [Cottage Labs](https://cottagelabs.com/) and [AntLeaf](https://antleaf.com/). It is built with Docker containers, which simplify development and deployment onto live services.
 
 ## Code Status
 
-[![Codeship Status for antleaf/nims-hyrax](https://app.codeship.com/projects/d4cc8560-e430-0136-fffd-6a7889452552/status?branch=develop)](https://app.codeship.com/projects/319029)
+[![CircleCI Status for nims-dpfc/nims-hyrax](https://circleci.com/gh/nims-dpfc/nims-hyrax/tree/develop.svg?style=svg)](https://circleci.com/gh/nims-dpfc/nims-hyrax)
 
-[![Coverage Status](https://coveralls.io/repos/github/antleaf/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/antleaf/nims-hyrax?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/nims-dpfc/nims-hyrax/badge.svg?branch=develop)](https://coveralls.io/github/nims-dpfc/nims-hyrax?branch=develop)
 
 ## Getting Started
 
-Clone the repository with `git clone https://github.com/antleaf/nims-hyrax.git`.
+Clone the repository with `git clone https://github.com/nims-dpfc/nims-hyrax.git`.
 
-Ensure you have docker and docker-compose. See [notes on installing docker](https://github.com/antleaf/nims-hyrax/blob/develop/README.md#installing-docker).
+Ensure you have docker and docker-compose. See [notes on installing docker](https://github.com/nims-dpfc/nims-hyrax/blob/develop/README.md#installing-docker).
 
 Open a console and try running `docker -h` and `docker-compose -h` to verify they are both accessible.
 
-Create the environment file `.env`. You can start by copying the template file [.env.template](https://github.com/antleaf/nims-hyrax/blob/develop/.env.template) to `.env` and customizing the values to your setup.
+Create the environment file `.env`. You can start by copying the template file [.env.template.development](https://github.com/nims-dpfc/nims-hyrax/blob/develop/.env.template.development) to `.env` and customizing the values to your setup. (For production environment, use .env.template as your template, not .env.template.development)
 
 ## quick start
 If you would like to do a test run of the system, start the docker containers
@@ -50,24 +50,20 @@ New code is created in `feature/` or `hotfix/` branches, and from there we make 
 
 ## Guide to docker-compose and the services needed to run the materials data repository
 
-![services diagram](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/docs/container_diag.png)
+![services diagram](https://github.com/nims-dpfc/nims-hyrax/blob/develop/hyrax/docs/container_diag.png)
 
 
 There are 4 `docker-compose` files provided in the repository, which build the containers running the services as shown above
-  * [docker-compose.yml](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose.yml) is the main docker-compose file. It builds all the core servcies required to run the application
-    * [fcrepo](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose.yml#L16-L27) is the container running the [Fedora 4 commons repository](https://wiki.duraspace.org/display/FEDORA47/Fedora+4.7+Documentation), an rdf document store. By default, this runs the fedora service on port 8080 internally in docker (http://fcrepo:8080/fcrepo/rest).<br/><br/>
-    * [Solr container](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose.yml#L29-L46) runs [SOLR](lucene.apache.org/solr/), an enterprise search server. By default, this runs the SOLR service on port 8983 internally in docker (http://solr:8983).<br/><br/>
-    * [db container](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose.yml#L48-L60) running a postgres database, used by the Hyrax application. By default, this runs the database service on port 5432 internally in docker.<br/><br/>
-    * [redis container](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose.yml#L109-L125) running [redis](https://redis.io/), used by Hyrax to manage background tasks. By default, this runs the redis service on port 6379 internally in docker.<br/><br/>
-    * [app container](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose.yml#L62-L81) sets up the [Hyrax] application, which is then used by 2 services - web and workers.<br/><br/>
-    * [Web container](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose.yml#L83-L94) runs the materials data repository application. By default, this runs the materials data repository service on port 3000 internally in docker (http://web:3000). <br/><br/>This container runs [docker-entrypoint.sh](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/docker-entrypoint.sh). It needs the database, solr and fedora containers to be up and running. It waits for 15s to ensure Solr and fedora are running and exits if they are not. It [runs a rake task](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/docker-entrypoint.sh#L38-L39), ([setup_hyrax.rake](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/lib/tasks/setup_hyrax.rake)) to setup the application. <br/><br/>The default workflows are loaded, the default admin set and collection types are created and the users in [setup.json](https://github.com/antleaf/nims-hyrax/blob/develop/hyrax/seed/setup.json) are created as a part of the setup.<br/><br/>
-    * [Wokers container](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose.yml#L96-L107) runs the background tasks for materials data repository, using [sidekiq](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwio06ew2qPhAhUMZt4KHT0jDwQQFjAAegQIBBAB&url=https%3A%2F%2Fgithub.com%2Fmperham%2Fsidekiq&usg=AOvVaw3mZXHmVT7i5YYB8_u56eH2) and redis. By default, this runs the worker service. <br/><br/> Hyrax processes long-running or particularly slow work in background jobs to speed up the web request/response cycle. When a user submits a file through a work (using the web or an import task), there a humber of background jobs that are run, initilated by the hyrax actor stack, as explained [here](https://samvera.github.io/what-happens-deposit-2.0.html)<br/><br/>You can monitor the background workers using the materials data repository service at http://web:3000/sidekiq when logged in as an admin user. <br/><br/>
-  * [docker-compose.override.yml](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose.override.yml) This file exposes the ports for fcrepo, solr and the hyrax web container, so they an be accessed outside the container. If running this service in development or test, we could use this file. <br/><br/>
-  * [docker-compose-demo.yml](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose-demo.yml) builds the [nginx container](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose-demo.yml#L15-L26) running the nginx service, which will reverse proxy requests from the web service, run by the web container. This will expose port 443 to the users, so they can interact with the materials data repository. <br/><br/>
-  There is also a http basic authentication requested by nginx. The credentials can be generated with the `htpasswd` command from the `apache2-utils` package (on Ubuntu) and the htpasswd file should be in the [docker/nginx directory](https://github.com/antleaf/nims-hyrax/tree/develop/docker/nginx). <br/><br/>
-  To change or remove the http auth, edit the config in [docker/nginx/nginx.conf](https://github.com/antleaf/nims-hyrax/blob/develop/docker/nginx/nginx.conf) and the `.htpasswd` file. <br/><br/>
-  The domain name would need to modified to one you are going to use for your service in the nginx.conf file.<br/><br/>The nginx container will automatically try to ascertain free-of-charge a [Certbot / LetsEncrypt](https://certbot.eff.org) certificate, it it has access to the server, to check the domain name resolves.<br/><br/>In order for the certificate verification to succeed, it is important not to destroy and recreate the nginx container's volumes so fast as to hit the Certbot rate limit for new certificates. In addition, ports 80 and 443 on our application must be accessible from the Certbot servers (i.e. not blocked by firewall).<br/><br/>It is very likely that you will need to replace the nginx.conf file to one that suits your deployment environment.
-  * [docker-compose-production.yml](https://github.com/antleaf/nims-hyrax/blob/develop/docker-compose-production.yml) is the production configuration, customised for the infrastructure at NIMS. <br/><br/>
+  * [docker-compose.yml](https://github.com/nims-dpfc/nims-hyrax/blob/develop/docker-compose.yml) is the main docker-compose file. It builds all the core servcies required to run the application
+    * [fcrepo](https://github.com/nims-dpfc/nims-hyrax/blob/develop/docker-compose.yml#L16-L27) is the container running the [Fedora 4 commons repository](https://wiki.duraspace.org/display/FEDORA47/Fedora+4.7+Documentation), an rdf document store. By default, this runs the fedora service on port 8080 internally in docker (http://fcrepo:8080/fcrepo/rest).<br/><br/>
+    * [Solr container](https://github.com/nims-dpfc/nims-hyrax/blob/develop/docker-compose.yml#L29-L46) runs [SOLR](lucene.apache.org/solr/), an enterprise search server. By default, this runs the SOLR service on port 8983 internally in docker (http://solr:8983).<br/><br/>
+    * [db container](https://github.com/nims-dpfc/nims-hyrax/blob/develop/docker-compose.yml#L48-L60) running a postgres database, used by the Hyrax application. By default, this runs the database service on port 5432 internally in docker.<br/><br/>
+    * [redis container](https://github.com/nims-dpfc/nims-hyrax/blob/develop/docker-compose.yml#L109-L125) running [redis](https://redis.io/), used by Hyrax to manage background tasks. By default, this runs the redis service on port 6379 internally in docker.<br/><br/>
+    * [app container](https://github.com/nims-dpfc/nims-hyrax/blob/develop/docker-compose.yml#L62-L81) sets up the [Hyrax] application, which is then used by 2 services - web and workers.<br/><br/>
+    * [Web container](https://github.com/nims-dpfc/nims-hyrax/blob/develop/docker-compose.yml#L83-L94) runs the materials data repository application. By default, this runs the materials data repository service on port 3000 internally in docker (http://web:3000). <br/><br/>This container runs [docker-entrypoint.sh](https://github.com/nims-dpfc/nims-hyrax/blob/develop/hyrax/docker-entrypoint.sh). It needs the database, solr and fedora containers to be up and running. It waits for 15s to ensure Solr and fedora are running and exits if they are not. It [runs a rake task](https://github.com/nims-dpfc/nims-hyrax/blob/develop/hyrax/docker-entrypoint.sh#L38-L39), ([setup_hyrax.rake](https://github.com/nims-dpfc/nims-hyrax/blob/develop/hyrax/lib/tasks/setup_hyrax.rake)) to setup the application. <br/><br/>The default workflows are loaded, the default admin set and collection types are created and the users in [setup.json](https://github.com/nims-dpfc/nims-hyrax/blob/develop/hyrax/seed/setup.json) are created as a part of the setup.<br/><br/>
+    * [Wokers container](https://github.com/nims-dpfc/nims-hyrax/blob/develop/docker-compose.yml#L96-L107) runs the background tasks for materials data repository, using [sidekiq](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwio06ew2qPhAhUMZt4KHT0jDwQQFjAAegQIBBAB&url=https%3A%2F%2Fgithub.com%2Fmperham%2Fsidekiq&usg=AOvVaw3mZXHmVT7i5YYB8_u56eH2) and redis. By default, this runs the worker service. <br/><br/> Hyrax processes long-running or particularly slow work in background jobs to speed up the web request/response cycle. When a user submits a file through a work (using the web or an import task), there a humber of background jobs that are run, initilated by the hyrax actor stack, as explained [here](https://samvera.github.io/what-happens-deposit-2.0.html)<br/><br/>You can monitor the background workers using the materials data repository service at http://web:3000/sidekiq when logged in as an admin user. <br/><br/>
+  * [docker-compose.override.yml](https://github.com/nims-dpfc/nims-hyrax/blob/develop/docker-compose.override.yml) This file exposes the ports for fcrepo, solr and the hyrax web container, so they an be accessed outside the container. If running this service in development or test, we could use this file. <br/><br/>
+  * [docker-compose-production.yml](https://github.com/nims-dpfc/nims-hyrax/blob/develop/docker-compose-production.yml) is the production configuration, customised for the infrastructure at NIMS. <br/><br/>
 
 
 The data for the application is stored in docker named volumes as specified by the compose files. These are:
@@ -89,7 +85,7 @@ These will persist when the system is brought down and rebuilt. Deleting them wi
 
 ## Running in development or test
 
-When running in development and test environment use `docker-compose`. This will use the docker-compose.yml file and the docker-compose.override.yml file and not use the docker-compose-production.yml.
+When running in development and test environment, prepare your .env file using .env.template.development as the template. You need to use `docker-compose -f docker-compose.yml -f docker-compose.override.yml`. This will use the docker-compose.yml file and the docker-compose.override.yml file and not use the docker-compose-production.yml.
   * fcrepo container will run the fedora service, which will be available in port 8080 at  http://localhost:8080/fcrepo/rest
   * Solr container will run the Solr service, which will be available in port 8983 at  http://localhost:8983
   * The web container runs the materials data repository service, which will be available in port 3000 at http://localhost:3000
@@ -99,22 +95,25 @@ You could setup an alias for docker-compose on your local machine, to ease typin
 ```bash
 alias ngdrdocker='docker-compose -f docker-compose.yml -f docker-compose.override.yml'
 ```
-which is by default the same as
-```bash
-alias ngdrdocker='docker-compose'
+
+### Yarn and static assets
+
+Static asset build is only run in `production` environment to speed up container creation in develop. To see features such as the IIIF viewer, `yarn install` must be run on the web container once it's up.
+
+```
+ngdrdocker run web yarn install
 ```
 
 ## Running in production
 
-When running in production, you need to use `docker-compose -f docker-compose.yml -f docker-compose-production.yml`, replacing docker-compose.override.yml with docker-compose-production.yml. To assist this, an alias similar to that below can be useful:
+When running in production, prepare your .env file using .env.template as the template (not .env.template.development). You need to use `docker-compose -f docker-compose.yml -f docker-compose-production.yml`, replacing docker-compose.override.yml with docker-compose-production.yml. To assist this, an alias similar to that below can be useful:
 
 ```bash
 alias ngdrdocker='docker-compose -f docker-compose.yml -f docker-compose-production.yml'
 ```
 
 * The service will run without the ports of intermediary services such as Solr being exposed to the host.
-* Materials data repository is accessible behind http basic auth at port 443, http requests to port 80 will be redirected to https.
-* In the current nginx setup, access credentials are needed.
+* Materials data repository is accessible at port 443, http requests to port 80 will be redirected to https.
 
 ## Builidng, starting and managing the service with docker
 
@@ -127,7 +126,7 @@ $ ngdrdocker build
 Note: This is using the alias defined above, as a short form for <br/>
 In development:
 ```bash
-$ docker-compose build
+$ docker-compose -f docker-compose.yml -f docker-compose.override.yml build
 ```
 In production:
 ```bash
@@ -144,7 +143,7 @@ ngdrdocker up -d
 Note: This is using the alias defined above, as a short form for <br/>
 In development:
 ```bash
-$ docker-compose up -d
+$ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 ```
 In production:
 ```bash
@@ -273,4 +272,4 @@ There is [docker documentation](https://docs.docker.com/storage/volumes/#backup-
 
 * As mentioned above, there is a `.env` file containing application secrets. This **must not** be checked into version control!
 * The system is configured on start-up using the `docker-entrypoint.sh` script, which configures users in the `seed/setup.json` file.
-* Importers are run manually in the container using the rails console. See [The project wiki](https://github.com/antleaf/nims-hyrax/wiki) for more information.
+* Importers are run manually in the container using the rails console. See [The project wiki](https://github.com/nims-dpfc/nims-hyrax/wiki) for more information.

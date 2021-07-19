@@ -1,7 +1,7 @@
 # README
 ## NIMS Hyrax
 
-The application contains 
+The application contains
 * Hyrax version 2.3
 * Rails 5.1
 
@@ -32,7 +32,7 @@ FITS can be installed on OSX using Homebrew by running the command: `brew instal
 1. Run `fits.sh -h` from the command line and see a help message to ensure FITS is properly installed
 1. Set FITS_PATH in your .env to the installed fits.sh location
 
-### Steps to install the application 
+### Steps to install the application
 1.  Clone this project
 2.  To install, cd to the `hyrax/` directory and
     ```
@@ -59,7 +59,7 @@ From the `hyrax/` directory:
     ```
     bundle exec rails s
     ```
-    
+
 **Note:** You could use screen to run the different components
 ```
 screen
@@ -71,6 +71,12 @@ autodetach on
 ```
 
 ### Steps to run the tests
+
+Before running specs, you will need to setup the test db with the following command:
+```
+docker-compose exec appdb bash -l -c "createdb -U postgres hyrax_test"
+```
+
 When the app is set up, from `hyrax/`:
 
     bundle exec rspec

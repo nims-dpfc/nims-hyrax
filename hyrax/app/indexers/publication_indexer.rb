@@ -4,14 +4,17 @@ class PublicationIndexer < NgdrIndexer
   # Custom indexers for publication model
   include ComplexField::DateIndexer
   include ComplexField::IdentifierIndexer
+  include ComplexField::CustomPropertyIndexer
   include ComplexField::PersonIndexer
   include ComplexField::RightsIndexer
   include ComplexField::VersionIndexer
+  include ComplexField::RelationIndexer
   include ComplexField::EventIndexer
   include ComplexField::SourceIndexer
 
   def self.facet_fields
     super.tap do |fields|
+      fields << Solrizer.solr_name('specimen_set', :stored_searchable)
       fields << Solrizer.solr_name('place', :facetable)
       fields.concat ComplexField::DateIndexer.date_facet_fields
       fields.concat ComplexField::PersonIndexer.person_facet_fields
@@ -23,12 +26,14 @@ class PublicationIndexer < NgdrIndexer
 
   def self.search_fields
     super.tap do |fields|
+      fields << Solrizer.solr_name('specimen_set', :stored_searchable)
       fields << Solrizer.solr_name('issue', :stored_searchable)
       fields << Solrizer.solr_name('place', :stored_searchable)
       fields << Solrizer.solr_name('table_of_contents', :stored_searchable)
       fields << Solrizer.solr_name('first_published_url', :stored_searchable)
       fields << Solrizer.solr_name('doi', :stored_searchable)
       fields.concat ComplexField::DateIndexer.date_search_fields
+      fields.concat ComplexField::CustomPropertyIndexer.custom_property_search_fields
       fields.concat ComplexField::IdentifierIndexer.identifier_search_fields
       fields.concat ComplexField::PersonIndexer.person_search_fields
       fields.concat ComplexField::RightsIndexer.rights_search_fields
@@ -39,10 +44,12 @@ class PublicationIndexer < NgdrIndexer
 
   def self.show_fields
     super.tap do |fields|
+      fields << Solrizer.solr_name('specimen_set', :stored_searchable)
       fields << Solrizer.solr_name('issue', :stored_searchable)
       fields << Solrizer.solr_name('place', :stored_searchable)
       fields << Solrizer.solr_name('table_of_contents', :stored_searchable)
       fields.concat ComplexField::DateIndexer.date_show_fields
+      fields.concat ComplexField::CustomPropertyIndexer.custom_property_show_fields
       fields.concat ComplexField::IdentifierIndexer.identifier_show_fields
       fields.concat ComplexField::PersonIndexer.person_show_fields
       fields.concat ComplexField::RightsIndexer.rights_show_fields
@@ -51,4 +58,14 @@ class PublicationIndexer < NgdrIndexer
     end
   end
 
+  def generate_solr_document
+    super.tap do |solr_doc|
+      solr_doc['keyword_tesim'] = object.keyword_ordered
+      solr_doc['keyword_sim'] = object.keyword_ordered
+      solr_doc['managing_organization_tesim'] = object.managing_organization_ordered
+      solr_doc['managing_organization_sim'] = object.managing_organization_ordered
+      solr_doc['specimen_set_tesim'] = object.specimen_set_ordered
+      solr_doc['specimen_set_sim'] = object.specimen_set_ordered
+    end
+  end
 end

@@ -46,6 +46,10 @@ class SolrDocument
     self[Solrizer.solr_name('alternative_title', :stored_searchable)]
   end
 
+  def date_published
+    self[Solrizer.solr_name('date_published', :stored_searchable)]
+  end
+
   def complex_date
     self[Solrizer.solr_name('complex_date', :displayable)]
   end
@@ -88,6 +92,10 @@ class SolrDocument
 
   def data_origin
     self[Solrizer.solr_name('data_origin', :stored_searchable)]
+  end
+
+  def licensed_date
+    self[Solrizer.solr_name('licensed_date', :stored_searchable)]
   end
 
   def instrument
@@ -150,11 +158,23 @@ class SolrDocument
     self[Solrizer.solr_name('first_published_url', :stored_searchable)]
   end
 
+  def manuscript_type
+    self[Solrizer.solr_name('manuscript_type', :stored_searchable)]
+  end
+
+  def managing_organization
+    self[Solrizer.solr_name('managing_organization', :stored_searchable)]
+  end
+
   def doi
     self[Solrizer.solr_name('doi', :stored_searchable)]
   end
 
   def file_size
     self[Solrizer.solr_name("file_size", 'lts')]
+  end
+
+  def material_type
+    self[Solrizer.solr_name('material_type', :stored_searchable)]
   end
 end

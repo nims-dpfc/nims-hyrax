@@ -28,7 +28,7 @@ class GetPIDJob < ApplicationJob
       pid_response = PIDResponseDeserializer.call(JSON.parse(response.body)['data'])
       puts "Got PID for work: #{work.id}: #{pid_response[:canonicalId]}"
       # NB: this appends the PID to any existing identifiers
-      work.complex_identifier_attributes = [ { identifier: pid_response[:canonicalId], scheme: ['identifier persistent'] }]
+      work.nims_pid = pid_response[:canonicalId]
       work.save
     else
       begin

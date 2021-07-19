@@ -1,5 +1,4 @@
 <%= f.input :supervisor_approval,
   required: f.object.required?(key),
   as: :multi_value,
-  hint: raw("If you entered a DOI above, enter \"approved\". If you entered a non-DOI URL above, fill in the name of your supervisor and the date of their approval. See <a href='https://dice.nims.go.jp/nimsonly/MDR/manual/html/' target='_blank' rel='noopener'>the User's Manual</a> for details."),
   input_html: {class: 'form-control'} %>

@@ -58,19 +58,65 @@ When(/^I create the publication with:$/) do |table|
   select(values[:DATA_ORIGIN], from: 'Data origin')
   fill_in('publication[complex_person_attributes][0][name][]', with: values[:CREATOR])
   fill_in('Keyword', with: values[:KEYWORD])
-  select('Creative Commons BY-SA Attribution-ShareAlike 4.0 International', from: 'publication[complex_rights_attributes][0][rights][]')
+  select('Creative Commons BY-SA Attribution-ShareAlike 4.0 International', from: 'dataset[rights_statement]')
 
   # With selenium and the chrome driver, focus remains on the
   # select box. Click outside the box so the next line can't find
   # its element
   find('body').click
   choose('publication_visibility_open')
-  expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
+  expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as MDR Open) may be viewed as publishing which could impact your ability to')
   check('agreement')
 
   click_on('Save')
 
   expect(page).to have_content(values[:TITLE])
+end
+
+When(/^I create a draft publication with:$/) do |table|
+  values = table.hashes.first # table is a table.hashes.keys # => [:TITLE, :SUPERVISOR, :DATA_ORIGIN, :CREATOR, :KEYWORD]
+
+  expect(page).to have_content /Add New Publication/i
+
+  click_link "Files" # switch tab
+  expect(page).to have_content /Add files/i
+  expect(page).to have_content /Add folder/i
+  within('span#addfiles') do
+    attach_file("files[]", File.join(fixture_path,  'image.jp2'), visible: false)
+    attach_file("files[]", File.join(fixture_path, 'jp2_fits.xml'), visible: false)
+  end
+
+  click_link "Descriptions" # switch tab
+  fill_in('Title', with: values[:TITLE])
+  fill_in('Supervisor approval', with: "approved")
+  find('#publication_resource_type').select('Dissertation')
+  # fill_in('publication[complex_person_attributes][0][name][]', with: values[:CREATOR])
+  fill_in('Keyword', with: values[:KEYWORD])
+  fill_in('Abstract or Summary', with: values[:ABSTRACT])
+  fill_in('Material/Specimen', with: 'Ooblek')
+  fill_in('Date published', with: '31/12/2020')
+  find('#publication_rights_statement').select('MIT License')
+
+  # With selenium and the chrome driver, focus remains on the
+  # select box. Click outside the box so the next line can't find
+  # its element
+  find('body').click
+  choose('publication_visibility_open')
+  expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as MDR Open) may be viewed as publishing which could impact your ability to')
+  check('agreement')
+
+  click_on('Save Draft')
+
+  expect(page).to have_content(values[:TITLE])
+end
+
+Then("the publication can be submitted for approval") do
+  publication = Publication.last
+  visit edit_hyrax_publication_path(publication)
+  find('#with_files_submit').click
+  publication.reload
+  workflow_state = publication.to_sipity_entity.reload.workflow_state_name
+  expect(workflow_state).to eq "pending_review"
 end
 
 Then(/^I should see the (open|authenticated|embargo|lease|restricted) publications?$/) do |access|
