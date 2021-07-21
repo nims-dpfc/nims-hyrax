@@ -55,7 +55,7 @@ RSpec.feature 'Create a Publication', js: false do
       fill_in('Title', with: 'My Test Work')
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Keyword', with: 'testing')
-      select('In Copyright', from: 'Rights statement')
+      select('In Copyright (No redistribution)', from: 'Rights statement')
 
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find

@@ -1,6 +1,6 @@
 terms:
     - id: http://rightsstatements.org/vocab/InC/1.0/
-      term: In Copyright
+      term: In Copyright (No redistribution)
       active: true
     - id: https://creativecommons.org/licenses/by/4.0/
       term: Creative Commons BY Attribution 4.0 International
