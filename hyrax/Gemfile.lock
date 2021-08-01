@@ -19,14 +19,6 @@ GIT
       rails (>= 5.1.6)
       rubyzip (>= 1.0.0)
 
-GIT
-  remote: https://github.com/fbacall/ro-crate-ruby
-  revision: 0982279c5e3613e718e34125a6182f1575222306
-  specs:
-    ro-crate-ruby (0.0.3)
-      addressable
-      rubyzip
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -804,6 +796,9 @@ GEM
       iiif-image-api (~> 0.1.0)
       railties (>= 4.2, < 6)
     rinku (2.0.6)
+    ro-crate (0.4.11)
+      addressable (~> 2.7.0)
+      rubyzip (~> 2.0.0)
     rsolr (2.3.0)
       builder (>= 2.1.2)
       faraday (>= 0.9.0)
@@ -1008,7 +1003,7 @@ DEPENDENCIES
   redis-session-store (~> 0.11.1)
   riiif (~> 2.0)
   rinku
-  ro-crate-ruby!
+  ro-crate (~> 0.4.11)
   rsolr (>= 1.0)
   rspec-activemodel-mocks
   rspec-rails
