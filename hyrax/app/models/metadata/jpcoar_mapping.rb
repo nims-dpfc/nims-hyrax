@@ -122,7 +122,7 @@ module Metadata
     end
 
     def jpcoar_complex_person(_field, xml)
-      return if complex_person.blank? or complex_person[0].blank?
+      return if complex_person.blank? or Array.wrap(complex_person)[0].blank?
       role_map = {
         'author' => 'creator',
         'editor' => 'Editor',
@@ -133,7 +133,7 @@ module Metadata
         'operator' =>	'Other'
       }
       if complex_person.present?
-        people = JSON.parse(complex_person[0])
+        people = JSON.parse(Array.wrap(complex_person)[0])
         people.each do |person|
           # Get the role and map it
           role = person.dig('role').present? ? person['role'].first : 'Other'
@@ -188,8 +188,8 @@ module Metadata
     end
 
     def jpcoar_complex_source(_field, xml)
-      return if complex_source.blank? or complex_source[0].blank?
-      sources = JSON.parse(complex_source[0])
+      return if complex_source.blank? or Array.wrap(complex_source)[0].blank?
+      sources = JSON.parse(Array.wrap(complex_source)[0])
       sources.each do |source|
         # Title		jpcoar:sourceTitle	TRUE
         v = source.dig('title').present? ? source['title'].first : nil
@@ -233,8 +233,8 @@ module Metadata
     end
 
     def jpcoar_complex_event(_field, xml)
-      return if complex_event.blank? or complex_event[0].blank?
-      events = JSON.parse(complex_event[0])
+      return if complex_event.blank? or Array.wrap(complex_event)[0].blank?
+      events = JSON.parse(Array.wrap(complex_event)[0])
       events.each do |event|
         xml.tag!('jpcoar:conference') do
           # Title		jpcoar:conferenceName	TRUE
@@ -284,7 +284,7 @@ module Metadata
     end
 
     def jpcoar_complex_date(_field, xml)
-      return if complex_date.blank? or complex_date[0].blank?
+      return if complex_date.blank? or Array.wrap(complex_date)[0].blank?
       # datacite:date@dateType="[(JPCOAR vocabulary)]" See Other date sheet
       # language attribute: FALSE
       complex_date_map = {
@@ -297,7 +297,7 @@ module Metadata
         'http://bibframe.org/vocab/changeDate' => 'Updated',
       }
 
-      dates = JSON.parse(complex_date[0])
+      dates = JSON.parse(Array.wrap(complex_date)[0])
       dates.each do |date_val|
         label = nil
         if date_val.dig('description').present? and date_val['description'][0].present? and complex_date_map.include?(date_val['description'][0])
@@ -314,12 +314,12 @@ module Metadata
     end
 
     def jpcoar_complex_identifier(_field, xml)
-      return if complex_identifier.blank? or complex_identifier[0].blank?
+      return if complex_identifier.blank? or Array.wrap(complex_identifier)[0].blank?
       # jpcoar:identifier@identifierType="DOI"
       complex_id_map = {
         'DOI' => 'DOI'
       }
-      identifiers = JSON.parse(complex_identifier[0])
+      identifiers = JSON.parse(Array.wrap(complex_identifier)[0])
       identifiers.each do |identifier|
         label = nil
         if identifier.dig('scheme').present? and identifier['scheme'][0].present? and complex_id_map.include?(identifier['scheme'][0])
@@ -336,9 +336,9 @@ module Metadata
     end
 
     def jpcoar_complex_version(_field, xml)
-      return if complex_version.blank? or complex_version[0].blank?
+      return if complex_version.blank? or Array.wrap(complex_version)[0].blank?
       # datacite:version
-      versions = JSON.parse(complex_version[0])
+      versions = JSON.parse(Array.wrap(complex_version)[0])
       versions.each do |version|
         val = nil
         if version.dig('version').present? and version['version'][0].present?
@@ -349,7 +349,7 @@ module Metadata
     end
 
     def jpcoar_complex_relation(_field, xml)
-      return if complex_relation.blank? or complex_relation[0].blank?
+      return if complex_relation.blank? or Array.wrap(complex_relation)[0].blank?
       complex_relation_map = {
         'isNewVersionOf' => 'isVersionOf',
         'isPreviousVersionOf' => 'hasVersion',
@@ -365,7 +365,7 @@ module Metadata
         'requires' => 'requires',
         'isRequiredBy' => 'isRequiredBy',
       }
-      relations = JSON.parse(complex_relation[0])
+      relations = JSON.parse(Array.wrap(complex_relation)[0])
       relations.each do |relation|
         relation_type = nil
         if relation.dig('relationship').present? and relation['relationship'][0].present? and complex_relation_map.include?(relation['relationship'][0])
