@@ -9,6 +9,7 @@ RSpec.describe ::Hyrax::SolrDocument::Jpcoar do
                         :with_article_resource_type,
                         :with_description_abstract,
                         :with_keyword,
+                        :with_language,
                         :with_publisher,
                         :with_date_published,
                         :with_rights,
