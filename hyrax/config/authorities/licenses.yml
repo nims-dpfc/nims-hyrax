@@ -1,4 +1,7 @@
 terms:
+    - id: https://mdr.nims.go.jp/terms#shared
+      term: MDR Shared (No redistribution)
+      active: true
     - id: http://rightsstatements.org/vocab/InC/1.0/
       term: In Copyright (No redistribution)
       active: true
