@@ -4,8 +4,10 @@ default: &default
   toolbar1: styleselect | bold italic | link image | undo redo
   toolbar2: table | fullscreen | uploadimage
   plugins:
-    - table
+    - anchor
     - fullscreen
+    - link
+    - table
 content_block:
   <<: *default
 custom:
