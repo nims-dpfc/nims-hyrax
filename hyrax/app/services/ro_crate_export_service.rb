@@ -46,7 +46,7 @@ class ROCrateExportService
       # Now get a list of all the related filesets and add them to the metadata graph
       @work.file_sets.each do |file_set|
         file_set.original_file.tap do |file|
-          filename = get_filename(tmpdir, file.file_name.first)
+          filename = CGI.unescape(get_filename(tmpdir, file.file_name.first))
 
           File.open(File.join(tmpdir, filename), 'wb') do |output|
             file.stream.each { |content| output.write(content) }
