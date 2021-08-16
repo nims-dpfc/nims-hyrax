@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'devise'
+require 'securerandom'
 
 RSpec.describe Hyrax::FileSetsController do
   include Devise::Test::ControllerHelpers
@@ -15,7 +16,7 @@ RSpec.describe Hyrax::FileSetsController do
 
     describe '#update' do
       let(:file_set) do
-        create(:file_set, user: user)
+        create(:file_set, user: user, id: SecureRandom.hex(10))
       end
 
       context 'when updating the attached file version' do

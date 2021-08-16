@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+# require 'securerandom'
 
 require 'rails_helper'
 RSpec.describe 'hyrax/file_sets/media_display/_pdf.html.erb', type: :view do
   let(:config) { double }
   let(:link) { true }
-  let(:file_set) { FileSet.create(visibility: 'authenticated') }
+  let(:file_set) { FileSet.create(id: SecureRandom.hex(10), visibility: 'authenticated') }
 
   before do
     allow(Hyrax.config).to receive(:display_media_download_link?).and_return(link)
