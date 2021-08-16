@@ -36,7 +36,7 @@ RSpec.describe DownloadAllController, type: :controller do
       before do
         @file_set_ids = []
         @file_sets = []
-        @user = create(:user)
+        @user = create(:user, id: SecureRandom.hex(10))
         4.times do |i|
           file_set = create(:file_set, :open, user: @user, id: SecureRandom.hex(10))
           @file_sets.append(file_set)

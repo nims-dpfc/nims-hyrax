@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'securerandom'
 include Warden::Test::Helpers
 
 RSpec.describe 'shared/_citations' do
@@ -23,14 +24,14 @@ RSpec.describe 'shared/_citations' do
     end
 
     context 'authenticated non-researcher' do
-      let(:user) { build(:user, :nims_other) }
+      let(:user) { build(:user, :nims_other, id: SecureRandom.hex(10)) }
       it 'shows the abstract' do
         expect(rendered).to have_css("meta[property='og:description'][content='#{dataset.description.first}']", visible: false)
       end
     end
 
     context 'authenticated NIMS Researcher' do
-      let(:user) { create(:user, :nims_researcher) }
+      let(:user) { create(:user, :nims_researcher, id: SecureRandom.hex(10)) }
       it 'shows the abstract' do
         expect(rendered).to have_css("meta[property='og:description'][content='#{dataset.description.first}']", visible: false)
       end

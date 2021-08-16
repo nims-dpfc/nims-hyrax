@@ -6,7 +6,7 @@ RSpec.describe Hyrax::FileSetsController do
   include Devise::Test::ControllerHelpers
 
   routes { Rails.application.routes }
-  let(:user) { create(:user) }
+  let(:user) { create(:user, id: SecureRandom.hex(10)) }
   let(:actor) { controller.send(:actor) }
 
   context 'when signed in' do

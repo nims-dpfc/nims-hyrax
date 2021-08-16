@@ -1,11 +1,12 @@
 require 'rails_helper'
+require 'securerandom'
 
 RSpec.describe Hyrax::PublicationForm do
   it { expect(described_class).to be < Hyrax::Forms::WorkForm }
 
   describe '#metadata_tab_terms' do
     let(:model) { build(:dataset) }
-    let(:ability) { Ability.new(create(:user)) }
+    let(:ability) { Ability.new(create(:user, id: SecureRandom.hex(10))) }
     let(:controller) { nil } # doesn't require a value for these tests
     let(:form) { described_class.new(model, ability, controller) }
 

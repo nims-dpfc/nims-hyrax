@@ -1,11 +1,12 @@
 require 'rails_helper'
+require 'securerandom'
 
 RSpec.describe Hyrax::UsersController do
   routes { Hyrax::Engine.routes }
 
   context "If an user has an ORCID id" do
     before(:each) do
-      @user = FactoryBot.create(:user, :nims_researcher, orcid: '0000-0002-9986-7223')
+      @user = FactoryBot.create(:user, :nims_researcher, orcid: '0000-0002-9986-7223', id: SecureRandom.hex(10))
     end
 
     describe "When not logged in" do
@@ -29,7 +30,7 @@ RSpec.describe Hyrax::UsersController do
 
   context "If an user doesn't have an ORCID id" do
     before(:each) do
-      @user = FactoryBot.create(:user, :nims_researcher)
+      @user = FactoryBot.create(:user, :nims_researcher, id: SecureRandom.hex(10))
     end
 
     describe "When not logged in" do

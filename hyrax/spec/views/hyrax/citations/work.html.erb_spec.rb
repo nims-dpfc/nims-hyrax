@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'securerandom'
 include Warden::Test::Helpers
 
 RSpec.describe 'hyrax/citations/work' do
@@ -34,7 +35,7 @@ RSpec.describe 'hyrax/citations/work' do
     end
 
     context 'authenticated NIMS Researcher' do
-      let(:user) { create(:user, :nims_researcher) }
+      let(:user) { create(:user, :nims_researcher, id: SecureRandom.hex(10)) }
       it 'shows the correct metadata' do
         expect(rendered).to have_content('Asahiko Matsuda, Kosuke Tanabe.')
         expect(rendered).to have_content("\"Open Publication\".\nTest journal. 3, no. 34. 1.2.2.\n(2021):")
@@ -70,7 +71,7 @@ RSpec.describe 'hyrax/citations/work' do
     end
 
     context 'authenticated NIMS Researcher' do
-      let(:user) { create(:user, :nims_researcher) }
+      let(:user) { create(:user, :nims_researcher, id: SecureRandom.hex(10)) }
       it 'shows the correct metadata' do
         expect(rendered).to have_content("\"Open Publication\".\n\n(2021):")
       end
@@ -102,7 +103,7 @@ RSpec.describe 'hyrax/citations/work' do
     end
 
     context 'authenticated NIMS Researcher' do
-      let(:user) { create(:user, :nims_researcher) }
+      let(:user) { create(:user, :nims_researcher, id: SecureRandom.hex(10)) }
       it 'shows the correct metadata' do
         expect(rendered).to have_content("\"Open Dataset\".\n\n(2021):")
       end

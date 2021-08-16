@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'securerandom'
 
 RSpec.describe ::User do
   let(:user) { described_class.new(username: 'username', display_name: 'Test user') }
@@ -27,7 +28,7 @@ RSpec.describe ::User do
   end
 
   describe 'self.find_or_create_system_user' do
-    let!(:existing_user) { create(:user, email: 'existing@example.com') }
+    let!(:existing_user) { create(:user, email: 'existing@example.com', id: SecureRandom.hex(10)) }
     before { allow(Devise).to receive(:friendly_token) { 'password' } }
 
     context 'finds the existing user' do
