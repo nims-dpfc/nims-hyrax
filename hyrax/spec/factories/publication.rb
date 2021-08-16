@@ -1,6 +1,9 @@
+require 'securerandom'
+
 FactoryBot.define do
 
   factory :publication do
+    id { SecureRandom.hex(10) }
     title { ["Publication"] }
     access_control
 
