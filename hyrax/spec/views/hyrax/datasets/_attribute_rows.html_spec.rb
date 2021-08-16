@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'securerandom'
 include Warden::Test::Helpers
 
 RSpec.describe 'hyrax/datasets/_attribute_rows' do
@@ -45,7 +46,7 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
   end
 
   context 'authenticated NIMS Researcher' do
-    let(:user) { create(:user, :nims_researcher) }
+    let(:user) { create(:user, :nims_researcher, id: SecureRandom.hex(10)) }
     it 'shows the correct metadata' do
       expect(rendered).to have_content('Alternative-Title-123')
       expect(rendered).to have_content('Anamika')
