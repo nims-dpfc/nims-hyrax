@@ -1,13 +1,12 @@
 require 'rails_helper'
 require 'devise'
-require 'securerandom'
 
 RSpec.describe DownloadAllController, type: :controller do
   include Devise::Test::ControllerHelpers
   routes { Rails.application.routes }
 
   describe 'GET #show' do
-    let(:file_set) { create(:file_set, id: SecureRandom.hex(10)) }
+    let(:file_set) { create(:file_set) }
     let(:dataset) { create(:dataset, members: [file_set]) }
 
     context 'with public file_set' do
@@ -38,27 +37,27 @@ RSpec.describe DownloadAllController, type: :controller do
         @file_sets = []
         @user = create(:user)
         4.times do |i|
-          file_set = create(:file_set, :open, user: @user, id: SecureRandom.hex(10))
+          file_set = create(:file_set, :open, user: @user)
           @file_sets.append(file_set)
           @file_set_ids.append(file_set.id)
           CharacterizeJob.perform_now(file_set, file_set.original_file.id)
         end
         4.times do |i|
-          file_set = create(:file_set, :authenticated, user: @user, id: SecureRandom.hex(10))
+          file_set = create(:file_set, :authenticated, user: @user)
           @file_sets.append(file_set)
           @file_set_ids.append(file_set.id)
           CharacterizeJob.perform_now(file_set, file_set.original_file.id)
         end
         4.times do |i|
-          file_set = create(:file_set, :restricted, user: @user, id: SecureRandom.hex(10))
+          file_set = create(:file_set, :restricted, user: @user)
           @file_sets.append(file_set)
           @file_set_ids.append(file_set.id)
           CharacterizeJob.perform_now(file_set, file_set.original_file.id)
         end
         allow(subject).to receive(:authorize_download!).and_return(true)
       end
-      let(:dataset) { create(:dataset, members: @file_sets, id: SecureRandom.hex(10)) }
-      let(:user) { create(:user, id: SecureRandom.hex(10)) }
+      let(:dataset) { create(:dataset, members: @file_sets) }
+      let(:user) { create(:user) }
 
       it 'returns the open file set ids when not logged in' do
         get :show, params: { id: dataset.id, format: :zip }
@@ -98,7 +97,7 @@ RSpec.describe DownloadAllController, type: :controller do
     end
 
     context 'with restricted file_sets' do
-      let(:file_set) { create(:file_set, :restricted, id: SecureRandom.hex(10)) }
+      let(:file_set) { create(:file_set, :restricted) }
       let(:dataset) { create(:dataset, members: [file_set]) }
 
       context 'request application/zip' do
@@ -116,7 +115,7 @@ RSpec.describe DownloadAllController, type: :controller do
         CharacterizeJob.perform_now(file_set, file_set.original_file.id)
       end
 
-      let(:file_set) { create(:file_set, :long_filename, id: SecureRandom.hex(10)) }
+      let(:file_set) { create(:file_set, :long_filename) }
       let(:dataset) { create(:dataset, members: [file_set]) }
 
       context 'request application/zip' do

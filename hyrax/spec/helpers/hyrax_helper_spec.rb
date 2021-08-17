@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'securerandom'
 
 RSpec.describe HyraxHelper, type: :helper do
   describe '#available_translations' do
@@ -9,10 +8,10 @@ RSpec.describe HyraxHelper, type: :helper do
   end
 
   describe '#available_file_set_ids' do
-    let(:file_set) { create(:file_set, id: SecureRandom.hex(10)) }
-    let(:dataset) { create(:dataset, members: [file_set], id: SecureRandom.hex(10)) }
+    let(:file_set) { create(:file_set) }
+    let(:dataset) { create(:dataset, members: [file_set]) }
     let(:solr_document) { SolrDocument.new(dataset.to_solr) }
-    let(:ability) { Ability.new(create(:user, id: SecureRandom.hex(10))) }
+    let(:ability) { Ability.new(create(:user)) }
     let(:presenter) { Hyrax::WorkShowPresenter.new(solr_document, ability) }
 
     before do
@@ -40,7 +39,7 @@ RSpec.describe HyraxHelper, type: :helper do
   end
 
   describe '#within_file_size_threshold?' do
-    let(:file_set) { create(:file_set, id: SecureRandom.hex(10)) }
+    let(:file_set) { create(:file_set) }
 
     before do
       CharacterizeJob.perform_now(file_set, file_set.original_file.id)

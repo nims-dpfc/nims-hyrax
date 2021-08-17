@@ -1,9 +1,6 @@
-require 'securerandom'
-
 FactoryBot.define do
 
   factory :dataset do
-    id { SecureRandom.hex(10) }
     title { ["Dataset"] }
     access_control
 
