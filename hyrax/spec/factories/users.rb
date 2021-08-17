@@ -1,9 +1,6 @@
 # Based on: https://github.com/samvera/hyrax/blob/master/spec/factories/users.rb
-require 'securerandom'
-
 FactoryBot.define do
   factory :user do
-    id { SecureRandom.hex(10) }
     sequence(:email) { |n| "user#{n}@example.com" }
     sequence(:username) { |n| "user#{n}" }
     sequence(:display_name) { |n| "User #{n}"}
