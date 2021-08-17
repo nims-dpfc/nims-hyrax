@@ -1,8 +1,7 @@
 require 'rails_helper'
-require "securerandom"
 
 RSpec.describe UserAuthorisationService do
-  let(:user) { create(:user, id: SecureRandom.hex(10)) }
+  let(:user) { create(:user) }
   let(:service) { described_class.new(user) }
 
   context 'without env vars' do

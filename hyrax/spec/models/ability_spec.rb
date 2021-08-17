@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'securerandom'
 
 RSpec.describe Ability do
   let(:ability) { Ability.new(user) }
@@ -19,7 +18,7 @@ RSpec.describe Ability do
     let(:create_work) { ability.can?(:create, Work) }
 
     context 'admin user' do
-      let(:user) { create(:user, :admin, id: SecureRandom.hex(10)) }
+      let(:user) { create(:user, :admin) }
       it { expect(role_create).to be true }
       it { expect(role_show).to be true }
       it { expect(role_add_user).to be true }
@@ -34,7 +33,7 @@ RSpec.describe Ability do
     end
 
     context 'guest user' do
-      let(:user) { create(:user, :guest, id: SecureRandom.hex(10)) }
+      let(:user) { create(:user, :guest) }
       it { expect(role_create).to be false }
       it { expect(role_show).to be false }
       it { expect(role_add_user).to be false }
