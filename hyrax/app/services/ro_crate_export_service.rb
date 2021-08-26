@@ -1,6 +1,5 @@
 require 'json'
 require 'tmpdir'
-require 'ro_crate_ruby'
 
 # This service generates an RO-Crate export for the specified work
 # NB: this is a prototype proof-of-concept exporter and has a few rough edges!
