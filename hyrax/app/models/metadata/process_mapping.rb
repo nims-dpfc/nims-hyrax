@@ -15,7 +15,6 @@ module Metadata
               xml.tag! field, value if value.present?
             end
           elsif mapping[:function].present?
-            puts "Calling #{mapping[:'function']} with params"
             value = self.send(mapping[:'function'], field, xml)
           else
             puts "WARNING: mapping #{mapping.inspect} is ignored"
