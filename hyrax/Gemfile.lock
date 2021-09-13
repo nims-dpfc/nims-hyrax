@@ -879,6 +879,8 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    sitemap_generator (6.1.2)
+      builder (~> 3.0)
     slop (4.8.2)
     solr_wrapper (2.1.0)
       faraday
@@ -1010,6 +1012,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sidekiq
   simplecov
+  sitemap_generator
   solr_wrapper (~> 2.0)
   spring
   spring-watcher-listen (~> 2.0.0)
