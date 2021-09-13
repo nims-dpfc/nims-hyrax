@@ -19,7 +19,6 @@ module ComplexValidation
       organization_blank = true
       return true if attributes.blank?
       orgs = nested_to_array(attributes, key)
-      puts orgs
       orgs.each do |org|
         vals = nested_to_array(org, :organization)
         organization_blank = organization_blank && vals.all?(&:blank?)
