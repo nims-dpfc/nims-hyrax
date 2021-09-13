@@ -44,8 +44,8 @@ module Hyrax
     private
 
     def private_work?
-      s = PowerConverter.convert(@curation_concern, to: :sipity_entity)
-      s and s.workflow_state.name != 'deposited' ? true : false
+      return false if @curation_concern.to_sipity_entity.blank?
+      @curation_concern.to_sipity_entity.reload.workflow_state_name != 'deposited' ? true : false
     end
 
   end
