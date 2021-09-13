@@ -1,6 +1,12 @@
 FactoryBot.define do
 
   factory :dataset do
+    transient do
+      user { create(:user) }
+      # Set to true (or a hash) if you want to create an admin set
+      with_admin_set { false }
+    end
+
     title { ["Dataset"] }
     access_control
 
