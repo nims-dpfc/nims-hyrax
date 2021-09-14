@@ -82,7 +82,7 @@ gem 'riiif', '~> 2.0'
 gem 'jsonapi-rails', '~> 0.4.0'
 gem 'faraday'
 
-gem 'ro-crate', '~> 0.4.11'
+gem 'ro-crate', '~> 0.4.11', require: 'ro_crate'
 
 group :production do
   gem 'exception_notification', '~> 4.4'
