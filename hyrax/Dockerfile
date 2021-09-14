@@ -1,4 +1,4 @@
-FROM ruby:2.6
+FROM ruby:2.6-buster
 
 # Setup build variables
 ARG RAILS_ENV
