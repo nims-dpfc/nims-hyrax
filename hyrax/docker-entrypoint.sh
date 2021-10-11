@@ -5,13 +5,7 @@ mkdir -p $APP_WORKDIR/log
 # if [ "$RAILS_ENV" = "production" ]; then
     if [ ! -f /root/.ssh/config ]; then
         echo "Installing dcs"
-        echo "gem 'dcs', git: 'git@github.com:nims-dpfc/mdr-dcs.git'" >> Gemfile
-        mkdir -p /root/.ssh
-        cp $SSH_KEY /root/.ssh/github_id_rsa
-        chmod 600 /root/.ssh/github_id_rsa
-        touch /root/.ssh/known_hosts
-        ssh-keyscan github.com >> /root/.ssh/known_hosts
-        cp $SSH_CONFIG /root/.ssh/config
+        echo "gem 'dcs', git: 'https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/nims-dpfc/mdr-dcs.git', require: 'dcs'" >> Gemfile
         bundle install
     fi
     # We could delete the files in /root/.ssh, touch /root/.ssh/config 

@@ -101,8 +101,6 @@ services:
     environment:
       - VIRTUAL_HOST=nims.docker
       - VIRTUAL_PORT=3000
-      - SSH_KEY=/run/secrets/ssh_key
-      - SSH_CONFIG=/run/secrets/ssh_config
     depends_on:
       - appdb
       - solr
@@ -110,9 +108,6 @@ services:
       - redis
     expose:
       - 3000
-    secrets:
-      - ssh_key
-      - ssh_config
 
   workers:
     <<: *app
@@ -135,9 +130,3 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-
-secrets:
-  ssh_key:
-    file: ~/.ssh/github_id_rsa
-  ssh_config:
-    file: ./github_ssh_config
