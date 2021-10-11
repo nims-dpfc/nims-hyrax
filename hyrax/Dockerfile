@@ -42,7 +42,7 @@ RUN apt-get update -qq && \
     bzip2 unzip xz-utils \
     vim \
     git \
-    openjdk-11-jre-headless \
+    openjdk-11-jre-headless netcat-openbsd \
     yarn && \
     yarn config set no-progress && \
     yarn config set silent
