@@ -11,7 +11,7 @@ RSpec.describe Hyrax::DatasetForm do
 
     describe '#metadata_tab_terms' do
       subject { form.metadata_tab_terms }
-      it { is_expected.to include(:supervisor_approval, :title, :alternative_title, :data_origin, :description,
+      it { is_expected.to include(:title, :alternative_title, :data_origin, :description,
         :keyword_ordered, :specimen_set_ordered, :complex_person, :complex_identifier, :complex_source,
         :publisher, :resource_type, :licensed_date, :material_type,
         :first_published_url, :managing_organization_ordered, :complex_event,
