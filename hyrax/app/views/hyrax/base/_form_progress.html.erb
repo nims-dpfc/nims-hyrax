@@ -12,6 +12,7 @@
             <li class="incomplete" id="required-files"><%= t('.required_files') %></li>
           <% end %>
           <% if Flipflop.show_deposit_agreement? && Flipflop.active_deposit_agreement_acceptance? %>
+            <li class="incomplete" id="required-supervisor-agreement" data-check="<%= t('.obtain_supervisor_agreement')%>"><%= t('.required_supervisor_agreement') %></li>
             <li class="incomplete" id="required-agreement"><%= t('.required_agreement') %></li>
           <% end %>
         </ul>
@@ -34,6 +35,10 @@
   <div class="panel-footer text-center">
     <% if ::Flipflop.show_deposit_agreement? %>
       <% if ::Flipflop.active_deposit_agreement_acceptance? %>
+        <label>
+          <%= check_box_tag 'supervisor_agreement', 1, f.object.supervisor_agreement_accepted, required: true%>
+          <%= t('hyrax.active_consent_to_supervisor_agreement') %><br />
+        </label>
         <label>
           <%= check_box_tag 'agreement', 1, f.object.agreement_accepted, required: true %>
           <%= t('hyrax.active_consent_to_agreement') %><br />
