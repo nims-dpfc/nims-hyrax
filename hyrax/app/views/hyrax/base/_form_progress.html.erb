@@ -36,7 +36,7 @@
     <% if ::Flipflop.show_deposit_agreement? %>
       <% if ::Flipflop.active_deposit_agreement_acceptance? %>
         <label>
-          <%= check_box_tag 'supervisor_agreement', 1, f.object.supervisor_agreement_accepted, required: true%>
+          <%= check_box_tag 'supervisor_agreement', 1, @supervisor_agreement_accepted, required: false%>
           <%= t('hyrax.active_consent_to_supervisor_agreement') %><br />
         </label>
         <label>
