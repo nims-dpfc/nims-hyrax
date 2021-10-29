@@ -5,7 +5,7 @@ Blacklight.onLoad(function() {
         var button = $(this);
         var form = button.parents('form')[0]
         let agreementCheckbox = $("#supervisor_agreement");
-        if (agreementCheckbox.length === 1 && !agreementCheckbox.prop('checked')) {
+        if (button.attr('id') == 'with_files_submit' && agreementCheckbox.length === 1 && !agreementCheckbox.prop('checked')) {
             let alert_data = $('#required-supervisor-agreement').data("check");
             alert(alert_data);
             button.attr("disabled", true);

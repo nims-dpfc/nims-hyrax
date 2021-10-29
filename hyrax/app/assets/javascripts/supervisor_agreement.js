@@ -12,6 +12,9 @@ Blacklight.onLoad(function() {
     agreementCheckbox.click(function (e) {
         if (agreementCheckbox.prop('checked')) {
             $('#required-supervisor-agreement').removeClass( "incomplete" ).addClass( "complete" );
+            if ($('.requirements > .incomplete').length <= 0) {
+                main_submit_button.attr('disabled', false);
+            }
         } else {
             $('#required-supervisor-agreement').removeClass( "complete" ).addClass( "incomplete" );
             main_submit_button.attr('disabled', true);

@@ -72,11 +72,6 @@ module Hyrax
       :description, :keyword_ordered, :date_published, :rights_statement
     ]
 
-    def initialize(model, current_ability, controller)
-      @supervisor_agreement_accepted = !model.new_record?
-      super(model, current_ability, controller)
-    end
-
     def metadata_tab_terms
       [
         # Description tab order determined here
