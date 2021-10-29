@@ -8,8 +8,8 @@ Feature: Create a publication
     And I have permission to deposit
     When I navigate to the new publication page
     And I create a draft publication with:
-      | TITLE          | SUPERVISOR   | CREATOR   | KEYWORD  | ABSTRACT            |
-      | My Publication | Jones, Janet | Doe, Jane | big data | This is an abstract |
+      | TITLE          | CREATOR   | KEYWORD  | ABSTRACT            |
+      | My Publication | Doe, Jane | big data | This is an abstract |
     Then I should see a message that my files are being processed
     And the work that is created should be in a draft workflow state
     And the work that is created is editable by the nims_researcher who deposited it
