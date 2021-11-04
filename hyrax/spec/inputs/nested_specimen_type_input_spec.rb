@@ -22,7 +22,6 @@ RSpec.describe NestedSpecimenTypeInput, type: :input do
     is_expected.to have_field('dataset_complex_specimen_type_attributes_0_description', type: :text, with: 'Specimen description')
 
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_material_type_attributes_0_material_type', type: :text, with: 'some material type')
-    is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_material_type_attributes_0_material_sub_type', type: :text, with: 'some other material sub type')
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_material_type_attributes_0_description', type: :text, with: 'material description')
 
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_purchase_record_attributes_0_title', type: :text, with: 'Purchase record title')

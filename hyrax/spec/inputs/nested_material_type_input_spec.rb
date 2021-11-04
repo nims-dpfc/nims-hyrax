@@ -16,8 +16,6 @@ RSpec.describe NestedMaterialTypeInput, type: :input do
 
   it 'generates the correct fields' do
     is_expected.to have_field('dataset_complex_material_type_attributes_0_material_type', type: :text, with: 'some material type')
-    is_expected.to have_field('dataset_complex_material_type_attributes_0_material_sub_type', type: :text, with: 'some other material sub type')
     is_expected.to have_field('dataset_complex_material_type_attributes_0_description', type: :text, with: 'material description')
-    is_expected.to have_field('dataset_complex_material_type_attributes_0_material_type', type: :text, with: 'some material type')
   end
 end
