@@ -55,7 +55,7 @@ class DownloadAllController < Hyrax::DownloadsController
   # Extend here to add other files to the zip
   def build_zip
     mk_zip_file_dir
-    add_metadata
+    # add_metadata
     add_files
     zip!
     cleanup
