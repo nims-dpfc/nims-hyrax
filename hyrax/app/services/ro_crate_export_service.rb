@@ -46,10 +46,11 @@ class ROCrateExportService
       # Now get a list of all the related filesets and add them to the metadata graph
       @work.file_sets.each do |file_set|
         file_set.original_file.tap do |file|
-          if file.file_name.first.size > 232
-            filename = "#{get_filename(tmpdir, file.file_name.first)[0..232]}#{File.extname(file.file_name.first)}"
+          escaped_filename = CGI.escape(file.original_name)
+          if escaped_filename.size > 232
+            filename = "#{get_filename(tmpdir, escaped_filename)[0..232]}#{File.extname(escaped_filename)}"
           else
-            filename = get_filename(tmpdir, file.file_name.first)
+            filename = get_filename(tmpdir, escaped_filename)
           end
 
           File.open(File.join(tmpdir, filename), 'wb') do |output|
