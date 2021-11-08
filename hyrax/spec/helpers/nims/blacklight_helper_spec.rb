@@ -55,7 +55,7 @@ RSpec.describe Nims::BlacklightHelper, type: :helper, clean: true do
     it 'does not have a "View More" button in catalog view' do
       args = { value: description,
                document: { controller: 'catalog', action: 'index' } }
-      p helper.render_truncated_description(args)
+      # p helper.render_truncated_description(args)
       expect(Capybara.string(helper.render_truncated_description(args))).not_to have_link('View More')
     end
     it 'does not have a "View More" button' do

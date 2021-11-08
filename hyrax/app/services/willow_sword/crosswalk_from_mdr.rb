@@ -22,12 +22,9 @@ module WillowSword
       return unless @metadata_file.present?
       return unless File.exist? @metadata_file
       parse_metadata
-      puts @attributes
-      puts '-'*70
       @metadata = @attributes
       @mapped_metadata = @attributes
       get_files
-      puts @mapped_metadata
     end
 
     def get_files
