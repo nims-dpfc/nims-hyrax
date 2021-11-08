@@ -1,9 +1,11 @@
+<%= render 'microdata', presenter: @presenter %>
+
 <% if can? :read_alternative_title, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:alternative_title, label: t('ngdr.fields.alternative_title'), html_dl: true) %>
 <% end %>
 
 <% if can? :read_identifier, presenter.model_name.name.constantize %>
-  <%= presenter.attribute_to_html(:doi, label: 'DOI', html_dl: true) %>
+  <%= presenter.attribute_to_html(:doi, label: 'DOI', html_dl: true, itemprop: 'identifier') %>
 <% end %>
 
 <% if can? :read_related, presenter.model_name.name.constantize %>
@@ -41,7 +43,7 @@
 <% end %>
 
 <% if can? :read_rights, presenter.model_name.name.constantize %>
-  <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
+  <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true, itemprop: 'license') %>
 <% end %>
 
 <%= presenter.attribute_to_html(:licensed_date, label: t('ngdr.fields.licensed_date'), html_dl: true) %>

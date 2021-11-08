@@ -1,3 +1,5 @@
+<%= render 'microdata', presenter: @presenter %>
+
 <!-- Accordion wrapper -->
 <div class="panel-group" id="accordion">
 
@@ -17,7 +19,7 @@
         <% end %>
 
         <% if can? :read_identifier, presenter.model_name.name.constantize %>
-          <%= presenter.attribute_to_html(:doi, label: 'DOI', html_dl: true) %>
+          <%= presenter.attribute_to_html(:doi, label: 'DOI', html_dl: true, itemprop: 'identifier') %>
         <% end %>
 
         <% if can? :read_related, presenter.model_name.name.constantize %>
@@ -52,7 +54,7 @@
         <% end %>
 
         <% if can? :read_rights, presenter.model_name.name.constantize %>
-          <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
+          <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true, itemprop: 'license') %>
           <%#= # presenter.attribute_to_html(:rights_notes, html_dl: true) %>
           <%= presenter.attribute_to_html(:licensed_date, label: t('ngdr.fields.licensed_date'), html_dl: true) %>
         <% end %>

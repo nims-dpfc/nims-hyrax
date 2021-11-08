@@ -1,0 +1,6 @@
+<div style="display: none">
+  <span itemprop="name"><%= presenter.title.first %></span>
+  <% if can? :read_abstract, presenter.model_name.name.constantize %>
+    <span itemprop="description"><%= presenter.description.first %></span>
+  <% end %>
+</div>
