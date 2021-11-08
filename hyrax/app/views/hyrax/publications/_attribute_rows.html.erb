@@ -1,4 +1,4 @@
-<%= render 'microdata', presenter: @presenter %>
+<%= render 'hyrax/base/microdata', presenter: @presenter %>
 
 <% if can? :read_alternative_title, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:alternative_title, label: t('ngdr.fields.alternative_title'), html_dl: true) %>
