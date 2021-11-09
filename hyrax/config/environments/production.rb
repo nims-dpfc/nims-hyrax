@@ -119,7 +119,13 @@ Rails.application.configure do
   }
 
   config.middleware.use ExceptionNotification::Rack,
-    ignore_exceptions: ['I18n::InvalidLocale', 'Riiif::ConversionError', 'Blacklight::Exceptions::RecordNotFound'] + ExceptionNotifier.ignored_exceptions,
+    ignore_exceptions: [
+      'I18n::InvalidLocale',
+      'Riiif::ConversionError',
+      'Blacklight::Exceptions::RecordNotFound',
+      'ActionView::Template::Error',
+      'Ldp::Gone'
+    ] + ExceptionNotifier.ignored_exceptions,
     error_grouping: true,
     email: {
       email_prefix: "[MDR #{ENV['ERROR_NOTIFICATION_SUBJECT_PREFIX']}] ",
