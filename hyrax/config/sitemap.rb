@@ -24,17 +24,29 @@ SitemapGenerator::Sitemap.create do
   #   Article.find_each do |article|
   #     add article_path(article), :lastmod => article.updated_at
   #   end
-  Publication.all.each do |publication|
-    next unless publication.visibility == 'open'
-    next unless publication.state.id == 'http://fedora.info/definitions/1/0/access/ObjState#active'
-
-    add polymorphic_path(publication), :lastmod => publication.date_modified || publication.date_uploaded
+  #
+  def build_each_doc(doc)
+    key = doc.fetch('has_model_ssim', []).first.constantize.model_name.singular_route_key
+    loc = Rails.application.routes.url_helpers.send(key + "_url", doc['id'], only_path: true)
+    date = doc.fetch('date_modified_dtsi', '') || doc.fetch('date_uploaded_dtsi', '')
+    return loc, date
   end
 
-  Dataset.all.each do |dataset|
-    next unless dataset.visibility == 'open'
-    next unless dataset.state.id == 'http://fedora.info/definitions/1/0/access/ObjState#active'
+  def public_work
+    { workflow_state_name_ssim: "deposited", read_access_group_ssim: "public" }
+  end
 
-    add polymorphic_path(dataset), :lastmod => dataset.date_modified || dataset.date_uploaded
+  Publication.search_in_batches(public_work) do |doc_set|
+    doc_set.each do |doc|
+      loc, date = build_each_doc(doc)
+      add loc, :lastmod => date
+    end
+  end
+
+  Dataset.search_in_batches(public_work) do |doc_set|
+    doc_set.each do |doc|
+      loc, date = build_each_doc(doc)
+      add loc, :lastmod => date
+    end
   end
 end
