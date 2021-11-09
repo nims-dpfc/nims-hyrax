@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://www.example.com"
+SitemapGenerator::Sitemap.default_host = Rails.application.config.application_url
 
 SitemapGenerator::Sitemap.create do
   # Put links creation logic here.
@@ -32,8 +32,8 @@ SitemapGenerator::Sitemap.create do
   end
 
   Dataset.all.each do |dataset|
-    next unless publication.visibility == 'open'
-    next unless publication.state.id == 'http://fedora.info/definitions/1/0/access/ObjState#active'
+    next unless dataset.visibility == 'open'
+    next unless dataset.state.id == 'http://fedora.info/definitions/1/0/access/ObjState#active'
 
     add polymorphic_path(dataset), :lastmod => dataset.date_modified || dataset.date_uploaded
   end
