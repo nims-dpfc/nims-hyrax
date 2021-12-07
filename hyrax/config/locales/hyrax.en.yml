@@ -238,6 +238,7 @@ en:
           title_tesim: Title
   hyrax:
     account_name: My Institution Account Id
+    active_consent_to_supervisor_agreement: I have obtained necessary approval from my supervisor
     base:
       citations:
         citations: Citations
@@ -246,6 +247,8 @@ en:
         mendeley: Mendeley
         zotero: Zotero
       form_progress:
+        required_supervisor_agreement: Check supervisor agreement
+        obtain_supervisor_agreement: Please obtained necessary approval from your supervisor and click on 'Check supervisor agreement'
         save_draft: Save Draft
         save: Submit
     content_blocks:
