@@ -27,7 +27,6 @@ jobs:
           command: |
             sudo apt update
             sudo apt install -y openjdk-11-jre-headless libmediainfo-dev
-            sudo update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/jre/bin/java
       - run:
           name: download fits
           command: |
