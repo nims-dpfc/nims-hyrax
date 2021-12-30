@@ -1008,7 +1008,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   devise
-  devise-guests (~> 0.6)
+  devise-guests (~> 0.7)
   devise_cas_authenticatable
   devise_ldap_authenticatable
   exception_notification (~> 4.4)
