@@ -4,16 +4,19 @@ echo "Creating log folder"
 mkdir -p $APP_WORKDIR/log
 # if [ "$RAILS_ENV" = "production" ]; then
     if [ ! -f /root/.ssh/config ]; then
-        echo "Installing dcs"
-        echo "gem 'dcs', git: 'git@github.com:nims-dpfc/mdr-dcs.git'" >> Gemfile
+        echo "Adding ssh key"
         mkdir -p /root/.ssh
         cp $SSH_KEY /root/.ssh/github_id_rsa
         chmod 600 /root/.ssh/github_id_rsa
         touch /root/.ssh/known_hosts
         ssh-keyscan github.com >> /root/.ssh/known_hosts
         cp $SSH_CONFIG /root/.ssh/config
-        bundle install
     fi
+    if [ "`grep -c "dcs" Gemfile`" -eq "0" ]; then
+        echo "Installing dcs"
+        echo "gem 'dcs', git: 'git@github.com:nims-dpfc/mdr-dcs.git'" >> Gemfile
+        bundle install
+    fi	    
     # We could delete the files in /root/.ssh, touch /root/.ssh/config 
     # and unset $SSH_KEY and $SSH_CONFIG at this point, if needed.
 # fi
