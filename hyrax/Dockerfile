@@ -11,6 +11,7 @@ ARG AIRBRAKE_PROJECT_KEY
 ARG FITS_PATH
 ARG FITS_VERSION
 ARG FLUENTD_URL
+ARG IM_VERSION=7.0.7-39
 
 ENV APP_PRODUCTION=/data/ \
     APP_WORKDIR=/data
@@ -37,7 +38,7 @@ RUN apt-get update -qq && \
     libjpeg-dev libtiff-dev libpng-dev libraw-dev libwebp-dev libjxr-dev \
     libcairo2-dev libgs-dev librsvg2-dev \
     libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev \
-    ghostscript ffmpeg imagemagick \
+    ghostscript ffmpeg \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
@@ -47,14 +48,16 @@ RUN apt-get update -qq && \
     yarn config set no-progress && \
     yarn config set silent
 
+RUN git clone https://github.com/ImageMagick/ImageMagick.git && \
+    cd ImageMagick && git checkout ${IM_VERSION} && \
+    ./configure --prefix=/usr --without-magick-plus-plus --disable-docs --disable-static --with-tiff && \
+    make && make install
+
 RUN mkdir -p /fits/ \
     && wget -q https://projects.iq.harvard.edu/files/fits/files/$FITS_VERSION.zip -O /fits/$FITS_VERSION.zip \
     && unzip -q /fits/$FITS_VERSION.zip -d /fits/$FITS_VERSION \
     && chmod a+x $FITS_PATH \
     && rm /fits/$FITS_VERSION.zip
-
-# copy the imagemagick policy over
-COPY ops/imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
 
 # copy gemfiles to production folder
 COPY Gemfile Gemfile.lock $APP_PRODUCTION
