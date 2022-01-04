@@ -1,0 +1,55 @@
+<jpcoar:jpcoar xmlns:jpcoar="https://github.com/JPCOAR/schema/blob/master/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rioxxterms="http://www.rioxx.net/schema/v2.0/rioxxterms/" xmlns:datacite="https://schema.datacite.org/meta/kernel-4/" xmlns:oaire="http://namespace.openaire.eu/schema/oaire/" xmlns:dcndl="http://ndl.go.jp/dcndl/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/JPCOAR/schema/blob/master/1.0/jpcoar_scm.xsd">
+  <jpcoar:contributor contributorType="HostingInstitution">
+    <jpcoar:affiliation>
+      <jpcoar:affiliationName xml:lang="en">Managing organization</jpcoar:affiliationName>
+    </jpcoar:affiliation>
+  </jpcoar:contributor>
+  <jpcoar:relation relationType="isVersionOf">
+    <jpcoar:relatedIdentifier identifierType="DOI">http://example.com/first-published-url</jpcoar:relatedIdentifier>
+  </jpcoar:relation>
+  <dc:title xml:lang="en">Dataset</dc:title>
+  <dc:alternative xml:lang="en">Alternative-Title-123</dc:alternative>
+  <dc:type rdf:resource="http://purl.org/coar/resource_type/c_6501">Article</dc:type>
+  <datacite:description descriptionType="Abstract" xml:lang="en">Abstract-Description-123</datacite:description>
+  <jpcoar:subject subjectScheme="Other" xml:lang="en">Keyword-123</jpcoar:subject>
+  <dc:publisher xml:lang="en">Publisher-123</dc:publisher>
+  <datacite:date dateType="Issued">1978-10-28</datacite:date>
+  <dc:rights rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" xml:lang="en">Creative Commons CC0 1.0 Universal</dc:rights>
+  <jpcoar:contributor contributorType="Editor">
+    <jpcoar:familyName xml:lang="en">Last name</jpcoar:familyName>
+    <jpcoar:givenName xml:lang="en">First name</jpcoar:givenName>
+    <jpcoar:contributorName xml:lang="en">Cee Jay</jpcoar:contributorName>
+    <jpcoar:nameIdentifier nameIdentifierScheme="ORCID" nameIdentifierURI="112233445566">112233445566</jpcoar:nameIdentifier>
+    <jpcoar:affiliation>
+      <jpcoar:affiliationName xml:lang="en">My journal org</jpcoar:affiliationName>
+    </jpcoar:affiliation>
+  </jpcoar:contributor>
+  <jpcoar:creator>
+    <jpcoar:familyName xml:lang="en">Last name</jpcoar:familyName>
+    <jpcoar:givenName xml:lang="en">First name</jpcoar:givenName>
+    <jpcoar:creatorName xml:lang="en">Anamika</jpcoar:creatorName>
+    <jpcoar:nameIdentifier nameIdentifierScheme="ORCID" nameIdentifierURI="23542345234">23542345234</jpcoar:nameIdentifier>
+    <jpcoar:affiliation>
+      <jpcoar:affiliationName xml:lang="en">My org</jpcoar:affiliationName>
+    </jpcoar:affiliation>
+  </jpcoar:creator>
+  <jpcoar:sourceTitle xml:lang="en">Test journal</jpcoar:sourceTitle>
+  <jpcoar:sourceIdentifier identifierType="ISSN">1234-5678</jpcoar:sourceIdentifier>
+  <jpcoar:volume>3</jpcoar:volume>
+  <jpcoar:issue>34</jpcoar:issue>
+  <jpcoar:pageStart>4</jpcoar:pageStart>
+  <jpcoar:pageEnd>12</jpcoar:pageEnd>
+  <jpcoar:numPages>8</jpcoar:numPages>
+  <jpcoar:conference>
+    <jpcoar:conferenceName xml:lang="en">Event-Title-123</jpcoar:conferenceName>
+    <jpcoar:conferencePlace xml:lang="en">New Scotland Yard</jpcoar:conferencePlace>
+    <jpcoar:conferenceDate xml:lang="en" startDay="25" startMonth="12" startYear="2018" endDay="1" endMonth="1" endYear="2019">2018-12-25 to 2019-01-01</jpcoar:conferenceDate>
+  </jpcoar:conference>
+  <datacite:date dateType="Collected">1978-10-28</datacite:date>
+  <jpcoar:identifier identifierType="DOI">10.0.1111</jpcoar:identifier>
+  <datacite:version>1.0</datacite:version>
+  <jpcoar:relation relationType="isVersionOf">
+    <jpcoar:relatedTitle xml:lang="en">A relation label</jpcoar:relatedTitle>
+    <jpcoar:relatedIdentifier identifierType="URI">http://example.com/relation</jpcoar:relatedIdentifier>
+  </jpcoar:relation>
+</jpcoar:jpcoar>

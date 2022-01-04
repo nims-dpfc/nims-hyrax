@@ -63,9 +63,9 @@ en:
       defaults:
         first_published_url: The DOI (in URL form) of the article related to this dataset or the URL where this dataset was first made public.
         supervisor_approval: "If you entered a DOI above, enter \"approved\". If you entered a non-DOI URL above, fill in the name of your supervisor and the date of their approval. See <a href='https://dice.nims.go.jp/services/MDR/manual/html/deposit.html#entering-metadata' target='_blank' rel='noopener'>the User's Manual</a> for details."
-        title: English is preferred.
-        alternative_title: Alternative title or the title in other language, if applicable.
-        rights_statement: "Copyright and license for your work. If none apply, select \"In Copyright\". <a href='https://dice.nims.go.jp/services/MDR/manual/html/terminology.html#term-license' target='_blank' rel='noopener'>See the User's Manual</a> for further information."
+        title: The title of your work. English is preferred.
+        alternative_title: Alternative title or the title in another language, if applicable.
+        rights_statement: "Copyright and license for your work. If none apply, select \"In Copyright\". <a href='https://dice.nims.go.jp/services/MDR/manual/html/glossary.html#rights-and-licenses' target='_blank' rel='noopener'>See the User's Manual</a> for further information."
         licensed_date: Date when the work was released under the license selected above.
         data_origin: Type of research.
         resource_type: Type of content. More than one type may be selected.
@@ -80,7 +80,6 @@ en:
         complex_source: '<span class="label label-info required-tag">required for journal articles</span>'
         complex_event: '<span class="label label-info required-tag">required for conference presentations</span>'
         custom_property: You may add custom properties not covered by the fields above.
-        note_to_admin: Text written here will not be publicly visible.
     placeholders:
       defaults:
         first_published_url: "https://doi.org/10.xxx/xxx"

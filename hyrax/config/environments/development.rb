@@ -58,6 +58,18 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.web_console.whitelisted_ips = ["172.0.0.0/8", '192.168.0.0/16', '127.0.0.1']
 
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  config.force_ssl = false
+  if ENV['MDR_HOST'].present?
+    Rails.application.routes.default_url_options = {protocol: 'http', host: ENV['MDR_HOST']}
+    Hyrax::Engine.routes.default_url_options = {protocol: 'http', host: ENV['MDR_HOST']}
+    config.application_url = "http://#{ENV['MDR_HOST']}"
+  else
+    Rails.application.routes.default_url_options = {protocol: 'http', host: "localhost"}
+    Hyrax::Engine.routes.default_url_options = {protocol: 'http', host: "localhost"}
+    config.application_url = "http://localhost"
+  end
+
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter

@@ -82,7 +82,7 @@ gem 'riiif', '~> 2.0'
 gem 'jsonapi-rails', '~> 0.4.0'
 gem 'faraday'
 
-gem 'ro-crate-ruby', git: 'https://github.com/fbacall/ro-crate-ruby'
+gem 'ro-crate', '~> 0.4.11', require: 'ro_crate'
 
 group :production do
   gem 'exception_notification', '~> 4.4'
@@ -106,3 +106,4 @@ end
 
 gem 'coveralls', require: false
 gem 'rinku'
+gem 'sitemap_generator'

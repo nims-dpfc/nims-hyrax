@@ -84,6 +84,7 @@ en:
           complex_state_of_matter_tesim: State of matter
           complex_state_of_matter_identifier_ssim: State of matter identifier
           material_type_sim: Material type
+          visibility_ssi: Visibility
         index:
           based_near_tesim: Location
           characterization_methods_tesim: Characterization methods
@@ -254,7 +255,7 @@ en:
         marketing_text: Marketing Text
     directory:
       suffix: "@example.org"
-    download_all: Download All Files (Zip)
+    download_all: Download This Work (Zip)
     footer:
       copyright_html: "&copy; 2020&ndash;%{year} National Institute for Materials Science. Works are available under licenses specified on their pages."
       service_html: <a href="https://library.nims.go.jp/" target="_blank" rel="noopener">NIMS Digital Library</a>
