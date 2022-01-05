@@ -10,7 +10,7 @@ RSpec.describe Hyrax::PublicationForm do
     let(:form) { described_class.new(model, ability, controller) }
 
     subject { form.metadata_tab_terms }
-    it { is_expected.to include(:first_published_url, :supervisor_approval, :title, :alternative_title,
+    it { is_expected.to include(:first_published_url, :title, :alternative_title,
       :language, :resource_type, :description,
       :keyword_ordered, :specimen_set_ordered, :complex_person, :complex_identifier,
       :manuscript_type, :publisher, :specimen_set_ordered,

@@ -33,5 +33,10 @@ module Hyrax
       super
     end
 
+    def edit
+      @supervisor_agreement_accepted = !curation_concern.draft?
+      super
+    end
+
   end
 end

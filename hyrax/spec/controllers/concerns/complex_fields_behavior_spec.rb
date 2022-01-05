@@ -286,7 +286,6 @@ def publication_attributes_from_form
 	return {
 	 "managing_organization_ordered"=>["Library", ""],
 	 "first_published_url"=>"https://dx.doi.org/0000-0001",
-	 "supervisor_approval"=>["approved", ""],
 	 "title"=>["Test publication", ""],
 	 "alternative_title"=>"",
 	 "resource_type"=>["", "Article"],
@@ -433,7 +432,6 @@ def publication_attributes_from_form_cleaned
 	return {
 	 "managing_organization_ordered"=>["Library"],
 	 "first_published_url"=>"https://dx.doi.org/0000-0001",
-	 "supervisor_approval"=>["approved"],
 	 "title"=>["Test publication"],
 	 "alternative_title"=>"",
 	 "resource_type"=>["Article"],
