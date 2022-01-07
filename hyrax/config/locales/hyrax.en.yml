@@ -84,6 +84,7 @@ en:
           complex_state_of_matter_tesim: State of matter
           complex_state_of_matter_identifier_ssim: State of matter identifier
           material_type_sim: Material type
+          visibility_ssi: Visibility
         index:
           based_near_tesim: Location
           characterization_methods_tesim: Characterization methods
@@ -237,6 +238,7 @@ en:
           title_tesim: Title
   hyrax:
     account_name: My Institution Account Id
+    active_consent_to_supervisor_agreement: I have obtained necessary approval from my supervisor
     base:
       citations:
         citations: Citations
@@ -245,6 +247,8 @@ en:
         mendeley: Mendeley
         zotero: Zotero
       form_progress:
+        required_supervisor_agreement: Check supervisor agreement
+        obtain_supervisor_agreement: Please obtained necessary approval from your supervisor and click on 'Check supervisor agreement'
         save_draft: Save Draft
         save: Submit
     content_blocks:

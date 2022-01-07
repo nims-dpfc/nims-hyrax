@@ -41,6 +41,11 @@ module Hyrax
       super
     end
 
+    def edit
+      @supervisor_agreement_accepted = !curation_concern.draft?
+      super
+    end
+    
     private
 
     def private_work?
@@ -55,6 +60,5 @@ module Hyrax
       actions = Hyrax::Workflow::PermissionQuery.scope_permitted_workflow_actions_available_for_current_state(entity: sipity_entity, user: current_ability.current_user)
       actions.present? ? true : false
     end
-
   end
 end

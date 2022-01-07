@@ -38,12 +38,16 @@ module Hyrax
       super
     end
 
+    def edit
+      @supervisor_agreement_accepted = !curation_concern.draft?
+      super
+    end
+    
     private
 
     def private_work?
       return false if @curation_concern.to_sipity_entity.blank?
       @curation_concern.to_sipity_entity.reload.workflow_state_name != 'deposited' ? true : false
     end
-
   end
 end
