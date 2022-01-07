@@ -21,6 +21,7 @@
 //= require hydra-editor/editMetadata
 //= require csv_preview
 //= require hyrax_form_patch
+//= require tinymce
 
 //= require_tree .
 //= require hyrax

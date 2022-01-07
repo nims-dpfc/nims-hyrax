@@ -3,6 +3,7 @@
 module Hyrax
   # Generated form for Dataset
   class DatasetForm < Hyrax::Forms::WorkForm
+    attr_reader :agreement_accepted, :supervisor_agreement_accepted
     self.model_class = ::Dataset
     delegate :keyword_ordered, :specimen_set_ordered, :managing_organization_ordered, to: :model
 
@@ -22,7 +23,7 @@ module Hyrax
 
       # description
       :managing_organization_ordered,
-      :first_published_url, :supervisor_approval,
+      :first_published_url,
       :title, :alternative_title, 
       :resource_type, :data_origin, 
       :description, :keyword_ordered,
@@ -67,7 +68,7 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :managing_organization_ordered, :supervisor_approval, :title, :resource_type, :data_origin, 
+      :managing_organization_ordered, :title, :resource_type, :data_origin,
       :description, :keyword_ordered, :date_published, :rights_statement
     ]
 
@@ -75,7 +76,7 @@ module Hyrax
       [
         # Description tab order determined here
         :managing_organization_ordered,
-        :first_published_url, :supervisor_approval,
+        :first_published_url,
         :title, :alternative_title, 
         :resource_type, :data_origin,
         :description, :keyword_ordered, 

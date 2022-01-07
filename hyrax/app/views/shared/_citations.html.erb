@@ -36,3 +36,9 @@
     <meta name="citation_lastpage" content="<%= ds.fetch(:end_page, '')%>"/>
   <% end %>
 <% end %>
+
+<% content_for(:schema_org_meta) do %>
+  <script type="application/ld+json">
+    <%=raw render 'shared/schema_org.json.jbuilder' %>
+  </script>
+<% end %>

@@ -43,5 +43,13 @@ Rails.application.configure do
   # Don't use redis for storing queued jobs when running tests
   config.active_job.queue_adapter = :test
 
-  Rails.application.routes.default_url_options = {protocol: 'http', host: 'localhost'}
+  if ENV['MDR_HOST'].present?
+    Rails.application.routes.default_url_options = {protocol: 'http', host: ENV['MDR_HOST']}
+    Hyrax::Engine.routes.default_url_options = {protocol: 'http', host: ENV['MDR_HOST']}
+    config.application_url = "http://#{ENV['MDR_HOST']}"
+  else
+    Rails.application.routes.default_url_options = {protocol: 'http', host: "localhost"}
+    Hyrax::Engine.routes.default_url_options = {protocol: 'http', host: "localhost"}
+    config.application_url = "http://localhost"
+  end
 end
