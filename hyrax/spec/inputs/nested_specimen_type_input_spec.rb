@@ -17,7 +17,7 @@ RSpec.describe NestedSpecimenTypeInput, type: :input do
   it 'generates the correct fields' do
     is_expected.to have_field('dataset_complex_specimen_type_attributes_0_title', type: :text, with: 'Specimen 1')
 
-    is_expected.to have_select('dataset[complex_specimen_type_attributes][0][complex_chemical_composition_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
+    is_expected.not_to have_select('dataset[complex_specimen_type_attributes][0][complex_chemical_composition_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0][complex_chemical_composition_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'chemical_composition/1234567')
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_chemical_composition_attributes_0_description', type: :text, with: 'chemical composition 1')
 

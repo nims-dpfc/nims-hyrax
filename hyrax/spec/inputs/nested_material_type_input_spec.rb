@@ -20,7 +20,7 @@ RSpec.describe NestedMaterialTypeInput, type: :input do
     is_expected.to have_field('dataset_complex_material_type_attributes_0_description', type: :text, with: 'material description')
     is_expected.to have_field('dataset_complex_material_type_attributes_0_material_type', type: :text, with: 'some material type')
 
-    is_expected.to have_select('dataset[complex_material_type_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
+    is_expected.not_to have_select('dataset[complex_material_type_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
     is_expected.to have_field('dataset[complex_material_type_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'material/ewfqwefqwef')
   end
 end

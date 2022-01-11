@@ -18,7 +18,7 @@ RSpec.describe NestedStructuralFeatureInput, type: :input do
     is_expected.to have_field('dataset_complex_structural_feature_attributes_0_category', type: :text, with: 'structural feature category')
     is_expected.to have_field('dataset_complex_structural_feature_attributes_0_sub_category', type: :text, with: 'structural feature sub category')
     is_expected.to have_field('dataset_complex_structural_feature_attributes_0_description', type: :text, with: 'structural feature description')
-    is_expected.to have_select('dataset[complex_structural_feature_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
+    is_expected.not_to have_select('dataset[complex_structural_feature_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
     is_expected.to have_field('dataset[complex_structural_feature_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'structural_feature/123456')
   end
 end

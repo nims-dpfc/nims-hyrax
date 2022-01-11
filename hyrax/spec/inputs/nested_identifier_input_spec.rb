@@ -16,6 +16,6 @@ RSpec.describe NestedIdentifierInput, type: :input do
 
   it 'generates the correct fields' do
     is_expected.to have_field('dataset_complex_identifier_attributes_0_identifier', type: :text, with: '10.0.1111')
-    is_expected.to have_select('dataset_complex_identifier_attributes_0_scheme', selected: 'DOI')
+    is_expected.not_to have_select('dataset_complex_identifier_attributes_0_scheme', selected: 'DOI')
   end
 end
