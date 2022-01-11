@@ -32,7 +32,9 @@ protected
     out << "  <div class='col-md-3'>"
     out << template.select_tag(scheme_field_name,
                                template.options_for_select(id_options, scheme_field_value),
-                               label: '', class: 'select form-control', prompt: 'choose type', id: scheme_field_id)
+                               label: '', class: 'select form-control', prompt: 'choose type', id: scheme_field_id,
+                               disabled: true
+                              )
     out << '  </div>'
 
     # --- identifier
