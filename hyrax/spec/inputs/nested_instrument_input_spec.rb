@@ -23,7 +23,7 @@ RSpec.describe NestedInstrumentInput, type: :input do
 
     is_expected.to have_field('dataset_instrument_attributes_0_description', type: :text, with: 'Instrument description')
 
-    is_expected.to have_select('dataset[instrument_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
+    is_expected.not_to have_select('dataset[instrument_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
     is_expected.to have_field('dataset[instrument_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'instrument/27213727')
 
     is_expected.not_to have_field('dataset[instrument_attributes][0]_instrument_function_attributes_0_column_number', type: :text, with: '1')
