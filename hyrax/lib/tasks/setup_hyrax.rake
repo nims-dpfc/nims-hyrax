@@ -22,14 +22,17 @@ namespace :ngdr do
     admin = Role.where(name: "admin").first_or_create!
     seed["users"].each do |user|
       newuser = User.find_by(username: user["username"])
-      newuser = User.create!(
-        username: user["username"],
-        password: user["password"],
-        display_name: user["name"],
-        email: user["email"],
-        user_identifier: user['user_identifier'],
-        employee_type_code: user['employee_type_code']
-      ) unless newuser
+      unless newuser
+        newuser = User.new(
+          username: user["username"],
+          display_name: user["name"],
+          email: user["email"],
+          user_identifier: user['user_identifier'],
+          employee_type_code: user['employee_type_code']
+        )
+        newuser.password = user["password"] if ENV['MDR_DEVISE_AUTH_MODULE'] == 'database_authenticatable'
+        newuser.save!
+      end
 
       if user["role"] == "admin"
         unless admin.users.include?(newuser)
