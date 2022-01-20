@@ -195,7 +195,7 @@ module Hyrax
        {
          column_number: [],
          category: [],
-         sub_category: [],
+         # sub_category: [],
          description: []
        }
       ]
@@ -290,7 +290,7 @@ module Hyrax
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
          complex_material_type_attributes: permitted_material_type_params,
-         complex_purchase_record_attributes: permitted_purchase_record_params,
+         # complex_purchase_record_attributes: permitted_purchase_record_params,
          complex_structural_feature_attributes: permitted_structural_feature_params,
          title: []
        }
@@ -304,7 +304,7 @@ module Hyrax
          category: [],
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
-         sub_category: []
+         # sub_category: []
        }
       ]
     end
