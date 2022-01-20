@@ -291,8 +291,6 @@ module Hyrax
          complex_identifier_attributes: permitted_identifier_params,
          complex_material_type_attributes: permitted_material_type_params,
          complex_purchase_record_attributes: permitted_purchase_record_params,
-         complex_shape_attributes: permitted_desc_id_params,
-         complex_state_of_matter_attributes: permitted_desc_id_params,
          complex_structural_feature_attributes: permitted_structural_feature_params,
          title: []
        }
