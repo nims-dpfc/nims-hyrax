@@ -32,7 +32,7 @@ RSpec.describe NestedSpecimenTypeInput, type: :input do
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'specimen/1234567')
 
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_material_type_attributes_0_material_type', type: :text, with: 'some material type')
-    is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_material_type_attributes_0_material_sub_type', type: :text, with: 'some other material sub type')
+    is_expected.not_to have_field('dataset[complex_specimen_type_attributes][0]_complex_material_type_attributes_0_material_sub_type', type: :text, with: 'some other material sub type')
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_material_type_attributes_0_description', type: :text, with: 'material description')
     is_expected.to have_select('dataset[complex_specimen_type_attributes][0][complex_material_type_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0][complex_material_type_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'material/ewfqwefqwef')
@@ -58,7 +58,7 @@ RSpec.describe NestedSpecimenTypeInput, type: :input do
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_state_of_matter_attributes_0_description', type: :text, with: 'state of matter description')
 
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_structural_feature_attributes_0_category', type: :text, with: 'structural feature category')
-    is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_structural_feature_attributes_0_sub_category', type: :text, with: 'structural feature sub category')
+    is_expected.not_to have_field('dataset[complex_specimen_type_attributes][0]_complex_structural_feature_attributes_0_sub_category', type: :text, with: 'structural feature sub category')
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_structural_feature_attributes_0_description', type: :text, with: 'structural feature description')
     is_expected.to have_select('dataset[complex_specimen_type_attributes][0][complex_structural_feature_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0][complex_structural_feature_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'structural_feature/123456')
