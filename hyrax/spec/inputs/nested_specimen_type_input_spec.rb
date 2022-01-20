@@ -49,14 +49,6 @@ RSpec.describe NestedSpecimenTypeInput, type: :input do
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0][complex_purchase_record_attributes][0]_manufacturer_attributes_0_purpose', type: :text, with: 'Manufacturer')
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_purchase_record_attributes_0_purchase_record_item', type: :text, with: 'Has a purchase record item')
 
-    is_expected.to have_select('dataset[complex_specimen_type_attributes][0][complex_shape_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
-    is_expected.to have_field('dataset[complex_specimen_type_attributes][0][complex_shape_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'shape/123456')
-    is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_shape_attributes_0_description', type: :text, with: 'shape description')
-
-    is_expected.to have_select('dataset[complex_specimen_type_attributes][0][complex_state_of_matter_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
-    is_expected.to have_field('dataset[complex_specimen_type_attributes][0][complex_state_of_matter_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'state/123456')
-    is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_state_of_matter_attributes_0_description', type: :text, with: 'state of matter description')
-
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_structural_feature_attributes_0_category', type: :text, with: 'structural feature category')
     is_expected.not_to have_field('dataset[complex_specimen_type_attributes][0]_complex_structural_feature_attributes_0_sub_category', type: :text, with: 'structural feature sub category')
     is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_structural_feature_attributes_0_description', type: :text, with: 'structural feature description')
