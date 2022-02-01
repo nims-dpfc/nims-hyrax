@@ -52,13 +52,5 @@ module Hyrax
       return false if @curation_concern.to_sipity_entity.blank?
       @curation_concern.to_sipity_entity.reload.workflow_state_name != 'deposited' ? true : false
     end
-
-    def private_work_actor?
-      # TODO: This will make it visible only for users with a workflow action. Is it too restrictive?
-      return false if @curation_concern.to_sipity_entity.blank?
-      sipity_entity = @curation_concern.to_sipity_entity.reload
-      actions = Hyrax::Workflow::PermissionQuery.scope_permitted_workflow_actions_available_for_current_state(entity: sipity_entity, user: current_ability.current_user)
-      actions.present? ? true : false
-    end
   end
 end
