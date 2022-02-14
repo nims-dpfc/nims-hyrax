@@ -48,15 +48,14 @@ spec:
           - sh
           - -c
           - "ls -l /opt/solr/ && echo $SOLR_HOME && ls -l /opt/solr/server/ && precreate-core hydra-test /opt/solr/solr_conf && solr-precreate ${SOLR_CORE} /opt/solr/solr_conf"
-        # livenessProbe:
-        #   exec:
-        #     command:
-        #       - wget
-        #       - "-O /dev/null"
-        #       - "http://localhost:8983/solr/"
-        #   failureThreshold: 3
-        #   periodSeconds: 30
-        #   timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            scheme: "HTTP"
+            path: /solr/admin/info/system
+            port: 8983
+          failureThreshold: 3
+          periodSeconds: 30
+          timeoutSeconds: 5
         ports:
           - containerPort: 8983
         volumeMounts:
