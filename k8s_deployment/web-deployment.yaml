@@ -16,6 +16,25 @@ spec:
       labels:
         app: mdr-web
     spec:
+      initContainers:
+      - name: solr-startup
+        image: alpine/git
+        envFrom:
+        - configMapRef:
+            name: nims-hyrax-config
+        command:
+          - /bin/sh
+          - -c
+          - "wget http://${SOLR_HOST}:${SOLR_PORT}/solr/admin/info/system"
+      - name: fedora-startup
+        image: alpine/git
+        envFrom:
+          - configMapRef:
+              name: nims-hyrax-config
+        command:
+          - /bin/sh
+          - -c
+          - "wget http://${FEDORA_HOST}:${FEDORA_PORT}/fcrepo/rest"
       containers:
       - name: mdr-web
         image: nims-hyrax_web:latest
