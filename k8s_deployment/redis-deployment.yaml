@@ -23,13 +23,14 @@ spec:
           - redis-server
           - --appendonly
           - "yes"
-#        livenessProbe:
-#          exec:
-#            command:
-#              - redis-cli ping
-#          failureThreshold: 3
-#          periodSeconds: 30
-#          timeoutSeconds: 5
+        livenessProbe:
+          exec:
+            command:
+              - redis-cli
+              - ping
+          failureThreshold: 3
+          periodSeconds: 30
+          timeoutSeconds: 5
         ports:
           - containerPort: 6379
         volumeMounts:
