@@ -165,36 +165,6 @@ spec:
     path: "/data/public/branding"
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: web-data-data
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 100Mi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/data/data"
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: web-data
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 100Mi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/data"
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: db-fcrepo
@@ -326,26 +296,3 @@ spec:
     requests:
       storage: 100Mi
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: web-data-data
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: web-data
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
