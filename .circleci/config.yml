@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
+      - image: circleci/ruby:2.7.4-buster-node
       - image: circleci/postgres:12-alpine
         environment:
           POSTGRES_USER: postgres
@@ -26,8 +26,7 @@ jobs:
           name: apt install
           command: |
             sudo apt update
-            sudo apt install -y openjdk-8-jre-headless libmediainfo-dev
-            sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+            sudo apt install -y openjdk-11-jre-headless libmediainfo-dev
       - run:
           name: download fits
           command: |
