@@ -11,7 +11,7 @@
     </p>
   <% end %>
 	<% # Override Hyrax 2.6 - remove relationships tab from here %>
-  <%= render 'hyrax/base/guts4form', f: f, tabs: %w[files metadata] %>
+  <%= render 'hyrax/base/guts4form', f: f, tabs: %w[files metadata relationships] %>
   <%= f.hidden_field :payload_concern, value: @form.payload_concern %>
 <% end %>
 
