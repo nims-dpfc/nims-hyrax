@@ -33,6 +33,7 @@
             <%= render 'metadata', presenter: @presenter %>
             <% @presenter.member_presenters.each do |member_presenter| %>
               <%= nims_media_display(member_presenter, datatable: true) if member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv? %>
+              <%= nims_media_display(member_presenter, graph: true) if member_presenter&.respond_to?(:json?) && member_presenter&.json? %>
             <% end %>
           </div>
 

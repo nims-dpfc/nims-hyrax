@@ -22,6 +22,10 @@
 //= require csv_preview
 //= require hyrax_form_patch
 //= require tinymce
+//= require d3
+//= require d3-tip
+//= require jsonld-vis
+//= require json-formatter
 
 //= require_tree .
 //= require hyrax

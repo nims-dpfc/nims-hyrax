@@ -110,5 +110,37 @@ RSpec.describe ExportsController do
         end
       end
     end
+
+    context 'json' do
+      context 'open' do
+        let(:file_set) { create(:file_set, :open, content: File.open(fixture_path + '/json/example.json')) }
+        it 'should return the contents of the file' do
+          expect(status).to eql(200)
+          expect(json['@context']).to match_array(["https://w3id.org/ro/crate/1.1/context", {'bio':'"http://schema.org"'}])
+        end
+      end
+
+      describe 'authentication' do
+        let(:file_set) { create(:file_set, :authenticated, content: File.open(fixture_path + '/json/example.json')) }
+
+        context 'unauthenticated' do
+          it 'should return an unauthenticated error' do
+            expect(status).to eql(401)
+          end
+        end
+
+        context 'authenticated' do
+          let(:user) { create(:user) }
+          before do
+            sign_in user
+          end
+
+          it 'should return success' do
+            expect(status).to eql(200)
+          end
+        end
+      end
+    end
+
   end
 end

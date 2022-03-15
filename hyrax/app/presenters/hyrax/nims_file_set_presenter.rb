@@ -19,5 +19,9 @@ module Hyrax
       csv? || tsv?
     end
 
+    def json?
+      file_format =~ /JSON/i || mime_type.present? && mime_type =~ /^application\/json$/i
+    end
+
   end
 end
