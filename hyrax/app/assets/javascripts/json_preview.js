@@ -11,10 +11,13 @@ Blacklight.onLoad(function() {
                 let ele_id = preview.data("ele");
                 let ele = document.getElementById(ele_id);
                 if('@context' in data){
+                    // It is likely jsonld. Draw graph using jsonldVis
                     jsonldVis(d3);
                     jsonldVis(data, "#"+ele_id, { w: 800, h: 600, maxLabelWidth: 250 });
-                    ele.scrollLeft = ele.scrollWidth;
                 } else {
+                    // Preview json using JSON formatter. It is expanded to just one level deep.
+                    // If we desire deeper levels to be expanded, for example, 3, it is
+                    // const formatter = new JSONFormatter(data, 3);
                     const formatter = new JSONFormatter(data);
                     ele.appendChild(formatter.render());
                 }
