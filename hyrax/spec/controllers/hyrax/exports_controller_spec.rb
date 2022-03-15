@@ -116,7 +116,7 @@ RSpec.describe ExportsController do
         let(:file_set) { create(:file_set, :open, content: File.open(fixture_path + '/json/example.json')) }
         it 'should return the contents of the file' do
           expect(status).to eql(200)
-          expect(json['@context']).to match_array(["https://w3id.org/ro/crate/1.1/context", {'bio':'"http://schema.org"'}])
+          expect(json['@context']).to match_array(["https://w3id.org/ro/crate/1.1/context", {"bio"=>"http://schema.org"}])
         end
       end
 
