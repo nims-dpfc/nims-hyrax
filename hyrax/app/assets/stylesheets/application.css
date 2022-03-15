@@ -13,5 +13,7 @@
  *= require bootstrap-datepicker3
  *= require_tree .
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require jsonld-vis
+ *= require json-formatter
  *= require_self
  */

@@ -22,6 +22,8 @@ module Hyrax
             'office_document'
           elsif presenter.csv_or_tsv?
             'csv'
+          elsif presenter.json?
+            'json'
           else
             'default'
           end

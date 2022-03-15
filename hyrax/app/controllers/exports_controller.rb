@@ -7,6 +7,8 @@ class ExportsController < Hyrax::DownloadsController
   def export
     if is_csv?(file) || is_tsv?(file)
       render json: csv_as_datatable
+    elsif is_json?(file)
+      render json: file.content.force_encoding(Encoding::UTF_8).scrub
     else
       render :json => { error: 'Unknown or unsupported file type' }, :status => :bad_request
     end
@@ -35,11 +37,20 @@ class ExportsController < Hyrax::DownloadsController
     return false unless file.present?
     return true if file.format_label && file.format_label.detect { |f| f.match(/CSV|Comma-separated/i) }
     return true if file.mime_type.present? && file.mime_type =~ /^(?:text|application)\/csv$/i
+    false
   end
 
   def is_tsv?(file)
     return false unless file.present?
     return true if file.format_label && file.format_label.detect { |f| f.match(/TSV|Tab-separated/i) }
     return true if file.mime_type.present? && file.mime_type =~ /^(?:text|application)\/tab-separated-values$/i
+    false
+  end
+
+  def is_json?(file)
+    return false unless file.present?
+    return true if file.format_label && file.format_label.detect { |f| f.match(/JSON/i) }
+    return true if file.mime_type.present? && file.mime_type =~ /^application\/json$/i
+    false
   end
 end

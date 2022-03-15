@@ -49,6 +49,11 @@ RSpec.describe Hyrax::NimsFileSetHelper, type: :helper do
       it { is_expected.to eql 'hyrax/file_sets/media_display/csv' }
     end
 
+    context 'json' do
+      let(:mime_type) { 'application/json' }
+      it { is_expected.to eql 'hyrax/file_sets/media_display/json' }
+    end
+
     context 'anything else' do
       let(:mime_type) { 'foo/bar' }
       it { is_expected.to eql 'hyrax/file_sets/media_display/default' }
