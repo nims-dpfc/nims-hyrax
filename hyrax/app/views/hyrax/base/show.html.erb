@@ -14,13 +14,21 @@
       <div class="panel-body">
         <div class="row">
           <%= render 'workflow_actions_widget', presenter: @presenter %>
-          <% if @presenter.iiif_viewer? %>
+          <% files_to_preview = false %>
+          <% @presenter.member_presenters.each do |member_presenter| %>
+            <% if (member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv?) or
+              (member_presenter&.respond_to?(:json?) && member_presenter&.json?) %>
+              <% files_to_preview = true %>
+            <% end %>
+          <% end %>
+          <% if @presenter.iiif_viewer? or files_to_preview %>
             <div class="col-sm-12">
-              <%= render 'representative_media', presenter: @presenter, viewer: true %>
+              <%= render 'preview_files', presenter: @presenter %>
             </div>
           <% end %>
           <div class="col-sm-3 text-center">
             <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? %>
+            <%= render 'download_all', presenter: @presenter %>
             <%= render 'citations', presenter: @presenter %>
             <%#= render 'social_media' %> <!-- No social media buttons -->
           </div>
@@ -31,10 +39,6 @@
               <%= render 'work_description', presenter: @presenter %>
             <% end %>
             <%= render 'metadata', presenter: @presenter %>
-            <% @presenter.member_presenters.each do |member_presenter| %>
-              <%= nims_media_display(member_presenter, datatable: true) if member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv? %>
-              <%= nims_media_display(member_presenter, graph: true) if member_presenter&.respond_to?(:json?) && member_presenter&.json? %>
-            <% end %>
           </div>
 
           <div class="col-sm-12">

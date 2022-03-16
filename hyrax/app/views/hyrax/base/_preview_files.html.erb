@@ -1,0 +1,43 @@
+<h2>Preview files</h2>
+<!-- Nav tabs -->
+<% active_class = 'active' %>
+<ul class="nav nav-tabs" id="preview_files" role="tablist">
+  <% if @presenter.iiif_viewer? %>
+    <li class="nav-item <%= active_class %>" role="presentation">
+      <a href="#imageview" aria-controls="image view" role="tab" data-toggle="tab">Media</a>
+    </li>
+    <% active_class = '' %>
+  <% end %>
+  <% @presenter.member_presenters.each do |member_presenter| %>
+    <% if (member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv?) or
+      (member_presenter&.respond_to?(:json?) && member_presenter&.json?) %>
+      <li class="nav-item <%= active_class %>" role="presentation">
+        <a href="#preview-<%= member_presenter.id %>" aria-controls="preview" role="tab" data-toggle="tab"><%= member_presenter.link_name%></a>
+      </li>
+      <% active_class = '' %>
+    <% end %>
+  <% end %>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+  <% active_class = 'active' %>
+  <% if @presenter.iiif_viewer? %>
+    <div class="tab-pane <%= active_class %>" id="imageview" role="tabpanel" aria-labelledby="imageview-tab">
+      <%= render 'representative_media', presenter: @presenter, viewer: true %>
+      <% active_class = '' %>
+    </div>
+  <% end %>
+  <% @presenter.member_presenters.each_with_index do |member_presenter, index| %>
+    <% if member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv? %>
+      <div class="tab-pane <%= active_class %>" id="preview-<%= member_presenter.id %>" role="tabpanel" aria-labelledby="preview-<%= member_presenter.id %>-tab">
+        <%= nims_media_display(member_presenter, datatable: true) %>
+      </div>
+      <% active_class = '' %>
+    <% elsif member_presenter&.respond_to?(:json?) && member_presenter&.json? %>
+      <div class="tab-pane <%= active_class %>" id="preview-<%= member_presenter.id %>" role="tabpanel" aria-labelledby="preview-<%= member_presenter.id %>-tab">
+        <%= nims_media_display(member_presenter, graph: true) %>
+      </div>
+      <% active_class = '' %>
+    <% end %>
+  <% end %>
+</div>

@@ -20,13 +20,8 @@
       </div>
     </div>
   </div>
-<% else %>
+<% elsif Hyrax.config.display_media_download_link? %>
   <div>
-    <a href="#json-preview-panel-<%= file_set.id %>">Preview</a>
+    <%= link_to t('hyrax.file_set.show.download'), hyrax.download_path(file_set.id), id: "file_download_"+file_set.id, data: { label: file_set.id }, target: "_new" %>
   </div>
-  <% if Hyrax.config.display_media_download_link? %>
-    <div>
-      <%= link_to t('hyrax.file_set.show.download'), hyrax.download_path(file_set.id), id: "file_download_"+file_set.id, data: { label: file_set.id }, target: "_new" %>
-    </div>
-  <% end %>
 <% end %>
