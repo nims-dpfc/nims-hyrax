@@ -107,3 +107,4 @@ gem 'coveralls', require: false
 gem 'rinku'
 gem 'sitemap_generator'
 gem 'cld'
+gem 'clamav-client', require: 'clamav/client'
