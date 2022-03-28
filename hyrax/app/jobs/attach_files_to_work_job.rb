@@ -27,7 +27,9 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
         # [nims-override] Log viruses
         message = "WARNING: Virus encountered while processing file #{error.filename} for work #{work.id}. Virus signature: #{error.scan_results.virus_name}"
         logger.warn(message)
-        send_email_about_virus(work, message, user) && (Rails.logger.error message)
+        if ENV.fetch('SEND_DEPOSITOR_VIRUS_NOTIFICATION', 'false') == 'true'
+          send_email_about_virus(work, message, user) && (Rails.logger.error message)
+        end
       end
     end
   end
