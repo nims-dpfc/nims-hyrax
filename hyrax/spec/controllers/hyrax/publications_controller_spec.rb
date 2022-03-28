@@ -4,11 +4,11 @@ require 'rails_helper'
 
 RSpec.describe Hyrax::PublicationsController do
   describe 'GET #show' do
-    let(:dataset) { create(:dataset, :open) }
+    let(:publication) { create(:publication, :open) }
 
     context 'with valid locale' do
       it 'returns a success response' do
-        get :show, params: { id: dataset.id, locale: 'en' }
+        get :show, params: { id: publication.id, locale: 'en' }
         expect(response).to be_successful
       end
     end
@@ -16,7 +16,7 @@ RSpec.describe Hyrax::PublicationsController do
     context 'with invalid locale' do
       it 'raises InvalidLocale error' do
         expect{
-          get :show, params: { id: dataset.id, locale: 'zzz' }
+          get :show, params: { id: publication.id, locale: 'zzz' }
         }.to raise_error I18n::InvalidLocale
       end
     end

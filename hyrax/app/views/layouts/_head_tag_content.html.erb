@@ -14,6 +14,9 @@ signed in %>
 <!-- Google Scholar metadata -->
 <%= yield :gscholar_meta %>
 
+<!-- Schema.org metadata -->
+<%= yield :schema_org_meta %>
+
 <title><%= content_for?(:page_title) ? yield(:page_title) : default_page_title %></title>
 
 <!-- application css -->
