@@ -59,7 +59,7 @@ protected
 
     out << "<div class='row'>"
     out << "  <div class='col-md-3'>"
-    out << template.label_tag(field_name, field.to_s.humanize, required: required)
+    out << template.label_tag(field_name, I18n.t('ngdr.fields.full_name'), required: required)
     out << '  </div>'
 
     out << "  <div class='col-md-9'>"
@@ -137,22 +137,23 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
-    # --- contact_person
-    field = :contact_person
-    field_name = singular_input_name_for(attribute_name, index, field, parent)
-    field_id = id_for(attribute_name, index, field, parent)
-    field_value = value.send(field).present? ? true : false
+    # --- corresponding_author
+    # FIXME: commented out temporarily
+    # field = :corresponding_author
+    # field_name = singular_input_name_for(attribute_name, index, field, parent)
+    # field_id = id_for(attribute_name, index, field, parent)
+    # field_value = value.send(field).present? ? true : false
 
-    out << "<div class='row'>"
-    out << "  <div class='col-md-3'>"
-    out << template.label_tag(field_name, field.to_s.humanize, required: required)
-    out << '  </div>'
+    # out << "<div class='row'>"
+    # out << "  <div class='col-md-3'>"
+    # out << template.label_tag(field_name, I18n.t('ngdr.fields.corresponding_author'), required: required)
+    # out << '  </div>'
 
-    out << "  <div class='col-md-9'>"
-    out << @builder.check_box(field_name,
-      options.merge(checked: field_value, name: field_name, id: field_id, required: required))
-    out << '  </div>'
-    out << '</div>' # row
+    # out << "  <div class='col-md-2'>"
+    # out << @builder.check_box(field_name,
+    #   options.merge(checked: field_value, name: field_name, id: field_id, required: required))
+    # out << '  </div>'
+    # out << '</div>' # row
 
     # --- display_order
     field = :display_order
@@ -165,7 +166,7 @@ protected
     out << template.label_tag(field_name, field.to_s.humanize, required: required)
     out << '  </div>'
 
-    out << "  <div class='col-md-9'>"
+    out << "  <div class='col-md-3'>"
     out << @builder.number_field(field_name,
       options.merge(value: field_value || 0, name: field_name, id: field_id, required: required))
     out << '  </div>'

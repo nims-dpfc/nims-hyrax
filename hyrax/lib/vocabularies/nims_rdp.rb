@@ -19,6 +19,7 @@ module RDF
       property 'computational-methods'
       property 'contact-person'
       property 'contributor'
+      property 'corresponding-author'
       property 'crystallographic-structure'
       property 'custom-property'
       property 'data-origin'

@@ -40,7 +40,7 @@ When(/^I navigate to the publication catalog page$/) do
 end
 
 When(/^I create the publication with:$/) do |table|
-  values = table.hashes.first # table is a table.hashes.keys # => [:TITLE, :SUPERVISOR, :DATA_ORIGIN, :CREATOR, :KEYWORD]
+  values = table.hashes.first # table is a table.hashes.keys # => [:TITLE, :DATA_ORIGIN, :CREATOR, :KEYWORD]
 
   expect(page).to have_content /Add New Publication/i
 
@@ -54,7 +54,6 @@ When(/^I create the publication with:$/) do |table|
 
   click_link "Descriptions" # switch tab
   fill_in('Title', with: values[:TITLE])
-  fill_in('Supervisor', with: values[:SUPERVISOR])
   select(values[:DATA_ORIGIN], from: 'Data origin')
   fill_in('publication[complex_person_attributes][0][name][]', with: values[:CREATOR])
   fill_in('Keyword', with: values[:KEYWORD])
@@ -74,7 +73,7 @@ When(/^I create the publication with:$/) do |table|
 end
 
 When(/^I create a draft publication with:$/) do |table|
-  values = table.hashes.first # table is a table.hashes.keys # => [:TITLE, :SUPERVISOR, :DATA_ORIGIN, :CREATOR, :KEYWORD]
+  values = table.hashes.first # table is a table.hashes.keys # => [:TITLE, :DATA_ORIGIN, :CREATOR, :KEYWORD]
 
   expect(page).to have_content /Add New Publication/i
 
@@ -88,7 +87,6 @@ When(/^I create a draft publication with:$/) do |table|
 
   click_link "Descriptions" # switch tab
   fill_in('Title', with: values[:TITLE])
-  fill_in('Supervisor approval', with: "approved")
   find('#publication_resource_type').select('Dissertation')
   # fill_in('publication[complex_person_attributes][0][name][]', with: values[:CREATOR])
   fill_in('Keyword', with: values[:KEYWORD])
@@ -175,4 +173,18 @@ Then(/^I should see the following links to publications:$/) do |table|
   table.symbolic_hashes.each do |row|
     expect(page).to have_link(row[:label], href: Regexp.new(Regexp.quote(row[:href])))
   end
+end
+
+When(/^I navigate to the (open|authenticated|embargo|lease|restricted) publication page$/) do |access|
+  visit polymorphic_path(@publications[access].first)
+end
+
+Then(/^I should access the (open|authenticated|embargo|lease|restricted) publication$/) do |access|
+  expect(page).to have_content("#{access.capitalize} Publication")
+  expect(page).not_to have_content('Unauthorized')
+end
+
+Then(/^I should not access the (open|authenticated|embargo|lease|restricted) publication$/) do |access|
+  expect(page).not_to have_content("#{access.capitalize} Publication")
+  expect(page).to have_content('Unauthorized')
 end

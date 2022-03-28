@@ -17,7 +17,7 @@ RSpec.describe NestedInstrumentFunctionInput, type: :input do
   it 'generates the correct fields' do
     is_expected.not_to have_field('dataset_instrument_function_attributes_0_column_number', type: :text, with: '1')
     is_expected.to have_field('dataset_instrument_function_attributes_0_category', type: :text, with: 'some value')
-    is_expected.to have_field('dataset_instrument_function_attributes_0_sub_category', type: :text, with: 'some other value')
+    is_expected.not_to have_field('dataset_instrument_function_attributes_0_sub_category', type: :text, with: 'some other value')
     is_expected.to have_field('dataset_instrument_function_attributes_0_description', type: :text, with: 'Instrument function description')
   end
 end

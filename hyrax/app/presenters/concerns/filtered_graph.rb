@@ -15,7 +15,9 @@ module FilteredGraph
     # Returns true if the statement should be filtered out of the graph
     model = model_name.name.constantize
     statement.predicate.ends_with?('purl.org/dc/elements/1.1/description') ||
-      (statement.predicate.ends_with?('www.nims.go.jp/vocabs/ngdr/supervisor-approval') && current_ability.cannot?(:read_supervisor_approval, model)) ||
-      (statement.predicate.ends_with?('id.loc.gov/vocabulary/relators/dpt'))
+      (statement.predicate.ends_with?('www.nims.go.jp/vocabs/ngdr/supervisor-approval')) ||
+      (statement.predicate.ends_with?('id.loc.gov/vocabulary/relators/dpt')) ||
+      (statement.predicate.ends_with?('scholarsphere.psu.edu/ns#onBehalfOf')) ||
+      (statement.predicate.ends_with?('scholarsphere.psu.edu/ns#proxyDepositor'))
   end
 end

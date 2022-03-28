@@ -32,14 +32,14 @@ class NestedSourceAttributeRenderer < NestedAttributeRenderer
         renderer_class = NestedIdentifierAttributeRenderer
         each_html += get_nested_output(field, label, v['complex_identifier'], renderer_class, false)
       end
-      unless v.dig('issue').blank?
-        label = 'Issue'
-        val = v['issue'][0]
-        each_html += get_row(label, val)
-      end
       unless v.dig('volume').blank?
         label = 'Volume'
         val = v['volume'][0]
+        each_html += get_row(label, val)
+      end
+      unless v.dig('issue').blank?
+        label = 'Issue'
+        val = v['issue'][0]
         each_html += get_row(label, val)
       end
       unless v.dig('sequence_number').blank?

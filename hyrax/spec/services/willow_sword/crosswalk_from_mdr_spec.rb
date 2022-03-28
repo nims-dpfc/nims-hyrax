@@ -17,7 +17,7 @@ RSpec.describe WillowSword::CrosswalkFromMdr do
               {:name => "Test1, TEST1", :complex_identifier_attributes => [{:identifier => "00112233", :scheme => "nims person id"}], :role => "author"},
               {:name => "Test2, TEST2", :complex_identifier_attributes => [{:identifier => "00445566", :scheme => "nims person id"}], :role => "data depositor"},
               {:name => "Test3, TEST3", :complex_identifier_attributes => [{:identifier => "00778899", :scheme => "nims person id"}], :role => "data curator"},
-              {:name => "Test4, TEST4", :complex_identifier_attributes => [{:identifier => "09876543", :scheme => "nims person id"}]}
+              {:name => "Test4, TEST4", :complex_identifier_attributes => [{:identifier => "09876543", :scheme => "nims person id"}], :role => "contact person"}
           ],
           :complex_organization_attributes => [
               {:organization => "NIMS"}

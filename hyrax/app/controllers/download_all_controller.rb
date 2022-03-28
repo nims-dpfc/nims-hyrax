@@ -29,7 +29,7 @@ class DownloadAllController < Hyrax::DownloadsController
 
   # Override from DownloadBehavior
   def asset
-    @asset ||= Hyrax::WorkShowPresenter.new(
+    @asset ||= Hyrax::WorkPresenter.new(
       SolrDocument.new(work.to_solr),
       current_ability,
       request
@@ -37,7 +37,9 @@ class DownloadAllController < Hyrax::DownloadsController
   end
 
   def file_set_ids
-    @file_set_ids ||= available_file_set_ids(asset, current_ability)
+    work.file_sets.select do |p|
+      current_ability.can?(:read, p.id)
+    end.collect(&:id)
   end
 
   def send_zip
@@ -53,7 +55,7 @@ class DownloadAllController < Hyrax::DownloadsController
   # Extend here to add other files to the zip
   def build_zip
     mk_zip_file_dir
-    add_metadata
+    # add_metadata
     add_files
     zip!
     cleanup
@@ -64,18 +66,15 @@ class DownloadAllController < Hyrax::DownloadsController
   def add_metadata
     File.write(
       File.join(zip_file_path, 'metadata.ttl'),
-      # This presenter method #export_as_ttl doesn't work, possibly a bug
-      #   so grab the ttl directly from the work
-      # asset.export_as_ttl,
-      work.resource.dump(:ttl),
+      asset.export_as_ttl,
       mode: 'wb'
     )
   end
 
   # Add all file_sets
   def add_files
-    file_sets(file_set_ids).each do |fs|
-      file_set = FileSet.find(fs['id'])
+    file_set_ids.each do |id|
+      file_set = FileSet.find(id)
       next if file_set.blank?
 
       original = file_set.original_file

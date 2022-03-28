@@ -1,6 +1,12 @@
 FactoryBot.define do
 
   factory :dataset do
+    transient do
+      user { create(:user) }
+      # Set to true (or a hash) if you want to create an admin set
+      with_admin_set { false }
+    end
+
     title { ["Dataset"] }
     access_control
 
@@ -69,8 +75,24 @@ FactoryBot.define do
       resource_type { ['Resource-Type-123'] }
     end
 
+    trait :with_article_resource_type do
+      resource_type { ['Article'] }
+    end
+
     trait :with_source do
       source { ['Source-123'] }
+    end
+
+    trait :with_managing_organization do
+      managing_organization { ['Managing organization'] }
+    end
+
+    trait :with_first_published_url do
+      first_published_url { 'http://example.com/first-published-url' }
+    end
+
+    trait :with_manuscript_type do
+      manuscript_type { ['Original'] }
     end
 
     trait :with_complex_person do
@@ -99,6 +121,7 @@ FactoryBot.define do
         [{
          name: 'Anamika',
          role: ['author'],
+         corresponding_author: '1',
           complex_identifier_attributes: [{
              identifier: '123456',
              scheme: 'identifier local'
@@ -113,7 +136,80 @@ FactoryBot.define do
          }]
        }]
       }
-   end
+    end
+
+    trait :with_detailed_complex_author do
+      complex_person_attributes {
+        [{
+          name: 'Anamika',
+          first_name: 'First name',
+          last_name: 'Last name',
+          role: ['author'],
+          corresponding_author: '1',
+          complex_identifier_attributes: [{
+            identifier: '123456',
+            scheme: 'identifier local'
+          }],
+          complex_affiliation_attributes: [{
+            job_title: 'Principal Investigator',
+            complex_organization_attributes: [{
+              organization: 'University',
+              sub_organization: 'Department',
+              purpose: 'Research'
+            }]
+          }],
+          orcid: '23542345234',
+          organization: 'My org'
+        }]
+      }
+    end
+
+    trait :with_detailed_complex_people do
+      complex_person_attributes {
+        [{
+           name: 'Anamika',
+           first_name: 'First name',
+           last_name: 'Last name',
+           role: ['author'],
+           corresponding_author: '1',
+           complex_identifier_attributes: [{
+             identifier: '123456',
+             scheme: 'identifier local'
+           }],
+           complex_affiliation_attributes: [{
+             job_title: 'Principal Investigator',
+             complex_organization_attributes: [{
+               organization: 'University',
+               sub_organization: 'Department',
+               purpose: 'Research'
+             }]
+           }],
+           orcid: '23542345234',
+           organization: 'My org'
+          },
+          {
+           name: 'Cee Jay',
+           first_name: 'First name',
+           last_name: 'Last name',
+           role: ['editor'],
+           corresponding_author: '0',
+           complex_identifier_attributes: [{
+             identifier: '1234565654',
+             scheme: 'identifier local'
+           }],
+           complex_affiliation_attributes: [{
+              job_title: 'Journal editor',
+              complex_organization_attributes: [{
+                organization: 'University',
+                sub_organization: 'Department',
+                purpose: 'Research'
+              }]
+            }],
+           orcid: '112233445566',
+           organization: 'My journal org'
+        }]
+      }
+    end
 
     trait :with_complex_chemical_composition do
       complex_specimen_type_attributes {
@@ -327,6 +423,30 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_source do
+      complex_source_attributes {
+        [{
+          alternative_title: 'Sub title for journal',
+          complex_person_attributes: [{
+            name: 'AR',
+            role: 'Editor'
+          }],
+          end_page: '12',
+          complex_identifier_attributes: [{
+            identifier: '1234567',
+            scheme: 'Local'
+          }],
+          issue: '34',
+          sequence_number: '1.2.2',
+          start_page: '4',
+          title: 'Test journal',
+          total_number_of_pages: '8',
+          volume: '3',
+          issn: '1234-5678'
+        }]
+      }
+    end
+
     trait :with_complex_relation do
       complex_relation_attributes {
         [{
@@ -374,6 +494,10 @@ FactoryBot.define do
              end_date: '2019-01-01'
         }]
       }
+    end
+
+    trait :with_material_type do
+      material_type { ['Cu-containing'] }
     end
   end
 end

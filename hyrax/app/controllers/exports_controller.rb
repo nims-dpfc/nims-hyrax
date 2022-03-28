@@ -2,7 +2,7 @@ require 'csv'
 require 'json'
 
 class ExportsController < Hyrax::DownloadsController
-  MAXIMUM_ROWS = 100
+  MAXIMUM_ROWS = 200
 
   def export
     if is_csv?(file) || is_tsv?(file)

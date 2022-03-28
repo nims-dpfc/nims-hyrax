@@ -26,6 +26,7 @@ class NgdrIndexer < Hyrax::WorkIndexer
       Solrizer.solr_name('publisher', :facetable),
       Solrizer.solr_name('resource_type', :facetable),
       Solrizer.solr_name('subject', :facetable),
+      Solrizer.solr_name('visibility', :stored_sortable),
     ]
   end
 

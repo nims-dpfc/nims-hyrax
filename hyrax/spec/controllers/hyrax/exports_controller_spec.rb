@@ -41,7 +41,7 @@ RSpec.describe ExportsController do
             ["Total", "Total", "4699755"]
           ])
           expect(json['total_rows']).to eql(7)
-          expect(json['maximum_rows']).to eql(100)
+          expect(json['maximum_rows']).to eql(200)
           expect(json['file_name']).to eql("example.csv")
         end
       end
@@ -84,7 +84,7 @@ RSpec.describe ExportsController do
                                                   ["Total", "Total", "4699755"]
                                               ])
           expect(json['total_rows']).to eql(7)
-          expect(json['maximum_rows']).to eql(100)
+          expect(json['maximum_rows']).to eql(200)
           expect(json['file_name']).to eql("example.tsv")
         end
       end

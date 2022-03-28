@@ -49,8 +49,8 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
 
     facet_fields = (DatasetIndexer.facet_fields +
-                   PublicationIndexer.facet_fields +
-                   ImageIndexer.facet_fields).uniq
+                   PublicationIndexer.facet_fields
+                   ).uniq
     facet_fields.each do |fld|
       config.add_facet_field fld, limit: 5
     end
@@ -68,7 +68,12 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false
     config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :render_truncated_description, if: lambda { |context, field_config, document| context.can?(:read_abstract, document.hydra_model) }
     config.add_index_field solr_name('keyword', :stored_searchable), itemprop: 'keywords', link_to_search: solr_name('keyword', :facetable), if: lambda { |context, field_config, document| context.can?(:read_keyword, document.hydra_model) }
+    # config.add_index_field solr_name('complex_specimen_type', :stored_searchable), itemprop: 'specimen'
+    config.add_index_field solr_name('specimen_set', :stored_searchable), itemprop: 'specimen'
     config.add_index_field solr_name('subject', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject', :facetable), if: lambda { |context, field_config, document| context.can?(:read_subject, document.hydra_model) }
+    config.add_index_field solr_name('resource_type', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('resource_type', :facetable), if: lambda { |context, field_config, document| context.can?(:read_resource_type, document.hydra_model) }
+    config.add_index_field solr_name('data_origin', :stored_searchable), itemprop: 'data_origin', link_to_search: solr_name('data_origin', :facetable)
+
     # config.add_index_field solr_name('creator', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable)
     # config.add_index_field solr_name('contributor', :stored_searchable), itemprop: 'contributor', link_to_search: solr_name('contributor', :facetable)
     config.add_index_field solr_name('complex_person_author', :stored_searchable), itemprop: 'author', link_to_search: solr_name('complex_person_author', :facetable)
@@ -77,36 +82,40 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('complex_person_data_depositor', :stored_searchable), itemprop: 'data depositor', link_to_search: solr_name('complex_person_data_depositor', :facetable)
     config.add_index_field solr_name('complex_person_data_curator', :stored_searchable), itemprop: 'data curator', link_to_search: solr_name('complex_person_data_curator', :facetable)
     config.add_index_field solr_name('complex_person_operator', :stored_searchable), itemprop: 'operator', link_to_search: solr_name('complex_person_operator', :facetable)
+    config.add_index_field solr_name('complex_person_contact_person', :stored_searchable), itemprop: 'contact person', link_to_search: solr_name('complex_person_contact_person', :facetable)
     config.add_index_field solr_name('complex_person_other', :stored_searchable), itemprop: 'creator or contributor', link_to_search: solr_name('complex_person_other', :facetable)
     # config.add_index_field solr_name('proxy_depositor', :symbol), label: 'Depositor', helper_method: :link_to_profile
     #  config.add_index_field solr_name('depositor'), label: 'Owner', helper_method: :link_to_profile
-    config.add_index_field solr_name('data_origin', :stored_searchable), itemprop: 'data_origin', link_to_search: solr_name('data_origin', :facetable)
-    config.add_index_field solr_name('complex_specimen_type', :stored_searchable), itemprop: 'specimen'
+
+    # config.add_index_field solr_name('publisher', :stored_searchable), itemprop: 'publisher', link_to_search: solr_name('publisher', :facetable)
+    # config.add_index_field solr_name('complex_date_published', :stored_searchable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
+    config.add_index_field solr_name('date_published', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
+
+    # config.add_index_field solr_name('rights_statement', :stored_searchable), helper_method: :rights_statement_links, if: lambda { |context, field_config, document| context.can?(:read_rights, document.hydra_model) }
+    config.add_index_field solr_name('license', :stored_searchable), helper_method: :license_links
+
     config.add_index_field solr_name('complex_source_title', :stored_searchable), itemprop: 'journal'
-    config.add_index_field solr_name('complex_date_published', :stored_searchable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
-    config.add_index_field solr_name('publisher', :stored_searchable), itemprop: 'publisher', link_to_search: solr_name('publisher', :facetable)
-    # config.add_index_field solr_name('based_near_label', :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name('based_near_label', :facetable)
-    # config.add_index_field solr_name('language', :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name('language', :facetable)
+
     config.add_index_field solr_name('date_uploaded', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
-    config.add_index_field solr_name('date_published', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
-    config.add_index_field solr_name('rights_statement', :stored_searchable), helper_method: :rights_statement_links, if: lambda { |context, field_config, document| context.can?(:read_rights, document.hydra_model) }
-    config.add_index_field solr_name('license', :stored_searchable), helper_method: :license_links
-    config.add_index_field solr_name('resource_type', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('resource_type', :facetable), if: lambda { |context, field_config, document| context.can?(:read_resource_type, document.hydra_model) }
-    config.add_index_field solr_name('file_format', :stored_searchable), link_to_search: solr_name('file_format', :facetable)
+
+    #config.add_index_field solr_name('file_format', :stored_searchable), link_to_search: solr_name('file_format', :facetable)
     #config.add_index_field solr_name('identifier', :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
-    config.add_index_field solr_name('embargo_release_date', :stored_sortable, type: :date), label: 'Embargo release date', helper_method: :human_readable_date
-    config.add_index_field solr_name('lease_expiration_date', :stored_sortable, type: :date), label: 'Lease expiration date', helper_method: :human_readable_date
-    config.add_index_field solr_name('place', :stored_searchable), itemprop: 'place', link_to_search: solr_name('place', :facetable)
-    config.add_index_field solr_name('status', :stored_searchable), itemprop: 'status', link_to_search: solr_name('status', :facetable)
-    config.add_index_field solr_name('issue', :stored_searchable), label: 'Issue'
+    #config.add_index_field solr_name('embargo_release_date', :stored_sortable, type: :date), label: 'Embargo release date', helper_method: :human_readable_date
+    #config.add_index_field solr_name('lease_expiration_date', :stored_sortable, type: :date), label: 'Lease expiration date', helper_method: :human_readable_date
+    #config.add_index_field solr_name('place', :stored_searchable), itemprop: 'place', link_to_search: solr_name('place', :facetable)
+    #config.add_index_field solr_name('status', :stored_searchable), itemprop: 'status', link_to_search: solr_name('status', :facetable)
+    # config.add_index_field solr_name('issue', :stored_searchable), label: 'Issue'
+    # config.add_index_field solr_name('based_near_label', :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name('based_near_label', :facetable)
+    # config.add_index_field solr_name('language', :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name('language', :facetable)
+
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     show_fields = (DatasetIndexer.show_fields +
-                   PublicationIndexer.show_fields +
-                   ImageIndexer.show_fields).uniq
+                   PublicationIndexer.show_fields
+                   ).uniq
     show_fields.each do |fld|
       config.add_show_field fld
     end
@@ -130,8 +139,8 @@ class CatalogController < ApplicationController
     # since we aren't specifying it otherwise.
     config.add_search_field('all_fields', label: 'All Fields') do |field|
       all_names = (DatasetIndexer.search_fields +
-                   PublicationIndexer.search_fields +
-                   ImageIndexer.search_fields).uniq.join(" ")
+                   PublicationIndexer.search_fields
+                   ).uniq.join(" ")
       title_name = solr_name("title", :stored_searchable)
       field.solr_parameters = {
         qf: "#{all_names} file_format_tesim all_text_timv",
@@ -295,4 +304,6 @@ class CatalogController < ApplicationController
       additional_export_formats(@document, format)
     end
   end
+
+  BlacklightOaiProvider::SolrDocumentProvider.register_format(Metadata::Jpcoar.instance)
 end
