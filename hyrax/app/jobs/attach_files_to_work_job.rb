@@ -8,7 +8,7 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
   def perform(work, uploaded_files, **work_attributes)
     validate_files!(uploaded_files)
     depositor = proxy_or_depositor(work)
-    user = User.find_by_user_key(depositor)
+    user = User.find_by(username: depositor)
     work_permissions = work.permissions.map(&:to_hash)
     metadata = visibility_attributes(work_attributes)
     uploaded_files.each do |uploaded_file|
@@ -27,7 +27,7 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
         # [nims-override] Log viruses
         message = "WARNING: Virus encountered while processing file #{error.filename} for work #{work.id}. Virus signature: #{error.scan_results.virus_name}"
         logger.warn(message)
-        # send_email_about_virus(work, message, user) && (Rails.logger.error message)
+        send_email_about_virus(work, message, user) && (Rails.logger.error message)
       end
     end
   end
