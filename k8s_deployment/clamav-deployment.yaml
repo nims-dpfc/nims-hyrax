@@ -22,7 +22,7 @@ spec:
           ports:
             - containerPort: 3310
           volumeMounts:
-            - name: clam_db
+            - name: clam-db
               mountPath: /var/lib/clamav
             - name: web-file-uploads
               mountPath: /shared/uploads/
