@@ -5,8 +5,6 @@ Hyrax.config do |config|
   config.register_curation_concern :dataset
   # Injected via `rails g hyrax:work Publication`
   config.register_curation_concern :publication
-  # Injected via `rails g hyrax:work Image`
-  config.register_curation_concern :image
   # Register roles that are expected by your implementation.
   # @see Hyrax::RoleRegistry for additional details.
   # @note there are magical roles as defined in Hyrax::RoleRegistry::MAGIC_ROLES
@@ -79,13 +77,13 @@ Hyrax.config do |config|
 
   # Hyrax uses NOIDs for files and collections instead of Fedora UUIDs
   # where NOID = 10-character string and UUID = 32-character string w/ hyphens
-  # config.enable_noids = true
+  config.enable_noids = true
 
   # In a test environment, use the file-based NOID generator to avoid problems with the tables being wiped between tests
   if ENV['RAILS_ENV'] == 'test'
     puts 'Using file-based NOIDs for tests'
     # Template for your repository's NOID IDs
-    config.noid_template = "test-.zdddd"
+    config.noid_template = "tzrb-.zddddd"
 
     # Use the database-backed minter class
     config.noid_minter_class = Noid::Rails::Minter::File
@@ -201,7 +199,7 @@ Hyrax.config do |config|
   config.derivatives_path = ENV.fetch('DERIVATIVES_PATH', Rails.root.join('tmp', 'derivatives'))
 
   # Should schema.org microdata be displayed?
-  # config.display_microdata = true
+  config.display_microdata = false
 
   # What default microdata type should be used if a more appropriate
   # type can not be found in the locale file?
@@ -267,7 +265,8 @@ Hyrax.config do |config|
   # If browse-everything has been configured, load the configs.  Otherwise, set to nil.
   begin
     if defined? BrowseEverything
-      config.browse_everything = BrowseEverything.config
+      # https://github.com/antleaf/nims-mdr-development/issues/457#issuecomment-861401697
+      config.browse_everything = nil # BrowseEverything.config
     else
       Rails.logger.warn "BrowseEverything is not installed"
     end

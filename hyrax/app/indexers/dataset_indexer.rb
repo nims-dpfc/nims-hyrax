@@ -31,7 +31,8 @@ class DatasetIndexer < NgdrIndexer
         'properties_addressed',
         'synthesis_and_processing',
         'characterization_methods',
-        'specimen_set'
+        'specimen_set',
+        'material_type'
       ]
       dataset_facet_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :facetable)
@@ -41,7 +42,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::OrganizationIndexer.organization_facet_fields
       fields.concat ComplexField::RightsIndexer.rights_facet_fields
       fields.concat ComplexField::InstrumentIndexer.instrument_facet_fields
-      fields.concat ComplexField::MaterialTypeIndexer.material_type_facet_fields
+      # fields.concat ComplexField::MaterialTypeIndexer.material_type_facet_fields
       fields.concat ComplexField::PurchaseRecordIndexer.purchase_record_facet_fields
       fields.concat ComplexField::StateOfMatterIndexer.state_of_matter_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_facet_fields
@@ -61,7 +62,8 @@ class DatasetIndexer < NgdrIndexer
         'specimen_set',
         'synthesis_and_processing',
         'first_published_url',
-        'doi'
+        'doi',
+        'material_type'
       ]
       dataset_search_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :stored_searchable)
@@ -95,6 +97,7 @@ class DatasetIndexer < NgdrIndexer
         'properties_addressed',
         'specimen_set',
         'synthesis_and_processing',
+        'material_type'
       ]
       dataset_show_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :stored_searchable)

@@ -10,8 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require turbolinks
-//
 //= require jquery
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
@@ -20,18 +18,13 @@
 //
 // Required by Blacklight
 //= require blacklight/blacklight
+//= require hydra-editor/editMetadata
 //= require csv_preview
+//= require hyrax_form_patch
+//= require tinymce
 
 //= require_tree .
 //= require hyrax
 
 
-// Patch hyrax form submit to keep the submit button values
-// so that they get to Rails even when they are disabled
-Blacklight.onLoad(function() {
-  $("form[data-behavior='work-form'] input[type=submit]").click(function (e) {
-    var button = $(this);
-    var form = button.parents('form')[0]
-    $(form).append(`<input type="hidden" id="${this.id}-hidden" name="${this.name}" value="${this.value}"></input>`)
-  });
-})
+

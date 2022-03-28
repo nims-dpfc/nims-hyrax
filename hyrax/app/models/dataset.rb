@@ -146,7 +146,9 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :note_to_admin, predicate: ::RDF::Vocab::NimsRdp['note-to-admin'], multiple: false
+  property :material_type, predicate: ::RDF::Vocab::NimsRdp["material-type"] do |index|
+    index.as :stored_searchable, :facetable
+  end
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)

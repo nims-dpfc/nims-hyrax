@@ -3,6 +3,7 @@
 module Hyrax
   # Generated form for Publication
   class PublicationForm < Hyrax::Forms::WorkForm
+    attr_reader :agreement_accepted, :supervisor_agreement_accepted
     self.model_class = ::Publication
     delegate :keyword_ordered, :specimen_set_ordered, :managing_organization_ordered, to: :model
     self.terms -= [
@@ -19,12 +20,21 @@ module Hyrax
 
     self.terms += [
       # Adding all fields in order of display in form
-      :first_published_url, :supervisor_approval,
-      :title, :alternative_title, :rights_statement, :complex_person, :description, :keyword_ordered, :date_published,
-      :publisher, :resource_type, :complex_date, :manuscript_type,
-      :complex_identifier, :complex_source, :complex_version, :complex_relation,
-      :complex_event, :specimen_set_ordered, :managing_organization_ordered,
-      :language, :licensed_date, :custom_property, :note_to_admin, :draft
+      :managing_organization_ordered,
+      :first_published_url,
+      :title, :alternative_title, 
+      :resource_type, 
+      :description, :keyword_ordered, 
+      :specimen_set_ordered, 
+      :publisher, :date_published,
+      :rights_statement, :licensed_date, 
+      :complex_person, 
+      :complex_source, :manuscript_type,
+      :complex_event, 
+      :language, 
+      :complex_date, 
+      :complex_identifier, :complex_version, :complex_relation,
+      :custom_property, :draft
     ]
 
     self.required_fields -= [
@@ -35,20 +45,28 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :supervisor_approval, :title, :resource_type, :managing_organization_ordered,
+      :managing_organization_ordered, :title, :resource_type,
       :description, :keyword_ordered, :date_published, :rights_statement
     ]
 
     def metadata_tab_terms
       [
         # Description tab order determined here
-        :first_published_url, :supervisor_approval,
-        :title, :alternative_title, :language, :resource_type, :description, :keyword_ordered,
-        :complex_person, :manuscript_type, :publisher, :specimen_set_ordered, :managing_organization_ordered,
-        :date_published, :rights_statement, :licensed_date,
-        :complex_identifier, :complex_source, :complex_version, :complex_relation,
-        :complex_date, :complex_event,
-        :custom_property, :note_to_admin
+        :managing_organization_ordered,
+        :first_published_url,
+        :title, :alternative_title, 
+        :resource_type, 
+        :description, :keyword_ordered,
+        :specimen_set_ordered, 
+        :publisher, :date_published, 
+        :rights_statement, :licensed_date,
+        :complex_person, 
+        :complex_source, :manuscript_type, 
+        :complex_event,
+        :language, 
+        :complex_date, 
+        :complex_identifier, :complex_version, :complex_relation,
+        :custom_property
       ]
     end
 
@@ -113,7 +131,7 @@ module Hyrax
     def self.permitted_person_params
       [:id,
         :_destroy,
-        :contact_person,
+        :corresponding_author,
         :display_order,
        {
          last_name: [],
