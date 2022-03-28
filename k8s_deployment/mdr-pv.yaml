@@ -165,6 +165,21 @@ spec:
     path: "/data/public/branding"
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: clam-db
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/lib/clamav"
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: db-fcrepo
@@ -288,6 +303,18 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: web-branding
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: clam-db
 spec:
   storageClassName: manual
   accessModes:
