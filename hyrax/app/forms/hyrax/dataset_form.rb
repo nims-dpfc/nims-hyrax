@@ -3,6 +3,7 @@
 module Hyrax
   # Generated form for Dataset
   class DatasetForm < Hyrax::Forms::WorkForm
+    attr_reader :agreement_accepted, :supervisor_agreement_accepted
     self.model_class = ::Dataset
     delegate :keyword_ordered, :specimen_set_ordered, :managing_organization_ordered, to: :model
 
@@ -22,7 +23,7 @@ module Hyrax
 
       # description
       :managing_organization_ordered,
-      :first_published_url, :supervisor_approval,
+      :first_published_url,
       :title, :alternative_title, 
       :resource_type, :data_origin, 
       :description, :keyword_ordered,
@@ -67,7 +68,7 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :managing_organization_ordered, :supervisor_approval, :title, :resource_type, :data_origin, 
+      :managing_organization_ordered, :title, :resource_type, :data_origin,
       :description, :keyword_ordered, :date_published, :rights_statement
     ]
 
@@ -75,7 +76,7 @@ module Hyrax
       [
         # Description tab order determined here
         :managing_organization_ordered,
-        :first_published_url, :supervisor_approval,
+        :first_published_url,
         :title, :alternative_title, 
         :resource_type, :data_origin,
         :description, :keyword_ordered, 
@@ -194,7 +195,7 @@ module Hyrax
        {
          column_number: [],
          category: [],
-         sub_category: [],
+         # sub_category: [],
          description: []
        }
       ]
@@ -289,9 +290,7 @@ module Hyrax
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
          complex_material_type_attributes: permitted_material_type_params,
-         complex_purchase_record_attributes: permitted_purchase_record_params,
-         complex_shape_attributes: permitted_desc_id_params,
-         complex_state_of_matter_attributes: permitted_desc_id_params,
+         # complex_purchase_record_attributes: permitted_purchase_record_params,
          complex_structural_feature_attributes: permitted_structural_feature_params,
          title: []
        }
@@ -305,7 +304,7 @@ module Hyrax
          category: [],
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
-         sub_category: []
+         # sub_category: []
        }
       ]
     end
