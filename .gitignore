@@ -351,3 +351,7 @@ $RECYCLE.BIN/
 .env
 /hyrax/.fedora-test.pid
 /hyrax/.solr-test.pid
+cas/.mvn/jvm.config
+
+# Default HOST_APP_DATA_PATH in .env.template.development
+/data/

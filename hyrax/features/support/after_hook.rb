@@ -1,3 +1,7 @@
 After do |scenario|
-  Dataset.destroy_all if ENV['RAILS_ENV'] == 'test'
+  begin
+    Dataset.destroy_all if ENV['RAILS_ENV'] == 'test'
+  rescue
+    next
+  end
 end

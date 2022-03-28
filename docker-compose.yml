@@ -22,7 +22,7 @@ services:
       - CATALINA_OPTS=-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC -Dfcrepo.home=/data -Dfcrepo.object.directory=/data/objects -Dfcrepo.binary.directory=/data/binaries -Dfcrepo.postgresql.username=$POSTGRES_USER -Dfcrepo.postgresql.password=$POSTGRES_PASSWORD -Dfcrepo.postgresql.host=$POSTGRES_HOST_FCREPO -Dfcrepo.postgresql.port=$POSTGRES_PORT -Dfcrepo.modeshape.configuration=classpath:/config/jdbc-postgresql/repository.json
 
   solr:
-    image: solr:7-alpine
+    image: solr:7
     expose:
       - 8983
     ports:
@@ -39,11 +39,10 @@ services:
     volumes:
       - solr:/opt/solr/server/solr/mycores
       - ./hyrax/solr/config:/opt/solr/solr_conf
-    entrypoint:
-      - docker-entrypoint.sh
-      - solr-precreate
-      - ${SOLR_CORE}
-      - /opt/solr/solr_conf
+    command:
+      - sh
+      - "-c"
+      - "precreate-core hydra-test /opt/solr/solr_conf; solr-precreate ${SOLR_CORE} /opt/solr/solr_conf"
 
   db: &db
     image: postgres:11-alpine
@@ -86,15 +85,13 @@ services:
         CACHE_PATH: ${CACHE_PATH}
         FITS_PATH: ${FITS_PATH}
         FITS_VERSION: ${FITS_VERSION}
-        AIRBRAKE_HOST: ${AIRBRAKE_HOST}
-        AIRBRAKE_PROJECT_ID: ${AIRBRAKE_PROJECT_ID}
-        AIRBRAKE_PROJECT_KEY: ${AIRBRAKE_PROJECT_KEY}
     env_file:
       - .env
     volumes:
       - app:${UPLOADS_PATH}
       - app:${DERIVATIVES_PATH}
       - app:${CACHE_PATH}
+      - app:${BRAND_PATH}
     networks:
       internal:
 

@@ -42,7 +42,6 @@ module Hyrax
           complex_instrument
           complex_affiliation
           manufacturer
-          managing_organization
           supplier
           custom_property
           complex_structural_feature

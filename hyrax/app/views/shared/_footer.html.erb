@@ -1,10 +1,31 @@
-<footer class="navbar site-footer">
+<footer class="site-footer">
   <div class="row">
-    <div class="col-sm-6 text-left">
-        <p><%= t('hyrax.footer.address_html') %></p>
+    <div class="col-sm-9 text-left">
+      <h2>
+        <a href="https://www.nims.go.jp/eng/" target="_blank" rel="noopener"><%= t('hyrax.institution_name_full') %></a>
+      </h2>
+      <p>
+        <a href="https://www.nims.go.jp/eng/research/MaDIS/" target="_blank" rel="noopener"><%= t('hyrax.division_name_full') %> (<%= t('hyrax.division_name') %>)</a>
+        <br>
+        <a href="https://www.nims.go.jp/eng/research/materials-data-pf/" target="_blank" rel="noopener"><%= t('hyrax.center_name_full') %></a>
+      </p>
+      <small><%= t('hyrax.footer.copyright_html', year: Date.today.year) %></small>
     </div>
-    <div class="col-sm-6 text-right">
-      <p><%= t('hyrax.footer.copyright_html') %></p>
+    <div class="col-sm-3 text-left">
+      <ul class="list-unstyled">
+        <li>
+          <a href="/terms"><%= t('hyrax.pages.tabs.terms_page') %></a>
+        </li>
+        <li>
+          <%= t('hyrax.footer.privacy_html') %>
+        </li>
+        <li>
+          <%= t('hyrax.footer.platform_html') %>
+        </li>
+        <li>
+          <%= t('hyrax.footer.service_html') %>
+        </li>
+      </ul>
     </div>
   </div>
 </footer>

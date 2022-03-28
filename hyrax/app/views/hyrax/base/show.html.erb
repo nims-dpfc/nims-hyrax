@@ -6,9 +6,8 @@
   <div class="col-xs-12">
     <%= render 'work_type', presenter: @presenter %>
   </div>
-  <div class="col-xs-12">&nbsp;</div>
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
-    <div class="panel panel-default">
+    <div>
       <div class="panel-heading">
         <%= render 'work_title', presenter: @presenter %>
       </div>
@@ -26,13 +25,18 @@
             <%#= render 'social_media' %> <!-- No social media buttons -->
           </div>
           <div class="col-sm-9">
+            <%= render 'relationships', presenter: @presenter %>
+
             <% if can? :read_abstract, @presenter.model_name.name.constantize %>
               <%= render 'work_description', presenter: @presenter %>
             <% end %>
             <%= render 'metadata', presenter: @presenter %>
+            <% @presenter.member_presenters.each do |member_presenter| %>
+              <%= nims_media_display(member_presenter, datatable: true) if member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv? %>
+            <% end %>
           </div>
+
           <div class="col-sm-12">
-            <%= render 'relationships', presenter: @presenter %>
             <%= render 'items', presenter: @presenter %>
             <%# TODO: we may consider adding these partials in the future %>
             <%# = render 'sharing_with', presenter: @presenter %>

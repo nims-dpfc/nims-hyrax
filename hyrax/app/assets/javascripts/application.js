@@ -10,8 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require turbolinks
-//
 //= require jquery
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
@@ -20,7 +18,13 @@
 //
 // Required by Blacklight
 //= require blacklight/blacklight
+//= require hydra-editor/editMetadata
+//= require csv_preview
+//= require hyrax_form_patch
+//= require tinymce
 
 //= require_tree .
 //= require hyrax
+
+
 

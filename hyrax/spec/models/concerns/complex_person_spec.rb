@@ -36,6 +36,7 @@ RSpec.describe ComplexPerson do
                }]
              }]
           }],
+          corresponding_author: true,
           uri: 'http://localhost/person/1234567'
         }]
       }).complex_person.first
@@ -58,6 +59,7 @@ RSpec.describe ComplexPerson do
       expect(subject.complex_affiliation.first.complex_organization.first.purpose).to eq ['org purpose']
       expect(subject.complex_affiliation.first.complex_organization.first.complex_identifier.first.identifier).to eq ['werqwerqwer']
       expect(subject.complex_affiliation.first.complex_organization.first.complex_identifier.first.scheme).to eq ['Local']
+      expect(subject.corresponding_author).to eq [true]
       expect(subject.uri).to eq ['http://localhost/person/1234567']
     end
   end
@@ -109,6 +111,7 @@ RSpec.describe ComplexPerson do
           expect(subject.role).to be_empty
           expect(subject.complex_identifier).to be_empty
           expect(subject.complex_affiliation).to be_empty
+          expect(subject.corresponding_author).to be_empty
           expect(subject.uri).to be_empty
         end
       end

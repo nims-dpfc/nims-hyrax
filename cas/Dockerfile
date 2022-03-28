@@ -1,5 +1,6 @@
 FROM apereo/cas:v5.3.10
 COPY pom.xml /cas-overlay/
+COPY .mvn/ /cas-overlay/.mvn/
 RUN build.sh package
 
 RUN keytool -genkeypair -alias cas -keyalg RSA -keypass changeit \

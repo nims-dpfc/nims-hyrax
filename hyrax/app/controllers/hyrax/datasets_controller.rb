@@ -14,17 +14,43 @@ module Hyrax
 
     def create
       safe_dataset_params = params['dataset'].permit(::Hyrax::DatasetForm.build_permitted_params)
-      #params['dataset'] = cleanup_instrument_and_specimen_type(cleanup_params(safe_dataset_params.to_h))
-      params['dataset'] = cleanup_params(safe_dataset_params.to_h)
+
+      # NB: need to cleanup twice
+      params['dataset'] = cleanup_params(cleanup_instrument_and_specimen_type(cleanup_params(safe_dataset_params.to_h)))
+      params['dataset']['draft'] = ['true'] if params["save_draft_with_files"] == "Save Draft"
       super
     end
 
     def update
       safe_dataset_params = params['dataset'].permit(::Hyrax::DatasetForm.build_permitted_params)
-      #params['dataset'] = cleanup_instrument_and_specimen_type(cleanup_params(safe_dataset_params.to_h))
-      params['dataset'] = cleanup_params(safe_dataset_params.to_h)
+      # NB: need to cleanup twice
+      params['dataset'] = cleanup_params(cleanup_instrument_and_specimen_type(cleanup_params(safe_dataset_params.to_h)))
+      if params["save_draft_with_files"] == "Save Draft"
+        params['dataset']['draft'] = ['true']
+      else
+        params['dataset']['draft'] = ['false']
+      end
       super
     end
 
+    # Finds a solr document matching the id and sets @presenter
+    # @raise CanCan::AccessDenied if the document is not found or the user doesn't have access to it.
+    def show
+      @curation_concern = _curation_concern_type.find(params[:id]) unless curation_concern
+      raise CanCan::AccessDenied if public_user? and private_work?
+      super
+    end
+
+    def edit
+      @supervisor_agreement_accepted = !curation_concern.draft?
+      super
+    end
+    
+    private
+
+    def private_work?
+      return false if @curation_concern.to_sipity_entity.blank?
+      @curation_concern.to_sipity_entity.reload.workflow_state_name != 'deposited' ? true : false
+    end
   end
 end

@@ -1,5 +1,5 @@
 <% service = CharacterizationMethodService.new %>
-<%= f.input :characterization_methods, as: :select,
+<%= f.input :characterization_methods, as: :multi_value_select,
     collection: service.select_active_options,
     include_blank: true,
     item_helper: service.method(:include_current_value),

@@ -18,36 +18,34 @@ protected
     # --- scheme and id - single row
     out << "<div class='row'>"
 
-    # --- scheme
-    field = :scheme
-    field_name = name_for(attribute_name, index, field, parent)
-    field_id = id_for(attribute_name, index, field, parent)
-    field_value = value.send(field).first
-    id_options = IdentifierService.new.select_all_options
+    scheme_field = :scheme
+    scheme_field_name = name_for(attribute_name, index, scheme_field, parent)
+    scheme_field_id = id_for(attribute_name, index, scheme_field, parent)
+    scheme_field_value = value.send(scheme_field).first
 
+    identifier_field = :identifier
+    identifier_field_name = name_for(attribute_name, index, identifier_field, parent)
+    identifier_field_id = id_for(attribute_name, index, identifier_field, parent)
+    identifier_field_value = value.send(identifier_field).first
+    # --- scheme
+    id_options = IdentifierService.new.select_all_options
     out << "  <div class='col-md-3'>"
-    out << template.select_tag(field_name,
-        template.options_for_select(id_options, field_value),
-        label: '', class: 'select form-control', prompt: 'choose type', id: field_id)
+    out << template.select_tag(scheme_field_name,
+                               template.options_for_select(id_options, scheme_field_value),
+                               label: '', class: 'select form-control', prompt: 'choose type', id: scheme_field_id)
     out << '  </div>'
 
     # --- identifier
-    field = :identifier
-    field_name = name_for(attribute_name, index, field, parent)
-    field_id = id_for(attribute_name, index, field, parent)
-    field_value = value.send(field).first
-
     out << "  <div class='col-md-6'>"
-    out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id,
-            required: required))
+    out << @builder.text_field(identifier_field_name,
+                               options.merge(value: identifier_field_value, name: identifier_field_name, id: identifier_field_id,
+                                             required: required))
     out << '  </div>'
 
     # --- delete checkbox
     if repeats == true
-      field_label = 'Identifier'
       out << "  <div class='col-md-3'>"
-      out << destroy_widget(attribute_name, index, field_label, parent)
+      out << destroy_widget(attribute_name, index, 'Identifier', parent)
       out << '  </div>'
     end
 

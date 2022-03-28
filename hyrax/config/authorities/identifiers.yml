@@ -20,9 +20,6 @@ terms:
   - id: full image url
     term: Full Image URL
     active: true
-  - id: nims person id
-    term: NIMS Person ID
-    active: true
   - id: ORCID
     term: ORCID
     active: true

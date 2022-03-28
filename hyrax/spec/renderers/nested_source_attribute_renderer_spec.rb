@@ -11,6 +11,9 @@ RSpec.describe NestedSourceAttributeRenderer do
     is_expected.to have_css('div.row label', text: 'Title')
     is_expected.to have_link('Test journal')
 
+    is_expected.to have_css('div.row label', text: 'ISSN')
+    is_expected.to have_css('div.row', text: '1234-5678')
+
     is_expected.to have_css('div.row label', text: 'Alternative title')
     is_expected.to have_css('div.row', text: 'Sub title for journal')
 

@@ -15,7 +15,7 @@ terms:
     term: data curator/データキュレーター
     active: true
   - id: contact person
-    term: contact person/連絡責任者
+    term: non-author contact/連絡責任者（著者以外）
     active: true
   - id: operator
     term: operator/データ測定者・計算者

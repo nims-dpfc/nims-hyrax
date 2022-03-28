@@ -4,6 +4,27 @@
 version: '3'
 
 services:
+  app: &app
+    build:
+      args:
+        FLUENTD_URL: ${FLUENTD_URL}
+
   web:
+    <<: *app
     ports:
       - 3000:3000
+
+  workers:
+    <<: *app
+
+  fluentd:
+    build: ./fluentd
+    volumes:
+      - ./fluentd/conf:/fluentd/etc
+    networks:
+      internal:
+    environment:
+      - FLUENTD_HOST=${FLUENTD_HOST}
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"

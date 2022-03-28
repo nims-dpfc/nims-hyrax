@@ -310,4 +310,59 @@ RSpec.describe PublicationIndexer do
     end
   end
 
+  describe 'indexes the relation active triple resource with all the attributes' do
+    before do
+      relationships = [
+        {
+          title: 'A related item',
+          url: 'http://example.com/relation',
+          complex_identifier_attributes: [{
+            identifier: ['123456'],
+            label: ['local']
+          }],
+          relationship: 'isPartOf'
+        }, {
+          title: 'A 2nd related item',
+          url: 'http://example.com/relation2',
+          relationship: 'isPartOf'
+        }, {
+          title: 'A 3rd relation item',
+          url: 'http://example.com/relation3',
+          relationship: 'isNewVersionOf'
+        }
+      ]
+      obj = build(:publication, complex_relation_attributes: relationships)
+      @solr_document = obj.to_solr
+    end
+    it 'indexes as displayable' do
+      expect(@solr_document).to include('complex_relation_ssm')
+      expect(JSON.parse(@solr_document['complex_relation_ssm'])).not_to be_empty
+    end
+    it 'indexes the title as stored searchable' do
+      expect(@solr_document['complex_relation_title_tesim']).to match_array(
+        ['A related item', 'A 2nd related item', 'A 3rd relation item'])
+    end
+    it 'indexes the relationship as facetable' do
+      expect(@solr_document['complex_relation_relationship_sim']).to match_array(
+        ['isPartOf', 'isPartOf', 'isNewVersionOf'])
+    end
+    it 'indexes the relation by relationship as stored searchable' do
+      expect(@solr_document['complex_relation_ispartof_tesim']).to match_array(
+        ['A related item', 'A 2nd related item'])
+      expect(@solr_document['complex_relation_isnewversionof_tesim']).to match_array(
+        ['A 3rd relation item'])
+    end
+    it 'indexes the relation by relationship as facetable' do
+      expect(@solr_document['complex_relation_ispartof_sim']).to match_array(
+        ['A related item', 'A 2nd related item'])
+      expect(@solr_document['complex_relation_isnewversionof_sim']).to match_array(
+        ['A 3rd relation item'])
+    end
+    it 'indexes the relation by relationship as facetable' do
+      expect(@solr_document['complex_relation_ispartof_sim']).to match_array(
+        ['A related item', 'A 2nd related item'])
+      expect(@solr_document['complex_relation_isnewversionof_sim']).to match_array(
+        ['A 3rd relation item'])
+    end
+  end
 end

@@ -1,5 +1,5 @@
 <% service = SynthesisAndProcessingService.new %>
-<%= f.input :synthesis_and_processing, as: :select,
+<%= f.input :synthesis_and_processing, as: :multi_value_select,
     collection: service.select_active_options,
     include_blank: true,
     item_helper: service.method(:include_current_value),

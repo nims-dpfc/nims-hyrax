@@ -25,6 +25,31 @@ class NestedPersonAttributeRenderer < NestedAttributeRenderer
           each_html += get_row(label, val)
         end
       end
+
+      # Workaround for nested properties
+      # orcid
+      unless v.dig('orcid').blank?
+        label = 'ORCID'
+        val = v['orcid'][0]
+        each_html += get_row(label, val)
+      end
+
+      # Workaround for nested properties
+      # organization
+      unless v.dig('organization').blank?
+        label = 'Organization'
+        val = v['organization'][0]
+        each_html += get_row(label, val)
+      end
+
+      # Workaround for nested properties
+      # sub_organization
+      unless v.dig('sub_organization').blank?
+        label = 'Sub organization'
+        val = v['sub_organization'][0]
+        each_html += get_row(label, val)
+      end
+
       # complex_identifier
       unless v.dig('complex_identifier').blank?
         label = 'Identifier'
@@ -42,7 +67,13 @@ class NestedPersonAttributeRenderer < NestedAttributeRenderer
         label = 'Role'
         val = v['role'][0]
         term = RoleService.new.find_by_id(val)
-        val = term['label'] if term.any?
+        val = term['id'] if term.any? #using id as proxy for English-only text
+        each_html += get_row(label, val)
+      end
+      # role
+      unless v.dig('corresponding_author')&.first.to_i.zero?
+        label = ''
+        val = 'corresponding author'
         each_html += get_row(label, val)
       end
       html += get_inner_html(each_html)
