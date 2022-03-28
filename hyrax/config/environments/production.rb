@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Added for Rails 5.2
+  config.secret_key_base = ENV['SECRET_KEY_BASE_PRODUCTION']
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -11,7 +14,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  # To display stack traces in production, you want 
+  # To display stack traces in production, you want
   # config.consider_all_requests_local       = true
   # To hide stack traces in production, set this to false.
   config.consider_all_requests_local       = false
@@ -34,7 +37,7 @@ Rails.application.configure do
   end
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = Uglifier.new(harmony: true)
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
@@ -57,9 +60,16 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   if ENV["RAILS_FORCE_SSL"].present? && (ENV["RAILS_FORCE_SSL"].to_s.downcase == 'false') then
     config.force_ssl = false
+    Rails.application.routes.default_url_options = \
+      Hyrax::Engine.routes.default_url_options = \
+      {protocol: 'http', host: ENV['MDR_HOST']}
+    config.application_url = "http://#{ENV['MDR_HOST']}"
   else
     config.force_ssl = true #default if nothing specified is more secure.
-    Rails.application.routes.default_url_options = {protocol: 'https', host: ENV['MDR_HOST']}
+    Rails.application.routes.default_url_options = \
+      Hyrax::Engine.routes.default_url_options = \
+      {protocol: 'https', host: ENV['MDR_HOST']}
+    config.application_url = "https://#{ENV['MDR_HOST']}"
   end
 
   # Use the lowest log level (:debug) to ensure availability of diagnostic information
@@ -97,7 +107,7 @@ Rails.application.configure do
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
-  config.i18n.fallbacks = true
+  # config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
@@ -112,4 +122,26 @@ Rails.application.configure do
     port: ENV['SMTP_PORT'],
     enable_starttls_auto: false
   }
+
+  config.middleware.use ExceptionNotification::Rack,
+    ignore_exceptions: [
+      'I18n::InvalidLocale',
+      'Riiif::ConversionError',
+      'Blacklight::Exceptions::RecordNotFound',
+      'ActionView::Template::Error',
+      'Ldp::Gone'
+    ] + ExceptionNotifier.ignored_exceptions,
+    error_grouping: true,
+    email: {
+      email_prefix: "[MDR #{ENV['ERROR_NOTIFICATION_SUBJECT_PREFIX']}] ",
+      sender_address: ENV['NOTIFICATIONS_EMAIL_DEFAULT_FROM_ADDRESS'],
+      exception_recipients: [ENV['ERROR_NOTIFICATION_RECIPIENT_EMAIL']]
+    }
+
+  ExceptionNotifier::Rake.configure
+
+  config.log_level = :info
+  config.logger = ActFluentLoggerRails::Logger.new
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Json.new
 end

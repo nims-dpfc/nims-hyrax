@@ -7,6 +7,7 @@ class SolrDocument
   # Adds Hyrax behaviors to the SolrDocument.
   include Hyrax::SolrDocumentBehavior
   include Hyrax::SolrDocument::MdrExport
+  include Hyrax::SolrDocument::Jpcoar
 
   # self.unique_key = 'id'
 
@@ -28,7 +29,7 @@ class SolrDocument
     contributor: 'complex_person_other_tesim', # @todo - extract anything other than author from complex person, may need new solr field
     creator: 'complex_person_author_tesim',
     date: 'date_tesim',
-    description: 'description_tesim',
+    # description: 'description_tesim', # hide description/abstract field for OAI-PMH feed
     identifier: 'complex_identifier_tesim',
     language: 'language_tesim',
     publisher: 'publisher_tesim',
@@ -39,13 +40,15 @@ class SolrDocument
     type: 'resource_type_tesim'
   )
 
-
-  # Do content negotiation for AF models.
-
-  use_extension( Hydra::ContentNegotiation )
+  # Using custom extension for content negotiation for ActiveFedora models
+  use_extension( ::Hyrax::SolrDocument::ContentNegotiation )
 
   def alternative_title
     self[Solrizer.solr_name('alternative_title', :stored_searchable)]
+  end
+
+  def date_published
+    self[Solrizer.solr_name('date_published', :stored_searchable)]
   end
 
   def complex_date
@@ -90,6 +93,10 @@ class SolrDocument
 
   def data_origin
     self[Solrizer.solr_name('data_origin', :stored_searchable)]
+  end
+
+  def licensed_date
+    self[Solrizer.solr_name('licensed_date', :stored_searchable)]
   end
 
   def instrument
@@ -147,5 +154,28 @@ class SolrDocument
   def status
     self[Solrizer.solr_name('status', :stored_searchable)]
   end
-end
 
+  def first_published_url
+    self[Solrizer.solr_name('first_published_url', :stored_searchable)]
+  end
+
+  def manuscript_type
+    self[Solrizer.solr_name('manuscript_type', :stored_searchable)]
+  end
+
+  def managing_organization
+    self[Solrizer.solr_name('managing_organization', :stored_searchable)]
+  end
+
+  def doi
+    self[Solrizer.solr_name('doi', :stored_searchable)]
+  end
+
+  def file_size
+    self[Solrizer.solr_name("file_size", 'lts')]
+  end
+
+  def material_type
+    self[Solrizer.solr_name('material_type', :stored_searchable)]
+  end
+end

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   curation_concerns_basic_routes
 
+  resources :local_terms, only: [:index]
   resources :bookmarks do
     concerns :exportable
     collection do
@@ -36,6 +37,14 @@ Rails.application.routes.draw do
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns :exportable
   end
+
+  resources :files, only: [] do
+    member do
+      get :export, controller: :exports
+    end
+  end
+
+  resources :download_all, only: :show
 
   resources :welcome, only: 'index'
   root 'hyrax/homepage#index'

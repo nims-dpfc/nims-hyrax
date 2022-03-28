@@ -3,34 +3,54 @@ FactoryBot.define do
   factory :publication do
     title { ["Publication"] }
     access_control
-    skip_create
-    override_new_record
 
     trait :open do
       visibility { 'open' }
       title { ["Open Publication"] }
     end
 
-    trait :with_people do
+    trait :authenticated do
+      visibility { 'authenticated' }
+      title { ["Authenticated Publication"] }
+    end
+
+    trait :restricted do
+      visibility { 'restricted' }
+      title { ["Restricted Publication"] }
+    end
+
+    trait :with_complex_author do
       complex_person_attributes {
-        [
-          {
-              first_name: ['Foo'],
-              last_name: 'Bar',
-              role: "author"
-          }, {
-              name: 'Big Baz',
-              role: "editor"
-          }, {
-              name: 'Small Buz',
-              role: "author"
-          }, {
-              first_name: ['Moo'],
-              last_name: 'Milk',
-              name: 'Moo Milk',
-              role: "data depositor"
+        [{
+          name: ['Foo Bar'],
+          role: ['author'],
+          orcid: ['https://orcid.org/0000-0002-1825-0097'],
+          organization: ['National Institute for Materials Science'],
+          sub_organization: ['MaDIS DPFC'],
+          complex_identifier_attributes: [{
+            identifier: '123456',
+            scheme: 'identifier local'
+          }],
+          complex_affiliation_attributes: [{
+            job_title: 'Principal Investigator',
+            complex_organization_attributes: [{
+              organization: 'University',
+              sub_organization: 'Department',
+              purpose: 'Research'
+            }]
           }
-        ]
+        ]}, {
+          name: ['Big Buz'],
+          role: ['editor'],
+        }, {
+          name: ['Small Buz'],
+          role: ['author'],
+        }, {
+          first_name: ['Moo'],
+          last_name: ['Milk'],
+          name: ['Moo Milk'],
+          role: ['data depositor']
+        }]
       }
     end
 
@@ -89,7 +109,16 @@ FactoryBot.define do
     end
 
     trait :with_complex_date do
-      complex_date_attributes { [{ date: '2019-05-28',  description: 'Published' }] }
+      complex_date_attributes {
+        [{
+          date: '1978-10-28',
+          description: 'Published'
+         }]
+      }
+    end
+
+    trait :with_date_published do
+      date_published { '2019-05-28' }
     end
 
     trait :with_place do
@@ -104,7 +133,7 @@ FactoryBot.define do
       complex_event_attributes {
         [{
              title: 'Event-Title-123',
-             invitation_status: true,
+             invitation_status: '1',
              place: 'New Scotland Yard',
              start_date: '2018-12-25',
              end_date: '2019-01-01'
@@ -130,7 +159,8 @@ FactoryBot.define do
           start_page: '4',
           title: 'Test journal',
           total_number_of_pages: '8',
-          volume: '3'
+          volume: '3',
+          issn: '1234-5678'
         }]
       }
     end
@@ -153,6 +183,14 @@ FactoryBot.define do
            version: '1.0'
          }]
       }
+    end
+
+    trait :with_description_abstract do
+      description { ["Abstract-Description-123"] }
+    end
+
+    trait :with_supervisor_approval do
+      supervisor_approval { ['Professor-Supervisor-Approval'] }
     end
   end
 end
