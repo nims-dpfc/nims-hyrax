@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::Workflow::VirusFoundNotification do
-  let(:approver) { User.find_by_user_key('admin') }
-  let(:depositor) { User.create(email: 'test@example.com', uid: 'test@example.com', password: 'password', password_confirmation: 'password') }
-  let(:cc_user) { User.create(email: 'test2@example.com', uid: 'test2@example.com', password: 'password', password_confirmation: 'password') }
-  let(:work) { Article.create(title: ['New Article'], depositor: depositor.email) }
+  let(:approver) { User.find_by(username: 'admin_hyrax') }
+  let(:depositor) { User.create(email: 'test@example.com', username: 'test@example.com', password: 'password', password_confirmation: 'password') }
+  let(:cc_user) { User.create(email: 'test2@example.com', username: 'test2@example.com', password: 'password', password_confirmation: 'password') }
+  let(:work) { Dataset.create(title: ['New Dataset'], depositor: depositor.username) }
   let(:admin_set) do
-    AdminSet.create(title: ['article admin set'],
+    AdminSet.create(title: ['dataset admin set'],
                     description: ['some description'],
-                    edit_users: [depositor.user_key])
+                    edit_users: [depositor.username])
   end
   let(:permission_template) do
     Hyrax::PermissionTemplate.create!(source_id: admin_set.id)
@@ -26,7 +26,7 @@ RSpec.describe Hyrax::Workflow::VirusFoundNotification do
       expect(depositor).to receive(:send_message)
         .with(anything,
               I18n.t('hyrax.notifications.workflow.virus_found.message', title: work.title[0],
-                                                                         link: "<a href=\"#{ENV['HYRAX_HOST']}/concern/articles/#{work.id}\">#{work.id}</a>",
+                                                                         link: "<a href=\"#{ENV['HYRAX_HOST']}/concern/datasets/#{work.id}\">#{work.id}</a>",
                                                                          comment: comment.comment),
               anything).exactly(2).times.and_call_original
 
