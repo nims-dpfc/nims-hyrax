@@ -70,3 +70,9 @@ services:
 
     ports:
       - 8443:8443
+
+  clamav:
+    volumes:
+      - file_uploads:${UPLOADS_PATH}
+    ports:
+      - 3310:3310
