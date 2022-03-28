@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mdr-clamav
+  name: mdr-clamav
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mdr-clamav
+  # strategy:
+  #   type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mdr-clamav
+    spec:
+      containers:
+        - name: mdr-clamav
+          image: clamav/clamav:stable
+          ports:
+            - containerPort: 3310
+          volumeMounts:
+            - name: clam_db
+              mountPath: /var/lib/clamav
+            - name: web-file-uploads
+              mountPath: /shared/uploads/
+      volumes:
+        - name: clam-db
+          persistentVolumeClaim:
+            claimName: clam-db
+        - name: web-file-uploads
+          persistentVolumeClaim:
+            claimName: web-file-uploads
+      hostname: mdr-clamav
+      # restartPolicy: Always
