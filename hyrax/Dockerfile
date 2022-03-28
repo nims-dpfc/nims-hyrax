@@ -19,9 +19,6 @@ ENV APP_PRODUCTION=/data/ \
 # Add backports to apt-get sources
 # Install libraries, dependencies, java and fits
 
-RUN echo 'deb  http://deb.debian.org/debian buster main contrib non-free'
-RUN echo 'deb-src  http://deb.debian.org/debian buster main contrib non-free'
-
 RUN apt-get update -qq && \
     apt-get -y install apt-transport-https && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
