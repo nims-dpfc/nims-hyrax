@@ -8,21 +8,22 @@ require 'pathname'
 RSpec.describe Nims::VirusScanner do
   subject(:scanner) { described_class.new(file) }
 
+  before(:suite) do
+    if !Dir.exist?('/shared/uploads/runner')
+      FileUtils.mkdir_p('/shared/uploads/runner')
+    end
+  end
+  after(:suite) do
+    FileUtils.rm_r('/shared/uploads/runner/*')
+    FileUtils.rmdir '/shared/uploads/runner'
+  end
+
   context 'when a file is not infected' do
     src_path = Pathname.new('spec/fixtures/files/test.txt').realpath.to_s
-
-
-    if Dir.pwd.include? 'runner'
-      let(:file) { Tempfile.new.path }
-    else
-      let(:file) { src_path }
-    end
+    let(:file) { '/shared/uploads/runner/text.txt' }
 
     before do
-      if Dir.pwd.include? 'runner'
-        FileUtils.rm(file)
-        FileUtils.cp(src_path, file)
-      end
+      FileUtils.cp(src_path, file)
     end
 
     it 'does not have a virus hy-c custom scan' do
@@ -44,17 +45,10 @@ RSpec.describe Nims::VirusScanner do
 
   context 'when a file is infected' do
     src_path = Pathname.new('spec/fixtures/files/virus.txt').realpath.to_s
-    if Dir.pwd.include? 'runner'
-      let(:file) { Tempfile.new.path }
-    else
-      let(:file) { src_path }
-    end
+    let(:file) { '/shared/uploads/runner/virus.txt' }
 
     before do
-      if Dir.pwd.include? 'runner'
-        FileUtils.rm(file)
-        FileUtils.cp(src_path, file)
-      end
+      FileUtils.cp(src_path, file)
     end
 
     it 'has a virus nims custom scan' do
@@ -68,18 +62,10 @@ RSpec.describe Nims::VirusScanner do
 
   context 'when a file name has special characters' do
     src_path = Pathname.new('spec/fixtures/files/odd_chars_+.txt').realpath.to_s
-
-    if Dir.pwd.include? 'runner'
-      let(:file) { Tempfile.new.path }
-    else
-      let(:file) { src_path }
-    end
+    let(:file) { '/shared/uploads/runner/odd_chars_+.txt' }
 
     before do
-      if Dir.pwd.include? 'runner'
-        FileUtils.rm(file)
-        FileUtils.cp(src_path, file)
-      end
+      FileUtils.cp(src_path, file)
     end
 
     it 'can perform a nims custom scan' do
