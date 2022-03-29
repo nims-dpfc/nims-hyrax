@@ -8,25 +8,15 @@ require 'pathname'
 RSpec.describe Nims::VirusScanner do
   subject(:scanner) { described_class.new(file) }
 
-  before(:suite) do
-    if !Dir.exist?('/shared/uploads/runner')
-      FileUtils.mkdir_p('/shared/uploads/runner')
-    end
-  end
-  after(:suite) do
-    FileUtils.rm_r('/shared/uploads/runner/*')
-    FileUtils.rmdir '/shared/uploads/runner'
-  end
-
   context 'when a file is not infected' do
     src_path = Pathname.new('spec/fixtures/files/test.txt').realpath.to_s
     let(:file) { '/shared/uploads/runner/text.txt' }
 
     before do
-      FileUtils.cp(src_path, file)
+      ClamAV::Client.any_instance.stub(:execute).and_return([ClamAV::SuccessResponse.new(file)])
     end
 
-    it 'does not have a virus hy-c custom scan' do
+    it 'does not have a virus custom scan' do
       expect(scanner.scan_file).to be_a ClamAV::SuccessResponse
     end
 
@@ -37,18 +27,20 @@ RSpec.describe Nims::VirusScanner do
 
   context 'when it cannot find the file' do
     let(:file) { 'not/a/file.txt' }
+    before do
+      ClamAV::Client.any_instance.stub(:execute).and_return([ClamAV::ErrorResponse.new('error')])
+    end
 
     it 'raises an error' do
-      expect { scanner.infected? }.to raise_error(ClamAV::Util::UnknownPathException)
+      expect { scanner.infected? }.to raise_error(StandardError, 'ClamAV::ErrorResponse: error')
     end
   end
 
   context 'when a file is infected' do
-    src_path = Pathname.new('spec/fixtures/files/virus.txt').realpath.to_s
     let(:file) { '/shared/uploads/runner/virus.txt' }
 
     before do
-      FileUtils.cp(src_path, file)
+      ClamAV::Client.any_instance.stub(:execute).and_return([ClamAV::VirusResponse.new(file, 'virus_name')])
     end
 
     it 'has a virus nims custom scan' do
@@ -61,11 +53,10 @@ RSpec.describe Nims::VirusScanner do
   end
 
   context 'when a file name has special characters' do
-    src_path = Pathname.new('spec/fixtures/files/odd_chars_+.txt').realpath.to_s
     let(:file) { '/shared/uploads/runner/odd_chars_+.txt' }
 
     before do
-      FileUtils.cp(src_path, file)
+      ClamAV::Client.any_instance.stub(:execute).and_return([ClamAV::SuccessResponse.new(file)])
     end
 
     it 'can perform a nims custom scan' do
