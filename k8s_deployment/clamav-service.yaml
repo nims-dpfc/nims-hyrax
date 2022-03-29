@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mdr-clamav
+  labels:
+    app: mdr-clamav
+spec:
+  selector:
+    app: mdr-clamav
+  ports:
+    - name: mdr-clamav
+      port: 3310
+      protocol: TCP
+      targetPort: 3310
