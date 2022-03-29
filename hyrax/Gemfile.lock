@@ -699,7 +699,7 @@ GEM
       rdf
     racc (1.6.0)
     rack (2.2.3)
-    rack-protection (2.0.5)
+    rack-protection (2.2.0)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -792,7 +792,7 @@ GEM
       rexml (~> 3.2)
     redic (1.5.3)
       hiredis
-    redis (3.3.5)
+    redis (4.5.1)
     redis-namespace (1.8.1)
       redis (>= 3.0.4)
     redis-session-store (0.11.1)
@@ -887,11 +887,11 @@ GEM
       rdf-xsd (~> 3.1)
       sparql (~> 3.1)
       sxp (~> 1.1)
-    sidekiq (5.2.7)
+    sidekiq (5.2.10)
       connection_pool (~> 2.2, >= 2.2.2)
-      rack (>= 1.5.0)
+      rack (~> 2.0)
       rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
+      redis (~> 4.5, < 4.6.0)
     signet (0.15.0)
       addressable (~> 2.3)
       faraday (>= 0.17.3, < 2.0)
@@ -1029,7 +1029,7 @@ DEPENDENCIES
   pry
   puma (~> 4.3)
   rails (~> 5.2.6)
-  redis (~> 3.0)
+  redis (~> 4.0)
   redis-session-store (~> 0.11.1)
   riiif (~> 2.0)
   rinku
@@ -1038,7 +1038,7 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-rails
   sass-rails (~> 5.0)
-  sidekiq
+  sidekiq (~> 5.2.10)
   simplecov
   sitemap_generator
   solr_wrapper (~> 2.0)
