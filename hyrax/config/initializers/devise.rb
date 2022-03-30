@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'microsoft'
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -356,4 +356,6 @@ Devise.setup do |config|
   # config.cas_client_config_options = {
   #     logger: Rails.logger
   # }
+  #
+  config.omniauth :microsoft, ENV['AZURE_APP_ID'], ENV['AZURE_APP_SECRET'], :scope => ENV['AZURE_SCOPES']
 end
