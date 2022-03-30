@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   mount WillowSword::Engine => '/sword'
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
   # This needs to appear before Hyrax's routes else sign_in and sign_out break
-  devise_for :users, controllers: {sessions: 'users/sessions'}
+  devise_for :users, controllers: {sessions: 'users/sessions', omniauth_callbacks: "omniauth_callbacks"}
+  # get 'auth/signout'
 
   authenticate :user, lambda { |u| u.admin? } do
     require 'sidekiq/web'
