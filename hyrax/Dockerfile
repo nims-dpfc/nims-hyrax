@@ -35,7 +35,7 @@ RUN apt-get update -qq && \
     libjpeg-dev libtiff-dev libpng-dev libraw-dev libwebp-dev libjxr-dev \
     libcairo2-dev libgs-dev librsvg2-dev \
     libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev \
-    ghostscript ffmpeg \
+    ghostscript ffmpeg cifs-utils \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
