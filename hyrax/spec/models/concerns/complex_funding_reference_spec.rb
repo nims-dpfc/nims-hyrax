@@ -23,7 +23,7 @@ RSpec.describe ComplexFundingReference do
         .new({ complex_funding_reference_attributes: [{funder_identifier: '12345'}]})
         .complex_funding_reference
         .first
-        .date
+        .funder_identifier
     end
     it { is_expected.to eq ['12345'] }
   end
