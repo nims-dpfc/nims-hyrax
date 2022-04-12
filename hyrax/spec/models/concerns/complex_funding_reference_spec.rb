@@ -58,4 +58,43 @@ RSpec.describe ComplexFundingReference do
     expect(@obj.complex_funding_reference.first.award_number).to eq ['a323']
     expect(@obj.complex_funding_reference.first.award_title).to eq ['Award title for a323']
   end
+
+  describe 'when reject_if is a symbol' do
+    before do
+      class ExampleWork2 < ExampleWork
+        include ComplexValidation
+        accepts_nested_attributes_for :complex_funding_reference, reject_if: :fundref_blank
+      end
+    end
+    after do
+      Object.send(:remove_const, :ExampleWork2)
+    end
+
+    it 'creates a fund ref active triple resource when any value is filled' do
+      @obj = ExampleWork2.new
+      @obj.attributes = {
+        complex_funding_reference_attributes: [
+          {
+            funder_identifier: '12456'
+          }
+        ]
+      }
+      expect(@obj.complex_funding_reference.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_funding_reference.first.funder_identifier).to eq ['12456']
+      expect(@obj.complex_funding_reference.first.funder_name).to be_empty
+    end
+
+    it 'rejects a fund ref active triple with no values' do
+      @obj = ExampleWork2.new
+      @obj.attributes = {
+        complex_funding_reference_attributes: [
+          {
+            funder_identifier: ''
+          }
+        ]
+      }
+      expect(@obj.complex_funding_reference).to be_empty
+    end
+  end
+
 end
