@@ -178,4 +178,8 @@ class SolrDocument
   def material_type
     self[Solrizer.solr_name('material_type', :stored_searchable)]
   end
+
+  def complex_funding_reference
+    self[Solrizer.solr_name('complex_funding_reference', :displayable)]
+  end
 end
