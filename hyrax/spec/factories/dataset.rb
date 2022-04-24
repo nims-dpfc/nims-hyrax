@@ -499,5 +499,16 @@ FactoryBot.define do
     trait :with_material_type do
       material_type { ['Cu-containing'] }
     end
+
+    trait :with_complex_funding_reference do
+      complex_funding_reference_attributes {
+        [{
+           funder_identifier: 'f1234',
+           funder_name: 'Bank',
+           award_number: 'a1234',
+           award_title: 'No free lunch'
+         }]
+      }
+    end
   end
 end

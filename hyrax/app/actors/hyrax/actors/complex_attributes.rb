@@ -55,6 +55,7 @@ module Hyrax
           complex_event
           complex_source
           complex_event_date
+          complex_funding_reference
 
         ]
       end

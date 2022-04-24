@@ -64,6 +64,7 @@ en:
           custom_property_sim: Additional metadata
           data_origin_sim: Data origin
           file_format_sim: Format
+          funder_sim: Funder
           generic_type_sim: Type
           human_readable_type_sim: Type of work
           instrument_sim: Instrument
@@ -86,6 +87,7 @@ en:
           material_type_sim: Material type
           visibility_ssi: Visibility
         index:
+          award_tesim: Award
           based_near_tesim: Location
           characterization_methods_tesim: Characterization methods
           contributor_tesim: Contributor
@@ -152,6 +154,7 @@ en:
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description/Abstract
           file_format_tesim: File Format
+          funder_tesim: Funder
           identifier_tesim: Identifier
           instrument_alternative_title_tesim: Instrument alternative title
           instrument_description_tesim: Instrument description
@@ -193,6 +196,7 @@ en:
           complex_date_purchased_ssm: Date purchased
           complex_date_other_ssm: Date
           complex_event_ssm: Event
+          complex_funding_reference_ssm: Funding reference
           complex_identifier_ssm: Identifier
           complex_instrument_ssm: Instrument
           complex_organization_ssm: Organization
