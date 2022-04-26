@@ -37,7 +37,13 @@ RSpec.describe SolrDocument do
       }],
       specimen_set: ['Specimen Set'],
       synthesis_and_processing: ['Synthesis and processing methods'],
-      custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }]
+      custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }],
+      complex_funding_reference_attributes: [{
+        funder_identifier: 'f1234',
+        funder_name: 'Bank',
+        award_number: 'a1234',
+        award_title: 'No free lunch'
+      }]
     )
   end
   let(:solr_document) { described_class.new(model.to_solr) }
@@ -317,5 +323,29 @@ RSpec.describe SolrDocument do
     let(:model) { build(:publication, id: '123456', title: ['Test']) }
     subject { solr_document.persistent_url }
     it { is_expected.to eql "http://localhost/concern/publications/#{solr_document.id}" }
+  end
+
+  describe '#complex_funding_reference' do
+    let(:complex_funding_reference) { JSON.parse(solr_document.complex_funding_reference).first }
+    #         funder_identifier: 'f1234',
+    #         funder_name: 'Bank',
+    #         award_number: 'a1234',
+    #         award_title: 'No free lunch'
+    describe 'funder_identifier' do
+      subject { complex_funding_reference['funder_identifier'] }
+      it { is_expected.to eql ['f1234'] }
+    end
+    describe 'funder_name' do
+      subject { complex_funding_reference['funder_name'] }
+      it { is_expected.to eql ['Bank'] }
+    end
+    describe 'award_number' do
+      subject { complex_funding_reference['award_number'] }
+      it { is_expected.to eql ['a1234'] }
+    end
+    describe 'award_title' do
+      subject { complex_funding_reference['award_title'] }
+      it { is_expected.to eql ['No free lunch'] }
+    end
   end
 end
