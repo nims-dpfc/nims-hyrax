@@ -365,4 +365,44 @@ RSpec.describe PublicationIndexer do
         ['A 3rd relation item'])
     end
   end
+
+  describe 'indexes the funding reference active triple resource with all the attributes' do
+    before do
+      fund_ref = [
+        {
+          funder_identifier: 'f12345',
+          funder_name: 'Bar',
+          award_number: 'c232',
+          award_title: 'Title of the award'
+        },
+        {
+          funder_identifier: 'f22345',
+          funder_name: 'Baz',
+          award_number: 'a223345',
+          award_title: 'Another award'
+        }
+      ]
+      obj = build(:publication, complex_funding_reference_attributes: fund_ref)
+      @solr_document = obj.to_solr
+    end
+    it 'indexes as displayable' do
+      expect(@solr_document).to include('complex_funding_reference_ssm')
+      expect(JSON.parse(@solr_document['complex_funding_reference_ssm'])).not_to be_empty
+    end
+    it 'indexes funder identifier as symbol' do
+      expect(@solr_document['funder_identifier_ssim']).to match_array(['f12345', 'f22345'])
+    end
+    it 'indexes funder name as stored searchable' do
+      expect(@solr_document['funder_tesim']).to match_array(['Bar', 'Baz'])
+    end
+    it 'indexes funder name as facetable' do
+      expect(@solr_document['funder_sim']).to match_array(['Bar', 'Baz'])
+    end
+    it 'indexes award number as symbol' do
+      expect(@solr_document['award_number_ssim']).to match_array(['c232', 'a223345'])
+    end
+    it 'indexes award title as stored searchable' do
+      expect(@solr_document['award_title_tesim']).to match_array(['Title of the award', 'Another award'])
+    end
+  end
 end

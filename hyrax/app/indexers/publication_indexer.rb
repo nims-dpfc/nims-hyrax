@@ -11,6 +11,7 @@ class PublicationIndexer < NgdrIndexer
   include ComplexField::RelationIndexer
   include ComplexField::EventIndexer
   include ComplexField::SourceIndexer
+  include ComplexField::FundrefIndexer
 
   def self.facet_fields
     super.tap do |fields|
@@ -21,6 +22,7 @@ class PublicationIndexer < NgdrIndexer
       fields.concat ComplexField::RightsIndexer.rights_facet_fields
       fields.concat ComplexField::EventIndexer.event_facet_fields
       fields.concat ComplexField::SourceIndexer.source_facet_fields
+      fields.concat ComplexField::FundrefIndexer.fundref_facet_fields
     end
   end
 
@@ -39,6 +41,7 @@ class PublicationIndexer < NgdrIndexer
       fields.concat ComplexField::RightsIndexer.rights_search_fields
       fields.concat ComplexField::EventIndexer.event_search_fields
       fields.concat ComplexField::SourceIndexer.source_search_fields
+      fields.concat ComplexField::FundrefIndexer.fundref_search_fields
     end
   end
 
@@ -55,6 +58,7 @@ class PublicationIndexer < NgdrIndexer
       fields.concat ComplexField::RightsIndexer.rights_show_fields
       fields.concat ComplexField::EventIndexer.event_show_fields
       fields.concat ComplexField::SourceIndexer.source_show_fields
+      fields.concat ComplexField::FundrefIndexer.fundref_show_fields
     end
   end
 

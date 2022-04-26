@@ -16,7 +16,7 @@ RSpec.describe Hyrax::PublicationForm do
       :manuscript_type, :publisher, :specimen_set_ordered,
       :managing_organization_ordered,
       :date_published, :rights_statement, :licensed_date, :complex_identifier, :complex_source,
-      :complex_version, :complex_relation, :complex_date, :complex_event,
+      :complex_version, :complex_funding_reference, :complex_relation, :complex_date, :complex_event,
       :custom_property) }
   end
 
@@ -35,6 +35,7 @@ RSpec.describe Hyrax::PublicationForm do
         expect(described_class).to receive(:permitted_event_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_source_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_custom_property_params).at_least(:once).and_call_original
+        expect(described_class).to receive(:permitted_fundref_params).at_least(:once).and_call_original
         subject
       end
     end
