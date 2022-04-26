@@ -87,7 +87,8 @@ en:
           material_type_sim: Material type
           visibility_ssi: Visibility
         index:
-          award_tesim: Award
+          award_title_tesim: Award title
+          award_number_ssim: Award number
           based_near_tesim: Location
           characterization_methods_tesim: Characterization methods
           contributor_tesim: Contributor
@@ -155,6 +156,7 @@ en:
           description_tesim: Description/Abstract
           file_format_tesim: File Format
           funder_tesim: Funder
+          funder_identifier_ssim: Funder identifier
           identifier_tesim: Identifier
           instrument_alternative_title_tesim: Instrument alternative title
           instrument_description_tesim: Instrument description
