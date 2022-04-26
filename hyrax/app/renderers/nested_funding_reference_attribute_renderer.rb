@@ -6,12 +6,12 @@ class NestedFundingReferenceAttributeRenderer < NestedAttributeRenderer
     value.each do |v|
       each_html = ''
       unless v.dig('funder_identifier').blank?
-        label = 'Funder Identifier'
+        label = 'Funder identifier'
         val = v['funder_identifier'][0]
         each_html += get_row(label, val)
       end
       unless v.dig('funder_name').blank?
-        label = 'Funder Name'
+        label = 'Funder name'
         val = v['funder_name'][0]
         each_html += get_row(label, val)
       end
