@@ -1081,12 +1081,14 @@ RSpec.describe DatasetIndexer do
           funder_identifier: 'f12345',
           funder_name: 'Bar',
           award_number: 'c232',
+          award_uri: 'http://award.com/c232',
           award_title: 'Title of the award'
         },
         {
           funder_identifier: 'f22345',
           funder_name: 'Baz',
           award_number: 'a223345',
+          award_uri: 'http://award.com/a223345',
           award_title: 'Another award'
         }
       ]

@@ -42,6 +42,7 @@ RSpec.describe SolrDocument do
         funder_identifier: 'f1234',
         funder_name: 'Bank',
         award_number: 'a1234',
+        award_uri: 'http://award.com/a1234',
         award_title: 'No free lunch'
       }]
     )
@@ -330,6 +331,7 @@ RSpec.describe SolrDocument do
     #         funder_identifier: 'f1234',
     #         funder_name: 'Bank',
     #         award_number: 'a1234',
+    #         award_uri: 'http://award.com/a1234'
     #         award_title: 'No free lunch'
     describe 'funder_identifier' do
       subject { complex_funding_reference['funder_identifier'] }
@@ -342,6 +344,10 @@ RSpec.describe SolrDocument do
     describe 'award_number' do
       subject { complex_funding_reference['award_number'] }
       it { is_expected.to eql ['a1234'] }
+    end
+    describe 'award_uri' do
+      subject { complex_funding_reference['award_uri'] }
+      it { is_expected.to eql ['http://award.com/a1234'] }
     end
     describe 'award_title' do
       subject { complex_funding_reference['award_title'] }

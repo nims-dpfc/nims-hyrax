@@ -199,6 +199,7 @@ FactoryBot.define do
            funder_identifier: 'f1234',
            funder_name: 'Bank',
            award_number: 'a1234',
+           award_uri: 'http://example.com/a1234',
            award_title: 'No free lunch'
          }]
       }

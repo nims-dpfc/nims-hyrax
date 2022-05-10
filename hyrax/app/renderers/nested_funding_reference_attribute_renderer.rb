@@ -20,6 +20,11 @@ class NestedFundingReferenceAttributeRenderer < NestedAttributeRenderer
         val = v['award_number'][0]
         each_html += get_row(label, val)
       end
+      unless v.dig('award_uri').blank?
+        label = 'Award URI'
+        val = v['award_uri'][0]
+        each_html += get_row(label, val)
+      end
       unless v.dig('award_title').blank?
         label = 'Award title'
         val = v['award_title'][0]
