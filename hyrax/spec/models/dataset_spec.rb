@@ -1032,6 +1032,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_funding_reference.first.funder_identifier).to eq ['f1234']
       expect(@obj.complex_funding_reference.first.funder_name).to eq ['Bank']
       expect(@obj.complex_funding_reference.first.award_number).to be_empty
+      expect(@obj.complex_funding_reference.first.award_uri).to be_empty
       expect(@obj.complex_funding_reference.first.award_title).to eq ['No free lunch']
     end
 
@@ -1041,6 +1042,7 @@ RSpec.describe Dataset do
                                                             funder_identifier: 'f1234',
                                                             funder_name: 'Bank',
                                                             award_number: 'a1234',
+                                                            award_uri: 'http://award.com/a1234',
                                                             award_title: 'No free lunch'
                                                           }]
       )
@@ -1049,6 +1051,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_funding_reference.first.funder_identifier).to eq ['f1234']
       expect(@obj.complex_funding_reference.first.funder_name).to eq ['Bank']
       expect(@obj.complex_funding_reference.first.award_number).to eq ['a1234']
+      expect(@obj.complex_funding_reference.first.award_uri).to eq ['http://award.com/a1234']
       expect(@obj.complex_funding_reference.first.award_title).to eq ['No free lunch']
     end
 

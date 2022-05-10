@@ -169,6 +169,7 @@ module Hyrax
          funder_identifier: [],
          funder_name: [],
          award_number: [],
+         award_uri: [],
          award_title: []
        }
       ]

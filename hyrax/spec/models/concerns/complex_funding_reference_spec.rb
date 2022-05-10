@@ -48,6 +48,7 @@ RSpec.describe ComplexFundingReference do
           funder_identifier: '12456',
           funder_name: 'Funder name',
           award_number: 'a323',
+          award_uri: 'http://award.com/a323',
           award_title: 'Award title for a323'
         }
       ]
@@ -56,6 +57,7 @@ RSpec.describe ComplexFundingReference do
     expect(@obj.complex_funding_reference.first.funder_identifier).to eq ['12456']
     expect(@obj.complex_funding_reference.first.funder_name).to eq ['Funder name']
     expect(@obj.complex_funding_reference.first.award_number).to eq ['a323']
+    expect(@obj.complex_funding_reference.first.award_uri).to eq ['http://award.com/a323']
     expect(@obj.complex_funding_reference.first.award_title).to eq ['Award title for a323']
   end
 
