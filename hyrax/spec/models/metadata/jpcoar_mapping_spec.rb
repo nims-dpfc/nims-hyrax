@@ -369,5 +369,28 @@ RSpec.describe Metadata::JpcoarMapping do
       end
     end
 
+    describe 'jpcoar_complex_funding_reference' do
+      let(:model) { build(:dataset, :with_complex_funding_reference) }
+      let(:solr_document) { SolrDocument.new(model.to_solr) }
+      let(:out) {"
+        <jpcoar:fundingReference>
+          <datacite:funderIdentifier funderIdentifierType=\"Other\">
+              f1234
+          </datacite:funderIdentifier>
+          <jpcoar:funderName xml:lang=\"en\">Bank</jpcoar:funderName>
+          <datacite:awardNumber awardURI=\"http://example.com/a1234\">
+              a1234
+          </datacite:awardNumber>
+          <jpcoar:awardTitle xml:lang=\"en\">
+              No free lunch
+          </jpcoar:awardTitle>
+        </jpcoar:fundingReference>
+      "}
+      it 'has the xml' do
+        solr_document.jpcoar_complex_funding_reference(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+    end
+
   end
 end
