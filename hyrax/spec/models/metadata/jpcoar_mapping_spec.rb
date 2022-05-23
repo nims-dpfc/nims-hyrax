@@ -49,7 +49,7 @@ RSpec.describe Metadata::JpcoarMapping do
     describe 'jpcoar_alternative_title' do
       let(:model) { build(:dataset, :with_alternative_title) }
       let(:solr_document) { SolrDocument.new(model.to_solr) }
-      let(:out) {'<dc:alternative xml:lang="en">Alternative-Title-123</dc:alternative>'}
+      let(:out) {'<dcterms:alternative xml:lang="en">Alternative-Title-123</dcterms:alternative>'}
       it 'has the xml' do
         solr_document.jpcoar_alternative_title(field, xml)
         expect(xml.target!.gsub(/<to_s\/>/, '')).to eq out.split("\n").map(&:rstrip).map(&:lstrip).join("")
