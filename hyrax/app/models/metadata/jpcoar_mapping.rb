@@ -3,7 +3,7 @@ module Metadata
 
     def get_language_code(val)
       lang = CLD.detect_language(val)
-      return lang[:code] if lang[:reliable]
+      return lang[:code] if %w(en ja zh-TW zh).include?(lang[:code]) or lang[:reliable] == true
       'en'
     end
 
