@@ -392,5 +392,126 @@ RSpec.describe Metadata::JpcoarMapping do
       end
     end
 
+    describe 'jpcoar with Japanese text' do
+      let(:model) { build(:dataset, :with_ja) }
+      let(:solr_document) { SolrDocument.new(model.to_solr) }
+
+      let(:mo_out) {'
+        <jpcoar:contributor contributorType="HostingInstitution">
+          <jpcoar:affiliation>
+              <jpcoar:affiliationName xml:lang="ja">ナノテクノロジープラットフォーム事業の成果と課題</jpcoar:affiliationName>
+          </jpcoar:affiliation>
+        </jpcoar:contributor>
+      '}
+      it 'has the managing organization xml' do
+        solr_document.jpcoar_managing_organization(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq mo_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+      let(:t_out) {'<dc:title xml:lang="ja">材料データプラットフォームDICE2.0 - データ創出−蓄積−利用−連携の基盤</dc:title>'}
+      it 'has the title xml' do
+        solr_document.jpcoar_title(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq t_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+      let(:at_out) {'<dcterms:alternative xml:lang="ja">試料冷却法を併用したAES深さ方向分析によるSiO2/Si熱酸化膜の分析</dcterms:alternative>'}
+      it 'has the alternative_title xml' do
+        solr_document.jpcoar_alternative_title(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq at_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+      let(:d_out) {'<datacite:description descriptionType="Abstract" xml:lang="ja">わが国の先端共用・技術プラットフォームの 展望と課題を、ナノテクノロジープラットフォーム事業の実績と経験にもとづいて</datacite:description>'}
+      it 'has the description xml' do
+        solr_document.jpcoar_description(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq d_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+      let(:k_out) {'<jpcoar:subject subjectScheme="Other" xml:lang="ja">ナノテクノロジープラットフォーム事業の活動実績</jpcoar:subject>
+                    <jpcoar:subject subjectScheme="Other" xml:lang="zh-TW">共用施策設計</jpcoar:subject>'}
+      it 'has the keyword xml' do
+        solr_document.jpcoar_keyword(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq k_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+      let(:p_out) {'<dc:publisher xml:lang="ja">金属材料技術研究所</dc:publisher>'}
+      it 'has the xml' do
+        solr_document.jpcoar_publisher(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq p_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+      let(:au_out) {'
+          <jpcoar:creator>
+            <jpcoar:familyName xml:lang="ja">田邉 浩介</jpcoar:familyName>
+            <jpcoar:givenName xml:lang="zh">江草 由佳</jpcoar:givenName>
+            <jpcoar:creatorName xml:lang="ja">轟 眞市</jpcoar:creatorName>
+            <jpcoar:nameIdentifier nameIdentifierScheme="ORCID" nameIdentifierURI="23542345234">23542345234</jpcoar:nameIdentifier>
+            <jpcoar:affiliation>
+              <jpcoar:affiliationName xml:lang="zh">筑波大学</jpcoar:affiliationName>
+            </jpcoar:affiliation>
+          </jpcoar:creator>
+        '}
+      it 'has the xml' do
+        solr_document.jpcoar_complex_person(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq au_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+      let(:src_out) {'
+        <jpcoar:sourceTitle xml:lang="ja">統合データベース</jpcoar:sourceTitle>
+        <jpcoar:sourceIdentifier identifierType="ISSN">1234-5678</jpcoar:sourceIdentifier>
+        <jpcoar:volume>3</jpcoar:volume>
+        <jpcoar:issue>34</jpcoar:issue>
+        <jpcoar:pageStart>4</jpcoar:pageStart>
+        <jpcoar:pageEnd>12</jpcoar:pageEnd>
+        <jpcoar:numPages>8</jpcoar:numPages>
+      '}
+      it 'has the xml' do
+        solr_document.jpcoar_complex_source(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq src_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+      let(:ev_out) {'
+        <jpcoar:conference>
+          <jpcoar:conferenceName xml:lang="ja">電子情報通信学会サービスコンピューティング研究会　2019年度第一回研究会、 第４３回MaDIS研究交流会合同研究会</jpcoar:conferenceName>
+          <jpcoar:conferencePlace xml:lang="ja">トリプル</jpcoar:conferencePlace>
+          <jpcoar:conferenceDate xml:lang="en" startDay="31" startMonth="5" startYear="2019" endDay="1" endMonth="6" endYear="2019">2019-05-31 to 2019-06-01</jpcoar:conferenceDate>
+        </jpcoar:conference>
+      '}
+      it 'has the xml' do
+        solr_document.jpcoar_complex_event(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq ev_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+      let(:r_out) {'
+          <jpcoar:relation relationType="isVersionOf">
+            <jpcoar:relatedTitle xml:lang="ja">材料データプラットフォームDICE2.0 - データ創出−蓄積−利用−連携の基盤</jpcoar:relatedTitle>
+            <jpcoar:relatedIdentifier identifierType="URI">http://example.com/relation</jpcoar:relatedIdentifier>
+          </jpcoar:relation>
+        '}
+      it "has the xml" do
+        solr_document.jpcoar_complex_relation(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq r_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+      let(:f_out) {"
+        <jpcoar:fundingReference>
+          <datacite:funderIdentifier funderIdentifierType=\"Other\">
+              f1234
+          </datacite:funderIdentifier>
+          <jpcoar:funderName xml:lang=\"ja\">無機材質研究所</jpcoar:funderName>
+          <datacite:awardNumber awardURI=\"http://example.com/a1234\">
+              a1234
+          </datacite:awardNumber>
+          <jpcoar:awardTitle xml:lang=\"ja\">
+              第2回 SPring-8データワークショップ「SPring-8データセンター構想とMDXプロジェクトとの連携
+          </jpcoar:awardTitle>
+        </jpcoar:fundingReference>
+      "}
+      it 'has the xml' do
+        solr_document.jpcoar_complex_funding_reference(field, xml)
+        expect(xml.target!.gsub(/<to_s\/>/, '')).to eq f_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
+      end
+
+    end
+
   end
 end
