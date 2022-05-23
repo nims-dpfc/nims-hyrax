@@ -18,7 +18,7 @@ Blacklight.onLoad(function() {
                     // Preview json using JSON formatter. It is expanded to just one level deep.
                     // If we desire deeper levels to be expanded, for example, 3, it is
                     // const formatter = new JSONFormatter(data, 3);
-                    const formatter = new JSONFormatter(data);
+                    const formatter = new JSONFormatter(data, 10);
                     ele.appendChild(formatter.render());
                 }
                 preview.addClass('done')
