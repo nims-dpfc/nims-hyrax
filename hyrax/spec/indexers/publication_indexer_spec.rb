@@ -365,4 +365,23 @@ RSpec.describe PublicationIndexer do
         ['A 3rd relation item'])
     end
   end
+
+  describe 'indexes specimen set' do
+    before do
+      obj = build(:publication, specimen_set: ['specimen A'])
+      @solr_document = obj.to_solr
+    end
+    it 'indexes as stored searchable' do
+      expect(@solr_document['specimen_set_tesim']).to match_array(['specimen A'])
+    end
+    it 'indexes as facetable' do
+      expect(@solr_document['specimen_set_sim']).to match_array(['specimen A'])
+    end
+  end
+
+  describe 'facet fields' do
+    it 'to not index specimen_set_tesim' do
+      expect(described_class.facet_fields).not_to include('specimen_set_tesim')
+    end
+  end
 end

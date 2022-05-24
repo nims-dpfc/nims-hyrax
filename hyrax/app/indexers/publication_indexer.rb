@@ -14,7 +14,7 @@ class PublicationIndexer < NgdrIndexer
 
   def self.facet_fields
     super.tap do |fields|
-      fields << Solrizer.solr_name('specimen_set', :stored_searchable)
+      fields << Solrizer.solr_name('specimen_set', :facetable)
       fields << Solrizer.solr_name('place', :facetable)
       fields.concat ComplexField::DateIndexer.date_facet_fields
       fields.concat ComplexField::PersonIndexer.person_facet_fields
