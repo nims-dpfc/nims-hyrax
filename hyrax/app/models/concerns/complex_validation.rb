@@ -226,8 +226,9 @@ module ComplexValidation
       id_blank = get_val_blank(attributes, :funder_identifier)
       name_blank = get_val_blank(attributes, :funder_name)
       award_number_blank = get_val_blank(attributes, :award_number)
+      award_uri_blank = get_val_blank(attributes, :award_uri)
       award_title_blank = get_val_blank(attributes, :award_title)
-      id_blank && name_blank && award_number_blank && award_title_blank
+      id_blank && name_blank && award_number_blank && award_uri_blank && award_title_blank
     end
   end
 end
