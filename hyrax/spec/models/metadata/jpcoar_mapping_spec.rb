@@ -427,7 +427,7 @@ RSpec.describe Metadata::JpcoarMapping do
       end
 
       let(:k_out) {'<jpcoar:subject subjectScheme="Other" xml:lang="ja">ナノテクノロジープラットフォーム事業の活動実績</jpcoar:subject>
-                    <jpcoar:subject subjectScheme="Other" xml:lang="zh-TW">共用施策設計</jpcoar:subject>'}
+                    <jpcoar:subject subjectScheme="Other" xml:lang="ja">共用施策設計</jpcoar:subject>'}
       it 'has the keyword xml' do
         solr_document.jpcoar_keyword(field, xml)
         expect(xml.target!.gsub(/<to_s\/>/, '')).to eq k_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
@@ -442,11 +442,11 @@ RSpec.describe Metadata::JpcoarMapping do
       let(:au_out) {'
           <jpcoar:creator>
             <jpcoar:familyName xml:lang="ja">田邉 浩介</jpcoar:familyName>
-            <jpcoar:givenName xml:lang="zh">江草 由佳</jpcoar:givenName>
+            <jpcoar:givenName xml:lang="ja">江草 由佳</jpcoar:givenName>
             <jpcoar:creatorName xml:lang="ja">轟 眞市</jpcoar:creatorName>
             <jpcoar:nameIdentifier nameIdentifierScheme="ORCID" nameIdentifierURI="23542345234">23542345234</jpcoar:nameIdentifier>
             <jpcoar:affiliation>
-              <jpcoar:affiliationName xml:lang="zh">筑波大学</jpcoar:affiliationName>
+              <jpcoar:affiliationName xml:lang="ja">筑波大学</jpcoar:affiliationName>
             </jpcoar:affiliation>
           </jpcoar:creator>
         '}
