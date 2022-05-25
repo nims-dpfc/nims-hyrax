@@ -1115,4 +1115,10 @@ RSpec.describe DatasetIndexer do
       expect(@solr_document['award_title_tesim']).to match_array(['Title of the award', 'Another award'])
     end
   end
+
+  describe 'facet fields' do
+    it 'to not index specimen_set_tesim' do
+      expect(described_class.facet_fields).not_to include('specimen_set_tesim')
+    end
+  end
 end
