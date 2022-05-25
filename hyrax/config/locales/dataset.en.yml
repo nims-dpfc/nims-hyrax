@@ -16,6 +16,7 @@ en:
         characterization_methods:         "Characterization methods"
         complex_date:                     "Other Date"
         complex_event:                    "Conference/Event"
+        complex_funding_reference:        "Funding reference"
         complex_identifier:               "Identifier"
         complex_instrument:               "Instrument"
         complex_organization:             "Organization"

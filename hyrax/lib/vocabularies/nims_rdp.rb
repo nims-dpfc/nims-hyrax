@@ -64,6 +64,7 @@ module RDF
       property 'funderIdentifier'
       property 'funderName'
       property 'awardNumber'
+      property 'awardURI'
       property 'awardTitle'
     end
   end
