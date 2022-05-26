@@ -407,7 +407,7 @@ RSpec.describe PublicationIndexer do
       expect(@solr_document['award_title_tesim']).to match_array(['Title of the award', 'Another award'])
     end
   end
-    
+
   describe 'indexes specimen set' do
     before do
       obj = build(:publication, specimen_set: ['specimen A'])
