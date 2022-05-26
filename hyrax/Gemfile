@@ -24,7 +24,7 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 3.0'
+gem 'redis', '~> 4.0'
 # Using redis to store sessions in the redis cache (rather than cookies) - this is to support single sign out
 # NB: Once we upgrade to rails >= 5.2 the gem can probably be removed as redis sessions are built in
 gem 'redis-session-store', '~> 0.11.1'
@@ -68,7 +68,7 @@ group :development, :test do
   gem 'pry'
 end
 
-gem 'sidekiq'
+gem 'sidekiq', '~> 5.2.10'
 gem 'hydra-role-management'
 gem 'bootstrap-datepicker-rails'
 gem 'pg'
