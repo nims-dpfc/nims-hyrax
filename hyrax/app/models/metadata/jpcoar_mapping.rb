@@ -40,7 +40,7 @@ module Metadata
       # Alternative title		dcterms:alternative
       # language attribute: TRUE
       alternative_title.each do |val|
-        xml.tag!('dc:alternative', val, "xml:lang" => "en") unless val.blank?
+        xml.tag!('dcterms:alternative', val, "xml:lang" => "en") unless val.blank?
       end
     end
 
