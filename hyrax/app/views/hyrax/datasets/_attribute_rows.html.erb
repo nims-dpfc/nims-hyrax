@@ -161,6 +161,7 @@
       <div class="panel-body">
         <%= presenter.attribute_to_html(:material_type, label: t('ngdr.fields.material_type'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_specimen_type, render_as: :nested_specimen_type, label: t('ngdr.fields.complex_specimen_type'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_chemical_composition, render_as: :nested_chemical_composition, label: t('ngdr.fields.complex_chemical_composition'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Specimen details accordion -->
