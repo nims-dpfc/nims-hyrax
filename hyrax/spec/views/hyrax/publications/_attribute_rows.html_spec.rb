@@ -8,7 +8,7 @@ RSpec.describe 'hyrax/publications/_attribute_rows' do
                         :with_complex_version, :with_resource_type, :with_source, :with_issue, :with_complex_source, :with_complex_event,
                         :with_place, :with_table_of_contents,
                         :with_number_of_pages, :with_complex_funding_reference,
-                        :with_contact_agent) }
+                        :with_complex_contact_agent) }
   let(:presenter) { Hyrax::PublicationPresenter.new(SolrDocument.new(publication.to_solr), Ability.new(user), controller.request) }
 
   before do
