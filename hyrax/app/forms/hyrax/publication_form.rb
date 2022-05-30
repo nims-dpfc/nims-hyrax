@@ -29,6 +29,7 @@ module Hyrax
       :publisher, :date_published,
       :rights_statement, :licensed_date, 
       :complex_person, 
+      :complex_contact_agent,
       :complex_source, :manuscript_type,
       :complex_event, 
       :language, 
@@ -64,6 +65,7 @@ module Hyrax
         :publisher, :date_published, 
         :rights_statement, :licensed_date,
         :complex_person, 
+        :complex_contact_agent,
         :complex_source, :manuscript_type, 
         :complex_event,
         :language, 
@@ -77,7 +79,9 @@ module Hyrax
     end
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,
-      :complex_person, :complex_version, :complex_funding_reference, :complex_event, :complex_source].freeze
+      :complex_person, :complex_version, :complex_funding_reference,
+      :complex_event, :complex_source, :complex_contact_agent
+    ].freeze
 
     protected
 
@@ -107,6 +111,18 @@ module Hyrax
        {
          date: [],
          description: []
+       }
+      ]
+    end
+
+    def self.permitted_contact_agent_params
+      [:id,
+       :_destroy,
+       {
+         name: [],
+         email: [],
+         organization: [],
+         department: []
        }
       ]
     end
