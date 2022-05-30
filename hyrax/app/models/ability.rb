@@ -46,6 +46,7 @@ class Ability
     can :read_date, [::Dataset, ::Publication]
     can :read_event, [::Dataset, ::Publication]
     can :read_funding_reference, [::Dataset, ::Publication]
+    can :read_contact_agent, [::Dataset, ::Publication]
     can :read_identifier, [::Dataset, ::Publication]
     can :read_issue, [::Publication]
     can :read_table_of_contents, [::Publication]
