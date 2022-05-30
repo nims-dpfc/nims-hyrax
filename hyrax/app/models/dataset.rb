@@ -174,5 +174,4 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
   accepts_nested_attributes_for :complex_funding_reference, reject_if: :fundref_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_contact_agent, reject_if: :all_blank, allow_destroy: true
-
 end
