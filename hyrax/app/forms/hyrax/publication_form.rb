@@ -259,6 +259,7 @@ module Hyrax
       permitted << { complex_source_attributes: permitted_source_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
       permitted << { complex_funding_reference_attributes: permitted_fundref_params }
+      permitted << { complex_contact_agent_attributes: permitted_contact_agent_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end
