@@ -1112,15 +1112,15 @@ RSpec.describe DatasetIndexer do
     before do
       chemical_composition = [
         {
-          complex_chemical_composition_attributes: [{
-            description: 'chemical composition 1',
-            complex_identifier_attributes: [{
-              identifier: 'chemical_composition/12345'
-            }],
-            description: 'chemical composition 2',
-            complex_identifier_attributes: [{
-              identifier: 'chemical_composition/67890'
-            }],
+          description: 'chemical composition 1',
+          complex_identifier_attributes: [{
+            identifier: 'chemical_composition/12345'
+          }]
+        },
+        {
+          description: 'chemical composition 2',
+          complex_identifier_attributes: [{
+            identifier: 'chemical_composition/67890'
           }]
         }
       ]
