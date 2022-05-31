@@ -44,6 +44,13 @@ RSpec.describe SolrDocument do
         award_number: 'a1234',
         award_uri: 'http://award.com/a1234',
         award_title: 'No free lunch'
+      }],
+      complex_chemical_composition_attributes: [{
+        description: 'chemical composition 1',
+        complex_identifier_attributes: [{
+          identifier: 'chemical_composition/1234567',
+          scheme: 'identifier persistent'
+        }]
       }]
     )
   end
@@ -352,6 +359,18 @@ RSpec.describe SolrDocument do
     describe 'award_title' do
       subject { complex_funding_reference['award_title'] }
       it { is_expected.to eql ['No free lunch'] }
+    end
+  end
+
+  describe '#complex_chemical_composition' do
+    let(:complex_chemical_composition) { JSON.parse(solr_document.complex_chemical_composition).first }
+    describe 'description' do
+      subject { complex_chemical_composition['description'] }
+      it { is_expected.to eql ['chemical composition 1'] }
+    end
+    describe 'complex_identifier' do
+      subject { complex_chemical_composition['complex_identifier'].first['identifier'] }
+      it { is_expected.to eql ['chemical_composition/1234567'] }
     end
   end
 end
