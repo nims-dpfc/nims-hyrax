@@ -212,17 +212,13 @@ FactoryBot.define do
     end
 
     trait :with_complex_chemical_composition do
-      complex_specimen_type_attributes {
-        [{
-          complex_chemical_composition_attributes: [{
-            description: 'chemical composition 1',
-            complex_identifier_attributes: [{
-              identifier: 'chemical_composition/1234567',
-              scheme: 'identifier persistent'
-            }]
-          }]
+      complex_chemical_composition_attributes: [{
+        description: 'chemical composition 1',
+        complex_identifier_attributes: [{
+          identifier: 'chemical_composition/1234567',
+          scheme: 'identifier persistent'
         }]
-       }
+      }]
     end
 
     trait :with_complex_crystallographic_structure do
