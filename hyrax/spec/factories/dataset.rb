@@ -215,6 +215,7 @@ FactoryBot.define do
       complex_chemical_composition_attributes {
         [{
           description: 'chemical composition 1',
+          category: 'http://id.example.jp/Q12345',
           complex_identifier_attributes: [{
             identifier: 'chemical_composition/1234567',
             scheme: 'identifier persistent'
