@@ -33,6 +33,7 @@ RSpec.describe Hyrax::DatasetForm do
     describe '#specimen_tab_terms' do
       subject { form.specimen_tab_terms }
       it { is_expected.to include(:complex_specimen_type) }
+      it { is_expected.to include(:complex_chemical_composition) }
     end
   end
 
