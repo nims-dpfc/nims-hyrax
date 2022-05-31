@@ -7,7 +7,7 @@ RSpec.describe NestedChemicalCompositionInput, type: :input do
   let(:object) { double(required?: true, model: dataset) }
   let(:builder) { SimpleForm::FormBuilder.new(:dataset, object, view, {}) }
   let(:input) { described_class.new(builder, :complex_chemical_composition, nil, :multi_value, {}) }
-  let(:value) { dataset.complex_specimen_type.first.complex_chemical_composition.first }
+  let(:value) { dataset.complex_chemical_composition.first }
   let(:index) { 0 }
   let(:options) { {} }
   let(:html) { input.send(:build_components, :complex_chemical_composition, value, index, options) }
