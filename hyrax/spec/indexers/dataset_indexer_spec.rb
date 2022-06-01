@@ -1113,26 +1113,29 @@ RSpec.describe DatasetIndexer do
       chemical_composition = [
         {
           description: 'chemical composition 1',
+          category: 'http://id.example.jp/Q12345',
           complex_identifier_attributes: [{
-            identifier: 'chemical_composition/12345'
+            identifier: ['chemical_composition/12345']
           }]
         },
         {
           description: 'chemical composition 2',
+          category: 'http://id.example.jp/Q67890',
           complex_identifier_attributes: [{
-            identifier: 'chemical_composition/67890'
+            identifier: ['chemical_composition/67890']
           }]
         }
       ]
       obj = build(:dataset, complex_chemical_composition_attributes: chemical_composition)
       @solr_document = obj.to_solr
     end
+    it 'indexes as symbol' do
+      expect(@solr_document['complex_chemical_composition_identifier_ssim']).to match_array(["chemical_composition/12345", "chemical_composition/67890"])
+      expect(@solr_document['complex_chemical_composition_category_ssim']).to match_array(["http://id.example.jp/Q12345", "http://id.example.jp/Q67890"])
+    end
     it 'indexes as displayable' do
       expect(@solr_document).to include('complex_chemical_composition_ssm')
       expect(JSON.parse(@solr_document['complex_chemical_composition_ssm'])).not_to be_empty
-    end
-    it 'indexes chemical_composition as symbol' do
-      expect(@solr_document['complex_chemical_composition_ssim']).to match_array(['chemical_composition/12345', 'chemical_composition/67890'])
     end
     it 'indexes chemical_composition as stored_searchable' do
       expect(@solr_document['complex_chemical_composition_tesim']).to match_array(
@@ -1140,10 +1143,13 @@ RSpec.describe DatasetIndexer do
     end
     it 'indexes chemical_composition identifier as stored_searchable' do
       expect(@solr_document['complex_chemical_composition_identifier_ssim']).to match_array(
-        ['chemical_composition/12345', 'chemical_composition/67890'])
+        ['chemical_composition/12345', 'chemical_composition/67890']
+      )
     end
-    it 'indexes chemical_composition as facetable' do
-      expect(@solr_document['complex_chemical_composition_sim']).to match_array(['chemical_composition/12345', 'chemical_composition/67890'])
+    it 'indexes chemical_composition identifier as facetable' do
+      expect(@solr_document['complex_chemical_composition_identifier_sim']).to match_array(
+        ['chemical_composition/12345', 'chemical_composition/67890']
+      )
     end
   end
 

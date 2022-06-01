@@ -12,10 +12,17 @@ module ComplexField
       solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
       solr_doc[fld_name] << object.complex_chemical_composition.map { |c| c.description.reject(&:blank?) }
       solr_doc[fld_name].flatten!
+
+      fld_name = Solrizer.solr_name('complex_chemical_composition_category', :symbol)
+      solr_doc[fld_name] = object.complex_chemical_composition.map { |c| c.category.reject(&:blank?).first }
+
       object.complex_chemical_composition.each do |cc|
-        solr_doc[fld_name] << cc.category.reject(&:blank?).first
         cc.complex_identifier.each do |id|
           fld_name = Solrizer.solr_name('complex_chemical_composition_identifier', :symbol)
+          solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
+          solr_doc[fld_name] << id.identifier.reject(&:blank?).first
+
+          fld_name = Solrizer.solr_name('complex_chemical_composition_identifier', :facetable)
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
           solr_doc[fld_name] << id.identifier.reject(&:blank?).first
         end
@@ -26,6 +33,7 @@ module ComplexField
       # solr fields that will be used for a search
       fields = []
       fields << Solrizer.solr_name('complex_chemical_composition', :stored_searchable)
+      fields << Solrizer.solr_name('complex_chemical_composition_category', :symbol)
       fields << Solrizer.solr_name('complex_chemical_composition_identifier', :symbol)
       fields
     end
