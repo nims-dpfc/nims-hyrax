@@ -224,6 +224,21 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_structural_feature do
+      complex_structural_feature_attributes {
+        [{
+          description: 'structural feature description',
+          category: 'structural feature category',
+          sub_category: 'structural feature sub category',
+          complex_identifier_attributes: [{
+            identifier: ['structural_feature/123456'],
+            scheme: 'identifier persistent',
+            label: 'Identifier - Persistent'
+          }]
+        }]
+      }
+    end
+
     trait :with_complex_crystallographic_structure do
       complex_specimen_type_attributes {
         [{
