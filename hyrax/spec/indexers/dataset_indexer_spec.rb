@@ -776,15 +776,6 @@ RSpec.describe DatasetIndexer do
               label: ['Local']
             }]
           }],
-          complex_structural_feature_attributes: [{
-            description: 'structural feature description 2',
-            category: 'structural feature category 2',
-            sub_category: 'structural feature sub category',
-            complex_identifier_attributes: [{
-              identifier: ['structural_feature/67890'],
-              label: ['Local']
-            }]
-          }],
           title: 'Specimen 2'
         }
       ]
@@ -909,30 +900,6 @@ RSpec.describe DatasetIndexer do
     it 'indexes state_of_matter identifier as stored_searchable' do
       expect(@solr_document['complex_state_of_matter_identifier_ssim']).to match_array(
         ['state/12345', 'state/67890'])
-    end
-    it 'indexes structural feature category as stored_searchable' do
-      expect(@solr_document['complex_structural_feature_category_tesim']).to match_array(
-        ['structural feature category', 'structural feature category 2'])
-    end
-    it 'indexes structural feature category as facetable' do
-      expect(@solr_document['complex_structural_feature_category_sim']).to match_array(
-        ['structural feature category', 'structural feature category 2'])
-    end
-    it 'indexes structural feature description as stored_searchable' do
-      expect(@solr_document['complex_structural_feature_description_tesim']).to match_array(
-        ['structural feature description', 'structural feature description 2'])
-    end
-    it 'indexes structural feature sub category as stored_searchable' do
-      expect(@solr_document['complex_structural_feature_sub_category_tesim']).to match_array(
-        ['structural feature sub category', 'structural feature sub category'])
-    end
-    it 'indexes structural feature sub category as facetable' do
-      expect(@solr_document['complex_structural_feature_sub_category_sim']).to match_array(
-        ['structural feature sub category', 'structural feature sub category'])
-    end
-    it 'indexes structural feature identifier as symbol' do
-      expect(@solr_document['complex_structural_feature_identifier_ssim']).to match_array(
-        ['structural_feature/12345', 'structural_feature/67890'])
     end
   end
 
@@ -1150,6 +1117,52 @@ RSpec.describe DatasetIndexer do
       expect(@solr_document['complex_chemical_composition_identifier_sim']).to match_array(
         ['chemical_composition/12345', 'chemical_composition/67890']
       )
+    end
+  end
+
+  describe 'indexes the chemical composition active triple resource with all the attributes' do
+    before do
+      structural_feature = [{
+        description: 'structural feature description',
+        category: 'structural feature category',
+        sub_category: 'structural feature sub category',
+        complex_identifier_attributes: [{
+          identifier: ['structural_feature/12345'],
+          label: ['Local']
+        }]
+      },
+      {
+        description: 'structural feature description 2',
+        category: 'structural feature category 2',
+        sub_category: 'structural feature sub category',
+        complex_identifier_attributes: [{
+          identifier: ['structural_feature/67890'],
+          label: ['Local']
+        }]
+      }]
+      obj = build(:dataset, complex_structural_feature_attributes: structural_feature)
+      @solr_document = obj.to_solr
+    end
+
+    it 'indexes structural feature category as stored_searchable' do
+      expect(@solr_document['complex_structural_feature_category_tesim']).to match_array(
+        ['structural feature category', 'structural feature category 2'])
+    end
+    it 'indexes structural feature category as facetable' do
+      expect(@solr_document['complex_structural_feature_category_sim']).to match_array(
+        ['structural feature category', 'structural feature category 2'])
+    end
+    it 'indexes structural feature description as stored_searchable' do
+      expect(@solr_document['complex_structural_feature_description_tesim']).to match_array(
+        ['structural feature description', 'structural feature description 2'])
+    end
+    it 'indexes structural feature sub category as stored_searchable' do
+      expect(@solr_document['complex_structural_feature_sub_category_tesim']).to match_array(
+        ['structural feature sub category', 'structural feature sub category'])
+    end
+    it 'indexes structural feature identifier as symbol' do
+      expect(@solr_document['complex_structural_feature_identifier_ssim']).to match_array(
+        ['structural_feature/12345', 'structural_feature/67890'])
     end
   end
 
