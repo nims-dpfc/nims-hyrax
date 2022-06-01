@@ -7,6 +7,7 @@ module ComplexField
     end
 
     def index_structural_feature(solr_doc)
+      solr_doc[Solrizer.solr_name('complex_structural_feature', :displayable)] = object.complex_structural_feature.to_json
       vals = object.complex_structural_feature.map { |c| c.category.reject(&:blank?) }
       fld_name = Solrizer.solr_name('complex_structural_feature_category', :stored_searchable)
       solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
