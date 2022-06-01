@@ -1090,4 +1090,29 @@ RSpec.describe Dataset do
       expect(@obj.complex_chemical_composition).to be_empty
     end
   end
+
+  describe 'complex_structural_feature' do
+    it 'creates a complex structural feature active triple resource with structural feature' do
+      @obj = build(:dataset,
+                   complex_structural_feature_attributes: [{
+                     description: 'structural feature 1',
+                     complex_identifier_attributes: [{
+                      identifier: 'structural_feature/1234567',
+                      scheme: 'identifier persistent'
+                    }]
+                   }]
+      )
+      expect(@obj.complex_structural_feature.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_structural_feature.first.description).to eq ['structural feature 1']
+    end
+
+    it 'rejects a complex structural feature active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_structural_feature_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_structural_feature).to be_empty
+    end
+  end
 end
