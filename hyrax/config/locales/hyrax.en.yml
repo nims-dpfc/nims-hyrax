@@ -7,6 +7,8 @@ en:
           based_near_label_sim: Location
           creator_sim: Creator
           characterization_methods_sim: Characterization methods
+          complex_contact_agent_ssm: "Contact agent"
+          complex_contact_agent_tesim: "Contact agent"
           complex_date_dtsim: Date
           complex_date_accepted_dtsim: Date accepted
           complex_year_accepted_sim: Date accepted
