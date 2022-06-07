@@ -45,12 +45,10 @@ class ROCrateExportService
       # Now get a list of all the related filesets and add them to the metadata graph
       @work.file_sets.each do |file_set|
         file_set.original_file.tap do |file|
-          filename = get_filename(tmpdir, file.file_name.first)
-
-          File.open(File.join(tmpdir, filename), 'wb') do |output|
+          File.open(File.join(tmpdir, file.original_name), 'wb') do |output|
             file.stream.each { |content| output.write(content) }
+            crate.add_file(output, contentSize: number_to_human_size(file.file_size.first), encodingFormat: file.mime_type)
           end
-          crate.add_file(File.join(tmpdir, filename), contentSize: number_to_human_size(file.file_size.first), encodingFormat: file.mime_type)
         end
       end
 

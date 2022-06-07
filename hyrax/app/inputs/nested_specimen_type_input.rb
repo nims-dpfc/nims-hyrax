@@ -108,25 +108,6 @@ protected
     # out << "  </button>"
     out << "</div>" # row
 
-    # --- complex_purchase_record
-    field = :complex_purchase_record
-    field_value = value.send(field)
-    if field_value.blank?
-      value.complex_purchase_record.build
-      field_value = value.send(field)
-    end
-    nested_fields = NestedPurchaseRecordInput.new(@builder, field, nil, :multi_value, {})
-    out << "<div class='inner-nested'>"
-    out << "<div class='form-group'>"
-    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Purchase record</label>"
-    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
-    out << "</div>"
-    # out << "  <button type='button' class='btn btn-link add'>"
-    # out << "    <span class='glyphicon glyphicon-plus'></span>"
-    # out << "    <span class='controls-add-text'>Add another purchase record</span>"
-    # out << "  </button>"
-    out << "</div>" # row
-
     # --- complex_structural_feature
     field = :complex_structural_feature
     field_value = value.send(field)

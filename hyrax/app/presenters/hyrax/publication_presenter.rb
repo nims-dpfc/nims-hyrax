@@ -4,7 +4,7 @@ module Hyrax
   class PublicationPresenter < Hyrax::WorkShowPresenter
     delegate :alternative_title, :complex_date, :complex_identifier, :complex_person,
              :complex_rights, :complex_version, :complex_event, :issue, :place,
-             :table_of_contents, :total_number_of_pages, :complex_source,
+             :table_of_contents, :total_number_of_pages, :complex_funding_reference, :complex_source,
              :complex_relation, :custom_property, :specimen_set,
              :first_published_url, :doi, :licensed_date, :creator, :date_published,
              :managing_organization, to: :solr_document

@@ -199,7 +199,7 @@ Hyrax.config do |config|
   config.derivatives_path = ENV.fetch('DERIVATIVES_PATH', Rails.root.join('tmp', 'derivatives'))
 
   # Should schema.org microdata be displayed?
-  # config.display_microdata = true
+  config.display_microdata = false
 
   # What default microdata type should be used if a more appropriate
   # type can not be found in the locale file?

@@ -9,6 +9,16 @@ FactoryBot.define do
       title { ["Open Publication"] }
     end
 
+    trait :authenticated do
+      visibility { 'authenticated' }
+      title { ["Authenticated Publication"] }
+    end
+
+    trait :restricted do
+      visibility { 'restricted' }
+      title { ["Restricted Publication"] }
+    end
+
     trait :with_complex_author do
       complex_person_attributes {
         [{
@@ -181,6 +191,18 @@ FactoryBot.define do
 
     trait :with_supervisor_approval do
       supervisor_approval { ['Professor-Supervisor-Approval'] }
+    end
+
+    trait :with_complex_funding_reference do
+      complex_funding_reference_attributes {
+        [{
+           funder_identifier: 'f1234',
+           funder_name: 'Bank',
+           award_number: 'a1234',
+           award_uri: 'http://example.com/a1234',
+           award_title: 'No free lunch'
+         }]
+      }
     end
   end
 end
