@@ -1,6 +1,12 @@
 FactoryBot.define do
 
   factory :dataset do
+    transient do
+      user { create(:user) }
+      # Set to true (or a hash) if you want to create an admin set
+      with_admin_set { false }
+    end
+
     title { ["Dataset"] }
     access_control
 
@@ -492,6 +498,79 @@ FactoryBot.define do
 
     trait :with_material_type do
       material_type { ['Cu-containing'] }
+    end
+
+    trait :with_complex_funding_reference do
+      complex_funding_reference_attributes {
+        [{
+           funder_identifier: 'f1234',
+           funder_name: 'Bank',
+           award_number: 'a1234',
+           award_uri: 'http://example.com/a1234',
+           award_title: 'No free lunch'
+         }]
+      }
+    end
+
+    trait :with_ja do
+      title { ["材料データプラットフォームDICE2.0 - データ創出−蓄積−利用−連携の基盤"] }
+      managing_organization { ['ナノテクノロジープラットフォーム事業の成果と課題'] }
+      alternative_title { '試料冷却法を併用したAES深さ方向分析によるSiO2/Si熱酸化膜の分析' }
+      description { ["わが国の先端共用・技術プラットフォームの 展望と課題を、ナノテクノロジープラットフォーム事業の実績と経験にもとづいて"] }
+      keyword { ['ナノテクノロジープラットフォーム事業の活動実績', '共用施策設計'] }
+      publisher { ['金属材料技術研究所'] }
+      complex_person_attributes {
+        [{
+          name: '轟 眞市',
+          first_name: '江草 由佳',
+          last_name: '田邉 浩介',
+          role: ['author'],
+          orcid: '23542345234',
+          organization: '筑波大学'
+        }]
+      }
+      complex_source_attributes {
+        [{
+           title: '統合データベース',
+           alternative_title: 'トリプル',
+           issue: '34',
+           start_page: '4',
+           end_page: '12',
+           sequence_number: '1.2.2',
+           total_number_of_pages: '8',
+           volume: '3',
+           issn: '1234-5678'
+         }]
+      }
+      complex_event_attributes {
+        [{
+           title: '電子情報通信学会サービスコンピューティング研究会　2019年度第一回研究会、 第４３回MaDIS研究交流会合同研究会',
+           invitation_status: '1',
+           place: 'トリプル',
+           start_date: '2019-05-31',
+           end_date: '2019-06-01'
+         }]
+      }
+      complex_relation_attributes {
+        [{
+           title: '材料データプラットフォームDICE2.0 - データ創出−蓄積−利用−連携の基盤',
+           url: 'http://example.com/relation',
+           complex_identifier_attributes: [{
+                                             identifier: ['info:hdl/4263537/400'],
+                                             scheme: 'identifier persistent'
+                                           }],
+           relationship: 'isNewVersionOf'
+         }]
+      }
+      complex_funding_reference_attributes {
+        [{
+           funder_identifier: 'f1234',
+           funder_name: '無機材質研究所',
+           award_number: 'a1234',
+           award_uri: 'http://example.com/a1234',
+           award_title: '第2回 SPring-8データワークショップ「SPring-8データセンター構想とMDXプロジェクトとの連携'
+         }]
+      }
     end
   end
 end

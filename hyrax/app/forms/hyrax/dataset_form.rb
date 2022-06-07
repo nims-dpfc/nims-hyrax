@@ -3,6 +3,7 @@
 module Hyrax
   # Generated form for Dataset
   class DatasetForm < Hyrax::Forms::WorkForm
+    attr_reader :agreement_accepted, :supervisor_agreement_accepted
     self.model_class = ::Dataset
     delegate :keyword_ordered, :specimen_set_ordered, :managing_organization_ordered, to: :model
 
@@ -22,7 +23,7 @@ module Hyrax
 
       # description
       :managing_organization_ordered,
-      :first_published_url, :supervisor_approval,
+      :first_published_url,
       :title, :alternative_title, 
       :resource_type, :data_origin, 
       :description, :keyword_ordered,
@@ -35,7 +36,8 @@ module Hyrax
       :language, 
       :complex_date,
       :complex_identifier, 
-      :complex_version, 
+      :complex_version,
+      :complex_funding_reference,
       :complex_relation, 
       :custom_property,
 
@@ -67,7 +69,7 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :managing_organization_ordered, :supervisor_approval, :title, :resource_type, :data_origin, 
+      :managing_organization_ordered, :title, :resource_type, :data_origin,
       :description, :keyword_ordered, :date_published, :rights_statement
     ]
 
@@ -75,7 +77,7 @@ module Hyrax
       [
         # Description tab order determined here
         :managing_organization_ordered,
-        :first_published_url, :supervisor_approval,
+        :first_published_url,
         :title, :alternative_title, 
         :resource_type, :data_origin,
         :description, :keyword_ordered, 
@@ -89,7 +91,8 @@ module Hyrax
         :language,
         :complex_date, 
         :complex_identifier, 
-        :complex_version, 
+        :complex_version,
+        :complex_funding_reference,
         :complex_relation,
         :custom_property
       ]
@@ -114,7 +117,7 @@ module Hyrax
     end
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
-      :complex_organization, :complex_person, :complex_relation, :complex_event,
+      :complex_organization, :complex_person, :complex_relation, :complex_event, :complex_funding_reference,
       :complex_source, :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
@@ -159,6 +162,19 @@ module Hyrax
       ]
     end
 
+    def self.permitted_fundref_params
+      [:id,
+       :_destroy,
+       {
+         funder_identifier: [],
+         funder_name: [],
+         award_number: [],
+         award_uri: [],
+         award_title: []
+       }
+      ]
+    end
+
     def self.permitted_identifier_params
       [:id,
        :_destroy,
@@ -194,7 +210,7 @@ module Hyrax
        {
          column_number: [],
          category: [],
-         sub_category: [],
+         # sub_category: [],
          description: []
        }
       ]
@@ -289,9 +305,7 @@ module Hyrax
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
          complex_material_type_attributes: permitted_material_type_params,
-         complex_purchase_record_attributes: permitted_purchase_record_params,
-         complex_shape_attributes: permitted_desc_id_params,
-         complex_state_of_matter_attributes: permitted_desc_id_params,
+         # complex_purchase_record_attributes: permitted_purchase_record_params,
          complex_structural_feature_attributes: permitted_structural_feature_params,
          title: []
        }
@@ -305,7 +319,7 @@ module Hyrax
          category: [],
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
-         sub_category: []
+         # sub_category: []
        }
       ]
     end
@@ -366,6 +380,7 @@ module Hyrax
       permitted << { complex_event_attributes: permitted_event_params }
       permitted << { complex_source_attributes: permitted_source_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
+      permitted << { complex_funding_reference_attributes: permitted_fundref_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end

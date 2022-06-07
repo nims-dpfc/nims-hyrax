@@ -60,11 +60,16 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   if ENV["RAILS_FORCE_SSL"].present? && (ENV["RAILS_FORCE_SSL"].to_s.downcase == 'false') then
     config.force_ssl = false
+    Rails.application.routes.default_url_options = \
+      Hyrax::Engine.routes.default_url_options = \
+      {protocol: 'http', host: ENV['MDR_HOST']}
+    config.application_url = "http://#{ENV['MDR_HOST']}"
   else
     config.force_ssl = true #default if nothing specified is more secure.
     Rails.application.routes.default_url_options = \
       Hyrax::Engine.routes.default_url_options = \
       {protocol: 'https', host: ENV['MDR_HOST']}
+    config.application_url = "https://#{ENV['MDR_HOST']}"
   end
 
   # Use the lowest log level (:debug) to ensure availability of diagnostic information
@@ -119,7 +124,13 @@ Rails.application.configure do
   }
 
   config.middleware.use ExceptionNotification::Rack,
-    ignore_exceptions: ['I18n::InvalidLocale', 'Riiif::ConversionError', 'Blacklight::Exceptions::RecordNotFound'] + ExceptionNotifier.ignored_exceptions,
+    ignore_exceptions: [
+      'I18n::InvalidLocale',
+      'Riiif::ConversionError',
+      'Blacklight::Exceptions::RecordNotFound',
+      'ActionView::Template::Error',
+      'Ldp::Gone'
+    ] + ExceptionNotifier.ignored_exceptions,
     error_grouping: true,
     email: {
       email_prefix: "[MDR #{ENV['ERROR_NOTIFICATION_SUBJECT_PREFIX']}] ",

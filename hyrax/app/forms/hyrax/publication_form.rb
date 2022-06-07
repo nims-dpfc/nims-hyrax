@@ -3,6 +3,7 @@
 module Hyrax
   # Generated form for Publication
   class PublicationForm < Hyrax::Forms::WorkForm
+    attr_reader :agreement_accepted, :supervisor_agreement_accepted
     self.model_class = ::Publication
     delegate :keyword_ordered, :specimen_set_ordered, :managing_organization_ordered, to: :model
     self.terms -= [
@@ -20,7 +21,7 @@ module Hyrax
     self.terms += [
       # Adding all fields in order of display in form
       :managing_organization_ordered,
-      :first_published_url, :supervisor_approval,
+      :first_published_url,
       :title, :alternative_title, 
       :resource_type, 
       :description, :keyword_ordered, 
@@ -32,7 +33,10 @@ module Hyrax
       :complex_event, 
       :language, 
       :complex_date, 
-      :complex_identifier, :complex_version, :complex_relation,
+      :complex_identifier,
+      :complex_version,
+      :complex_funding_reference,
+      :complex_relation,
       :custom_property, :draft
     ]
 
@@ -44,7 +48,7 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :managing_organization_ordered, :supervisor_approval, :title, :resource_type, 
+      :managing_organization_ordered, :title, :resource_type,
       :description, :keyword_ordered, :date_published, :rights_statement
     ]
 
@@ -52,7 +56,7 @@ module Hyrax
       [
         # Description tab order determined here
         :managing_organization_ordered,
-        :first_published_url, :supervisor_approval,
+        :first_published_url,
         :title, :alternative_title, 
         :resource_type, 
         :description, :keyword_ordered,
@@ -64,13 +68,16 @@ module Hyrax
         :complex_event,
         :language, 
         :complex_date, 
-        :complex_identifier, :complex_version, :complex_relation,
+        :complex_identifier,
+        :complex_version,
+        :complex_funding_reference,
+        :complex_relation,
         :custom_property
       ]
     end
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,
-      :complex_person, :complex_version, :complex_event, :complex_source].freeze
+      :complex_person, :complex_version, :complex_funding_reference, :complex_event, :complex_source].freeze
 
     protected
 
@@ -211,6 +218,19 @@ module Hyrax
       ]
     end
 
+    def self.permitted_fundref_params
+      [:id,
+       :_destroy,
+       {
+         funder_identifier: [],
+         funder_name: [],
+         award_number: [],
+         award_uri: [],
+         award_title: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
@@ -222,6 +242,7 @@ module Hyrax
       permitted << { complex_event_attributes: permitted_event_params }
       permitted << { complex_source_attributes: permitted_source_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
+      permitted << { complex_funding_reference_attributes: permitted_fundref_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end

@@ -69,6 +69,10 @@
   <%= presenter.attribute_to_html(:complex_date, render_as: :nested_date, label: t('ngdr.fields.complex_date'), html_dl: true) %>
 <% end %>
 
+<% if can? :read_funding_reference, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:complex_funding_reference, render_as: :nested_funding_reference, label: t('ngdr.fields.complex_funding_reference'), html_dl: true) %>
+<% end %>
+
 <% if can? :read_identifier, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:complex_identifier, render_as: :nested_identifier, label: t('ngdr.fields.complex_identifier'), html_dl: true) %>
 <% end %>

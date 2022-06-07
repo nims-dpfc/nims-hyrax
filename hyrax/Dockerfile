@@ -1,4 +1,4 @@
-FROM ruby:2.6-buster
+FROM ruby:2.7.4-buster
 
 # Setup build variables
 ARG RAILS_ENV
@@ -11,6 +11,7 @@ ARG AIRBRAKE_PROJECT_KEY
 ARG FITS_PATH
 ARG FITS_VERSION
 ARG FLUENTD_URL
+ARG IM_VERSION=7.0.7-39
 
 ENV APP_PRODUCTION=/data/ \
     APP_WORKDIR=/data
@@ -18,14 +19,11 @@ ENV APP_PRODUCTION=/data/ \
 # Add backports to apt-get sources
 # Install libraries, dependencies, java and fits
 
-RUN echo 'deb  http://deb.debian.org/debian buster main contrib non-free'
-RUN echo 'deb-src  http://deb.debian.org/debian buster main contrib non-free'
-
 RUN apt-get update -qq && \
     apt-get -y install apt-transport-https && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get update -qq && apt-get install -y --no-install-recommends \
     libpq-dev \
     libxml2-dev libxslt1-dev \
@@ -37,7 +35,7 @@ RUN apt-get update -qq && \
     libjpeg-dev libtiff-dev libpng-dev libraw-dev libwebp-dev libjxr-dev \
     libcairo2-dev libgs-dev librsvg2-dev \
     libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev \
-    ghostscript ffmpeg imagemagick \
+    ghostscript ffmpeg \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
@@ -47,14 +45,16 @@ RUN apt-get update -qq && \
     yarn config set no-progress && \
     yarn config set silent
 
+RUN git clone https://github.com/ImageMagick/ImageMagick.git && \
+    cd ImageMagick && git checkout ${IM_VERSION} && \
+    ./configure --prefix=/usr --without-magick-plus-plus --disable-docs --disable-static --with-tiff && \
+    make && make install
+
 RUN mkdir -p /fits/ \
     && wget -q https://projects.iq.harvard.edu/files/fits/files/$FITS_VERSION.zip -O /fits/$FITS_VERSION.zip \
     && unzip -q /fits/$FITS_VERSION.zip -d /fits/$FITS_VERSION \
     && chmod a+x $FITS_PATH \
     && rm /fits/$FITS_VERSION.zip
-
-# copy the imagemagick policy over
-COPY ops/imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
 
 # copy gemfiles to production folder
 COPY Gemfile Gemfile.lock $APP_PRODUCTION
