@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_contact_agent,
+    as: :nested_contact_agent,
+    input_html: {
+      class: '',
+      data: {name: :complex_contact_agent}
+    },
+    required: f.object.required?(:complex_contact_agent)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another contact agent</span>
+  </button>
+</div>

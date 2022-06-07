@@ -183,6 +183,9 @@ class SolrDocument
     self[Solrizer.solr_name('complex_funding_reference', :displayable)]
   end
 
+  def complex_contact_agent
+    self[Solrizer.solr_name('complex_contact_agent', :displayable)]
+
   def complex_chemical_composition
     self[Solrizer.solr_name('complex_chemical_composition', :displayable)]
   end
