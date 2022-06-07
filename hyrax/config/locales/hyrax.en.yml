@@ -224,6 +224,7 @@ en:
           complex_rights_ssm: License
           complex_source_ssm: Journal
           complex_specimen_type_ssm: Specimen type
+          complex_structural_feature_ssm: Structural feature
           complex_version_ssm: Version
           creator_tesim: Creator
           custom_property_ssm: Additional metadata

@@ -57,7 +57,14 @@ RSpec.describe SolrDocument do
           identifier: 'chemical_composition/1234567',
           scheme: 'identifier persistent'
         }]
-      }]     
+      }],
+      complex_structural_feature_attributes: [{
+        description: 'structural feature 1',
+        complex_identifier_attributes: [{
+          identifier: 'structural_feature/1234567',
+          scheme: 'identifier persistent'
+        }]
+      }]
     )
   end
   let(:solr_document) { described_class.new(model.to_solr) }
@@ -397,6 +404,18 @@ RSpec.describe SolrDocument do
     describe 'complex_identifier' do
       subject { complex_chemical_composition['complex_identifier'].first['identifier'] }
       it { is_expected.to eql ['chemical_composition/1234567'] }
+    end
+  end
+
+  describe '#complex_structural_feature' do
+    let(:complex_structural_feature) { JSON.parse(solr_document.complex_structural_feature).first }
+    describe 'description' do
+      subject { complex_structural_feature['description'] }
+      it { is_expected.to eql ['structural feature 1'] }
+    end
+    describe 'complex_identifier' do
+      subject { complex_structural_feature['complex_identifier'].first['identifier'] }
+      it { is_expected.to eql ['structural_feature/1234567'] }
     end
   end
 end

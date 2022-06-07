@@ -27,7 +27,7 @@ en:
         complex_rights:                   "Rights"
         complex_source:                   "Journal/Book/Proceedings/Database"
         complex_specimen_type:            "Specimen type"
-        complex_structural_features:      "Structural features"
+        complex_structural_features:      "Structural feature"
         complex_version:                  "Version"
         computational_methods:            "Computational methods"
         custom_property:                  "Additional metadata"
