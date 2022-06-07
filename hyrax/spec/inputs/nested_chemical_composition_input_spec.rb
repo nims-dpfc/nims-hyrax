@@ -18,5 +18,6 @@ RSpec.describe NestedChemicalCompositionInput, type: :input do
     is_expected.to have_field('dataset_complex_chemical_composition_attributes_0_description', type: :text, with: 'chemical composition 1')
     is_expected.to have_field('dataset[complex_chemical_composition_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'chemical_composition/1234567')
     is_expected.to have_select('dataset[complex_chemical_composition_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
+    is_expected.to have_field('dataset_complex_chemical_composition_attributes_0_category', type: :text, with: 'http://id.example.jp/Q12345')
   end
 end
