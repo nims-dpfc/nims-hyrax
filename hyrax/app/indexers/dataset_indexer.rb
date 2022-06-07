@@ -116,6 +116,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_show_fields
       fields.concat ComplexField::FundrefIndexer.fundref_show_fields
       fields.concat ComplexField::ContactAgentIndexer.contact_agent_show_fields
+      fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_show_fields
     end
   end
 

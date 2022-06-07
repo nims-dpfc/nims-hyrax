@@ -33,6 +33,7 @@ RSpec.describe Hyrax::DatasetForm do
     describe '#specimen_tab_terms' do
       subject { form.specimen_tab_terms }
       it { is_expected.to include(:complex_specimen_type) }
+      it { is_expected.to include(:complex_chemical_composition) }
     end
   end
 
@@ -56,6 +57,7 @@ RSpec.describe Hyrax::DatasetForm do
         expect(described_class).to receive(:permitted_custom_property_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_fundref_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_contact_agent_params).at_least(:once).and_call_original
+        expect(described_class).to receive(:permitted_chemical_composition_params).at_least(:once).and_call_original
         subject
       end
     end
