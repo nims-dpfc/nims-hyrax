@@ -190,4 +190,8 @@ class SolrDocument
   def complex_chemical_composition
     self[Solrizer.solr_name('complex_chemical_composition', :displayable)]
   end
+
+  def complex_structural_feature
+    self[Solrizer.solr_name('complex_structural_feature', :displayable)]
+  end
 end
