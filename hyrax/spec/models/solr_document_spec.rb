@@ -45,6 +45,12 @@ RSpec.describe SolrDocument do
         award_uri: 'http://award.com/a1234',
         award_title: 'No free lunch'
       }],
+      complex_contact_agent_attributes: [{
+        name: 'Kosuke Tanabe',
+        email: 'tanabe@example.jp',
+        organization: 'NIMS',
+        department: 'DPFC'
+      }],
       complex_chemical_composition_attributes: [{
         description: 'chemical composition 1',
         complex_identifier_attributes: [{
@@ -366,6 +372,26 @@ RSpec.describe SolrDocument do
     describe 'award_title' do
       subject { complex_funding_reference['award_title'] }
       it { is_expected.to eql ['No free lunch'] }
+    end
+  end
+
+  describe '#complex_contact_agent' do
+    let(:complex_contact_agent) { JSON.parse(solr_document.complex_contact_agent).first }
+    describe 'name' do
+      subject { complex_contact_agent['name'] }
+      it { is_expected.to eql ['Kosuke Tanabe'] }
+    end
+    describe 'email' do
+      subject { complex_contact_agent['email'] }
+      it { is_expected.to eql ['tanabe@example.jp'] }
+    end
+    describe 'organization' do
+      subject { complex_contact_agent['organization'] }
+      it { is_expected.to eql ['NIMS'] }
+    end
+    describe 'department' do
+      subject { complex_contact_agent['department'] }
+      it { is_expected.to eql ['DPFC'] }
     end
   end
 
