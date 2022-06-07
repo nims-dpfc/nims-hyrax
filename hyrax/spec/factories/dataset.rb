@@ -511,6 +511,17 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_contact_agent do
+      complex_contact_agent_attributes {
+        [{
+           name: 'Kosuke Tanabe',
+           email: 'tanabe@example.jp',
+           organization: 'NIMS',
+           department: 'DPFC'
+         }]
+      }
+    end
+
     trait :with_ja do
       title { ["材料データプラットフォームDICE2.0 - データ創出−蓄積−利用−連携の基盤"] }
       managing_organization { ['ナノテクノロジープラットフォーム事業の成果と課題'] }
