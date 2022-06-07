@@ -31,6 +31,9 @@
         <% if can? :read_creator, presenter.model_name.name.constantize %>
           <%= presenter.attribute_to_html(:complex_person, render_as: :nested_person, label: t('ngdr.fields.complex_person'), html_dl: true) %>
         <% end %>
+        <% if can? :read_contact_agent, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_contact_agent, render_as: :nested_contact_agent, label: t('ngdr.fields.complex_contact_agent'), html_dl: true) %>
+        <% end %>
 
         <% if can? :read_keyword, presenter.model_name.name.constantize %>
           <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>

@@ -22,6 +22,7 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::StateOfMatterIndexer
   include ComplexField::StructuralFeatureIndexer
   include ComplexField::FundrefIndexer
+  include ComplexField::ContactAgentIndexer
 
   def self.facet_fields
     # solr fields that will be treated as facets
@@ -114,6 +115,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::InstrumentIndexer.instrument_show_fields
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_show_fields
       fields.concat ComplexField::FundrefIndexer.fundref_show_fields
+      fields.concat ComplexField::ContactAgentIndexer.contact_agent_show_fields
       fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_show_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_show_fields
     end

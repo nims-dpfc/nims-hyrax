@@ -31,6 +31,7 @@ module Hyrax
       :publisher, :date_published, 
       :rights_statement, :licensed_date,
       :complex_person, 
+      :complex_contact_agent,
       :complex_source, :manuscript_type, 
       :complex_event,
       :language, 
@@ -88,6 +89,7 @@ module Hyrax
         :publisher, :date_published, 
         :rights_statement, :licensed_date, 
         :complex_person, 
+        :complex_contact_agent,
         :complex_source, :manuscript_type,
         :complex_event,
         :language,
@@ -120,7 +122,7 @@ module Hyrax
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
       :complex_organization, :complex_person, :complex_relation, :complex_event,
-      :complex_funding_reference, :complex_chemical_composition,
+      :complex_funding_reference, :complex_contact_agent, :complex_chemical_composition,
       :complex_structural_feature,
       :complex_source, :complex_specimen_type, :complex_version, :custom_property].freeze
 
@@ -175,6 +177,18 @@ module Hyrax
          award_number: [],
          award_uri: [],
          award_title: []
+       }
+      ]
+    end
+
+    def self.permitted_contact_agent_params
+      [:id,
+       :_destroy,
+       {
+         name: [],
+         email: [],
+         organization: [],
+         department: []
        }
       ]
     end
@@ -396,6 +410,7 @@ module Hyrax
       permitted << { complex_source_attributes: permitted_source_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
       permitted << { complex_funding_reference_attributes: permitted_fundref_params }
+      permitted << { complex_contact_agent_attributes: permitted_contact_agent_params }
       permitted << { complex_chemical_composition_attributes: permitted_chemical_composition_params }
       permitted << { complex_structural_feature_attributes: permitted_structural_feature_params }
       permitted << :member_of_collection_ids
