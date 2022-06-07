@@ -204,5 +204,16 @@ FactoryBot.define do
          }]
       }
     end
+
+    trait :with_complex_contact_agent do
+      complex_contact_agent_attributes {
+        [{
+           name: 'Kosuke Tanabe',
+           email: 'tanabe@example.jp',
+           organization: 'NIMS',
+           department: 'DPFC'
+         }]
+      }
+    end
   end
 end

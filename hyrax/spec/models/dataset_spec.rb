@@ -1065,4 +1065,28 @@ RSpec.describe Dataset do
       expect(@obj.complex_funding_reference).to be_empty
     end
   end
+
+  describe 'complex_contact_agent' do
+    it 'creates a complex contact agent active triple resource with contact agent' do
+      @obj = build(:dataset,
+                   complex_contact_agent_attributes: [{
+                     name: 'Kosuke Tanabe',
+                     email: 'tanabe@example.jp',
+                     organization: 'NIMS',
+                     department: 'DPFC'
+                   }]
+      )
+      expect(@obj.complex_contact_agent.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_contact_agent.first.name).to eq ['Kosuke Tanabe']
+    end
+
+    it 'rejects a complex contact agent active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_contact_agent_attributes: [{
+                                                 name: ''
+                                               }]
+      )
+      expect(@obj.complex_contact_agent).to be_empty
+    end
+  end
 end
