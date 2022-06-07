@@ -50,7 +50,14 @@ RSpec.describe SolrDocument do
         email: 'tanabe@example.jp',
         organization: 'NIMS',
         department: 'DPFC'
-      }]
+      }],
+      complex_chemical_composition_attributes: [{
+        description: 'chemical composition 1',
+        complex_identifier_attributes: [{
+          identifier: 'chemical_composition/1234567',
+          scheme: 'identifier persistent'
+        }]
+      }]     
     )
   end
   let(:solr_document) { described_class.new(model.to_solr) }
@@ -378,6 +385,18 @@ RSpec.describe SolrDocument do
     describe 'department' do
       subject { complex_contact_agent['department'] }
       it { is_expected.to eql ['DPFC'] }
+    end
+  end
+
+  describe '#complex_chemical_composition' do
+    let(:complex_chemical_composition) { JSON.parse(solr_document.complex_chemical_composition).first }
+    describe 'description' do
+      subject { complex_chemical_composition['description'] }
+      it { is_expected.to eql ['chemical composition 1'] }
+    end
+    describe 'complex_identifier' do
+      subject { complex_chemical_composition['complex_identifier'].first['identifier'] }
+      it { is_expected.to eql ['chemical_composition/1234567'] }
     end
   end
 end

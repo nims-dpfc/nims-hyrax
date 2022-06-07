@@ -53,6 +53,7 @@ module Hyrax
 
       # specimen details
       :complex_specimen_type,
+      :complex_chemical_composition,
       :material_type,
       
       # not used
@@ -115,11 +116,12 @@ module Hyrax
     end
 
     def specimen_tab_terms
-      [ :complex_specimen_type ]
+      [ :complex_chemical_composition, :complex_specimen_type ]
     end
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
-      :complex_organization, :complex_person, :complex_relation, :complex_event, :complex_funding_reference, :complex_contact_agent,
+      :complex_organization, :complex_person, :complex_relation, :complex_event,
+      :complex_funding_reference, :complex_contact_agent, :complex_chemical_composition,
       :complex_source, :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
@@ -326,6 +328,17 @@ module Hyrax
       ]
     end
 
+    def self.permitted_chemical_composition_params
+      [:id,
+       :_destroy,
+       {
+         description: [],
+         complex_identifier_attributes: permitted_identifier_params,
+         category: []
+       }
+      ]
+    end
+
     def self.permitted_structural_feature_params
       [:id,
        :_destroy,
@@ -396,6 +409,7 @@ module Hyrax
       permitted << { custom_property_attributes: permitted_custom_property_params }
       permitted << { complex_funding_reference_attributes: permitted_fundref_params }
       permitted << { complex_contact_agent_attributes: permitted_contact_agent_params }
+      permitted << { complex_chemical_composition_attributes: permitted_chemical_composition_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end

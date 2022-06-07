@@ -1089,4 +1089,29 @@ RSpec.describe Dataset do
       expect(@obj.complex_contact_agent).to be_empty
     end
   end
+
+  describe 'complex_chemical_composition' do
+    it 'creates a complex chemical composition active triple resource with chemical composition' do
+      @obj = build(:dataset,
+                   complex_chemical_composition_attributes: [{
+                     description: 'chemical composition 1',
+                     complex_identifier_attributes: [{
+                      identifier: 'chemical_composition/1234567',
+                      scheme: 'identifier persistent'
+                    }]
+                   }]
+      )
+      expect(@obj.complex_chemical_composition.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_chemical_composition.first.description).to eq ['chemical composition 1']
+    end
+
+    it 'rejects a complex chemical composition active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_chemical_composition_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_chemical_composition).to be_empty
+    end
+  end
 end

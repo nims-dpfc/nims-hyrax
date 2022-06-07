@@ -110,6 +110,9 @@ class Dataset < ActiveFedora::Base
   property :complex_specimen_type, predicate: ::RDF::Vocab::NimsRdp['specimen-type'],
   class_name: "ComplexSpecimenType"
 
+  property :complex_chemical_composition, predicate: ::RDF::Vocab::NimsRdp['chemical-composition'],
+  class_name: "ComplexChemicalComposition"
+
   property :synthesis_and_processing, predicate: ::RDF::Vocab::NimsRdp['synthesis-and-processing'] do |index|
     index.as :stored_searchable, :facetable
   end
@@ -174,4 +177,5 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
   accepts_nested_attributes_for :complex_funding_reference, reject_if: :fundref_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_contact_agent, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_chemical_composition, reject_if: :all_blank, allow_destroy: true
 end
