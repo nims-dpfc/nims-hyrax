@@ -32,7 +32,7 @@ RSpec.describe ComplexRights do
     @obj = ExampleWork.new
     @obj.attributes = {
       complex_rights_attributes: [{
-        rights: 'https://creativecommons.org/publicdomain/zero/1.0/'
+        rights: 'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
       }]
     }
     expect(@obj.complex_rights.first.id).to include('#rights')
@@ -43,13 +43,13 @@ RSpec.describe ComplexRights do
     @obj.attributes = {
       complex_rights_attributes: [{
         date: '1978-10-28',
-        rights: 'https://creativecommons.org/publicdomain/zero/1.0/',
+        rights: 'https://creativecommons.org/publicdomain/zero/1.0/legalcode',
         label: 'CC-0'
       }]
     }
     expect(@obj.complex_rights.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_rights.first.date).to eq ['1978-10-28']
-    expect(@obj.complex_rights.first.rights).to eq ['https://creativecommons.org/publicdomain/zero/1.0/']
+    expect(@obj.complex_rights.first.rights).to eq ['https://creativecommons.org/publicdomain/zero/1.0/legalcode']
     expect(@obj.complex_rights.first.label).to eq ['CC-0']
   end
 
@@ -68,11 +68,11 @@ RSpec.describe ComplexRights do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_rights_attributes: [{
-          rights: 'https://creativecommons.org/publicdomain/zero/1.0/'
+          rights: 'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
         }]
       }
       expect(@obj.complex_rights.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_rights.first.rights).to eq ['https://creativecommons.org/publicdomain/zero/1.0/']
+      expect(@obj.complex_rights.first.rights).to eq ['https://creativecommons.org/publicdomain/zero/1.0/legalcode']
       expect(@obj.complex_rights.first.date).to be_empty
     end
 

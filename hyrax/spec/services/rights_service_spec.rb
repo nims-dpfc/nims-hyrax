@@ -6,7 +6,7 @@ RSpec.describe RightsService do
   describe "#select_active_options" do
     it "returns active terms" do
       expect(service.select_active_options).to include(
-        ["Creative Commons BY Attribution 4.0 International", "https://creativecommons.org/licenses/by/4.0/"],
+        ["Creative Commons BY Attribution 4.0 International", "https://creativecommons.org/licenses/by/4.0/legalcode"],
         ["Creative Commons Public Domain Mark 1.0", "http://creativecommons.org/publicdomain/mark/1.0/"],
         )
     end

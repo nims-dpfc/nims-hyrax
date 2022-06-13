@@ -169,7 +169,7 @@ FactoryBot.define do
       complex_rights_attributes {
         [{
            date: '1980-10-10',
-           rights: 'http://creativecommons.org/publicdomain/zero/1.0/'
+           rights: 'http://creativecommons.org/publicdomain/zero/1.0/legalcode'
          }]
       }
     end

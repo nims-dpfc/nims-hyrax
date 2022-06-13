@@ -14,7 +14,7 @@
   <jpcoar:subject subjectScheme="Other" xml:lang="en">Keyword-123</jpcoar:subject>
   <dc:publisher xml:lang="en">Publisher-123</dc:publisher>
   <datacite:date dateType="Issued">1978-10-28</datacite:date>
-  <dc:rights rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" xml:lang="en">Creative Commons CC0 1.0 Universal</dc:rights>
+  <dc:rights rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/legalcode" xml:lang="en">Creative Commons CC0 1.0 Universal</dc:rights>
   <jpcoar:contributor contributorType="Editor">
     <jpcoar:familyName xml:lang="en">Last name</jpcoar:familyName>
     <jpcoar:givenName xml:lang="en">First name</jpcoar:givenName>

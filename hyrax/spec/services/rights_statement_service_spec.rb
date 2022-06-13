@@ -7,7 +7,7 @@ RSpec.describe RightsStatementService do
     it "returns active terms" do
       expect(service.select_active_options).to include(
         ["In Copyright", "http://rightsstatements.org/vocab/InC/1.0/"],
-        ["Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 4.0 International", "https://creativecommons.org/licenses/by-nc-nd/4.0/"],
+        ["Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 4.0 International", "https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode"],
         )
     end
   end

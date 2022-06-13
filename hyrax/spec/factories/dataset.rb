@@ -478,7 +478,7 @@ FactoryBot.define do
     trait :with_rights do
       rights_statement {
         [
-          'http://creativecommons.org/publicdomain/zero/1.0/'
+          'http://creativecommons.org/publicdomain/zero/1.0/legalcode'
         ]
       }
     end

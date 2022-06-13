@@ -296,7 +296,7 @@ def publication_attributes_from_form
 	 "specimen_set_ordered"=>["Workflow notifications", ""],
 	 "publisher"=>["CL", ""],
 	 "date_published"=>"25/10/2020",
-	 "rights_statement"=>["", "https://creativecommons.org/licenses/by/4.0/"],
+	 "rights_statement"=>["", "https://creativecommons.org/licenses/by/4.0/legalcode"],
 	 "licensed_date"=>"10/11/2020",
 	 "complex_person_attributes"=>
 	  {"0"=>
@@ -441,7 +441,7 @@ def publication_attributes_from_form_cleaned
 	 "specimen_set_ordered"=>["Workflow notifications"],
 	 "publisher"=>["CL"],
 	 "date_published"=>"25/10/2020",
-	 "rights_statement"=>["https://creativecommons.org/licenses/by/4.0/"],
+	 "rights_statement"=>["https://creativecommons.org/licenses/by/4.0/legalcode"],
 	 "licensed_date"=>"10/11/2020",
 	 "complex_person_attributes"=>
 	  [{"last_name"=>["Rang"],
