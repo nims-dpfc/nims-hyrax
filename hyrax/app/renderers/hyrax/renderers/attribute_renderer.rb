@@ -79,7 +79,11 @@ module Hyrax
         end
 
         def li_value(value)
-          auto_link(value.html_safe)
+          safe_value = ERB::Util.h(value)
+          if safe_value.include?("&amp;")
+            safe_value = safe_value.gsub("&amp;", "&")
+          end
+          auto_link(safe_value)
         end
 
         def work_type_label_key

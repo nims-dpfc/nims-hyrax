@@ -4,7 +4,11 @@ module Hyrax
       private
 
         def li_value(value)
-          link_to(value.html_safe, search_path(value.html_safe))
+          safe_value = ERB::Util.h(value)
+          if safe_value.include?("&amp;")
+            safe_value = safe_value.gsub("&amp;", "&")
+          end
+          link_to(safe_value, search_path(safe_value))
         end
 
         def search_path(value)
