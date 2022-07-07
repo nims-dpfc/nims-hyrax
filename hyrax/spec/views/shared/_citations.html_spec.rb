@@ -2,7 +2,7 @@ require 'rails_helper'
 include Warden::Test::Helpers
 
 RSpec.describe 'shared/_citations' do
-  let(:dataset) { create(:dataset, :open, :with_description_seq, :with_detailed_complex_people) }
+  let(:dataset) { create(:dataset, :open, :with_description_seq) }
   let(:presenter) { Hyrax::DatasetPresenter.new(SolrDocument.new(dataset.to_solr), Ability.new(user), controller.request) }
 
   before do
@@ -34,14 +34,6 @@ RSpec.describe 'shared/_citations' do
       it 'shows the abstract' do
         expect(rendered).to have_css("meta[property='og:description'][content='#{dataset.description.first}']", visible: false)
       end
-    end
-  end
-
-  describe 'citation_author' do
-    let(:user) { nil }
-    it 'shows the authors' do
-      expect(rendered).to have_css("meta[name='citation:author'][content='#{dataset.complex_person[0].name.first}']", visible: false)
-      expect(rendered).to have_css("meta[name='citation:author'][content='#{dataset.complex_person[1].name.first}']", visible: false)
     end
   end
 end
