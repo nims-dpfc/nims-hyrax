@@ -178,4 +178,20 @@ class SolrDocument
   def material_type
     self[Solrizer.solr_name('material_type', :stored_searchable)]
   end
+
+  def complex_funding_reference
+    self[Solrizer.solr_name('complex_funding_reference', :displayable)]
+  end
+
+  def complex_contact_agent
+    self[Solrizer.solr_name('complex_contact_agent', :displayable)]
+  end
+
+  def complex_chemical_composition
+    self[Solrizer.solr_name('complex_chemical_composition', :displayable)]
+  end
+
+  def complex_structural_feature
+    self[Solrizer.solr_name('complex_structural_feature', :displayable)]
+  end
 end

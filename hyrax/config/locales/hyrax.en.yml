@@ -7,6 +7,9 @@ en:
           based_near_label_sim: Location
           creator_sim: Creator
           characterization_methods_sim: Characterization methods
+          complex_chemical_composition_category_ssim: Chemical composition category
+          complex_chemical_composition_identifier_sim: Chemical composition identifier
+          complex_contact_agent_ssm: Contact agent
           complex_date_dtsim: Date
           complex_date_accepted_dtsim: Date accepted
           complex_year_accepted_sim: Date accepted
@@ -64,6 +67,7 @@ en:
           custom_property_sim: Additional metadata
           data_origin_sim: Data origin
           file_format_sim: Format
+          funder_sim: Funder
           generic_type_sim: Type
           human_readable_type_sim: Type of work
           instrument_sim: Instrument
@@ -86,11 +90,15 @@ en:
           material_type_sim: Material type
           visibility_ssi: Visibility
         index:
+          award_title_tesim: Award title
+          award_number_ssim: Award number
           based_near_tesim: Location
           characterization_methods_tesim: Characterization methods
           contributor_tesim: Contributor
           creator_tesim: Creator
+          complex_contact_agent_tesim: Contact agent
           complex_chemical_composition_tesim: Chemical composition
+          complex_chemical_composition_category_ssim: Chemical composition category
           complex_chemical_composition_identifier_ssim: Chemical composition identifier
           complex_crystallographic_structure_tesim: Crystallographic structure
           complex_crystallographic_structure_identifier_ssim: Crystallographic structure identifier
@@ -152,6 +160,8 @@ en:
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description/Abstract
           file_format_tesim: File Format
+          funder_tesim: Funder
+          funder_identifier_ssim: Funder identifier
           identifier_tesim: Identifier
           instrument_alternative_title_tesim: Instrument alternative title
           instrument_description_tesim: Instrument description
@@ -178,7 +188,9 @@ en:
           characterization_methods_tesim: Characterization_methods
           computational_methods_tesim: Computational methods
           contributor_tesim: Contributor
-          complex_date_ssm: "Date"
+          complex_date_ssm: Date
+          complex_contact_agent_ssm: Contact agent
+          complex_chemical_composition: Chemical composition
           complex_date_accepted_ssm: Date accepted
           complex_date_available_ssm: Date available
           complex_date_copyrighted_ssm: Date copyrighted
@@ -193,6 +205,7 @@ en:
           complex_date_purchased_ssm: Date purchased
           complex_date_other_ssm: Date
           complex_event_ssm: Event
+          complex_funding_reference_ssm: Funding reference
           complex_identifier_ssm: Identifier
           complex_instrument_ssm: Instrument
           complex_organization_ssm: Organization
@@ -211,6 +224,7 @@ en:
           complex_rights_ssm: License
           complex_source_ssm: Journal
           complex_specimen_type_ssm: Specimen type
+          complex_structural_feature_ssm: Structural feature
           complex_version_ssm: Version
           creator_tesim: Creator
           custom_property_ssm: Additional metadata
