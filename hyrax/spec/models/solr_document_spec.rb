@@ -37,7 +37,34 @@ RSpec.describe SolrDocument do
       }],
       specimen_set: ['Specimen Set'],
       synthesis_and_processing: ['Synthesis and processing methods'],
-      custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }]
+      custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }],
+      complex_funding_reference_attributes: [{
+        funder_identifier: 'f1234',
+        funder_name: 'Bank',
+        award_number: 'a1234',
+        award_uri: 'http://award.com/a1234',
+        award_title: 'No free lunch'
+      }],
+      complex_contact_agent_attributes: [{
+        name: 'Kosuke Tanabe',
+        email: 'tanabe@example.jp',
+        organization: 'NIMS',
+        department: 'DPFC'
+      }],
+      complex_chemical_composition_attributes: [{
+        description: 'chemical composition 1',
+        complex_identifier_attributes: [{
+          identifier: 'chemical_composition/1234567',
+          scheme: 'identifier persistent'
+        }]
+      }],
+      complex_structural_feature_attributes: [{
+        description: 'structural feature 1',
+        complex_identifier_attributes: [{
+          identifier: 'structural_feature/1234567',
+          scheme: 'identifier persistent'
+        }]
+      }]
     )
   end
   let(:solr_document) { described_class.new(model.to_solr) }
@@ -317,5 +344,78 @@ RSpec.describe SolrDocument do
     let(:model) { build(:publication, id: '123456', title: ['Test']) }
     subject { solr_document.persistent_url }
     it { is_expected.to eql "http://localhost/concern/publications/#{solr_document.id}" }
+  end
+
+  describe '#complex_funding_reference' do
+    let(:complex_funding_reference) { JSON.parse(solr_document.complex_funding_reference).first }
+    #         funder_identifier: 'f1234',
+    #         funder_name: 'Bank',
+    #         award_number: 'a1234',
+    #         award_uri: 'http://award.com/a1234'
+    #         award_title: 'No free lunch'
+    describe 'funder_identifier' do
+      subject { complex_funding_reference['funder_identifier'] }
+      it { is_expected.to eql ['f1234'] }
+    end
+    describe 'funder_name' do
+      subject { complex_funding_reference['funder_name'] }
+      it { is_expected.to eql ['Bank'] }
+    end
+    describe 'award_number' do
+      subject { complex_funding_reference['award_number'] }
+      it { is_expected.to eql ['a1234'] }
+    end
+    describe 'award_uri' do
+      subject { complex_funding_reference['award_uri'] }
+      it { is_expected.to eql ['http://award.com/a1234'] }
+    end
+    describe 'award_title' do
+      subject { complex_funding_reference['award_title'] }
+      it { is_expected.to eql ['No free lunch'] }
+    end
+  end
+
+  describe '#complex_contact_agent' do
+    let(:complex_contact_agent) { JSON.parse(solr_document.complex_contact_agent).first }
+    describe 'name' do
+      subject { complex_contact_agent['name'] }
+      it { is_expected.to eql ['Kosuke Tanabe'] }
+    end
+    describe 'email' do
+      subject { complex_contact_agent['email'] }
+      it { is_expected.to eql ['tanabe@example.jp'] }
+    end
+    describe 'organization' do
+      subject { complex_contact_agent['organization'] }
+      it { is_expected.to eql ['NIMS'] }
+    end
+    describe 'department' do
+      subject { complex_contact_agent['department'] }
+      it { is_expected.to eql ['DPFC'] }
+    end
+  end
+
+  describe '#complex_chemical_composition' do
+    let(:complex_chemical_composition) { JSON.parse(solr_document.complex_chemical_composition).first }
+    describe 'description' do
+      subject { complex_chemical_composition['description'] }
+      it { is_expected.to eql ['chemical composition 1'] }
+    end
+    describe 'complex_identifier' do
+      subject { complex_chemical_composition['complex_identifier'].first['identifier'] }
+      it { is_expected.to eql ['chemical_composition/1234567'] }
+    end
+  end
+
+  describe '#complex_structural_feature' do
+    let(:complex_structural_feature) { JSON.parse(solr_document.complex_structural_feature).first }
+    describe 'description' do
+      subject { complex_structural_feature['description'] }
+      it { is_expected.to eql ['structural feature 1'] }
+    end
+    describe 'complex_identifier' do
+      subject { complex_structural_feature['complex_identifier'].first['identifier'] }
+      it { is_expected.to eql ['structural_feature/1234567'] }
+    end
   end
 end

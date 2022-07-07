@@ -6,7 +6,9 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
   let(:dataset) { create(:dataset, :open, :with_alternative_title, :with_complex_person, :with_keyword, :with_subject,
                         :with_language, :with_publisher, :with_date_published, :with_complex_identifier, :with_rights,
                         :with_complex_version, :with_resource_type, :with_complex_relation, :with_complex_source,
-                        :with_complex_event, :with_material_type,
+                        :with_complex_event, :with_material_type, :with_complex_funding_reference,
+                        :with_complex_contact_agent, :with_complex_chemical_composition, 
+                        :with_complex_structural_feature,
                         :with_description_abstract, :with_supervisor_approval) }
   let(:presenter) { Hyrax::DatasetPresenter.new(SolrDocument.new(dataset.to_solr), Ability.new(user), controller.request) }
 
@@ -39,6 +41,13 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
       expect(rendered).to have_content('Test journal')
       expect(rendered).to have_content('1234-5678')
       expect(rendered).to have_content('Cu-containing')
+      expect(rendered).to have_content('f1234')
+      expect(rendered).to have_content('tanabe@example.jp')
+      expect(rendered).to have_content('chemical composition 1')
+      expect(rendered).to have_content('http://id.example.jp/Q12345')
+      expect(rendered).to have_content('structural feature description')
+      expect(rendered).to have_content('structural feature category')
+      expect(rendered).to have_content('structural_feature/123456')
       expect(rendered).not_to have_content('Abstract-Description-123') # Abstract/Description is not displayed in this table partial
       expect(rendered).not_to have_content('Professor-Supervisor-Approval')
     end
@@ -64,6 +73,13 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
       expect(rendered).to have_content('A relation label')
       expect(rendered).to have_content('Test journal')
       expect(rendered).to have_content('1234-5678')
+      expect(rendered).to have_content('f1234')
+      expect(rendered).to have_content('tanabe@example.jp')
+      expect(rendered).to have_content('chemical composition 1')
+      expect(rendered).to have_content('http://id.example.jp/Q12345')
+      expect(rendered).to have_content('structural feature description')
+      expect(rendered).to have_content('structural feature category')
+      expect(rendered).to have_content('structural_feature/123456')
       expect(rendered).not_to have_content('Abstract-Description-123') # Abstract/Description is not displayed in this table partial
       expect(rendered).not_to have_content('Professor-Supervisor-Approval')
     end
