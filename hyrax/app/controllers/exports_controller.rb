@@ -1,5 +1,6 @@
 require 'csv'
 require 'json'
+require 'github/markup'
 
 class ExportsController < Hyrax::DownloadsController
   MAXIMUM_ROWS = 200
@@ -9,6 +10,10 @@ class ExportsController < Hyrax::DownloadsController
       render json: csv_as_datatable
     elsif is_json?(file)
       render json: file.content.force_encoding(Encoding::UTF_8).scrub
+    elsif is_md?(file)
+      render json: {'content': GitHub::Markup.render_s(GitHub::Markups::MARKUP_MARKDOWN, file.content) }
+    elsif is_txt?(file)
+      render json: {'content': file.content.force_encoding(Encoding::UTF_8).scrub }
     else
       render :json => { error: 'Unknown or unsupported file type' }, :status => :bad_request
     end
@@ -51,6 +56,20 @@ class ExportsController < Hyrax::DownloadsController
     return false unless file.present?
     return true if file.format_label && file.format_label.detect { |f| f.match(/JSON/i) }
     return true if file.mime_type.present? && file.mime_type =~ /^application\/json$/i
+    false
+  end
+
+  def is_txt?(file)
+    return false unless file.present?
+    return true if file.format_label && file.format_label.detect { |f| f.match(/Text/i) }
+    return true if file.mime_type.present? && file.mime_type =~ /^text\/plain$/i
+    false
+  end
+
+  def is_md?(file)
+    return false unless is_txt?(file)
+    puts file.label.to_s
+    # return true if file.label && File.extname(file.label).downcase == '.md'
     false
   end
 end

@@ -9,8 +9,8 @@
     <% active_class = '' %>
   <% end %>
   <% @presenter.member_presenters.each do |member_presenter| %>
-    <% if (member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv?) or
-      (member_presenter&.respond_to?(:json?) && member_presenter&.json?) %>
+    <% if (member_presenter&.respond_to?(:display_readme?) && member_presenter&.display_readme?) or
+      (member_presenter&.respond_to?(:metadata_json?) && member_presenter&.metadata_json?) %>
       <li class="nav-item <%= active_class %>" role="presentation">
         <a href="#preview-<%= member_presenter.id %>" aria-controls="preview" role="tab" data-toggle="tab"><%= member_presenter.link_name%></a>
       </li>
@@ -28,12 +28,12 @@
     </div>
   <% end %>
   <% @presenter.member_presenters.each_with_index do |member_presenter, index| %>
-    <% if member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv? %>
+    <% if member_presenter&.respond_to?(:display_readme?) && member_presenter&.display_readme? %>
       <div class="tab-pane <%= active_class %>" id="preview-<%= member_presenter.id %>" role="tabpanel" aria-labelledby="preview-<%= member_presenter.id %>-tab">
-        <%= nims_media_display(member_presenter, datatable: true) %>
+        <%= nims_media_display(member_presenter, content: true) %>
       </div>
       <% active_class = '' %>
-    <% elsif member_presenter&.respond_to?(:json?) && member_presenter&.json? %>
+    <% elsif member_presenter&.respond_to?(:metadata_json?) && member_presenter&.metadata_json? %>
       <div class="tab-pane <%= active_class %>" id="preview-<%= member_presenter.id %>" role="tabpanel" aria-labelledby="preview-<%= member_presenter.id %>-tab">
         <%= nims_media_display(member_presenter, graph: true) %>
       </div>
