@@ -4,7 +4,8 @@ module Hyrax
   class DatasetPresenter < Hyrax::WorkShowPresenter
     delegate :alternative_title, :complex_date, :complex_identifier,
       :complex_person, :complex_organization, :complex_rights, :complex_version,
-      :characterization_methods, :computational_methods, :data_origin,
+      :complex_funding_reference, :characterization_methods, :computational_methods, :data_origin,
+      :complex_contact_agent, :complex_chemical_composition, :complex_structural_feature,
       :complex_instrument, :origin_system_provenance, :properties_addressed,
       :complex_relation, :specimen_set, :complex_specimen_type, :complex_event,
       :complex_source, :material_type,

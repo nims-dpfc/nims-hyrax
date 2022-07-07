@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_funding_reference,
+    as: :nested_funding_reference,
+    input_html: {
+      class: '',
+      data: {name: :complex_funding_reference}
+    },
+    required: f.object.required?(:complex_funding_reference)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another funding reference</span>
+  </button>
+</div>

@@ -44,6 +44,6 @@ RSpec.describe Hyrax::Actors::ComplexAttributes do
             complex_specimen_type complex_version complex_relation complex_instrument complex_affiliation manufacturer
             supplier custom_property complex_structural_feature complex_state_of_matter complex_shape complex_purchase_record
             complex_material_type instrument_function complex_chemical_composition complex_crystallographic_structure
-            complex_event complex_source complex_event_date]) }
+            complex_event complex_source complex_event_date complex_funding_reference]) }
   end
 end
