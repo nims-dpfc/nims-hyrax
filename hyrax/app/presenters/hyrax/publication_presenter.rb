@@ -9,7 +9,7 @@ module Hyrax
              :complex_contact_agent,
              :complex_relation, :custom_property, :specimen_set,
              :first_published_url, :doi, :licensed_date, :creator, :date_published,
-             :managing_organization, to: :solr_document
+             :managing_organization, :ordered_creators, to: :solr_document
 
     Hyrax::MemberPresenterFactory.file_presenter_class = Hyrax::NimsFileSetPresenter
     prepend ::FilteredGraph
