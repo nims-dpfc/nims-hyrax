@@ -185,7 +185,8 @@ FactoryBot.define do
              }]
            }],
            orcid: '23542345234',
-           organization: 'My org'
+           organization: 'My org',
+           display_order: 0
           },
           {
            name: 'Cee Jay',
@@ -206,7 +207,8 @@ FactoryBot.define do
               }]
             }],
            orcid: '112233445566',
-           organization: 'My journal org'
+           organization: 'My journal org',
+           display_order: 1
         }]
       }
     end
