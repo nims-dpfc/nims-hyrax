@@ -16,10 +16,15 @@
           <%= render 'workflow_actions_widget', presenter: @presenter %>
           <% files_to_preview = false %>
           <% @presenter.member_presenters.each do |member_presenter| %>
-            <% if (member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv?) or
-              (member_presenter&.respond_to?(:json?) && member_presenter&.json?) %>
+            <% if (member_presenter&.respond_to?(:display_readme?) && member_presenter&.display_readme?) or
+              (member_presenter&.respond_to?(:metadata_json?) && member_presenter&.metadata_json?) %>
               <% files_to_preview = true %>
             <% end %>
+          <% end %>
+          <% if can? :read_abstract, @presenter.model_name.name.constantize %>
+            <div class="col-sm-12">
+              <%= render 'work_description', presenter: @presenter %>
+            </div>
           <% end %>
           <% if @presenter.iiif_viewer? or files_to_preview %>
             <div class="col-sm-12">
@@ -34,11 +39,8 @@
           </div>
           <div class="col-sm-9">
             <%= render 'relationships', presenter: @presenter %>
-
-            <% if can? :read_abstract, @presenter.model_name.name.constantize %>
-              <%= render 'work_description', presenter: @presenter %>
-            <% end %>
             <%= render 'metadata', presenter: @presenter %>
+            <%= render 'preview_csv_files', presenter: @presenter %>
           </div>
 
           <div class="col-sm-12">

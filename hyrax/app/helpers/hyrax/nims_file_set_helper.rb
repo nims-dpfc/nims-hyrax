@@ -24,6 +24,10 @@ module Hyrax
             'csv'
           elsif presenter.json?
             'json'
+          elsif presenter.markdown?
+            'txt'
+          elsif presenter.text?
+            'txt'
           else
             'default'
           end

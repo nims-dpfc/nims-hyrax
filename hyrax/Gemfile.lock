@@ -357,6 +357,7 @@ GEM
     gems (1.2.0)
     geocoder (1.6.7)
     gherkin (5.1.0)
+    github-markup (4.0.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
     google-api-client (0.53.0)
@@ -1020,6 +1021,7 @@ DEPENDENCIES
   faraday
   faraday_middleware
   fcrepo_wrapper
+  github-markup
   hydra-role-management
   hyrax (~> 2.9)
   jbuilder (~> 2.5)
