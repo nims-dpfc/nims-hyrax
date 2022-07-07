@@ -25,7 +25,7 @@ module Hyrax
           elsif presenter.json?
             'json'
           elsif presenter.markdown?
-            'txt'
+            'md'
           elsif presenter.text?
             'txt'
           else

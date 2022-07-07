@@ -1,6 +1,6 @@
 require 'csv'
 require 'json'
-require 'github/markup'
+  require 'github/markup'
 
 class ExportsController < Hyrax::DownloadsController
   MAXIMUM_ROWS = 200
@@ -11,7 +11,7 @@ class ExportsController < Hyrax::DownloadsController
     elsif is_json?(file)
       render json: file.content.force_encoding(Encoding::UTF_8).scrub
     elsif is_md?(file)
-      render json: {'content': GitHub::Markup.render_s(GitHub::Markups::MARKUP_MARKDOWN, file.content) }
+      render json: {'content': GitHub::Markup.render_s(GitHub::Markups::MARKUP_MARKDOWN, file.content.force_encoding(Encoding::UTF_8).scrub) }
     elsif is_txt?(file)
       render json: {'content': file.content.force_encoding(Encoding::UTF_8).scrub }
     else
@@ -68,8 +68,7 @@ class ExportsController < Hyrax::DownloadsController
 
   def is_md?(file)
     return false unless is_txt?(file)
-    puts file.label.to_s
-    # return true if file.label && File.extname(file.label).downcase == '.md'
+    return true if file.original_name && File.extname(file.original_name).downcase == '.md'
     false
   end
 end
