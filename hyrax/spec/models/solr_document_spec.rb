@@ -18,7 +18,11 @@ RSpec.describe SolrDocument do
         sub_organization: 'Bar',
         purpose: 'org purpose'
       }],
-      complex_person_attributes: [{ name: ['Anamika'] }],
+      complex_person_attributes: [
+        { name: ['Anamika'], display_order: 0 },
+        { name: ['Smith, John'], display_order: 1 },
+        { first_name: ['Joe'], last_name: ['Blogg'], display_order: 2 },
+      ],
       complex_rights_attributes: [{ rights: 'cc0' }],
       complex_specimen_type_attributes: [{
         complex_chemical_composition_attributes: [{ description: 'chemical composition 1' }]
@@ -135,11 +139,28 @@ RSpec.describe SolrDocument do
   end
 
   describe '#complex_person' do
-    let(:complex_person) { JSON.parse(solr_document.complex_person).first }
-    describe 'name' do
-      subject { complex_person['name'] }
+    let(:complex_person) { JSON.parse(solr_document.complex_person) }
+    describe 'first name' do
+      subject { complex_person[0]['name'] }
       it { is_expected.to eql ['Anamika'] }
     end
+    describe 'second name' do
+      subject { complex_person[1]['name'] }
+      it { is_expected.to eql ['Smith, John'] }
+    end
+    describe 'third last_name' do
+      subject { complex_person[2]['last_name'] }
+      it { is_expected.to eql ['Blogg'] }
+    end
+    describe 'third first_name' do
+      subject { complex_person[2]['first_name'] }
+      it { is_expected.to eql ['Joe'] }
+    end
+  end
+
+  describe '#ordered_creators' do
+    subject { solr_document.ordered_creators }
+    it { is_expected.to eql ['Anamika', 'Smith, John', 'Blogg, Joe'] }
   end
 
   describe '#complex_rights' do
