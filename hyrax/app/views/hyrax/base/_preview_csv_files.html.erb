@@ -1,0 +1,3 @@
+<% @presenter.member_presenters.each do |member_presenter| %>
+  <%= nims_media_display(member_presenter, datatable: true) if member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv? %>
+<% end %>
