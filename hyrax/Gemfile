@@ -84,6 +84,7 @@ gem 'faraday'
 
 gem 'ro-crate', '~> 0.4.11', require: 'ro_crate'
 gem 'github-markup'
+gem 'commonmarker'
 
 group :production do
   gem 'exception_notification', '~> 4.4'
