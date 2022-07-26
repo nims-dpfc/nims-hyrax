@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   end
 
   resources :download_all, only: :show
+  get '/pid/:identifier', to: 'pid#show'
 
   resources :welcome, only: 'index'
   root 'hyrax/homepage#index'
