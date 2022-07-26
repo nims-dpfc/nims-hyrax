@@ -126,7 +126,6 @@ Rails.application.configure do
   config.middleware.use ExceptionNotification::Rack,
     ignore_exceptions: [
       'I18n::InvalidLocale',
-      'I18n::InvalidLocale',
       'Riiif::ConversionError',
       'Blacklight::Exceptions::RecordNotFound',
       'ActionView::Template::Error',
