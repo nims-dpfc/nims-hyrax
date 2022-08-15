@@ -58,97 +58,19 @@ RSpec.describe ::User do
   end
 
   describe 'NIMS Roles' do
-    let(:user) { described_class.new(employee_type_code: employee_type_code) }
-
-    describe '#authenticated_nims_researcher?' do
-      subject { user.authenticated_nims_researcher? }
-
-      context 'employee_type 11' do
-        let(:employee_type_code) { '11' }
-        it { is_expected.to be true }
-      end
-
-      context 'employee_type 12' do
-        let(:employee_type_code) { '12' }
-        it { is_expected.to be true }
-      end
-
-      context 'employee_type 13' do
-        let(:employee_type_code) { '13' }
-        it { is_expected.to be true }
-      end
-
-      context 'employee_type 21' do
-        let(:employee_type_code) { '21' }
-        it { is_expected.to be false }
-      end
-
-      context 'employee_type 22' do
-        let(:employee_type_code) { '22' }
-        it { is_expected.to be false }
-      end
-
-      context 'employee_type 23' do
-        let(:employee_type_code) { '23' }
-        it { is_expected.to be false }
-      end
-    end
-
-    describe '#authenticated_nims_other?' do
-      subject { user.authenticated_nims_other? }
-
-      context 'employee_type 21' do
-        let(:employee_type_code) { '21' }
-        it { is_expected.to be true }
-      end
-
-      context 'employee_type 30' do
-        let(:employee_type_code) { '30' }
-        it { is_expected.to be false }
-      end
-    end
+    let(:user) { described_class.new() }
 
     describe '#authenticated_nims?' do
       subject { user.authenticated_nims? }
-
-      context 'employee_type 11' do
-        let(:employee_type_code) { '11' }
-        it { is_expected.to be true }
-      end
-
-      context 'employee_type 21' do
-        let(:employee_type_code) { '21' }
-        it { is_expected.to be true }
-      end
-
-      context 'employee_type 30' do
-        let(:employee_type_code) { '30' }
-        it { is_expected.to be false }
-      end
+      it { is_expected.to be true }
     end
 
     describe '#authenticated_external?' do
-      context 'employee_type 11' do
-        let(:employee_type_code) { '11' }
-        subject { user.authenticated_external? }
-        it { is_expected.to be false }
-      end
-
-      context 'employee_type 30' do
-        let(:employee_type_code) { '30' }
-        subject { user.authenticated_external? }
-        it { is_expected.to be true }
-      end
-
-      context 'employee_type nil' do
-        let(:employee_type_code) { nil }
-        subject { user.authenticated_external? }
-        it { is_expected.to be false }
-      end
+      subject { user.authenticated_external? }
+      it { is_expected.to be true }
     end
 
     describe '#authenticated?' do
-      let(:employee_type_code) { '30' }
       subject { user.authenticated? }
       it { is_expected.to be true }
     end
