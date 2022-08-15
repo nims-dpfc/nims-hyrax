@@ -29,7 +29,6 @@ RSpec.describe Ability do
       it { expect(role_destroy).to be true }
       it { expect(create_dataset).to be true }
       it { expect(create_publication).to be true }
-      it { expect(create_work).to be true }
     end
 
     context 'guest user' do
@@ -53,15 +52,6 @@ RSpec.describe Ability do
 
     context 'unauthenticated user' do
       let(:user) { build(:user, :guest) }
-      it 'cannot create content' do
-        models.each do |model|
-          expect(ability.can?(:create, model)).to be false
-        end
-      end
-    end
-
-    context 'authenticated NIMS non-Researcher' do
-      let(:user) { build(:user, :nims_other) }
       it 'cannot create content' do
         models.each do |model|
           expect(ability.can?(:create, model)).to be false
