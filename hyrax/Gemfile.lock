@@ -19,6 +19,16 @@ GIT
       rails (>= 5.1.6)
       rubyzip (>= 1.0.0)
 
+GIT
+  remote: https://github.com/nabeta/resync.git
+  revision: f59a1f77f3c378180ee9ebcc42b325372f1e7a31
+  specs:
+    resync (0.4.6)
+      mime-types (~> 3.0)
+      typesafe_enum (~> 0.1, >= 0.1.5)
+      xml-mapping (~> 0.10)
+      xml-mapping_extensions (~> 0.4, >= 0.4.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -965,6 +975,7 @@ GEM
       actionpack (>= 3.1)
       jquery-rails
       railties (>= 3.1)
+    typesafe_enum (0.3.0)
     typhoeus (1.4.0)
       ethon (>= 0.9.0)
     tzinfo (1.2.10)
@@ -992,6 +1003,11 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    xml-mapping (0.10.1)
+    xml-mapping_extensions (0.4.9)
+      mime-types (~> 3.0)
+      typesafe_enum (~> 0.1, >= 0.1.8)
+      xml-mapping (~> 0.10)
     xml-simple (1.1.8)
     xpath (3.2.0)
       nokogiri (~> 1.8)
@@ -1035,6 +1051,7 @@ DEPENDENCIES
   rails (~> 5.2.8)
   redis (~> 4.0)
   redis-session-store (~> 0.11.1)
+  resync!
   riiif (~> 2.0)
   rinku
   ro-crate (~> 0.4.11)
