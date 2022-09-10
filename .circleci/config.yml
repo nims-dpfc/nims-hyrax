@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.4-buster-node
+      - image: cimg/ruby:2.7.4-browsers
       - image: cimg/postgres:12.11
         environment:
           POSTGRES_USER: postgres
