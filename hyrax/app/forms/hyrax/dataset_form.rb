@@ -55,6 +55,7 @@ module Hyrax
       :complex_specimen_type,
       :complex_chemical_composition,
       :complex_structural_feature,
+      :complex_software,
       :material_type,
       
       # not used
