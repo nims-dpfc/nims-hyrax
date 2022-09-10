@@ -16,7 +16,7 @@ RSpec.describe Hyrax::DatasetForm do
         :publisher, :resource_type, :licensed_date, :material_type,
         :first_published_url, :managing_organization_ordered, :complex_event, :complex_version,
         :complex_funding_reference, :complex_relation, :custom_property, :language, :date_published, :complex_date,
-        :complex_contact_agent,
+        :complex_contact_agent, :complex_software,
         :rights_statement) }
     end
 
@@ -35,6 +35,7 @@ RSpec.describe Hyrax::DatasetForm do
       it { is_expected.to include(:complex_specimen_type) }
       it { is_expected.to include(:complex_chemical_composition) }
       it { is_expected.to include(:complex_structural_feature) }
+      it { is_expected.to include(:complex_software) }
     end
   end
 
@@ -60,6 +61,7 @@ RSpec.describe Hyrax::DatasetForm do
         expect(described_class).to receive(:permitted_contact_agent_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_chemical_composition_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_structural_feature_params).at_least(:once).and_call_original
+        expect(described_class).to receive(:permitted_software_params).at_least(:once).and_call_original
         subject
       end
     end
