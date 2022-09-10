@@ -26,7 +26,7 @@ jobs:
           name: apt install
           command: |
             sudo apt update
-            sudo apt install -y openjdk-11-jre-headless libmediainfo-dev
+            sudo apt install -y openjdk-11-jre-headless libmediainfo-dev libxslt1-dev
       - run:
           name: download fits
           command: |
