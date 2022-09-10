@@ -31,32 +31,39 @@ class Ability
 
   def create_content
     # only NIMS Researchers may upload new content
-    can :create, [::Dataset, ::Publication, ::Image] if current_user.authenticated_nims_researcher?
+    can :create, [::Dataset, ::Publication] if current_user.authenticated_nims_researcher?
+    can :create, [::Dataset, ::Publication] if current_user.authenticated_external?
+    can :create, [::Dataset, ::Publication] if current_user.admin?
   end
 
   def read_metadata
-    can :read_abstract, [::Dataset, ::Image, ::Publication] if current_user.authenticated?
-    can :read_alternative_title, [::Dataset, ::Image, ::Publication]
+    can :read_abstract, [::Dataset, ::Publication, ::Collection]
+    can :read_alternative_title, [::Dataset, ::Publication]
     # NB: no users can :read_application_number
-    can :read_creator, [::Dataset, ::Image, ::Publication]
-    can :read_date, [::Dataset, ::Image, ::Publication]
-    can :read_event, [::Publication]
-    can :read_identifier, [::Dataset, ::Image, ::Publication]
+    # NB: no users can :read_supervisor_approval (though it is visible on the edit form to users with permission to edit)
+    cannot :read_supervisor_approval, [::Dataset, ::Publication]
+    can :read_creator, [::Dataset, ::Publication]
+    can :read_date, [::Dataset, ::Publication, ::Collection]
+    can :read_event, [::Dataset, ::Publication]
+    can :read_funding_reference, [::Dataset, ::Publication]
+    can :read_contact_agent, [::Dataset, ::Publication]
+    can :read_identifier, [::Dataset, ::Publication]
     can :read_issue, [::Publication]
     can :read_table_of_contents, [::Publication]
-    can :read_keyword, [::Dataset, ::Image, ::Publication]
-    can :read_language, [::Dataset, ::Image, ::Publication]
+    can :read_keyword, [::Dataset, ::Publication, ::Collection]
+    can :read_language, [::Dataset, ::Publication]
     can :read_location, [::Publication]
     can :read_number_of_pages, [::Publication]
     can :read_organization, [::Dataset, ::Publication]
-    can :read_publisher, [::Dataset, ::Image, ::Publication]
+    can :read_publisher, [::Dataset, ::Publication]
+    can :read_date_published, [::Dataset, ::Publication]
     can :read_related, [::Dataset, ::Publication]
-    can :read_resource_type, [::Dataset, ::Image, ::Publication] #NB: added Dataset to list
-    can :read_rights, [::Dataset, ::Image, ::Publication]
+    can :read_resource_type, [::Dataset, ::Publication, ::Collection] #NB: added Dataset to list
+    can :read_rights, [::Dataset, ::Publication, ::Collection]
     can :read_source, [::Dataset, ::Publication] #NB: added Dataset to the list
-    can :read_subject, [::Dataset, ::Publication, ::Image]  # NB: added Image to list
-    can :read_title, [::Dataset, ::Image, ::Publication]    # NB: not used in Publication
-    can :read_version, [::Dataset, ::Image, ::Publication]
+    can :read_subject, [::Dataset, ::Publication]
+    can :read_title, [::Dataset, ::Publication]    # NB: not used in Publication
+    can :read_version, [::Dataset, ::Publication]
   end
 
   def only_admin_can_view_user_list
@@ -65,5 +72,16 @@ class Ability
     else
       cannot :index, ::User
     end
+  end
+
+  def user_groups
+    return @user_groups if @user_groups
+
+    @user_groups = default_user_groups
+    @user_groups |= current_user.groups if current_user.respond_to? :groups
+    unless current_user.new_record?
+      @user_groups |= ['registered'] unless current_user.email_user?
+    end
+    @user_group
   end
 end

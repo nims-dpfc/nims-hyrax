@@ -547,4 +547,105 @@ RSpec.describe Publication do
     end
   end
 
+  describe 'nims_pid' do
+    it 'has nims_pid as singular' do
+      @obj = build(:publication, nims_pid: 'nims:12345678')
+      expect(@obj.nims_pid).to eq 'nims:12345678'
+    end
+  end
+
+  describe 'complex_relation' do
+    it 'creates a relation active triple resource with all the attributes' do
+      @obj = build(:publication,
+        complex_relation_attributes: [{
+          title: 'A related item',
+          url: 'http://example.com/relation',
+          complex_identifier_attributes: [{
+            identifier: ['123456'],
+            label: ['local']
+          }],
+          relationship: 'IsPartOf'
+        }]
+      )
+      expect(@obj.complex_relation.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_relation.first.title).to eq ['A related item']
+      expect(@obj.complex_relation.first.url).to eq ['http://example.com/relation']
+      expect(@obj.complex_relation.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_relation.first.complex_identifier.first.identifier).to eq ['123456']
+      expect(@obj.complex_relation.first.complex_identifier.first.label).to eq ['local']
+      expect(@obj.complex_relation.first.relationship).to eq ['IsPartOf']
+    end
+  end
+
+
+  describe 'complex_funding_reference' do
+    it 'creates a complex funding reference active triple resource with funding reference' do
+      @obj = build(:publication,
+                   complex_funding_reference_attributes: [{
+                                                            funder_identifier: 'f1234',
+                                                            funder_name: 'Bank',
+                                                            award_title: 'No free lunch'
+                                                          }]
+      )
+      expect(@obj.complex_funding_reference.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_funding_reference.first.id).to include('#fundref')
+      expect(@obj.complex_funding_reference.first.funder_identifier).to eq ['f1234']
+      expect(@obj.complex_funding_reference.first.funder_name).to eq ['Bank']
+      expect(@obj.complex_funding_reference.first.award_number).to be_empty
+      expect(@obj.complex_funding_reference.first.award_uri).to be_empty
+      expect(@obj.complex_funding_reference.first.award_title).to eq ['No free lunch']
+    end
+
+    it 'creates a complex funding reference active triple resource with all the attributes' do
+      @obj = build(:publication,
+                   complex_funding_reference_attributes: [{
+                                                            funder_identifier: 'f1234',
+                                                            funder_name: 'Bank',
+                                                            award_number: 'a1234',
+                                                            award_uri: 'http://award.com/a1234',
+                                                            award_title: 'No free lunch'
+                                                          }]
+      )
+      expect(@obj.complex_funding_reference.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_funding_reference.first.id).to include('#fundref')
+      expect(@obj.complex_funding_reference.first.funder_identifier).to eq ['f1234']
+      expect(@obj.complex_funding_reference.first.funder_name).to eq ['Bank']
+      expect(@obj.complex_funding_reference.first.award_number).to eq ['a1234']
+      expect(@obj.complex_funding_reference.first.award_uri).to eq ['http://award.com/a1234']
+      expect(@obj.complex_funding_reference.first.award_title).to eq ['No free lunch']
+    end
+
+    it 'rejects a complex funding reference active triple with no attributes' do
+      @obj = build(:publication,
+                   complex_funding_reference_attributes: [{
+                                                 funder_identifier: ''
+                                               }]
+      )
+      expect(@obj.complex_funding_reference).to be_empty
+    end
+  end
+
+  describe 'complex_contact_agent' do
+    it 'creates a complex contact agent active triple resource with contact agent' do
+      @obj = build(:publication,
+                   complex_contact_agent_attributes: [{
+                     name: 'Kosuke Tanabe',
+                     email: 'tanabe@example.jp',
+                     organization: 'NIMS',
+                     department: 'DPFC'
+                   }]
+      )
+      expect(@obj.complex_contact_agent.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_contact_agent.first.name).to eq ['Kosuke Tanabe']
+    end
+
+    it 'rejects a complex contact agent active triple with no attributes' do
+      @obj = build(:publication,
+                   complex_contact_agent_attributes: [{
+                                                 name: ''
+                                               }]
+      )
+      expect(@obj.complex_contact_agent).to be_empty
+    end
+  end
 end

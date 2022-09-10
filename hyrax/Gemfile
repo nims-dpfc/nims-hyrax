@@ -7,9 +7,9 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '>= 5.0.6'
+gem 'rails', '~> 5.2.8'
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -21,12 +21,10 @@ gem 'coffee-rails', '~> 4.2'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 3.0'
+gem 'redis', '~> 4.0'
 # Using redis to store sessions in the redis cache (rather than cookies) - this is to support single sign out
 # NB: Once we upgrade to rails >= 5.2 the gem can probably be removed as redis sessions are built in
 gem 'redis-session-store', '~> 0.11.1'
@@ -54,14 +52,14 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'hyrax', '~> 2.6'
+gem 'hyrax', '~> 2.9'
 group :development, :test do
   gem 'solr_wrapper', '~> 2.0'
 end
 
 gem 'rsolr', '>= 1.0'
 gem 'devise'
-gem 'devise-guests', '~> 0.6'
+gem 'devise-guests', '~> 0.7.0'
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.3.6'
@@ -70,7 +68,7 @@ group :development, :test do
   gem 'pry'
 end
 
-gem 'sidekiq'
+gem 'sidekiq', '~> 5.2.10'
 gem 'hydra-role-management'
 gem 'bootstrap-datepicker-rails'
 gem 'pg'
@@ -81,12 +79,19 @@ gem 'devise_cas_authenticatable'
 gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > hydra-editor
 
 gem 'riiif', '~> 2.0'
+gem 'jsonapi-rails', '~> 0.4.0'
+gem 'faraday'
+
+gem 'ro-crate', '~> 0.4.11', require: 'ro_crate'
 
 group :production do
-  gem 'airbrake', '~> 5.0'
+  gem 'exception_notification', '~> 4.4'
+  gem 'exception_notification-rake', '~> 0.3.1'
+  gem 'act-fluent-logger-rails'
+  gem 'lograge'
 end
 
-gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'feature/prep_for_new_release'
+gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'develop'
 gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_oai_provider.git', branch: 'master'
 
 group :test do
@@ -96,6 +101,10 @@ group :test do
   gem 'webdrivers', '~> 4.1'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+  gem 'rspec-activemodel-mocks'
 end
 
 gem 'coveralls', require: false
+gem 'rinku'
+gem 'sitemap_generator'
+gem 'cld'

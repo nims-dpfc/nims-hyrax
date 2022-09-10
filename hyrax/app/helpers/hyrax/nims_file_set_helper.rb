@@ -20,7 +20,7 @@ module Hyrax
             'pdf'
           elsif presenter.office_document?
             'office_document'
-          elsif presenter.csv?
+          elsif presenter.csv_or_tsv?
             'csv'
           else
             'default'

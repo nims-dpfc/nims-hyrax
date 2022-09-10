@@ -46,6 +46,7 @@ RSpec.describe ComplexChemicalComposition do
     @obj.attributes = {
       complex_chemical_composition_attributes: [{
         description: 'chemical_composition description',
+        category: 'http://id.example.jp/Q12345',
         complex_identifier_attributes: [{
           identifier: ['123456'],
           label: ['Local']
@@ -57,6 +58,7 @@ RSpec.describe ComplexChemicalComposition do
     expect(@obj.complex_chemical_composition.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_chemical_composition.first.complex_identifier.first.identifier).to eq ['123456']
     expect(@obj.complex_chemical_composition.first.complex_identifier.first.label).to eq ['Local']
+    expect(@obj.complex_chemical_composition.first.category).to eq ['http://id.example.jp/Q12345']
   end
 
   describe "when reject_if is a symbol" do
@@ -74,7 +76,7 @@ RSpec.describe ComplexChemicalComposition do
       @obj = ExampleWork2.new
       @obj.attributes = {
         complex_chemical_composition_attributes: [{
-          description: 'chemical composition 12',
+          description: 'chemical composition 1',
           complex_identifier_attributes: [{
             identifier: ['ewfqwefqwef'],
           }]
@@ -83,7 +85,7 @@ RSpec.describe ComplexChemicalComposition do
       expect(@obj.complex_chemical_composition.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_chemical_composition.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_chemical_composition.first.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
-      expect(@obj.complex_chemical_composition.first.description).to eq ['chemical composition 12']
+      expect(@obj.complex_chemical_composition.first.description).to eq ['chemical composition 1']
     end
 
     it 'rejects an chemical_composition active triple with no description' do

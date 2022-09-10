@@ -1,6 +1,10 @@
-$( document ).on('turbolinks:load', function() {
+Blacklight.onLoad(function() {
+    $.fn.dataTable.ext.errMode = 'none';
     $('.csv-preview').each(function() {
         var preview = $(this);
+        if(preview.hasClass('done')) {
+            return true
+        }
         $.ajax({
             url: preview.data('url'),
             success: function (data) {
@@ -22,6 +26,7 @@ $( document ).on('turbolinks:load', function() {
                 } else {
                     preview.find('.csv-preview-size').hide();
                 }
+                preview.addClass('done')
             },
             error: function() {
                 preview.find('.csv-preview-error').show();

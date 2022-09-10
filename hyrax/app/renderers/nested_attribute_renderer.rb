@@ -15,7 +15,7 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
       markup << inner_markup
       markup << %(</ul></dd>)
     end
-    markup.html_safe
+    sanitize(markup)
   end
 
   private
@@ -39,6 +39,8 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
       row += "<div class=\"col-md-9\">#{get_doi_hyperlink(val)}</div>"
     elsif Handle.match_hdl_prefix(val)
       row += "<div class=\"col-md-9\">#{get_handle_hyperlink(val)}</div>"
+    elsif label =~/^orcid|rights$/i
+      row += "<div class=\"col-md-9\">#{get_hyperlink(val)}</div>"
     else
       row += "<div class=\"col-md-9\">#{val}</div>"
     end
@@ -62,6 +64,10 @@ class NestedAttributeRenderer < Hyrax::Renderers::FacetedAttributeRenderer
   def get_handle_hyperlink(val)
     handle = Handle.new(val)
     link_to(handle.label, handle.url, target: '_blank')
+  end
+
+  def get_hyperlink(val)
+    Rinku.auto_link(val, :all, 'target="_blank"')
   end
 
   def get_nested_output(field, label, nested_value, renderer_class, display_label=false)

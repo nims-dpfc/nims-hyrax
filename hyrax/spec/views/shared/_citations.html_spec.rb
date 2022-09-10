@@ -17,8 +17,8 @@ RSpec.describe 'shared/_citations' do
   describe 'og:description' do
     context 'unauthenticated user' do
       let(:user) { nil }
-      it 'does not show the abstract and shows the title instead' do
-        expect(rendered).to have_css("meta[property='og:description'][content='#{dataset.title.first}']", visible: false)
+      it 'shows the abstract' do
+        expect(rendered).to have_css("meta[property='og:description'][content='#{dataset.description.first}']", visible: false)
       end
     end
 

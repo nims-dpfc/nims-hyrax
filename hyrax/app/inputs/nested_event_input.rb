@@ -24,7 +24,7 @@ protected
 
     out << "  <div class='col-md-9'>"
     out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id, required: required))
+        options.merge(value: field_value, name: field_name, id: field_id, required: required, placeholder: "Conference name"))
     out << '  </div>'
     out << '</div>' # row
 
@@ -56,7 +56,7 @@ protected
     out << template.label_tag(field_name, field.to_s.humanize, required: false)
     out << '  </div>'
 
-    out << "  <div class='col-md-9'>"
+    out << "  <div class='col-md-6'>"
     out << @builder.text_field(field_name,
         options.merge(value: field_value, name: field_name, id: field_id,
             data: { provide: 'datepicker' }, required: false))
@@ -74,7 +74,7 @@ protected
     out << template.label_tag(field_name, field.to_s.humanize, required: false)
     out << '  </div>'
 
-    out << "  <div class='col-md-9'>"
+    out << "  <div class='col-md-6'>"
     out << @builder.text_field(field_name,
         options.merge(value: field_value, name: field_name, id: field_id,
             data: { provide: 'datepicker' }, required: false))
@@ -95,8 +95,8 @@ protected
     out << '  </div>'
 
     out << "  <div class='col-md-6'>"
-    out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id, required: false))
+    out << @builder.check_box(field_name,
+      options.merge(checked: field_value, name: field_name, id: field_id, required: false))
     out << '  </div>'
 
     # --- delete checkbox

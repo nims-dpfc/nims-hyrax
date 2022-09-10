@@ -9,18 +9,16 @@ Feature: Search links on a dataset
       | with_complex_chemical_composition       |
       | with_complex_crystallographic_structure |
       | with_custom_property                    |
-      | with_complex_date                       |
       | with_complex_identifier                 |
       | with_complex_instrument                 |
       | with_complex_specimen_type              |
       | with_complex_relation                   |
-      | with_complex_rights                     |
       | with_complex_version                    |
 
 
   Scenario: Search links are generated correctly
     Given I am on the dataset page
-    Then I should see the following links:
+    Then I should see the following links to datasets:
       | LABEL                      | HREF                                                                                  |
       | Anamika                    | /catalog?f%5Bcomplex_person_sim%5D%5B%5D=Anamika                                      |
       | University                 | /catalog?f%5Bcomplex_person_organization_sim%5D%5B%5D=University                      |

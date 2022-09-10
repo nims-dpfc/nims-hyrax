@@ -36,6 +36,14 @@ RSpec.describe Hyrax::FileSetsController do
             }
           }
         end
+
+        it 'should not return JSON response' do
+          # disable JSON template temporarily
+          # https://github.com/antleaf/nims-mdr-development/issues/326
+          expect {
+            get :show, params: { id: file_set, format: :json }
+          }.to raise_error(ActionController::UnknownFormat)
+        end
       end
     end
   end

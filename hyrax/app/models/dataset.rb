@@ -1,4 +1,6 @@
 require "./lib/vocabularies/nims_rdp"
+require "./lib/vocabularies/oaire_terms"
+
 class Dataset < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
 
@@ -51,6 +53,8 @@ class Dataset < ActiveFedora::Base
 
   property :complex_organization, predicate: ::RDF::Vocab::ORG.organization, class_name:"ComplexOrganization"
 
+  property :complex_event, predicate: ::RDF::Vocab::ESciDocPublication.event, class_name: 'ComplexEvent'
+
   property :characterization_methods, predicate: ::RDF::Vocab::NimsRdp['characterization-methods'] do |index|
     index.as :stored_searchable, :facetable
   end
@@ -62,6 +66,18 @@ class Dataset < ActiveFedora::Base
   # TODO - This is required
   property :data_origin, predicate: ::RDF::Vocab::NimsRdp['data-origin'] do |index|
     index.as :stored_searchable, :facetable
+  end
+
+  ##
+  # We need a local term to store whether the work is a draft
+  property :draft, predicate: 'http://local.authority/draft'
+
+  ##
+  # Convenience method to determine whether a work is in a draft state
+  def draft?
+    return false if draft.empty?
+    return false unless draft.first.to_s == 'true'
+    true
   end
 
   property :complex_instrument, predicate: ::RDF::Vocab::NimsRdp.instrument, class_name: "ComplexInstrument"
@@ -85,13 +101,20 @@ class Dataset < ActiveFedora::Base
   #   could be used in place of part_of and related_url
   property :complex_relation, predicate: ::RDF::Vocab::DC.relation, class_name:"ComplexRelation"
 
-  # TODO - This is required
-  property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'], multiple: false do |index|
-    index.as :stored_searchable
+  property :complex_source, predicate: ::RDF::Vocab::ESciDocPublication.source, class_name: 'ComplexSource'
+
+  property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'] do |index|
+    index.as :stored_searchable, :facetable
   end
 
   property :complex_specimen_type, predicate: ::RDF::Vocab::NimsRdp['specimen-type'],
   class_name: "ComplexSpecimenType"
+
+  property :complex_chemical_composition, predicate: ::RDF::Vocab::NimsRdp['chemical-composition'],
+    class_name: "ComplexChemicalComposition"
+
+  property :complex_structural_feature, predicate: ::RDF::Vocab::NimsRdp['structural-feature'],
+    class_name: "ComplexStructuralFeature"
 
   property :synthesis_and_processing, predicate: ::RDF::Vocab::NimsRdp['synthesis-and-processing'] do |index|
     index.as :stored_searchable, :facetable
@@ -101,10 +124,47 @@ class Dataset < ActiveFedora::Base
 
   property :supervisor_approval, predicate: ::RDF::Vocab::NimsRdp['supervisor-approval']
 
+  property :first_published_url, predicate: ::RDF::Vocab::NimsRdp['first_published_url'], multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :doi, predicate: ::RDF::Vocab::Identifiers.doi, multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :licensed_date, predicate: ::RDF::Vocab::NimsRdp['licenced-date'], multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :date_published, predicate: ::RDF::Vocab::NimsRdp['date_published'], multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :manuscript_type, predicate: ::RDF::Vocab::OaireTerms.version, multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :managing_organization, predicate: ::RDF::Vocab::NimsRdp['contributor'] do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :nims_pid, predicate: ::RDF::Vocab::NimsRdp['nims-pid'], multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :material_type, predicate: ::RDF::Vocab::NimsRdp["material-type"] do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :complex_funding_reference, predicate: ::RDF::Vocab::DataCite.fundref, class_name:"ComplexFundingReference"
+
+  property :complex_contact_agent, predicate: ::RDF::Vocab::DCAT.contactPoint, class_name: 'ComplexContactAgent'
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
   include ComplexValidation
+  include OrderedFields
   accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
@@ -114,6 +174,12 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_specimen_type, reject_if: :specimen_type_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_event, reject_if: :event_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_source, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
+  accepts_nested_attributes_for :complex_funding_reference, reject_if: :fundref_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_contact_agent, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_chemical_composition, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_structural_feature, reject_if: :all_blank, allow_destroy: true
 end

@@ -3,7 +3,6 @@ module Hyrax
     include Blacklight::Base
     include Blacklight::AccessControls::Catalog
     include Hyrax::Breadcrumbs
-    prepend ::DisableApiBehavior
 
     before_action :authenticate_user!, except: [:show, :citation, :stats]
     load_and_authorize_resource class: ::FileSet, except: :show
@@ -40,7 +39,7 @@ module Hyrax
     def show
       respond_to do |wants|
         wants.html { presenter }
-        wants.json { presenter }
+        # wants.json { presenter }
         additional_response_formats(wants)
       end
     end

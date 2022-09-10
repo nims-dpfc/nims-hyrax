@@ -1,6 +1,12 @@
 <% # we will yield to content_for for each tab, e.g. :files_tab %>
-<% # Override Hyrax 2.6 - remove relationships tab from here %>
-<% tabs ||= %w[metadata method instrument specimen files] # default tab order %>
+<% # Override Hyrax - relationships and share tab only visible to admins %>
+<% tabs ||= %w[metadata method instrument specimen files relationships] # default tab order %>
+<% user_class = 'user' %>
+<% tab_class = 'hidden' %>
+<% if can? :read, :admin_dashboard %>
+  <% user_class = '' %>
+  <% tab_class = '' %>
+<% end %>
 <div class="row">
   <div class="col-xs-12 col-sm-8">
     <div class="panel panel-default tabs" role="main">
@@ -10,7 +16,11 @@
           <% if i == 0 %>
             <li role="presentation" class="active">
           <% else %>
-            <li role="presentation">
+            <% if tab == 'relationships' %>
+              <li role="presentation" class="<%= tab_class %>">
+            <% else %>
+              <li role="presentation">
+            <% end %>
           <% end %>
               <a href="#<%= tab %>" aria-controls="<%= tab %>" role="tab" data-toggle="tab">
                 <%= t("hyrax.works.form.tab.#{tab}") %>
@@ -18,7 +28,7 @@
             </li>
         <% end %>
 
-        <li role="presentation" id="tab-share" class="hidden">
+        <li role="presentation" id="tab-share" class="<%= tab_class %>">
           <a href="#share" aria-controls="share" role="tab" data-toggle="tab">
             <%= t("hyrax.works.form.tab.share") %>
           </a>
@@ -33,7 +43,7 @@
           <% else %>
             <div role="tabpanel" class="tab-pane" id="<%= tab %>">
           <% end %>
-            <div class="form-tab-content">
+            <div class="<%= user_class %> form-tab-content">
               <% # metadata_tab is sometimes provided %>
               <%= yield "#{tab}_tab".to_sym if content_for? "#{tab}_tab".to_sym %>
               <%= render "form_#{tab}", f: f %>
@@ -42,7 +52,7 @@
         <% end %>
 
         <div role="tabpanel" class="tab-pane" id="share" data-param-key="<%= f.object.model_name.param_key %>">
-            <div class="form-tab-content">
+            <div class="<%= user_class %> form-tab-content">
               <%= render "form_share", f: f %>
             </div>
         </div>

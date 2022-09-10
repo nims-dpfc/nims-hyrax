@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_chemical_composition,
+    as: :nested_chemical_composition,
+    input_html: {
+      class: '',
+      data: {name: :complex_chemical_composition}
+    },
+    required: f.object.required?(:complex_chemical_composition)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another chemical composition</span>
+  </button>
+</div>

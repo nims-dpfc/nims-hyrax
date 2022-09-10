@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::CitationsBehaviors::NameBehavior, :type => :helper do
-  let(:publication) { build(:publication, :with_people) }
+  let(:publication) { build(:publication, :with_complex_author) }
   let(:presenter) { Hyrax::WorkPresenter.new(SolrDocument.new(publication.to_solr),  Ability.new(nil)) }
 
   describe '#author_list' do

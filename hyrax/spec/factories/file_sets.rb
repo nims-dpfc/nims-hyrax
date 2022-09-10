@@ -36,5 +36,10 @@ FactoryBot.define do
       visibility { 'restricted' }
       title { ["Restricted File Set"] }
     end
+
+    trait :long_filename do
+      visibility { 'open' }
+      content { File.open('spec/fixtures/csv/ファイル名の長さがエスケープ後に256文字以上になる、長い日本語のファイル名を持つファイル.csv', 'r') }
+    end
   end
 end

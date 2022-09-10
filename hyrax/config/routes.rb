@@ -17,10 +17,11 @@ Rails.application.routes.draw do
 
   concern :exportable, Blacklight::Routes::Exportable.new
   concern :searchable, Blacklight::Routes::Searchable.new
-  #concern :oai_provider, BlacklightOaiProvider::Routes::Provider.new # Temporarily disable API behaviour, see https://github.com/antleaf/nims-mdr-development/issues/241
+  concern :oai_provider, BlacklightOaiProvider::Routes::Provider.new
 
   curation_concerns_basic_routes
 
+  resources :local_terms, only: [:index]
   resources :bookmarks do
     concerns :exportable
     collection do
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
   end
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
-    #concerns :oai_provider # Temporarily disable API behaviour, see https://github.com/antleaf/nims-mdr-development/issues/241
+    concerns :oai_provider
     concerns :searchable
   end
 
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
   end
 
   resources :download_all, only: :show
+  get '/pid/:identifier', to: 'pid#show'
 
   resources :welcome, only: 'index'
   root 'hyrax/homepage#index'
