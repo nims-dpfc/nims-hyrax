@@ -18,15 +18,15 @@ jobs:
             - rails-demo-{{ checksum "hyrax/Gemfile.lock" }}
             - rails-demo-
       - run:
-          name: bundle install
-          command: |
-            cd hyrax
-            bundle install --jobs 4 --retry 3
-      - run:
           name: apt install
           command: |
             sudo apt update
             sudo apt install -y openjdk-11-jre-headless libmediainfo-dev libxslt1-dev libsqlite3-dev
+      - run:
+          name: bundle install
+          command: |
+            cd hyrax
+            bundle install --jobs 4 --retry 3
       - run:
           name: download fits
           command: |
