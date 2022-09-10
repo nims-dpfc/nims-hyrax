@@ -17,6 +17,9 @@ module RDF
       property 'characterization-methods'
       property 'chemical-composition'
       property 'computational-methods'
+      property 'contact-person'
+      property 'contributor'
+      property 'corresponding-author'
       property 'crystallographic-structure'
       property 'custom-property'
       property 'data-origin'
@@ -33,6 +36,7 @@ module RDF
       property 'material-type'
       property 'sub-category'
       property 'material-sub-type'
+      property 'order'
       property 'origin-system-provenance'
       property 'properties-addressed'
       property 'purchase-date'
@@ -55,6 +59,13 @@ module RDF
       property 'version'
       property 'version-date'
       property 'version-identifier'
+      # vocabulary to store funding information
+      property 'FundingReference'
+      property 'funderIdentifier'
+      property 'funderName'
+      property 'awardNumber'
+      property 'awardURI'
+      property 'awardTitle'
     end
   end
 end

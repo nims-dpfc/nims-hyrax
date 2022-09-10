@@ -12,7 +12,7 @@ RSpec.describe NestedInstrumentAttributeRenderer do
     is_expected.to have_css('div.row label', text: 'Alternative title')
     is_expected.to have_css('div.row', text: 'An instrument title')
 
-    is_expected.to have_css('div.row label', text: 'Published')
+    is_expected.to have_css('div.row label', text: 'Collected')
     is_expected.to have_css('div.row', text: '14/02/2018')
 
     is_expected.to have_css('div.row label', text: 'Description')
@@ -71,7 +71,7 @@ RSpec.describe NestedInstrumentAttributeRenderer do
     is_expected.to have_css('div.row', text: 'Research')
 
     is_expected.to have_css('div.row label', text: 'Role')
-    is_expected.to have_css('div.row', text: 'operator/データ測定者・計算者')
+    is_expected.to have_css('div.row', text: 'operator')
 
     is_expected.to have_css('div.row label', text: 'Managing organization')
     is_expected.to have_css('div.row label', text: 'Organization')

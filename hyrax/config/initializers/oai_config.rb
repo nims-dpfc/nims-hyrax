@@ -9,5 +9,12 @@ OAI_CONFIG =
         },
         document: {
             limit: 25,            # number of records returned with each request, default: 15
-        }
+            supported_formats: %w(oai_dc jpcoar),
+        },
+        record_filters: [
+          # limit access to public records
+          'read_access_group_ssim: "public"',
+          # Get only those records in deposited workflow state
+          'workflow_state_name_ssim: "deposited"'
+        ]
     }

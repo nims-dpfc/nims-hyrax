@@ -19,7 +19,6 @@ module ComplexValidation
       organization_blank = true
       return true if attributes.blank?
       orgs = nested_to_array(attributes, key)
-      puts orgs
       orgs.each do |org|
         vals = nested_to_array(org, :organization)
         organization_blank = organization_blank && vals.all?(&:blank?)
@@ -219,6 +218,17 @@ module ComplexValidation
     resource_class.send(:define_method, :event_blank) do |attributes|
       return true if attributes.blank?
       get_val_blank(attributes, :title)
+    end
+    # funding reference blank
+    # Require one of the fields to be filled in
+    resource_class.send(:define_method, :fundref_blank) do |attributes|
+      return true if attributes.blank?
+      id_blank = get_val_blank(attributes, :funder_identifier)
+      name_blank = get_val_blank(attributes, :funder_name)
+      award_number_blank = get_val_blank(attributes, :award_number)
+      award_uri_blank = get_val_blank(attributes, :award_uri)
+      award_title_blank = get_val_blank(attributes, :award_title)
+      id_blank && name_blank && award_number_blank && award_uri_blank && award_title_blank
     end
   end
 end

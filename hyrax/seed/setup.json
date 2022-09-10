@@ -5,7 +5,8 @@
       "password": "password",
       "name": "hyrax Admin",
       "role": "admin",
-      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:8c5f864c-c315-49c0-a49d-609895a8925d"
+      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:8c5f864c-c315-49c0-a49d-609895a8925d",
+      "employee_type_code": "11"
     },
     {
       "email": "user@hyrax",
@@ -14,7 +15,8 @@
       "name": "Demo User",
       "role": "user",
       "depositor": true,
-      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:ebb7db80-27ef-4d3c-896d-e5956ee22ca5"
+      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:ebb7db80-27ef-4d3c-896d-e5956ee22ca5",
+      "employee_type_code": "11"
     },
     {
       "email": "workflow@hyrax",
@@ -22,7 +24,28 @@
       "password": "workflow",
       "name": "Workflow Admin",
       "role": "admin",
-      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:5a882edb-377f-4f35-85b1-a0963293c261"
+      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:5a882edb-377f-4f35-85b1-a0963293c261",
+      "employee_type_code": "11"
+    },
+    {
+      "email": "nims_other@hyrax",
+      "username": "nims_other",
+      "password": "demouser",
+      "name": "NIMS other User",
+      "role": "user",
+      "depositor": true,
+      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:ebb7db80-27ef-4d3c-896d-e5956ee22cb6",
+      "employee_type_code": "22"
+    },
+    {
+      "email": "external_user@hyrax",
+      "username": "external_user",
+      "password": "demouser",
+      "name": "NIMS external User",
+      "role": "user",
+      "depositor": true,
+      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:ebb7db80-27ef-4d3c-896d-e5956ee22cc7",
+      "employee_type_code": "30"
     }
   ]
 }

@@ -9,16 +9,12 @@ default: &default
   password: <%= ENV['POSTGRES_PASSWORD'] || 'password' %>
 
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
-  pool: 5
-  timeout: 5000
-
+  <<: *default
+  database: <%= ENV['POSTGRES_DB_APP'] || 'hyrax_development' %>
+  
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
-  pool: 5
-  timeout: 5000
+  <<: *default
+  database: <%= ENV['POSTGRES_DB_TEST'] || 'hyrax_test' %>
 
 production:
   <<: *default

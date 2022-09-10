@@ -65,14 +65,23 @@ form .field-wrapper label[required="required"]::after {
   padding: 10px;
   background-color: $mdr-green-light;
 }
+
+// thumbnail img in home page and search results
+#recent_docs img,
+.list-thumbnail img {
+  max-height: 90px;
+  width: auto;
+}
+
 //------------ display css -------------
 .each_metadata:not(:last-child) {
   margin-bottom: 1em;
   padding-bottom: 1em;
   border-bottom: 1px solid #ddd;
 }
-.label-row {
-  color: #999;
+.label-row label {
+  font-style: italic;
+  font-weight: normal;
 }
 
 .panel-heading .accordion-toggle:after {
@@ -121,4 +130,24 @@ div#announcement {
 
 .csv-preview-size {
   text-align: right;
+}
+
+// Hiding Relationships and Sharing tab contents from casual users
+// https://github.com/antleaf/nims-mdr-development/issues/292 
+
+#relationships > .user.form-tab-content::before {
+  content: "Relationships settings are not available.";
+}
+
+#relationships > .user.form-tab-content > * {
+  visibility: hidden;
+}
+
+#share > .user.form-tab-content::before {
+  content: "Share settings are not available.";
+}
+
+#share > .user.form-tab-content > * {
+  visibility: hidden;
+  display: none;
 }

@@ -11,6 +11,8 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::OrganizationIndexer
   include ComplexField::InstrumentIndexer
   include ComplexField::RelationIndexer
+  include ComplexField::EventIndexer
+  include ComplexField::SourceIndexer
   include ComplexField::SpecimenTypeIndexer
   include ComplexField::ChemicalCompositionIndexer
   include ComplexField::CrystallographicStructureIndexer
@@ -19,6 +21,8 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::ShapeIndexer
   include ComplexField::StateOfMatterIndexer
   include ComplexField::StructuralFeatureIndexer
+  include ComplexField::FundrefIndexer
+  include ComplexField::ContactAgentIndexer
 
   def self.facet_fields
     # solr fields that will be treated as facets
@@ -28,7 +32,9 @@ class DatasetIndexer < NgdrIndexer
         'data_origin',
         'properties_addressed',
         'synthesis_and_processing',
-        'characterization_methods'
+        'characterization_methods',
+        'specimen_set',
+        'material_type'
       ]
       dataset_facet_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :facetable)
@@ -38,10 +44,11 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::OrganizationIndexer.organization_facet_fields
       fields.concat ComplexField::RightsIndexer.rights_facet_fields
       fields.concat ComplexField::InstrumentIndexer.instrument_facet_fields
-      fields.concat ComplexField::MaterialTypeIndexer.material_type_facet_fields
+      # fields.concat ComplexField::MaterialTypeIndexer.material_type_facet_fields
       fields.concat ComplexField::PurchaseRecordIndexer.purchase_record_facet_fields
       fields.concat ComplexField::StateOfMatterIndexer.state_of_matter_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_facet_fields
+      fields.concat ComplexField::FundrefIndexer.fundref_facet_fields
     end
   end
 
@@ -57,6 +64,9 @@ class DatasetIndexer < NgdrIndexer
         'properties_addressed',
         'specimen_set',
         'synthesis_and_processing',
+        'first_published_url',
+        'doi',
+        'material_type'
       ]
       dataset_search_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :stored_searchable)
@@ -75,6 +85,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::PurchaseRecordIndexer.purchase_record_search_fields
       fields.concat ComplexField::ShapeIndexer.shape_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_search_fields
+      fields.concat ComplexField::FundrefIndexer.fundref_search_fields
     end
   end
 
@@ -90,6 +101,7 @@ class DatasetIndexer < NgdrIndexer
         'properties_addressed',
         'specimen_set',
         'synthesis_and_processing',
+        'material_type'
       ]
       dataset_show_fields.each do |fld|
         fields << Solrizer.solr_name(fld, :stored_searchable)
@@ -102,7 +114,22 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::OrganizationIndexer.organization_show_fields
       fields.concat ComplexField::InstrumentIndexer.instrument_show_fields
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_show_fields
+      fields.concat ComplexField::FundrefIndexer.fundref_show_fields
+      fields.concat ComplexField::ContactAgentIndexer.contact_agent_show_fields
+      fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_show_fields
+      fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_show_fields
     end
+  end
+
+  def generate_solr_document
+   super.tap do |solr_doc|
+     solr_doc['keyword_tesim'] = object.keyword_ordered
+     solr_doc['keyword_sim'] = object.keyword_ordered
+     solr_doc['managing_organization_tesim'] = object.managing_organization_ordered
+     solr_doc['managing_organization_sim'] = object.managing_organization_ordered
+     solr_doc['specimen_set_tesim'] = object.specimen_set_ordered
+     solr_doc['specimen_set_sim'] = object.specimen_set_ordered
+   end
   end
 
 end

@@ -17,6 +17,7 @@ class ComplexSource < ActiveTriples::Resource
   property :title, predicate: ::RDF::Vocab::DC11.title
   property :total_number_of_pages, predicate: ::RDF::Vocab::ESciDocPublication['total-number-of-pages']
   property :volume, predicate: ::RDF::Vocab::ESciDocPublication.volume
+  property :issn, predicate: ::RDF::Vocab::BIBO.issn
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)

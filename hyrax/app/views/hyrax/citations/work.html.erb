@@ -1,0 +1,17 @@
+<h4>Citation Formats</h4>
+
+<span class="citation">
+<%= @presenter.creator.first %>.
+"<%= @presenter.title.first %>".
+<%= setup_pub_source(@presenter) %>
+<%- if @presenter.date_published.present? -%>
+(<%= setup_pub_year(@presenter) %>):
+<%- end -%>
+<% if @presenter.first_published_url&.first =~ /https?:\/\/(dx\.)?doi\.org\// %>
+<%= @presenter.first_published_url.first %>
+<% else %>
+<%= @presenter.doi&.first %>
+<% end %>
+</span>
+
+<br /><br />

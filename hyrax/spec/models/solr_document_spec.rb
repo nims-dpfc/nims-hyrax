@@ -3,40 +3,72 @@ require 'rails_helper'
 RSpec.describe SolrDocument do
   let(:model) do
     build(:dataset,
-          alternative_title: 'Alternative Title',
-          complex_date_attributes: [{ date: ['2018-02-14'], description: 'Published Date' }],
-          complex_identifier_attributes: [{ identifier: ['123456'], label: ['Local'] }],
-          complex_instrument_attributes: [{
-            complex_date_attributes: [{ date: ['2018-01-28'] }],
-            complex_identifier_attributes: [{ identifier: ['ewfqwefqwef'] }],
-            complex_person_attributes: [{ name: ['operator 1'] }],
-            title: 'Instrument 1'
-          }],
-          complex_organization_attributes: [{
-            organization: 'Foo',
-            sub_organization: 'Bar',
-            purpose: 'org purpose'
-          }],
-          complex_person_attributes: [{ name: ['Anamika'] }],
-          complex_rights_attributes: [{ rights: 'cc0' }],
-          complex_specimen_type_attributes: [{
-            complex_chemical_composition_attributes: [{ description: 'chemical composition 1' }]
-          }],
-          complex_version_attributes: [{ version: '1.0' }],
-          characterization_methods: ['Characterization methods'],
-          computational_methods: ['computational methods'],
-          data_origin: ['data origin'],
-          origin_system_provenance: 'Origin A',
-          properties_addressed: ['Properties Addressed'],
-          complex_relation_attributes: [{
-            title: 'A related item',
-            url: 'http://example.com/relation',
-            complex_identifier_attributes: [{ identifier: ['123456'] }],
-            relationship: 'IsPartOf'
-          }],
-          specimen_set: 'Specimen Set',
-          synthesis_and_processing: ['Synthesis and processing methods'],
-          custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }]
+      alternative_title: 'Alternative Title',
+      complex_date_attributes: [{ date: ['2018-02-14'], description: 'Published Date' }],
+      date_published: '2018-02-14',
+      complex_identifier_attributes: [{ identifier: ['123456'], label: ['Local'] }],
+      complex_instrument_attributes: [{
+        complex_date_attributes: [{ date: ['2018-01-28'] }],
+        complex_identifier_attributes: [{ identifier: ['ewfqwefqwef'] }],
+        complex_person_attributes: [{ name: ['operator 1'] }],
+        title: 'Instrument 1'
+      }],
+      complex_organization_attributes: [{
+        organization: 'Foo',
+        sub_organization: 'Bar',
+        purpose: 'org purpose'
+      }],
+      complex_person_attributes: [
+        { name: ['Anamika'], display_order: 0 },
+        { name: ['Smith, John'], display_order: 1 },
+        { first_name: ['Joe'], last_name: ['Blogg'], display_order: 2 },
+      ],
+      complex_rights_attributes: [{ rights: 'cc0' }],
+      complex_specimen_type_attributes: [{
+        complex_chemical_composition_attributes: [{ description: 'chemical composition 1' }]
+      }],
+      complex_version_attributes: [{ version: '1.0' }],
+      characterization_methods: ['Characterization methods'],
+      computational_methods: ['computational methods'],
+      data_origin: ['data origin'],
+      origin_system_provenance: 'Origin A',
+      properties_addressed: ['Properties Addressed'],
+      complex_relation_attributes: [{
+        title: 'A related item',
+        url: 'http://example.com/relation',
+        complex_identifier_attributes: [{ identifier: ['123456'] }],
+        relationship: 'IsPartOf'
+      }],
+      specimen_set: ['Specimen Set'],
+      synthesis_and_processing: ['Synthesis and processing methods'],
+      custom_property_attributes: [{ label: 'Full name', description: 'My full name is' }],
+      complex_funding_reference_attributes: [{
+        funder_identifier: 'f1234',
+        funder_name: 'Bank',
+        award_number: 'a1234',
+        award_uri: 'http://award.com/a1234',
+        award_title: 'No free lunch'
+      }],
+      complex_contact_agent_attributes: [{
+        name: 'Kosuke Tanabe',
+        email: 'tanabe@example.jp',
+        organization: 'NIMS',
+        department: 'DPFC'
+      }],
+      complex_chemical_composition_attributes: [{
+        description: 'chemical composition 1',
+        complex_identifier_attributes: [{
+          identifier: 'chemical_composition/1234567',
+          scheme: 'identifier persistent'
+        }]
+      }],
+      complex_structural_feature_attributes: [{
+        description: 'structural feature 1',
+        complex_identifier_attributes: [{
+          identifier: 'structural_feature/1234567',
+          scheme: 'identifier persistent'
+        }]
+      }]
     )
   end
   let(:solr_document) { described_class.new(model.to_solr) }
@@ -107,11 +139,28 @@ RSpec.describe SolrDocument do
   end
 
   describe '#complex_person' do
-    let(:complex_person) { JSON.parse(solr_document.complex_person).first }
-    describe 'name' do
-      subject { complex_person['name'] }
+    let(:complex_person) { JSON.parse(solr_document.complex_person) }
+    describe 'first name' do
+      subject { complex_person[0]['name'] }
       it { is_expected.to eql ['Anamika'] }
     end
+    describe 'second name' do
+      subject { complex_person[1]['name'] }
+      it { is_expected.to eql ['Smith, John'] }
+    end
+    describe 'third last_name' do
+      subject { complex_person[2]['last_name'] }
+      it { is_expected.to eql ['Blogg'] }
+    end
+    describe 'third first_name' do
+      subject { complex_person[2]['first_name'] }
+      it { is_expected.to eql ['Joe'] }
+    end
+  end
+
+  describe '#ordered_creators' do
+    subject { solr_document.ordered_creators }
+    it { is_expected.to eql ['Anamika', 'Smith, John', 'Blogg, Joe'] }
   end
 
   describe '#complex_rights' do
@@ -147,12 +196,6 @@ RSpec.describe SolrDocument do
   describe '#data_origin' do
     subject { solr_document.data_origin }
     it { is_expected.to eql ['data origin'] }
-  end
-
-  describe '#instrument' do
-    let(:model) { build(:image, instrument: ['Instrument']) }
-    subject { solr_document.instrument }
-    it { is_expected.to eql ['Instrument'] }
   end
 
   describe '#origin_system_provenance' do
@@ -209,13 +252,13 @@ RSpec.describe SolrDocument do
 
   describe '#complex_event' do
     let(:model) { build(:publication,
-          complex_event_attributes: [{
-            end_date: '2019-01-01',
-            invitation_status: true,
-            place: '221B Baker Street',
-            start_date: '2018-12-25',
-            title: 'A Title'
-          }]
+      complex_event_attributes: [{
+        end_date: '2019-01-01',
+        invitation_status: true,
+        place: '221B Baker Street',
+        start_date: '2018-12-25',
+        title: 'A Title'
+      }]
     )}
     let(:complex_event) { JSON.parse(solr_document.complex_event).first }
     describe 'end_date' do
@@ -312,27 +355,88 @@ RSpec.describe SolrDocument do
     end
   end
 
-  describe '#status' do
-    let(:model) { build(:image, status: 'Status') }
-    subject { solr_document.status }
-    it { is_expected.to eql ['Status'] }
-  end
-
   describe '#persistent_url (Dataset)' do
     let(:model) { build(:dataset, id: '123456', title: ['Test']) }
     subject { solr_document.persistent_url }
     it { is_expected.to eql "http://localhost/concern/datasets/#{solr_document.id}" }
   end
 
-  describe '#persistent_url (Image)' do
-    let(:model) { build(:image, id: '123456', title: ['Test']) }
-    subject { solr_document.persistent_url }
-    it { is_expected.to eql "http://localhost/concern/images/#{solr_document.id}" }
-  end
-
   describe '#persistent_url (Publication)' do
     let(:model) { build(:publication, id: '123456', title: ['Test']) }
     subject { solr_document.persistent_url }
     it { is_expected.to eql "http://localhost/concern/publications/#{solr_document.id}" }
+  end
+
+  describe '#complex_funding_reference' do
+    let(:complex_funding_reference) { JSON.parse(solr_document.complex_funding_reference).first }
+    #         funder_identifier: 'f1234',
+    #         funder_name: 'Bank',
+    #         award_number: 'a1234',
+    #         award_uri: 'http://award.com/a1234'
+    #         award_title: 'No free lunch'
+    describe 'funder_identifier' do
+      subject { complex_funding_reference['funder_identifier'] }
+      it { is_expected.to eql ['f1234'] }
+    end
+    describe 'funder_name' do
+      subject { complex_funding_reference['funder_name'] }
+      it { is_expected.to eql ['Bank'] }
+    end
+    describe 'award_number' do
+      subject { complex_funding_reference['award_number'] }
+      it { is_expected.to eql ['a1234'] }
+    end
+    describe 'award_uri' do
+      subject { complex_funding_reference['award_uri'] }
+      it { is_expected.to eql ['http://award.com/a1234'] }
+    end
+    describe 'award_title' do
+      subject { complex_funding_reference['award_title'] }
+      it { is_expected.to eql ['No free lunch'] }
+    end
+  end
+
+  describe '#complex_contact_agent' do
+    let(:complex_contact_agent) { JSON.parse(solr_document.complex_contact_agent).first }
+    describe 'name' do
+      subject { complex_contact_agent['name'] }
+      it { is_expected.to eql ['Kosuke Tanabe'] }
+    end
+    describe 'email' do
+      subject { complex_contact_agent['email'] }
+      it { is_expected.to eql ['tanabe@example.jp'] }
+    end
+    describe 'organization' do
+      subject { complex_contact_agent['organization'] }
+      it { is_expected.to eql ['NIMS'] }
+    end
+    describe 'department' do
+      subject { complex_contact_agent['department'] }
+      it { is_expected.to eql ['DPFC'] }
+    end
+  end
+
+  describe '#complex_chemical_composition' do
+    let(:complex_chemical_composition) { JSON.parse(solr_document.complex_chemical_composition).first }
+    describe 'description' do
+      subject { complex_chemical_composition['description'] }
+      it { is_expected.to eql ['chemical composition 1'] }
+    end
+    describe 'complex_identifier' do
+      subject { complex_chemical_composition['complex_identifier'].first['identifier'] }
+      it { is_expected.to eql ['chemical_composition/1234567'] }
+    end
+  end
+
+  describe '#complex_structural_feature' do
+    let(:complex_structural_feature) { JSON.parse(solr_document.complex_structural_feature).first }
+    describe 'description' do
+      subject { complex_structural_feature['description'] }
+      it { is_expected.to eql ['structural feature 1'] }
+    end
+    describe 'complex_identifier' do
+      subject { complex_structural_feature['complex_identifier'].first['identifier'] }
+      it { is_expected.to eql ['structural_feature/1234567'] }
+    end
   end
 end

@@ -1,67 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>The change you wanted was rejected (422)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+<meta charset="utf-8">
+<title>Error | MDR</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="/errorpages.css">
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
-
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
+<body>
+<header>
+
+<div class="logo">
+<a href="/">
+  <img alt="MDR: Materials Data Repository" src="/MDR-linear.png">
+</a>
+</div>
+
+<nav id="masthead" class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <ul id="user_utility_links" class="nav navbar-nav navbar-right list-unstyled">
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/about">About</a>
+    </li>
+    <li>
+      <a href="/help">Help</a>
+    </li>
+    <li>
+      <a href="/contact">Contact</a>
+    </li>
+  </ul>
+</nav>
+
+</header>
+
+<h1>Unprocessable Entity</h1>
+
+<div id="content-wrapper" role="main">
+
+<p><strong>The change you wanted was rejected.</strong></p>
+
+<p>Maybe you tried to change something you didn't have access to.</p>
+
+<p>Information may be available in the <a href="/help">User's manual</a>.</p>
+
+<p>If the problem persists, please <a href="/contact">let us know</a>.</p>
+
+<p class="mainaction">
+  <a class="btn btn-primary" href="javascript:history.back()">GO BACK</a>
+</p>
+
+</div>
+<!--/#content-wrapper-->
+
+<footer class="site-footer">
+  <div class="row">
+    <div class="col-sm-9 text-left">
+      <h2>
+        <a href="https://www.nims.go.jp/eng/" target="_blank" rel="noopener">National Institute for Materials Science</a>
+      </h2>
+      <p>
+        <a href="https://www.nims.go.jp/eng/research/MaDIS/" target="_blank" rel="noopener">Research and Services Division of Materials Data and Integrated System (MaDIS)</a>
+        <br>
+        <a href="https://www.nims.go.jp/eng/research/materials-data-pf/" target="_blank" rel="noopener">Materials Data Platform Center</a>
+      </p>
+      <small>&copy; 2020&ndash;<script>document.write(new Date().getFullYear())</script> National Institute for Materials Science.</small>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+    <div class="col-sm-3 text-left">
+      <ul class="list-unstyled">
+        <li>
+          <a href="/terms">Terms of Use</a>
+        </li>
+        <li>
+          <a href="https://www.nims.go.jp/eng/siteinfo/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
+        </li>
+        <li>
+          <a href="https://dice.nims.go.jp/" target="_blank" rel="noopener">Data Platform DICE</a>
+        </li>
+        <li>
+          <a href="https://library.nims.go.jp/" target="_blank" rel="noopener">NIMS Digital Library</a>
+        </li>
+      </ul>
+    </div>
   </div>
+</footer>
 </body>
 </html>

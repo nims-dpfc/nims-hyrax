@@ -65,6 +65,18 @@ class Publication < ActiveFedora::Base
 
   property :complex_event, predicate: ::RDF::Vocab::ESciDocPublication.event, class_name: 'ComplexEvent'
 
+  ##
+  # We need a local term to store whether the work is a draft
+  property :draft, predicate: 'http://local.authority/draft'
+
+  ##
+  # Convenience method to determine whether a work is in a draft state
+  def draft?
+    return false if draft.empty?
+    return false unless draft.first.to_s == 'true'
+    true
+  end
+
   property :issue, predicate: ::RDF::Vocab::ESciDocPublication.issue, multiple: false do |index|
     index.as :stored_searchable
   end
@@ -81,21 +93,66 @@ class Publication < ActiveFedora::Base
     index.as :stored_searchable, :sortable, type: :integer
   end
 
+  property :complex_relation, predicate: ::RDF::Vocab::DC.relation, class_name: 'ComplexRelation'
+
   property :complex_source, predicate: ::RDF::Vocab::ESciDocPublication.source, class_name: 'ComplexSource'
 
+  property :custom_property, predicate: ::RDF::Vocab::NimsRdp['custom-property'], class_name: 'ComplexKeyValue'
+
   property :supervisor_approval, predicate: ::RDF::Vocab::NimsRdp['supervisor-approval']
+
+  property :first_published_url, predicate: ::RDF::Vocab::NimsRdp['first_published_url'], multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :doi, predicate: ::RDF::Vocab::Identifiers.doi, multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :licensed_date, predicate: ::RDF::Vocab::NimsRdp['licenced-date'], multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'] do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :date_published, predicate: ::RDF::Vocab::NimsRdp['date_published'], multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :manuscript_type, predicate: ::RDF::Vocab::OaireTerms.version, multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :managing_organization, predicate: ::RDF::Vocab::NimsRdp['contributor'] do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+  property :nims_pid, predicate: ::RDF::Vocab::NimsRdp['nims-pid'], multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :complex_funding_reference, predicate: ::RDF::Vocab::DataCite.fundref, class_name:"ComplexFundingReference"
+
+  property :complex_contact_agent, predicate: ::RDF::Vocab::DCAT.contactPoint, class_name: 'ComplexContactAgent'
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
   include ComplexValidation
+  include OrderedFields
   accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_relation, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_rights, reject_if: :rights_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_version, reject_if: :version_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_event, reject_if: :event_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_source, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
+  accepts_nested_attributes_for :complex_funding_reference, reject_if: :fundref_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_contact_agent, reject_if: :all_blank, allow_destroy: true
 end

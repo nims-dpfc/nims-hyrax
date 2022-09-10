@@ -21,17 +21,28 @@ namespace :ngdr do
     depositor = false
     admin = Role.where(name: "admin").first_or_create!
     seed["users"].each do |user|
-      newUser = User.where(username: user["username"]).first_or_create!(password: user["password"], display_name: user["name"], email: user["email"])
+      newuser = User.find_by(username: user["username"])
+      unless newuser
+        newuser = User.new(
+          username: user["username"],
+          display_name: user["name"],
+          email: user["email"],
+          user_identifier: user['user_identifier'],
+          employee_type_code: user['employee_type_code']
+        )
+        newuser.password = user["password"] if ENV['MDR_DEVISE_AUTH_MODULE'] == 'database_authenticatable'
+        newuser.save!
+      end
 
       if user["role"] == "admin"
-        unless admin.users.include?(newUser)
-          admin.users << newUser
+        unless admin.users.include?(newuser)
+          admin.users << newuser
           admin.save!
         end
       end
 
       if user.has_key?("depositor")
-        depositor = newUser
+        depositor = newuser
       end
     end
 
@@ -40,11 +51,10 @@ namespace :ngdr do
 
 
     ##############################################
-    # Create default administrative set
+    # Create default administrative set and load customized NIMS workflow
     ######
-    Rake::Task['hyrax:default_admin_set:create'].invoke
-    Rake::Task['hyrax:workflow:load'].invoke
     Rake::Task['hyrax:default_collection_types:create'].invoke
+    Rake::Task['ngdr:setup_workflow'].invoke
 
     ##############################################
     # Create languages controlled vocabulary

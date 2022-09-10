@@ -29,6 +29,20 @@ RSpec.describe Dataset do
     end
   end
 
+  ##
+  # Is this work in a draft state?
+  describe '#draft?' do
+    it 'is false if the draft field is blank' do
+      @obj = build(:dataset)
+      expect(@obj.draft?).to eq false
+    end
+    it "is true if the draft field is true" do
+      @obj = build(:dataset)
+      @obj.draft = ['true']
+      expect(@obj.draft?).to eq true
+    end
+  end
+
   describe 'title' do
     it 'requires title' do
       @obj = build(:dataset, title: nil)
@@ -100,8 +114,16 @@ RSpec.describe Dataset do
 
   describe 'keyword' do
     it 'has keyword' do
-      @obj = build(:dataset, keyword: ['keyword 1', 'keyword 2'])
-      expect(@obj.keyword).to eq ['keyword 1', 'keyword 2']
+      @obj = build(:dataset, keyword: ['keyword 2', '3 keyword', 'keyword 1'])
+      expect(@obj.keyword).to eq ['keyword 2', '3 keyword', 'keyword 1']
+    end
+
+    it 'preserves keyword order' do
+      @obj = Dataset.create(attributes_for(:dataset, keyword_ordered: ['keyword 2', '3 keyword', 'keyword 1']))
+      after = Dataset.find(@obj.id)
+      expect(after.keyword).to match_array ['0 ~ keyword 2', '1 ~ 3 keyword', '2 ~ keyword 1']
+      expect(after.keyword_ordered).to eq ['keyword 2', '3 keyword', 'keyword 1']
+
     end
   end
 
@@ -318,6 +340,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_person.first.complex_affiliation).to be_empty
       expect(@obj.complex_person.first.role).to be_empty
       expect(@obj.complex_person.first.complex_identifier).to be_empty
+      expect(@obj.complex_person.first.display_order).to be_empty
       expect(@obj.complex_person.first.uri).to be_empty
     end
 
@@ -328,7 +351,8 @@ RSpec.describe Dataset do
           complex_affiliation_attributes: [{
             job_title: 'Paradise',
           }],
-          role: 'Creator'
+          role: 'Creator',
+          display_order: 1
         }]
       )
       expect(@obj.complex_person.first).to be_kind_of ActiveTriples::Resource
@@ -338,6 +362,7 @@ RSpec.describe Dataset do
       expect(@obj.complex_person.first.email).to be_empty
       expect(@obj.complex_person.first.role).to eq ['Creator']
       expect(@obj.complex_person.first.complex_identifier).to be_empty
+      expect(@obj.complex_person.first.display_order).to eq([1])
       expect(@obj.complex_person.first.uri).to be_empty
       expect(@obj.complex_person.first.complex_affiliation.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_person.first.complex_affiliation.first.job_title).to eq ['Paradise']
@@ -615,8 +640,8 @@ RSpec.describe Dataset do
 
   describe 'specimen_set' do
     it 'has specimen_set' do
-      @obj = build(:dataset, specimen_set: 'Specimen')
-      expect(@obj.specimen_set).to eq 'Specimen'
+      @obj = build(:dataset, specimen_set: ['Specimen'])
+      expect(@obj.specimen_set).to eq ['Specimen']
     end
   end
 
@@ -905,7 +930,7 @@ RSpec.describe Dataset do
     end
 
     it 'creates an identifier active triple resource with just the identifier' do
-      @obj = build(:publication,
+      @obj = build(:dataset,
         complex_identifier_attributes: [{
           identifier: '1234'
         }]
@@ -917,12 +942,201 @@ RSpec.describe Dataset do
     end
 
     it 'rejects an identifier active triple with no identifier' do
-      @obj = build(:publication,
+      @obj = build(:dataset,
         complex_identifier_attributes: [{
           label: 'Local'
         }]
       )
       expect(@obj.complex_identifier).to be_empty
+    end
+  end
+
+  describe 'nims_pid' do
+    it 'has nims_pid as singular' do
+      @obj = build(:dataset, nims_pid: 'nims:12345678')
+      expect(@obj.nims_pid).to eq 'nims:12345678'
+    end
+  end
+
+  describe 'complex_event' do
+    it 'creates an event active triple resource with all the attributes' do
+      @obj = build(:dataset, complex_event_attributes: [
+        {
+          end_date: '2019-01-01',
+          invitation_status: true,
+          place: '221B Baker Street',
+          start_date: '2018-12-25',
+          title: 'A Title'
+        }
+      ])
+      expect(@obj.complex_event.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_event.first.id).to include('#event')
+      expect(@obj.complex_event.first.end_date).to eq ['2019-01-01']
+      expect(@obj.complex_event.first.invitation_status).to eq [true]
+      expect(@obj.complex_event.first.place).to eq ['221B Baker Street']
+      expect(@obj.complex_event.first.start_date).to eq ['2018-12-25']
+      expect(@obj.complex_event.first.title).to eq ['A Title']
+    end
+  end
+
+  describe 'complex_source' do
+    it 'creates a complex source active triple resource with an id and all properties' do
+      @obj = build(:dataset,
+        complex_source_attributes: [{
+          alternative_title: 'Sub title for journal',
+          complex_person_attributes: [{
+            name: 'AR',
+            role: 'Editor'
+          }],
+          end_page: '12',
+          complex_identifier_attributes: [{
+            identifier: '1234567',
+            scheme: 'Local'
+          }],
+          issue: '34',
+          sequence_number: '1.2.2',
+          start_page: '4',
+          title: 'Test journal',
+          total_number_of_pages: '8',
+          volume: '3'
+        }]
+      )
+      expect(@obj.complex_source.first.id).to include('#source')
+      expect(@obj.complex_source.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_source.first.alternative_title).to eq ['Sub title for journal']
+      expect(@obj.complex_source.first.complex_person.first.name).to eq ['AR']
+      expect(@obj.complex_source.first.complex_person.first.role).to eq ['Editor']
+      expect(@obj.complex_source.first.end_page).to eq ['12']
+      expect(@obj.complex_source.first.complex_identifier.first.identifier).to eq ['1234567']
+      expect(@obj.complex_source.first.complex_identifier.first.scheme).to eq ['Local']
+      expect(@obj.complex_source.first.issue).to eq ['34']
+      expect(@obj.complex_source.first.sequence_number).to eq ['1.2.2']
+      expect(@obj.complex_source.first.start_page).to eq ['4']
+      expect(@obj.complex_source.first.title).to eq ['Test journal']
+      expect(@obj.complex_source.first.total_number_of_pages).to eq ['8']
+      expect(@obj.complex_source.first.volume).to eq ['3']
+    end
+  end
+
+  describe 'complex_funding_reference' do
+    it 'creates a complex funding reference active triple resource with funding reference' do
+      @obj = build(:dataset,
+                   complex_funding_reference_attributes: [{
+                                                            funder_identifier: 'f1234',
+                                                            funder_name: 'Bank',
+                                                            award_title: 'No free lunch'
+                                                          }]
+      )
+      expect(@obj.complex_funding_reference.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_funding_reference.first.id).to include('#fundref')
+      expect(@obj.complex_funding_reference.first.funder_identifier).to eq ['f1234']
+      expect(@obj.complex_funding_reference.first.funder_name).to eq ['Bank']
+      expect(@obj.complex_funding_reference.first.award_number).to be_empty
+      expect(@obj.complex_funding_reference.first.award_uri).to be_empty
+      expect(@obj.complex_funding_reference.first.award_title).to eq ['No free lunch']
+    end
+
+    it 'creates a complex funding reference active triple resource with all the attributes' do
+      @obj = build(:dataset,
+                   complex_funding_reference_attributes: [{
+                                                            funder_identifier: 'f1234',
+                                                            funder_name: 'Bank',
+                                                            award_number: 'a1234',
+                                                            award_uri: 'http://award.com/a1234',
+                                                            award_title: 'No free lunch'
+                                                          }]
+      )
+      expect(@obj.complex_funding_reference.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_funding_reference.first.id).to include('#fundref')
+      expect(@obj.complex_funding_reference.first.funder_identifier).to eq ['f1234']
+      expect(@obj.complex_funding_reference.first.funder_name).to eq ['Bank']
+      expect(@obj.complex_funding_reference.first.award_number).to eq ['a1234']
+      expect(@obj.complex_funding_reference.first.award_uri).to eq ['http://award.com/a1234']
+      expect(@obj.complex_funding_reference.first.award_title).to eq ['No free lunch']
+    end
+
+    it 'rejects a complex funding reference active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_funding_reference_attributes: [{
+                                                 funder_identifier: '',
+                                                 funder_name: ''
+                                               }]
+      )
+      expect(@obj.complex_funding_reference).to be_empty
+    end
+  end
+
+  describe 'complex_contact_agent' do
+    it 'creates a complex contact agent active triple resource with contact agent' do
+      @obj = build(:dataset,
+                   complex_contact_agent_attributes: [{
+                     name: 'Kosuke Tanabe',
+                     email: 'tanabe@example.jp',
+                     organization: 'NIMS',
+                     department: 'DPFC'
+                   }]
+      )
+      expect(@obj.complex_contact_agent.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_contact_agent.first.name).to eq ['Kosuke Tanabe']
+    end
+
+    it 'rejects a complex contact agent active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_contact_agent_attributes: [{
+                                                 name: ''
+                                               }]
+      )
+      expect(@obj.complex_contact_agent).to be_empty
+    end
+  end
+
+  describe 'complex_chemical_composition' do
+    it 'creates a complex chemical composition active triple resource with chemical composition' do
+      @obj = build(:dataset,
+                   complex_chemical_composition_attributes: [{
+                     description: 'chemical composition 1',
+                     complex_identifier_attributes: [{
+                      identifier: 'chemical_composition/1234567',
+                      scheme: 'identifier persistent'
+                    }]
+                   }]
+      )
+      expect(@obj.complex_chemical_composition.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_chemical_composition.first.description).to eq ['chemical composition 1']
+    end
+
+    it 'rejects a complex chemical composition active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_chemical_composition_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_chemical_composition).to be_empty
+    end
+  end
+
+  describe 'complex_structural_feature' do
+    it 'creates a complex structural feature active triple resource with structural feature' do
+      @obj = build(:dataset,
+                   complex_structural_feature_attributes: [{
+                     description: 'structural feature 1',
+                     complex_identifier_attributes: [{
+                      identifier: 'structural_feature/1234567',
+                      scheme: 'identifier persistent'
+                    }]
+                   }]
+      )
+      expect(@obj.complex_structural_feature.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_structural_feature.first.description).to eq ['structural feature 1']
+    end
+
+    it 'rejects a complex structural feature active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_structural_feature_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_structural_feature).to be_empty
     end
   end
 end

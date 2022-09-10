@@ -3,7 +3,7 @@ terms:
     term: Accepted
     active: true
   - id: Available
-    term: Available
+    term: Available (Embargo release)
     active: true
   - id: http://bibframe.org/vocab/copyrightDate
     term: Copyrighted
@@ -17,26 +17,11 @@ terms:
   - id: Deposited
     term: Deposited
     active: true
-  - id: http://purl.org/dc/terms/issued
-    term: Issued
-    active: true
-  - id: Published
-    term: Published
-    active: true
   - id: http://bibframe.org/vocab/providerDate
     term: Submitted
     active: true
   - id: http://bibframe.org/vocab/changeDate
     term: Updated
-    active: true
-  - id: http://purl.org/dc/terms/valid
-    term: Valid
-    active: true
-  - id: Processed
-    term: Processed
-    active: true
-  - id: Purchased
-    term: Purchased
     active: true
   - id: Registered
     term: Registered

@@ -1,0 +1,55 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2 
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.7.4-buster-node
+      - image: circleci/postgres:12-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: hyrax_test
+      - image: circleci/redis:6.2
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - rails-demo-{{ checksum "hyrax/Gemfile.lock" }}
+            - rails-demo-
+      - run:
+          name: bundle install
+          command: |
+            cd hyrax
+            bundle install --jobs 4 --retry 3
+      - run:
+          name: apt install
+          command: |
+            sudo apt update
+            sudo apt install -y openjdk-11-jre-headless libmediainfo-dev
+      - run:
+          name: download fits
+          command: |
+            export FITS_ROOT=~/nims-hyrax/
+            mkdir -p ${FITS_ROOT}
+            wget -q https://projects.iq.harvard.edu/files/fits/files/fits-1.3.0.zip -O ${FITS_ROOT}/fits-1.3.0.zip
+            unzip -q ${FITS_ROOT}/fits-1.3.0.zip -d ${FITS_ROOT}/fits-1.3.0
+            chmod a+x ${FITS_ROOT}/fits-1.3.0/fits.sh
+            rm ${FITS_ROOT}/fits-1.3.0.zip
+      - run:
+          name: prepare database
+          command: |
+            cd hyrax
+            bundle exec rake db:test:prepare
+      - run:
+          name: run tests
+          command: |
+            cd hyrax
+            export FITS_PATH=~/nims-hyrax/fits-1.3.0/fits.sh
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            if test -f "lib/tasks/test_servers.rake"; then echo 'Running full tests' && bundle exec rake test:servers:start && bundle exec rspec && bundle exec cucumber && bundle exec rake test:servers:stop; else echo "Running limited tests"; bundle exec rspec --exclude-pattern "**/features/*_spec.rb"; fi
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results

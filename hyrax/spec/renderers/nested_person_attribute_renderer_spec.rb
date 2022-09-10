@@ -30,7 +30,7 @@ RSpec.describe NestedPersonAttributeRenderer do
       is_expected.to have_css('div.row', text: 'Research')
 
       is_expected.to have_css('div.row label', text: 'Role')
-      is_expected.to have_css('div.row', text: 'operator/データ測定者・計算者')
+      is_expected.to have_css('div.row', text: 'operator')
     end
   end
 
@@ -39,7 +39,25 @@ RSpec.describe NestedPersonAttributeRenderer do
     it 'generates the correct fields' do
       is_expected.to have_css('th', text: 'Person')
       is_expected.to have_css('div.row label', text: 'Name')
-      is_expected.to have_css('div.row a', text: 'Foo Bar')
+      is_expected.to have_css('div.row a', text: 'Bar, Foo')
+    end
+  end
+
+  context 'without corresponding_author' do
+    let(:nested_value) { { first_name: ['Foo'], last_name: ['Bar'], corresponding_author: '0' } }
+
+    it 'generates the correct fields' do
+      is_expected.to have_css('div.row label', text: '')
+      is_expected.not_to have_css('div.row div.col-md-9', text: 'corresponding author')
+    end
+  end
+
+  context 'with corresponding_author' do
+    let(:nested_value) { { first_name: ['Foo'], last_name: ['Bar'], corresponding_author: '1' } }
+
+    it 'generates the correct fields' do
+      is_expected.to have_css('div.row label', text: '')
+      is_expected.to have_css('div.row div.col-md-9', text: 'corresponding author')
     end
   end
 end
