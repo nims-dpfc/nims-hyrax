@@ -11,7 +11,7 @@ module ComplexField
       solr_doc[Solrizer.solr_name('complex_software_name', :stored_searchable)] = object.complex_software.map { |i| i.name.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_software_name', :facetable)] = object.complex_software.map { |i| i.name.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_software_description', :stored_searchable)] = object.complex_software.map { |i| i.description.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('complex_software_identifier', :stored_searchable)] = object.complex_software.map { |i| i.identifier.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('complex_software_identifier', :symbol)] = object.complex_software.map { |i| i.identifier.reject(&:blank?).first }
     end
 
     def self.software_facet_fields
@@ -26,7 +26,7 @@ module ComplexField
       fields = []
       fields << Solrizer.solr_name('complex_software_name', :stored_searchable)
       fields << Solrizer.solr_name('complex_software_description', :stored_searchable)
-      fields << Solrizer.solr_name('complex_software_identifier', :stored_searchable)
+      fields << Solrizer.solr_name('complex_software_identifier', :symbol)
       fields
     end
 
