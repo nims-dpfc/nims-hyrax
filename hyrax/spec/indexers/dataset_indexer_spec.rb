@@ -1120,7 +1120,7 @@ RSpec.describe DatasetIndexer do
     end
   end
 
-  describe 'indexes the chemical composition active triple resource with all the attributes' do
+  describe 'indexes the structural feature active triple resource with all the attributes' do
     before do
       structural_feature = [{
         description: 'structural feature description',
@@ -1163,6 +1163,44 @@ RSpec.describe DatasetIndexer do
     it 'indexes structural feature identifier as symbol' do
       expect(@solr_document['complex_structural_feature_identifier_ssim']).to match_array(
         ['structural_feature/12345', 'structural_feature/67890'])
+    end
+  end
+
+  describe 'indexes the software active triple resource with all the attributes' do
+    before do
+      software = [
+        {
+          description: 'software description 1',
+          version: '1.0',
+          identifier: 'sample10',
+          name: 'sample1.exe',
+        },
+        {
+          description: 'software description 2',
+          version: '2.0',
+          identifier: 'sample20',
+          name: 'sample2.exe'
+        }
+      ]
+      obj = build(:dataset, complex_software_attributes: software)
+      @solr_document = obj.to_solr
+    end
+
+    it 'indexes software name as stored_searchable' do
+      expect(@solr_document['complex_software_tesim']).to match_array(
+        ['sample10', 'sample20'])
+    end
+    it 'indexes software name as facetable' do
+      expect(@solr_document['complex_software_name_sim']).to match_array(
+        ['sample1.exe', 'sample2.exe'])
+    end
+    it 'indexes software description as stored_searchable' do
+      expect(@solr_document['complex_software_description_tesim']).to match_array(
+        ['software description 1', 'software description 2'])
+    end
+    it 'indexes software identifier as symbol' do
+      expect(@solr_document['complex_software_identifier_ssim']).to match_array(
+        ['sample10', 'sample20'])
     end
   end
 
