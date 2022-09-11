@@ -15,9 +15,9 @@ RSpec.describe NestedSoftwareInput, type: :input do
   subject { Capybara.string(html) }
 
   it 'generates the correct fields' do
-    is_expected.to have_field('dataset_complex_software_attributes_0_name', type: :text, with: 'software name')
-    is_expected.to have_field('dataset_complex_software_attributes_0_version', type: :text, with: 'software version')
-    is_expected.to have_field('dataset_complex_software_attributes_0_identifier', type: :text, with: 'software identifier')
-    is_expected.to have_field('dataset_complex_software_attributes_0_description', type: :text, with: 'software description')
+    is_expected.to have_field('dataset_complex_software_attributes_0_name', type: :text, with: 'notepad.exe')
+    is_expected.to have_field('dataset_complex_software_attributes_0_version', type: :text, with: '1.0')
+    is_expected.to have_field('dataset_complex_software_attributes_0_identifier', type: :text, with: 'notepad10')
+    is_expected.to have_field('dataset_complex_software_attributes_0_description', type: :text, with: 'Notepad')
   end
 end
