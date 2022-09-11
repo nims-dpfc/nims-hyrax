@@ -24,7 +24,7 @@ protected
 
     out << "  <div class='col-md-9'>"
     out << @builder.text_field(field_name,
-        options.merge(value: field_value, name: field_name, id: field_id, required: required, placeholder: "Journal name"))
+        options.merge(value: field_value, name: field_name, id: field_id, required: required, placeholder: "Software name"))
     out << '  </div>'
     out << '</div>' # row
 
