@@ -23,8 +23,8 @@ RSpec.describe NestedSpecimenTypeInput, type: :input do
 
     is_expected.to have_select('dataset[complex_specimen_type_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
 
-    is_expected.to have_field('dataset[complex_specimen_type_attributes][0][complex_crystallographic_structure_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'crystallographic_structure/123456')
-    is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_crystallographic_structure_attributes_0_description', type: :text, with: 'crystallographic_structure 1')
+    # is_expected.to have_field('dataset[complex_specimen_type_attributes][0][complex_crystallographic_structure_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'crystallographic_structure/123456')
+    # is_expected.to have_field('dataset[complex_specimen_type_attributes][0]_complex_crystallographic_structure_attributes_0_description', type: :text, with: 'crystallographic_structure 1')
 
     is_expected.to have_field('dataset_complex_specimen_type_attributes_0_description', type: :text, with: 'Specimen description')
 
