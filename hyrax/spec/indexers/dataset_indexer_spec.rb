@@ -1187,7 +1187,7 @@ RSpec.describe DatasetIndexer do
     end
 
     it 'indexes software name as stored_searchable' do
-      expect(@solr_document['complex_software_tesim']).to match_array(
+      expect(@solr_document['complex_software_name_tesim']).to match_array(
         ['sample1.exe', 'sample2.exe'])
     end
     it 'indexes software name as facetable' do
