@@ -1139,4 +1139,28 @@ RSpec.describe Dataset do
       expect(@obj.complex_structural_feature).to be_empty
     end
   end
+
+  describe 'complex_software' do
+    it 'creates a complex software active triple resource with software' do
+      @obj = build(:dataset,
+                   complex_software_attributes: [{
+                     description: 'software 1',
+                     name: 'sample1.exe',
+                     identifier: 'sample10',
+                     version: '1.0'
+                   }]
+      )
+      expect(@obj.complex_software.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_software.first.description).to eq ['software 1']
+    end
+
+    it 'rejects a complex software active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_software_attributes: [{
+                                                 name: ''
+                                               }]
+      )
+      expect(@obj.complex_software).to be_empty
+    end
+  end
 end
