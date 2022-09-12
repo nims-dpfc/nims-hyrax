@@ -23,6 +23,7 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::StructuralFeatureIndexer
   include ComplexField::FundrefIndexer
   include ComplexField::ContactAgentIndexer
+  include ComplexField::CrystallographicStructureIndexer
 
   def self.facet_fields
     # solr fields that will be treated as facets
@@ -49,6 +50,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::StateOfMatterIndexer.state_of_matter_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_facet_fields
       fields.concat ComplexField::FundrefIndexer.fundref_facet_fields
+      fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_facet_fields
     end
   end
 
@@ -86,6 +88,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::ShapeIndexer.shape_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_search_fields
       fields.concat ComplexField::FundrefIndexer.fundref_search_fields
+      fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_search_fields
     end
   end
 
@@ -118,6 +121,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::ContactAgentIndexer.contact_agent_show_fields
       fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_show_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_show_fields
+      fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_show_fields
     end
   end
 
