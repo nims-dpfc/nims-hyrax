@@ -55,6 +55,7 @@ module Hyrax
       :complex_specimen_type,
       :complex_chemical_composition,
       :complex_structural_feature,
+      :complex_crystallographic_structure,
       :material_type,
       
       # not used
@@ -117,13 +118,13 @@ module Hyrax
     end
 
     def specimen_tab_terms
-      [ :complex_chemical_composition, :complex_specimen_type, :complex_structural_feature ]
+      [ :complex_chemical_composition, :complex_specimen_type, :complex_structural_feature, :complex_crystallographic_structure ]
     end
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
       :complex_organization, :complex_person, :complex_relation, :complex_event,
       :complex_funding_reference, :complex_contact_agent, :complex_chemical_composition,
-      :complex_structural_feature,
+      :complex_structural_feature, :complex_crystallographic_structure,
       :complex_source, :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
@@ -395,6 +396,18 @@ module Hyrax
       ]
     end
 
+		def self.permitted_crystallographic_structure_params
+      [:id,
+       :_destroy,
+       {
+         specimen_identifier: [],
+         category_vocabulary: [],
+         category_description: [],
+         description: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
@@ -413,6 +426,7 @@ module Hyrax
       permitted << { complex_contact_agent_attributes: permitted_contact_agent_params }
       permitted << { complex_chemical_composition_attributes: permitted_chemical_composition_params }
       permitted << { complex_structural_feature_attributes: permitted_structural_feature_params }
+      permitted << { complex_crystallographic_structure_attributes: permitted_structural_feature_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end

@@ -220,4 +220,8 @@ class SolrDocument
   def complex_structural_feature
     self[Solrizer.solr_name('complex_structural_feature', :displayable)]
   end
+
+  def complex_crystallographic_structure
+    self[Solrizer.solr_name('complex_crystallographic_structure', :displayable)]
+  end
 end
