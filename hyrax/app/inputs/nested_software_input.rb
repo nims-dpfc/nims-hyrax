@@ -1,13 +1,13 @@
 class NestedSoftwareInput < NestedAttributesInput
 
-protected
+  protected
 
   def build_components(attribute_name, value, index, options, parent=@builder.object_name)
     out = ''
 
     # Inherit required for fields validated in nested attributes
     required  = false
-    if object.required?(:complex_source) and index == 0
+    if object.required?(:complex_software) and index == 0
       required = true
     end
 
