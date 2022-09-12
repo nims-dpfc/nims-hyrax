@@ -47,7 +47,7 @@ module Hyrax
       :computational_methods,
       :properties_addressed, 
       :synthesis_and_processing,
-      :complex_feature
+      :complex_feature,
 
       # instruments
       :complex_instrument, 
