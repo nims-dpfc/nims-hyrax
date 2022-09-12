@@ -31,7 +31,7 @@ class NestedCrystallographicStructureAttributeRenderer < NestedAttributeRenderer
       end
       # category_description
       unless v.dig('category_description').blank?
-        label = 'Catetgory description'
+        label = 'Category description'
         val = v['category_description'][0]
         each_html += get_row(label, val)
       end
