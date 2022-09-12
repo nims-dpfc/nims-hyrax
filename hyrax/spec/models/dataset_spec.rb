@@ -1139,4 +1139,28 @@ RSpec.describe Dataset do
       expect(@obj.complex_structural_feature).to be_empty
     end
   end
+
+  describe 'complex_crystallographic_structure' do
+    it 'creates a complex crystallographic_structure active triple resource with crystallographic_structure' do
+      @obj = build(:dataset,
+                   complex_crystallographic_structure_attributes: [{
+                     description: 'structure 1',
+                     category_vocabulary: 'http://vocabulary.example.jp/Q123',
+                     category_description: 'Q123',
+                     specimen_identifier: 'sample10',
+                   }]
+      )
+      expect(@obj.complex_crystallographic_structure.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_crystallographic_structure.first.description).to eq ['structure 1']
+    end
+
+    it 'rejects a complex crystallographic_structure active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_crystallographic_structure_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_crystallographic_structure).to be_empty
+    end
+  end
 end

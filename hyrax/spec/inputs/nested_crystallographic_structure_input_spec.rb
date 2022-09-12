@@ -16,6 +16,8 @@ RSpec.describe NestedCrystallographicStructureInput, type: :input do
 
   it 'generates the correct fields' do
     is_expected.to have_field('dataset_complex_crystallographic_structure_attributes_0_description', type: :text, with: 'crystallographic_structure 1')
+    is_expected.to have_field('dataset_complex_crystallographic_structure_attributes_0_category_description', type: :text, with: 'crystallographic_structure category 1')
+    is_expected.to have_field('dataset_complex_crystallographic_structure_attributes_0_category_vocabulary', type: :text, with: 'crystallographic_structure/123456')
     is_expected.to have_field('dataset_complex_crystallographic_structure_attributes_0_specimen_identifier', type: :text, with: 'specimen/123456')
     # is_expected.to have_field('dataset[complex_crystallographic_structure_attributes][0]_complex_identifier_attributes_0_identifier', type: :text, with: 'crystallographic_structure/123456')
     # is_expected.to have_select('dataset[complex_crystallographic_structure_attributes][0]_complex_identifier_attributes_0_scheme', selected: 'Identifier - Persistent')
