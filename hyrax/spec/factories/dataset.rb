@@ -246,7 +246,7 @@ FactoryBot.define do
         [{
           description: 'crystallographic_structure 1',
           category_description: 'crystallographic_structure category 1',
-          category_identifier: ['crystallographic_structure/123456'],
+          category_vocabulary: ['crystallographic_structure/123456'],
           specimen_identifier: ['specimen/123456']
         }]
       }
