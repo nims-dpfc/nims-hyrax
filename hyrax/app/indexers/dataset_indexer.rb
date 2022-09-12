@@ -88,7 +88,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::ShapeIndexer.shape_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_search_fields
       fields.concat ComplexField::FundrefIndexer.fundref_search_fields
-      fields.concat ComplexField::FeaturefIndexer.feature_search_fields
+      fields.concat ComplexField::FeatureIndexer.feature_search_fields
     end
   end
 
