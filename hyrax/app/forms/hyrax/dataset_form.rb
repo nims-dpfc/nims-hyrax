@@ -426,7 +426,7 @@ module Hyrax
       permitted << { complex_contact_agent_attributes: permitted_contact_agent_params }
       permitted << { complex_chemical_composition_attributes: permitted_chemical_composition_params }
       permitted << { complex_structural_feature_attributes: permitted_structural_feature_params }
-      permitted << { complex_crystallographic_structure_attributes: permitted_structural_feature_params }
+      permitted << { complex_crystallographic_structure_attributes: permitted_crystallographic_structure_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end
