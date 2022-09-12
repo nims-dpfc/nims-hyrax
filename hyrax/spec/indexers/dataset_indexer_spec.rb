@@ -1166,6 +1166,44 @@ RSpec.describe DatasetIndexer do
     end
   end
 
+  describe 'indexes the feature active triple resource with all the attributes' do
+    before do
+      feature = [
+        {
+          description: 'feature 1',
+          category_vocabulary: 'http://vocabulary.example.jp/Q234',
+          unit_vocabulary: 'http://vocabulary.example.jp/Q235',
+          value: '100'
+        },
+        {
+          description: 'feature 2',
+          category_vocabulary: 'http://vocabulary.example.jp/Q236',
+          unit_vocabulary: 'http://vocabulary.example.jp/Q237',
+          value: '200'
+        }
+      ]
+      obj = build(:dataset, complex_feature_attributes: feature)
+      @solr_document = obj.to_solr
+    end
+
+    it 'indexes feature description as stored_searchable' do
+      expect(@solr_document['complex_feature_description_tesim']).to match_array(
+        ['feature 1', 'feature 2'])
+    end
+    it 'indexes feature category_vocabulary as facetable' do
+      expect(@solr_document['complex_feature_category_vocabulary_sim']).to match_array(
+        ['http://vocabulary.example.jp/Q234', 'http://vocabulary.example.jp/Q236'])
+    end
+    it 'indexes feature unit_vocabulary as facetable' do
+      expect(@solr_document['complex_feature_unit_vocabulary_sim']).to match_array(
+        ['http://vocabulary.example.jp/Q235', 'http://vocabulary.example.jp/Q237'])
+    end
+    it 'indexes feature description as stored_searchable' do
+      expect(@solr_document['complex_feature_description_tesim']).to match_array(
+        ['feature 1', 'feature 2'])
+    end
+  end
+
   describe 'facet fields' do
     it 'to not index specimen_set_tesim' do
       expect(described_class.facet_fields).not_to include('specimen_set_tesim')
