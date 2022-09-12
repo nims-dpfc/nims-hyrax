@@ -8,7 +8,7 @@ module Hyrax
       :complex_contact_agent, :complex_chemical_composition, :complex_structural_feature,
       :complex_instrument, :origin_system_provenance, :properties_addressed,
       :complex_relation, :specimen_set, :complex_specimen_type, :complex_event,
-      :complex_source, :material_type,
+      :complex_source, :complex_feature, :material_type,
       :synthesis_and_processing, :custom_property, :first_published_url, :doi,
       :creator, :licensed_date, :date_published, :managing_organization, :ordered_creators, to: :solr_document
 

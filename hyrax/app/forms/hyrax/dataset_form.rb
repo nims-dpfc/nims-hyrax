@@ -47,6 +47,7 @@ module Hyrax
       :computational_methods,
       :properties_addressed, 
       :synthesis_and_processing,
+      :complex_feature
 
       # instruments
       :complex_instrument, 
@@ -108,7 +109,8 @@ module Hyrax
         :characterization_methods, :computational_methods,
         # :origin_system_provenance, # not using this
         :properties_addressed,
-        :synthesis_and_processing
+        :synthesis_and_processing,
+        :complex_feature
       ]
     end
 
@@ -124,6 +126,7 @@ module Hyrax
       :complex_organization, :complex_person, :complex_relation, :complex_event,
       :complex_funding_reference, :complex_contact_agent, :complex_chemical_composition,
       :complex_structural_feature,
+      :complex_feature,
       :complex_source, :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
@@ -395,6 +398,18 @@ module Hyrax
       ]
     end
 
+    def self.permitted_feature_params
+      [:id,
+       :_destroy,
+       {
+         category_vocabulary: [],
+         unit_vocabulary: [],
+         value: [],
+         description: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
@@ -413,6 +428,7 @@ module Hyrax
       permitted << { complex_contact_agent_attributes: permitted_contact_agent_params }
       permitted << { complex_chemical_composition_attributes: permitted_chemical_composition_params }
       permitted << { complex_structural_feature_attributes: permitted_structural_feature_params }
+      permitted << { complex_feature_attributes: permitted_feature_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end
