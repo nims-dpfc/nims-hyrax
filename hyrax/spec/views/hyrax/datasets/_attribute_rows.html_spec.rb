@@ -82,7 +82,9 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
       expect(rendered).to have_content('http://id.example.jp/Q12345')
       expect(rendered).to have_content('structural feature description')
       expect(rendered).to have_content('structural feature category')
-      expect(rendered).to have_content('structural_feature/123456')
+      expect(rendered).to have_content('crystallographic_structure/123456')
+      expect(rendered).to have_content('crystallographic_structure category 1')
+      expect(rendered).to have_content('specimen/123456')
       expect(rendered).not_to have_content('Abstract-Description-123') # Abstract/Description is not displayed in this table partial
       expect(rendered).not_to have_content('Professor-Supervisor-Approval')
     end
