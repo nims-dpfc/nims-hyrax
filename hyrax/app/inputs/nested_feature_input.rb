@@ -86,12 +86,13 @@ class NestedFeatureInput < NestedAttributesInput
     # --- delete checkbox
     if repeats == true
       field_label = 'Additional feature'
+      out << "<div class='row'>"
       out << "  <div class='col-md-3'>"
       out << destroy_widget(attribute_name, index, field_label, parent)
       out << '  </div>'
+      out << '</div>' # last row
     end
 
-    out << '</div>' # last row
     out
   end
 end
