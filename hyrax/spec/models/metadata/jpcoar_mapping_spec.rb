@@ -130,8 +130,8 @@ RSpec.describe Metadata::JpcoarMapping do
     describe 'jpcoar_rights_statement' do
       let(:model) { build(:dataset, :with_rights) }
       let(:solr_document) { SolrDocument.new(model.to_solr) }
-      let(:out) {'<dc:rights rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" xml:lang="en">
-        Creative Commons CC0 1.0 Universal</dc:rights>'}
+      let(:out) {'<dc:rights rdf:resource="https://creativecommons.org/publicdomain/zero/1.0/legalcode  " xml:lang="en">
+        Creative Commons Zero v1.0 Universal</dc:rights>'}
       it 'has the xml' do
         solr_document.jpcoar_rights_statement(field, xml)
         expect(xml.target!.gsub(/<to_s\/>/, '')).to eq out.split("\n").map(&:rstrip).map(&:lstrip).join("")
