@@ -68,6 +68,3 @@ terms:
     - id: http://creativecommons.org/licenses/by/3.0/de/
       term: Creative Commons BY 3.0 DE
       active: false
-    - id: http://creativecommons.org/licenses/by/3.0/de/
-      term: Creative Commons BY 3.0
-      active: false
