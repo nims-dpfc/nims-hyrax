@@ -129,7 +129,8 @@ Rails.application.configure do
       'Riiif::ConversionError',
       'Blacklight::Exceptions::RecordNotFound',
       'ActionView::Template::Error',
-      'Ldp::Gone'
+      'Ldp::Gone',
+      'URI::InvalidURIError'
     ] + ExceptionNotifier.ignored_exceptions,
     error_grouping: true,
     email: {

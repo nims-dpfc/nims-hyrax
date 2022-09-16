@@ -35,3 +35,36 @@ terms:
     - id: http://opensource.org/licenses/MIT
       term: MIT License
       active: true
+    - id: http://creativecommons.org/licenses/by-nc-nd/2.1/jp/
+      term: Creative Commons BY-NC-ND 2.1 JP
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc-nd/3.0/
+      term: Creative Commons BY-NC-ND 3.0
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc-sa/2.1/jp/
+      term: Creative Commons BY-NC-SA 2.1 JP
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc/3.0/
+      term: Creative Commons BY-NC 3.0
+      active: false
+    - id: http://creativecommons.org/licenses/by-nd/2.1/jp/
+      term: Creative Commons BY-ND 2.1 JP
+      active: false
+    - id: http://creativecommons.org/licenses/by-nd/3.0/
+      term: Creative Commons BY-ND 3.0
+      active: false
+    - id: http://creativecommons.org/licenses/by-sa/3.0/
+      term: Creative Commons BY-SA 3.0
+      active: false
+    - id: http://creativecommons.org/licenses/by/2.0/de/
+      term: Creative Commons BY 2.0 DE
+      active: false
+    - id: http://creativecommons.org/licenses/by/2.1/jp/
+      term: Creative Commons BY 2.1 JP
+      active: false
+    - id: http://creativecommons.org/licenses/by/3.0/
+      term: Creative Commons BY 3.0
+      active: false
+    - id: http://creativecommons.org/licenses/by/3.0/de/
+      term: Creative Commons BY 3.0 DE
+      active: false
