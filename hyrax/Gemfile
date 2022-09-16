@@ -87,8 +87,6 @@ gem 'ro-crate', '~> 0.4.11', require: 'ro_crate'
 group :production do
   gem 'exception_notification', '~> 4.4'
   gem 'exception_notification-rake', '~> 0.3.1'
-  gem 'act-fluent-logger-rails'
-  gem 'lograge'
 end
 
 gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'develop'
