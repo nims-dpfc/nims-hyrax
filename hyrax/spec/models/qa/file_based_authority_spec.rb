@@ -49,7 +49,7 @@ RSpec.describe Qa::Authorities::Local::FileBasedAuthority do
       expect(@la.find(@term['id'])).to eq(@term)
     end
     it 'has the extra keys in terms hash for rights_statements' do
-      @term = @la.all.first
+      @term = @la.all[1]
       expect(@term.keys).to include('short_label', 'term', 'label', 'uri', 'human_url')
     end
   end
