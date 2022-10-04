@@ -31,8 +31,6 @@ services:
   web:
     ports:
       - 3000:3000
-    depends_on:
-      - cas
     environment:
       - RAILS_FORCE_SSL=false
     volumes:
@@ -58,15 +56,3 @@ services:
   redis:
     volumes:
       - redis:/data
-
-  cas:
-    build:
-      context: cas
-    networks:
-      internal:
-        aliases:
-          - cas
-          - cas.mdr.nims.test
-
-    ports:
-      - 8443:8443
