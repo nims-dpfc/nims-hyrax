@@ -53,7 +53,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [:username]
+  config.authentication_keys = [:email]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -65,12 +65,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [:username]
+  config.case_insensitive_keys = [:email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [:username]
+  config.strip_whitespace_keys = [:email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -158,7 +158,7 @@ Devise.setup do |config|
   config.reconfirmable = true
 
   # Defines which key will be used when confirming an account
-  config.confirmation_keys = [:username]
+  config.confirmation_keys = [:email]
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
@@ -195,7 +195,7 @@ Devise.setup do |config|
   config.lock_strategy = :failed_attempts
 
   # Defines which key will be used when locking and unlocking an account
-  config.unlock_keys = [:username]
+  config.unlock_keys = [:email]
 
   # Defines which strategy will be used to unlock an account.
   # :email = Sends an unlock link to the user email
@@ -217,7 +217,7 @@ Devise.setup do |config|
   # ==> Configuration for :recoverable
   #
   # Defines which key will be used when recovering the password for an account
-  config.reset_password_keys = [:username]
+  config.reset_password_keys = [:email]
 
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
@@ -294,66 +294,4 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
-  # CAS (Central Authentication Service) setup
-  config.cas_base_url = ENV['CAS_BASE_URL'] || 'https://cas.nims.go.jp/'
-
-  # you can override these if you need to, but cas_base_url is usually enough
-  # config.cas_login_url = "https://cas.myorganization.com/login"
-  # config.cas_logout_url = "https://cas.myorganization.com/logout"
-  # config.cas_validate_url = "https://cas.myorganization.com/serviceValidate"
-  if ENV['CAS_VALIDATE_URL'].present?
-    config.cas_validate_url = ENV['CAS_VALIDATE_URL']
-  end
-
-  # The CAS specification allows for the passing of a follow URL to be displayed when
-  # a user logs out on the CAS server. RubyCAS-Server also supports redirecting to a
-  # URL via the destination param. Set either of these urls and specify either nil,
-  # 'destination' or 'follow' as the logout_url_param. If the urls are blank but
-  # logout_url_param is set, a default will be detected for the service.
-  config.cas_destination_url = ENV['CAS_DESTINATION_URL']
-  # config.cas_follow_url = 'https://cas.myorganization.com'
-  # config.cas_logout_url_param = nil
-
-  # You can specify the name of the destination argument with the following option.
-  # e.g. the following option will change it from 'destination' to 'url'
-  # config.cas_destination_logout_param_name = 'url'
-
-  # NB: these two parameters are necessary for single-sign-out to work correctly on the NIMS CAS server (Apereo CAS 6)
-  config.cas_logout_url_param = 'destination'
-  config.cas_destination_logout_param_name = 'service'
-
-  # By default, devise_cas_authenticatable will create users.  If you would rather
-  # require user records to already exist locally before they can authenticate via
-  # CAS, uncomment the following line.
-  # config.cas_create_user = false
-
-  # You can enable Single Sign Out, which by default is disabled.
-  config.cas_enable_single_sign_out = true
-
-  # If you don't want to use the username returned from your CAS server as the unique
-  # identifier, but some other field passed in cas_extra_attributes, you can specify
-  # the field name here.
-  # config.cas_user_identifier = nil
-
-  # If you want to use the Devise Timeoutable module with single sign out,
-  # uncommenting this will redirect timeouts to the logout url, so that the CAS can
-  # take care of signing out the other serviced applocations. Note that each
-  # application manages timeouts independently, so one application timing out will
-  # kill the session on all applications serviced by the CAS.
-  # config.warden do |manager|
-  #   manager.failure_app = DeviseCasAuthenticatable::SingleSignOut::WardenFailureApp
-  # end
-
-  # You can also set another single sign out strategy so that you won't be attached to rails_cache.
-  # Be aware that to do so you also need to set the session_store.
-  # Example for setting redis_cache.
-  # There are some gems the help with it. One of them is called redis-rails and it can easily be set like this:
-  # Rails.application.config.session_store :redis_store, servers: ["redis://localhost:6379/0/session"]
-  # This is specially useful when you need to share session id accross apps (i.e. in a distributed environment)
-  # config.cas_single_sign_out_mapping_strategy = :redis_cache
-
-  # If you need to specify some extra configs for rubycas-client, you can do this via:
-  # config.cas_client_config_options = {
-  #     logger: Rails.logger
-  # }
 end
