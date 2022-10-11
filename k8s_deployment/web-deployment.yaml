@@ -39,6 +39,8 @@ spec:
       - name: mdr-web
         image: nims-hyrax_web:latest
         imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
         args:
           - bash
           - -c
@@ -88,7 +90,14 @@ spec:
             mountPath: /shared/cache/
           - name: web-branding
             mountPath: /data/public/branding
+          - name: azure-shared-storage
+            mountPath: /data/mdrtest3-test
       volumes:
+        - name: azure-shared-storage
+          azureFile:
+            shareName: mdrtest3-test
+            secretName: azure-fileshare-secret
+            readOnly: false
         - name: web-file-uploads
           persistentVolumeClaim:
             claimName: web-file-uploads
