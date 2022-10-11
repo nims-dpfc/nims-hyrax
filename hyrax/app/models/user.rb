@@ -21,7 +21,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise ENV.fetch('MDR_DEVISE_AUTH_MODULE', 'database_authenticatable').to_sym,
-         :rememberable, :trackable, :lockable
+         :omniauthable, :rememberable, :trackable, :lockable, omniauth_providers: [:microsoft]
          # NB: the :validatable module is not compatible with CAS authentication
 
   # Method added by Blacklight; Blacklight uses #to_s on your
@@ -34,6 +34,19 @@ class User < ApplicationRecord
   def self.find_or_create_system_user(user_key)
     username = user_key.split('@')[0]
     User.find_by('email' => user_key) || User.create!(username: username, email: user_key, password: Devise.friendly_token[0, 20], user_identifier: Noid::Rails::Service.new.mint)
+  end
+
+  ## allow omniauth logins - this will create a local user based on an omniauth/shib login
+  ## if they haven't logged in before
+  def self.from_omniauth(auth)
+    name = auth_hash.dig(:extra, :raw_info, :displayName)
+    email = auth_hash.dig(:extra, :raw_info, :mail) ||
+      auth_hash.dig(:extra, :raw_info, :userPrincipalName)
+    User.find_by('email' => email) || User.create!(
+      username: name,
+      email: email,
+      password: Devise.friendly_token[0, 20],
+      user_identifier: Noid::Rails::Service.new.mint)
   end
 
   def ldap_before_save

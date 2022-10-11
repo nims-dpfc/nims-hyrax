@@ -8,6 +8,6 @@ Rails.application.config.session_store :redis_session_store, {
         expire_after: 90.minutes,  # cookie expiration
         ttl: 90.minutes,           # Redis expiration, defaults to 'expire_after'
         key_prefix: 'hyrax:session:',
-        url: "redis://#{redis_config[:host]}:#{redis_config[:port]}/0",
+        url: "rediss://:#{redis_config[:password]}@#{redis_config[:host]}:#{redis_config[:port]}/0",
     }
 }
