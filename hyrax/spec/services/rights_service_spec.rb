@@ -14,7 +14,7 @@ RSpec.describe RightsService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('http://creativecommons.org/publicdomain/mark/1.0/')).to eq({
+      expect(service.find_by_id('http://creativecommons.org/publicdomain/mark/1.0/')).to include({
         "label" => "Creative Commons Public Domain Mark 1.0",
         "id" => "http://creativecommons.org/publicdomain/mark/1.0/",
         "active" => true
@@ -24,7 +24,7 @@ RSpec.describe RightsService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('Creative Commons Public Domain Mark 1.0')).to eq({
+      expect(service.find_by_label('Creative Commons Public Domain Mark 1.0')).to include({
         "label" => "Creative Commons Public Domain Mark 1.0",
         "id" => "http://creativecommons.org/publicdomain/mark/1.0/",
         "active" => true
@@ -34,12 +34,12 @@ RSpec.describe RightsService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('http://creativecommons.org/publicdomain/mark/1.0/')).to eq({
+      expect(service.find_by_id_or_label('http://creativecommons.org/publicdomain/mark/1.0/')).to include({
         "label" => "Creative Commons Public Domain Mark 1.0",
         "id" => "http://creativecommons.org/publicdomain/mark/1.0/",
         "active" => true
       })
-      expect(service.find_by_id_or_label('Creative Commons Public Domain Mark 1.0')).to eq({
+      expect(service.find_by_id_or_label('Creative Commons Public Domain Mark 1.0')).to include({
         "label" => "Creative Commons Public Domain Mark 1.0",
         "id" => "http://creativecommons.org/publicdomain/mark/1.0/",
         "active" => true
