@@ -163,6 +163,15 @@ RSpec.describe Ability do
         it { expect(read_title).to be true }
         it { expect(read_version).to be true }
       end
+
+      context 'collection' do
+        let(:model) { ::Collection}
+        it { expect(read_abstract).to be true }
+        it { expect(read_date).to be true }
+        it { expect(read_keyword).to be true }
+        it { expect(read_resource_type).to be true }
+        it { expect(read_rights).to be true }
+      end
     end
 
     context 'authenticated NIMS Researcher' do
