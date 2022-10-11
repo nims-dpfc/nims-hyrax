@@ -11,7 +11,7 @@ ARG AIRBRAKE_PROJECT_KEY
 ARG FITS_PATH
 ARG FITS_VERSION
 ARG FLUENTD_URL
-ARG IM_VERSION=7.0.7-39
+ARG IM_VERSION=7.1.0-40
 
 ENV APP_PRODUCTION=/data/ \
     APP_WORKDIR=/data
@@ -35,6 +35,10 @@ RUN apt-get update -qq && \
     libjpeg-dev libtiff-dev libpng-dev libraw-dev libwebp-dev libjxr-dev \
     libcairo2-dev libgs-dev librsvg2-dev \
     libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev \
+    libexif-dev \
+    libtiff5-dev \
+    libtiffxx5 \
+    libltdl-dev \
     ghostscript ffmpeg cifs-utils \
     ufraw \
     bzip2 unzip xz-utils \
