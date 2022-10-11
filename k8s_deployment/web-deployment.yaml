@@ -41,8 +41,6 @@ spec:
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
-        securityContext:
-          privileged: true
         args:
           - bash
           - -c
