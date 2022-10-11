@@ -25,4 +25,14 @@ class QaSelectServiceExtended < Hyrax::QaSelectService
       {}
     end
   end
+
+  def find_any_by_id(term, &block)
+    a = authority.all.select { |e| e[:id] == term }
+    if a.any?
+      a.first
+    else
+      {}
+    end
+  end
+
 end
