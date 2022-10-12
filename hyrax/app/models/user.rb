@@ -32,8 +32,7 @@ class User < ApplicationRecord
   end
 
   def self.find_or_create_system_user(user_key)
-    username = user_key.split('@')[0]
-    User.find_by('email' => user_key) || User.create!(username: username, email: user_key, password: Devise.friendly_token[0, 20], user_identifier: Noid::Rails::Service.new.mint)
+    User.find_by('email' => user_key) || User.create!(username: user_key, email: user_key, password: Devise.friendly_token[0, 20], user_identifier: Noid::Rails::Service.new.mint)
   end
 
   ## allow omniauth logins - this will create a local user based on an omniauth/shib login
