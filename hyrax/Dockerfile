@@ -40,6 +40,7 @@ RUN apt-get update -qq && \
     libtiffxx5 \
     libltdl-dev \
     ghostscript ffmpeg cifs-utils \
+    ghostscript ffmpeg cifs-utils keyutils netcat telnet \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
