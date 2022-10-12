@@ -55,7 +55,7 @@
         <% end %>
 
         <% if can? :read_rights, presenter.model_name.name.constantize %>
-          <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
+          <%= presenter.attribute_to_html(:rights_statement, render_as: :mdr_rights_statement, html_dl: true) %>
           <%#= # presenter.attribute_to_html(:rights_notes, html_dl: true) %>
           <%= presenter.attribute_to_html(:licensed_date, label: t('ngdr.fields.licensed_date'), html_dl: true) %>
         <% end %>
