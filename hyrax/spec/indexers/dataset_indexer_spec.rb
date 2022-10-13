@@ -220,6 +220,54 @@ RSpec.describe DatasetIndexer do
     end
   end
 
+  describe 'indexes the new rights statement active triple resource in all variants' do
+    before do
+      rights_statement = ['https://creativecommons.org/licenses/by-sa/4.0/legalcode']
+      obj = build(:dataset, rights_statement: rights_statement)
+      @solr_document = obj.to_solr
+    end
+    it 'indexes the id as searchable' do
+      expect(@solr_document).to include('rights_statement_tesim')
+      expect(@solr_document['rights_statement_tesim']).to eq ['https://creativecommons.org/licenses/by-sa/4.0/legalcode']
+    end
+    it 'indexes all the values as searchable' do
+      expect(@solr_document).to include('rights_statement_variants_tesim')
+      expect(@solr_document['rights_statement_variants_tesim']).to match_array([
+         'https://creativecommons.org/licenses/by-sa/4.0/legalcode',
+         'Creative Commons Attribution Share Alike 4.0 International',
+         'CC-BY-SA-4.0',
+         'https://creativecommons.org/licenses/by-sa/4.0/'
+       ])
+    end
+    it 'indexes as facetable' do
+      expect(@solr_document).to include('rights_statement_sim')
+      expect(@solr_document['rights_statement_sim']).to match_array(['CC-BY-SA-4.0'])
+    end
+  end
+
+  describe 'indexes the old rights statement active triple resource in all variants' do
+    before do
+      rights_statement = ['http://rightsstatements.org/vocab/InC/1.0/']
+      obj = build(:dataset, rights_statement: rights_statement)
+      @solr_document = obj.to_solr
+    end
+    it 'indexes the id as searchable' do
+      expect(@solr_document).to include('rights_statement_tesim')
+      expect(@solr_document['rights_statement_tesim']).to eq ['http://rightsstatements.org/vocab/InC/1.0/']
+    end
+    it 'indexes all the values as searchable' do
+      expect(@solr_document).to include('rights_statement_variants_tesim')
+      expect(@solr_document['rights_statement_variants_tesim']).to match_array([
+         'http://rightsstatements.org/vocab/InC/1.0/',
+         'In Copyright'
+       ])
+    end
+    it 'indexes as facetable' do
+      expect(@solr_document).to include('rights_statement_sim')
+      expect(@solr_document['rights_statement_sim']).to match_array(['In Copyright'])
+    end
+  end
+
   describe 'indexes the version active triple resource with all the attributes' do
     before do
       versions = [
