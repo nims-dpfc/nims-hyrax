@@ -20,6 +20,7 @@ class User < ApplicationRecord
   include Blacklight::User
   # Include default devise modules. Others available are:
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
+  # ToDo: Now that we are not using CAS, do we want :validatable module?
   devise ENV.fetch('MDR_DEVISE_AUTH_MODULE', 'database_authenticatable').to_sym,
          :omniauthable, :rememberable, :trackable, :lockable, omniauth_providers: [:microsoft]
          # NB: the :validatable module is not compatible with CAS authentication
@@ -57,7 +58,6 @@ class User < ApplicationRecord
   end
 
   def set_user_identifier
-    # TODO: This will be replaced by NIMS PID when the CAS server is online
     self.user_identifier = Noid::Rails::Service.new.mint
   end
 
@@ -65,28 +65,6 @@ class User < ApplicationRecord
     User.find_by(user_identifier: component)
   end
 
-  def cas_extra_attributes=(extra_attributes)
-    extra_attributes.each do |name, value|
-      case name.to_sym
-      # TODO: change these mappings to match NIMS CAS schema
-      # when :mail
-      #   self.email = value
-      # when :eduPersonNickname
-      #   self.display_name = value
-      # when :cn
-      #   self.email = value
-      when :userClass
-        self.employee_type_code = value
-      # when :fullname
-      #   self.fullname = value
-      # when :email
-      #   self.email = value
-      end
-    end
-
-    self.guest = true if email_user?
-  end
-  
   def mailboxer_email(_object)
     email
   end
