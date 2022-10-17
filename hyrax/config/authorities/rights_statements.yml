@@ -87,7 +87,7 @@ terms:
       term: Creative Commons BY Attribution 2.1 Japan
       active: false
     - id: http://creativecommons.org/licenses/by-nc/2.1/jp/
-      term: Creative Commons BY Attribution 2.1 Japan
+      term: Creative Commons BY-NC Attribution-NonCommercial 2.1 Japan
       active: false
     - id: http://creativecommons.org/licenses/by-nd/2.1/jp/
       term: Creative Commons BY-ND Attribution-NoDerivatives 2.1 Japan
