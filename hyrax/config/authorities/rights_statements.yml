@@ -83,35 +83,38 @@ terms:
     - id: CC-BY
       term: Creative Commons Attribution
       active: false
-    - id: http://creativecommons.org/licenses/by-nc-nd/2.1/jp/
-      term: Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 2.1 Japan
+    - id: http://creativecommons.org/licenses/by/2.1/jp/
+      term: Creative Commons BY Attribution 2.1 Japan
       active: false
-    - id: http://creativecommons.org/licenses/by-nc-nd/3.0/
-      term: Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 3.0 International
-      active: false
-    - id: http://creativecommons.org/licenses/by-nc-sa/2.1/jp/
-      term: Creative Commons BY-NC-SA Attribution-NonCommercial-ShareAlike 2.1 Japan
-      active: false
-    - id: http://creativecommons.org/licenses/by-nc/3.0/
-      term: Creative Commons BY-NC Attribution-NonCommercial 3.0 International
+    - id: http://creativecommons.org/licenses/by-nc/2.1/jp/
+      term: Creative Commons BY-NC Attribution-NonCommercial 2.1 Japan
       active: false
     - id: http://creativecommons.org/licenses/by-nd/2.1/jp/
       term: Creative Commons BY-ND Attribution-NoDerivatives 2.1 Japan
       active: false
+    - id: http://creativecommons.org/licenses/by-nc-nd/2.1/jp/
+      term: Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 2.1 Japan
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc-sa/2.1/jp/
+      term: Creative Commons BY-NC-SA Attribution-NonCommercial-ShareAlike 2.1 Japan
+      active: false
+    - id: http://creativecommons.org/licenses/by/3.0/
+      term: Creative Commons BY Attribution 3.0 International
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc/3.0/
+      term: Creative Commons BY-NC Attribution-NonCommercial 3.0 International
+      active: false
     - id: http://creativecommons.org/licenses/by-nd/3.0/
       term: Creative Commons BY-ND Attribution-NoDerivatives 3.0 International
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc-nd/3.0/
+      term: Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 3.0 International
       active: false
     - id: http://creativecommons.org/licenses/by-sa/3.0/
       term: Creative Commons BY-SA Attribution-ShareAlike 3.0 International
       active: false
     - id: http://creativecommons.org/licenses/by/2.0/de/
       term: Creative Commons BY Attribution 2.0 Germany
-      active: false
-    - id: http://creativecommons.org/licenses/by/2.1/jp/
-      term: Creative Commons BY Attribution 2.1 Japan
-      active: false
-    - id: http://creativecommons.org/licenses/by/3.0/
-      term: Creative Commons BY Attribution 3.0 International
       active: false
     - id: http://creativecommons.org/licenses/by/3.0/de/
       term: Creative Commons BY Attribution 3.0 Germany
