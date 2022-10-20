@@ -77,6 +77,11 @@ spec:
             secretKeyRef:
               name: azure-auth-secrets
               key: AZURE_OAUTH_TOKEN_ENDPOINT
+        - name: AZURE_OAUTH_JWKS_URL
+          valueFrom:
+            secretKeyRef:
+              name: azure-auth-secrets
+              key: AZURE_OAUTH_JWKS_URL
         ports:
           - containerPort: 3000
         volumeMounts:
