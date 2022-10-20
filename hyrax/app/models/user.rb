@@ -11,8 +11,6 @@ class User < ApplicationRecord
 
   has_many :uploaded_files, class_name: 'Hyrax::UploadedFile', dependent: :nullify
 
-  before_create :set_user_identifier
-
   if Blacklight::Utils.needs_attr_accessible?
     attr_accessible :username, :email, :password, :password_confirmation
   end
@@ -39,15 +37,14 @@ class User < ApplicationRecord
 
   ## allow omniauth logins - this will create a local user based on an omniauth/shib login
   ## if they haven't logged in before
-  def self.from_omniauth(auth)
-    name = auth_hash.dig(:extra, :raw_info, :displayName)
-    email = auth_hash.dig(:extra, :raw_info, :mail) ||
-      auth_hash.dig(:extra, :raw_info, :userPrincipalName)
-    User.find_by('email' => email) || User.create!(
-      username: name,
-      email: email,
+  def self.from_omniauth(auth_hash)
+    sub = auth_hash.dig(:extra, :raw_info, :sub)
+    User.find_by(username: sub) || User.create!(
+      username: sub,
+      email: "#{sub}@example.domain",
+      display_name: auth_hash.dig(:extra, :raw_info, :name),
       password: Devise.friendly_token[0, 20],
-      user_identifier: Noid::Rails::Service.new.mint)
+      user_identifier: sub)
   end
 
   def ldap_before_save
