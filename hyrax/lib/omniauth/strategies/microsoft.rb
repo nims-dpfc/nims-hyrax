@@ -17,8 +17,8 @@ module OmniAuth
       # Send the scope parameter during authorize
       option :authorize_options, [:scope]
 
-      # Unique ID for the user is the id field
-      uid { raw_info['id'] }
+      # Unique ID for the user is the sub field
+      uid { raw_info['sub'] }
 
       # Get additional information after token is retrieved
       extra do
