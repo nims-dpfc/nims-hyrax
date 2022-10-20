@@ -4,9 +4,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def microsoft
     # Access the authentication hash for omniauth
     data = request.env['omniauth.auth']
-    save_in_session data
-    @user = User.from_omniauth(data)
-    sign_in_and_redirect @user
+    # save_in_session data
+    user = User.from_omniauth(data)
+    sign_in_and_redirect user
   end
 
   def signout
