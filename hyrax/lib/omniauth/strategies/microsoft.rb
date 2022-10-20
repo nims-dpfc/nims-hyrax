@@ -29,7 +29,12 @@ module OmniAuth
 
       def raw_info
         # Get user profile information from the /me endpoint
-        @raw_info ||= access_token.get('https://graph.microsoft.com/v1.0/me?$select=displayName,mail,mailboxSettings,userPrincipalName').parsed
+        @raw_info ||= decode_token
+      end
+
+      def decode_token
+        keys = JSON.parse(URI.open(ENV['AZURE_OAUTH_JWKS_URL']).read)
+        JWT.decode(access_token['id_token'], nil, true, { algorithms: ['RS256'], jwks: keys}).first
       end
 
       def authorize_params
