@@ -8,7 +8,7 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
   def perform(work, uploaded_files, **work_attributes)
     validate_files!(uploaded_files)
     depositor = proxy_or_depositor(work)
-    user = User.find_by(username: depositor)
+    user = User.find_by(email: depositor)
     work_permissions = work.permissions.map(&:to_hash)
     metadata = visibility_attributes(work_attributes)
     uploaded_files.each do |uploaded_file|
