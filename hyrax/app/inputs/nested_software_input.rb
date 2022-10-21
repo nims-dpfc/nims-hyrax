@@ -77,8 +77,14 @@ class NestedSoftwareInput < NestedAttributesInput
     out << @builder.text_field(field_name,
         options.merge(value: field_value, name: field_name, id: field_id, required: required))
     out << '  </div>'
-    out << '</div>' # row
 
+    # --- delete checkbox
+    field_label ='Software'
+    out << "  <div class='col-md-3'>"
+    out << destroy_widget(attribute_name, index, field_label, parent)
+    out << '  </div>'
+
+    out << '</div>' # last row
     out
   end
 end
