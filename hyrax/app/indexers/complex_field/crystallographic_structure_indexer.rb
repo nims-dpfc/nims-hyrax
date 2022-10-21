@@ -25,8 +25,6 @@ module ComplexField
       solr_doc[Solrizer.solr_name('complex_crystallographic_structure', :displayable)] = object.complex_crystallographic_structure.to_json
       solr_doc[Solrizer.solr_name('complex_crystallographic_structure_category_vocabulary', :stored_searchable)] = object.complex_crystallographic_structure.map { |i| i.category_vocabulary.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_crystallographic_structure_category_vocabulary', :facetable)] = object.complex_crystallographic_structure.map { |i| i.category_vocabulary.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('complex_crystallographic_structure_category_vocabulary', :stored_searchable)] = object.complex_crystallographic_structure.map { |i| i.category_vocabulary.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('complex_crystallographic_structure_category_vocabulary', :facetable)] = object.complex_crystallographic_structure.map { |i| i.category_vocabulary.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_crystallographic_structure_category_description', :stored_searchable)] = object.complex_crystallographic_structure.map { |i| i.category_description.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_crystallographic_structure_description', :stored_searchable)] = object.complex_crystallographic_structure.map { |i| i.description.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_crystallographic_structure_specimen_identifier', :symbol)] = object.complex_crystallographic_structure.map { |i| i.specimen_identifier.reject(&:blank?).first }
