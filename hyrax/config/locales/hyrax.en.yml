@@ -10,6 +10,7 @@ en:
           complex_chemical_composition_category_ssim: Chemical composition category
           complex_chemical_composition_identifier_sim: Chemical composition identifier
           complex_contact_agent_ssm: Contact agent
+          complex_crystallographic_structure_category_vocabulary_sim: Crystallographic structure
           complex_date_dtsim: Date
           complex_date_accepted_dtsim: Date accepted
           complex_year_accepted_sim: Date accepted
@@ -191,6 +192,7 @@ en:
           complex_date_ssm: Date
           complex_contact_agent_ssm: Contact agent
           complex_chemical_composition: Chemical composition
+          complex_crystallographic_structure_ssm: Crystallographic structure
           complex_date_accepted_ssm: Date accepted
           complex_date_available_ssm: Date available
           complex_date_copyrighted_ssm: Date copyrighted
