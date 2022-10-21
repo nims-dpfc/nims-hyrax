@@ -11,11 +11,9 @@ class NestedFeatureAttributeRenderer < NestedAttributeRenderer
       # unit_vocabulary
       val = v.fetch('unit_vocabulary', [])
       each_html += get_row('Unit', val[0]) unless val.blank?
-      html += get_inner_html(each_html)
       # unit_vocabulary
       val = v.fetch('value', [])
       each_html += get_row('Value', val[0]) unless val.blank?
-      html += get_inner_html(each_html)
       # description
       val = v.fetch('description', [])
       each_html += get_row('Description', val[0]) unless val.blank?
