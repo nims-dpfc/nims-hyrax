@@ -58,6 +58,7 @@ en:
           complex_purchase_record_supplier_sub_organization_sim: Purchase record supplier sub organization
           complex_relation_relationship_sim: Relationship
           complex_rights_sim: License
+          complex_software_name_sim: Software
           complex_structural_feature_category_sim: Structural feature category
           complex_structural_feature_sub_category_sim: Structural feature sub category
           complex_source_title_sim: Journal
@@ -143,6 +144,9 @@ en:
           complex_relation_title_tesim: Title of related item
           complex_shape_tesim: Shape
           complex_shape_identifier_ssim: Shape identifier
+          complex_software_name_tesim: Software name
+          complex_software_description_tesim: Software description
+          complex_software_identifier_ssim: Software identifier
           complex_source_title_tesim: Journal
           complex_specimen_type_tesim: Specimen type
           complex_specimen_type_description_tesim: Specimen description
@@ -222,6 +226,7 @@ en:
           complex_person_sub_organization_ssm: Sub organization
           complex_relation_ssm: Related item
           complex_rights_ssm: License
+          complex_software_ssm: Software
           complex_source_ssm: Journal
           complex_specimen_type_ssm: Specimen type
           complex_structural_feature_ssm: Structural feature
