@@ -13,7 +13,7 @@ RSpec.describe ProcessingEnvironmentService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('in liquid')).to eq({
+      expect(service.find_by_id('in liquid')).to include({
         "label" => "in liquid/液体中",
         "id" => "in liquid",
         "active" => true
@@ -23,7 +23,7 @@ RSpec.describe ProcessingEnvironmentService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('in liquid/液体中')).to eq({
+      expect(service.find_by_label('in liquid/液体中')).to include({
         "label" => "in liquid/液体中",
         "id" => "in liquid",
         "active" => true
@@ -33,12 +33,12 @@ RSpec.describe ProcessingEnvironmentService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('in liquid')).to eq({
+      expect(service.find_by_id_or_label('in liquid')).to include({
         "label" => "in liquid/液体中",
         "id" => "in liquid",
         "active" => true
       })
-      expect(service.find_by_id_or_label('in liquid/液体中')).to eq({
+      expect(service.find_by_id_or_label('in liquid/液体中')).to include({
         "label" => "in liquid/液体中",
         "id" => "in liquid",
         "active" => true
