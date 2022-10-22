@@ -1,6 +1,14 @@
-<% service = RightsStatementService.new %>
+<%
+  service = RightsStatementService.new
+  collection = service.select_active_options
+  f.object[:rights_statement].each do |v|
+    unless service.find_by_id(v).any?
+      val = service.find_any_by_id(v)
+      collection.unshift([val[:label] + ' (deprecated)', val[:id]]) unless val.empty?
+    end
+  end
+%>
 <%= f.input :rights_statement, as: :select,
-    collection: service.select_active_options,
+    collection: collection,
     include_blank: true,
-    item_helper: service.method(:include_current_value),
     input_html: { class: 'form-control', multiple: true } %>
