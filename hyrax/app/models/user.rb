@@ -20,7 +20,6 @@ class User < ApplicationRecord
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   # ToDo: Now that we are not using CAS, do we want :validatable module?
   devise ENV.fetch('MDR_DEVISE_AUTH_MODULE', 'database_authenticatable').to_sym,
-         :rememberable, :trackable, :lockable
          :omniauthable, :rememberable, :trackable, :lockable, omniauth_providers: [:microsoft]
          # NB: the :validatable module is not compatible with CAS authentication
 
