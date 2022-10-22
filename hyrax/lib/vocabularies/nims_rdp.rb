@@ -59,6 +59,13 @@ module RDF
       property 'version'
       property 'version-date'
       property 'version-identifier'
+      # vocabulary to store funding information
+      property 'FundingReference'
+      property 'funderIdentifier'
+      property 'funderName'
+      property 'awardNumber'
+      property 'awardURI'
+      property 'awardTitle'
     end
   end
 end

@@ -11,16 +11,13 @@ ARG AIRBRAKE_PROJECT_KEY
 ARG FITS_PATH
 ARG FITS_VERSION
 ARG FLUENTD_URL
-ARG IM_VERSION=7.0.7-39
+ARG IM_VERSION=7.1.0-40
 
 ENV APP_PRODUCTION=/data/ \
     APP_WORKDIR=/data
 
 # Add backports to apt-get sources
 # Install libraries, dependencies, java and fits
-
-RUN echo 'deb  http://deb.debian.org/debian buster main contrib non-free'
-RUN echo 'deb-src  http://deb.debian.org/debian buster main contrib non-free'
 
 RUN apt-get update -qq && \
     apt-get -y install apt-transport-https && \
@@ -38,7 +35,11 @@ RUN apt-get update -qq && \
     libjpeg-dev libtiff-dev libpng-dev libraw-dev libwebp-dev libjxr-dev \
     libcairo2-dev libgs-dev librsvg2-dev \
     libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libx264-dev \
-    ghostscript ffmpeg \
+    libexif-dev \
+    libtiff5-dev \
+    libtiffxx5 \
+    libltdl-dev \
+    ghostscript ffmpeg cifs-utils \
     ufraw \
     bzip2 unzip xz-utils \
     vim \

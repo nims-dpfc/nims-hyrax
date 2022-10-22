@@ -2,36 +2,120 @@ terms:
     - id: http://rightsstatements.org/vocab/InC/1.0/
       term: In Copyright
       active: true
-    - id: https://creativecommons.org/licenses/by/4.0/
-      term: Creative Commons BY Attribution 4.0 International
+    - id: https://creativecommons.org/licenses/by/4.0/legalcode
+      term: Creative Commons Attribution 4.0 International
+      short_label: CC-BY-4.0
+      human_url: https://creativecommons.org/licenses/by/4.0/
       active: true
-    - id: https://creativecommons.org/licenses/by-sa/4.0/
-      term: Creative Commons BY-SA Attribution-ShareAlike 4.0 International
+    - id: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+      term: Creative Commons Attribution Share Alike 4.0 International
+      short_label: CC-BY-SA-4.0
+      human_url: https://creativecommons.org/licenses/by-sa/4.0/
       active: true
-    - id: https://creativecommons.org/licenses/by-nd/4.0/
-      term: Creative Commons BY-ND Attribution-NoDerivatives 4.0 International
+    - id: https://creativecommons.org/licenses/by-nd/4.0/legalcode
+      term: Creative Commons Attribution No Derivatives 4.0 International
+      short_label: CC-BY-ND-4.0
+      human_url: https://creativecommons.org/licenses/by-nd/4.0/
       active: true
-    - id: https://creativecommons.org/licenses/by-nc/4.0/
-      term: Creative Commons BY-NC Attribution-NonCommercial 4.0 International
+    - id: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+      term: Creative Commons Attribution Non Commercial 4.0 International
+      short_label: CC-BY-NC-4.0
+      human_url: https://creativecommons.org/licenses/by-nc/4.0/
       active: true
-    - id: https://creativecommons.org/licenses/by-nc-nd/4.0/
-      term: Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 4.0 International
+    - id: https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
+      term: Creative Commons Attribution Non Commercial No Derivatives 4.0 International
+      short_label: CC-BY-NC-ND-4.0
+      human_url: https://creativecommons.org/licenses/by-nc-nd/4.0/
       active: true
-    - id: https://creativecommons.org/licenses/by-nc-sa/4.0/
-      term: Creative Commons BY-NC-SA Attribution-NonCommercial-ShareAlike 4.0 International
+    - id: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+      term: Creative Commons Attribution Non Commercial Share Alike 4.0 International
+      short_label: CC-BY-NC-SA-4.0
+      human_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
       active: true
-    - id: http://creativecommons.org/publicdomain/zero/1.0/
-      term: Creative Commons CC0 1.0 Universal
+    - id: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+      term: Creative Commons Zero v1.0 Universal
+      short_label: CC0-1.0
+      human_url: https://creativecommons.org/publicdomain/zero/1.0/
       active: true
     - id: http://creativecommons.org/publicdomain/mark/1.0/
       term: Creative Commons Public Domain Mark 1.0
       active: true
-    - id: http://www.apache.org/licenses/LICENSE-2.0
+    - id: https://www.apache.org/licenses/LICENSE-2.0
       term: Apache License 2.0
+      short_label: Apache-2.0
+      human_url: https://www.apache.org/licenses/LICENSE-2.0
       active: true
     - id: http://www.gnu.org/licenses/gpl.html
       term: GNU General Public License
       active: true
+    - id: https://opensource.org/licenses/MIT
+      term: MIT License
+      short_label: MIT
+      human_url: https://opensource.org/licenses/MIT
+      active: true
+    - id: https://creativecommons.org/licenses/by/4.0/
+      term: Creative Commons BY Attribution 4.0 International
+      active: false
+    - id: https://creativecommons.org/licenses/by-sa/4.0/
+      term: Creative Commons BY-SA Attribution-ShareAlike 4.0 International
+      active: false
+    - id: https://creativecommons.org/licenses/by-nd/4.0/
+      term: Creative Commons BY-ND Attribution-NoDerivatives 4.0 International
+      active: false
+    - id: https://creativecommons.org/licenses/by-nc/4.0/
+      term: Creative Commons BY-NC Attribution-NonCommercial 4.0 International
+      active: false
+    - id: https://creativecommons.org/licenses/by-nc-nd/4.0/
+      term: Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 4.0 International
+      active: false
+    - id: https://creativecommons.org/licenses/by-nc-sa/4.0/
+      term: Creative Commons BY-NC-SA Attribution-NonCommercial-ShareAlike 4.0 International
+      active: false
+    - id: http://creativecommons.org/publicdomain/zero/1.0/
+      term: Creative Commons CC0 1.0 Universal
+      active: false
+    - id: http://www.apache.org/licenses/LICENSE-2.0
+      term: Apache License 2.0
+      active: false
     - id: http://opensource.org/licenses/MIT
       term: MIT License
-      active: true
+      active: false
+    - id: CC-BY
+      term: Creative Commons Attribution
+      active: false
+    - id: http://creativecommons.org/licenses/by/2.1/jp/
+      term: Creative Commons BY Attribution 2.1 Japan
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc/2.1/jp/
+      term: Creative Commons BY-NC Attribution-NonCommercial 2.1 Japan
+      active: false
+    - id: http://creativecommons.org/licenses/by-nd/2.1/jp/
+      term: Creative Commons BY-ND Attribution-NoDerivatives 2.1 Japan
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc-nd/2.1/jp/
+      term: Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 2.1 Japan
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc-sa/2.1/jp/
+      term: Creative Commons BY-NC-SA Attribution-NonCommercial-ShareAlike 2.1 Japan
+      active: false
+    - id: http://creativecommons.org/licenses/by/3.0/
+      term: Creative Commons BY Attribution 3.0 International
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc/3.0/
+      term: Creative Commons BY-NC Attribution-NonCommercial 3.0 International
+      active: false
+    - id: http://creativecommons.org/licenses/by-nd/3.0/
+      term: Creative Commons BY-ND Attribution-NoDerivatives 3.0 International
+      active: false
+    - id: http://creativecommons.org/licenses/by-nc-nd/3.0/
+      term: Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 3.0 International
+      active: false
+    - id: http://creativecommons.org/licenses/by-sa/3.0/
+      term: Creative Commons BY-SA Attribution-ShareAlike 3.0 International
+      active: false
+    - id: http://creativecommons.org/licenses/by/2.0/de/
+      term: Creative Commons BY Attribution 2.0 Germany
+      active: false
+    - id: http://creativecommons.org/licenses/by/3.0/de/
+      term: Creative Commons BY Attribution 3.0 Germany
+      active: false

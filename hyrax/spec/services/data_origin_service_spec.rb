@@ -13,7 +13,7 @@ RSpec.describe DataOriginService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('experiments')).to eq({
+      expect(service.find_by_id('experiments')).to include({
         "label" => "experiments/実験",
         "id" => "experiments",
         "active" => true
@@ -23,7 +23,7 @@ RSpec.describe DataOriginService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('experiments/実験')).to eq({
+      expect(service.find_by_label('experiments/実験')).to include({
         "label" => "experiments/実験",
         "id" => "experiments",
         "active" => true
@@ -33,12 +33,12 @@ RSpec.describe DataOriginService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('experiments/実験')).to eq({
+      expect(service.find_by_id_or_label('experiments/実験')).to include({
         "label" => "experiments/実験",
         "id" => "experiments",
         "active" => true
       })
-      expect(service.find_by_id_or_label('experiments')).to eq({
+      expect(service.find_by_id_or_label('experiments')).to include({
         "label" => "experiments/実験",
         "id" => "experiments",
         "active" => true
