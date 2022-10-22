@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe NestedDescIdAttributeRenderer do
   let(:html) { described_class.new('Description / identifier', nested_value.to_json).render }
-  let(:nested_value) { build(:dataset, :with_complex_chemical_composition).complex_specimen_type.first.complex_chemical_composition.first }
+  let(:nested_value) { build(:dataset, :with_complex_chemical_composition).complex_chemical_composition.first }
   subject { Capybara.string(html) }
   it 'generates the correct fields' do
     is_expected.to have_css('th', text: 'Description / identifier')

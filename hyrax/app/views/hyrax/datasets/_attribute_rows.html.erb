@@ -31,6 +31,9 @@
         <% if can? :read_creator, presenter.model_name.name.constantize %>
           <%= presenter.attribute_to_html(:complex_person, render_as: :nested_person, label: t('ngdr.fields.complex_person'), html_dl: true) %>
         <% end %>
+        <% if can? :read_contact_agent, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_contact_agent, render_as: :nested_contact_agent, label: t('ngdr.fields.complex_contact_agent'), html_dl: true) %>
+        <% end %>
 
         <% if can? :read_keyword, presenter.model_name.name.constantize %>
           <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
@@ -52,7 +55,7 @@
         <% end %>
 
         <% if can? :read_rights, presenter.model_name.name.constantize %>
-          <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
+          <%= presenter.attribute_to_html(:rights_statement, render_as: :mdr_rights_statement, html_dl: true) %>
           <%#= # presenter.attribute_to_html(:rights_notes, html_dl: true) %>
           <%= presenter.attribute_to_html(:licensed_date, label: t('ngdr.fields.licensed_date'), html_dl: true) %>
         <% end %>
@@ -90,6 +93,10 @@
 
         <% if can? :read_related, presenter.model_name.name.constantize %>
           <%= presenter.attribute_to_html(:complex_relation, render_as: :nested_relation, label: t('ngdr.fields.complex_relation'), html_dl: true) %>
+        <% end %>
+
+        <% if can? :read_funding_reference, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_funding_reference, render_as: :nested_funding_reference, label: t('ngdr.fields.complex_funding_reference'), html_dl: true) %>
         <% end %>
 
         <%= presenter.attribute_to_html(:custom_property, render_as: :nested_custom_property, label: t('ngdr.fields.custom_property'), html_dl: true) %>
@@ -157,6 +164,8 @@
       <div class="panel-body">
         <%= presenter.attribute_to_html(:material_type, label: t('ngdr.fields.material_type'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_specimen_type, render_as: :nested_specimen_type, label: t('ngdr.fields.complex_specimen_type'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_chemical_composition, render_as: :nested_chemical_composition, label: t('ngdr.fields.complex_chemical_composition'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_structural_feature, render_as: :nested_structural_feature, label: t('ngdr.fields.complex_structural_feature'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Specimen details accordion -->
