@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :file_set do
     transient do
       user { create(:user) }
-      content { File.open(Rails.root.join('spec/fixtures/csv/example.csv'), 'r') }
+      content { File.read(Rails.root.join('spec/fixtures/csv/example.csv')) }
     end
     after(:build) do |fs, evaluator|
       fs.apply_depositor_metadata evaluator.user.user_key
