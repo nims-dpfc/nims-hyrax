@@ -46,7 +46,7 @@ terms:
       human_url: https://www.apache.org/licenses/LICENSE-2.0
       active: true
     - id: http://www.gnu.org/licenses/gpl.html
-      term: GNU General Public License
+      term: GNU General Public License v3.0
       active: true
     - id: https://opensource.org/licenses/MIT
       term: MIT License
