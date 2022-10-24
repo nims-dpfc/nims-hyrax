@@ -55,7 +55,7 @@
         <% end %>
 
         <% if can? :read_rights, presenter.model_name.name.constantize %>
-          <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
+          <%= presenter.attribute_to_html(:rights_statement, render_as: :mdr_rights_statement, html_dl: true) %>
           <%#= # presenter.attribute_to_html(:rights_notes, html_dl: true) %>
           <%= presenter.attribute_to_html(:licensed_date, label: t('ngdr.fields.licensed_date'), html_dl: true) %>
         <% end %>
@@ -167,6 +167,7 @@
         <%= presenter.attribute_to_html(:complex_specimen_type, render_as: :nested_specimen_type, label: t('ngdr.fields.complex_specimen_type'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_chemical_composition, render_as: :nested_chemical_composition, label: t('ngdr.fields.complex_chemical_composition'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_structural_feature, render_as: :nested_structural_feature, label: t('ngdr.fields.complex_structural_feature'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_software, render_as: :nested_software, label: t('ngdr.fields.software'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Specimen details accordion -->
