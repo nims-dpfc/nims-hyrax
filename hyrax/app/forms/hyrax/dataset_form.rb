@@ -56,6 +56,7 @@ module Hyrax
       :complex_specimen_type,
       :complex_chemical_composition,
       :complex_structural_feature,
+      :complex_software,
       :material_type,
       
       # not used
@@ -119,14 +120,13 @@ module Hyrax
     end
 
     def specimen_tab_terms
-      [ :complex_chemical_composition, :complex_specimen_type, :complex_structural_feature ]
+      [ :complex_chemical_composition, :complex_specimen_type, :complex_structural_feature, :complex_software ]
     end
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
       :complex_organization, :complex_person, :complex_relation, :complex_event,
       :complex_funding_reference, :complex_contact_agent, :complex_chemical_composition,
-      :complex_structural_feature,
-      :complex_feature,
+      :complex_structural_feature, :complex_software, :complex_feature,
       :complex_source, :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
@@ -405,6 +405,19 @@ module Hyrax
          category_vocabulary: [],
          unit_vocabulary: [],
          value: [],
+         identifier: [],
+         description: []
+       }
+      ]
+    end
+
+    def self.permitted_software_params
+      [:id,
+       :_destroy,
+       {
+         name: [],
+         version: [],
+         identifier: [],
          description: []
        }
       ]
@@ -429,6 +442,7 @@ module Hyrax
       permitted << { complex_chemical_composition_attributes: permitted_chemical_composition_params }
       permitted << { complex_structural_feature_attributes: permitted_structural_feature_params }
       permitted << { complex_feature_attributes: permitted_feature_params }
+      permitted << { complex_software_attributes: permitted_software_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end

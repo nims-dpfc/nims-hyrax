@@ -28,6 +28,7 @@ en:
         complex_relation:                 "Related item"
         complex_rights:                   "Rights"
         complex_source:                   "Journal/Book/Proceedings/Database"
+        complex_software:                 "Software"
         complex_specimen_type:            "Specimen type"
         complex_structural_feature:       "Structural feature"
         complex_version:                  "Version"
