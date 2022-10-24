@@ -38,6 +38,8 @@ en:
           complex_date_other_dtsim: Date
           complex_year_other_sim: Date
           complex_event_sim: Event
+          complex_feature_category_vocabulary_sim: Feature category
+          complex_feature_unit_vocabulary_sim: Feature unit
           complex_material_sub_type_sim: Material sub type
           complex_material_type_sim: Material type
           complex_organization_sim: Organization
@@ -209,6 +211,7 @@ en:
           complex_date_purchased_ssm: Date purchased
           complex_date_other_ssm: Date
           complex_event_ssm: Event
+          complex_feature_ssm: Feature
           complex_funding_reference_ssm: Funding reference
           complex_identifier_ssm: Identifier
           complex_instrument_ssm: Instrument

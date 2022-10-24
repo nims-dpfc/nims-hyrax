@@ -547,6 +547,17 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_feature do
+      complex_feature_attributes {
+        [{
+           category_vocabulary: 'http://vocabulary.example.jp/Q2345',
+           unit_vocabulary: 'http://vocabulary.example.jp/Q2346',
+           value: '100',
+           description: 'Feature 1'
+         }]
+      }
+    end
+
     trait :with_complex_software do
       complex_software_attributes {
         [{

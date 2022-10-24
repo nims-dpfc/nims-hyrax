@@ -221,6 +221,10 @@ class SolrDocument
     self[Solrizer.solr_name('complex_structural_feature', :displayable)]
   end
 
+  def complex_feature
+    self[Solrizer.solr_name('complex_feature', :displayable)]
+  end
+
   def complex_software
     self[Solrizer.solr_name('complex_software', :displayable)]
   end

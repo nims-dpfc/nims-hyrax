@@ -45,6 +45,6 @@ RSpec.describe Hyrax::Actors::ComplexAttributes do
             supplier custom_property complex_structural_feature complex_state_of_matter complex_shape complex_purchase_record
             complex_material_type instrument_function complex_chemical_composition complex_crystallographic_structure
             complex_event complex_source complex_event_date complex_funding_reference
-            complex_software ]) }
+            complex_feature complex_software ]) }
   end
 end
