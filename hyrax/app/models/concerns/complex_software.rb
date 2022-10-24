@@ -3,9 +3,9 @@ class ComplexSoftware < ActiveTriples::Resource
 
   configure type: ::RDF::Vocab::SCHEMA.SoftwareApplication
   property :description, predicate: ::RDF::Vocab::SCHEMA.description
-  property :name, predicate: ::RDF::Vocab::SCHEMA::name
+  property :name, predicate: ::RDF::Vocab::SCHEMA.name
   property :identifier, predicate: ::RDF::Vocab::SCHEMA.identifier
-  property :version, predicate: ::RDF::Vocab::SCHEMA::softwareVersion
+  property :version, predicate: ::RDF::Vocab::SCHEMA.softwareVersion
 
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)
