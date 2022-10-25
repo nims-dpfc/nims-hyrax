@@ -547,6 +547,28 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_feature do
+      complex_feature_attributes {
+        [{
+           category_vocabulary: 'http://vocabulary.example.jp/Q2345',
+           unit_vocabulary: 'http://vocabulary.example.jp/Q2346',
+           value: '100',
+           description: 'Feature 1'
+         }]
+      }
+    end
+
+    trait :with_complex_software do
+      complex_software_attributes {
+        [{
+           name: 'notepad.exe',
+           version: '1.0',
+           identifier: 'notepad10',
+           description: 'Notepad'
+         }]
+      }
+    end
+
     trait :with_ja do
       title { ["材料データプラットフォームDICE2.0 - データ創出−蓄積−利用−連携の基盤"] }
       managing_organization { ['ナノテクノロジープラットフォーム事業の成果と課題'] }
