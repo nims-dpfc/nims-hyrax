@@ -12,6 +12,11 @@ class NestedSoftwareAttributeRenderer < NestedAttributeRenderer
           Rails.application.routes.url_helpers.search_catalog_path(:"f[complex_source_name_sim][]" => v['name'][0], locale: I18n.locale))
         each_html += get_row(label, val)
       end
+      unless v.dig('description').blank?
+        label = 'Description'
+        val = v['description'][0]
+        each_html += get_row(label, val)
+      end
       unless v.dig('version').blank?
         label = 'Version'
         val = v['version'][0]
@@ -20,11 +25,6 @@ class NestedSoftwareAttributeRenderer < NestedAttributeRenderer
       unless v.dig('identifier').blank?
         label = 'Identifier'
         val = v['identifier'][0]
-        each_html += get_row(label, val)
-      end
-      unless v.dig('description').blank?
-        label = 'Description'
-        val = v['description'][0]
         each_html += get_row(label, val)
       end
       html += get_inner_html(each_html)
