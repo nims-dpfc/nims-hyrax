@@ -39,7 +39,7 @@ RUN apt-get update -qq && \
     libtiff5-dev \
     libtiffxx5 \
     libltdl-dev \
-    ghostscript ffmpeg \
+    ghostscript ffmpeg cifs-utils \
     ufraw \
     bzip2 unzip xz-utils \
     vim \

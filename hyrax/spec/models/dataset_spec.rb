@@ -1163,4 +1163,52 @@ RSpec.describe Dataset do
       expect(@obj.complex_crystallographic_structure).to be_empty
     end
   end
+
+  describe 'complex_feature' do
+    it 'creates a complex feature active triple resource with feature' do
+      @obj = build(:dataset,
+                   complex_feature_attributes: [{
+                     description: 'Feature 1',
+                     category_vocabulary: 'http://vocabulary.example.jp/Q123',
+                     unit_vocabulary: 'http://vocabulary.example.jp/Q124',
+                     value: '10',
+                   }]
+      )
+      expect(@obj.complex_feature.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_feature.first.description).to eq ['Feature 1']
+    end
+
+    it 'rejects a complex feature active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_feature_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_feature).to be_empty
+    end
+  end
+
+  describe 'complex_software' do
+    it 'creates a complex software active triple resource with software' do
+      @obj = build(:dataset,
+                   complex_software_attributes: [{
+                     description: 'software 1',
+                     name: 'sample1.exe',
+                     identifier: 'sample10',
+                     version: '1.0'
+                   }]
+      )
+      expect(@obj.complex_software.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_software.first.description).to eq ['software 1']
+    end
+
+    it 'rejects a complex software active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_software_attributes: [{
+                                                 name: ''
+                                               }]
+      )
+      expect(@obj.complex_software).to be_empty
+    end
+  end
 end
