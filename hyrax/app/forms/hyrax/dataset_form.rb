@@ -111,7 +111,8 @@ module Hyrax
         # :origin_system_provenance, # not using this
         :properties_addressed,
         :synthesis_and_processing,
-        :complex_feature
+        :complex_feature,
+        :complex_software
       ]
     end
 
@@ -120,7 +121,7 @@ module Hyrax
     end
 
     def specimen_tab_terms
-      [ :complex_chemical_composition, :complex_specimen_type, :complex_structural_feature, :complex_software ]
+      [ :complex_chemical_composition, :complex_specimen_type, :complex_structural_feature ]
     end
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,

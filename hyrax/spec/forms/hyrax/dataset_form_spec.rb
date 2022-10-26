@@ -29,6 +29,7 @@ RSpec.describe Hyrax::DatasetForm do
       subject { form.method_tab_terms }
       it { is_expected.to include(:characterization_methods, :computational_methods, :properties_addressed, :synthesis_and_processing) }
       it { is_expected.to include(:complex_feature) }
+      it { is_expected.to include(:complex_software) }
     end
 
     describe '#instrument_tab_terms' do
@@ -41,7 +42,6 @@ RSpec.describe Hyrax::DatasetForm do
       it { is_expected.to include(:complex_specimen_type) }
       it { is_expected.to include(:complex_chemical_composition) }
       it { is_expected.to include(:complex_structural_feature) }
-      it { is_expected.to include(:complex_software) }
     end
   end
 
