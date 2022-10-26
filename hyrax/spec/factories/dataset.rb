@@ -477,6 +477,14 @@ FactoryBot.define do
     trait :with_rights do
       rights_statement {
         [
+          'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
+        ]
+      }
+    end
+
+    trait :with_old_rights do
+      rights_statement {
+        [
           'http://creativecommons.org/publicdomain/zero/1.0/'
         ]
       }
@@ -532,6 +540,28 @@ FactoryBot.define do
            email: 'tanabe@example.jp',
            organization: 'NIMS',
            department: 'DPFC'
+         }]
+      }
+    end
+
+    trait :with_complex_feature do
+      complex_feature_attributes {
+        [{
+           category_vocabulary: 'http://vocabulary.example.jp/Q2345',
+           unit_vocabulary: 'http://vocabulary.example.jp/Q2346',
+           value: '100',
+           description: 'Feature 1'
+         }]
+      }
+    end
+
+    trait :with_complex_software do
+      complex_software_attributes {
+        [{
+           name: 'notepad.exe',
+           version: '1.0',
+           identifier: 'notepad10',
+           description: 'Notepad'
          }]
       }
     end

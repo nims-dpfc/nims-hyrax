@@ -18,8 +18,7 @@ RSpec.describe Hyrax::DatasetForm do
         :keyword_ordered, :specimen_set_ordered,
         :material_type, :publisher, :date_published, :rights_statement,
         :licensed_date,
-        :complex_person, :complex_contact_agent,
-        :complex_source,
+        :complex_person, :complex_contact_agent, :complex_source,
         :manuscript_type,
         :complex_event, :language, :complex_date, :complex_identifier,
         :complex_version,
@@ -30,6 +29,7 @@ RSpec.describe Hyrax::DatasetForm do
     describe '#method_tab_terms' do
       subject { form.method_tab_terms }
       it { is_expected.to include(:characterization_methods, :computational_methods, :properties_addressed, :synthesis_and_processing) }
+      it { is_expected.to include(:complex_feature) }
     end
 
     describe '#instrument_tab_terms' do
@@ -43,6 +43,7 @@ RSpec.describe Hyrax::DatasetForm do
       it { is_expected.to include(:complex_chemical_composition) }
       it { is_expected.to include(:complex_structural_feature) }
       it { is_expected.to include(:complex_crystallographic_structure) }
+      it { is_expected.to include(:complex_software) }
     end
   end
 
@@ -69,6 +70,8 @@ RSpec.describe Hyrax::DatasetForm do
         expect(described_class).to receive(:permitted_chemical_composition_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_structural_feature_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_crystallographic_structure_params).at_least(:once).and_call_original
+        expect(described_class).to receive(:permitted_feature_params).at_least(:once).and_call_original
+        expect(described_class).to receive(:permitted_software_params).at_least(:once).and_call_original
         subject
       end
     end
