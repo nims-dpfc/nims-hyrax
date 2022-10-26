@@ -45,7 +45,7 @@ terms:
       short_label: Apache-2.0
       human_url: https://www.apache.org/licenses/LICENSE-2.0
       active: true
-    - id: http://www.gnu.org/licenses/gpl.html
+    - id: https://www.gnu.org/licenses/gpl-3.0.html
       term: GNU General Public License v3.0
       active: true
     - id: https://opensource.org/licenses/MIT
