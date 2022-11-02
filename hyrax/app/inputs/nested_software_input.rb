@@ -32,8 +32,8 @@ class NestedSoftwareInput < NestedAttributesInput
     out << '  </div>'
     out << '</div>' # row
 
-    # --- version
-    field = :version
+    # --- description
+    field = :description
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
     field_value = value.send(field).first
@@ -43,7 +43,7 @@ class NestedSoftwareInput < NestedAttributesInput
     out << template.label_tag(field_name, field.to_s.humanize, required: required)
     out << '  </div>'
 
-    out << "  <div class='col-md-6'>"
+    out << "  <div class='col-md-9'>"
     out << @builder.text_field(field_name,
         options.merge(value: field_value, name: field_name, id: field_id, required: required))
     out << '  </div>'
@@ -69,8 +69,8 @@ class NestedSoftwareInput < NestedAttributesInput
     # last row
     out << "<div class='row'>"
 
-    # --- description
-    field = :description
+    # --- version
+    field = :version
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
     field_value = value.send(field).first
@@ -79,7 +79,7 @@ class NestedSoftwareInput < NestedAttributesInput
     out << template.label_tag(field_name, field.to_s.humanize, required: required)
     out << '  </div>'
 
-    out << "  <div class='col-md-9'>"
+    out << "  <div class='col-md-6'>"
     out << @builder.text_field(field_name,
         options.merge(value: field_value, name: field_name, id: field_id, required: required))
     out << '  </div>'
