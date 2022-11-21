@@ -45,6 +45,7 @@ RUN apt-get update -qq && \
     vim \
     git \
     openjdk-11-jre-headless \
+    postgresql-client \
     yarn && \
     yarn config set no-progress && \
     yarn config set silent
