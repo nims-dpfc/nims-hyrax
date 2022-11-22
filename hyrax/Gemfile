@@ -105,4 +105,7 @@ gem 'coveralls', require: false
 gem 'rinku'
 gem 'sitemap_generator'
 gem 'cld'
-gem 'clamav-client', require: 'clamav/client'
+# gem 'clamav-client', require: 'clamav/client'
+gem 'omniauth-oauth2'
+gem 'omniauth', '~> 1.9.1'
+gem 'omniauth-rails_csrf_protection'
