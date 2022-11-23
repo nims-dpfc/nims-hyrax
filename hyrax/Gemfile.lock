@@ -1,12 +1,12 @@
 GIT
   remote: https://github.com/CottageLabs/blacklight_oai_provider.git
-  revision: 73d5f34315e313fb22084cfc52939d71e3c0728a
-  branch: master
+  revision: 1512a30a5e5ecab40ca016cf2ab4a23973383b30
+  branch: oai_upgrade
   specs:
     blacklight_oai_provider (1.4.1)
       blacklight (>= 6.1)
-      oai (~> 0.4.0)
-      rails (>= 4.2)
+      oai (~> 1.0)
+      rails (>= 5.2)
 
 GIT
   remote: https://github.com/CottageLabs/willow_sword.git
@@ -665,7 +665,7 @@ GEM
       racc (~> 1.4)
     nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)
-    oai (0.4.0)
+    oai (1.1.0)
       builder (>= 3.1.0)
       faraday
       faraday_middleware
