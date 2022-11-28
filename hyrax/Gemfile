@@ -108,3 +108,4 @@ gem 'coveralls', require: false
 gem 'rinku'
 gem 'sitemap_generator'
 gem 'cld'
+gem 'elastic-apm'
