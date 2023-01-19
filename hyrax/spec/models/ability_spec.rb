@@ -53,9 +53,7 @@ RSpec.describe Ability do
     context 'not logged in' do
       let(:user) { User.new }
       it 'cannot create content' do
-        models.each do |model|
-          expect(ability.can?(:create, model)).to be false
-        end
+        expect(ability.can_create_any_work?).to be false
       end
     end
 
