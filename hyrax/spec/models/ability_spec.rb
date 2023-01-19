@@ -54,6 +54,10 @@ RSpec.describe Ability do
       let(:user) { User.new }
       it 'cannot create content' do
         expect(ability.can_create_any_work?).to be false
+
+        models.each do |model|
+          expect(ability.can?(:create, model)).to be false
+        end
       end
     end
 
