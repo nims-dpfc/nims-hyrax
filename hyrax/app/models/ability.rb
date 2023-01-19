@@ -34,6 +34,8 @@ class Ability
   end
 
   def create_content
+    return false if current_user.invalid?
+
     # only NIMS Researchers may upload new content
     can :create, [::Dataset, ::Publication] if current_user.authenticated_nims?
     can :create, [::Dataset, ::Publication] if current_user.authenticated_external?
