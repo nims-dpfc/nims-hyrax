@@ -79,6 +79,8 @@ class Ability
   end
 
   def can_create_any_work?
+    return false if current_user.email.blank?
+
     Hyrax.config.curation_concerns.any? do |curation_concern_type|
       can?(:create, curation_concern_type)
     end # && admin_set_with_deposit?

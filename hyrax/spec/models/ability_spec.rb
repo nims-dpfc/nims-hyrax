@@ -50,6 +50,15 @@ RSpec.describe Ability do
   describe '#create_content' do
     let(:models) { [::Dataset, ::Publication] }
 
+    context 'not logged in' do
+      let(:user) { User.new }
+      it 'cannot create content' do
+        models.each do |model|
+          expect(ability.can?(:create, model)).to be false
+        end
+      end
+    end
+
     context 'unauthenticated user' do
       let(:user) { build(:user, :guest) }
       it 'cannot create content' do
