@@ -89,7 +89,7 @@ group :production do
 end
 
 gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'develop'
-gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_oai_provider.git', branch: 'master'
+gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_oai_provider.git', branch: 'oai_upgrade'
 
 group :test do
   gem 'simplecov', require: false
@@ -109,3 +109,4 @@ gem 'cld'
 gem 'omniauth-oauth2'
 gem 'omniauth', '~> 1.9.1'
 gem 'omniauth-rails_csrf_protection'
+gem 'elastic-apm'

@@ -34,6 +34,25 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
+    # --- complex_crystallographic_structure
+    field = :complex_crystallographic_structure
+    field_value = value.send(field)
+    if field_value.blank?
+      value.complex_crystallographic_structure.build
+      field_value = value.send(field)
+    end
+    nested_fields = NestedCrystallographicStructureInput.new(@builder, field, nil, :multi_value, {})
+    out << "<div class='inner-nested'>"
+    out << "<div class='form-group'>"
+    out << "  <label class='control-label optional' for='dataset_#{field.to_s}'>Crystallographic structure</label>"
+    out << nested_fields.nested_input({:class=>"form-control", :repeats => false}, field_value, parent_attribute)
+    out << "</div>"
+    # out << "  <button type='button' class='btn btn-link add'>"
+    # out << "    <span class='glyphicon glyphicon-plus'></span>"
+    # out << "    <span class='controls-add-text'>Add another crystallographic structure</span>"
+    # out << "  </button>"
+    out << "</div>" # row
+
     # --- description
     field = :description
     field_name = name_for(attribute_name, index, field, parent)
