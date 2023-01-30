@@ -34,6 +34,8 @@ class Ability
   end
 
   def create_content
+    return false if current_user.invalid?
+
     # only NIMS Researchers may upload new content
     can :create, [::Dataset, ::Publication] if current_user.authenticated_nims?
     can :create, [::Dataset, ::Publication] if current_user.authenticated_external?
@@ -79,6 +81,8 @@ class Ability
   end
 
   def can_create_any_work?
+    return false if current_user.email.blank?
+
     Hyrax.config.curation_concerns.any? do |curation_concern_type|
       can?(:create, curation_concern_type)
     end # && admin_set_with_deposit?
