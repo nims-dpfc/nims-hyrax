@@ -236,9 +236,6 @@ GEM
       warden (~> 1.2.3)
     devise-guests (0.7.0)
       devise
-    devise_cas_authenticatable (1.10.4)
-      devise (>= 1.2.0)
-      rubycas-client (>= 2.2.1)
     devise_ldap_authenticatable (0.8.6)
       devise (>= 3.4.1)
       net-ldap (>= 0.16.0)
@@ -643,7 +640,7 @@ GEM
       redic
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
-    net-ldap (0.16.1)
+    net-ldap (0.17.1)
     netrc (0.11.0)
     nio4r (2.5.8)
     noid (0.9.0)
@@ -853,8 +850,6 @@ GEM
       oauth2
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
-    rubycas-client (2.3.9)
-      activesupport
     rubyzip (2.0.0)
     samvera-nesting_indexer (2.0.0)
       dry-equalizer
@@ -1018,7 +1013,6 @@ DEPENDENCIES
   database_cleaner
   devise
   devise-guests (~> 0.7.0)
-  devise_cas_authenticatable
   devise_ldap_authenticatable
   elastic-apm
   exception_notification (~> 4.4)
