@@ -1,12 +1,12 @@
 GIT
   remote: https://github.com/CottageLabs/blacklight_oai_provider.git
-  revision: 73d5f34315e313fb22084cfc52939d71e3c0728a
-  branch: master
+  revision: 1512a30a5e5ecab40ca016cf2ab4a23973383b30
+  branch: oai_upgrade
   specs:
     blacklight_oai_provider (1.4.1)
       blacklight (>= 6.1)
-      oai (~> 0.4.0)
-      rails (>= 4.2)
+      oai (~> 1.0)
+      rails (>= 5.2)
 
 GIT
   remote: https://github.com/CottageLabs/willow_sword.git
@@ -314,6 +314,9 @@ GEM
       scanf (~> 1.0)
       sxp (~> 1.1)
       unicode-types (~> 1.6)
+    elastic-apm (4.5.1)
+      concurrent-ruby (~> 1.0)
+      http (>= 3.0)
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
     erubi (1.10.0)
@@ -340,6 +343,9 @@ GEM
     fcrepo_wrapper (0.9.0)
       ruby-progressbar
     ffi (1.15.5)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     flipflop (2.6.0)
       activesupport (>= 4.0)
     flot-rails (0.0.7)
@@ -349,7 +355,7 @@ GEM
     gems (1.2.0)
     geocoder (1.6.7)
     gherkin (5.1.0)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     google-api-client (0.53.0)
       google-apis-core (~> 0.1)
@@ -396,9 +402,15 @@ GEM
     hashie (5.0.0)
     hiredis (0.6.3)
     htmlentities (4.3.4)
+    http (5.1.0)
+      addressable (~> 2.8)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.2)
+      llhttp-ffi (~> 0.4.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    http-form_data (2.3.0)
     http_logger (0.6.0)
     httpclient (2.8.3)
     hydra-access-controls (11.0.7)
@@ -614,7 +626,10 @@ GEM
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    loofah (2.18.0)
+    llhttp-ffi (0.4.0)
+      ffi-compiler (~> 1.0)
+      rake (~> 13.0)
+    loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -631,7 +646,7 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.15.0)
+    minitest (5.17.0)
     multi_json (1.15.0)
     multi_test (0.1.2)
     multi_xml (0.6.0)
@@ -640,19 +655,19 @@ GEM
       redic
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
-    net-ldap (0.16.1)
+    net-ldap (0.17.1)
     netrc (0.11.0)
     nio4r (2.5.8)
     noid (0.9.0)
     noid-rails (3.0.3)
       actionpack (>= 5.0.0, < 7)
       noid (~> 0.9)
-    nokogiri (1.13.7)
+    nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)
-    oai (0.4.0)
+    oai (1.1.0)
       builder (>= 3.1.0)
       faraday
       faraday_middleware
@@ -696,8 +711,8 @@ GEM
       nokogiri (~> 1.6)
       rails (>= 5.0, < 6.2)
       rdf
-    racc (1.6.0)
-    rack (2.2.4)
+    racc (1.6.1)
+    rack (2.2.6.2)
     rack-protection (2.2.0)
       rack
     rack-test (2.0.2)
@@ -718,8 +733,8 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.3)
-      loofah (~> 2.3)
+    rails-html-sanitizer (1.4.4)
+      loofah (~> 2.19, >= 2.19.1)
     rails_autolink (1.1.6)
       rails (> 3.1)
     railties (5.2.8.1)
@@ -1008,6 +1023,7 @@ DEPENDENCIES
   devise
   devise-guests (~> 0.7.0)
   devise_ldap_authenticatable
+  elastic-apm
   exception_notification (~> 4.4)
   exception_notification-rake (~> 0.3.1)
   factory_bot_rails
