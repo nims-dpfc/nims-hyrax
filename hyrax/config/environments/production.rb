@@ -120,7 +120,10 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: ENV['SMTP_HOST'],
     port: ENV['SMTP_PORT'],
-    enable_starttls_auto: false
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASS'],
+    authentication: :plain,
+    enable_starttls_auto: true
   }
 
   config.middleware.use ExceptionNotification::Rack,
@@ -129,7 +132,8 @@ Rails.application.configure do
       'Riiif::ConversionError',
       'Blacklight::Exceptions::RecordNotFound',
       'ActionView::Template::Error',
-      'Ldp::Gone'
+      'Ldp::Gone',
+      'URI::InvalidURIError'
     ] + ExceptionNotifier.ignored_exceptions,
     error_grouping: true,
     email: {
