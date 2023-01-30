@@ -654,7 +654,7 @@ GEM
       redic
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
-    net-ldap (0.16.1)
+    net-ldap (0.17.1)
     netrc (0.11.0)
     nio4r (2.5.8)
     noid (0.9.0)
