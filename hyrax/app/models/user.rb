@@ -53,28 +53,6 @@ class User < ApplicationRecord
     User.find_by(user_identifier: component)
   end
 
-  def cas_extra_attributes=(extra_attributes)
-    extra_attributes.each do |name, value|
-      case name.to_sym
-      # TODO: change these mappings to match NIMS CAS schema
-      # when :mail
-      #   self.email = value
-      # when :eduPersonNickname
-      #   self.display_name = value
-      # when :cn
-      #   self.email = value
-      when :userClass
-        self.employee_type_code = value
-      # when :fullname
-      #   self.fullname = value
-      # when :email
-      #   self.email = value
-      end
-    end
-
-    self.guest = true if email_user?
-  end
-  
   def mailboxer_email(_object)
     email
   end
