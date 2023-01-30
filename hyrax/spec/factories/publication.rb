@@ -78,6 +78,22 @@ FactoryBot.define do
       source { ['Source-123'] }
     end
 
+    trait :with_rights do
+      rights_statement {
+        [
+          'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
+        ]
+      }
+    end
+
+    trait :with_old_rights do
+      rights_statement {
+        [
+          'http://creativecommons.org/publicdomain/zero/1.0/'
+        ]
+      }
+    end
+
     trait :with_rights_statement do
       rights_statement { ['Rights-Statement-123'] }
     end
