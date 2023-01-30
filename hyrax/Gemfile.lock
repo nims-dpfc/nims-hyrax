@@ -225,7 +225,6 @@ GEM
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
     database_cleaner (1.7.0)
-    date (3.3.3)
     declarative (0.0.20)
     deprecation (1.1.0)
       activesupport
@@ -620,11 +619,8 @@ GEM
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.8.0.1)
+    mail (2.7.1)
       mini_mime (>= 0.1.1)
-      net-imap
-      net-pop
-      net-smtp
     mailboxer (0.15.1)
       carrierwave (>= 0.5.8)
       rails (>= 5.0.0)
@@ -647,16 +643,7 @@ GEM
       redic
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
-    net-imap (0.3.4)
-      date
-      net-protocol
     net-ldap (0.16.1)
-    net-pop (0.1.2)
-      net-protocol
-    net-protocol (0.2.1)
-      timeout
-    net-smtp (0.3.3)
-      net-protocol
     netrc (0.11.0)
     nio4r (2.5.8)
     noid (0.9.0)
@@ -972,7 +959,6 @@ GEM
     thor (1.2.1)
     thread_safe (0.3.6)
     tilt (2.0.11)
-    timeout (0.3.1)
     tins (1.21.1)
     tinymce-rails (4.9.11)
       railties (>= 3.1.1)
@@ -1049,6 +1035,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   lograge
+  mail (~> 2.7.1)
   pg
   pry
   puma (~> 4.3)
