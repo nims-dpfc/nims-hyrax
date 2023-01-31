@@ -27,7 +27,7 @@ RSpec.describe Metadata::JpcoarMapping do
       let(:solr_document) { SolrDocument.new(model.to_solr) }
       let(:out) {'
         <jpcoar:relation relationType="isVersionOf">
-          <jpcoar:relatedIdentifier identifierType="DOI">http://example.com/first-published-url</jpcoar:relatedIdentifier>
+          <jpcoar:relatedIdentifier identifierType="URI">http://example.com/first-published-url</jpcoar:relatedIdentifier>
         </jpcoar:relation>
       '}
       it 'has the xml' do
