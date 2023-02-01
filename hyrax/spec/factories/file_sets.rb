@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :file_set do
     transient do
       user { create(:user) }
-      content { File.read(Rails.root.join('spec/fixtures/csv/example.csv')) }
+      content { File.open(Rails.root.join('spec/fixtures/csv/example.csv'), 'r') }
     end
     after(:build) do |fs, evaluator|
       fs.apply_depositor_metadata evaluator.user.user_key
@@ -39,7 +39,7 @@ FactoryBot.define do
 
     trait :long_filename do
       visibility { 'open' }
-      content { File.open('spec/fixtures/csv/ファイル名の長さがエスケープ後に256文字以上になる、長い日本語のファイル名を持つファイル.csv', 'r') }
+      content { File.open(Rails.root.join('spec/fixtures/csv/ファイル名の長さがエスケープ後に256文字以上になる、長い日本語のファイル名を持つファイル.csv'), 'r') }
     end
   end
 end
