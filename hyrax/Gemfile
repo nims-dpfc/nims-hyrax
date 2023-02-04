@@ -74,7 +74,6 @@ gem 'bootstrap-datepicker-rails'
 gem 'pg'
 gem 'faraday_middleware'
 gem 'devise_ldap_authenticatable'
-gem 'devise_cas_authenticatable'
 
 gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > hydra-editor
 
@@ -87,8 +86,6 @@ gem 'ro-crate', '~> 0.4.11', require: 'ro_crate'
 group :production do
   gem 'exception_notification', '~> 4.4'
   gem 'exception_notification-rake', '~> 0.3.1'
-  gem 'act-fluent-logger-rails'
-  gem 'lograge'
 end
 
 gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'develop'
@@ -108,3 +105,9 @@ gem 'coveralls', require: false
 gem 'rinku'
 gem 'sitemap_generator'
 gem 'cld'
+# gem 'clamav-client', require: 'clamav/client'
+gem 'omniauth-oauth2'
+gem 'omniauth', '~> 1.9.1'
+gem 'omniauth-rails_csrf_protection'
+gem 'elastic-apm'
+gem 'mail', '~> 2.7.1'
