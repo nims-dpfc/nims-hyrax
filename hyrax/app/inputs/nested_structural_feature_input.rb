@@ -17,8 +17,8 @@ protected
 
     parent_attribute = name_for(attribute_name, index, '', parent)[0..-5]
 
-    # --- category
-    field = :category
+    # --- description
+    field = :description
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
     field_value = value.send(field).first
@@ -34,8 +34,8 @@ protected
     out << '  </div>'
     out << '</div>' # row
 
-    # --- description
-    field = :description
+    # --- category
+    field = :category
     field_name = name_for(attribute_name, index, field, parent)
     field_id = id_for(attribute_name, index, field, parent)
     field_value = value.send(field).first

@@ -11,8 +11,6 @@ class User < ApplicationRecord
 
   has_many :uploaded_files, class_name: 'Hyrax::UploadedFile', dependent: :nullify
 
-  before_create :set_user_identifier
-
   if Blacklight::Utils.needs_attr_accessible?
     attr_accessible :username, :email, :password, :password_confirmation
   end
@@ -20,8 +18,10 @@ class User < ApplicationRecord
   include Blacklight::User
   # Include default devise modules. Others available are:
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
+  # ToDo: Now that we are not using CAS, do we want :validatable module?
   devise ENV.fetch('MDR_DEVISE_AUTH_MODULE', 'database_authenticatable').to_sym,
-         :omniauthable, :rememberable, :trackable, :lockable, omniauth_providers: [:microsoft]
+         :omniauthable, :rememberable, :trackable, :lockable, :validatable,
+         omniauth_providers: [:microsoft]
          # NB: the :validatable module is not compatible with CAS authentication
 
   # Method added by Blacklight; Blacklight uses #to_s on your
@@ -38,15 +38,14 @@ class User < ApplicationRecord
 
   ## allow omniauth logins - this will create a local user based on an omniauth/shib login
   ## if they haven't logged in before
-  def self.from_omniauth(auth)
-    name = auth_hash.dig(:extra, :raw_info, :displayName)
-    email = auth_hash.dig(:extra, :raw_info, :mail) ||
-      auth_hash.dig(:extra, :raw_info, :userPrincipalName)
-    User.find_by('email' => email) || User.create!(
-      username: name,
-      email: email,
+  def self.from_omniauth(auth_hash)
+    sub = auth_hash.dig(:extra, :raw_info, :sub)
+    User.find_by(username: sub) || User.create!(
+      username: sub,
+      email: "#{sub}@example.domain",
+      display_name: auth_hash.dig(:extra, :raw_info, :name),
       password: Devise.friendly_token[0, 20],
-      user_identifier: Noid::Rails::Service.new.mint)
+      user_identifier: sub)
   end
 
   def ldap_before_save
@@ -58,7 +57,6 @@ class User < ApplicationRecord
   end
 
   def set_user_identifier
-    # TODO: This will be replaced by NIMS PID when the CAS server is online
     self.user_identifier = Noid::Rails::Service.new.mint
   end
 
@@ -66,28 +64,6 @@ class User < ApplicationRecord
     User.find_by(user_identifier: component)
   end
 
-  def cas_extra_attributes=(extra_attributes)
-    extra_attributes.each do |name, value|
-      case name.to_sym
-      # TODO: change these mappings to match NIMS CAS schema
-      # when :mail
-      #   self.email = value
-      # when :eduPersonNickname
-      #   self.display_name = value
-      # when :cn
-      #   self.email = value
-      when :userClass
-        self.employee_type_code = value
-      # when :fullname
-      #   self.fullname = value
-      # when :email
-      #   self.email = value
-      end
-    end
-
-    self.guest = true if email_user?
-  end
-  
   def mailboxer_email(_object)
     email
   end

@@ -72,14 +72,13 @@ gem 'sidekiq', '~> 5.2.10'
 gem 'hydra-role-management'
 gem 'bootstrap-datepicker-rails'
 gem 'pg'
-gem 'faraday_middleware'
+gem 'faraday_middleware', '~> 0.14'
 gem 'devise_ldap_authenticatable'
 
 gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > hydra-editor
 
 gem 'riiif', '~> 2.0'
 gem 'jsonapi-rails', '~> 0.4.0'
-gem 'faraday'
 
 gem 'ro-crate', '~> 0.4.11', require: 'ro_crate'
 
@@ -89,7 +88,7 @@ group :production do
 end
 
 gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'develop'
-gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_oai_provider.git', branch: 'master'
+gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_oai_provider.git', branch: 'oai_upgrade'
 
 group :test do
   gem 'simplecov', require: false
@@ -109,3 +108,6 @@ gem 'clamav-client', require: 'clamav/client'
 gem 'omniauth-oauth2'
 gem 'omniauth', '~> 1.9.1'
 gem 'omniauth-rails_csrf_protection'
+gem 'elastic-apm'
+gem 'mail', '~> 2.7.1'
+gem 'bootstrap_form', '~> 4.5'
