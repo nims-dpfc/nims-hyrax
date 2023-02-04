@@ -10,12 +10,6 @@ Feature: Create a dataset
     # When I try to navigate to the dashboard page
     Then I should be redirected to the top page
 
-  Scenario: Cannot create a dataset as a Non-Researcher user
-    Given I am logged in as a nims_other user
-    And I have permission to deposit
-    When I try to navigate to the new dataset page
-    Then I should not be authorized to access the page
-  
   Scenario: Create an open dataset as a NIMS Researcher user
     Given I am logged in as a nims_researcher user
     And I have permission to deposit

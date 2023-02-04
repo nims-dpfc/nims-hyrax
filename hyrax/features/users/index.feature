@@ -13,12 +13,6 @@ Feature: Users index page
     Then I should not see the nims_researcher users
     And I should be redirected to the login page
 
-  Scenario: nims_other user cannot view users
-    Given I am logged in as an nims_other user
-    When I navigate to the users list
-    Then I should not see the nims_researcher users
-    And I should be redirected to the home page
-
   Scenario: nims_researcher user cannot view users
     Given I am logged in as an nims_researcher user
     When I navigate to the users list

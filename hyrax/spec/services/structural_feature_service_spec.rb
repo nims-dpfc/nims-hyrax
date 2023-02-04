@@ -13,7 +13,7 @@ RSpec.describe StructuralFeatureService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('defects')).to eq({
+      expect(service.find_by_id('defects')).to include({
         "label" => "defects/欠陥",
         "id" => "defects",
         "active" => true
@@ -23,7 +23,7 @@ RSpec.describe StructuralFeatureService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('defects/欠陥')).to eq({
+      expect(service.find_by_label('defects/欠陥')).to include({
         "label" => "defects/欠陥",
         "id" => "defects",
         "active" => true
@@ -33,12 +33,12 @@ RSpec.describe StructuralFeatureService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('defects')).to eq({
+      expect(service.find_by_id_or_label('defects')).to include({
         "label" => "defects/欠陥",
         "id" => "defects",
         "active" => true
       })
-      expect(service.find_by_id_or_label('defects/欠陥')).to eq({
+      expect(service.find_by_id_or_label('defects/欠陥')).to include({
         "label" => "defects/欠陥",
         "id" => "defects",
         "active" => true

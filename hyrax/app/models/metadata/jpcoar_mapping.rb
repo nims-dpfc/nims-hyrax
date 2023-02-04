@@ -29,7 +29,7 @@ module Metadata
       # Note: Only mapping the first value
       val = first_published_url.first
       xml.tag!('jpcoar:relation', "relationType" => "isVersionOf") do
-        xml.tag!('jpcoar:relatedIdentifier', val, "identifierType" => "DOI")
+        xml.tag!('jpcoar:relatedIdentifier', val, "identifierType" => "URI")
       end
     end
 

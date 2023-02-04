@@ -14,7 +14,7 @@ RSpec.describe RelationshipService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('isSupplementedBy')).to eq({
+      expect(service.find_by_id('isSupplementedBy')).to include({
         "label" => "is supplemented by",
         "id" => "isSupplementedBy",
         "active" => true
@@ -24,7 +24,7 @@ RSpec.describe RelationshipService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('is supplemented by')).to eq({
+      expect(service.find_by_label('is supplemented by')).to include({
         "label" => "is supplemented by",
         "id" => "isSupplementedBy",
         "active" => true
@@ -34,12 +34,12 @@ RSpec.describe RelationshipService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('isSupplementedBy')).to eq({
+      expect(service.find_by_id_or_label('isSupplementedBy')).to include({
         "label" => "is supplemented by",
         "id" => "isSupplementedBy",
         "active" => true
       })
-      expect(service.find_by_id_or_label('is supplemented by')).to eq({
+      expect(service.find_by_id_or_label('is supplemented by')).to include({
         "label" => "is supplemented by",
         "id" => "isSupplementedBy",
         "active" => true

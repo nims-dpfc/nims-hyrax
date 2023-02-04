@@ -5,6 +5,12 @@ class NestedStructuralFeatureAttributeRenderer < NestedAttributeRenderer
     value = parse_value(input_value)
     value.each do |v|
       each_html = ''
+      # description
+      unless v.dig('description').blank?
+        label = 'Description'
+        val = v['description'][0]
+        each_html += get_row(label, val)
+      end
       # category
       unless v.dig('category').blank?
         label = 'Category'
@@ -15,12 +21,6 @@ class NestedStructuralFeatureAttributeRenderer < NestedAttributeRenderer
       unless v.dig('sub_category').blank?
         label = 'Sub category'
         val = v['sub_category'][0]
-        each_html += get_row(label, val)
-      end
-      # description
-      unless v.dig('description').blank?
-        label = 'Description'
-        val = v['description'][0]
         each_html += get_row(label, val)
       end
       # identifier

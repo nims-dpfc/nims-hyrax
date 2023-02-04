@@ -5,11 +5,21 @@ volumes:
   db:
   db-fcrepo:
   app:
+  clam_db:
 
 networks:
   internal:
 
 services:
+  clamav:
+    image: clamav/clamav:stable
+    expose:
+      - 3310
+    networks:
+      internal:
+    volumes:
+      - clam_db:/var/lib/clamav
+
   fcrepo:
     image: ualbertalib/docker-fcrepo4:4.7
     expose:

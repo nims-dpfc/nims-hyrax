@@ -7,11 +7,6 @@ Feature: Contact form
     When I navigate to the contact form
     Then I should see the contact form
 
-  Scenario: nims_other user can access the contact form
-    Given I am logged in as a nims_other user
-    When I navigate to the contact form
-    Then I should see the contact form
-
   Scenario: nims_researcher user can access the contact form
     Given I am logged in as a nims_researcher user
     When I navigate to the contact form

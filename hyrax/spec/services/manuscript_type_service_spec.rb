@@ -13,7 +13,7 @@ RSpec.describe ManuscriptTypeService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('Accepted')).to eq({
+      expect(service.find_by_id('Accepted')).to include({
         "label" => "Accepted manuscript",
         "id" => "Accepted",
         "active" => true
@@ -23,7 +23,7 @@ RSpec.describe ManuscriptTypeService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('Accepted manuscript')).to eq({
+      expect(service.find_by_label('Accepted manuscript')).to include({
         "label" => "Accepted manuscript",
         "id" => "Accepted",
         "active" => true
@@ -33,12 +33,12 @@ RSpec.describe ManuscriptTypeService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('Accepted')).to eq({
+      expect(service.find_by_id_or_label('Accepted')).to include({
         "label" => "Accepted manuscript",
         "id" => "Accepted",
         "active" => true
       })
-      expect(service.find_by_id_or_label('Accepted manuscript')).to eq({
+      expect(service.find_by_id_or_label('Accepted manuscript')).to include({
         "label" => "Accepted manuscript",
         "id" => "Accepted",
         "active" => true

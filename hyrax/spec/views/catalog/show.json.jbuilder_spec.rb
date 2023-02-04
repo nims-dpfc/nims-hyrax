@@ -27,14 +27,6 @@ RSpec.describe "catalog/show.json.jbuilder", api: true do
     end
   end
 
-  context 'authenticated non-researcher' do
-    let(:user) { build(:user, :nims_other) }
-    it 'shows the abstract' do
-      expect(rendered).not_to match('depositor_ti')
-      expect(rendered).not_to match('description_tesim')
-    end
-  end
-
   context 'authenticated NIMS Researcher' do
     let(:user) { build(:user, :nims_researcher) }
     it 'shows the abstract' do

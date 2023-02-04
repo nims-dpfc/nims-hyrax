@@ -1,16 +1,17 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@1.8.0
 
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.4-buster-node
-      - image: circleci/postgres:12-alpine
+      - image: cimg/ruby:2.7.4-browsers
+      - image: cimg/postgres:12.11
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: hyrax_test
-      - image: circleci/redis:6.2
+      - image: cimg/redis:6.2
+      - image: clamav/clamav:stable
     steps:
       - checkout
       - restore_cache:
@@ -18,15 +19,15 @@ jobs:
             - rails-demo-{{ checksum "hyrax/Gemfile.lock" }}
             - rails-demo-
       - run:
+          name: apt install
+          command: |
+            sudo apt update
+            sudo apt install -y openjdk-11-jre-headless libmediainfo-dev libxslt1-dev libsqlite3-dev
+      - run:
           name: bundle install
           command: |
             cd hyrax
             bundle install --jobs 4 --retry 3
-      - run:
-          name: apt install
-          command: |
-            sudo apt update
-            sudo apt install -y openjdk-11-jre-headless libmediainfo-dev
       - run:
           name: download fits
           command: |
