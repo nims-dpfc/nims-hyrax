@@ -72,14 +72,13 @@ gem 'sidekiq', '~> 5.2.10'
 gem 'hydra-role-management'
 gem 'bootstrap-datepicker-rails'
 gem 'pg'
-gem 'faraday_middleware'
+gem 'faraday_middleware', '~> 0.14'
 gem 'devise_ldap_authenticatable'
 
 gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > hydra-editor
 
 gem 'riiif', '~> 2.0'
 gem 'jsonapi-rails', '~> 0.4.0'
-gem 'faraday'
 
 gem 'ro-crate', '~> 0.4.11', require: 'ro_crate'
 
@@ -95,7 +94,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'capybara'
   gem 'launchy'
-  gem 'webdrivers', '~> 4.1'
+  gem 'webdrivers'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'rspec-activemodel-mocks'
@@ -107,7 +106,8 @@ gem 'sitemap_generator'
 gem 'cld'
 # gem 'clamav-client', require: 'clamav/client'
 gem 'omniauth-oauth2'
-gem 'omniauth', '~> 1.9.1'
+gem 'omniauth', '~> 1.9.2'
 gem 'omniauth-rails_csrf_protection'
 gem 'elastic-apm'
 gem 'mail', '~> 2.7.1'
+gem 'bootstrap_form', '~> 4.5'
