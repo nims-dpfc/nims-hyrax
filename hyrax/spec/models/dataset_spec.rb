@@ -1065,4 +1065,126 @@ RSpec.describe Dataset do
       expect(@obj.complex_funding_reference).to be_empty
     end
   end
+
+  describe 'complex_contact_agent' do
+    it 'creates a complex contact agent active triple resource with contact agent' do
+      @obj = build(:dataset,
+                   complex_contact_agent_attributes: [{
+                     name: 'Kosuke Tanabe',
+                     email: 'tanabe@example.jp',
+                     organization: 'NIMS',
+                     department: 'DPFC'
+                   }]
+      )
+      expect(@obj.complex_contact_agent.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_contact_agent.first.name).to eq ['Kosuke Tanabe']
+    end
+
+    it 'rejects a complex contact agent active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_contact_agent_attributes: [{
+                                                 name: ''
+                                               }]
+      )
+      expect(@obj.complex_contact_agent).to be_empty
+    end
+  end
+
+  describe 'complex_chemical_composition' do
+    it 'creates a complex chemical composition active triple resource with chemical composition' do
+      @obj = build(:dataset,
+                   complex_chemical_composition_attributes: [{
+                     description: 'chemical composition 1',
+                     complex_identifier_attributes: [{
+                      identifier: 'chemical_composition/1234567',
+                      scheme: 'identifier persistent'
+                    }]
+                   }]
+      )
+      expect(@obj.complex_chemical_composition.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_chemical_composition.first.description).to eq ['chemical composition 1']
+    end
+
+    it 'rejects a complex chemical composition active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_chemical_composition_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_chemical_composition).to be_empty
+    end
+  end
+
+  describe 'complex_structural_feature' do
+    it 'creates a complex structural feature active triple resource with structural feature' do
+      @obj = build(:dataset,
+                   complex_structural_feature_attributes: [{
+                     description: 'structural feature 1',
+                     complex_identifier_attributes: [{
+                      identifier: 'structural_feature/1234567',
+                      scheme: 'identifier persistent'
+                    }]
+                   }]
+      )
+      expect(@obj.complex_structural_feature.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_structural_feature.first.description).to eq ['structural feature 1']
+    end
+
+    it 'rejects a complex structural feature active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_structural_feature_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_structural_feature).to be_empty
+    end
+  end
+
+  describe 'complex_feature' do
+    it 'creates a complex feature active triple resource with feature' do
+      @obj = build(:dataset,
+                   complex_feature_attributes: [{
+                     description: 'Feature 1',
+                     category_vocabulary: 'http://vocabulary.example.jp/Q123',
+                     unit_vocabulary: 'http://vocabulary.example.jp/Q124',
+                     value: '10',
+                   }]
+      )
+      expect(@obj.complex_feature.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_feature.first.description).to eq ['Feature 1']
+    end
+
+    it 'rejects a complex feature active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_feature_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_feature).to be_empty
+    end
+  end
+
+  describe 'complex_software' do
+    it 'creates a complex software active triple resource with software' do
+      @obj = build(:dataset,
+                   complex_software_attributes: [{
+                     description: 'software 1',
+                     name: 'sample1.exe',
+                     identifier: 'sample10',
+                     version: '1.0'
+                   }]
+      )
+      expect(@obj.complex_software.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_software.first.description).to eq ['software 1']
+    end
+
+    it 'rejects a complex software active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_software_attributes: [{
+                                                 name: ''
+                                               }]
+      )
+      expect(@obj.complex_software).to be_empty
+    end
+  end
 end

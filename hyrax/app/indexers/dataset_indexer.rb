@@ -22,6 +22,9 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::StateOfMatterIndexer
   include ComplexField::StructuralFeatureIndexer
   include ComplexField::FundrefIndexer
+  include ComplexField::ContactAgentIndexer
+  include ComplexField::FeatureIndexer
+  include ComplexField::SoftwareIndexer
 
   def self.facet_fields
     # solr fields that will be treated as facets
@@ -48,6 +51,8 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::StateOfMatterIndexer.state_of_matter_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_facet_fields
       fields.concat ComplexField::FundrefIndexer.fundref_facet_fields
+      fields.concat ComplexField::FeatureIndexer.feature_facet_fields
+      fields.concat ComplexField::SoftwareIndexer.software_facet_fields
     end
   end
 
@@ -85,6 +90,8 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::ShapeIndexer.shape_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_search_fields
       fields.concat ComplexField::FundrefIndexer.fundref_search_fields
+      fields.concat ComplexField::FeatureIndexer.feature_search_fields
+      fields.concat ComplexField::SoftwareIndexer.software_search_fields
     end
   end
 
@@ -114,6 +121,11 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::InstrumentIndexer.instrument_show_fields
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_show_fields
       fields.concat ComplexField::FundrefIndexer.fundref_show_fields
+      fields.concat ComplexField::ContactAgentIndexer.contact_agent_show_fields
+      fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_show_fields
+      fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_show_fields
+      fields.concat ComplexField::FeatureIndexer.feature_show_fields
+      fields.concat ComplexField::SoftwareIndexer.software_show_fields
     end
   end
 

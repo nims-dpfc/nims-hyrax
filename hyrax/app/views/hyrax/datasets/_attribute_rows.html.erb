@@ -31,6 +31,9 @@
         <% if can? :read_creator, presenter.model_name.name.constantize %>
           <%= presenter.attribute_to_html(:complex_person, render_as: :nested_person, label: t('ngdr.fields.complex_person'), html_dl: true) %>
         <% end %>
+        <% if can? :read_contact_agent, presenter.model_name.name.constantize %>
+          <%= presenter.attribute_to_html(:complex_contact_agent, render_as: :nested_contact_agent, label: t('ngdr.fields.complex_contact_agent'), html_dl: true) %>
+        <% end %>
 
         <% if can? :read_keyword, presenter.model_name.name.constantize %>
           <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
@@ -52,7 +55,7 @@
         <% end %>
 
         <% if can? :read_rights, presenter.model_name.name.constantize %>
-          <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
+          <%= presenter.attribute_to_html(:rights_statement, render_as: :mdr_rights_statement, html_dl: true) %>
           <%#= # presenter.attribute_to_html(:rights_notes, html_dl: true) %>
           <%= presenter.attribute_to_html(:licensed_date, label: t('ngdr.fields.licensed_date'), html_dl: true) %>
         <% end %>
@@ -128,6 +131,8 @@
         <%= presenter.attribute_to_html(:origin_system_provenance, label: t('ngdr.fields.origin_system_provenance'), html_dl: true) %>
         <%= presenter.attribute_to_html(:properties_addressed, render_as: :faceted, label: t('ngdr.fields.properties_addressed'), html_dl: true) %>
         <%= presenter.attribute_to_html(:synthesis_and_processing, render_as: :faceted, label: t('ngdr.fields.synthesis_and_processing'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_feature, render_as: :nested_feature, label: t('ngdr.fields.complex_feature'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_software, render_as: :nested_software, label: t('ngdr.fields.software'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Method accordion -->
@@ -161,6 +166,8 @@
       <div class="panel-body">
         <%= presenter.attribute_to_html(:material_type, label: t('ngdr.fields.material_type'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_specimen_type, render_as: :nested_specimen_type, label: t('ngdr.fields.complex_specimen_type'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_chemical_composition, render_as: :nested_chemical_composition, label: t('ngdr.fields.complex_chemical_composition'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_structural_feature, render_as: :nested_structural_feature, label: t('ngdr.fields.complex_structural_feature'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Specimen details accordion -->

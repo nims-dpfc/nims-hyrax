@@ -185,7 +185,8 @@ FactoryBot.define do
              }]
            }],
            orcid: '23542345234',
-           organization: 'My org'
+           organization: 'My org',
+           display_order: 0
           },
           {
            name: 'Cee Jay',
@@ -206,23 +207,38 @@ FactoryBot.define do
               }]
             }],
            orcid: '112233445566',
-           organization: 'My journal org'
+           organization: 'My journal org',
+           display_order: 1
         }]
       }
     end
 
     trait :with_complex_chemical_composition do
-      complex_specimen_type_attributes {
+      complex_chemical_composition_attributes {
         [{
-          complex_chemical_composition_attributes: [{
-            description: 'chemical composition 1',
-            complex_identifier_attributes: [{
-              identifier: 'chemical_composition/1234567',
-              scheme: 'identifier persistent'
-            }]
+          description: 'chemical composition 1',
+          category: 'http://id.example.jp/Q12345',
+          complex_identifier_attributes: [{
+            identifier: 'chemical_composition/1234567',
+            scheme: 'identifier persistent'
           }]
         }]
-       }
+      }
+    end
+
+    trait :with_complex_structural_feature do
+      complex_structural_feature_attributes {
+        [{
+          description: 'structural feature description',
+          category: 'structural feature category',
+          sub_category: 'structural feature sub category',
+          complex_identifier_attributes: [{
+            identifier: ['structural_feature/123456'],
+            scheme: 'identifier persistent',
+            label: 'Identifier - Persistent'
+          }]
+        }]
+      }
     end
 
     trait :with_complex_crystallographic_structure do
@@ -464,6 +480,14 @@ FactoryBot.define do
     trait :with_rights do
       rights_statement {
         [
+          'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
+        ]
+      }
+    end
+
+    trait :with_old_rights do
+      rights_statement {
+        [
           'http://creativecommons.org/publicdomain/zero/1.0/'
         ]
       }
@@ -508,6 +532,39 @@ FactoryBot.define do
            award_number: 'a1234',
            award_uri: 'http://example.com/a1234',
            award_title: 'No free lunch'
+         }]
+      }
+    end
+
+    trait :with_complex_contact_agent do
+      complex_contact_agent_attributes {
+        [{
+           name: 'Kosuke Tanabe',
+           email: 'tanabe@example.jp',
+           organization: 'NIMS',
+           department: 'DPFC'
+         }]
+      }
+    end
+
+    trait :with_complex_feature do
+      complex_feature_attributes {
+        [{
+           category_vocabulary: 'http://vocabulary.example.jp/Q2345',
+           unit_vocabulary: 'http://vocabulary.example.jp/Q2346',
+           value: '100',
+           description: 'Feature 1'
+         }]
+      }
+    end
+
+    trait :with_complex_software do
+      complex_software_attributes {
+        [{
+           name: 'notepad.exe',
+           version: '1.0',
+           identifier: 'notepad10',
+           description: 'Notepad'
          }]
       }
     end

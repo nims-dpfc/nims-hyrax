@@ -220,6 +220,54 @@ RSpec.describe DatasetIndexer do
     end
   end
 
+  describe 'indexes the new rights statement active triple resource in all variants' do
+    before do
+      rights_statement = ['https://creativecommons.org/licenses/by-sa/4.0/legalcode']
+      obj = build(:dataset, rights_statement: rights_statement)
+      @solr_document = obj.to_solr
+    end
+    it 'indexes the id as searchable' do
+      expect(@solr_document).to include('rights_statement_tesim')
+      expect(@solr_document['rights_statement_tesim']).to eq ['https://creativecommons.org/licenses/by-sa/4.0/legalcode']
+    end
+    it 'indexes all the values as searchable' do
+      expect(@solr_document).to include('rights_statement_variants_tesim')
+      expect(@solr_document['rights_statement_variants_tesim']).to match_array([
+         'https://creativecommons.org/licenses/by-sa/4.0/legalcode',
+         'Creative Commons Attribution Share Alike 4.0 International',
+         'CC-BY-SA-4.0',
+         'https://creativecommons.org/licenses/by-sa/4.0/'
+       ])
+    end
+    it 'indexes as facetable' do
+      expect(@solr_document).to include('rights_statement_sim')
+      expect(@solr_document['rights_statement_sim']).to match_array(['CC-BY-SA-4.0'])
+    end
+  end
+
+  describe 'indexes the old rights statement active triple resource in all variants' do
+    before do
+      rights_statement = ['http://rightsstatements.org/vocab/InC/1.0/']
+      obj = build(:dataset, rights_statement: rights_statement)
+      @solr_document = obj.to_solr
+    end
+    it 'indexes the id as searchable' do
+      expect(@solr_document).to include('rights_statement_tesim')
+      expect(@solr_document['rights_statement_tesim']).to eq ['http://rightsstatements.org/vocab/InC/1.0/']
+    end
+    it 'indexes all the values as searchable' do
+      expect(@solr_document).to include('rights_statement_variants_tesim')
+      expect(@solr_document['rights_statement_variants_tesim']).to match_array([
+         'http://rightsstatements.org/vocab/InC/1.0/',
+         'In Copyright'
+       ])
+    end
+    it 'indexes as facetable' do
+      expect(@solr_document).to include('rights_statement_sim')
+      expect(@solr_document['rights_statement_sim']).to match_array(['In Copyright'])
+    end
+  end
+
   describe 'indexes the version active triple resource with all the attributes' do
     before do
       versions = [
@@ -776,15 +824,6 @@ RSpec.describe DatasetIndexer do
               label: ['Local']
             }]
           }],
-          complex_structural_feature_attributes: [{
-            description: 'structural feature description 2',
-            category: 'structural feature category 2',
-            sub_category: 'structural feature sub category',
-            complex_identifier_attributes: [{
-              identifier: ['structural_feature/67890'],
-              label: ['Local']
-            }]
-          }],
           title: 'Specimen 2'
         }
       ]
@@ -805,14 +844,6 @@ RSpec.describe DatasetIndexer do
     it 'indexes identifier as symbol' do
       expect(@solr_document['complex_specimen_type_identifier_ssim']).to match_array(
         ['specimen/12345', 'specimen/67890'])
-    end
-    it 'indexes chemical_composition as stored_searchable' do
-      expect(@solr_document['complex_chemical_composition_tesim']).to match_array(
-        ['chemical composition 1', 'chemical composition 2'])
-    end
-    it 'indexes chemical_composition identifier as stored_searchable' do
-      expect(@solr_document['complex_chemical_composition_identifier_ssim']).to match_array(
-        ['chemical_composition/12345', 'chemical_composition/67890'])
     end
     it 'indexes crystallographic_structure as stored_searchable' do
       expect(@solr_document['complex_crystallographic_structure_tesim']).to match_array(
@@ -917,30 +948,6 @@ RSpec.describe DatasetIndexer do
     it 'indexes state_of_matter identifier as stored_searchable' do
       expect(@solr_document['complex_state_of_matter_identifier_ssim']).to match_array(
         ['state/12345', 'state/67890'])
-    end
-    it 'indexes structural feature category as stored_searchable' do
-      expect(@solr_document['complex_structural_feature_category_tesim']).to match_array(
-        ['structural feature category', 'structural feature category 2'])
-    end
-    it 'indexes structural feature category as facetable' do
-      expect(@solr_document['complex_structural_feature_category_sim']).to match_array(
-        ['structural feature category', 'structural feature category 2'])
-    end
-    it 'indexes structural feature description as stored_searchable' do
-      expect(@solr_document['complex_structural_feature_description_tesim']).to match_array(
-        ['structural feature description', 'structural feature description 2'])
-    end
-    it 'indexes structural feature sub category as stored_searchable' do
-      expect(@solr_document['complex_structural_feature_sub_category_tesim']).to match_array(
-        ['structural feature sub category', 'structural feature sub category'])
-    end
-    it 'indexes structural feature sub category as facetable' do
-      expect(@solr_document['complex_structural_feature_sub_category_sim']).to match_array(
-        ['structural feature sub category', 'structural feature sub category'])
-    end
-    it 'indexes structural feature identifier as symbol' do
-      expect(@solr_document['complex_structural_feature_identifier_ssim']).to match_array(
-        ['structural_feature/12345', 'structural_feature/67890'])
     end
   end
 
@@ -1113,6 +1120,173 @@ RSpec.describe DatasetIndexer do
     end
     it 'indexes award title as stored searchable' do
       expect(@solr_document['award_title_tesim']).to match_array(['Title of the award', 'Another award'])
+    end
+  end
+
+  describe 'indexes the chemical composition active triple resource with all the attributes' do
+    before do
+      chemical_composition = [
+        {
+          description: 'chemical composition 1',
+          category: 'http://id.example.jp/Q12345',
+          complex_identifier_attributes: [{
+            identifier: ['chemical_composition/12345']
+          }]
+        },
+        {
+          description: 'chemical composition 2',
+          category: 'http://id.example.jp/Q67890',
+          complex_identifier_attributes: [{
+            identifier: ['chemical_composition/67890']
+          }]
+        }
+      ]
+      obj = build(:dataset, complex_chemical_composition_attributes: chemical_composition)
+      @solr_document = obj.to_solr
+    end
+    it 'indexes as symbol' do
+      expect(@solr_document['complex_chemical_composition_identifier_ssim']).to match_array(["chemical_composition/12345", "chemical_composition/67890"])
+      expect(@solr_document['complex_chemical_composition_category_ssim']).to match_array(["http://id.example.jp/Q12345", "http://id.example.jp/Q67890"])
+    end
+    it 'indexes as displayable' do
+      expect(@solr_document).to include('complex_chemical_composition_ssm')
+      expect(JSON.parse(@solr_document['complex_chemical_composition_ssm'])).not_to be_empty
+    end
+    it 'indexes chemical_composition as stored_searchable' do
+      expect(@solr_document['complex_chemical_composition_tesim']).to match_array(
+        ['chemical composition 1', 'chemical composition 2'])
+    end
+    it 'indexes chemical_composition identifier as stored_searchable' do
+      expect(@solr_document['complex_chemical_composition_identifier_ssim']).to match_array(
+        ['chemical_composition/12345', 'chemical_composition/67890']
+      )
+    end
+    it 'indexes chemical_composition identifier as facetable' do
+      expect(@solr_document['complex_chemical_composition_identifier_sim']).to match_array(
+        ['chemical_composition/12345', 'chemical_composition/67890']
+      )
+    end
+  end
+
+  describe 'indexes the structural feature active triple resource with all the attributes' do
+    before do
+      structural_feature = [{
+        description: 'structural feature description',
+        category: 'structural feature category',
+        sub_category: 'structural feature sub category',
+        complex_identifier_attributes: [{
+          identifier: ['structural_feature/12345'],
+          label: ['Local']
+        }]
+      },
+      {
+        description: 'structural feature description 2',
+        category: 'structural feature category 2',
+        sub_category: 'structural feature sub category',
+        complex_identifier_attributes: [{
+          identifier: ['structural_feature/67890'],
+          label: ['Local']
+        }]
+      }]
+      obj = build(:dataset, complex_structural_feature_attributes: structural_feature)
+      @solr_document = obj.to_solr
+    end
+
+    it 'indexes structural feature category as stored_searchable' do
+      expect(@solr_document['complex_structural_feature_category_tesim']).to match_array(
+        ['structural feature category', 'structural feature category 2'])
+    end
+    it 'indexes structural feature category as facetable' do
+      expect(@solr_document['complex_structural_feature_category_sim']).to match_array(
+        ['structural feature category', 'structural feature category 2'])
+    end
+    it 'indexes structural feature description as stored_searchable' do
+      expect(@solr_document['complex_structural_feature_description_tesim']).to match_array(
+        ['structural feature description', 'structural feature description 2'])
+    end
+    it 'indexes structural feature sub category as stored_searchable' do
+      expect(@solr_document['complex_structural_feature_sub_category_tesim']).to match_array(
+        ['structural feature sub category', 'structural feature sub category'])
+    end
+    it 'indexes structural feature identifier as symbol' do
+      expect(@solr_document['complex_structural_feature_identifier_ssim']).to match_array(
+        ['structural_feature/12345', 'structural_feature/67890'])
+    end
+  end
+
+  describe 'indexes the feature active triple resource with all the attributes' do
+    before do
+      feature = [
+        {
+          description: 'feature 1',
+          category_vocabulary: 'http://vocabulary.example.jp/Q234',
+          unit_vocabulary: 'http://vocabulary.example.jp/Q235',
+          value: '100'
+        },
+        {
+          description: 'feature 2',
+          category_vocabulary: 'http://vocabulary.example.jp/Q236',
+          unit_vocabulary: 'http://vocabulary.example.jp/Q237',
+          value: '200'
+        }
+      ]
+      obj = build(:dataset, complex_feature_attributes: feature)
+      @solr_document = obj.to_solr
+    end
+
+    it 'indexes feature description as stored_searchable' do
+      expect(@solr_document['complex_feature_description_tesim']).to match_array(
+        ['feature 1', 'feature 2'])
+    end
+    it 'indexes feature category_vocabulary as facetable' do
+      expect(@solr_document['complex_feature_category_vocabulary_sim']).to match_array(
+        ['http://vocabulary.example.jp/Q234', 'http://vocabulary.example.jp/Q236'])
+    end
+    it 'indexes feature unit_vocabulary as facetable' do
+      expect(@solr_document['complex_feature_unit_vocabulary_sim']).to match_array(
+        ['http://vocabulary.example.jp/Q235', 'http://vocabulary.example.jp/Q237'])
+    end
+    it 'indexes feature description as stored_searchable' do
+      expect(@solr_document['complex_feature_description_tesim']).to match_array(
+        ['feature 1', 'feature 2'])
+    end
+  end
+
+  describe 'indexes the software active triple resource with all the attributes' do
+    before do
+      software = [
+        {
+          description: 'software description 1',
+          version: '1.0',
+          identifier: 'sample10',
+          name: 'sample1.exe',
+        },
+        {
+          description: 'software description 2',
+          version: '2.0',
+          identifier: 'sample20',
+          name: 'sample2.exe'
+        }
+      ]
+      obj = build(:dataset, complex_software_attributes: software)
+      @solr_document = obj.to_solr
+    end
+
+    it 'indexes software name as stored_searchable' do
+      expect(@solr_document['complex_software_name_tesim']).to match_array(
+        ['sample1.exe', 'sample2.exe'])
+    end
+    it 'indexes software name as facetable' do
+      expect(@solr_document['complex_software_name_sim']).to match_array(
+        ['sample1.exe', 'sample2.exe'])
+    end
+    it 'indexes software description as stored_searchable' do
+      expect(@solr_document['complex_software_description_tesim']).to match_array(
+        ['software description 1', 'software description 2'])
+    end
+    it 'indexes software identifier as symbol' do
+      expect(@solr_document['complex_software_identifier_ssim']).to match_array(
+        ['sample10', 'sample20'])
     end
   end
 

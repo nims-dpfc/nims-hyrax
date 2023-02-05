@@ -17,6 +17,9 @@
 <% if can? :read_creator, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:complex_person, render_as: :nested_person, label: t('ngdr.fields.complex_person'), html_dl: true) %>
 <% end %>
+<% if can? :read_contact_agent, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:complex_contact_agent, render_as: :nested_contact_agent, label: t('ngdr.fields.complex_contact_agent'), html_dl: true) %>
+<% end %>
 
 <% if can? :read_subject, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:subject, render_as: :faceted, html_dl: true) %>
@@ -41,7 +44,7 @@
 <% end %>
 
 <% if can? :read_rights, presenter.model_name.name.constantize %>
-  <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
+  <%= presenter.attribute_to_html(:rights_statement, render_as: :mdr_rights_statement, html_dl: true) %>
 <% end %>
 
 <%= presenter.attribute_to_html(:licensed_date, label: t('ngdr.fields.licensed_date'), html_dl: true) %>
