@@ -11,6 +11,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: hyrax_test
       - image: cimg/redis:6.2
+      - image: clamav/clamav:stable
     steps:
       - checkout
       - restore_cache:

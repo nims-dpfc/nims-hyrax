@@ -7,19 +7,19 @@ Feature: Access a publication
     And there is 1 restricted publication
 
   Scenario: Access a open publication
-    Given I am logged in as an email user
+    Given I am logged in as an external_researcher user
     And I have permission to deposit
     When I navigate to the open publication page
     Then I should access the open publication
 
   Scenario: Access a authenticated publication
-    Given I am logged in as an email user
+    Given I am logged in as an external_researcher user
     And I have permission to deposit
     When I navigate to the authenticated publication page
-    Then I should not access the authenticated publication
+    Then I should access the authenticated publication
 
   Scenario: Access a restricted publication
-    Given I am logged in as an email user
+    Given I am logged in as an external_researcher user
     And I have permission to deposit
     When I navigate to the restricted publication page
     Then I should not access the restricted publication
