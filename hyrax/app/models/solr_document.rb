@@ -71,6 +71,32 @@ class SolrDocument
     self[Solrizer.solr_name('complex_person', :displayable)]
   end
 
+  def ordered_creators
+    val = self[Solrizer.solr_name('complex_person', :displayable)]
+    val = val[0] if val.present? and val.kind_of?(Array)
+    val = JSON.parse(val) if val.kind_of?(String)
+    val = [val] unless val.kind_of?(Array)
+    names = []
+    val.each do |v|
+      if v.dig('name').present? and v['name'][0].present?
+        names.append(v['name'][0])
+      else
+        creator_name = []
+        unless v.dig('last_name').blank?
+          creator_name << v['last_name'][0]
+        end
+        unless v.dig('first_name').blank?
+          creator_name << v['first_name'][0]
+        end
+        creator_name = creator_name.join(', ').strip
+        if creator_name.present?
+          names.append(creator_name)
+        end
+      end
+    end
+    names
+  end
+
   def complex_rights
     self[Solrizer.solr_name('complex_rights', :displayable)]
   end
@@ -177,5 +203,29 @@ class SolrDocument
 
   def material_type
     self[Solrizer.solr_name('material_type', :stored_searchable)]
+  end
+
+  def complex_funding_reference
+    self[Solrizer.solr_name('complex_funding_reference', :displayable)]
+  end
+
+  def complex_contact_agent
+    self[Solrizer.solr_name('complex_contact_agent', :displayable)]
+  end
+
+  def complex_chemical_composition
+    self[Solrizer.solr_name('complex_chemical_composition', :displayable)]
+  end
+
+  def complex_structural_feature
+    self[Solrizer.solr_name('complex_structural_feature', :displayable)]
+  end
+
+  def complex_feature
+    self[Solrizer.solr_name('complex_feature', :displayable)]
+  end
+
+  def complex_software
+    self[Solrizer.solr_name('complex_software', :displayable)]
   end
 end

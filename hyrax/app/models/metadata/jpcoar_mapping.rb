@@ -1,6 +1,12 @@
 module Metadata
   module JpcoarMapping
 
+    def get_language_code(val)
+      lang = CLD.detect_language(val)
+      return 'ja' if %w(ja zh-TW zh).include?(lang[:code])
+      'en'
+    end
+
     def jpcoar_managing_organization(_field, xml)
       return if managing_organization.blank? or managing_organization[0].blank?
       # jpcoar:contributor@contributorType="HostingInstitution"/jpcoar:affiliation/jpcoar:affiliationName
@@ -8,9 +14,10 @@ module Metadata
       # Note: Only mapping the first value
       # if self.has? "managing_organization_tesim" and self["managing_organization_tesim"].present?
       val = managing_organization.first
+      lang_code = get_language_code(val)
       xml.tag!('jpcoar:contributor', "contributorType" => "HostingInstitution") do
         xml.tag!("jpcoar:affiliation") do
-          xml.tag!('jpcoar:affiliationName', val, "xml:lang" => "en")
+          xml.tag!('jpcoar:affiliationName', val, "xml:lang" => lang_code)
         end
       end
     end
@@ -22,7 +29,7 @@ module Metadata
       # Note: Only mapping the first value
       val = first_published_url.first
       xml.tag!('jpcoar:relation', "relationType" => "isVersionOf") do
-        xml.tag!('jpcoar:relatedIdentifier', val, "identifierType" => "DOI")
+        xml.tag!('jpcoar:relatedIdentifier', val, "identifierType" => "URI")
       end
     end
 
@@ -32,7 +39,8 @@ module Metadata
       # language attribute: TRUE
       # Note: Only mapping the first value
       val = title.first
-      xml.tag!('dc:title', val, "xml:lang" => "en")
+      lang_code = get_language_code(val)
+      xml.tag!('dc:title', val, "xml:lang" => lang_code)
     end
 
     def jpcoar_alternative_title(_field, xml)
@@ -40,7 +48,9 @@ module Metadata
       # Alternative title		dcterms:alternative
       # language attribute: TRUE
       alternative_title.each do |val|
-        xml.tag!('dc:alternative', val, "xml:lang" => "en") unless val.blank?
+        next if val.blank?
+        lang_code = get_language_code(val)
+        xml.tag!('dcterms:alternative', val, "xml:lang" => lang_code)
       end
     end
 
@@ -78,7 +88,9 @@ module Metadata
       # datacite:description@descriptionType="Abstract"
       # language attribute: TRUE
       description.each do |val|
-        xml.tag!('datacite:description', val, "descriptionType" => "Abstract", "xml:lang" => "en") unless val.blank?
+        next if val.blank?
+        lang_code = get_language_code(val)
+        xml.tag!('datacite:description', val, "descriptionType" => "Abstract", "xml:lang" => lang_code)
       end
     end
 
@@ -87,7 +99,9 @@ module Metadata
       # jpcoar:subject@subjectScheme="Other"
       # language attribute: TRUE
       keyword.each do |val|
-        xml.tag!('jpcoar:subject', val, "subjectScheme" => "Other", "xml:lang" => "en") unless val.blank?
+        next if val.blank?
+        lang_code = get_language_code(val)
+        xml.tag!('jpcoar:subject', val, "subjectScheme" => "Other", "xml:lang" => lang_code)
       end
     end
 
@@ -96,7 +110,9 @@ module Metadata
       # dc:publisher
       # language attribute: TRUE
       publisher.each do |val|
-        xml.tag!('dc:publisher', val, "xml:lang" => "en") unless val.blank?
+        next if val.blank?
+        lang_code = get_language_code(val)
+        xml.tag!('dc:publisher', val, "xml:lang" => lang_code)
       end
     end
 
@@ -161,17 +177,26 @@ module Metadata
         # jpcoar:familyName
         # language attribute: TRUE
       v = person.dig('last_name').present? ? person['last_name'].first : nil
-      xml.tag!('jpcoar:familyName', v, "xml:lang" => "en") unless v.blank?
+      if v.present?
+        lang_code = get_language_code(v)
+        xml.tag!('jpcoar:familyName', v, "xml:lang" => lang_code)
+      end
       # first_name
         # jpcoar:givenName
         # language attribute: TRUE
       v = person.dig('first_name').present? ? person['first_name'].first : nil
-      xml.tag!('jpcoar:givenName', v, "xml:lang" => "en") unless v.blank?
+      if v.present?
+        lang_code = get_language_code(v)
+        xml.tag!('jpcoar:givenName', v, "xml:lang" => lang_code)
+      end
       # name
         # jpcoar:creatorName / jpcoar:contributorName
         # language attribute: TRUE
       v = person.dig('name').present? ? person['name'].first: nil
-      xml.tag!(parent_tag_name + 'Name', v, "xml:lang" => "en") unless v.blank?
+      if v.present?
+        lang_code = get_language_code(v)
+        xml.tag!(parent_tag_name + 'Name', v, "xml:lang" => lang_code)
+      end
       # orcid
         # jpcoar:nameIdentifier@nameIdentifierScheme="ORCID" nameIdentifierURI="[HTTP URI]"
         # language attribute: FALSE
@@ -182,8 +207,11 @@ module Metadata
         # jpcoar:affiliation/jpcoar:affiliationName
         # language attribute: TRUE
       v = person.dig('organization').present? ? person['organization'].first : nil
-      xml.tag!('jpcoar:affiliation') do
-        xml.tag!('jpcoar:affiliationName', v, "xml:lang" => "en") unless v.blank?
+      if v.present?
+        lang_code = get_language_code(v)
+        xml.tag!('jpcoar:affiliation') do
+          xml.tag!('jpcoar:affiliationName', v, "xml:lang" => lang_code)
+        end
       end
     end
 
@@ -193,7 +221,10 @@ module Metadata
       sources.each do |source|
         # Title		jpcoar:sourceTitle	TRUE
         v = source.dig('title').present? ? source['title'].first : nil
-        xml.tag!('jpcoar:sourceTitle', v, "xml:lang" => "en") unless v.blank?
+        if v.present?
+          lang_code = get_language_code(v)
+          xml.tag!('jpcoar:sourceTitle', v, "xml:lang" => lang_code)
+        end
         # Issn		jpcoar:sourceIdentifier@identifierType="ISSN"	FALSE
         v = source.dig('issn').present? ? source['issn'].first : nil
         xml.tag!('jpcoar:sourceIdentifier', v, "identifierType" => "ISSN") unless v.blank?
@@ -239,10 +270,16 @@ module Metadata
         xml.tag!('jpcoar:conference') do
           # Title		jpcoar:conferenceName	TRUE
           v = event.dig('title').present? ? event['title'].first : nil
-          xml.tag!('jpcoar:conferenceName', v, "xml:lang" => "en") unless v.blank?
+          if v.present?
+            lang_code = get_language_code(v)
+            xml.tag!('jpcoar:conferenceName', v, "xml:lang" => lang_code)
+          end
           # Place		jpcoar:conferencePlace	TRUE
           v = event.dig('place').present? ? event['place'].first : nil
-          xml.tag!('jpcoar:conferencePlace', v, "xml:lang" => "en") unless v.blank?
+          if v.present?
+            lang_code = get_language_code(v)
+            xml.tag!('jpcoar:conferencePlace', v, "xml:lang" => lang_code)
+          end
           # conference date
           # <jpcoar:conferenceDate xml:lang="en" startDay="29" startMonth="02" startYear="2016"
           # endDay="04" endMonth="03" endYear="2016">February 29th to March 4th, 2016</jpcoar:conferenceDate>
@@ -383,9 +420,51 @@ module Metadata
           # jpcoar:relation @relationType="[(JPCOAR vocabulary)]" See Relationship sheet	FALSE
           xml.tag!('jpcoar:relation', 'relationType' => relation_type) do
             # Title	jpcoar:relatedTitle	TRUE
-            xml.tag!('jpcoar:relatedTitle', title, 'xml:lang' => 'en') unless title.blank?
+            if title.present?
+              lang_code = get_language_code(title)
+              xml.tag!('jpcoar:relatedTitle', title, 'xml:lang' => lang_code)
+            end
             # Url	jpcoar:relatedIdentifier@identifierType="URI"	FALSE
             xml.tag!('jpcoar:relatedIdentifier', url, 'identifierType' => 'URI') unless url.blank?
+          end
+        end
+      end
+    end
+
+    def jpcoar_complex_funding_reference(_field, xml)
+      return if complex_funding_reference.blank? or Array.wrap(complex_funding_reference)[0].blank?
+      funding_refs = JSON.parse(Array.wrap(complex_funding_reference)[0])
+      funding_refs.each do |funding_ref|
+        xml.tag!('jpcoar:fundingReference') do
+          # Funder Identifier
+          #   datacite:funderIdentifier
+          #   funderIdentifierType attribute: true
+          v = funding_ref.dig('funder_identifier').present? ? funding_ref['funder_identifier'].first : nil
+          funder_id_type = 'Other'
+          xml.tag!('datacite:funderIdentifier', v, "funderIdentifierType" => funder_id_type) unless v.blank?
+          # Funder Name
+          #   jpcoar:funderName
+          #   language attribute: TRUE
+          v = funding_ref.dig('funder_name').present? ? funding_ref['funder_name'].first : nil
+          if v.present?
+            lang_code = get_language_code(v)
+            xml.tag!('jpcoar:funderName', v, "xml:lang" => lang_code)
+          end
+          # Award Number with award uri
+          #   datacite:awardNumber
+          #   Attribute: awardURI
+          v = funding_ref.dig('award_number').present? ? funding_ref['award_number'].first : nil
+          u = funding_ref.dig('award_uri').present? ? funding_ref['award_uri'].first : nil
+          if v.present? and u.present?
+            xml.tag!('datacite:awardNumber', v, "awardURI" => u)
+          end
+          # Award Title
+          #   jpcoar:awardTitle
+          #   Attribute: xml:lang True
+          v = funding_ref.dig('award_title').present? ? funding_ref['award_title'].first : nil
+          if v.present?
+            lang_code = get_language_code(v)
+            xml.tag!('jpcoar:awardTitle', v, "xml:lang" => lang_code)
           end
         end
       end
