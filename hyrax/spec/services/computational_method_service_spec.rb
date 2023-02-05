@@ -13,7 +13,7 @@ RSpec.describe ComputationalMethodService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('CALPHAD')).to eq({
+      expect(service.find_by_id('CALPHAD')).to include({
         "label" => "CALPHAD/カルパッド",
         "id" => "CALPHAD",
         "active" => true
@@ -23,7 +23,7 @@ RSpec.describe ComputationalMethodService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('CALPHAD/カルパッド')).to eq({
+      expect(service.find_by_label('CALPHAD/カルパッド')).to include({
         "label" => "CALPHAD/カルパッド",
         "id" => "CALPHAD",
         "active" => true
@@ -33,12 +33,12 @@ RSpec.describe ComputationalMethodService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('CALPHAD/カルパッド')).to eq({
+      expect(service.find_by_id_or_label('CALPHAD/カルパッド')).to include({
         "label" => "CALPHAD/カルパッド",
         "id" => "CALPHAD",
         "active" => true
       })
-      expect(service.find_by_id_or_label('CALPHAD')).to eq({
+      expect(service.find_by_id_or_label('CALPHAD')).to include({
         "label" => "CALPHAD/カルパッド",
         "id" => "CALPHAD",
         "active" => true

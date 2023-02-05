@@ -20,7 +20,7 @@
 
 <% content_for(:gscholar_meta) do %>
   <meta name="citation_title" content="<%= @presenter.title.first %>" />
-  <% @presenter.creator.each do |creator| %>
+  <% @presenter.ordered_creators.each do |creator| %>
     <meta name="citation_author" content="<%= creator %>" />
   <% end %>
   <meta name="citation_publication_date" content="<%= google_scholar_pub_date(@presenter) %>" />

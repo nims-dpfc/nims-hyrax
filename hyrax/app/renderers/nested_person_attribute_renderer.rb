@@ -12,13 +12,13 @@ class NestedPersonAttributeRenderer < NestedAttributeRenderer
         each_html += get_row(label, val)
       else
         creator_name = []
-        unless v.dig('first_name').blank?
-          creator_name = v['first_name']
-        end
         unless v.dig('last_name').blank?
-          creator_name += v['last_name']
+          creator_name << v['last_name'][0]
         end
-        creator_name = creator_name.join(' ').strip
+        unless v.dig('first_name').blank?
+          creator_name << v['first_name'][0]
+        end
+        creator_name = creator_name.join(', ').strip
         if creator_name.present?
           label = "Name"
           val = link_to(ERB::Util.h(creator_name), search_path(creator_name))

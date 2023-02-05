@@ -31,12 +31,14 @@ module Hyrax
       :publisher, :date_published, 
       :rights_statement, :licensed_date,
       :complex_person, 
+      :complex_contact_agent,
       :complex_source, :manuscript_type, 
       :complex_event,
       :language, 
       :complex_date,
       :complex_identifier, 
-      :complex_version, 
+      :complex_version,
+      :complex_funding_reference,
       :complex_relation, 
       :custom_property,
 
@@ -45,12 +47,16 @@ module Hyrax
       :computational_methods,
       :properties_addressed, 
       :synthesis_and_processing,
+      :complex_feature,
 
       # instruments
       :complex_instrument, 
 
       # specimen details
       :complex_specimen_type,
+      :complex_chemical_composition,
+      :complex_structural_feature,
+      :complex_software,
       :material_type,
       
       # not used
@@ -85,12 +91,14 @@ module Hyrax
         :publisher, :date_published, 
         :rights_statement, :licensed_date, 
         :complex_person, 
+        :complex_contact_agent,
         :complex_source, :manuscript_type,
         :complex_event,
         :language,
         :complex_date, 
         :complex_identifier, 
-        :complex_version, 
+        :complex_version,
+        :complex_funding_reference,
         :complex_relation,
         :custom_property
       ]
@@ -102,7 +110,9 @@ module Hyrax
         :characterization_methods, :computational_methods,
         # :origin_system_provenance, # not using this
         :properties_addressed,
-        :synthesis_and_processing
+        :synthesis_and_processing,
+        :complex_feature,
+        :complex_software
       ]
     end
 
@@ -111,11 +121,13 @@ module Hyrax
     end
 
     def specimen_tab_terms
-      [ :complex_specimen_type ]
+      [ :complex_chemical_composition, :complex_specimen_type, :complex_structural_feature ]
     end
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
       :complex_organization, :complex_person, :complex_relation, :complex_event,
+      :complex_funding_reference, :complex_contact_agent, :complex_chemical_composition,
+      :complex_structural_feature, :complex_software, :complex_feature,
       :complex_source, :complex_specimen_type, :complex_version, :custom_property].freeze
 
     protected
@@ -156,6 +168,31 @@ module Hyrax
        {
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
+       }
+      ]
+    end
+
+    def self.permitted_fundref_params
+      [:id,
+       :_destroy,
+       {
+         funder_identifier: [],
+         funder_name: [],
+         award_number: [],
+         award_uri: [],
+         award_title: []
+       }
+      ]
+    end
+
+    def self.permitted_contact_agent_params
+      [:id,
+       :_destroy,
+       {
+         name: [],
+         email: [],
+         organization: [],
+         department: []
        }
       ]
     end
@@ -297,6 +334,17 @@ module Hyrax
       ]
     end
 
+    def self.permitted_chemical_composition_params
+      [:id,
+       :_destroy,
+       {
+         description: [],
+         complex_identifier_attributes: permitted_identifier_params,
+         category: []
+       }
+      ]
+    end
+
     def self.permitted_structural_feature_params
       [:id,
        :_destroy,
@@ -351,6 +399,31 @@ module Hyrax
       ]
     end
 
+    def self.permitted_feature_params
+      [:id,
+       :_destroy,
+       {
+         category_vocabulary: [],
+         unit_vocabulary: [],
+         value: [],
+         identifier: [],
+         description: []
+       }
+      ]
+    end
+
+    def self.permitted_software_params
+      [:id,
+       :_destroy,
+       {
+         name: [],
+         version: [],
+         identifier: [],
+         description: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
@@ -365,6 +438,12 @@ module Hyrax
       permitted << { complex_event_attributes: permitted_event_params }
       permitted << { complex_source_attributes: permitted_source_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
+      permitted << { complex_funding_reference_attributes: permitted_fundref_params }
+      permitted << { complex_contact_agent_attributes: permitted_contact_agent_params }
+      permitted << { complex_chemical_composition_attributes: permitted_chemical_composition_params }
+      permitted << { complex_structural_feature_attributes: permitted_structural_feature_params }
+      permitted << { complex_feature_attributes: permitted_feature_params }
+      permitted << { complex_software_attributes: permitted_software_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end

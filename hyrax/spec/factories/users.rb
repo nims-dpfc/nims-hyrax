@@ -49,12 +49,6 @@ FactoryBot.define do
       employee_type_code { '11' }
     end
 
-    trait :nims_other do
-      sequence(:display_name) { |n| "Non-Researcher #{n}"}
-      guest { false }
-      employee_type_code { '21' }
-    end
-
     trait :external_researcher do
       sequence(:display_name) { |n| "External-Researcher #{n}"}
       guest { false }

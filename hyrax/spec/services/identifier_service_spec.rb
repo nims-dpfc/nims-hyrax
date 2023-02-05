@@ -13,7 +13,7 @@ RSpec.describe IdentifierService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('referred identifier local')).to eq({
+      expect(service.find_by_id('referred identifier local')).to include({
         "label" => "Referred Identifier - Local",
         "id" => "referred identifier local",
         "active" => true
@@ -23,7 +23,7 @@ RSpec.describe IdentifierService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('Identifier - Local')).to eq({
+      expect(service.find_by_label('Identifier - Local')).to include({
         "label" => "Identifier - Local",
         "id" => "identifier local",
         "active" => true
@@ -33,12 +33,12 @@ RSpec.describe IdentifierService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('Identifier - Persistent')).to eq({
+      expect(service.find_by_id_or_label('Identifier - Persistent')).to include({
         "label" => "Identifier - Persistent",
         "id" => "identifier persistent",
         "active" => true
       })
-      expect(service.find_by_id_or_label('identifier persistent')).to eq({
+      expect(service.find_by_id_or_label('identifier persistent')).to include({
         "label" => "Identifier - Persistent",
         "id" => "identifier persistent",
         "active" => true

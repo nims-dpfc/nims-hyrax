@@ -58,6 +58,7 @@ module Hyrax
           'complex_identifier': {function: 'jpcoar_complex_identifier'},
           'complex_version': {function: 'jpcoar_complex_version'},
           'complex_relation': {function: 'jpcoar_complex_relation'},
+          'complex_funding_reference': {function: 'jpcoar_complex_funding_reference'}
         }
       }
     end

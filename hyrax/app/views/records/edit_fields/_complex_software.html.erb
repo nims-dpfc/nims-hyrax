@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_software,
+    as: :nested_software,
+    input_html: {
+      class: '',
+      data: {name: :complex_software}
+    },
+    required: f.object.required?(:complex_software)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another software</span>
+  </button>
+</div>

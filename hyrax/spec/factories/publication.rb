@@ -78,6 +78,22 @@ FactoryBot.define do
       source { ['Source-123'] }
     end
 
+    trait :with_rights do
+      rights_statement {
+        [
+          'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
+        ]
+      }
+    end
+
+    trait :with_old_rights do
+      rights_statement {
+        [
+          'http://creativecommons.org/publicdomain/zero/1.0/'
+        ]
+      }
+    end
+
     trait :with_rights_statement do
       rights_statement { ['Rights-Statement-123'] }
     end
@@ -191,6 +207,29 @@ FactoryBot.define do
 
     trait :with_supervisor_approval do
       supervisor_approval { ['Professor-Supervisor-Approval'] }
+    end
+
+    trait :with_complex_funding_reference do
+      complex_funding_reference_attributes {
+        [{
+           funder_identifier: 'f1234',
+           funder_name: 'Bank',
+           award_number: 'a1234',
+           award_uri: 'http://example.com/a1234',
+           award_title: 'No free lunch'
+         }]
+      }
+    end
+
+    trait :with_complex_contact_agent do
+      complex_contact_agent_attributes {
+        [{
+           name: 'Kosuke Tanabe',
+           email: 'tanabe@example.jp',
+           organization: 'NIMS',
+           department: 'DPFC'
+         }]
+      }
     end
   end
 end

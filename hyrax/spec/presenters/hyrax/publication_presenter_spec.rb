@@ -37,7 +37,7 @@ RSpec.describe Hyrax::PublicationPresenter do
     end
 
     context 'authenticated user' do
-      let(:user) { create(:user, :nims_other) }
+      let(:user) { create(:user, :nims_researcher) }
       it { is_expected.not_to match(abstract_regex) }
       it { is_expected.not_to match(supervisor_regex) }
       it { is_expected.not_to match(depositor_regex) }
@@ -73,7 +73,7 @@ RSpec.describe Hyrax::PublicationPresenter do
     end
 
     context 'authenticated user' do
-      let(:user) { create(:user, :nims_other) }
+      let(:user) { create(:user, :nims_researcher) }
       it { is_expected.not_to match(abstract_regex) }
       it { is_expected.not_to match(supervisor_regex) }
       it { is_expected.not_to match(depositor_regex) }
@@ -108,7 +108,7 @@ RSpec.describe Hyrax::PublicationPresenter do
     end
 
     context 'authenticated user' do
-      let(:user) { create(:user, :nims_other) }
+      let(:user) { create(:user, :nims_researcher) }
       it { is_expected.not_to include("dc11:description" => "Abstract-Description-123") }
       it { is_expected.not_to include("nimsrdp:supervisor-approval" => "Professor-Supervisor-Approval") }
       it { is_expected.not_to include("marcrelators:dpt" => "depositor") }

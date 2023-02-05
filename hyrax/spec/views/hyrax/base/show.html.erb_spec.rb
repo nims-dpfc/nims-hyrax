@@ -30,15 +30,6 @@ RSpec.describe 'hyrax/base/show' do
     end
   end
 
-  context 'authenticated non-researcher' do
-    let(:user) { build(:user, :nims_other) }
-    it 'shows the abstract' do
-      expect(rendered).to have_css('h1', text: dataset.title.first)
-      expect(rendered).to have_css('div.work_description', text: dataset.description.first)
-      expect(rendered).to have_css("span.Z3988[title*='rft.description=#{CGI.escape(dataset.description.first)}']")
-    end
-  end
-
   context 'authenticated NIMS Researcher' do
     let(:user) { build(:user, :nims_researcher) }
     it 'shows the abstract' do

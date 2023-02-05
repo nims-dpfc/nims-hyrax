@@ -133,6 +133,10 @@ class Publication < ActiveFedora::Base
     index.as :stored_searchable
   end
 
+  property :complex_funding_reference, predicate: ::RDF::Vocab::DataCite.fundref, class_name:"ComplexFundingReference"
+
+  property :complex_contact_agent, predicate: ::RDF::Vocab::DCAT.contactPoint, class_name: 'ComplexContactAgent'
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
@@ -149,4 +153,6 @@ class Publication < ActiveFedora::Base
   accepts_nested_attributes_for :complex_source, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
+  accepts_nested_attributes_for :complex_funding_reference, reject_if: :fundref_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_contact_agent, reject_if: :all_blank, allow_destroy: true
 end

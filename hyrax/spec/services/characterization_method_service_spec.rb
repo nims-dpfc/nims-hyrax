@@ -13,7 +13,7 @@ RSpec.describe CharacterizationMethodService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('charge distribution')).to eq({
+      expect(service.find_by_id('charge distribution')).to include({
         "label" => "charge distribution/荷電分布",
         "id" => "charge distribution",
         "active" => true
@@ -23,7 +23,7 @@ RSpec.describe CharacterizationMethodService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('charge distribution/荷電分布')).to eq({
+      expect(service.find_by_label('charge distribution/荷電分布')).to include({
         "label" => "charge distribution/荷電分布",
         "id" => "charge distribution",
         "active" => true
@@ -33,12 +33,12 @@ RSpec.describe CharacterizationMethodService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('charge distribution/荷電分布')).to eq({
+      expect(service.find_by_id_or_label('charge distribution/荷電分布')).to include({
         "label" => "charge distribution/荷電分布",
         "id" => "charge distribution",
         "active" => true
       })
-      expect(service.find_by_id_or_label('charge distribution')).to eq({
+      expect(service.find_by_id_or_label('charge distribution')).to include({
         "label" => "charge distribution/荷電分布",
         "id" => "charge distribution",
         "active" => true

@@ -29,11 +29,15 @@ module Hyrax
       :publisher, :date_published,
       :rights_statement, :licensed_date, 
       :complex_person, 
+      :complex_contact_agent,
       :complex_source, :manuscript_type,
       :complex_event, 
       :language, 
       :complex_date, 
-      :complex_identifier, :complex_version, :complex_relation,
+      :complex_identifier,
+      :complex_version,
+      :complex_funding_reference,
+      :complex_relation,
       :custom_property, :draft
     ]
 
@@ -61,17 +65,23 @@ module Hyrax
         :publisher, :date_published, 
         :rights_statement, :licensed_date,
         :complex_person, 
+        :complex_contact_agent,
         :complex_source, :manuscript_type, 
         :complex_event,
         :language, 
         :complex_date, 
-        :complex_identifier, :complex_version, :complex_relation,
+        :complex_identifier,
+        :complex_version,
+        :complex_funding_reference,
+        :complex_relation,
         :custom_property
       ]
     end
 
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,
-      :complex_person, :complex_version, :complex_event, :complex_source].freeze
+      :complex_person, :complex_version, :complex_funding_reference,
+      :complex_event, :complex_source, :complex_contact_agent
+    ].freeze
 
     protected
 
@@ -101,6 +111,18 @@ module Hyrax
        {
          date: [],
          description: []
+       }
+      ]
+    end
+
+    def self.permitted_contact_agent_params
+      [:id,
+       :_destroy,
+       {
+         name: [],
+         email: [],
+         organization: [],
+         department: []
        }
       ]
     end
@@ -212,6 +234,19 @@ module Hyrax
       ]
     end
 
+    def self.permitted_fundref_params
+      [:id,
+       :_destroy,
+       {
+         funder_identifier: [],
+         funder_name: [],
+         award_number: [],
+         award_uri: [],
+         award_title: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
@@ -223,6 +258,8 @@ module Hyrax
       permitted << { complex_event_attributes: permitted_event_params }
       permitted << { complex_source_attributes: permitted_source_params }
       permitted << { custom_property_attributes: permitted_custom_property_params }
+      permitted << { complex_funding_reference_attributes: permitted_fundref_params }
+      permitted << { complex_contact_agent_attributes: permitted_contact_agent_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end

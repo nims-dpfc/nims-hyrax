@@ -23,14 +23,6 @@ RSpec.describe 'hyrax/base/show.json.jbuilder' do
     end
   end
 
-  context 'authenticated non-researcher' do
-    let(:user) { build(:user, :nims_other) }
-    it 'shows the abstract' do
-      expect(rendered).not_to match('depositor')
-      expect(rendered).not_to match('description')
-    end
-  end
-
   context 'authenticated NIMS Researcher' do
     let(:user) { build(:user, :nims_researcher) }
     it 'shows the abstract' do

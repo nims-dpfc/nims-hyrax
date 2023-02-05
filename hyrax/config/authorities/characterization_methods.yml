@@ -250,6 +250,9 @@ terms:
 - id: spectroscopy -- x-ray photoelectron spectroscopy
   term: spectroscopy/分光法 -- x-ray photoelectron spectroscopy/X線光電子分光法
   active: true
+- id: spectroscopy -- hard x-ray photoelectron spectroscopy
+  term: spectroscopy/分光法 -- hard x-ray photoelectron spectroscopy/硬X線光電子分光法
+  active: true
 - id: thermochemical
   term: thermochemical/熱化学
   active: true

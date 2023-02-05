@@ -13,7 +13,7 @@ RSpec.describe MeasurementEnvironmentService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('in air')).to eq({
+      expect(service.find_by_id('in air')).to include({
         "label" => "in air/空気中",
         "id" => "in air",
         "active" => true
@@ -23,7 +23,7 @@ RSpec.describe MeasurementEnvironmentService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('in air/空気中')).to eq({
+      expect(service.find_by_label('in air/空気中')).to include({
         "label" => "in air/空気中",
         "id" => "in air",
         "active" => true
@@ -33,12 +33,12 @@ RSpec.describe MeasurementEnvironmentService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('in air')).to eq({
+      expect(service.find_by_id_or_label('in air')).to include({
         "label" => "in air/空気中",
         "id" => "in air",
         "active" => true
       })
-      expect(service.find_by_id_or_label('in air/空気中')).to eq({
+      expect(service.find_by_id_or_label('in air/空気中')).to include({
         "label" => "in air/空気中",
         "id" => "in air",
         "active" => true

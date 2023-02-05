@@ -11,6 +11,7 @@ en:
       publication:
         complex_date:                     "Other Date"
         complex_event:                    "Conference/Event"
+        complex_funding_reference:        "Funding reference"
         complex_identifier:               "Identifier"
         complex_organization:             "Organization"
         complex_person:                   "Creator"

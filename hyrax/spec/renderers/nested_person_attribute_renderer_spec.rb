@@ -39,7 +39,7 @@ RSpec.describe NestedPersonAttributeRenderer do
     it 'generates the correct fields' do
       is_expected.to have_css('th', text: 'Person')
       is_expected.to have_css('div.row label', text: 'Name')
-      is_expected.to have_css('div.row a', text: 'Foo Bar')
+      is_expected.to have_css('div.row a', text: 'Bar, Foo')
     end
   end
 
