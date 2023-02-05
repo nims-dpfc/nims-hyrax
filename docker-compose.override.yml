@@ -57,5 +57,8 @@ services:
     volumes:
       - redis:/data
 
+  clamav:
+    volumes:
+      - file_uploads:${UPLOADS_PATH}
     ports:
-      - 8443:8443
+      - 3310:3310
