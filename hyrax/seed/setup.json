@@ -28,16 +28,6 @@
       "employee_type_code": "11"
     },
     {
-      "email": "nims_other@hyrax",
-      "username": "nims_other",
-      "password": "demouser",
-      "name": "NIMS other User",
-      "role": "user",
-      "depositor": true,
-      "user_identifier": "urn:USER_IDENTIFIER.dpfc.nims.go.jp:ebb7db80-27ef-4d3c-896d-e5956ee22cb6",
-      "employee_type_code": "22"
-    },
-    {
       "email": "external_user@hyrax",
       "username": "external_user",
       "password": "demouser",
