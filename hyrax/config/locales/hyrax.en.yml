@@ -298,6 +298,11 @@ en:
     center_name_full: Materials Data Platform Center
     division_name: MaDIS
     division_name_full: Research and Services Division of Materials Data and Integrated System
+    notifications:
+      workflow:
+        virus_found:
+          subject: 'Virus found in uploaded file'
+          message: "A virus was found in file %{comment} submitted with %{title} (%{link}) and has been deleted."
     product_name: MDR
     product_name_full: "MDR: NIMS Materials Data Repository"
     product_twitter_handle: "@nims_library"
