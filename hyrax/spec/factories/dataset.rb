@@ -36,7 +36,7 @@ FactoryBot.define do
     end
 
     trait :with_draft do
-      draft { [true] }
+      draft { ['true'] }
     end
 
     trait :with_description_abstract do

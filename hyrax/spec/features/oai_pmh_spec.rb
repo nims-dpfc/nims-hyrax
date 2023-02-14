@@ -2,14 +2,12 @@
 require 'rails_helper'
 
 RSpec.describe "OAI PMH Support", type: :feature do
-  let!(:work) { create(:dataset, :open) }
-  let(:identifier) { work.id }
-  let!(:work2) { create(:dataset, :open, :with_draft) }
-  let(:identifier2) { work2.id }
-
   before { OAI_CONFIG[:document][:limit] = 1000 }
 
   context 'oai interface with works present' do
+    let!(:work) { create(:dataset, :open) }
+    let(:identifier) { work.id }
+
     it 'lists metadata prefixes' do
       visit oai_provider_catalog_path(verb: 'ListMetadataFormats')
       expect(page).to have_content('oai_dc')
@@ -34,6 +32,10 @@ RSpec.describe "OAI PMH Support", type: :feature do
     end
 
     context 'excludes works in review' do
+      let(:admin) { FactoryBot.create(:user, :admin) }
+      let!(:work2) { create(:dataset, :with_draft, title: ['Draft Dataset'], depositor: admin.user_key) }
+      let(:identifier2) { work2.id }
+
       it 'retrieves a list of records' do
         visit oai_provider_catalog_path(verb: 'ListRecords', metadataPrefix: 'oai_dc')
         expect(page).not_to have_content("#{ENV['OAI_RECORD_PREFIX']}:#{identifier2}")
