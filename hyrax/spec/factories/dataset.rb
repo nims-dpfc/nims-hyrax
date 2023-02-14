@@ -35,6 +35,10 @@ FactoryBot.define do
       title { ["Restricted Dataset"] }
     end
 
+    trait :with_draft do
+      draft { [true] }
+    end
+
     trait :with_description_abstract do
       description { ["Abstract-Description-123"] }
     end
