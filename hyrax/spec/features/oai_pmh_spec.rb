@@ -44,7 +44,7 @@ RSpec.describe "OAI PMH Support", type: :feature do
 
       it 'retrieves a single record' do
         visit oai_provider_catalog_path(verb: 'GetRecord', metadataPrefix: 'oai_dc', identifier: identifier2)
-        expect(page).to have_content('idDoesNotExist')
+        expect(page).to have_content('The value of the identifier argument is unknown or illegal in this repository.')
       end
 
       it 'retrieves a list of identifiers' do
