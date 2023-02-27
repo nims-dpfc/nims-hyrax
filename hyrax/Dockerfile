@@ -39,12 +39,13 @@ RUN apt-get update -qq && \
     libtiff5-dev \
     libtiffxx5 \
     libltdl-dev \
-    ghostscript ffmpeg cifs-utils \
+    ghostscript ffmpeg cifs-utils keyutils \
     ufraw \
     bzip2 unzip xz-utils \
     vim \
     git \
     openjdk-11-jre-headless \
+    postgresql-client \
     yarn && \
     yarn config set no-progress && \
     yarn config set silent

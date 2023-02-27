@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_feature,
+    as: :nested_feature,
+    input_html: {
+      class: '',
+      data: {name: :complex_feature}
+    },
+    required: f.object.required?(:complex_feature)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another feature</span>
+  </button>
+</div>
