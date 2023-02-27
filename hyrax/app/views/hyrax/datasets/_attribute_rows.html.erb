@@ -131,6 +131,8 @@
         <%= presenter.attribute_to_html(:origin_system_provenance, label: t('ngdr.fields.origin_system_provenance'), html_dl: true) %>
         <%= presenter.attribute_to_html(:properties_addressed, render_as: :faceted, label: t('ngdr.fields.properties_addressed'), html_dl: true) %>
         <%= presenter.attribute_to_html(:synthesis_and_processing, render_as: :faceted, label: t('ngdr.fields.synthesis_and_processing'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_feature, render_as: :nested_feature, label: t('ngdr.fields.complex_feature'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_software, render_as: :nested_software, label: t('ngdr.fields.software'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Method accordion -->
