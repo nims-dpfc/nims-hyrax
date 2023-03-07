@@ -16,6 +16,7 @@ class ReindexWithLogs
     solr_results: The ids od the docs will be retrieved from solr response(s) and indexed.
                   Needs dir_path, containing one or more json file containing a solr response.
     uri: The fedora uri to index (and all it's descendants)
+    file: A directory containing one or more json files. Each file has an array of descendant URIs
     """
     my_logger.info "Re-index everything ... #{from}"
 
@@ -72,6 +73,8 @@ class ReindexWithLogs
     when 'uri'
       my_logger.info "Gathering all descendants for uri... #{uri}"
       descendants = descendant_uris(uri, exclude_uri: false)
+    when 'file'
+      descendants = get_descendants_from_file(dir_path, files_to_process)
     else
       my_logger.info "No descendants to gather. Choices are: active_fedora_base, solr_results, uri"
       descendants = []
@@ -85,12 +88,23 @@ class ReindexWithLogs
     descendants = []
     files_to_process.each do |filename|
       my_logger.debug "Gathering ids from json file #{filename}"
-      file_uris = get_file_uris(dir_path, filename)
+      file_uris = get_uris_from_doc_ids(dir_path, filename)
       file_descendants = []
       file_uris.each do |uri|
         file_descendants += descendant_uris(uri)
         log_descendants(file_descendants, File.basename(filename,File.extname(filename)))
       end
+      descendants += file_descendants
+    end
+    descendants
+  end
+
+  def get_descendants_from_file(dir_path, files_to_process)
+    files_to_process = Dir.entries(File.join(dir_path, '*.json')) unless files_to_process
+    descendants = []
+    files_to_process.each do |filename|
+      my_logger.debug "Gathering descendant URIs from json file #{filename}"
+      file_descendants = read_descendant_uris_from_file(dir_path, filename)
       descendants += file_descendants
     end
     descendants
@@ -126,14 +140,14 @@ class ReindexWithLogs
     uris = []
     files_to_process.each do |filename|
       my_logger.debug "Gathering ids from json file #{filename}"
-      uris += get_file_uris(dir_path, filename)
+      uris += get_uris_from_doc_ids(dir_path, filename)
     end
     uris
   end
 
   private
 
-  def get_file_uris(dir_path, filename)
+  def get_uris_from_doc_ids(dir_path, filename)
     filepath = File.join(dir_path, filename)
     uris = []
     return uris unless File.exists?(filepath)
@@ -168,6 +182,15 @@ class ReindexWithLogs
       uri = nil
     end
     uri
+  end
+
+  def read_descendant_uris_from_file(dir_path, filename)
+    filepath = File.join(dir_path, filename)
+    uris = []
+    return uris unless File.exists?(filepath)
+    file = File.read(filepath)
+    uris = JSON.parse(file)
+    uris
   end
 
   def log_descendants(descendants, file_prefix='')
@@ -206,6 +229,7 @@ end
 # files_to_process = ['Collection_ids.json', 'Datasets.json']
 # ---- if files_to_process is empty, all files in the directory dir_path will be processed
 # r.reindex_everything(from, dir_path: dir_path, files_to_process: files_to_process)
+
 # -----------------------------------------
 # usage with uri
 # -----------------------------------------
@@ -214,4 +238,14 @@ end
 # uri should be a fedora uri
 # uri = "http://localhost:8080/fcrepo/rest/prod/70/79/5b/48/70795b489"
 # r.reindex_everything(from, uri: uri)
+
+# -----------------------------------------
+# usage with descendant uris written to file
+# -----------------------------------------
+# r = ReindexWithLogs.new('/home/webapp/reindex_work/reindex.log')
+# from = 'file'
+# dir_path = "/home/webapp/reindex_work/descendants/"
+# files_to_process = ['Collection_ids_descendants.log', 'Dataset_ids_descendants.log']
+# ---- if files_to_process is empty, all files in the directory dir_path will be processed
+# r.reindex_everything(from, dir_path: dir_path, files_to_process: files_to_process)
 
