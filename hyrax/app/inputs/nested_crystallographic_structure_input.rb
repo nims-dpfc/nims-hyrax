@@ -9,6 +9,8 @@ class NestedCrystallographicStructureInput < NestedAttributesInput
     if object.required?(:complex_crystallographic_structure) and index == 0
       required = true
     end
+    repeats = options.delete(:repeats)
+    repeats = true if repeats.nil?
 
     # --- category_vocabulary
     field = :category_vocabulary
