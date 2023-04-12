@@ -294,10 +294,10 @@ en:
         title: News
     institution_name: NIMS
     institution_name_full: National Institute for Materials Science
-    center_name: DPFC
-    center_name_full: Materials Data Platform Center
-    division_name: MaDIS
-    division_name_full: Research and Services Division of Materials Data and Integrated System
+    center_name: DPF
+    center_name_full: Materials Data Platform
+    division_name: RNFS
+    division_name_full: Research Network and Facility Services Division
     product_name: MDR
     product_name_full: "MDR: NIMS Materials Data Repository"
     product_twitter_handle: "@nims_library"
