@@ -1,5 +1,5 @@
 module ComplexField
-  module CaulculatedMethodIndexer
+  module ComputationalMethodIndexer
     def generate_solr_document
       super.tap do |solr_doc|
         index_computational_method(solr_doc)
