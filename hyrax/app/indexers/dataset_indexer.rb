@@ -94,7 +94,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::FundrefIndexer.fundref_search_fields
       fields.concat ComplexField::FeatureIndexer.feature_search_fields
       fields.concat ComplexField::SoftwareIndexer.software_search_fields
-      fields.concat ComplexField::ComputationalMethodIndexer.software_search_fields
+      fields.concat ComplexField::ComputationalMethodIndexer.computational_method_search_fields
     end
   end
 
