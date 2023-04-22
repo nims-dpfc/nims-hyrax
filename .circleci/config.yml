@@ -22,7 +22,7 @@ jobs:
           name: apt install
           command: |
             sudo apt update
-            sudo apt install -y openjdk-11-jre-headless libmediainfo-dev libxslt1-dev libsqlite3-dev
+            sudo apt install -y openjdk-8-jre-headless libmediainfo-dev libxslt1-dev libsqlite3-dev
       - run:
           name: bundle install
           command: |
