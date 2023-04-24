@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_crystallographic_structure,
+    as: :nested_crystallographic_structure,
+    input_html: {
+      class: '',
+      data: {name: :complex_crystallographic_structure}
+    },
+    required: f.object.required?(:complex_crystallographic_structure)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another crystallographic structure</span>
+  </button>
+</div>
