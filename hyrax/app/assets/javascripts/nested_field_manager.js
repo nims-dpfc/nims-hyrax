@@ -146,7 +146,7 @@ var NestedFieldManager = function () {
         key: 'updateIndexInName',
         value: function updateIndexInName($newChildren, $currentId, $newId) {
             // modify id and name in newChildren
-            var $currentNamePart = new RegExp('[' + $currentId + ']');
+            var $currentNamePart = '\[' + $currentId + '\]';
             var $newnamePart = '[' + $newId + ']';
             $newChildren.each(function () {
                 var $currentName = $(this).attr('name');
