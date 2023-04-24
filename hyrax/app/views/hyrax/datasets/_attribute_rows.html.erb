@@ -127,6 +127,7 @@
     <div id="experimentalMethod" class="panel-collapse collapse in">
       <div class="panel-body">
         <%= presenter.attribute_to_html(:characterization_methods, render_as: :faceted, label: t('ngdr.fields.characterization_methods'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:experimental_methods, render_as: :nested_experimental_method, label: t('ngdr.fields.characterization_methods'), html_dl: true) %>
         <%= presenter.attribute_to_html(:computational_methods, render_as: :faceted, label: t('ngdr.fields.computational_methods'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_computational_method, render_as: :nested_computational_method, label: t('ngdr.fields.computational_methods'), html_dl: true) %>
         <%= presenter.attribute_to_html(:origin_system_provenance, label: t('ngdr.fields.origin_system_provenance'), html_dl: true) %>

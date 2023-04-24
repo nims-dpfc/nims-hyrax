@@ -130,8 +130,8 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_show_fields
       fields.concat ComplexField::FeatureIndexer.feature_show_fields
       fields.concat ComplexField::SoftwareIndexer.software_show_fields
-      fields.concat ComplexField::ComputationalMethodIndexer.software_show_fields
-      fields.concat ComplexField::ExperimentalMethodIndexer.software_show_fields
+      fields.concat ComplexField::ComputationalMethodIndexer.computational_method_show_fields
+      fields.concat ComplexField::ExperimentalMethodIndexer.experimental_method_show_fields
     end
   end
 
