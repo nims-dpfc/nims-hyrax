@@ -10,7 +10,7 @@ module ComplexField
       solr_doc[Solrizer.solr_name('complex_computational_method', :displayable)] = object.complex_computational_method.to_json
       solr_doc[Solrizer.solr_name('complex_computational_method_category_vocabulary', :stored_searchable)] = object.complex_computational_method.map { |i| i.category_vocabulary.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_computational_method_category_vocabulary', :facetable)] = object.complex_computational_method.map { |i| i.category_vocabulary.reject(&:blank?).first }
-      solr_doc[Solrizer.solr_name('complex_computational_method_category_description', :facetable)] = object.complex_computational_method.map { |i| i.category_description.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('complex_computational_method_category_description', :stored_searchable)] = object.complex_computational_method.map { |i| i.category_description.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_computational_method_description', :stored_searchable)] = object.complex_computational_method.map { |i| i.description.reject(&:blank?).first }
     end
 

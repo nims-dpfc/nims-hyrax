@@ -232,4 +232,8 @@ class SolrDocument
   def complex_computational_method
     self[Solrizer.solr_name('complex_computational_method', :displayable)]
   end
+
+  def complex_experimental_method
+    self[Solrizer.solr_name('complex_experimental_method', :displayable)]
+  end
 end
