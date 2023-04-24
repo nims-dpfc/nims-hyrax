@@ -168,6 +168,8 @@ class Dataset < ActiveFedora::Base
 
   property :complex_computational_method, predicate: ::RDF::Vocab::NimsRdp["computational-method"], class_name: 'ComplexComputationalMethod'
 
+  property :complex_experimental_method, predicate: ::RDF::Vocab::NimsRdp["experimental-method"], class_name: 'ComplexExperimentalMethod'
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
@@ -193,4 +195,5 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_feature, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_software, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_computational_method, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_experimental_method, reject_if: :all_blank, allow_destroy: true
 end
