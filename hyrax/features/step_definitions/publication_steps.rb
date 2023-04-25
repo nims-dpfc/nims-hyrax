@@ -188,3 +188,20 @@ Then(/^I should not access the (open|authenticated|embargo|lease|restricted) pub
   expect(page).not_to have_content("#{access.capitalize} Publication")
   expect(page).to have_content('Unauthorized')
 end
+
+Then('make publication editable by the nims_researcher') do
+  publication = Publication.last
+  publication.update(edit_users: [@user.user_key])
+end
+
+Then("On edit publication page should not show extra blank complex source fileds") do
+  publication = Publication.last
+
+  visit edit_hyrax_publication_path(publication)
+
+  expect(page).to have_content('Edit Work')
+
+  click_link "Descriptions" # switch tab
+
+  expect(page).to_not have_css ".nested_source.publication_complex_source #publication_complex_source_attributes_1_title"
+end
