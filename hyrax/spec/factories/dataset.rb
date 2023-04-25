@@ -573,6 +573,32 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_computational_method do
+      complex_computational_method_attributes {
+        [{
+           category_vocabulary: 'http://vocabulary.example.jp/Q3456',
+           category_description: 'Category Q3456',
+           calculated_at: '2023-01-01 00:00:00',
+           description: 'Computational method 1'
+         }]
+      }
+    end
+
+    trait :with_complex_experimental_method do
+      complex_experimental_method_attributes {
+        [{
+           category_vocabulary: 'http://vocabulary.example.jp/Q4560',
+           category_description: 'Category Q4560',
+           analysis_field_vocabulary: 'http://vocabulary.example.jp/Q4561',
+           analysis_field_description: 'Category Q4561',
+           measurement_envirionment_vocabulary_description: 'Category Q4561',
+           standarized_procedure_vocabulary: 'Category Q4561',
+           measured_at: '2023-02-01 00:00:00',
+           description: 'Experimental method 1'
+         }]
+      }
+    end
+
     trait :with_ja do
       title { ["材料データプラットフォームDICE2.0 - データ創出−蓄積−利用−連携の基盤"] }
       managing_organization { ['ナノテクノロジープラットフォーム事業の成果と課題'] }
