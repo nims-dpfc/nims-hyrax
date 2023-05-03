@@ -9,6 +9,7 @@ en:
           characterization_methods_sim: Characterization methods
           complex_chemical_composition_category_ssim: Chemical composition category
           complex_chemical_composition_identifier_sim: Chemical composition identifier
+          complex_computational_method_category_vocabulary_sim: Computational method category
           complex_contact_agent_ssm: Contact agent
           complex_crystallographic_structure_category_vocabulary_sim: Crystallographic structure
           complex_date_dtsim: Date
@@ -196,6 +197,7 @@ en:
           computational_methods_tesim: Computational methods
           contributor_tesim: Contributor
           complex_date_ssm: Date
+          complex_computational_method_ssm: Computational method
           complex_contact_agent_ssm: Contact agent
           complex_chemical_composition: Chemical composition
           complex_crystallographic_structure_ssm: Crystallographic structure

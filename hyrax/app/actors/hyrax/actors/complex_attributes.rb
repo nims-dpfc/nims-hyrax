@@ -51,6 +51,7 @@ module Hyrax
           complex_material_type
           instrument_function
           complex_chemical_composition
+          complex_computational_method
           complex_crystallographic_structure
           complex_event
           complex_source
@@ -58,7 +59,6 @@ module Hyrax
           complex_funding_reference
           complex_feature
           complex_software
-
         ]
       end
     end

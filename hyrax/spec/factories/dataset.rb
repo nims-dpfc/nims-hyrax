@@ -570,6 +570,17 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_computational_method do
+      complex_computational_method_attributes {
+        [{
+          category_vocabulary: 'http://vocabulary.example.jp/Q3456',
+          category_description: 'Vocabulary 3456',
+          description: 'Computational method 1',
+          calculated_at: '2023-01-01 10:00:00'
+        }]
+      }
+    end
+
     trait :with_ja do
       title { ["材料データプラットフォームDICE2.0 - データ創出−蓄積−利用−連携の基盤"] }
       managing_organization { ['ナノテクノロジープラットフォーム事業の成果と課題'] }

@@ -15,6 +15,7 @@ en:
         analysis_field:                   "Analysis field"
         characterization_methods:         "Characterization methods"
         complex_chemical_composition:     "Chemical composition"
+        complex_computational_method:     "Computational method"
         complex_contact_agent:            "Contact agent"
         complex_crystallographic_structure: "Crystallographic structure"
         complex_date:                     "Other Date"

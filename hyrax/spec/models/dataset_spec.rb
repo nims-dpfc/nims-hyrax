@@ -1211,4 +1211,21 @@ RSpec.describe Dataset do
       expect(@obj.complex_software).to be_empty
     end
   end
+
+  describe 'complex_computational_method' do
+    it 'creates a complex computational method active triple resource with computational_method' do
+      @obj = build(:dataset, :with_complex_computational_method)
+      expect(@obj.complex_computational_method.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_computational_method.first.description).to eq ['Computational method 1']
+    end
+
+    it 'rejects a complex computational method active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_computational_method_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_software).to be_empty
+    end
+  end
 end
