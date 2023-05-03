@@ -1214,6 +1214,44 @@ RSpec.describe DatasetIndexer do
     end
   end
 
+  describe 'indexes the crystallographic_structure active triple resource with all the attributes' do
+    before do
+      crystallographic_structure = [
+        {
+          description: 'crystallographic_structure description 1',
+          specimen_identifier: 'sample10',
+          category_vocabulary: 'http://vocabulary.example.jp/Q234',
+          category_description: 'Q234'
+        },
+        {
+          description: 'crystallographic_structure description 2',
+          specimen_identifier: 'sample20',
+          category_vocabulary: 'http://vocabulary.example.jp/Q235',
+          category_description: 'Q235'
+        }
+      ]
+      obj = build(:dataset, complex_crystallographic_structure_attributes: crystallographic_structure)
+      @solr_document = obj.to_solr
+    end
+
+    it 'indexes crystallographic_structure name as stored_searchable' do
+      expect(@solr_document['complex_crystallographic_structure_description_tesim']).to match_array(
+        ['crystallographic_structure description 1', 'crystallographic_structure description 2'])
+    end
+    it 'indexes crystallographic_structure category_vocabulary as facetable' do
+      expect(@solr_document['complex_crystallographic_structure_category_vocabulary_sim']).to match_array(
+        ['http://vocabulary.example.jp/Q234', 'http://vocabulary.example.jp/Q235'])
+    end
+    it 'indexes crystallographic_structure description as stored_searchable' do
+      expect(@solr_document['complex_crystallographic_structure_description_tesim']).to match_array(
+        ['crystallographic_structure description 1', 'crystallographic_structure description 2'])
+    end
+    it 'indexes crystallographic_structure specimen_identifier as symbol' do
+      expect(@solr_document['complex_crystallographic_structure_specimen_identifier_ssim']).to match_array(
+        ['sample10', 'sample20'])
+    end
+  end
+
   describe 'indexes the feature active triple resource with all the attributes' do
     before do
       feature = [
