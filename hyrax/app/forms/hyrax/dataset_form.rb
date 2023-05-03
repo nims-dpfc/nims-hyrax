@@ -44,7 +44,6 @@ module Hyrax
 
       # method
       :characterization_methods, 
-      :computational_methods,
       :properties_addressed, 
       :synthesis_and_processing,
       :complex_feature,
@@ -109,7 +108,7 @@ module Hyrax
     def method_tab_terms
       [
         # Method tab order determined here
-        :characterization_methods, :computational_methods,
+        :characterization_methods,
         # :origin_system_provenance, # not using this
         :properties_addressed,
         :synthesis_and_processing,
