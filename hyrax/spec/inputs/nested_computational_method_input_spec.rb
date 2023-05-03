@@ -15,9 +15,9 @@ RSpec.describe NestedComputationalMethodInput, type: :input do
   subject { Capybara.string(html) }
 
   it 'generates the correct fields' do
-    is_expected.to have_field('dataset_complex_computational_method_attributes_0_category_vocabulary', type: :text, with: 'http://vocabulary.example.jp/Q3456')
-    is_expected.to have_field('dataset_complex_computational_method_attributes_0_category_description', type: :text, with: 'Category Q3456')
-    is_expected.to have_field('dataset_complex_computational_method_attributes_0_calculated_at', type: :text, with: '2023-01-01 00:00:00')
     is_expected.to have_field('dataset_complex_computational_method_attributes_0_description', type: :text, with: 'Computational method 1')
+    is_expected.to have_field('dataset_complex_computational_method_attributes_0_category_vocabulary', type: :text, with: 'http://vocabulary.example.jp/Q3456')
+    is_expected.to have_field('dataset_complex_computational_method_attributes_0_category_description', type: :text, with: 'Vocabulary 3456')
+    is_expected.to have_field('dataset_complex_computational_method_attributes_0_calculated_at', type: :text, with: '2023-01-01 10:00:00')
   end
 end

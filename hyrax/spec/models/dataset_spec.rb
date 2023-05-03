@@ -1140,6 +1140,30 @@ RSpec.describe Dataset do
     end
   end
 
+  describe 'complex_crystallographic_structure' do
+    it 'creates a complex crystallographic_structure active triple resource with crystallographic_structure' do
+      @obj = build(:dataset,
+                   complex_crystallographic_structure_attributes: [{
+                     description: 'structure 1',
+                     category_vocabulary: 'http://vocabulary.example.jp/Q123',
+                     category_description: 'Q123',
+                     specimen_identifier: 'sample10',
+                   }]
+      )
+      expect(@obj.complex_crystallographic_structure.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_crystallographic_structure.first.description).to eq ['structure 1']
+    end
+
+    it 'rejects a complex crystallographic_structure active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_crystallographic_structure_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_crystallographic_structure).to be_empty
+    end
+  end
+
   describe 'complex_feature' do
     it 'creates a complex feature active triple resource with feature' do
       @obj = build(:dataset,
@@ -1182,6 +1206,23 @@ RSpec.describe Dataset do
       @obj = build(:dataset,
                    complex_software_attributes: [{
                                                  name: ''
+                                               }]
+      )
+      expect(@obj.complex_software).to be_empty
+    end
+  end
+
+  describe 'complex_computational_method' do
+    it 'creates a complex computational method active triple resource with computational_method' do
+      @obj = build(:dataset, :with_complex_computational_method)
+      expect(@obj.complex_computational_method.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_computational_method.first.description).to eq ['Computational method 1']
+    end
+
+    it 'rejects a complex computational method active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_computational_method_attributes: [{
+                                                 description: ''
                                                }]
       )
       expect(@obj.complex_software).to be_empty
