@@ -23,6 +23,7 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::StructuralFeatureIndexer
   include ComplexField::FundrefIndexer
   include ComplexField::ContactAgentIndexer
+  include ComplexField::CrystallographicStructureIndexer
   include ComplexField::FeatureIndexer
   include ComplexField::SoftwareIndexer
   include ComplexField::ComputationalMethodIndexer
@@ -53,6 +54,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::StateOfMatterIndexer.state_of_matter_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_facet_fields
       fields.concat ComplexField::FundrefIndexer.fundref_facet_fields
+      fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_facet_fields
       fields.concat ComplexField::FeatureIndexer.feature_facet_fields
       fields.concat ComplexField::SoftwareIndexer.software_facet_fields
       fields.concat ComplexField::ComputationalMethodIndexer.computational_method_facet_fields
@@ -93,6 +95,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::ShapeIndexer.shape_search_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_search_fields
       fields.concat ComplexField::FundrefIndexer.fundref_search_fields
+      fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_search_fields
       fields.concat ComplexField::FeatureIndexer.feature_search_fields
       fields.concat ComplexField::SoftwareIndexer.software_search_fields
       fields.concat ComplexField::ComputationalMethodIndexer.computational_method_search_fields
@@ -128,6 +131,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::ContactAgentIndexer.contact_agent_show_fields
       fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_show_fields
       fields.concat ComplexField::StructuralFeatureIndexer.structural_feature_show_fields
+      fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_show_fields
       fields.concat ComplexField::FeatureIndexer.feature_show_fields
       fields.concat ComplexField::SoftwareIndexer.software_show_fields
       fields.concat ComplexField::ComputationalMethodIndexer.software_show_fields

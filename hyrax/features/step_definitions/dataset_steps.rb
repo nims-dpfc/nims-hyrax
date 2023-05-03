@@ -200,3 +200,20 @@ Then(/^I should not access the (open|authenticated|embargo|lease|restricted) dat
   expect(page).not_to have_content("#{access.capitalize} Dataset")
   expect(page).to have_content('Unauthorized')
 end
+
+Then('make dataset editable by the nims_researcher') do
+  dataset = Dataset.last
+  dataset.update(edit_users: [@user.user_key])
+end
+
+Then("On edit dataset page should not show extra blank complex source fileds") do
+  dataset = Dataset.last
+
+  visit edit_hyrax_dataset_path(dataset)
+
+  expect(page).to have_content('Edit Work')
+
+  click_link "Descriptions" # switch tab
+
+  expect(page).to_not have_css ".nested_source.dataset_complex_source #dataset_complex_source_attributes_1_title"
+end
