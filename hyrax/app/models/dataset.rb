@@ -116,6 +116,9 @@ class Dataset < ActiveFedora::Base
   property :complex_structural_feature, predicate: ::RDF::Vocab::NimsRdp['structural-feature'],
     class_name: "ComplexStructuralFeature"
 
+  property :complex_crystallographic_structure, predicate: ::RDF::Vocab::NimsRdp['crystallographic-structure'],
+    class_name: "ComplexCrystallographicStructure"
+
   property :complex_feature, predicate: ::RDF::Vocab::NimsRdp['feature'],
     class_name: "ComplexFeature"
 
@@ -190,6 +193,7 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_contact_agent, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_chemical_composition, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_structural_feature, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_crystallographic_structure, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_feature, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_software, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_computational_method, reject_if: :all_blank, allow_destroy: true
