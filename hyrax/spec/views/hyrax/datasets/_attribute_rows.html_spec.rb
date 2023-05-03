@@ -8,7 +8,8 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
                         :with_complex_version, :with_resource_type, :with_complex_relation, :with_complex_source,
                         :with_complex_event, :with_material_type, :with_complex_funding_reference,
                         :with_complex_contact_agent, :with_complex_chemical_composition, 
-                        :with_complex_structural_feature, :with_complex_software,
+                        :with_complex_structural_feature, :with_complex_crystallographic_structure,
+                        :with_complex_software,
                         :with_complex_feature,
                         :with_description_abstract, :with_supervisor_approval) }
   let(:presenter) { Hyrax::DatasetPresenter.new(SolrDocument.new(dataset.to_solr), Ability.new(user), controller.request) }
@@ -49,6 +50,9 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
       expect(rendered).to have_content('structural feature description')
       expect(rendered).to have_content('structural feature category')
       expect(rendered).to have_content('structural_feature/123456')
+      expect(rendered).to have_content('crystallographic_structure/123456')
+      expect(rendered).to have_content('crystallographic_structure category 1')
+      expect(rendered).to have_content('specimen/123456')
       expect(rendered).to have_content('http://vocabulary.example.jp/Q2345')
       expect(rendered).to have_content('http://vocabulary.example.jp/Q2346')
       expect(rendered).to have_content('Feature 1')
@@ -85,7 +89,9 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
       expect(rendered).to have_content('http://id.example.jp/Q12345')
       expect(rendered).to have_content('structural feature description')
       expect(rendered).to have_content('structural feature category')
-      expect(rendered).to have_content('structural_feature/123456')
+      expect(rendered).to have_content('crystallographic_structure/123456')
+      expect(rendered).to have_content('crystallographic_structure category 1')
+      expect(rendered).to have_content('specimen/123456')
       expect(rendered).not_to have_content('Abstract-Description-123') # Abstract/Description is not displayed in this table partial
       expect(rendered).not_to have_content('Professor-Supervisor-Approval')
     end

@@ -22,6 +22,19 @@ module ComplexField
           end
         end
       end
+      solr_doc[Solrizer.solr_name('complex_crystallographic_structure', :displayable)] = object.complex_crystallographic_structure.to_json
+      solr_doc[Solrizer.solr_name('complex_crystallographic_structure_category_vocabulary', :stored_searchable)] = object.complex_crystallographic_structure.map { |i| i.category_vocabulary.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('complex_crystallographic_structure_category_vocabulary', :facetable)] = object.complex_crystallographic_structure.map { |i| i.category_vocabulary.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('complex_crystallographic_structure_category_description', :stored_searchable)] = object.complex_crystallographic_structure.map { |i| i.category_description.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('complex_crystallographic_structure_description', :stored_searchable)] = object.complex_crystallographic_structure.map { |i| i.description.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('complex_crystallographic_structure_specimen_identifier', :symbol)] = object.complex_crystallographic_structure.map { |i| i.specimen_identifier.reject(&:blank?).first }
+    end
+
+    def self.crystallographic_structure_facet_fields
+      # solr fields that will be treated as facets
+      fields = []
+      fields << Solrizer.solr_name('complex_crystallographic_structure_category_vocabulary', :facetable)
+      fields
     end
 
     def self.crystallographic_structure_search_fields
@@ -29,6 +42,17 @@ module ComplexField
       fields = []
       fields << Solrizer.solr_name('complex_crystallographic_structure', :stored_searchable)
       fields << Solrizer.solr_name('complex_crystallographic_structure_identifier', :symbol)
+      fields << Solrizer.solr_name('complex_crystallographic_structure_category_vocabulary', :stored_searchable)
+      fields << Solrizer.solr_name('complex_crystallographic_structure_category_description', :stored_searchable)
+      fields << Solrizer.solr_name('complex_crystallographic_structure_description', :stored_searchable)
+      fields << Solrizer.solr_name('complex_crystallographic_structure_specimen_identifier', :symbol)
+      fields
+    end
+
+    def self.crystallographic_structure_show_fields
+      # solr fields that will be used to display results on the record page
+      fields = []
+      fields << Solrizer.solr_name('complex_crystallographic_structure', :displayable)
       fields
     end
 
