@@ -246,15 +246,12 @@ FactoryBot.define do
     end
 
     trait :with_complex_crystallographic_structure do
-      complex_specimen_type_attributes {
+      complex_crystallographic_structure_attributes {
         [{
-          complex_crystallographic_structure_attributes: [{
-            description: 'crystallographic_structure 1',
-            complex_identifier_attributes: [{
-              identifier: ['crystallographic_structure/123456'],
-              scheme: 'identifier persistent'
-            }]
-          }]
+          description: 'crystallographic_structure 1',
+          category_description: 'crystallographic_structure category 1',
+          category_vocabulary: ['crystallographic_structure/123456'],
+          specimen_identifier: ['specimen/123456']
         }]
       }
     end
@@ -576,11 +573,11 @@ FactoryBot.define do
     trait :with_complex_computational_method do
       complex_computational_method_attributes {
         [{
-           category_vocabulary: 'http://vocabulary.example.jp/Q3456',
-           category_description: 'Category Q3456',
-           calculated_at: '2023-01-01 00:00:00',
-           description: 'Computational method 1'
-         }]
+          category_vocabulary: 'http://vocabulary.example.jp/Q3456',
+          category_description: 'Vocabulary 3456',
+          description: 'Computational method 1',
+          calculated_at: '2023-01-01 10:00:00'
+        }]
       }
     end
 

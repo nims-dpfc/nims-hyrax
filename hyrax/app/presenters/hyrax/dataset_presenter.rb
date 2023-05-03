@@ -8,6 +8,7 @@ module Hyrax
       :complex_contact_agent, :complex_chemical_composition, :complex_structural_feature,
       :complex_instrument, :origin_system_provenance, :properties_addressed,
       :complex_relation, :specimen_set, :complex_specimen_type, :complex_event,
+      :complex_crystallographic_structure,
       :complex_source, :complex_feature, :complex_software,
       :complex_computational_method, :complex_experimental_method,
       :material_type,
