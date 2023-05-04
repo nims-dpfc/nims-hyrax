@@ -585,11 +585,11 @@ FactoryBot.define do
       complex_experimental_method_attributes {
         [{
            category_vocabulary: 'http://vocabulary.example.jp/Q4560',
-           category_description: 'Category Q4560',
+           category_description: 'Vocabulary 4560',
            analysis_field_vocabulary: 'http://vocabulary.example.jp/Q4561',
-           analysis_field_description: 'Category Q4561',
-           measurement_envirionment_vocabulary_description: 'Category Q4561',
-           standarized_procedure_vocabulary: 'Category Q4561',
+           analysis_field_description: 'Vocabulary 4561',
+           measurement_environment_vocabulary: 'http://vocabulary.example.jp/Q4562',
+           standarized_procedure_vocabulary: 'http://vocabulary.example.jp/Q4563',
            measured_at: '2023-02-01 00:00:00',
            description: 'Experimental method 1'
          }]

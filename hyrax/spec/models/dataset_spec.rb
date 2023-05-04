@@ -1225,7 +1225,24 @@ RSpec.describe Dataset do
                                                  description: ''
                                                }]
       )
-      expect(@obj.complex_software).to be_empty
+      expect(@obj.complex_computational_method).to be_empty
+    end
+  end
+
+  describe 'complex_experimental_method' do
+    it 'creates a complex experimental method active triple resource with computational_method' do
+      @obj = build(:dataset, :with_complex_experimental_method)
+      expect(@obj.complex_experimental_method.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_experimental_method.first.description).to eq ['Experimental method 1']
+    end
+
+    it 'rejects a complex experimental method active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_experimental_method_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_experimental_method).to be_empty
     end
   end
 end
