@@ -14,6 +14,7 @@ en:
           complex_crystallographic_structure_category_vocabulary_sim: Crystallographic structure
           complex_date_dtsim: Date
           complex_date_accepted_dtsim: Date accepted
+          complex_experimental_method_category_vocabulary_sim: Experimental method category
           complex_year_accepted_sim: Date accepted
           complex_date_available_dtsim: Date available
           complex_year_available_sim: Date available
@@ -215,6 +216,7 @@ en:
           complex_date_purchased_ssm: Date purchased
           complex_date_other_ssm: Date
           complex_event_ssm: Event
+          complex_experimental_method_ssm: Experimental method
           complex_feature_ssm: Feature
           complex_funding_reference_ssm: Funding reference
           complex_identifier_ssm: Identifier

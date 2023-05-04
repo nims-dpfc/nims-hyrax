@@ -54,6 +54,7 @@ module Hyrax
           complex_computational_method
           complex_crystallographic_structure
           complex_event
+          complex_experimental_method
           complex_source
           complex_event_date
           complex_funding_reference
