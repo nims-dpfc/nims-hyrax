@@ -1225,7 +1225,7 @@ RSpec.describe Dataset do
                                                  description: ''
                                                }]
       )
-      expect(@obj.complex_software).to be_empty
+      expect(@obj.complex_computational_method).to be_empty
     end
   end
 end
