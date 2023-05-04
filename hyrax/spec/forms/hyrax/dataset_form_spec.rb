@@ -32,6 +32,7 @@ RSpec.describe Hyrax::DatasetForm do
       it { is_expected.to include(:complex_feature) }
       it { is_expected.to include(:complex_software) }
       it { is_expected.to include(:complex_computational_method) }
+      it { is_expected.to include(:complex_experimental_method) }
     end
 
     describe '#instrument_tab_terms' do
@@ -74,6 +75,7 @@ RSpec.describe Hyrax::DatasetForm do
         expect(described_class).to receive(:permitted_feature_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_software_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_computational_method_params).at_least(:once).and_call_original
+        expect(described_class).to receive(:permitted_experimental_method_params).at_least(:once).and_call_original
         subject
       end
     end
