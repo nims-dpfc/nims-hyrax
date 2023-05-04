@@ -6,7 +6,6 @@ RSpec.describe NestedComputationalMethodAttributeRenderer do
   subject { Capybara.string(html) }
 
   it 'generates the correct fields' do
-    puts html.to_s
     is_expected.to have_css('th', text: 'Computational method')
 
     is_expected.to have_css('div.row label', text: 'Description')
