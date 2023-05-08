@@ -31,8 +31,6 @@ services:
   web:
     ports:
       - 3000:3000
-    depends_on:
-      - cas
     environment:
       - RAILS_FORCE_SSL=false
     volumes:
@@ -59,14 +57,8 @@ services:
     volumes:
       - redis:/data
 
-  cas:
-    build:
-      context: cas
-    networks:
-      internal:
-        aliases:
-          - cas
-          - cas.mdr.nims.test
-
+  clamav:
+    volumes:
+      - file_uploads:${UPLOADS_PATH}
     ports:
-      - 8443:8443
+      - 3310:3310

@@ -7,6 +7,10 @@ en:
           based_near_label_sim: Location
           creator_sim: Creator
           characterization_methods_sim: Characterization methods
+          complex_chemical_composition_category_ssim: Chemical composition category
+          complex_chemical_composition_identifier_sim: Chemical composition identifier
+          complex_contact_agent_ssm: Contact agent
+          complex_crystallographic_structure_category_vocabulary_sim: Crystallographic structure
           complex_date_dtsim: Date
           complex_date_accepted_dtsim: Date accepted
           complex_year_accepted_sim: Date accepted
@@ -35,6 +39,8 @@ en:
           complex_date_other_dtsim: Date
           complex_year_other_sim: Date
           complex_event_sim: Event
+          complex_feature_category_vocabulary_sim: Feature category
+          complex_feature_unit_vocabulary_sim: Feature unit
           complex_material_sub_type_sim: Material sub type
           complex_material_type_sim: Material type
           complex_organization_sim: Organization
@@ -55,6 +61,7 @@ en:
           complex_purchase_record_supplier_sub_organization_sim: Purchase record supplier sub organization
           complex_relation_relationship_sim: Relationship
           complex_rights_sim: License
+          complex_software_name_sim: Software
           complex_structural_feature_category_sim: Structural feature category
           complex_structural_feature_sub_category_sim: Structural feature sub category
           complex_source_title_sim: Journal
@@ -93,7 +100,9 @@ en:
           characterization_methods_tesim: Characterization methods
           contributor_tesim: Contributor
           creator_tesim: Creator
+          complex_contact_agent_tesim: Contact agent
           complex_chemical_composition_tesim: Chemical composition
+          complex_chemical_composition_category_ssim: Chemical composition category
           complex_chemical_composition_identifier_ssim: Chemical composition identifier
           complex_crystallographic_structure_tesim: Crystallographic structure
           complex_crystallographic_structure_identifier_ssim: Crystallographic structure identifier
@@ -138,6 +147,9 @@ en:
           complex_relation_title_tesim: Title of related item
           complex_shape_tesim: Shape
           complex_shape_identifier_ssim: Shape identifier
+          complex_software_name_tesim: Software name
+          complex_software_description_tesim: Software description
+          complex_software_identifier_ssim: Software identifier
           complex_source_title_tesim: Journal
           complex_specimen_type_tesim: Specimen type
           complex_specimen_type_description_tesim: Specimen description
@@ -183,7 +195,10 @@ en:
           characterization_methods_tesim: Characterization_methods
           computational_methods_tesim: Computational methods
           contributor_tesim: Contributor
-          complex_date_ssm: "Date"
+          complex_date_ssm: Date
+          complex_contact_agent_ssm: Contact agent
+          complex_chemical_composition: Chemical composition
+          complex_crystallographic_structure_ssm: Crystallographic structure
           complex_date_accepted_ssm: Date accepted
           complex_date_available_ssm: Date available
           complex_date_copyrighted_ssm: Date copyrighted
@@ -198,6 +213,7 @@ en:
           complex_date_purchased_ssm: Date purchased
           complex_date_other_ssm: Date
           complex_event_ssm: Event
+          complex_feature_ssm: Feature
           complex_funding_reference_ssm: Funding reference
           complex_identifier_ssm: Identifier
           complex_instrument_ssm: Instrument
@@ -215,8 +231,10 @@ en:
           complex_person_sub_organization_ssm: Sub organization
           complex_relation_ssm: Related item
           complex_rights_ssm: License
+          complex_software_ssm: Software
           complex_source_ssm: Journal
           complex_specimen_type_ssm: Specimen type
+          complex_structural_feature_ssm: Structural feature
           complex_version_ssm: Version
           creator_tesim: Creator
           custom_property_ssm: Additional metadata
@@ -278,10 +296,10 @@ en:
         title: News
     institution_name: NIMS
     institution_name_full: National Institute for Materials Science
-    center_name: DPFC
-    center_name_full: Materials Data Platform Center
-    division_name: MaDIS
-    division_name_full: Research and Services Division of Materials Data and Integrated System
+    center_name: DPF
+    center_name_full: Materials Data Platform
+    division_name: RNFS
+    division_name_full: Research Network and Facility Services Division
     product_name: MDR
     product_name_full: "MDR: NIMS Materials Data Repository"
     product_twitter_handle: "@nims_library"

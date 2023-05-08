@@ -12,6 +12,7 @@ class PublicationIndexer < NgdrIndexer
   include ComplexField::EventIndexer
   include ComplexField::SourceIndexer
   include ComplexField::FundrefIndexer
+  include ComplexField::ContactAgentIndexer
 
   def self.facet_fields
     super.tap do |fields|
@@ -59,6 +60,7 @@ class PublicationIndexer < NgdrIndexer
       fields.concat ComplexField::EventIndexer.event_show_fields
       fields.concat ComplexField::SourceIndexer.source_show_fields
       fields.concat ComplexField::FundrefIndexer.fundref_show_fields
+      fields.concat ComplexField::ContactAgentIndexer.contact_agent_show_fields
     end
   end
 

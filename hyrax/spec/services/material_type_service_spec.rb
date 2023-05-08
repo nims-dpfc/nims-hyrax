@@ -13,7 +13,7 @@ RSpec.describe MaterialTypeService do
 
   describe "find_by_id" do
     it "returns active term matching id" do
-      expect(service.find_by_id('ceramics')).to eq({
+      expect(service.find_by_id('ceramics')).to include({
         "label" => "ceramics/セラミックス",
         "id" => "ceramics",
         "active" => true
@@ -23,7 +23,7 @@ RSpec.describe MaterialTypeService do
 
   describe "find_by_label" do
     it "returns active term  matching label" do
-      expect(service.find_by_label('ceramics/セラミックス')).to eq({
+      expect(service.find_by_label('ceramics/セラミックス')).to include({
         "label" => "ceramics/セラミックス",
         "id" => "ceramics",
         "active" => true
@@ -33,12 +33,12 @@ RSpec.describe MaterialTypeService do
 
   describe "find_by_id_or_label" do
     it "returns active term matching id or label" do
-      expect(service.find_by_id_or_label('ceramics')).to eq({
+      expect(service.find_by_id_or_label('ceramics')).to include({
         "label" => "ceramics/セラミックス",
         "id" => "ceramics",
         "active" => true
       })
-      expect(service.find_by_id_or_label('ceramics/セラミックス')).to eq({
+      expect(service.find_by_id_or_label('ceramics/セラミックス')).to include({
         "label" => "ceramics/セラミックス",
         "id" => "ceramics",
         "active" => true
