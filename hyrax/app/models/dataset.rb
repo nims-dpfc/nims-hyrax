@@ -110,6 +110,21 @@ class Dataset < ActiveFedora::Base
   property :complex_specimen_type, predicate: ::RDF::Vocab::NimsRdp['specimen-type'],
   class_name: "ComplexSpecimenType"
 
+  property :complex_chemical_composition, predicate: ::RDF::Vocab::NimsRdp['chemical-composition'],
+    class_name: "ComplexChemicalComposition"
+
+  property :complex_structural_feature, predicate: ::RDF::Vocab::NimsRdp['structural-feature'],
+    class_name: "ComplexStructuralFeature"
+
+  property :complex_crystallographic_structure, predicate: ::RDF::Vocab::NimsRdp['crystallographic-structure'],
+    class_name: "ComplexCrystallographicStructure"
+
+  property :complex_feature, predicate: ::RDF::Vocab::NimsRdp['feature'],
+    class_name: "ComplexFeature"
+
+  property :complex_software, predicate: ::RDF::Vocab::SCHEMA.SoftwareApplication,
+    class_name: "ComplexSoftware"
+
   property :synthesis_and_processing, predicate: ::RDF::Vocab::NimsRdp['synthesis-and-processing'] do |index|
     index.as :stored_searchable, :facetable
   end
@@ -152,6 +167,8 @@ class Dataset < ActiveFedora::Base
 
   property :complex_funding_reference, predicate: ::RDF::Vocab::DataCite.fundref, class_name:"ComplexFundingReference"
 
+  property :complex_contact_agent, predicate: ::RDF::Vocab::DCAT.contactPoint, class_name: 'ComplexContactAgent'
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
@@ -171,5 +188,10 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :custom_property, reject_if: :key_value_blank, allow_destroy: true
   accepts_nested_attributes_for :updated_subresources, allow_destroy: true
   accepts_nested_attributes_for :complex_funding_reference, reject_if: :fundref_blank, allow_destroy: true
-
+  accepts_nested_attributes_for :complex_contact_agent, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_chemical_composition, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_structural_feature, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_crystallographic_structure, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_feature, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_software, reject_if: :all_blank, allow_destroy: true
 end

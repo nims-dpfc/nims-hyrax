@@ -57,7 +57,7 @@ When(/^I create the publication with:$/) do |table|
   select(values[:DATA_ORIGIN], from: 'Data origin')
   fill_in('publication[complex_person_attributes][0][name][]', with: values[:CREATOR])
   fill_in('Keyword', with: values[:KEYWORD])
-  select('Creative Commons BY-SA Attribution-ShareAlike 4.0 International', from: 'dataset[rights_statement]')
+  select('Creative Commons Attribution Share Alike 4.0 International', from: 'dataset[rights_statement]')
 
   # With selenium and the chrome driver, focus remains on the
   # select box. Click outside the box so the next line can't find
@@ -187,4 +187,21 @@ end
 Then(/^I should not access the (open|authenticated|embargo|lease|restricted) publication$/) do |access|
   expect(page).not_to have_content("#{access.capitalize} Publication")
   expect(page).to have_content('Unauthorized')
+end
+
+Then('make publication editable by the nims_researcher') do
+  publication = Publication.last
+  publication.update(edit_users: [@user.user_key])
+end
+
+Then("On edit publication page should not show extra blank complex source fileds") do
+  publication = Publication.last
+
+  visit edit_hyrax_publication_path(publication)
+
+  expect(page).to have_content('Edit Work')
+
+  click_link "Descriptions" # switch tab
+
+  expect(page).to_not have_css ".nested_source.publication_complex_source #publication_complex_source_attributes_1_title"
 end
