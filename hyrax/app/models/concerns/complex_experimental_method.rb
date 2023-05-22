@@ -15,7 +15,7 @@ class ComplexExperimentalMethod < ActiveTriples::Resource
   ## Necessary to get AT to create hash URIs.
   def initialize(uri, parent)
     if uri.try(:node?)
-      uri = RDF::URI("#computational-method#{uri.to_s.gsub('_:', '')}")
+      uri = RDF::URI("#experimental-method#{uri.to_s.gsub('_:', '')}")
     elsif uri.start_with?("#")
       uri = RDF::URI(uri)
     end
