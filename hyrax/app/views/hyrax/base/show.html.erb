@@ -1,4 +1,7 @@
 <% provide :page_title, @presenter.page_title %>
+<% metadata_presenters = metadata_file_set_presenters(@presenter, current_ability)%>
+<% readme_presenters = readme_file_set_presenters(@presenter, current_ability)%>
+<% json_presenters = json_file_set_presenters(@presenter, current_ability)%>
 
 <% render 'shared/citations' %>
 
@@ -26,9 +29,11 @@
               <%= render 'work_description', presenter: @presenter %>
             </div>
           <% end %>
-          <% if @presenter.iiif_viewer? or files_to_preview %>
+          <% if @presenter.iiif_viewer? or (@presenter.member_presenters.length > 0 &&
+            (readme_presenters.size > 0 or metadata_presenters.size > 0 or json_presenters.size > 0)) or files_to_preview %>
             <div class="col-sm-12">
-              <%= render 'preview_files', presenter: @presenter %>
+              <%= render 'preview_files', presenter: @presenter, metadata_presenters: metadata_presenters,
+                         readme_presenters: readme_presenters, json_presenters: json_presenters  %>
             </div>
           <% end %>
           <div class="col-sm-3 text-center">
