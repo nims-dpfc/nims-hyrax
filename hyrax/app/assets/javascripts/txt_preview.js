@@ -10,8 +10,6 @@ Blacklight.onLoad(function() {
                 preview.find('.txt-preview-error').hide();
                 let ele_id = preview.data("ele");
                 let ele = document.getElementById(ele_id);
-                console.log(ele_id);
-                // console.log(data['content']);
                 ele.innerText = data['content'];
                 preview.addClass('done')
             },

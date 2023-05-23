@@ -11,30 +11,20 @@
   <% end %>
   <% if @presenter.member_presenters.length > 0 && readme_presenters.size > 0 %>
     <li class="nav-item <%= active_class %>" role="presentation">
-      <a href="#readmeview" aria-controls="readme view" role="tab" data-toggle="tab">Readme</a>
+      <a class="preview_file_types" href="#readmeview" aria-controls="readme view" role="tab" data-toggle="tab">Readme</a>
     </li>
     <% active_class = '' %>
   <% end %>
   <% if @presenter.member_presenters.length > 0 && metadata_presenters.size > 0 %>
     <li class="nav-item <%= active_class %>" role="presentation">
-      <a href="#metadataview" aria-controls="metadata view" role="tab" data-toggle="tab">Metadata</a>
+      <a class="preview_file_types" href="#metadataview" aria-controls="metadata view" role="tab" data-toggle="tab">Metadata</a>
     </li>
     <% active_class = '' %>
   <% end %>
   <% if @presenter.member_presenters.length > 0 && json_presenters.size > 0 %>
     <li class="nav-item <%= active_class %>" role="presentation">
-      <a href="#jsonview" aria-controls="json view" role="tab" data-toggle="tab">Json</a>
+      <a class="preview_file_types" href="#jsonview" aria-controls="json view" role="tab" data-toggle="tab">Json</a>
     </li>
-    <% active_class = '' %>
-  <% end %>
-  <% @presenter.member_presenters.each do |member_presenter| %>
-    <% if (member_presenter&.respond_to?(:display_readme?) && member_presenter&.display_readme?) or
-      (member_presenter&.respond_to?(:metadata_json?) && member_presenter&.metadata_json?) %>
-      <li class="nav-item <%= active_class %>" role="presentation">
-        <a href="#preview-<%= member_presenter.id %>" aria-controls="preview" role="tab" data-toggle="tab"><%= member_presenter.link_name%></a>
-      </li>
-      <% active_class = '' %>
-    <% end %>
   <% end %>
 </ul>
 <!-- Tab panes -->
@@ -49,32 +39,21 @@
   <% if @presenter.member_presenters.length > 0 && readme_presenters.size > 0 %>
     <div class="tab-pane <%= active_class %>" id="readmeview" role="tabpanel" aria-labelledby="readmeview-tab">
       <%= render 'preview_same_file_types', presenter: @presenter,
-                 file_presenters: readme_presenters%>
+                 file_presenters: readme_presenters, active_class: active_class, file_group: "readme" %>
     </div>
+    <% active_class = '' %>
   <% end %>
   <% if @presenter.member_presenters.length > 0 && metadata_presenters.size > 0 %>
     <div class="tab-pane <%= active_class %>" id="metadataview" role="tabpanel" aria-labelledby="metadataview-tab">
       <%= render 'preview_same_file_types', presenter: @presenter,
-                 file_presenters: metadata_presenters%>
+                 file_presenters: metadata_presenters, active_class: active_class, file_group: "metadata" %>
     </div>
+    <% active_class = '' %>
   <% end %>
   <% if @presenter.member_presenters.length > 0 && json_presenters.size > 0 %>
     <div class="tab-pane <%= active_class %>" id="jsonview" role="tabpanel" aria-labelledby="jsonview-tab">
       <%= render 'preview_same_file_types', presenter: @presenter,
-                 file_presenters: json_presenters%>
+                 file_presenters: json_presenters, active_class: active_class, file_group: "json" %>
     </div>
-  <% end %>
-  <% @presenter.member_presenters.each_with_index do |member_presenter, index| %>
-    <% if member_presenter&.respond_to?(:display_readme?) && member_presenter&.display_readme? %>
-      <div class="tab-pane <%= active_class %>" id="preview-<%= member_presenter.id %>" role="tabpanel" aria-labelledby="preview-<%= member_presenter.id %>-tab">
-        <%= nims_media_display(member_presenter, content: true) %>
-      </div>
-      <% active_class = '' %>
-    <% elsif member_presenter&.respond_to?(:metadata_json?) && member_presenter&.metadata_json? %>
-      <div class="tab-pane <%= active_class %>" id="preview-<%= member_presenter.id %>" role="tabpanel" aria-labelledby="preview-<%= member_presenter.id %>-tab">
-        <%= nims_media_display(member_presenter, graph: true) %>
-      </div>
-      <% active_class = '' %>
-    <% end %>
   <% end %>
 </div>

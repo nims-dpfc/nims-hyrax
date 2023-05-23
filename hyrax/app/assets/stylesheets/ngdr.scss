@@ -171,35 +171,50 @@ div#announcement {
 }
 
 /* Style the buttons that are used to open the tab content */
-.vertical-tab button {
-  display: block;
-  background-color: inherit;
-  color: black;
-  padding: 22px 16px;
-  width: 100%;
-  border: none;
-  outline: none;
-  text-align: left;
-  cursor: pointer;
-  transition: 0.3s;
+div.vertical-tab-menu{
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+div.vertical-tab-menu div.list-group{
+  margin-bottom: 0;
+}
+div.vertical-tab-menu div.list-group>a{
+  margin-bottom: 0;
+}
+div.vertical-tab-menu div.list-group>a .glyphicon,
+div.vertical-tab-menu div.list-group>a .fa {
+  color: #7DB928;
+}
+div.vertical-tab-menu div.list-group>a:first-child{
+  border-top-right-radius: 0;
+}
+div.vertical-tab-menu div.list-group>a:last-child{
+  border-bottom-right-radius: 0;
+}
+div.vertical-tab-menu div.list-group>a.active{
+  background-color: #7DB928;
+  color: #000000;
+}
+div.vertical-tab-menu div.list-group>a.active:after{
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -13px;
+  border-left: 0;
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
+  border-left: 10px solid #7DB928;
 }
 
-/* Change background color of buttons on hover */
-.vertical-tab button:hover {
-  background-color: #ddd;
+div.vertical-tab-content{
+  background-color: #ffffff;
+  /* border: 1px solid #eeeeee; */
+  padding-left: 20px;
+  padding-top: 10px;
 }
 
-/* Create an active/current "tab button" class */
-.vertical-tab button.active {
-  background-color: #ccc;
-}
-
-/* Style the tab content */
-.vertical-tab-content {
-  float: left;
-  padding: 0px 12px;
-  border: 1px solid #ccc;
-  width: 70%;
-  border-left: none;
-  height: 100%;
+div.vertical-tab div.vertical-tab-content:not(.active){
+  display: none;
 }
