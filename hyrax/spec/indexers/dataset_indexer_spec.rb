@@ -1328,6 +1328,36 @@ RSpec.describe DatasetIndexer do
     end
   end
 
+  describe 'indexes the computational method active triple resource with all the attributes' do
+    before do
+      computational_method = [
+        {
+          description: 'computational method 1',
+          category_vocabulary: 'http://vocabulary.example.jp/Q234',
+          category_description: 'Q234',
+          calculated_at: '2023-01-01 00:00:00'
+        },
+        {
+          description: 'computational method 2',
+          category_vocabulary: 'http://vocabulary.example.jp/Q235',
+          category_description: 'Q235',
+          calculated_at: '2023-01-01 00:01:00'
+        }
+      ]
+      obj = build(:dataset, complex_computational_method_attributes: computational_method)
+      @solr_document = obj.to_solr
+    end
+
+    it 'indexes computational method description as stored_searchable' do
+      expect(@solr_document['complex_computational_method_description_tesim']).to match_array(
+        ['computational method 1', 'computational method 2'])
+    end
+    it 'indexes feature category_vocabulary as facetable' do
+      expect(@solr_document['complex_computational_method_category_vocabulary_sim']).to match_array(
+        ['http://vocabulary.example.jp/Q234', 'http://vocabulary.example.jp/Q235'])
+    end
+  end
+
   describe 'facet fields' do
     it 'to not index specimen_set_tesim' do
       expect(described_class.facet_fields).not_to include('specimen_set_tesim')

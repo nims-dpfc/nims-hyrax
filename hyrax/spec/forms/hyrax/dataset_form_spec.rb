@@ -28,9 +28,10 @@ RSpec.describe Hyrax::DatasetForm do
 
     describe '#method_tab_terms' do
       subject { form.method_tab_terms }
-      it { is_expected.to include(:characterization_methods, :computational_methods, :properties_addressed, :synthesis_and_processing) }
+      it { is_expected.to include(:characterization_methods, :properties_addressed, :synthesis_and_processing) }
       it { is_expected.to include(:complex_feature) }
       it { is_expected.to include(:complex_software) }
+      it { is_expected.to include(:complex_computational_method) }
     end
 
     describe '#instrument_tab_terms' do
@@ -72,6 +73,7 @@ RSpec.describe Hyrax::DatasetForm do
         expect(described_class).to receive(:permitted_crystallographic_structure_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_feature_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_software_params).at_least(:once).and_call_original
+        expect(described_class).to receive(:permitted_computational_method_params).at_least(:once).and_call_original
         subject
       end
     end

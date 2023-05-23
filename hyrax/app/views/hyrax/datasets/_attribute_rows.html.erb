@@ -128,6 +128,7 @@
       <div class="panel-body">
         <%= presenter.attribute_to_html(:characterization_methods, render_as: :faceted, label: t('ngdr.fields.characterization_methods'), html_dl: true) %>
         <%= presenter.attribute_to_html(:computational_methods, render_as: :faceted, label: t('ngdr.fields.computational_methods'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_computational_method, render_as: :nested_computational_method, label: t('ngdr.fields.computational_methods'), html_dl: true) %>
         <%= presenter.attribute_to_html(:origin_system_provenance, label: t('ngdr.fields.origin_system_provenance'), html_dl: true) %>
         <%= presenter.attribute_to_html(:properties_addressed, render_as: :faceted, label: t('ngdr.fields.properties_addressed'), html_dl: true) %>
         <%= presenter.attribute_to_html(:synthesis_and_processing, render_as: :faceted, label: t('ngdr.fields.synthesis_and_processing'), html_dl: true) %>
