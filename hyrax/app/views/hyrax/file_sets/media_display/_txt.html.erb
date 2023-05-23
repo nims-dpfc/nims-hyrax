@@ -1,25 +1,6 @@
 <% if local_assigns[:content] %>
-  <div class="txt-preview panel panel-default"
-       data-url="<%= main_app.export_file_path(file_set.id)%>"
-       data-ele="txt-preview-content-<%= file_set.id %>"
-       data-title="<%= file_set.link_name %>"
-  >
-    <a id="txt-preview-panel-<%= file_set.id %>"></a>
-    <div class="panel-heading" data-toggle="collapse" data-target="#txt-preview-<%= file_set.id %>">
-      <h4 class="panel-title">
-        <a class="txt-preview-title accordion-toggle">Preview: <%= file_set.link_name %></a>
-      </h4>
-    </div>
-    <div id="txt-preview-<%= file_set.id %>" class="panel-collapse collapse in">
-      <div class="panel-body overflow-scroll">
-        <div class="txt-preview-error" style="display: none;">There was an error generating the text preview; please download the file instead.</div>
-        <div class="txt-preview-content display full-width" style="width:100%"><pre id="txt-preview-content-<%= file_set.id %>"></pre></div>
-      </div>
-      <div class="panel-footer txt-preview-size" style="display: none;">
-        <!-- size -->
-      </div>
-    </div>
-  </div>
+  <div class="txt-preview-error" style="display: none;">There was an error generating the text preview; please download the file instead.</div>
+  <div class="txt-preview-content display full-width" style="width:100%"><pre id="txt-preview-content-<%= file_set.id %>"></pre></div>
 <% elsif Hyrax.config.display_media_download_link? %>
   <div>
     <%= link_to t('hyrax.file_set.show.download'), hyrax.download_path(file_set.id), id: "file_download_"+file_set.id, data: { label: file_set.id }, target: "_new" %>
