@@ -1,0 +1,18 @@
+<div class="vertical-tab">
+  <% file_presenters.each do |p| %>
+    <button class="vertical-tab-links" id="<%= p.id %>"
+            onclick="showFile(event, 'tab-content-<%= p.id %>')">
+      <%= p.link_name %>
+    </button>
+  <% end %>
+</div>
+
+<% file_presenters.each do |p| %>
+  <div id="tab-content-<%= p.id %>" class="vertical-tab-content">
+    File content should be here
+    <%#= nims_media_display(p, content: true) %>
+  </div>
+<% end %>
+
+
+

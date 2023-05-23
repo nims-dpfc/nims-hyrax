@@ -1,10 +1,29 @@
 <h2>Preview files</h2>
 <!-- Nav tabs -->
 <% active_class = 'active' %>
+
 <ul class="nav nav-tabs" id="preview_files" role="tablist">
   <% if @presenter.iiif_viewer? %>
     <li class="nav-item <%= active_class %>" role="presentation">
       <a href="#imageview" aria-controls="image view" role="tab" data-toggle="tab">Media</a>
+    </li>
+    <% active_class = '' %>
+  <% end %>
+  <% if @presenter.member_presenters.length > 0 && readme_presenters.size > 0 %>
+    <li class="nav-item <%= active_class %>" role="presentation">
+      <a href="#readmeview" aria-controls="readme view" role="tab" data-toggle="tab">Readme</a>
+    </li>
+    <% active_class = '' %>
+  <% end %>
+  <% if @presenter.member_presenters.length > 0 && metadata_presenters.size > 0 %>
+    <li class="nav-item <%= active_class %>" role="presentation">
+      <a href="#metadataview" aria-controls="metadata view" role="tab" data-toggle="tab">Metadata</a>
+    </li>
+    <% active_class = '' %>
+  <% end %>
+  <% if @presenter.member_presenters.length > 0 && json_presenters.size > 0 %>
+    <li class="nav-item <%= active_class %>" role="presentation">
+      <a href="#jsonview" aria-controls="json view" role="tab" data-toggle="tab">Json</a>
     </li>
     <% active_class = '' %>
   <% end %>
@@ -25,6 +44,24 @@
     <div class="tab-pane <%= active_class %>" id="imageview" role="tabpanel" aria-labelledby="imageview-tab">
       <%= render 'representative_media', presenter: @presenter, viewer: true %>
       <% active_class = '' %>
+    </div>
+  <% end %>
+  <% if @presenter.member_presenters.length > 0 && readme_presenters.size > 0 %>
+    <div class="tab-pane <%= active_class %>" id="readmeview" role="tabpanel" aria-labelledby="readmeview-tab">
+      <%= render 'preview_same_file_types', presenter: @presenter,
+                 file_presenters: readme_presenters%>
+    </div>
+  <% end %>
+  <% if @presenter.member_presenters.length > 0 && metadata_presenters.size > 0 %>
+    <div class="tab-pane <%= active_class %>" id="metadataview" role="tabpanel" aria-labelledby="metadataview-tab">
+      <%= render 'preview_same_file_types', presenter: @presenter,
+                 file_presenters: metadata_presenters%>
+    </div>
+  <% end %>
+  <% if @presenter.member_presenters.length > 0 && json_presenters.size > 0 %>
+    <div class="tab-pane <%= active_class %>" id="jsonview" role="tabpanel" aria-labelledby="jsonview-tab">
+      <%= render 'preview_same_file_types', presenter: @presenter,
+                 file_presenters: json_presenters%>
     </div>
   <% end %>
   <% @presenter.member_presenters.each_with_index do |member_presenter, index| %>
