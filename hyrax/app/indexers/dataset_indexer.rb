@@ -58,6 +58,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::FeatureIndexer.feature_facet_fields
       fields.concat ComplexField::SoftwareIndexer.software_facet_fields
       fields.concat ComplexField::ComputationalMethodIndexer.computational_method_facet_fields
+      fields.concat ComplexField::ExperimentalMethodIndexer.experimental_method_facet_fields
     end
   end
 
@@ -99,6 +100,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::FeatureIndexer.feature_search_fields
       fields.concat ComplexField::SoftwareIndexer.software_search_fields
       fields.concat ComplexField::ComputationalMethodIndexer.computational_method_search_fields
+      fields.concat ComplexField::ExperimentalMethodIndexer.experimental_method_search_fields
     end
   end
 

@@ -1,0 +1,14 @@
+<div class="multi-nested">
+  <%= f.input :complex_experimental_method,
+    as: :nested_experimental_method,
+    input_html: {
+      class: '',
+      data: {name: :complex_experimental_method}
+    },
+    required: f.object.required?(:complex_experimental_method)
+  %>
+  <button type="button" class="btn btn-link add">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="controls-add-text">Add another experimental_method</span>
+  </button>
+</div>
