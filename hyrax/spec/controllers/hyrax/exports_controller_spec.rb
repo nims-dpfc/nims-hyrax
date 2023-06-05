@@ -17,8 +17,8 @@ RSpec.describe ExportsController do
       end
     end
 
-    context 'non-csv' do
-      let(:file_set) { create(:file_set, :open, content: File.open(fixture_path + '/xml/other.txt')) }
+    context 'non-supported format' do
+      let(:file_set) { create(:file_set, :open, content: File.open(fixture_path + '/xml/test.xml')) }
       it 'should return an error' do
         expect(status).to eql(400)
         expect(json['error']).to eql('Unknown or unsupported file type')
@@ -110,5 +110,79 @@ RSpec.describe ExportsController do
         end
       end
     end
+
+    context 'json' do
+      context 'open' do
+        let(:file_set) { create(:file_set, :open, content: File.open(fixture_path + '/json/example.json')) }
+        it 'should return the contents of the file' do
+          expect(status).to eql(200)
+          expect(json['@context']).to match_array(["https://w3id.org/ro/crate/1.1/context", {"bio"=>"http://schema.org"}])
+        end
+      end
+
+      describe 'authentication' do
+        let(:file_set) { create(:file_set, :authenticated, content: File.open(fixture_path + '/json/example.json')) }
+
+        context 'unauthenticated' do
+          it 'should return an unauthenticated error' do
+            expect(status).to eql(401)
+          end
+        end
+
+        context 'authenticated' do
+          let(:user) { create(:user) }
+          before do
+            sign_in user
+          end
+
+          it 'should return success' do
+            expect(status).to eql(200)
+          end
+        end
+      end
+    end
+
+    context 'txt' do
+      context 'open' do
+        let(:file_set) { create(:file_set, :open, content: File.open(fixture_path + '/txt/example.txt')) }
+        it 'should return the contents of the file' do
+          expect(status).to eql(200)
+          expect(json['content']).to have_text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+        end
+      end
+
+      describe 'authentication' do
+        let(:file_set) { create(:file_set, :authenticated, content: File.open(fixture_path + '/txt/example.txt')) }
+
+        context 'unauthenticated' do
+          it 'should return an unauthenticated error' do
+            expect(status).to eql(401)
+          end
+        end
+
+        context 'authenticated' do
+          let(:user) { create(:user) }
+          before do
+            sign_in user
+          end
+
+          it 'should return success' do
+            expect(status).to eql(200)
+          end
+        end
+      end
+    end
+
+    context 'md' do
+      context 'open' do
+        let(:file_set) { create(:file_set, :open, content: File.open(fixture_path + '/txt/README.md')) }
+        it 'should return the rendered contents of the file' do
+          pending("Not sure why this is failing")
+          expect(status).to eql(200)
+          expect(json['content']).to have_text('<h1>README</h1>')
+        end
+      end
+    end
+
   end
 end

@@ -1,0 +1,79 @@
+{
+  "@context": ["https://w3id.org/ro/crate/1.1/context", {"bio": "http://schema.org"}],
+  "@graph": [
+    {
+      "@type": "CreativeWork",
+      "@id": "ro-crate-metadata.json",
+      "conformsTo": {"@id": "https://w3id.org/ro/crate/1.1"},
+      "about": {"@id": "./"}
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "url": "https://mdr.nims.go.jp/concern/datasets/bn999915v",
+      "identifier": "https://doi.org/10.48505/nims.2563",
+      "name": "XAFS spectrum of Tungsten carbonyl",
+      "datePublished": "2021",
+      "description": "This dataset consists of X-ray absorption fine structure (XAFS) spectra at W L21-edge of Tungsten carbonyl measured at SPring-8 BL14B2",
+      "license": {"@id": "https://creativecommons.org/licenses/by-nc-sa/4.0/"},
+      "measurementTechnique": ["x-ray absorption spectroscopy", {"@id": "#instrument-0"}],
+      "material": [
+        {"@id": "#material-0"}
+      ],
+      "hasPart": [
+        {"@id": "W-L1_W(CO)6_Si311_50ms_201119.ex3"},
+        {"@id": "W-L1_W(CO)6_Si311_50ms_201119.txt"},
+        {"@id": "primary.tsv"}
+      ]
+    },
+    {
+      "@id": "#material-0",
+      "@type": "Material",
+      "name": "Platinum(IV) Oxide",
+      "description": "Standard Sample",
+      "bio:ChemicalSubstance": {
+        "bio:chemicalComposition": "PtO2",
+        "identifier": "https://matvoc.nims.go.jp/wiki/Item:Q1656"
+      }
+    },
+    {
+      "@id": "#instrument-0",
+      "@type": "Instrument",
+      "name": "BL14B2_XAFS",
+      "description": "SPring-8 Engineering Science Research Beamline XAFS setup",
+      "creator": {"@id": "https://ror.org/01xjv7358"}
+    },
+    {
+      "@id": "https://ror.org/01xjv7358",
+      "name": "Japan Synchrotron Radiation Research Institute"
+    },
+    {
+      "@id": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "@type": "CreativeWork",
+      "description": "This work is licensed under the Creative Commons BY-NC-SA Attribution-NonCommercial-ShareAlike 4.0 International License.",
+      "identifier": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "name": "Creative Commons BY-NC-SA Attribution-NonCommercial-ShareAlike 4.0 International"
+    },
+    {
+      "@id": "W-L1_W(CO)6_Si311_50ms_201119.ex3",
+      "@type": "File",
+      "encodingFormat": "text/plain",
+      "url": "https://mdr.nims.go.jp/downloads/73666690b",
+      "mainEntityOfPage": {"@id": "https://mdr.nims.go.jp/concern/parent/bn999915v/file_sets/73666690b"}
+    },
+    {
+      "@id": "W-L1_W(CO)6_Si311_50ms_201119.txt",
+      "@type": "File",
+      "encodingFormat": "text/plain",
+      "url": "https://mdr.nims.go.jp/downloads/z603r040j",
+      "mainEntityOfPage": {"@id": "https://mdr.nims.go.jp/concern/parent/bn999915v/file_sets/z603r040j"}
+    },
+    {
+      "@id": "primary.tsv",
+      "@type": "File",
+      "encodingFormat": "text/tab-separated-values",
+      "url": "https://mdr.nims.go.jp/downloads/k930c032p",
+      "mainEntityOfPage": {"@id": "https://mdr.nims.go.jp/concern/parent/bn999915v/file_sets/k930c032p"}
+    }
+  ]
+}

@@ -7,7 +7,6 @@ RSpec.describe Hyrax::NimsFileSetHelper, type: :helper do
   describe '#nims_media_display' do
     let(:mime_type) { 'text/csv' }
     subject { helper.nims_media_display(presenter) }
-    it { is_expected.to have_css('a', text: 'Preview') }
     it { is_expected.to have_css('a', text: 'Download the file') }
   end
 
@@ -47,6 +46,11 @@ RSpec.describe Hyrax::NimsFileSetHelper, type: :helper do
     context 'tsv' do
       let(:mime_type) { 'text/csv' }
       it { is_expected.to eql 'hyrax/file_sets/media_display/csv' }
+    end
+
+    context 'json' do
+      let(:mime_type) { 'application/json' }
+      it { is_expected.to eql 'hyrax/file_sets/media_display/json' }
     end
 
     context 'anything else' do

@@ -1,0 +1,8 @@
+<% if local_assigns[:graph] %>
+  <div class="json-preview-error" style="display: none;">There was an error generating the jsonld preview; please download the file instead.</div>
+  <div id="json-preview-graph-<%= file_set.id %>" class="json-preview-graph display full-width" style="width:100%"></div>
+<% elsif Hyrax.config.display_media_download_link? %>
+  <div>
+    <%= link_to t('hyrax.file_set.show.download'), hyrax.download_path(file_set.id), id: "file_download_"+file_set.id, data: { label: file_set.id }, target: "_new" %>
+  </div>
+<% end %>

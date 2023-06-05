@@ -1,4 +1,7 @@
 <% provide :page_title, @presenter.page_title %>
+<% metadata_presenters = metadata_file_set_presenters(@presenter, current_ability)%>
+<% readme_presenters = readme_file_set_presenters(@presenter, current_ability)%>
+<% json_presenters = json_file_set_presenters(@presenter, current_ability)%>
 
 <% render 'shared/citations' %>
 
@@ -14,26 +17,35 @@
       <div class="panel-body">
         <div class="row">
           <%= render 'workflow_actions_widget', presenter: @presenter %>
-          <% if @presenter.iiif_viewer? %>
+          <% files_to_preview = false %>
+          <% @presenter.member_presenters.each do |member_presenter| %>
+            <% if (member_presenter&.respond_to?(:display_readme?) && member_presenter&.display_readme?) or
+              (member_presenter&.respond_to?(:metadata_json?) && member_presenter&.metadata_json?) %>
+              <% files_to_preview = true %>
+            <% end %>
+          <% end %>
+          <% if can? :read_abstract, @presenter.model_name.name.constantize %>
             <div class="col-sm-12">
-              <%= render 'representative_media', presenter: @presenter, viewer: true %>
+              <%= render 'work_description', presenter: @presenter %>
+            </div>
+          <% end %>
+          <% if @presenter.iiif_viewer? or (@presenter.member_presenters.length > 0 &&
+            (readme_presenters.size > 0 or metadata_presenters.size > 0 or json_presenters.size > 0)) or files_to_preview %>
+            <div class="col-sm-12">
+              <%= render 'preview_files', presenter: @presenter, metadata_presenters: metadata_presenters,
+                         readme_presenters: readme_presenters, json_presenters: json_presenters  %>
             </div>
           <% end %>
           <div class="col-sm-3 text-center">
             <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? %>
+            <%= render 'download_all', presenter: @presenter %>
             <%= render 'citations', presenter: @presenter %>
             <%#= render 'social_media' %> <!-- No social media buttons -->
           </div>
           <div class="col-sm-9">
             <%= render 'relationships', presenter: @presenter %>
-
-            <% if can? :read_abstract, @presenter.model_name.name.constantize %>
-              <%= render 'work_description', presenter: @presenter %>
-            <% end %>
             <%= render 'metadata', presenter: @presenter %>
-            <% @presenter.member_presenters.each do |member_presenter| %>
-              <%= nims_media_display(member_presenter, datatable: true) if member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv? %>
-            <% end %>
+            <%= render 'preview_csv_files', presenter: @presenter %>
           </div>
 
           <div class="col-sm-12">

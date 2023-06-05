@@ -132,6 +132,15 @@ div#announcement {
   text-align: right;
 }
 
+.txt-preview-content {
+  white-space: pre-wrap;
+}
+
+.json-preview-graph, .txt-preview-content, .md-preview-content,  {
+  max-height: 590px;
+  overflow: auto;
+}
+
 // Hiding Relationships and Sharing tab contents from casual users
 // https://github.com/antleaf/nims-mdr-development/issues/292 
 
@@ -149,5 +158,63 @@ div#announcement {
 
 #share > .user.form-tab-content > * {
   visibility: hidden;
+  display: none;
+}
+
+//-------------------------------------------
+.vertical-tab {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width: 30%;
+  height: 100%;
+}
+
+/* Style the buttons that are used to open the tab content */
+div.vertical-tab-menu{
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+div.vertical-tab-menu div.list-group{
+  margin-bottom: 0;
+}
+div.vertical-tab-menu div.list-group>a{
+  margin-bottom: 0;
+}
+div.vertical-tab-menu div.list-group>a .glyphicon,
+div.vertical-tab-menu div.list-group>a .fa {
+  color: #7DB928;
+}
+div.vertical-tab-menu div.list-group>a:first-child{
+  border-top-right-radius: 0;
+}
+div.vertical-tab-menu div.list-group>a:last-child{
+  border-bottom-right-radius: 0;
+}
+div.vertical-tab-menu div.list-group>a.active{
+  background-color: #7DB928;
+  color: #000000;
+}
+div.vertical-tab-menu div.list-group>a.active:after{
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -13px;
+  border-left: 0;
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
+  border-left: 10px solid #7DB928;
+}
+
+div.vertical-tab-content{
+  background-color: #ffffff;
+  /* border: 1px solid #eeeeee; */
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+div.vertical-tab div.vertical-tab-content:not(.active){
   display: none;
 }

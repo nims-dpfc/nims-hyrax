@@ -65,4 +65,38 @@ RSpec.describe Hyrax::NimsFileSetPresenter do
      it { is_expected.to be_falsey }
     end
   end
+
+  describe 'json?' do
+    subject { presenter.json? }
+    context 'application/json' do
+      let(:mime_type) { 'application/json' }
+      let(:file_format) { nil }
+      it { is_expected.to be_truthy }
+    end
+    context 'APPLICATION/JSON' do
+      let(:mime_type) { 'APPLICATION/JSON' }
+      let(:file_format) { nil }
+      it { is_expected.to be_truthy }
+    end
+    context 'JSON format' do
+      let(:mime_type) { 'text/plain' }
+      let(:file_format) { 'json (JSON Data Interchange Format, Plain text, JSON data)' }
+      it { is_expected.to be_truthy }
+    end
+    context 'plain json format' do
+      let(:mime_type) { 'text/plain' }
+      let(:file_format) { 'plain (JSON Data Interchange Format, Plain text)' }
+      it { is_expected.to be_truthy }
+    end
+    context 'some/mime_type' do
+      let(:mime_type) { 'some/mime_type' }
+      let(:file_format) { nil }
+      it { is_expected.to be_falsey }
+    end
+    context 'no mime type' do
+      let(:mime_type) { nil }
+      let(:file_format) { nil }
+      it { is_expected.to be_falsey }
+    end
+  end
 end

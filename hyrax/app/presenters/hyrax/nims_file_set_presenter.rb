@@ -19,5 +19,32 @@ module Hyrax
       csv? || tsv?
     end
 
+    def json?
+      file_format =~ /JSON/i || mime_type.present? && mime_type =~ /^application\/json$/i
+    end
+
+    def text?
+      mime_type.present? && mime_type =~ /^text\/plain$/i
+    end
+
+    def markdown?
+      text? and File.extname(label).downcase == '.md'
+    end
+
+    def metadata_json?
+      json? and label.downcase.include? 'metadata'
+    end
+
+    def text_readme?
+      text? and label.downcase.include? 'readme'
+    end
+
+    def markdown_readme?
+      markdown? and label.downcase.include? 'readme'
+    end
+
+    def display_readme?
+      text_readme? || markdown_readme?
+    end
   end
 end

@@ -52,4 +52,28 @@ module HyraxHelper
     100_000_000
   end
 
+  def metadata_file_set_presenters(presenter, ability)
+    selected_presenters = []
+    presenter.file_set_presenters.select do |p|
+      selected_presenters << p if ability.can?(:read, p.id) and p.metadata_json?
+    end
+    selected_presenters
+  end
+
+  def readme_file_set_presenters(presenter, ability)
+    selected_presenters = []
+    presenter.file_set_presenters.select do |p|
+      selected_presenters << p if ability.can?(:read, p.id) and p.display_readme?
+    end
+    selected_presenters
+  end
+
+  def json_file_set_presenters(presenter, ability)
+    selected_presenters = []
+    presenter.file_set_presenters.select do |p|
+      selected_presenters << p if ability.can?(:read, p.id) and p.json? and not p.metadata_json?
+    end
+    selected_presenters
+  end
+
 end

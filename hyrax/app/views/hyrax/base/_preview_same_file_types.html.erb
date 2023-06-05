@@ -1,0 +1,62 @@
+<% this_active_class = active_class %>
+
+<div class="files-preview panel panel-default <%= active_class %>">
+  <a id="<%= file_group %>-preview-panel"></a>
+  <div class="panel-heading" data-toggle="collapse" data-target="#<%= file_group %>-preview">
+    <h4 class="panel-title">
+      <a class="<%= file_group %>-preview-title accordion-toggle">Preview <%= file_group %> files</a>
+    </h4>
+  </div>
+  <div id="<%= file_group %>-preview" class="panel-collapse collapse in">
+    <div class="panel-body overflow-scroll">
+
+      <div class="col-lg-3 col-md-3 vertical-tab-menu">
+        <div class="list-group">
+          <% file_presenters.each do |p| %>
+            <a href="#type-preview-<%= p.id %>" aria-controls="preview <%= p.link_name %>"
+               class="list-group-item <%= this_active_class %> text-center">
+              <%= p.link_name %>
+            </a>
+            <% this_active_class = '' %>
+          <% end %>
+        </div>
+      </div>
+
+      <% this_active_class = active_class %>
+      <div class="col-lg-9 col-md-9 vertical-tab">
+        <% file_presenters.each do |p| %>
+          <% if p.json? %>
+            <% member_type = "graph" %>
+            <% member_class = "json-preview" %>
+          <% elsif p.markdown? %>
+            <% member_type = "content" %>
+            <% member_class = "md-preview" %>
+          <% else # should be text %>
+            <% member_type = "content" %>
+            <% member_class = "txt-preview" %>
+          <% end %>
+          <div class="vertical-tab-content <%= member_class %> <%= this_active_class %>" id="type-preview-<%= p.id %>"
+               aria-labelledby="preview <%= p.link_name %>"
+               data-url="<%= main_app.export_file_path(p.id)%>"
+               data-ele="<%= member_class %>-<%= member_type %>-<%= p.id %>"
+               data-title="<%= p.link_name %>">
+            <% if member_type == "graph" %>
+              <%= nims_media_display(p, graph: true) %>
+            <% else %>
+              <%= nims_media_display(p, content: true) %>
+            <% end %>
+          </div>
+          <% this_active_class = '' %>
+        <% end %>
+      </div>
+
+    </div>
+    <div class="panel-footer <%= file_group %>-preview-size" style="display: none;">
+      <!-- size -->
+    </div>
+  </div>
+</div>
+
+
+
+
