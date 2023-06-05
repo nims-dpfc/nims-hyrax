@@ -20,6 +20,7 @@ en:
         complex_crystallographic_structure: "Crystallographic structure"
         complex_date:                     "Other Date"
         complex_event:                    "Conference/Event"
+        complex_experimental_method:      "Experimental method"
         complex_feature:                  "Feature"
         complex_funding_reference:        "Funding reference"
         complex_identifier:               "Identifier"

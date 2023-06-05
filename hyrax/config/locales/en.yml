@@ -15,6 +15,7 @@ en:
       complex_crystallographic_structure: "Crystallographic structure"
       complex_date:             "Other Date"
       complex_event:            "Event"
+      complex_experimental_method: "Experimental method"
       complex_funding_reference: "Funding reference"
       complex_identifier:       "Identifier"
       complex_instrument:       "Instrument"
