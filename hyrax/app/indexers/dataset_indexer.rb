@@ -26,6 +26,8 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::CrystallographicStructureIndexer
   include ComplexField::FeatureIndexer
   include ComplexField::SoftwareIndexer
+  include ComplexField::ComputationalMethodIndexer
+  include ComplexField::ExperimentalMethodIndexer
 
   def self.facet_fields
     # solr fields that will be treated as facets
@@ -55,6 +57,8 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_facet_fields
       fields.concat ComplexField::FeatureIndexer.feature_facet_fields
       fields.concat ComplexField::SoftwareIndexer.software_facet_fields
+      fields.concat ComplexField::ComputationalMethodIndexer.computational_method_facet_fields
+      fields.concat ComplexField::ExperimentalMethodIndexer.experimental_method_facet_fields
     end
   end
 
@@ -95,6 +99,8 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_search_fields
       fields.concat ComplexField::FeatureIndexer.feature_search_fields
       fields.concat ComplexField::SoftwareIndexer.software_search_fields
+      fields.concat ComplexField::ComputationalMethodIndexer.computational_method_search_fields
+      fields.concat ComplexField::ExperimentalMethodIndexer.experimental_method_search_fields
     end
   end
 
@@ -130,6 +136,8 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_show_fields
       fields.concat ComplexField::FeatureIndexer.feature_show_fields
       fields.concat ComplexField::SoftwareIndexer.software_show_fields
+      fields.concat ComplexField::ComputationalMethodIndexer.computational_method_show_fields
+      fields.concat ComplexField::ExperimentalMethodIndexer.experimental_method_show_fields
     end
   end
 

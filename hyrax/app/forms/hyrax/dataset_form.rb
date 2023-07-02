@@ -44,10 +44,11 @@ module Hyrax
 
       # method
       :characterization_methods, 
-      :computational_methods,
       :properties_addressed, 
       :synthesis_and_processing,
       :complex_feature,
+      :complex_computational_method,
+      :complex_experimental_method,
 
       # instruments
       :complex_instrument, 
@@ -108,10 +109,12 @@ module Hyrax
     def method_tab_terms
       [
         # Method tab order determined here
-        :characterization_methods, :computational_methods,
+        :characterization_methods,
         # :origin_system_provenance, # not using this
         :properties_addressed,
         :synthesis_and_processing,
+        :complex_experimental_method,
+        :complex_computational_method,
         :complex_feature,
         :complex_software
       ]
@@ -438,6 +441,34 @@ module Hyrax
       ]
     end
 
+    def self.permitted_computational_method_params
+      [:id,
+       :_destroy,
+       {
+         category_vocabulary: [],
+         category_description: [],
+         calculated_at: [],
+         description: []
+       }
+      ]
+    end
+
+    def self.permitted_experimental_method_params
+      [:id,
+       :_destroy,
+       {
+         category_vocabulary: [],
+         category_description: [],
+         analysis_field_vocabulary: [],
+         analysis_field_description: [],
+         measurement_environment_vocabulary: [],
+         standarized_procedure_vocabulary: [],
+         measured_at: [],
+         description: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
@@ -459,6 +490,8 @@ module Hyrax
       permitted << { complex_crystallographic_structure_attributes: permitted_crystallographic_structure_params }
       permitted << { complex_feature_attributes: permitted_feature_params }
       permitted << { complex_software_attributes: permitted_software_params }
+      permitted << { complex_computational_method_attributes: permitted_computational_method_params }
+      permitted << { complex_experimental_method_attributes: permitted_experimental_method_params }
       permitted << :member_of_collection_ids
       permitted << :find_child_work
     end
