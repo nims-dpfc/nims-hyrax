@@ -1328,6 +1328,74 @@ RSpec.describe DatasetIndexer do
     end
   end
 
+  describe 'indexes the computational method active triple resource with all the attributes' do
+    before do
+      computational_method = [
+        {
+          description: 'computational method 1',
+          category_vocabulary: 'http://vocabulary.example.jp/Q234',
+          category_description: 'Q234',
+          calculated_at: '2023-01-01 00:00:00'
+        },
+        {
+          description: 'computational method 2',
+          category_vocabulary: 'http://vocabulary.example.jp/Q235',
+          category_description: 'Q235',
+          calculated_at: '2023-01-01 00:01:00'
+        }
+      ]
+      obj = build(:dataset, complex_computational_method_attributes: computational_method)
+      @solr_document = obj.to_solr
+    end
+
+    it 'indexes computational method description as stored_searchable' do
+      expect(@solr_document['complex_computational_method_description_tesim']).to match_array(
+        ['computational method 1', 'computational method 2'])
+    end
+    it 'indexes feature category_vocabulary as facetable' do
+      expect(@solr_document['complex_computational_method_category_vocabulary_sim']).to match_array(
+        ['http://vocabulary.example.jp/Q234', 'http://vocabulary.example.jp/Q235'])
+    end
+  end
+
+  describe 'indexes the experimental method active triple resource with all the attributes' do
+    before do
+      experimental_method = [
+        {
+          description: 'experimental method 1',
+          category_vocabulary: 'http://vocabulary.example.jp/Q345',
+          category_description: 'Q345',
+          analysis_field_vocabulary: 'http://vocabulary.example.jp/Q4561',
+          analysis_field_description: 'Category Q4561',
+          measurement_environment_vocabulary: 'http://vocabulary.example.jp/Q4562',
+          standarized_procedure_vocabulary: 'http://vocabulary.example.jp/Q4563',
+          measured_at: '2023-01-01 00:02:00'
+        },
+        {
+          description: 'experimental method 2',
+          category_vocabulary: 'http://vocabulary.example.jp/Q346',
+          category_description: 'Q346',
+          analysis_field_vocabulary: 'http://vocabulary.example.jp/Q4564',
+          analysis_field_description: 'Category Q4564',
+          measurement_environment_vocabulary: 'http://vocabulary.example.jp/Q4565',
+          standarized_procedure_vocabulary: 'http://vocabulary.example.jp/Q4566',
+          measured_at: '2023-01-01 00:03:00'
+        }
+      ]
+      obj = build(:dataset, complex_experimental_method_attributes: experimental_method)
+      @solr_document = obj.to_solr
+    end
+
+    it 'indexes experimental method description as stored_searchable' do
+      expect(@solr_document['complex_experimental_method_description_tesim']).to match_array(
+        ['experimental method 1', 'experimental method 2'])
+    end
+    it 'indexes feature category_vocabulary as facetable' do
+      expect(@solr_document['complex_experimental_method_category_vocabulary_sim']).to match_array(
+        ['http://vocabulary.example.jp/Q345', 'http://vocabulary.example.jp/Q346'])
+    end
+  end
+
   describe 'facet fields' do
     it 'to not index specimen_set_tesim' do
       expect(described_class.facet_fields).not_to include('specimen_set_tesim')
