@@ -30,12 +30,13 @@ class SolrDocument
     creator: 'complex_person_author_tesim',
     date: 'date_tesim',
     # description: 'description_tesim', # hide description/abstract field for OAI-PMH feed
-    identifier: 'complex_identifier_tesim',
+    identifier: 'complex_identifier_ssim',
     language: 'language_tesim',
     publisher: 'publisher_tesim',
-    relation: '', # @todo have a think about what to map here
-    rights: 'rights_tesim',
-    subject: 'subject_tesim',
+    # relation: '', # @todo have a think about what to map here
+    relation: 'first_published_url_tesim',
+    rights: 'rights_statement_tesim',
+    subject: 'keyword_tesim',
     title: 'title_tesim',
     type: 'resource_type_tesim'
   )
