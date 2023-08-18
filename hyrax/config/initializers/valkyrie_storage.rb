@@ -1,7 +1,8 @@
 Rails.configuration.to_prepare do
-  fedora_url = ENV.fetch('FEDORA_URL','https://ora4-qa-dps-witness.bodleian.ox.ac.uk/fcrepo/rest')
+  fedora_url = ENV.fetch('FEDORA6_URL',nil)
+  return unless fedora_url
   ldp_connection = Ldp::Client.new(fedora_url)
-  ldp_connection.http.basic_auth(ENV.fetch('FEDORA_USERNAME', 'ora'), ENV.fetch('FEDORA_PASSWORD', 'orapass'))
+  ldp_connection.http.basic_auth(ENV.fetch('FEDORA6_USERNAME', nil), ENV.fetch('FEDORA6_PASSWORD', nil))
   Valkyrie::StorageAdapter.register(
     Valkyrie::Storage::Fedora.new(
       connection: ldp_connection,
@@ -31,7 +32,7 @@ Rails.configuration.to_prepare do
         request.body = file
       end
 
-      find_by(id: Valkyrie::ID.new(identifier.to_s.sub(/^.+\/\//, ENV.fetch('DPS_FEDORA_URL_SCHEME', 'fedora://'))))
+      find_by(id: Valkyrie::ID.new(identifier.to_s.sub(/^.+\/\//, ENV.fetch('OCFL_ID_URL_SCHEME', 'fedora://'))))
     end
   end
 end
