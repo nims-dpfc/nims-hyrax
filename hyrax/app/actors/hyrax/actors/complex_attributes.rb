@@ -40,6 +40,7 @@ module Hyrax
           complex_version
           complex_relation
           complex_instrument
+          complex_instrument_operator
           complex_affiliation
           manufacturer
           supplier

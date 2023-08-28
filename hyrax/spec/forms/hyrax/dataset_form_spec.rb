@@ -38,6 +38,7 @@ RSpec.describe Hyrax::DatasetForm do
     describe '#instrument_tab_terms' do
       subject { form.instrument_tab_terms }
       it { is_expected.to include(:complex_instrument) }
+      it { is_expected.to include(:complex_instrument_operator) }
     end
 
     describe '#specimen_tab_terms' do
@@ -59,6 +60,7 @@ RSpec.describe Hyrax::DatasetForm do
         expect(described_class).to receive(:permitted_date_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_identifier_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_instrument_params).at_least(:once).and_call_original
+        expect(described_class).to receive(:permitted_instrument_operator_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_person_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_organization_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_relation_params).at_least(:once).and_call_original
