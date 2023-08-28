@@ -10,6 +10,7 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::VersionIndexer
   include ComplexField::OrganizationIndexer
   include ComplexField::InstrumentIndexer
+  include ComplexField::InstrumentOperatorIndexer
   include ComplexField::RelationIndexer
   include ComplexField::EventIndexer
   include ComplexField::SourceIndexer
@@ -49,6 +50,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::OrganizationIndexer.organization_facet_fields
       fields.concat ComplexField::RightsIndexer.rights_facet_fields
       fields.concat ComplexField::InstrumentIndexer.instrument_facet_fields
+      fields.concat ComplexField::InstrumentOperatorIndexer.instrument_operator_facet_fields
       # fields.concat ComplexField::MaterialTypeIndexer.material_type_facet_fields
       fields.concat ComplexField::PurchaseRecordIndexer.purchase_record_facet_fields
       fields.concat ComplexField::StateOfMatterIndexer.state_of_matter_search_fields
@@ -88,6 +90,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::RightsIndexer.rights_search_fields
       fields.concat ComplexField::OrganizationIndexer.organization_search_fields
       fields.concat ComplexField::InstrumentIndexer.instrument_search_fields
+      fields.concat ComplexField::InstrumentOperatorIndexer.instrument_operator_search_fields
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_search_fields
       fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_search_fields
       fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_search_fields
