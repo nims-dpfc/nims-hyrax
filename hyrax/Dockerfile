@@ -44,7 +44,7 @@ RUN apt-get update -qq && \
     bzip2 unzip xz-utils \
     vim \
     git \
-    openjdk-11-jre-headless \
+    openjdk-8-jre-headless \
     postgresql-client \
     yarn && \
     yarn config set no-progress && \
