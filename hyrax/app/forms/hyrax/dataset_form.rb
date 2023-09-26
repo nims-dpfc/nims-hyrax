@@ -247,7 +247,7 @@ module Hyrax
       ]
     end
 
-    def self.permitted_instrument_operator_method_params
+    def self.permitted_instrument_operator_params
       [:id,
        :_destroy,
        {
