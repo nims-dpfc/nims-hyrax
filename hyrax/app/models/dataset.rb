@@ -183,6 +183,7 @@ class Dataset < ActiveFedora::Base
   accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
+  accepts_nested_attributes_for :complex_instrument_operator, reject_if: :name_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_organization, reject_if: :organization_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_relation, reject_if: :relation_blank, allow_destroy: true
