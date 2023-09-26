@@ -663,7 +663,7 @@ FactoryBot.define do
           {
             name: 'Operator1',
             email: 'operator1@example.jp',
-            organization: 'University'
+            organization: 'University',
             department: 'Department'
           }
         ]
