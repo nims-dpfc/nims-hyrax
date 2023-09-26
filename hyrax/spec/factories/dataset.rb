@@ -658,24 +658,16 @@ FactoryBot.define do
     end
 
     trait :with_complex_instrument_operator do
-       complex_instrument_operator_attributes {
-         [{
-          name: 'Anamika',
-          role: ['operator'],
-           complex_identifier_attributes: [{
-              identifier: '987654',
-              scheme: 'identifier local'
-            }],
-          complex_affiliation_attributes: [{
-            job_title: 'Operator',
-            complex_organization_attributes: [{
-              organization: 'University',
-              sub_organization: 'Department',
-              purpose: 'Research'
-            }]
-          }]
-        }]
-       }
+      complex_instrument_operator_attributes {
+        [
+          {
+            name: 'Operator1',
+            email: 'operator1@example.jp',
+            organization: 'University'
+            department: 'Department'
+          }
+        ]
+      }
     end
   end
 end
