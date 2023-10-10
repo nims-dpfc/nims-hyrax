@@ -90,6 +90,7 @@ end
 
 gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'develop'
 gem 'blacklight_oai_provider', git: 'https://github.com/CottageLabs/blacklight_oai_provider.git', branch: 'oai_upgrade'
+gem 'resync', github: 'nabeta/resync'
 
 group :test do
   gem 'simplecov', require: false
