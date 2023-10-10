@@ -19,6 +19,7 @@ services:
       internal:
     volumes:
       - clam_db:/var/lib/clamav
+      - ./hyrax:/data
 
   fcrepo:
     image: ualbertalib/docker-fcrepo4:4.7
