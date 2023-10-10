@@ -79,7 +79,6 @@ gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > h
 
 gem 'riiif', '~> 2.0'
 gem 'jsonapi-rails', '~> 0.4.0'
-gem 'faraday'
 
 gem 'ro-crate', '~> 0.4.11', require: 'ro_crate'
 
@@ -105,9 +104,10 @@ gem 'coveralls', require: false
 gem 'rinku'
 gem 'sitemap_generator'
 gem 'cld'
-# gem 'clamav-client', require: 'clamav/client'
+gem 'clamav-client', require: 'clamav/client'
 gem 'omniauth-oauth2'
 gem 'omniauth', '~> 1.9.1'
 gem 'omniauth-rails_csrf_protection'
 gem 'elastic-apm'
 gem 'mail', '~> 2.7.1'
+gem 'bootstrap_form', '~> 4.5'

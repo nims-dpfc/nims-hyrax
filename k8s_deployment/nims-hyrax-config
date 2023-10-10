@@ -1,13 +1,15 @@
+IN_DOCKER=true
+
 # Solr setting
 SOLR_URL_SCHEME=http
-SOLR_HOST=solr
+SOLR_HOST=mdr-solr
 SOLR_PORT=8983
 SOLR_CORE=hyrax_production
-SOLR_TEST_PORT=8985
+SOLR_TEST_PORT=8983
 
 # Database setting
-POSTGRES_HOST_APP=appdb
-POSTGRES_HOST_FCREPO=fcrepodb
+POSTGRES_HOST_APP=mdr-appdb
+POSTGRES_HOST_FCREPO=mdr-fcrepodb
 POSTGRES_PORT=5432
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=password
@@ -16,24 +18,25 @@ POSTGRES_DB_TEST=hyrax_test
 POSTGRES_DB_FCREPO=fcrepo
 
 # Redis setting
-REDIS_HOST=redis
+REDIS_HOST=mdr-redis
 REDIS_PORT=6379
 REDIS_PASSWORD=
 
 # Fedora setting
 FEDORA_URL_SCHEME=http
-FEDORA_HOST=fcrepo
+FEDORA_HOST=mdr-fcrepo
 FEDORA_PORT=8080
 # FCREPO_ENDPOINT=hyrax_production # Optional - default is production
 # FCREPO_PATH is Optional - default is /fcrepo/rest
-# FCREPO_PATH=/rest
+FCREPO_PATH=/fcrepo/rest
 FCREPO_VERSION=4.7.5
-FEDORA_TEST_PORT=8986
+FCREPO_DEVELOPMENT_PORT=8080
+FEDORA_TEST_PORT=8080
 
 # RAILS setting
 LANG=C.UTF-8
 PORT=3000
-RAILS_ENV=production
+RAILS_ENV=development
 RAILS_LOG_TO_STDOUT=true
 RAILS_SERVE_STATIC_FILES=true
 RAILS_MAX_THREADS=5
@@ -43,7 +46,7 @@ SECRET_KEY_BASE_PRODUCTION=
 DEVISE_SECRET_KEY=
 
 # ClamAV settings
-CLAMD_HOST=clamav
+CLAMD_HOST=mdr-clamav
 CLAMD_PORT=3310
 SEND_DEPOSITOR_VIRUS_NOTIFICATION=false
 
@@ -57,7 +60,6 @@ GA_CLIENT_EMAIL=
 
 # Hyrax application setting
 # NB: in macOS Catalina (10.15) the /srv/ path is not available to Docker
-HOST_APP_DATA_PATH=/srv/ngdr/data/
 DERIVATIVES_PATH=/shared/derivatives/
 FITS_PATH=/fits/fits-1.3.0/fits.sh
 # fits_version should appear exactly like this, including fits-
@@ -92,19 +94,32 @@ MDR_DEVISE_AUTH_MODULE=database_authenticatable
 # MDR_DEVISE_AUTH_MODULE=ldap_authenticatable
 # MDR_DEVISE_AUTH_MODULE=cas_authenticatable
 
-LDAP_HOST=
+LDAP_HOST=***REMOVED***
 LDAP_PORT=443
 LDAP_ATTRIBUTE=uid
-LDAP_BASE=
-LDAP_ADMIN_USER=
-LDAP_ADMIN_PASSWORD=
+LDAP_BASE=***REMOVED***
+LDAP_ADMIN_USER=***REMOVED***
+LDAP_ADMIN_PASSWORD=***REMOVED***
 LDAP_SSL=false
 
 SMTP_HOST=
 SMTP_PORT=
 
 # Host used for generating URLs
-MDR_HOST=
+MDR_HOST=localhost:1313
+
+CAS_BASE_URL=https://cas.nims.go.jp/
+
+# For local docker-based setup for development, use:
+# CAS_BASE_URL=https://cas.mdr.nims.test:8443/cas/
+# and add the following two localhost pointers to your system's /etc/hosts file:
+# 127.0.0.1       mdr.nims.test         # <-- MDR website
+# 127.0.0.1       cas.mdr.nims.test     # <-- CAS server
+# and also trust the SSL certificate for cas.mdr.nims.test
+
+# CAS_VALIDATE_URL may need to be set depending on how MDR is configured
+# CAS_VALIDATE_URL=https://cas:8443/cas/serviceValidate
+# CAS_DESTINATION_URL=https://portal.nims.test/
 
 # OAI config used in config/initializers/oai_config.rb
 OAI_REPOSTIORY_NAME='NIMS MDR'
@@ -112,7 +127,7 @@ OAI_REPOSITORY_URL=http://localhost:3000/catalog/oai
 OAI_RECORD_PREFIX=nims_mdr
 OAI_ADMIN_EMAIL=***REMOVED***
 
-# User Authorisation LDAP (runs after database / LDAP authentication)
+# User Authorisation LDAP (runs after database / LDAP / CAS authentication)
 USER_AUTHORISATION_LDAP_HOST=
 USER_AUTHORISATION_LDAP_PORT=389
 USER_AUTHORISATION_LDAP_ATTRIBUTE=uid
@@ -120,11 +135,3 @@ USER_AUTHORISATION_LDAP_BASE=
 
 WIKIBASE_BASE_URL=https://wikibase.example.jp
 WIKIBASE_SPARQL_QUERY_SYNONYM=/query/example?query=some_sparql_query
-
-AZURE_APP_ID=
-AZURE_APP_SECRET=
-AZURE_SCOPES=openid offline_access
-AZURE_OAUTH_SITE_URL=
-AZURE_OAUTH_AUTHORIZE_ENDPOINT=
-AZURE_OAUTH_TOKEN_ENDPOINT=
-AZURE_OAUTH_JWKS_URL=

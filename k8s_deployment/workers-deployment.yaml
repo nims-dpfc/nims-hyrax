@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mdr-workers
+  name: mdr-workers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mdr-workers
+  # strategy:
+  #   type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mdr-workers
+    spec:
+      initContainers:
+        - name: solr-startup
+          image: alpine/git
+          envFrom:
+            - configMapRef:
+                name: nims-hyrax-config
+          command:
+            - /bin/sh
+            - -c
+            - "wget http://${SOLR_HOST}:${SOLR_PORT}/solr/admin/info/system"
+        - name: fedora-startup
+          image: alpine/git
+          envFrom:
+            - configMapRef:
+                name: nims-hyrax-config
+          command:
+            - /bin/sh
+            - -c
+            - "wget http://${FEDORA_HOST}:${FEDORA_PORT}/fcrepo/rest"
+      containers:
+      - name: mdr-workers
+        image: nims-hyrax_workers:latest
+        imagePullPolicy: IfNotPresent
+        args:
+          - bundle
+          - exec
+          - sidekiq
+        envFrom:
+        - configMapRef:
+            name: nims-hyrax-config
+        volumeMounts:
+          - name: web-file-uploads
+            mountPath: /shared/uploads/
+          - name: web-derivatives
+            mountPath: /shared/derivatives/
+          - name: web-cache
+            mountPath: /shared/cache/
+          - name: web-branding
+            mountPath: /data/public/branding
+      volumes:
+        - name: web-file-uploads
+          persistentVolumeClaim:
+            claimName: web-file-uploads
+        - name: web-derivatives
+          persistentVolumeClaim:
+            claimName: web-derivatives
+        - name: web-cache
+          persistentVolumeClaim:
+            claimName: web-cache
+        - name: web-branding
+          persistentVolumeClaim:
+            claimName: web-branding
+      hostname: mdr-workers
+      # restartPolicy: Always

@@ -1,1 +1,1 @@
-# ClamAV.instance.loaddb if defined? ClamAV
+Hydra::Works.default_system_virus_scanner = Nims::VirusScanner
