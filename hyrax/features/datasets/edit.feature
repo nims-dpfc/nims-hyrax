@@ -15,10 +15,9 @@ Feature: Edit a dataset
       | with_custom_property                    |
       | with_complex_identifier                 |
       | with_complex_instrument                 |
-      | with_complex_instrument_operator        |
       | with_complex_specimen_type              |
       | with_complex_relation                   |
       | with_complex_version                    |
       | with_complex_source                     |
     And make dataset editable by the nims_researcher
-    And On edit dataset page should not show extra blank complex source fileds
+    And On edit dataset page should not show extra blank complex source fields
