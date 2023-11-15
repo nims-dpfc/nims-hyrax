@@ -30,6 +30,7 @@ module Hyrax
       :specimen_set_ordered, 
       :publisher, :date_published, 
       :rights_statement, :licensed_date,
+      :complex_rights,
       :complex_person, 
       :complex_contact_agent,
       :complex_source, :manuscript_type, 
@@ -91,7 +92,8 @@ module Hyrax
         :specimen_set_ordered, 
         :material_type,
         :publisher, :date_published, 
-        :rights_statement, :licensed_date, 
+        :rights_statement, :licensed_date,
+        :complex_rights,
         :complex_person, 
         :complex_contact_agent,
         :complex_source, :manuscript_type,
@@ -131,7 +133,7 @@ module Hyrax
     NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
       :complex_organization, :complex_person, :complex_relation, :complex_event,
       :complex_funding_reference, :complex_contact_agent, :complex_chemical_composition,
-      :complex_crystallographic_structure,
+      :complex_crystallographic_structure, :complex_rights,
       :complex_structural_feature, :complex_software, :complex_feature,
       :complex_source, :complex_specimen_type, :complex_version, :custom_property].freeze
 
@@ -318,7 +320,8 @@ module Hyrax
        :_destroy,
        {
          date: [],
-         rights: []
+         rights: [],
+         license_description: []
        }
       ]
     end
@@ -475,6 +478,7 @@ module Hyrax
       permitted << :licensed_date
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_instrument_attributes: permitted_instrument_params }
+      permitted << { complex_rights_attributes: permitted_rights_params }
       permitted << { complex_person_attributes: permitted_person_params }
       permitted << { complex_organization_attributes: permitted_organization_params }
       permitted << { complex_relation_attributes: permitted_relation_params }

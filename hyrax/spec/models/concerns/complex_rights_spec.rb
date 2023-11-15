@@ -44,13 +44,15 @@ RSpec.describe ComplexRights do
       complex_rights_attributes: [{
         date: '1978-10-28',
         rights: 'https://creativecommons.org/publicdomain/zero/1.0/',
-        label: 'CC-0'
+        label: 'CC-0',
+        license_description: 'Some description for the rights'
       }]
     }
     expect(@obj.complex_rights.first).to be_kind_of ActiveTriples::Resource
     expect(@obj.complex_rights.first.date).to eq ['1978-10-28']
     expect(@obj.complex_rights.first.rights).to eq ['https://creativecommons.org/publicdomain/zero/1.0/']
     expect(@obj.complex_rights.first.label).to eq ['CC-0']
+    expect(@obj.complex_rights.first.license_description).to eq ['Some description for the rights']
   end
 
   describe 'when reject_if is a symbol' do
@@ -81,7 +83,8 @@ RSpec.describe ComplexRights do
       @obj.attributes = {
         complex_rights_attributes: [{
           date: '2018-01-01',
-          label: 'cc0'
+          label: 'cc0',
+          license_description: 'Some description for the rights'
         }]
       }
       expect(@obj.complex_rights).to be_empty
