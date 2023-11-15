@@ -184,6 +184,13 @@ RSpec.describe Dataset do
     end
   end
 
+  describe 'license description' do
+    it 'has license description' do
+      @obj = build(:dataset, license_description: ['This is some description for the license'])
+      expect(@obj.license_description).to eq ['This is some description for the license']
+    end
+  end
+
   describe 'supervisor_approval' do
     it 'has supervisor_approval' do
       @obj = build(:dataset, supervisor_approval: ['Kosuke Tanabe 2019.08.01'])

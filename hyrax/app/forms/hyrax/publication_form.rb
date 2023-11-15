@@ -27,7 +27,8 @@ module Hyrax
       :description, :keyword_ordered, 
       :specimen_set_ordered, 
       :publisher, :date_published,
-      :rights_statement, :licensed_date, 
+      :rights_statement, :licensed_date,
+      :license_description,
       :complex_person, 
       :complex_contact_agent,
       :complex_source, :manuscript_type,
@@ -64,6 +65,7 @@ module Hyrax
         :specimen_set_ordered, 
         :publisher, :date_published, 
         :rights_statement, :licensed_date,
+        :license_description,
         :complex_person, 
         :complex_contact_agent,
         :complex_source, :manuscript_type, 
@@ -251,6 +253,7 @@ module Hyrax
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
       permitted << :licensed_date
+      permitted << :license_description
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_person_attributes: permitted_person_params }
       permitted << { complex_relation_attributes: permitted_relation_params }

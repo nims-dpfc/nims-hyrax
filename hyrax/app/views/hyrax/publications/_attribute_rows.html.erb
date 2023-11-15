@@ -49,6 +49,8 @@
 
 <%= presenter.attribute_to_html(:licensed_date, label: t('ngdr.fields.licensed_date'), html_dl: true) %>
 
+<%= presenter.attribute_to_html(:license_description, label: t('ngdr.fields.license_description'), html_dl: true) %>
+
 <% if can? :read_source, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:source, label: "Source", html_dl: true) %>
   <%= presenter.attribute_to_html(:complex_source, render_as: :nested_source, label: t('ngdr.fields.complex_source'), html_dl: true) %>
