@@ -494,6 +494,16 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_rights do
+      complex_rights_attributes {
+        [{
+           rights: 'http://creativecommons.org/publicdomain/zero/1.0/',
+           date: '1978-10-28',
+           license_description: 'A customised rights statement'
+         }]
+      }
+    end
+
     trait :with_complex_version do
       complex_version_attributes {
         [{

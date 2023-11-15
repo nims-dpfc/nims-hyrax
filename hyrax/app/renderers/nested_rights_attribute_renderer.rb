@@ -11,6 +11,10 @@ class NestedRightsAttributeRenderer < NestedAttributeRenderer
       # start date
       val = v.fetch('date', [])
       each_html += get_row('Date', val[0]) unless val.blank?
+      # License description
+      val = v.fetch('license_description', [])
+      each_html += get_row('License description', val[0]) unless val.blank?
+      # Add it all
       html += get_inner_html(each_html)
     end
     html_out = get_ouput_html(html)

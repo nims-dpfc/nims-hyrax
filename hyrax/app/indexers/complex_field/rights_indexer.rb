@@ -9,6 +9,7 @@ module ComplexField
     def index_rights(solr_doc)
       solr_doc[Solrizer.solr_name('complex_rights', :displayable)] = object.complex_rights.to_json
       solr_doc[Solrizer.solr_name('complex_rights', :facetable)] = object.complex_rights.map { |r| r.rights.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('complex_rights_description', :searchable)] = object.complex_rights.map { |r| r.license_description.reject(&:blank?).first }
     end
 
     def self.rights_facet_fields
@@ -22,6 +23,7 @@ module ComplexField
       # solr fields that will be used for a search
       fields = []
       fields << Solrizer.solr_name('complex_rights', :facetable)
+      fields << Solrizer.solr_name('complex_rights_description', :searchable)
       fields
     end
 
