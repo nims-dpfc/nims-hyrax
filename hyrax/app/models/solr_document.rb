@@ -126,6 +126,10 @@ class SolrDocument
     self[Solrizer.solr_name('licensed_date', :stored_searchable)]
   end
 
+  def license_description
+    self[Solrizer.solr_name('license_description', :stored_searchable)]
+  end
+
   def instrument
     self[Solrizer.solr_name('instrument', :stored_searchable)]
   end

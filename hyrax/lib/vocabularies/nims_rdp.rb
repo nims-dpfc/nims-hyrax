@@ -33,6 +33,8 @@ module RDF
       property 'instrument-operator'
       property 'instrument-organization'
       property 'instrument-title'
+      property 'licenced-date'
+      property 'licence-description'
       property 'material-type'
       property 'sub-category'
       property 'material-sub-type'

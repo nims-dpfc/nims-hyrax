@@ -17,7 +17,7 @@ RSpec.describe Hyrax::DatasetForm do
         :title, :alternative_title, :resource_type, :data_origin, :description,
         :keyword_ordered, :specimen_set_ordered,
         :material_type, :publisher, :date_published, :rights_statement,
-        :licensed_date,
+        :licensed_date, :license_description,
         :complex_person, :complex_contact_agent, :complex_source,
         :manuscript_type,
         :complex_event, :language, :complex_date, :complex_identifier,
