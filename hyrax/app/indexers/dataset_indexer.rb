@@ -130,6 +130,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::RightsIndexer.rights_show_fields
       fields.concat ComplexField::OrganizationIndexer.organization_show_fields
       fields.concat ComplexField::InstrumentIndexer.instrument_show_fields
+      fields.concat ComplexField::InstrumentOperatorIndexer.instrument_operator_show_fields
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_show_fields
       fields.concat ComplexField::FundrefIndexer.fundref_show_fields
       fields.concat ComplexField::ContactAgentIndexer.contact_agent_show_fields
