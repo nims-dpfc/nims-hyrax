@@ -12,6 +12,7 @@ module RDF
       property 'Shape'
       property 'Specimen'
       property 'StateOfMatter'
+      property 'article-number'
       property 'downstream'
       property 'category'
       property 'characterization-methods'
