@@ -51,6 +51,7 @@ RSpec.describe 'hyrax/datasets/_form.html.erb', type: :view do
       render
       expect(rendered).to have_field('dataset_complex_source_attributes_0_title', type: :text, with: 'Test journal')
       expect(rendered).to have_field('dataset_complex_source_attributes_0_alternative_title', type: :text, with: 'Sub title for journal')
+      expect(rendered).to have_field('dataset_complex_source_attributes_0_article_number', type: :text, with: 'a1234')
       expect(rendered).to have_field('dataset_complex_source_attributes_0_start_page', type: :text, with: '4')
       expect(rendered).to have_field('dataset_complex_source_attributes_0_end_page', type: :text, with: '12')
       expect(rendered).to have_field('dataset_complex_source_attributes_0_issue', type: :text, with: '34')
