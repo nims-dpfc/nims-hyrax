@@ -16,7 +16,7 @@ RSpec.describe Hyrax::DatasetForm do
         :first_published_url,
         :title, :alternative_title, :resource_type, :data_origin, :description,
         :keyword_ordered, :specimen_set_ordered,
-        :material_type, :publisher, :date_published, :rights_statement,
+        :material_type, :publisher, :date_published, :rights_statement, :complex_rights,
         :licensed_date,
         :complex_person, :complex_contact_agent, :complex_source,
         :manuscript_type,
@@ -64,6 +64,7 @@ RSpec.describe Hyrax::DatasetForm do
         expect(described_class).to receive(:permitted_relation_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_specimen_type_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_version_params).at_least(:once).and_call_original
+        expect(described_class).to receive(:permitted_rights_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_event_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_source_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_custom_property_params).at_least(:once).and_call_original
