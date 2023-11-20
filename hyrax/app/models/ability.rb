@@ -70,6 +70,7 @@ class Ability
     can :read_subject, [::Dataset, ::Publication]
     can :read_title, [::Dataset, ::Publication]    # NB: not used in Publication
     can :read_version, [::Dataset, ::Publication]
+    can :read_manuscript_type, [::Dataset, ::Publication]
   end
 
   def only_admin_can_view_user_list
