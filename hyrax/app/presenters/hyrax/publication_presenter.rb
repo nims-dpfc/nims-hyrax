@@ -8,8 +8,8 @@ module Hyrax
              :complex_funding_reference, :complex_source,
              :complex_contact_agent,
              :complex_relation, :custom_property, :specimen_set,
-             :first_published_url, :doi, :licensed_date, :creator, :date_published,
-             :managing_organization, :ordered_creators, to: :solr_document
+             :first_published_url, :doi, :licensed_date, :license_description,
+             :creator, :date_published, :managing_organization, :ordered_creators, to: :solr_document
 
     Hyrax::MemberPresenterFactory.file_presenter_class = Hyrax::NimsFileSetPresenter
     prepend ::FilteredGraph
