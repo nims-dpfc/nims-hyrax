@@ -232,5 +232,9 @@ FactoryBot.define do
          }]
       }
     end
+
+    trait :with_manuscript_type do
+      manuscript_type { 'Original' }
+    end
   end
 end
