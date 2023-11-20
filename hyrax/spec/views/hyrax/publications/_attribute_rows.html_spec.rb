@@ -45,7 +45,7 @@ RSpec.describe 'hyrax/publications/_attribute_rows' do
       expect(rendered).to have_content('Test journal')
       expect(rendered).to have_content('f1234')
       expect(rendered).to have_content('tanabe@example.jp')
-      expect(rendered).to have_content('Original')
+      expect(rendered).to have_content("Author's original")
     end
   end
 
@@ -74,7 +74,7 @@ RSpec.describe 'hyrax/publications/_attribute_rows' do
       expect(rendered).to have_content('Test journal')
       expect(rendered).to have_content('f1234')
       expect(rendered).to have_content('tanabe@example.jp')
-      expect(rendered).to have_content('Original')
+      expect(rendered).to have_content("Author's original")
     end
   end
 end
