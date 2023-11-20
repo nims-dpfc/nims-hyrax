@@ -113,6 +113,10 @@ class Publication < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
+  property :license_description, predicate: ::RDF::Vocab::NimsRdp['licence-description'], multiple: false do |index|
+    index.as :stored_searchable
+  end
+
   property :specimen_set, predicate: ::RDF::Vocab::NimsRdp['specimen-set'] do |index|
     index.as :stored_searchable, :facetable
   end
