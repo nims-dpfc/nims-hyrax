@@ -311,6 +311,7 @@ RSpec.describe SolrDocument do
     let(:model) { build(:publication,
       complex_source_attributes: [{
         alternative_title: 'Sub title for journal',
+        article_number: 'a1234',
         end_page: '12',
         issue: '34',
         sequence_number: '1.2.2',
@@ -324,6 +325,10 @@ RSpec.describe SolrDocument do
     describe 'alternative_title' do
       subject { complex_source['alternative_title'] }
       it { is_expected.to eql ['Sub title for journal'] }
+    end
+    describe 'article_number' do
+      subject { complex_source['article_number'] }
+      it { is_expected.to eql ['a1234'] }
     end
     describe 'end_page' do
       subject { complex_source['end_page'] }

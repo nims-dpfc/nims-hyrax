@@ -399,7 +399,8 @@ module Hyrax
          title: [],
          total_number_of_pages: [],
          volume: [],
-         issn: []
+         issn: [],
+         article_number: []
        }
       ]
     end
