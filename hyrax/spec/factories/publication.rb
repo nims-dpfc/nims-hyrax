@@ -170,6 +170,7 @@ FactoryBot.define do
             identifier: '1234567',
             scheme: 'Local'
           }],
+          article_number: 'a1234',
           issue: '34',
           sequence_number: '1.2.2',
           start_page: '4',
@@ -230,6 +231,10 @@ FactoryBot.define do
            department: 'DPFC'
          }]
       }
+    end
+
+    trait :with_manuscript_type do
+      manuscript_type { 'Original' }
     end
   end
 end

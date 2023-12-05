@@ -43,6 +43,7 @@ en:
       instrument_function:      "Instrument function"
       keyword_ordered:          "Keyword"
       last_name:                "Surname"
+      license_description:      "License description"
       managing_organization:    "Managing organization"
       material_sub_type:        "Material sub type"
       material_type:            "Material type"
@@ -74,6 +75,7 @@ en:
         alternative_title: Alternative title or the title in another language, if applicable.
         rights_statement: "Copyright and license for your work. If none apply, select \"In Copyright\". <a href='https://dice.nims.go.jp/services/MDR/manual/html/glossary.html#rights-and-licenses' target='_blank' rel='noopener'>See the User's Manual</a> for further information."
         licensed_date: Date when the work was released under the license selected above.
+        license_decription: text accompanying the license selected above, if any.
         data_origin: Type of research.
         resource_type: Type of content. More than one type may be selected.
         description: Abstract or a free-text description for the work.

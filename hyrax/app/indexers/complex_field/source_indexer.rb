@@ -12,6 +12,7 @@ module ComplexField
       solr_doc[Solrizer.solr_name('complex_source_title', :facetable)] = object.complex_source.map { |i| i.title.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_source_issue', :stored_searchable)] = object.complex_source.map { |i| i.issue.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_source_sequence_number', :stored_searchable)] = object.complex_source.map { |i| i.sequence_number.reject(&:blank?).first }
+      solr_doc[Solrizer.solr_name('complex_source_article_number', :stored_searchable)] = object.complex_source.map { |i| i.article_number.reject(&:blank?).first }
       solr_doc[Solrizer.solr_name('complex_source_volume', :stored_searchable)] = object.complex_source.map { |i| i.volume.reject(&:blank?).first }
       object.complex_source.each do |i|
         i.complex_person.each do |pn|

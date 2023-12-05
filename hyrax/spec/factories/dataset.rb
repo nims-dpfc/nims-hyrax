@@ -453,6 +453,7 @@ FactoryBot.define do
             identifier: '1234567',
             scheme: 'Local'
           }],
+          article_number: 'a1234',
           issue: '34',
           sequence_number: '1.2.2',
           start_page: '4',
@@ -617,6 +618,7 @@ FactoryBot.define do
         [{
            title: '統合データベース',
            alternative_title: 'トリプル',
+           article_number: 'a1234',
            issue: '34',
            start_page: '4',
            end_page: '12',

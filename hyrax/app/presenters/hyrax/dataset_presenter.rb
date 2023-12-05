@@ -14,7 +14,8 @@ module Hyrax
       :complex_computational_method, :complex_experimental_method,
       :material_type,
       :synthesis_and_processing, :custom_property, :first_published_url, :doi,
-      :creator, :licensed_date, :date_published, :managing_organization, :ordered_creators, to: :solr_document
+      :creator, :licensed_date, :license_description, :date_published,
+      :managing_organization, :ordered_creators, to: :solr_document
 
     Hyrax::MemberPresenterFactory.file_presenter_class = Hyrax::NimsFileSetPresenter
     prepend ::FilteredGraph

@@ -30,6 +30,7 @@ module Hyrax
       :specimen_set_ordered, 
       :publisher, :date_published, 
       :rights_statement, :licensed_date,
+      :license_description,
       :complex_person, 
       :complex_contact_agent,
       :complex_source, :manuscript_type, 
@@ -92,7 +93,8 @@ module Hyrax
         :specimen_set_ordered, 
         :material_type,
         :publisher, :date_published, 
-        :rights_statement, :licensed_date, 
+        :rights_statement, :licensed_date,
+        :license_description,
         :complex_person, 
         :complex_contact_agent,
         :complex_source, :manuscript_type,
@@ -415,7 +417,8 @@ module Hyrax
          title: [],
          total_number_of_pages: [],
          volume: [],
-         issn: []
+         issn: [],
+         article_number: []
        }
       ]
     end
@@ -489,6 +492,7 @@ module Hyrax
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
       permitted << :licensed_date
+      permitted << :license_description
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_instrument_attributes: permitted_instrument_params }
       permitted << { complex_instrument_operator_attributes: permitted_instrument_operator_params }
