@@ -206,7 +206,7 @@ Then('make dataset editable by the nims_researcher') do
   dataset.update(edit_users: [@user.user_key])
 end
 
-Then("On edit dataset page should not show extra blank complex source fileds") do
+Then("On edit dataset page should not show extra blank complex source fields") do
   dataset = Dataset.last
 
   visit edit_hyrax_dataset_path(dataset)

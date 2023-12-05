@@ -658,5 +658,18 @@ FactoryBot.define do
          }]
       }
     end
+
+    trait :with_complex_instrument_operator do
+      complex_instrument_operator_attributes {
+        [
+          {
+            name: 'Operator1',
+            email: 'operator1@example.jp',
+            organization: 'University',
+            department: 'Department'
+          }
+        ]
+      }
+    end
   end
 end

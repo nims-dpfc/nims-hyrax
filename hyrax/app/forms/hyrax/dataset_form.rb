@@ -52,7 +52,8 @@ module Hyrax
       :complex_experimental_method,
 
       # instruments
-      :complex_instrument, 
+      :complex_instrument,
+      :complex_instrument_operator,
 
       # specimen details
       :complex_specimen_type,
@@ -123,7 +124,10 @@ module Hyrax
     end
 
     def instrument_tab_terms
-      [ :complex_instrument ]
+      [
+        :complex_instrument,
+        :complex_instrument_operator
+      ]
     end
 
     def specimen_tab_terms
@@ -241,6 +245,18 @@ module Hyrax
          category: [],
          # sub_category: [],
          description: []
+       }
+      ]
+    end
+
+    def self.permitted_instrument_operator_params
+      [:id,
+       :_destroy,
+       {
+         name: [],
+         email: [],
+         organization: [],
+         department: []
        }
       ]
     end
@@ -479,6 +495,7 @@ module Hyrax
       permitted << :license_description
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_instrument_attributes: permitted_instrument_params }
+      permitted << { complex_instrument_operator_attributes: permitted_instrument_operator_params }
       permitted << { complex_person_attributes: permitted_person_params }
       permitted << { complex_organization_attributes: permitted_organization_params }
       permitted << { complex_relation_attributes: permitted_relation_params }
