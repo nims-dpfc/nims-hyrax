@@ -58,7 +58,8 @@ class NgdrIndexer < Hyrax::WorkIndexer
       Solrizer.solr_name('place', :stored_searchable),
       Solrizer.solr_name('status', :stored_searchable),
       Solrizer.solr_name('issue', :stored_searchable),
-      Solrizer.solr_name('licensed_date', :stored_searchable)
+      Solrizer.solr_name('licensed_date', :stored_searchable),
+      Solrizer.solr_name('license_description', :stored_searchable)
     ]
   end
 
@@ -86,7 +87,8 @@ class NgdrIndexer < Hyrax::WorkIndexer
       Solrizer.solr_name('place', :stored_searchable),
       Solrizer.solr_name('status', :stored_searchable),
       Solrizer.solr_name('issue', :stored_searchable),
-      Solrizer.solr_name('licensed_date', :stored_searchable)
+      Solrizer.solr_name('licensed_date', :stored_searchable),
+      Solrizer.solr_name('license_description', :stored_searchable)
     ]
   end
 
