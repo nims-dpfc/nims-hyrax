@@ -82,7 +82,7 @@ class Dataset < ActiveFedora::Base
 
   property :complex_instrument, predicate: ::RDF::Vocab::NimsRdp.instrument, class_name: "ComplexInstrument"
 
-  property :complex_instrument_operator, predicate: ::RDF::Vocab::NimsRdp.instrument, class_name: "ComplexInstrumentOperator"
+  property :complex_instrument_operator, predicate: ::RDF::Vocab::NimsRdp.instrument_operator, class_name: "ComplexInstrumentOperator"
 
   property :origin_system_provenance, predicate: ::RDF::Vocab::NimsRdp['origin-system-provenance'], multiple: false do |index|
     index.as :stored_searchable
