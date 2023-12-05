@@ -153,6 +153,7 @@
     <div id="instrument" class="panel-collapse collapse in">
       <div class="panel-body">
         <%= presenter.attribute_to_html(:complex_instrument, render_as: :nested_instrument, label: t('ngdr.fields.instrument'), html_dl: true) %>
+        <%= presenter.attribute_to_html(:complex_instrument_opeartor, render_as: :nested_instrument_operator, label: t('ngdr.fields.instrument_operator'), html_dl: true) %>
       </div> <!-- panel body -->
     </div> <!-- Accordion body -->
   </div> <!-- Instruments accordion -->

@@ -10,6 +10,7 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::VersionIndexer
   include ComplexField::OrganizationIndexer
   include ComplexField::InstrumentIndexer
+  include ComplexField::InstrumentOperatorIndexer
   include ComplexField::RelationIndexer
   include ComplexField::EventIndexer
   include ComplexField::SourceIndexer
@@ -88,6 +89,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::RightsIndexer.rights_search_fields
       fields.concat ComplexField::OrganizationIndexer.organization_search_fields
       fields.concat ComplexField::InstrumentIndexer.instrument_search_fields
+      fields.concat ComplexField::InstrumentOperatorIndexer.instrument_operator_search_fields
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_search_fields
       fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_search_fields
       fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_search_fields
@@ -128,6 +130,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::RightsIndexer.rights_show_fields
       fields.concat ComplexField::OrganizationIndexer.organization_show_fields
       fields.concat ComplexField::InstrumentIndexer.instrument_show_fields
+      fields.concat ComplexField::InstrumentOperatorIndexer.instrument_operator_show_fields
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_show_fields
       fields.concat ComplexField::FundrefIndexer.fundref_show_fields
       fields.concat ComplexField::ContactAgentIndexer.contact_agent_show_fields

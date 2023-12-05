@@ -25,6 +25,7 @@ en:
         complex_funding_reference:        "Funding reference"
         complex_identifier:               "Identifier"
         complex_instrument:               "Instrument"
+        complex_instrument_operator:      "Instrument operator"
         complex_organization:             "Organization"
         complex_person:                   "Creator"
         complex_relation:                 "Related item"
