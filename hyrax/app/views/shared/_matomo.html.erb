@@ -8,7 +8,6 @@
     var u="<%= ENV['MATOMO_BASE_URL'] %>";
     _paq.push(['setTrackerUrl', u+'matomo.php']);
     _paq.push(['setSiteId', '<%= ENV['MATOMO_SITE_ID'] %>']);
-    _paq.push(['setSiteId', '1']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();
