@@ -50,8 +50,8 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :managing_organization_ordered, :title, :resource_type,
-      :description, :keyword_ordered, :date_published, :rights_statement
+      :title, :resource_type, :description, :keyword_ordered,
+      :date_published, :rights_statement
     ]
 
     def metadata_tab_terms
