@@ -9,7 +9,6 @@
                   hyrax.download_path(file_set),
                   target: :_blank,
                   id: "file_download_"+file_set.id,
-                  class: "matomo_download",
                   data: { label: file_set.id } if can?(:download, file_set.id) %>
     </div>
 <% else %>
