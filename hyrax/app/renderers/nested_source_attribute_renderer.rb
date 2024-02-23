@@ -17,9 +17,9 @@ class NestedSourceAttributeRenderer < NestedAttributeRenderer
         val = v['issn'][0]
         each_html += get_row(label, val)
       end
-      unless v.dig('alternative_title').blank?
+      unless v.dig('alternate_title').blank?
         label = 'Alternative title'
-        val = v['alternative_title'][0]
+        val = v['alternate_title'][0]
         each_html += get_row(label, val)
       end
       unless v.dig('complex_person').blank?

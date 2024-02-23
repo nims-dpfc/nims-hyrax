@@ -14,7 +14,7 @@ RSpec.describe Hyrax::DatasetForm do
       it { is_expected.to include(
         :managing_organization_ordered,
         :first_published_url,
-        :title, :alternative_title, :resource_type, :data_origin, :description,
+        :title, :alternate_title, :resource_type, :data_origin, :description,
         :keyword_ordered, :specimen_set_ordered,
         :material_type, :publisher, :date_published, :rights_statement,
         :licensed_date, :license_description,

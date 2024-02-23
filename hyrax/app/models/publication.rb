@@ -43,7 +43,7 @@ class Publication < ActiveFedora::Base
   property :updated_subresources, predicate: ::RDF::URI.new('http://example.com/updatedSubresources'), class_name: "ActiveTriples::Resource"
 
   # NGDR Hyrax Work Common
-  property :alternative_title, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|
+  property :alternate_title, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|
     index.as :stored_searchable
   end
 

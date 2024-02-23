@@ -46,12 +46,12 @@ RSpec.describe Metadata::JpcoarMapping do
       end
     end
 
-    describe 'jpcoar_alternative_title' do
-      let(:model) { build(:dataset, :with_alternative_title) }
+    describe 'jpcoar_alternate_title' do
+      let(:model) { build(:dataset, :with_alternate_title) }
       let(:solr_document) { SolrDocument.new(model.to_solr) }
       let(:out) {'<dcterms:alternative xml:lang="en">Alternative-Title-123</dcterms:alternative>'}
       it 'has the xml' do
-        solr_document.jpcoar_alternative_title(field, xml)
+        solr_document.jpcoar_alternate_title(field, xml)
         expect(xml.target!.gsub(/<to_s\/>/, '')).to eq out.split("\n").map(&:rstrip).map(&:lstrip).join("")
       end
     end
@@ -415,8 +415,8 @@ RSpec.describe Metadata::JpcoarMapping do
       end
 
       let(:at_out) {'<dcterms:alternative xml:lang="ja">試料冷却法を併用したAES深さ方向分析によるSiO2/Si熱酸化膜の分析</dcterms:alternative>'}
-      it 'has the alternative_title xml' do
-        solr_document.jpcoar_alternative_title(field, xml)
+      it 'has the alternate_title xml' do
+        solr_document.jpcoar_alternate_title(field, xml)
         expect(xml.target!.gsub(/<to_s\/>/, '')).to eq at_out.split("\n").map(&:rstrip).map(&:lstrip).join("")
       end
 

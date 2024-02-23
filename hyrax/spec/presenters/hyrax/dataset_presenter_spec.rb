@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::DatasetPresenter do
-  let(:dataset) { create(:dataset, :open, :with_alternative_title, :with_description_abstract, :with_supervisor_approval, depositor: 'despositor') }
+  let(:dataset) { create(:dataset, :open, :with_alternate_title, :with_description_abstract, :with_supervisor_approval, depositor: 'despositor') }
   let(:solr_document) { SolrDocument.new(dataset.to_solr) }
   let(:host) { double(host: 'http://example.org') }
   let(:user) { nil }

@@ -3,7 +3,7 @@ include Warden::Test::Helpers
 
 RSpec.describe 'hyrax/datasets/_attribute_rows' do
   let(:partial) { 'hyrax/datasets/attribute_rows' }
-  let(:dataset) { create(:dataset, :open, :with_alternative_title, :with_complex_person, :with_keyword, :with_subject,
+  let(:dataset) { create(:dataset, :open, :with_alternate_title, :with_complex_person, :with_keyword, :with_subject,
                         :with_language, :with_publisher, :with_date_published, :with_complex_identifier, :with_rights,
                         :with_complex_version, :with_resource_type, :with_complex_relation, :with_complex_source,
                         :with_complex_event, :with_material_type, :with_complex_funding_reference,

@@ -44,8 +44,8 @@ class SolrDocument
   # Using custom extension for content negotiation for ActiveFedora models
   use_extension( ::Hyrax::SolrDocument::ContentNegotiation )
 
-  def alternative_title
-    self[Solrizer.solr_name('alternative_title', :stored_searchable)]
+  def alternate_title
+    self[Solrizer.solr_name('alternate_title', :stored_searchable)]
   end
 
   def date_published
