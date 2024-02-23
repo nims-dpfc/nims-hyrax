@@ -22,7 +22,7 @@ module Hyrax
       # Adding all fields in order of display in form
       :managing_organization_ordered,
       :first_published_url,
-      :title, :alternative_title, 
+      :title, :alternate_title, 
       :resource_type, 
       :description, :keyword_ordered, 
       :specimen_set_ordered, 
@@ -59,7 +59,7 @@ module Hyrax
         # Description tab order determined here
         :managing_organization_ordered,
         :first_published_url,
-        :title, :alternative_title, 
+        :title, :alternate_title, 
         :resource_type, 
         :description, :keyword_ordered,
         :specimen_set_ordered, 
@@ -264,7 +264,6 @@ module Hyrax
       permitted << { custom_property_attributes: permitted_custom_property_params }
       permitted << { complex_funding_reference_attributes: permitted_fundref_params }
       permitted << { complex_contact_agent_attributes: permitted_contact_agent_params }
-      permitted << :member_of_collection_ids
       permitted << :find_child_work
     end
   end

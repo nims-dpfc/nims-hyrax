@@ -54,8 +54,8 @@ FactoryBot.define do
       }
     end
 
-    trait :with_alternative_title do
-      alternative_title { 'Alternative-Title-123' }
+    trait :with_alternate_title do
+      alternate_title { 'Alternative-Title-123' }
     end
 
     trait :with_keyword do

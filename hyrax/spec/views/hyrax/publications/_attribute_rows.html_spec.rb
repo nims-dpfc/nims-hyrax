@@ -3,7 +3,7 @@ include Warden::Test::Helpers
 
 RSpec.describe 'hyrax/publications/_attribute_rows' do
   let(:partial) { 'hyrax/publications/attribute_rows' }
-  let(:publication) { build(:publication, :open, :with_alternative_title, :with_complex_author, :with_keyword, :with_subject, :with_language,
+  let(:publication) { build(:publication, :open, :with_alternate_title, :with_complex_author, :with_keyword, :with_subject, :with_language,
                         :with_publisher, :with_date_published, :with_complex_identifier, :with_rights_statement, :with_complex_rights,
                         :with_complex_version, :with_resource_type, :with_source, :with_issue, :with_complex_source, :with_complex_event,
                         :with_place, :with_table_of_contents,

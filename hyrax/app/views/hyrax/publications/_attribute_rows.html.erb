@@ -1,5 +1,5 @@
-<% if can? :read_alternative_title, presenter.model_name.name.constantize %>
-  <%= presenter.attribute_to_html(:alternative_title, label: t('ngdr.fields.alternative_title'), html_dl: true) %>
+<% if can? :read_alternate_title, presenter.model_name.name.constantize %>
+  <%= presenter.attribute_to_html(:alternate_title, label: t('ngdr.fields.alternate_title'), html_dl: true) %>
 <% end %>
 
 <% if can? :read_identifier, presenter.model_name.name.constantize %>

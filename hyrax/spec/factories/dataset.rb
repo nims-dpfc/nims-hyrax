@@ -47,8 +47,8 @@ FactoryBot.define do
       sequence(:description) { |n| ["Abstract-Description-#{n}"] }
     end
 
-    trait :with_alternative_title do
-      alternative_title { 'Alternative-Title-123' }
+    trait :with_alternate_title do
+      alternate_title { 'Alternative-Title-123' }
     end
 
     trait :with_keyword do
@@ -600,7 +600,7 @@ FactoryBot.define do
     trait :with_ja do
       title { ["材料データプラットフォームDICE2.0 - データ創出−蓄積−利用−連携の基盤"] }
       managing_organization { ['ナノテクノロジープラットフォーム事業の成果と課題'] }
-      alternative_title { '試料冷却法を併用したAES深さ方向分析によるSiO2/Si熱酸化膜の分析' }
+      alternate_title { '試料冷却法を併用したAES深さ方向分析によるSiO2/Si熱酸化膜の分析' }
       description { ["わが国の先端共用・技術プラットフォームの 展望と課題を、ナノテクノロジープラットフォーム事業の実績と経験にもとづいて"] }
       keyword { ['ナノテクノロジープラットフォーム事業の活動実績', '共用施策設計'] }
       publisher { ['金属材料技術研究所'] }

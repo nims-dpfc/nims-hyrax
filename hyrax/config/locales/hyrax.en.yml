@@ -192,7 +192,7 @@ en:
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
         show:
-          alternative_title_tesim: Alternative title
+          alternate_title_tesim: Alternative title
           based_near_tesim: Location
           characterization_methods_tesim: Characterization_methods
           computational_methods_tesim: Computational methods
