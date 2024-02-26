@@ -22,7 +22,7 @@ RSpec.describe Hyrax::UsersController do
 
       it "should be redirected to SAMURAI" do
         get :show, params: { id: @user.user_identifier }
-        expect(response).to redirect_to "https://samurai.nims.go.jp/orcid/#{Hyrax::OrcidValidator.match(@user.orcid)}"
+        expect(response).to redirect_to "https://samurai.nims.go.jp/orcid/#{Hyrax::OrcidValidator.extract_bare_orcid(from: @user.orcid)}"
       end
     end
   end
