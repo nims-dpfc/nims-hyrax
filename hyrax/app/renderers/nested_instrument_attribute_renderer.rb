@@ -13,9 +13,9 @@ class NestedInstrumentAttributeRenderer < NestedAttributeRenderer
         each_html += get_row(label, val)
       end
       # alternative title
-      unless v.dig('alternate_title').blank?
+      unless v.dig('alternative_title').blank?
         label = 'Alternative title'
-        val = v['alternate_title'][0]
+        val = v['alternative_title'][0]
         each_html += get_row(label, val)
       end
       # complex date

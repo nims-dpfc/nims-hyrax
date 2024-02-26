@@ -24,7 +24,7 @@ RSpec.describe Hyrax::PublicationForm do
   describe '#build_permitted_params' do
     subject { described_class.build_permitted_params }
 
-    it { is_expected.to include(:member_of_collection_ids, :find_child_work) }
+    it { is_expected.to include(:find_child_work) }
 
     context 'permitted params' do
       it do
