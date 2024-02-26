@@ -103,7 +103,7 @@ RSpec.describe ComplexInstrument do
       end
       it 'creates an instrument active triple resource with all the attributes' do
         expect(subject).to be_kind_of ActiveTriples::Resource
-        expect(subject.alternate_title).to eq ['An instrument title']
+        expect(subject.alternative_title).to eq ['An instrument title']
         expect(subject.complex_date.first).to be_kind_of ActiveTriples::Resource
         expect(subject.complex_date.first.date).to eq ['2018-02-14']
         expect(subject.description).to eq ['Instrument description']
