@@ -28,6 +28,12 @@ services:
     ports:
       - 8983:8983
 
+  solr8:
+    environment:
+      - OOM=script
+    ports:
+      - 8987:8983
+
   web:
     ports:
       - 3000:3000
