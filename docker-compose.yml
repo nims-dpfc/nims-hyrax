@@ -2,6 +2,7 @@ version: '3'
 
 volumes:
   solr:
+  solr8:
   db:
   db-fcrepo:
   app:
@@ -53,6 +54,31 @@ services:
       - sh
       - "-c"
       - "precreate-core hydra-test /opt/solr/solr_conf; solr-precreate ${SOLR_CORE} /opt/solr/solr_conf"
+
+  solr8:
+    image: solr:8
+    expose:
+      - 8983
+    ports:
+      - 8987:8983
+    env_file:
+      - .env
+    environment:
+      - OOM=script
+    healthcheck:
+      test: ["CMD-SHELL", "wget -O /dev/null http://localhost:8987/solr/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      internal:
+    volumes:
+      - solr8:/var/solr
+      - ./hyrax/solr8/conf:/opt/solr/solr_conf
+    command:
+      - sh
+      - "-c"
+      - "precreate-core ${SOLR_TEST_CORE} /opt/solr/solr_conf; solr-precreate ${SOLR_CORE} /opt/solr/solr_conf"
 
   db: &db
     image: postgres:11-alpine
@@ -114,6 +140,7 @@ services:
     depends_on:
       - appdb
       - solr
+      - solr8
       - fcrepo
       - redis
     expose:
@@ -125,6 +152,7 @@ services:
     depends_on:
       - appdb
       - solr
+      - solr8
       - fcrepo
       - redis
 
