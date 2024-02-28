@@ -158,7 +158,7 @@ Hyrax.config do |config|
   end
 
   # Returns a URL that resolves to an image provided by a IIIF image server
-  config.iiif_image_url_builder = lambda do |file_id, base_url, size|
+  config.iiif_image_url_builder = lambda do |file_id, base_url, size, format|
     Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size, protocol: protocol, port: port)
   end
 
