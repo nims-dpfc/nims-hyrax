@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Hyrax::IiifHelper, :type => :helper do
   let(:publication) { build(:publication) }
-  let(:mock_solr_doc) { instance_double(SolrDocument, hydra_model: publication) } # a bit of a hack to make the routing work in tests
+  let(:mock_solr_doc) { instance_double(SolrDocument, to_model: publication) } # a bit of a hack to make the routing work in tests
   let(:presenter) { Hyrax::WorkPresenter.new(mock_solr_doc,  Ability.new(nil)) }
 
   describe '#iiif_viewer_display' do
