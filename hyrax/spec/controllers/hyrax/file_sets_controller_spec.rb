@@ -17,10 +17,13 @@ RSpec.describe Hyrax::FileSetsController do
       let(:file_set) do
         create(:file_set, user: user)
       end
+      let(:dataset) { create(:dataset, :open) }
 
       context 'when updating the attached file version' do
         before do
           allow(Hyrax::Actors::FileActor).to receive(:new).and_return(actor)
+          dataset.ordered_members << file_set
+          dataset.save
         end
 
         it 'returns a Hyrax::UploadedFile' do
