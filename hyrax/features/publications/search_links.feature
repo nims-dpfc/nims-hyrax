@@ -9,7 +9,7 @@ Feature: Search links on a publication
       | with_complex_rights                     |
       | with_complex_version                    |
       | with_complex_source                     |
-
+    Then I have published publication
 
   Scenario: Search links are generated correctly
     Given I am on the publication page
