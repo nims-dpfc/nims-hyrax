@@ -19,7 +19,7 @@ end
 When(/^I navigate to the new publication page$/) do
   visit hyrax.dashboard_path  # /dashboard
   click_link "Works"
-  click_link "Add new work"
+  click_link "add-new-work-button"
 
   # If you generate more than one work uncomment these lines
   choose "payload_concern", option: "Publication"
@@ -47,7 +47,7 @@ When(/^I create the publication with:$/) do |table|
   click_link "Files" # switch tab
   expect(page).to have_content /Add files/i
   expect(page).to have_content /Add folder/i
-  within('span#addfiles') do
+  within('#add-files') do
     attach_file("files[]", File.join(fixture_path, 'image.jp2'), visible: false)
     attach_file("files[]", File.join(fixture_path, 'jp2_fits.xml'), visible: false)
   end

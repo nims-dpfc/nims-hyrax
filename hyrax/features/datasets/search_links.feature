@@ -14,7 +14,7 @@ Feature: Search links on a dataset
       | with_complex_specimen_type              |
       | with_complex_relation                   |
       | with_complex_version                    |
-
+    Then I have published dataset
 
   Scenario: Search links are generated correctly
     Given I am on the dataset page
