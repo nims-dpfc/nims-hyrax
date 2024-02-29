@@ -80,7 +80,7 @@ When(/^I create a draft dataset with:$/) do |table|
   click_link "Files" # switch tab
   expect(page).to have_content /Add files/i
   expect(page).to have_content /Add folder/i
-  within('span#addfiles') do
+  within('#add-files') do
     attach_file("files[]", File.join(fixture_path,  'image.jp2'), visible: false)
     attach_file("files[]", File.join(fixture_path, 'jp2_fits.xml'), visible: false)
   end
