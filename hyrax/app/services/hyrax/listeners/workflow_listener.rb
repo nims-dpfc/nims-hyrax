@@ -33,6 +33,8 @@ module Hyrax
       rescue Sipity::StateError, Sipity::ConversionError => err
         # don't error on known sipity error types; log instead
         Rails.logger.error(err)
+      rescue ActiveRecord::RecordNotUnique => err
+        determine_workflow_state(event)
       end
 
 
