@@ -91,7 +91,7 @@ RSpec.describe Ability do
 
   describe '#read_metadata' do
     let(:read_abstract) { ability.can?(:read_abstract, model) }
-    let(:read_alternative_title) { ability.can?(:read_alternative_title, model) }
+    let(:read_alternate_title) { ability.can?(:read_alternate_title, model) }
     let(:read_creator) { ability.can?(:read_creator, model) }
     let(:read_date) { ability.can?(:read_date, model) }
     let(:read_event) { ability.can?(:read_event, model) }
@@ -118,7 +118,7 @@ RSpec.describe Ability do
       context 'dataset' do
         let(:model) { ::Dataset}
         it { expect(read_abstract).to be true }
-        it { expect(read_alternative_title).to be true }
+        it { expect(read_alternate_title).to be true }
         it { expect(read_creator).to be true }
         it { expect(read_date).to be true }
         it { expect(read_event).to be true }
@@ -143,7 +143,7 @@ RSpec.describe Ability do
       context 'publication' do
         let(:model) { ::Publication}
         it { expect(read_abstract).to be true }
-        it { expect(read_alternative_title).to be true }
+        it { expect(read_alternate_title).to be true }
         it { expect(read_creator).to be true }
         it { expect(read_date).to be true }
         it { expect(read_event).to be true }
@@ -181,7 +181,7 @@ RSpec.describe Ability do
       context 'dataset' do
         let(:model) { ::Dataset}
         it { expect(read_abstract).to be true }
-        it { expect(read_alternative_title).to be true }
+        it { expect(read_alternate_title).to be true }
         it { expect(read_creator).to be true }
         it { expect(read_date).to be true }
         it { expect(read_event).to be true }
@@ -206,7 +206,7 @@ RSpec.describe Ability do
       context 'publication' do
         let(:model) { ::Publication}
         it { expect(read_abstract).to be true }
-        it { expect(read_alternative_title).to be true }
+        it { expect(read_alternate_title).to be true }
         it { expect(read_creator).to be true }
         it { expect(read_date).to be true }
         it { expect(read_event).to be true }

@@ -11,7 +11,7 @@ Feature: Create a publication
       | TITLE          | CREATOR   | KEYWORD  | ABSTRACT            |
       | My Publication | Doe, Jane | big data | This is an abstract |
     Then I should see a message that my files are being processed
-    And the work that is created should be in a draft workflow state
-    And the work that is created is editable by the nims_researcher who deposited it
+    And the publication work that is created should be in a draft workflow state
+    And the publication that is created is editable by the nims_researcher who deposited it
     And the publication can be submitted for approval
-    And after it is approved, it is no longer editable by the nims_researcher who deposited it
+    And after publication is approved, it is no longer editable by the nims_researcher who deposited it

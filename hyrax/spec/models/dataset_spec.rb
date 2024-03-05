@@ -254,10 +254,10 @@ RSpec.describe Dataset do
     end
   end
 
-  describe 'alternative_title' do
-    it 'has alternative_title as singular' do
-      @obj = build(:dataset, alternative_title: 'Alternative Title')
-      expect(@obj.alternative_title).to eq 'Alternative Title'
+  describe 'alternate_title' do
+    it 'has alternate_title as singular' do
+      @obj = build(:dataset, alternate_title: 'Alternative Title')
+      expect(@obj.alternate_title).to eq 'Alternative Title'
     end
   end
 

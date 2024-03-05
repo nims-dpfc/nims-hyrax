@@ -131,4 +131,11 @@ class DownloadAllController < Hyrax::DownloadsController
   def local_derivative_download_options
     super.merge(disposition: 'attachment')
   end
+
+  def authorize_download!
+    authorize! :download, params[:id]
+  rescue CanCan::AccessDenied
+    unauthorized_image = Rails.root.join("app", "assets", "images", "unauthorized.png")
+    send_file unauthorized_image, status: :unauthorized
+  end
 end

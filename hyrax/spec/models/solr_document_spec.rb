@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SolrDocument do
   let(:model) do
     build(:dataset,
-      alternative_title: 'Alternative Title',
+      alternate_title: 'Alternative Title',
       complex_date_attributes: [{ date: ['2018-02-14'], description: 'Published Date' }],
       date_published: '2018-02-14',
       complex_identifier_attributes: [{ identifier: ['123456'], label: ['Local'] }],
@@ -73,8 +73,8 @@ RSpec.describe SolrDocument do
   end
   let(:solr_document) { described_class.new(model.to_solr) }
 
-  describe '#alternative_title' do
-    subject { solr_document.alternative_title }
+  describe '#alternate_title' do
+    subject { solr_document.alternate_title }
     it { is_expected.to eql ['Alternative Title'] }
   end
 
