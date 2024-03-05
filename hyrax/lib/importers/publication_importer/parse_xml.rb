@@ -105,7 +105,7 @@ module Importers
         metadata[:description] = val if val.any?
         # alternative
         val = get_text(node, 'alternative')
-        metadata[:alternative_title] = val[0] if val.any?
+        metadata[:alternate_title] = val[0] if val.any?
         # created - ignoring this date for now
         # creator
         metadata[:complex_person_attributes] = get_creators(node)
@@ -292,7 +292,7 @@ module Importers
           # typ = ele.attribute('type')
           # alternative title
           val = get_text(ele, 'alternative')
-          source[:alternative_title] = val if val.any?
+          source[:alternate_title] = val if val.any?
           # creator
           val = get_text(ele, 'creator')
           source[:complex_person_attributes] = [{name: val, role: 'editor'}] if val.any?

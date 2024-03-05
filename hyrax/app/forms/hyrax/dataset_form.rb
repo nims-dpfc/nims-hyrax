@@ -24,7 +24,7 @@ module Hyrax
       # description
       :managing_organization_ordered,
       :first_published_url,
-      :title, :alternative_title, 
+      :title, :alternate_title, 
       :resource_type, :data_origin, 
       :description, :keyword_ordered,
       :specimen_set_ordered, 
@@ -86,7 +86,7 @@ module Hyrax
         # Description tab order determined here
         :managing_organization_ordered,
         :first_published_url,
-        :title, :alternative_title, 
+        :title, :alternate_title, 
         :resource_type, :data_origin,
         :description, :keyword_ordered, 
         :specimen_set_ordered, 
@@ -512,7 +512,6 @@ module Hyrax
       permitted << { complex_software_attributes: permitted_software_params }
       permitted << { complex_computational_method_attributes: permitted_computational_method_params }
       permitted << { complex_experimental_method_attributes: permitted_experimental_method_params }
-      permitted << :member_of_collection_ids
       permitted << :find_child_work
     end
   end

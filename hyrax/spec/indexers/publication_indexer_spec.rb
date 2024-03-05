@@ -3,11 +3,11 @@ require 'json'
 RSpec.describe PublicationIndexer do
   describe 'indexes an alternative title' do
     before do
-      obj = build(:publication, alternative_title: 'Another title')
+      obj = build(:publication, alternate_title: 'Another title')
       @solr_document = obj.to_solr
     end
     it 'indexes as stored_searchable' do
-      expect(@solr_document['alternative_title_tesim']).to match_array(['Another title'])
+      expect(@solr_document['alternate_title_tesim']).to match_array(['Another title'])
     end
   end
 

@@ -14,7 +14,7 @@ RSpec.describe Hyrax::DatasetForm do
       it { is_expected.to include(
         :managing_organization_ordered,
         :first_published_url,
-        :title, :alternative_title, :resource_type, :data_origin, :description,
+        :title, :alternate_title, :resource_type, :data_origin, :description,
         :keyword_ordered, :specimen_set_ordered,
         :material_type, :publisher, :date_published, :rights_statement,
         :licensed_date, :license_description,
@@ -53,7 +53,7 @@ RSpec.describe Hyrax::DatasetForm do
   describe '#build_permitted_params' do
     subject { described_class.build_permitted_params }
 
-    it { is_expected.to include(:member_of_collection_ids, :find_child_work) }
+    it { is_expected.to include(:find_child_work) }
 
     context 'permitted params' do
       it do

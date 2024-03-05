@@ -42,7 +42,7 @@ module Hyrax
           'managing_organization': {'function': 'jpcoar_managing_organization'},
           'first_published_url': {'function': 'jpcoar_first_published_url'},
           'title': {'function': 'jpcoar_title'},
-          'alternative_title': {'function': 'jpcoar_alternative_title'},
+          'alternate_title': {'function': 'jpcoar_alternate_title'},
           'resource_type': {'function': 'jpcoar_resource_type'},
           'description': {'function': 'jpcoar_description'},
           'keyword': {'function': 'jpcoar_keyword'},

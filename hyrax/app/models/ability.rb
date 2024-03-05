@@ -44,7 +44,7 @@ class Ability
 
   def read_metadata
     can :read_abstract, [::Dataset, ::Publication, ::Collection]
-    can :read_alternative_title, [::Dataset, ::Publication]
+    can :read_alternate_title, [::Dataset, ::Publication]
     # NB: no users can :read_application_number
     # NB: no users can :read_supervisor_approval (though it is visible on the edit form to users with permission to edit)
     cannot :read_supervisor_approval, [::Dataset, ::Publication]

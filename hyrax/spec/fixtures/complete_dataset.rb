@@ -11,7 +11,7 @@ dataset_attributes = {
   rights_statement: ['rights_statement 1'],
   source: ['Source 1'],
   subject: ['subject 1'],
-  alternative_title: 'Alternative Title',
+  alternate_title: 'Alternative Title',
   complex_date_attributes: [{
     date: '1978-10-28',
     description: 'http://purl.org/dc/terms/issued',

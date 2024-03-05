@@ -296,7 +296,7 @@ def publication_attributes_from_form
 	 "managing_organization_ordered"=>["Library", ""],
 	 "first_published_url"=>"https://dx.doi.org/0000-0001",
 	 "title"=>["Test publication", ""],
-	 "alternative_title"=>"",
+	 "alternate_title"=>"",
 	 "resource_type"=>["", "Article"],
 	 "description"=>
 	  ["This is the abstract for the text work. It sets out the aims of this test record.",
@@ -446,7 +446,7 @@ def publication_attributes_from_form_cleaned
 	 "managing_organization_ordered"=>["Library"],
 	 "first_published_url"=>"https://dx.doi.org/0000-0001",
 	 "title"=>["Test publication"],
-	 "alternative_title"=>"",
+	 "alternate_title"=>"",
 	 "resource_type"=>["Article"],
 	 "description"=>
 	  ["This is the abstract for the text work. It sets out the aims of this test record."],

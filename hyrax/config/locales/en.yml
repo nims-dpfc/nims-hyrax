@@ -1,7 +1,7 @@
 en:
   ngdr:
     fields:
-      alternative_title:        "Alternative title"
+      alternate_title:        "Alternative title"
       analysis_field:           "Analysis field"
       category:                 "Category"
       characterization_methods: "Characterization methods"
@@ -72,7 +72,7 @@ en:
         first_published_url: The DOI (in URL form) of the article related to this dataset or the URL where this dataset was first made public.
         supervisor_approval: "If you entered a DOI above, enter \"approved\". If you entered a non-DOI URL above, fill in the name of your supervisor and the date of their approval. See <a href='https://dice.nims.go.jp/services/MDR/manual/html/deposit.html#entering-metadata' target='_blank' rel='noopener'>the User's Manual</a> for details."
         title: The title of your work. English is preferred.
-        alternative_title: Alternative title or the title in another language, if applicable.
+        alternate_title: Alternative title or the title in another language, if applicable.
         rights_statement: "Copyright and license for your work. If none apply, select \"In Copyright\". <a href='https://dice.nims.go.jp/services/MDR/manual/html/glossary.html#rights-and-licenses' target='_blank' rel='noopener'>See the User's Manual</a> for further information."
         licensed_date: Date when the work was released under the license selected above.
         license_decription: text accompanying the license selected above, if any.

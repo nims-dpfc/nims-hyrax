@@ -37,7 +37,7 @@ class Dataset < ActiveFedora::Base
   # Required due to bug saving nested resources
   property :updated_subresources, predicate: ::RDF::URI.new('http://example.com/updatedSubresources'), class_name: "ActiveTriples::Resource"
 
-  property :alternative_title, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|
+  property :alternate_title, predicate: ::RDF::Vocab::DC.alternative, multiple: false do |index|
     index.as :stored_searchable
   end
 

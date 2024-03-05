@@ -67,7 +67,7 @@ class DatasetIndexer < NgdrIndexer
     # solr fields that will be used for a search
     super.tap do |fields|
       dataset_search_fields = [
-        'alternative_title',
+        'alternate_title',
         'characterization_methods',
         'computational_methods',
         'data_origin',
@@ -110,7 +110,7 @@ class DatasetIndexer < NgdrIndexer
     # solr fields that will be used to display results on the record page
     super.tap do |fields|
       dataset_show_fields = [
-        'alternative_title',
+        'alternate_title',
         'characterization_methods',
         'computational_methods',
         'data_origin',
