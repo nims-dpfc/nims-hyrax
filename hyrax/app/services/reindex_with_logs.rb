@@ -1,16 +1,19 @@
 require 'json'
 class ReindexWithLogs
 
-  def initialize(log_file_path)
-    @og_file_path = log_file_path
+  def initialize(log_file_path, url=nil)
+    options = url ? {url: url} : {}
+    ActiveFedora::SolrService.register(options) unless options.empty?
+    @log_file_path = log_file_path
   end
 
   def my_logger
-    @my_logger ||= Logger.new(@og_file_path)
+    @my_logger ||= Logger.new(@log_file_path)
   end
 
   def reindex_everything(from, dir_path: nil, files_to_process: [], uri: nil, batch_size: 50, softCommit: true, progress_bar: false, final_commit: true, dry_run: false)
     """
+    based on https://github.com/samvera/active_fedora/blob/v13.2.5/lib/active_fedora/indexing.rb#L98
     from: How do you want to reindex?
     active_fedora_base: All records in Fedora, starting from the base URI
     solr_results: The ids od the docs will be retrieved from solr response(s) and indexed.
@@ -83,7 +86,7 @@ class ReindexWithLogs
   end
 
   def get_descendants_from_solr(dir_path, files_to_process)
-    files_to_process = Dir.entries(File.join(dir_path, '*.json')) unless files_to_process
+    files_to_process = Dir.entries(dir_path).select {|n| n.end_with?('.json')} unless files_to_process
     # uris = []
     descendants = []
     files_to_process.each do |filename|
@@ -100,7 +103,7 @@ class ReindexWithLogs
   end
 
   def get_descendants_from_file(dir_path, files_to_process)
-    files_to_process = Dir.entries(File.join(dir_path, '*.json')) unless files_to_process
+    files_to_process = Dir.entries(dir_path).select {|n| n.end_with?('.json')} unless files_to_process
     descendants = []
     files_to_process.each do |filename|
       my_logger.debug "Gathering descendant URIs from json file #{filename}"
@@ -135,7 +138,7 @@ class ReindexWithLogs
   end
 
   def get_uris_from_solr(dir_path, files_to_process)
-    files_to_process = Dir.entries(File.join(dir_path, '*.json')) unless files_to_process
+    files_to_process = Dir.entries(dir_path).select {|n| n.end_with?('.json')} unless files_to_process
     # files_to_process = %w(Collection_ids.json Etd_ids.json GenericWork_ids.json student_work_ids.json FileSet_ids.json)
     uris = []
     files_to_process.each do |filename|
@@ -195,34 +198,44 @@ class ReindexWithLogs
 
   def log_descendants(descendants, file_prefix='')
     file_prefix = "#{file_prefix}_" if file_prefix
-    file_dir = File.dirname(@og_file_path)
+    file_dir = File.dirname(@log_file_path)
     descendant_log_file = File.join(file_dir, "#{file_prefix}descendants.log")
     File.write(descendant_log_file, JSON.pretty_generate(descendants))
   end
 end
 
 # -----------------------------------------
-# usage starting from active fedora base
+# usage - reindex starting from active fedora base
 # -----------------------------------------
 # r = ReindexWithLogs.new('/home/webapp/reindex_work/reindex.log')
+# or
+# url = "http://localhost:8984/solr"
+# r = ReindexWithLogs.new('/home/webapp/reindex_work/reindex.log', url)
 # from = 'active_fedora_base'
 # r.reindex_everything(from)
 
 # If you do not want to reindex, but want to gather all the URIs and solr documents which are going to be indexed, run the following
 # r = ReindexWithLogs.new('/home/webapp/reindex_work/reindex.log')
+# or
+# url = "http://localhost:8984/solr"
+# r = ReindexWithLogs.new('/home/webapp/reindex_work/reindex.log', url)
 # from = 'active_fedora_base'
 # r.gather_descendants(from, dry_run: true)
 
 # If you do not want to reindex, but want to gather all the URIs which are going to be indexed, run the following
 # r = ReindexWithLogs.new('/home/webapp/reindex_work/reindex.log')
+# or
+# url = "http://localhost:8984/solr"
+# r = ReindexWithLogs.new('/home/webapp/reindex_work/reindex.log', url)
 # from = 'active_fedora_base'
 # r.gather_descendants(from)
 
 # Gathering all descendants can take a couple of hours, for a Hyrax instance with 15 collections and 3000 works
 
 # -----------------------------------------
-# usage with solr response data
+# usage - reindex with solr response data
 # -----------------------------------------
+# This will extract the ids of the documents from the solr response and reindex them
 # r = ReindexWithLogs.new('/home/webapp/reindex_work/reindex.log')
 # from = 'solr_results'
 # dir_path = "/home/webapp/reindex_work/ids_to_index"
@@ -231,7 +244,7 @@ end
 # r.reindex_everything(from, dir_path: dir_path, files_to_process: files_to_process)
 
 # -----------------------------------------
-# usage with uri
+# usage - reindex with uri
 # -----------------------------------------
 # r = ReindexWithLogs.new('/home/webapp/reindex_work/reindex.log')
 # from = 'uri'
@@ -240,9 +253,11 @@ end
 # r.reindex_everything(from, uri: uri)
 
 # -----------------------------------------
-# usage with descendant uris written to file
+# usage - gather descendants and reindex with descendant uris written to file
 # -----------------------------------------
+# This will need the descendant URIs to have been fetched, either using doc ids from solr or from active fedora base
 # r = ReindexWithLogs.new('/home/webapp/reindex_work/reindex.log')
+# r.gather_descendants('active_fedora_base')
 # from = 'file'
 # dir_path = "/home/webapp/reindex_work/descendants/"
 # files_to_process = ['Collection_ids_descendants.log', 'Dataset_ids_descendants.log']
