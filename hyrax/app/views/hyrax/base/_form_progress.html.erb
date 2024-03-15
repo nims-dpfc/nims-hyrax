@@ -1,6 +1,6 @@
-<aside id="form-progress" class="form-progress panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%= t("hyrax.works.progress.header") %></h3>
+<aside id="form-progress" class="form-progress card">
+  <div class="card-header">
+    <h3 class="card-title"><%= t("hyrax.works.progress.header") %></h3>
   </div>
   <div class="list-group">
     <div class="list-group-item">
@@ -20,11 +20,11 @@
     </div>
 
     <div class="set-access-controls list-group-item">
-      <%= render 'form_visibility_component', f: f %>
+      <%= render 'form_visibility_component', f: f, save_work: true %>
     </div>
     <% if Flipflop.proxy_deposit? && current_user.can_make_deposits_for.any? %>
         <div class="list-group-item">
-          <%= f.input :on_behalf_of, collection: current_user.can_make_deposits_for.map(&:user_key), prompt: "Yourself" %>
+          <%= f.input :on_behalf_of, label: t(".proxy_depositors"), collection: current_user.can_make_deposits_for, prompt: t(".yourself"), value_method: :user_key %>
         </div>
     <% end %>
 
@@ -32,7 +32,7 @@
       <%= render "form_progress_#{section}", f: f %>
     <% end %>
   </div>
-  <div class="panel-footer text-center">
+  <div class="card-footer text-center">
     <% if ::Flipflop.show_deposit_agreement? %>
       <% if ::Flipflop.active_deposit_agreement_acceptance? %>
         <label>
@@ -60,15 +60,15 @@
     <%= f.submit t('.save_draft'), class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "with_files_submit_draft", name: "save_draft_with_files" %>
     <%= f.submit t('.save'), class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "with_files_submit", name: "save_with_files" %>
   </div>
-  <div class="panel-footer text-muted">
+  <div class="card-footer text-muted">
     <p><%= t('hyrax.works.form.submit_caution_html') %></p>
   </div>
 
   <%# Provide immediate feedback after the form is submitted while the subsequent page is loading %>
-  <div class="panel-footer hidden">
+  <div class="card-footer save-progress" hidden>
     <div class="progress" style="background-color: #286090;">
-      <div class="progress-bar progress-bar-striped progress-bar-complete active">
-        <span id="form-feedback" aria-live="assertive">Saving your work. This may take a few moments</span>
+      <div class="progress-bar progress-bar-striped progress-bar-complete progress-bar-animated">
+        <span id="form-feedback" aria-live="assertive"><%= t(".saving_your_work") %></span>
       </div>
     </div>
   </div>

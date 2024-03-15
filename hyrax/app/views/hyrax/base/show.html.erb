@@ -1,17 +1,16 @@
 <% provide :page_title, @presenter.page_title %>
 
-<% render 'shared/citations' %>
+<%= render 'shared/citations' %>
 
 <div class="row work-type">
-  <div class="col-xs-12">
+  <div class="col-sm-12">
     <%= render 'work_type', presenter: @presenter %>
   </div>
-  <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
-    <div>
-      <div class="panel-heading">
-        <%= render 'work_title', presenter: @presenter %>
-      </div>
-      <div class="panel-body">
+  <div itemscope itemtype="http://schema.org/CreativeWork" class="col-12">
+    <%= render 'work_title', presenter: @presenter %>
+    <%= render 'show_actions', presenter: @presenter %>
+    <div class="card">
+      <div class="card-body">
         <div class="row">
           <%= render 'workflow_actions_widget', presenter: @presenter %>
           <% if @presenter.iiif_viewer? %>
@@ -35,15 +34,27 @@
               <%= nims_media_display(member_presenter, datatable: true) if member_presenter&.respond_to?(:csv_or_tsv?) && member_presenter&.csv_or_tsv? %>
             <% end %>
           </div>
-
-          <div class="col-sm-12">
-            <%= render 'items', presenter: @presenter %>
-            <%# TODO: we may consider adding these partials in the future %>
-            <%# = render 'sharing_with', presenter: @presenter %>
-            <%# = render 'user_activity', presenter: @presenter %>
-          </div>
         </div>
       </div>
+    </div><!-- /.card -->
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title"><%= t('.items') %></h2>
+      </div>
+      <div class="card-body">
+        <%= render 'items', presenter: @presenter %>
+      </div>
     </div>
+
+    <%# TODO: we may consider adding these partials in the future %>
+    <%# = render 'sharing_with', presenter: @presenter %>
+    <%# = render 'user_activity', presenter: @presenter %>
+
+    <span class='hide analytics-event' data-category="work" data-action="work-view" data-name="<%= @presenter.id %>" >
+    <% @presenter.member_of_collection_ids.each do |collection_id| %>
+      <span class='hide analytics-event' data-category="work-in-collection" data-action="work-in-collection-view" data-name="<%= collection_id %>" >
+    <% end %>
+
   </div>
 </div>

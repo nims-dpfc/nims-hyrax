@@ -1,3 +1,3 @@
 Blacklight.onLoad(function() {
-  $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+  $.fn.datepicker({ format: 'dd/mm/yyyy' });
 });

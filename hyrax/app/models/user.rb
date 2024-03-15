@@ -11,9 +11,6 @@ class User < ApplicationRecord
 
   has_many :uploaded_files, class_name: 'Hyrax::UploadedFile', dependent: :nullify
 
-  if Blacklight::Utils.needs_attr_accessible?
-    attr_accessible :username, :email, :password, :password_confirmation
-  end
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
   # Include default devise modules. Others available are:

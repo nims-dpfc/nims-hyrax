@@ -7,11 +7,11 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.8'
+gem 'rails', '~> 6.0.5'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -34,6 +34,8 @@ gem 'redis-session-store', '~> 0.11.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'twitter-typeahead-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -52,7 +54,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'hyrax', '~> 3.6.0'
+gem 'hyrax', '~> 4.0.0'
 group :development, :test do
   gem 'solr_wrapper', '~> 2.0'
 end
@@ -71,16 +73,17 @@ end
 
 gem 'sidekiq', '~> 5.2.10'
 gem 'hydra-role-management'
+gem 'bootstrap', '~> 4.0'
 gem 'bootstrap-datepicker-rails'
 gem 'pg'
-gem 'faraday_middleware', '~> 0.14'
+gem 'faraday_middleware', '~> 1.2'
 gem 'devise_ldap_authenticatable'
 
 gem 'cancancan', '~> 1.17' # NB: locked to an older version because of hyrax > hydra-editor
 
 gem 'riiif', '~> 2.0'
 gem 'jsonapi-rails', '~> 0.4.0'
-gem 'faraday'
+gem 'faraday', '~> 1.0'
 gem 'simple_form', '5.1.0'
 gem 'ro-crate', '~> 0.4.11', require: 'ro_crate'
 gem 'rdf-vocab', '3.1.4'
