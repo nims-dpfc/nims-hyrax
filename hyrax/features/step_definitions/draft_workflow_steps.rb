@@ -33,7 +33,7 @@ Then("after dataset is approved, it is no longer editable by the nims_researcher
     workflow.update_responsibilities(role: Sipity::Role.where(id: workflow_role.role_id), agents: @user)
   end
   subject = Hyrax::WorkflowActionInfo.new(@dataset, @user)
-  sipity_workflow_action = PowerConverter.convert_to_sipity_action("approve", scope: subject.entity.workflow) { nil }
+  sipity_workflow_action = Sipity.WorkflowAction('approve', subject.entity.workflow)
   Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
   @dataset.reload
   workflow_state = @dataset.to_sipity_entity.reload.workflow_state_name
@@ -49,7 +49,7 @@ Then("after publication is approved, it is no longer editable by the nims_resear
     workflow.update_responsibilities(role: Sipity::Role.where(id: workflow_role.role_id), agents: @user)
   end
   subject = Hyrax::WorkflowActionInfo.new(@publication, @user)
-  sipity_workflow_action = PowerConverter.convert_to_sipity_action("approve", scope: subject.entity.workflow) { nil }
+  sipity_workflow_action = Sipity.WorkflowAction('approve', subject.entity.workflow)
   Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
   @publication.reload
   workflow_state = @publication.to_sipity_entity.reload.workflow_state_name

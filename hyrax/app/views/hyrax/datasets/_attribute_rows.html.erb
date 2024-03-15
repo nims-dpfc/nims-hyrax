@@ -1,17 +1,17 @@
 <!-- Accordion wrapper -->
-<div class="panel-group" id="accordion">
+<div id="accordion">
 
   <!-- Description accordion -->
-  <div class="panel panel-default">
+  <div class="card">
     <!-- Accordion header -->
-    <div class="panel-heading" data-toggle="collapse" data-target="#description">
-      <h4 class="panel-title">
+    <div class="card-header" data-toggle="collapse" data-target="#description">
+      <h4 class="card-title">
         <a class="accordion-toggle">Description</a>
       </h4>
     </div> <!-- Accordion header -->
     <!-- Accordion body -->
-    <div id="description" class="panel-collapse collapse in">
-      <div class="panel-body">
+    <div id="description" class="collapse show">
+      <div class="card-body">
         <% if can? :read_alternate_title, presenter.model_name.name.constantize %>
           <%= presenter.attribute_to_html(:alternate_title, label: t('ngdr.fields.alternate_title'), html_dl: true) %>
         <% end %>
@@ -112,21 +112,21 @@
         <%= presenter.attribute_to_html(:license, render_as: :license, html_dl: true) %>
         <%= presenter.attribute_to_html(:access_right, html_dl: true) %>
 
-      </div> <!-- panel body -->
+      </div> <!-- card body -->
     </div> <!-- Accordion body -->
   </div> <!-- Description accordion -->
 
   <!-- Method accordion -->
-  <div class="panel panel-default">
+  <div class="card">
     <!-- Accordion header -->
-    <div class="panel-heading" data-toggle="collapse" data-target="#experimentalMethod">
-      <h4 class="panel-title">
+    <div class="card-header" data-toggle="collapse" data-target="#experimentalMethod">
+      <h4 class="card-title">
         <a class="accordion-toggle">Method</a>
       </h4>
     </div> <!-- Accordion header -->
     <!-- Accordion body -->
-    <div id="experimentalMethod" class="panel-collapse collapse in">
-      <div class="panel-body">
+    <div id="experimentalMethod" class="collapse show">
+      <div class="card-body">
         <%= presenter.attribute_to_html(:characterization_methods, render_as: :faceted, label: t('ngdr.fields.characterization_methods'), html_dl: true) %>
         <%= presenter.attribute_to_html(:experimental_methods, render_as: :nested_experimental_method, label: t('ngdr.fields.characterization_methods'), html_dl: true) %>
         <%= presenter.attribute_to_html(:computational_methods, render_as: :faceted, label: t('ngdr.fields.computational_methods'), html_dl: true) %>
@@ -137,44 +137,44 @@
         <%= presenter.attribute_to_html(:synthesis_and_processing, render_as: :faceted, label: t('ngdr.fields.synthesis_and_processing'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_feature, render_as: :nested_feature, label: t('ngdr.fields.complex_feature'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_software, render_as: :nested_software, label: t('ngdr.fields.software'), html_dl: true) %>
-      </div> <!-- panel body -->
+      </div> <!-- card body -->
     </div> <!-- Accordion body -->
   </div> <!-- Method accordion -->
 
   <!-- Instruments accordion -->
-  <div class="panel panel-default">
+  <div class="card">
     <!-- Accordion header -->
-    <div class="panel-heading" data-toggle="collapse" data-target="#instrument">
-      <h4 class="panel-title">
+    <div class="card-header" data-toggle="collapse" data-target="#instrument">
+      <h4 class="card-title">
         <a class="accordion-toggle">Instruments</a>
       </h4>
     </div> <!-- Accordion header -->
     <!-- Accordion body -->
-    <div id="instrument" class="panel-collapse collapse in">
-      <div class="panel-body">
+    <div id="instrument" class="collapse show">
+      <div class="card-body">
         <%= presenter.attribute_to_html(:complex_instrument, render_as: :nested_instrument, label: t('ngdr.fields.instrument'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_instrument_opeartor, render_as: :nested_instrument_operator, label: t('ngdr.fields.instrument_operator'), html_dl: true) %>
-      </div> <!-- panel body -->
+      </div> <!-- card body -->
     </div> <!-- Accordion body -->
   </div> <!-- Instruments accordion -->
 
   <!-- Specimen details accordion -->
-  <div class="panel panel-default">
+  <div class="card">
     <!-- Accordion header -->
-    <div class="panel-heading" data-toggle="collapse" data-target="#specimenType">
-      <h4 class="panel-title">
+    <div class="card-header" data-toggle="collapse" data-target="#specimenType">
+      <h4 class="card-title">
         <a class="accordion-toggle">Specimen details</a>
       </h4>
     </div> <!-- Accordion header -->
     <!-- Accordion body -->
-    <div id="specimenType" class="panel-collapse collapse in">
-      <div class="panel-body">
+    <div id="specimenType" class="collapse show">
+      <div class="card-body">
         <%= presenter.attribute_to_html(:material_type, label: t('ngdr.fields.material_type'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_specimen_type, render_as: :nested_specimen_type, label: t('ngdr.fields.complex_specimen_type'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_chemical_composition, render_as: :nested_chemical_composition, label: t('ngdr.fields.complex_chemical_composition'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_structural_feature, render_as: :nested_structural_feature, label: t('ngdr.fields.complex_structural_feature'), html_dl: true) %>
         <%= presenter.attribute_to_html(:complex_crystallographic_structure, render_as: :nested_crystallographic_structure, label: t('ngdr.fields.complex_crystallographic_structure'), html_dl: true) %>
-      </div> <!-- panel body -->
+      </div> <!-- card body -->
     </div> <!-- Accordion body -->
   </div> <!-- Specimen details accordion -->
 

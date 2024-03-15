@@ -10,14 +10,18 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require dataTables/jquery.dataTables
-//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require jquery3
+//= require rails-ujs
+//= require popper
+//= require twitter/typeahead
+//= require bootstrap
+//= require jquery.dataTables
+//= require dataTables.bootstrap4
 //= require bootstrap-datepicker
 //
 // Required by Blacklight
 //= require blacklight/blacklight
+//= require blacklight_gallery
 //= require hydra-editor/editMetadata
 //= require csv_preview
 //= require hyrax_form_patch
