@@ -46,8 +46,9 @@ module Hyrax
     private
 
     def private_work?
-      return false if @curation_concern.to_sipity_entity.blank?
-      @curation_concern.to_sipity_entity.reload.workflow_state_name != 'deposited' ? true : false
+      sipity_entity = Sipity.Entity(@curation_concern)
+      return false if sipity_entity.blank?
+      sipity_entity.reload.workflow_state_name != 'deposited' ? true : false
     end
   end
 end
