@@ -113,7 +113,8 @@ Then("the publication can be submitted for approval") do
   visit edit_hyrax_publication_path(publication)
   find('#with_files_submit').click
   publication.reload
-  workflow_state = publication.to_sipity_entity.reload.workflow_state_name
+  sipity_entity = Sipity.Entity(publication)
+  workflow_state = sipity_entity.reload.workflow_state_name
   expect(workflow_state).to eq "pending_review"
 end
 
