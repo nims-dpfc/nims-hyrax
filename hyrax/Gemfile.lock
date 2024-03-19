@@ -1,12 +1,12 @@
 GIT
-  remote: https://github.com/CottageLabs/blacklight_oai_provider.git
-  revision: 716a6559c12b4f1fac3e3d39aeaf9ac29561c26c
-  branch: oai_upgrade
+  remote: https://github.com/CottageLabs/projectblacklight_blacklight_oai_provider.git
+  revision: 5a21f2e5f9bd78b1498c56016c637cb695a73bcb
+  branch: customize_oai_provider
   specs:
-    blacklight_oai_provider (1.4.1)
-      blacklight (>= 6.1)
-      oai (~> 1.0)
-      rails (>= 5.2)
+    blacklight_oai_provider (7.0.2)
+      blacklight (>= 7.0, < 9)
+      oai (~> 1.2)
+      rexml
 
 GIT
   remote: https://github.com/CottageLabs/willow_sword.git
@@ -1032,6 +1032,10 @@ GEM
     tinymce-rails (5.10.9)
       railties (>= 3.1.1)
     trailblazer-option (0.1.2)
+    twitter-typeahead-rails (0.11.1)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
     typhoeus (1.4.1)
       ethon (>= 0.9.0)
     tzinfo (1.2.11)
@@ -1142,6 +1146,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.3.6)
+  twitter-typeahead-rails
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
