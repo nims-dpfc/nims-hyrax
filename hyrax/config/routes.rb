@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   concern :exportable, Blacklight::Routes::Exportable.new
   concern :searchable, Blacklight::Routes::Searchable.new
-  concern :oai_provider, BlacklightOaiProvider::Routes::Provider.new
+  concern :oai_provider, BlacklightOaiProvider::Routes.new
 
   curation_concerns_basic_routes
 

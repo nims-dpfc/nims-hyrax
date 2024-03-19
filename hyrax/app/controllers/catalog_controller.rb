@@ -1,7 +1,7 @@
 class CatalogController < ApplicationController
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
-  include BlacklightOaiProvider::CatalogControllerBehavior
+  include BlacklightOaiProvider::Controller
   include Nims::BlacklightHelper
 
   # This filter applies the hydra access controls
@@ -295,11 +295,11 @@ class CatalogController < ApplicationController
   end
 
   def show
-    @response, @document = fetch params[:id]
+    @response, @document = search_service.fetch params[:id]
     respond_to do |format|
       format.html { setup_next_and_previous_documents }
       format.json do
-        @presenter = Blacklight::JsonPresenter.new(@response, @document, facets_from_request, blacklight_config)
+        @presenter = Blacklight::JsonPresenter.new(@response, blacklight_config)
       end
       additional_export_formats(@document, format)
     end

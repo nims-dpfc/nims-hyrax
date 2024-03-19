@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Hyrax
   class FileSetsController < ApplicationController
     rescue_from WorkflowAuthorizationException, with: :render_unavailable
@@ -9,7 +10,11 @@ module Hyrax
     before_action :authenticate_user!, except: [:show, :citation, :stats]
     load_and_authorize_resource class: ::FileSet, except: :show
     before_action :build_breadcrumbs, only: [:show, :edit, :stats]
+    before_action do
+      blacklight_config.track_search_session = false
+    end
     before_action :presenter
+
     # provides the help_text view method
     helper PermissionsHelper
 
@@ -124,7 +129,7 @@ module Hyrax
         end
     end
 
-    # Override Hyrax 2.6.0 - pass Hyrax::UploadedFile to actor.update_content
+# Override Hyrax 2.6.0 - pass Hyrax::UploadedFile to actor.update_content
     # Updated in Hyrax 3.6.0
     def attempt_update
       if wants_to_revert?
@@ -142,7 +147,7 @@ module Hyrax
       end
     end
 
-    # Override Hyrax 2.6.0 - create an Hyrax::UploadedFile from the file upload
+# Override Hyrax 2.6.0 - create an Hyrax::UploadedFile from the file upload
     def uploaded_file_from_path
       uploaded_file = CarrierWave::SanitizedFile.new(params[:file_set][:files].first)
       Hyrax::UploadedFile.create(user_id: current_user.id, file: uploaded_file)
@@ -151,7 +156,8 @@ module Hyrax
     def after_update_response
       respond_to do |wants|
         wants.html do
-          redirect_to [main_app, curation_concern], notice: "The file #{view_context.link_to(curation_concern, [main_app, curation_concern])} has been updated."
+          link_to_file = view_context.link_to(curation_concern, [main_app, curation_concern])
+          redirect_to [main_app, curation_concern], notice: view_context.t('hyrax.file_sets.asset_updated_flash.message', link_to_file: link_to_file)
         end
         wants.json do
           @presenter = show_presenter.new(curation_concern, current_ability)
@@ -194,13 +200,12 @@ module Hyrax
         @form.prepopulate!
       else
         @form = form_class.new(file_set)
-        @form[:visibility] = file_set.visibility # workaround for hydra-head < 12
       end
       @version_list = Hyrax::VersionListPresenter.for(file_set: file_set)
       @groups = current_user.groups
     end
 
-    # From Hyrax 3.6.0
+# From Hyrax 3.6.0
     include WorkflowsHelper # Provides #workflow_restriction?, and yes I mean include not helper; helper exposes the module methods
     # @param parent [Hyrax::WorkShowPresenter, GenericWork, #suppressed?] an
     #        object on which we check if the current can take action.
@@ -223,10 +228,10 @@ module Hyrax
 
     def presenter
       @presenter ||= begin
-        presenter = show_presenter.new(curation_concern_document, current_ability, request)
-        raise WorkflowAuthorizationException if presenter.parent.blank?
-        presenter
-      end
+                       presenter = show_presenter.new(curation_concern_document, current_ability, request)
+                       raise WorkflowAuthorizationException if presenter.parent.blank?
+                       presenter
+                     end
     end
 
     def curation_concern_document
@@ -239,7 +244,7 @@ module Hyrax
     end
 
     def single_item_search_service
-      Hyrax::SearchService.new(config: blacklight_config, user_params: params.except(:q, :page), scope: self, search_builder_class: search_builder_class)
+      Hyrax::SearchService.new(config: blacklight_config, user_params: params.except(:q, :page), scope: self, search_builder_class: blacklight_config.search_builder_class)
     end
 
     def wants_to_revert?
@@ -257,16 +262,16 @@ module Hyrax
 
     def decide_layout
       layout = case action_name
-                when 'show'
-                  '1_column'
-                else
-                  'dashboard'
-                end
+               when 'show'
+                 '1_column'
+               else
+                 'dashboard'
+               end
       File.join(theme, layout)
     end
 
     # rubocop:disable Metrics/MethodLength
-    # updated Hyrax 3.6.0 
+# updated Hyrax 3.6.0 
     def render_unavailable
       message = I18n.t("hyrax.workflow.unauthorized_parent")
       respond_to do |wants|

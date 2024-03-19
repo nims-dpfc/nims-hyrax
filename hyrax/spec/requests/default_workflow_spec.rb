@@ -35,7 +35,8 @@ RSpec.describe 'NIMS workflow', type: :request do
           env = Hyrax::Actors::Environment.new(dataset, ::Ability.new(admin), attributes_for_actor)
           Hyrax::CurationConcern.actor.create(env)
           post_actor_stack_dataset = Dataset.last
-          expect(post_actor_stack_dataset.to_sipity_entity.workflow_state_name).to eq "pending_review"
+          sipity_entity = Sipity.Entity(post_actor_stack_dataset)
+          expect(sipity_entity.workflow_state_name).to eq "pending_review"
         end
       end
 
@@ -46,7 +47,8 @@ RSpec.describe 'NIMS workflow', type: :request do
           env = Hyrax::Actors::Environment.new(dataset, ::Ability.new(admin), attributes_for_actor)
           Hyrax::CurationConcern.actor.create(env)
           post_actor_stack_dataset = Dataset.last
-          expect(post_actor_stack_dataset.to_sipity_entity.workflow_state_name).to eq "draft"
+          sipity_entity = Sipity.Entity(post_actor_stack_dataset)
+          expect(sipity_entity.workflow_state_name).to eq "draft"
         end
       end
     end
@@ -59,7 +61,8 @@ RSpec.describe 'NIMS workflow', type: :request do
           env = Hyrax::Actors::Environment.new(publication, ::Ability.new(admin), attributes_for_actor)
           Hyrax::CurationConcern.actor.create(env)
           post_actor_stack_publication = Publication.last
-          # expect(post_actor_stack_publication.to_sipity_entity.workflow_state_name).to eq "pending_review"
+          sipity_entity = Sipity.Entity(post_actor_stack_publication)
+          # expect(sipity_entity.workflow_state_name).to eq "pending_review"
         end
       end
 
@@ -70,7 +73,8 @@ RSpec.describe 'NIMS workflow', type: :request do
           env = Hyrax::Actors::Environment.new(publication, ::Ability.new(admin), attributes_for_actor)
           Hyrax::CurationConcern.actor.create(env)
           post_actor_stack_publication = Publication.last
-          # expect(post_actor_stack_publication.to_sipity_entity.workflow_state_name).to eq "draft"
+          sipity_entity = Sipity.Entity(post_actor_stack_publication)
+          # expect(sipity_entity.workflow_state_name).to eq "draft"
         end
       end
     end

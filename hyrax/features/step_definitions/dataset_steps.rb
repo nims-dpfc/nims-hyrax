@@ -117,7 +117,8 @@ Then("the dataset can be submitted for approval") do
   end
   find('#with_files_submit').click
   dataset.reload
-  workflow_state = dataset.to_sipity_entity.reload.workflow_state_name
+  sipity_entity = Sipity.Entity(dataset)
+  workflow_state = sipity_entity.reload.workflow_state_name
   expect(workflow_state).to eq "pending_review"
 end
 

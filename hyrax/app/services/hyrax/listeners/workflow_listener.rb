@@ -44,15 +44,15 @@ module Hyrax
         # Put the work into a draft workflow state if event[:object].draft? == true
         if event[:object].draft?
           subject = Hyrax::WorkflowActionInfo.new(event[:object], event[:user])
-          sipity_workflow_action = PowerConverter.convert_to_sipity_action("deposit_draft", scope: subject.entity.workflow) { nil }
+          sipity_workflow_action = Sipity.WorkflowAction('deposit_draft', subject.entity.workflow)
           Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
         elsif event[:object].visibility == 'authenticated' # MDR shared / Institution
           subject = Hyrax::WorkflowActionInfo.new(event[:object], event[:user])
-          sipity_workflow_action = PowerConverter.convert_to_sipity_action("approve", scope: subject.entity.workflow) { nil }
+          sipity_workflow_action = Sipity.WorkflowAction('approve', subject.entity.workflow)
           Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
         else
           subject = Hyrax::WorkflowActionInfo.new(event[:object], event[:user])
-          sipity_workflow_action = PowerConverter.convert_to_sipity_action("deposit", scope: subject.entity.workflow) { nil }
+          sipity_workflow_action = Sipity.WorkflowAction('deposit', subject.entity.workflow)
           Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
         end
       end

@@ -11,7 +11,16 @@ RSpec.describe 'hyrax/base/_member.html.erb', type: :view do
   let(:file_member) { Hyrax::FileSetPresenter.new(file_document, ability) }
 
   before do
+    controller = Hyrax::FileSetsController.new
     def view.contextual_path(member, presenter)
+    end
+
+    def view.blacklight_config
+      @blacklight_config = controller.blacklight_config
+    end
+
+    def view.blacklight_configuration_context
+      @blacklight_configuration_context ||= Blacklight::Configuration::Context.new(controller)
     end
 
     allow(view).to receive(:render_thumbnail_tag).and_return(true)
@@ -23,6 +32,7 @@ RSpec.describe 'hyrax/base/_member.html.erb', type: :view do
     allow(ability).to receive(:can?).with(:download, '1234').and_return(true)
     allow(view).to receive(:contextual_path).and_return("/concern/publications/0r967372b")
     allow(file_document).to receive(:file_size).and_return("1024")
+    allow(view).to receive(:blacklight_config).and_return(controller.blacklight_config)
   end
 
   it 'shows its file size' do
