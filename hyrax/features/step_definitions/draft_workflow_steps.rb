@@ -28,8 +28,8 @@ end
 Then("after dataset is approved, it is no longer editable by the nims_researcher who deposited it") do
   @dataset = Dataset.last
   nims_researcher = User.find_by(username: @dataset.depositor)
-
-  workflow = @dataset.active_workflow
+  sipity_entity = Sipity.Entity(@dataset)
+  workflow = sipity_entity.workflow
   workflow_roles = Sipity::WorkflowRole.where(workflow_id: workflow.id)
   workflow_roles.each do |workflow_role|
     workflow.update_responsibilities(role: Sipity::Role.where(id: workflow_role.role_id), agents: @user)
@@ -38,7 +38,6 @@ Then("after dataset is approved, it is no longer editable by the nims_researcher
   sipity_workflow_action = Sipity.WorkflowAction('approve', subject.entity.workflow)
   Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
   @dataset.reload
-  sipity_entity = Sipity.Entity(@dataset)
   workflow_state = sipity_entity.reload.workflow_state_name
   expect(workflow_state).to eq "deposited"
   expect(@dataset.edit_users).not_to include(@dataset.depositor)
@@ -46,7 +45,8 @@ end
 
 Then("after publication is approved, it is no longer editable by the nims_researcher who deposited it") do
   @publication = Publication.last
-  workflow = @publication.active_workflow
+  sipity_entity = Sipity.Entity(@publication)
+  workflow = sipity_entity.workflow
   workflow_roles = Sipity::WorkflowRole.where(workflow_id: workflow.id)
   workflow_roles.each do |workflow_role|
     workflow.update_responsibilities(role: Sipity::Role.where(id: workflow_role.role_id), agents: @user)
@@ -55,7 +55,6 @@ Then("after publication is approved, it is no longer editable by the nims_resear
   sipity_workflow_action = Sipity.WorkflowAction('approve', subject.entity.workflow)
   Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
   @publication.reload
-  sipity_entity = Sipity.Entity(@publication)
   workflow_state = sipity_entity.reload.workflow_state_name
   expect(workflow_state).to eq "deposited"
   nims_researcher = User.find_by(username: @publication.depositor)
