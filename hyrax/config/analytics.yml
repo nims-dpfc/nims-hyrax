@@ -2,8 +2,22 @@
 # To integrate your app with Google Analytics, uncomment the lines below and add your API key information.
 #
 analytics:
-  app_name: <%= ENV['GA_APP_NAME'] %>
-  app_version: <%= ENV['GA_APP_VERSION'] %>
-  privkey_path: <%= ENV['GA_PRIVATE_KEY_PATH'] %>
-  privkey_secret: <%= ENV['GA_PRIVATE_KEY_SECRET'] %>
-  client_email: <%= ENV['GA_CLIENT_EMAIL'] %>
+  ga4:
+    analytics_id: <%= ENV['GOOGLE_ANALYTICS_ID'] %>
+    app_name: <%= ENV['GA_APP_NAME'] %>
+    app_version: <%= ENV['GA_APP_VERSION'] %>
+    privkey_path: <%= ENV['GA_PRIVATE_KEY_PATH'] %>
+    privkey_secret: <%= ENV['GA_PRIVATE_KEY_SECRET'] %>
+    client_email: <%= ENV['GA_CLIENT_EMAIL'] %>
+  google:
+    analytics_id: <%= ENV['GOOGLE_ANALYTICS_ID'] %>
+    app_name: <%= ENV['GOOGLE_APP_NAME'] %>
+    app_version: <%= ENV['GOOGLE_APP_VERSION'] %>
+    privkey_value: <%= ENV['GOOGLE_PRIVATE_KEY_VALUE'] %>
+    privkey_path: <%= ENV['GOOGLE_PRIVATE_KEY_PATH'] %>
+    privkey_secret: <%= ENV['GOOGLE_PRIVATE_KEY_SECRET'] %>
+    client_email: <%= ENV['GOOGLE_CLIENT_EMAIL'] %>
+  matomo:
+    base_url: <%= ENV['MATOMO_BASE_URL'] %>
+    site_id: <%= ENV['MATOMO_SITE_ID'] %>
+    auth_token: <%= ENV['MATOMO_AUTH_TOKEN'] %>
