@@ -445,8 +445,8 @@ RSpec.describe SolrDocument do
     end
   end
 
-  context "when exporting in bibtex format" do
-    let(:attributes) { { id: "1234" } }
-    its(:bibtex_filename) { is_expected.to eq("1234.bibtex") }
+  describe "bibtex_filename" do
+    subject { solr_document.bibtex_filename }
+    it { is_expected.to eq("#{ solr_document.id }.bibtex") }
   end
 end
