@@ -78,7 +78,8 @@ module Hyrax
           spaced_values = values.join("; ")
           text << "#{bibtex_key.ljust(12)} = #{spaced_values}"
         end
-        text.join("\n")
+        text << "}"
+        text.join(",\n")
       end
 
       # Name of the downloaded bibtex file
