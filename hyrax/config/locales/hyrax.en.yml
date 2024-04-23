@@ -269,6 +269,7 @@ en:
     active_consent_to_supervisor_agreement: I have obtained necessary approval from my supervisor
     base:
       citations:
+        bibtex: Bibtex
         citations: Citations
         endnote: EndNote
         header: 'Export:'

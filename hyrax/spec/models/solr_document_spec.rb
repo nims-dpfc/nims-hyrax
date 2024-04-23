@@ -444,4 +444,9 @@ RSpec.describe SolrDocument do
       it { is_expected.to eql ['structural_feature/1234567'] }
     end
   end
+
+  context "when exporting in bibtex format" do
+    let(:attributes) { { id: "1234" } }
+    its(:bibtex_filename) { is_expected.to eq("1234.bibtex") }
+  end
 end
