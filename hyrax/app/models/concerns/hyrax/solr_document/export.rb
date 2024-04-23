@@ -64,7 +64,7 @@ module Hyrax
           bibtex_format = bibtex_publication_format
         else
           text << "@misc{#{id}"
-          bibtex_format = bibtex_format
+          bibtex_format = bibtex_dataset_format
         end
         bibtex_format.each do |bibtex_key, mapping|
           if mapping.is_a? String
@@ -120,9 +120,9 @@ module Hyrax
 
       def bibtex_year
         if date_published.present?
-          DateTime.parse(date_published).strftime('%Y')
+          DateTime.parse(date_published[0]).strftime('%Y')
         elsif date_created.present?
-          DateTime.parse(date_created).strftime('%Y')
+          DateTime.parse(date_created[0]).strftime('%Y')
         else
           ''
         end
@@ -130,9 +130,9 @@ module Hyrax
 
       def bibtex_month
         if date_published.present?
-          DateTime.parse(date_published).strftime('%m')
+          DateTime.parse(date_published[0]).strftime('%m')
         elsif date_created.present?
-          DateTime.parse(date_created).strftime('%m')
+          DateTime.parse(date_created[0]).strftime('%m')
         else
           ''
         end
