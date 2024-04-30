@@ -43,7 +43,7 @@ RSpec.describe Hyrax::PublicationsController do
         get :show, params: { id: publication.id, format: 'bibtex' }
         expect(response).to be_successful
         expect(disposition).to include("attachment")
-        expect(content_type).to eq("application/x-bibtex-refer")
+        expect(content_type).to eq("application/x-bibtex")
         expect(response.body).to include("@Article")
       end
     end
