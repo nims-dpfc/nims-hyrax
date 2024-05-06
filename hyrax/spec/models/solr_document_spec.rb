@@ -444,4 +444,9 @@ RSpec.describe SolrDocument do
       it { is_expected.to eql ['structural_feature/1234567'] }
     end
   end
+
+  describe "bibtex_filename" do
+    subject { solr_document.bibtex_filename }
+    it { is_expected.to eq("#{ solr_document.id }.bibtex") }
+  end
 end

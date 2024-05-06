@@ -32,5 +32,20 @@ RSpec.describe Hyrax::PublicationsController do
         }.to raise_error I18n::InvalidLocale
       end
     end
+
+    context "with an bibtex file" do
+      let(:disposition)  { response.header.fetch("Content-Disposition") }
+      let(:content_type) { response.header.fetch("Content-Type") }
+
+      render_views
+
+      it 'downloads the file' do
+        get :show, params: { id: publication.id, format: 'bibtex' }
+        expect(response).to be_successful
+        expect(disposition).to include("attachment")
+        expect(content_type).to eq("application/x-bibtex")
+        expect(response.body).to include("@Article")
+      end
+    end
   end
 end
