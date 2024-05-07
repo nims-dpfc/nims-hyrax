@@ -1,4 +1,5 @@
 namespace :works do
+  desc 'Create missing entities and deposit'
   task create_missing_entities_and_deposit: :environment  do
     admin_user = Role.find_by_name('admin').users.first
     errors = []
