@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mdr-solr
+  name: mdr-solr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mdr-solr
+#  strategy:
+#    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mdr-solr
+    spec:
+      # securityContext:
+      #   fsGroup: 8983
+      #   # runAsUser: 8983
+      initContainers:
+      - name: init-wait
+        image: alpine/git
+        command:
+          - /bin/sh
+          - -c
+          - "chmod -R 777 /opt/solr/server/solr/mycores ;
+             chmod -R 777 /opt/solr/solr_conf ;
+             chmod -R 777 /opt/solr/server/logs ;
+             rm -f /tmp/nims-hyrax ;
+             git clone https://github.com/nims-dpfc/nims-hyrax /tmp/nims-hyrax ;
+             cp -R /tmp/nims-hyrax/hyrax/solr/config/* /opt/solr/solr_conf"
+        volumeMounts:
+        - name: solr-logs
+          mountPath: /opt/solr/server/logs
+        - name: solr-data
+          mountPath: /opt/solr/server/solr/mycores
+        - name: solr-conf
+          mountPath: /opt/solr/solr_conf
+      containers:
+      - name: mdr-solr
+        image: solr:7
+        envFrom:
+        - configMapRef:
+            name: nims-hyrax-config
+        command:
+          - sh
+          - -c
+          - "ls -l /opt/solr/ && echo $SOLR_HOME && ls -l /opt/solr/server/ && precreate-core hydra-test /opt/solr/solr_conf && solr-precreate ${SOLR_CORE} /opt/solr/solr_conf"
+        livenessProbe:
+          httpGet:
+            scheme: "HTTP"
+            path: /solr/admin/info/system
+            port: 8983
+          failureThreshold: 3
+          periodSeconds: 30
+          timeoutSeconds: 5
+        ports:
+          - containerPort: 8983
+        volumeMounts:
+        - name: mdr-secrets-store
+          mountPath: /mnt/secrets-store
+          readOnly: true
+        - name: solr-data
+          mountPath: /opt/solr/server/solr/mycores
+        - name: solr-conf
+          mountPath: /opt/solr/solr_conf
+        - name: solr-logs
+          mountPath: /opt/solr/server/logs
+      volumes:
+      - name: mdr-secrets-store
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: azure-kvname-user-msi
+      - name: solr-data
+        persistentVolumeClaim:
+          claimName: solr-data
+      - name: solr-logs
+        persistentVolumeClaim:
+          claimName: solr-logs
+      - name: solr-conf
+        persistentVolumeClaim:
+          claimName: solr-conf
+        # hostPath:
+        #   path: /home/anusha/Documents/src/nims-hyrax/hyrax/solr/config
+        #   type: Directory
+      hostname: mdr-solr
+      # restartPolicy: Always
