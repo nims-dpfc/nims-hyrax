@@ -17,40 +17,26 @@ class DataModelAnalysis
 
   def get_stats(model)
     uninterested_keys = %w[head tail]
+    $stdout.sync = true
+    puts "#{Time.now.strftime("%Y-%m-%d T %H:%M:%S")}: #{model.to_s} start"
     model.all.each do |d|
-      vals = { id: d.id }
+      print "."
+      vals = { id: d.id, class: d.class }
       d.attributes.each do |k, v|
         next unless v.present?
         vals[k] = v.class
         if v.class == ActiveTriples::Relation
-          v_json = JSON.parse(v.to_json)
-          if v_json.present?
-            if v_json.class == Array
-              if v_json.first.class == Hash
-                inner_hash = { id: d.id }
-                v_json.first.each do |inner_k, inner_v|
-                  inner_hash[inner_k] = inner_v.class
-                end
-                @work_nested_vals[k] ||= []
-                @work_nested_vals[k].append(inner_hash)
-              else
-                vals[k] = v_json.first.class
-              end
-            else
-              vals[k] = v_json.class
-            end
-          end
+          parent_new_val = parse_active_triples_relation(d.id, d.class, k, v)
+          vals[k] = parent_new_val if parent_new_val.present?
         elsif v.class == ActiveTriples::Resource
-          inner_hash = { id: d.id }
-          v.each do |inner_k, inner_v|
-            inner_hash[inner_k] = inner_v.class
-          end
-          @work_nested_vals[k] ||= []
-          @work_nested_vals[k].append(inner_hash)
+          parse_active_resource(d.id, d.class, k, v)
+        elsif v.class == Array
+          vals[k] = "#{v.class}: #{v.size}"
         end
       end
       @work_data.append(vals)
     end
+    puts "#{Time.now.strftime("%Y-%m-%d T %H:%M:%S")}: #{model.to_s} end"
   end
 
   def write_to_csv
@@ -75,23 +61,46 @@ class DataModelAnalysis
     end
   end
   
-  def parse_active_triples_relation(work_relation, id)
-    v_json = JSON.parse(work_relation.to_json)
-    return unless v_json.present?
-    if v_json.class == Array
-      if v_json.first.class == Hash
-        inner_hash = { id: id }
-        v_json.first.each do |inner_k, inner_v|
+  def parse_active_triples_relation(work_id, work_class, attribute_name, attr_value)
+    relation_data = JSON.parse(attr_value.to_json)
+    return unless relation_data.present?
+    parent_new_val = nil
+    if relation_data.class == Array
+      if relation_data.first.class == Hash
+        inner_hash = { id: work_id, class: work_class }
+        relation_data.first.each do |inner_k, inner_v|
           inner_hash[inner_k] = inner_v.class
+          if inner_v.class == ActiveTriples::Relation
+            new_inner_val = parse_active_triples_relation(work_id, work_class, inner_k, inner_v)
+            inner_hash[inner_k] = new_inner_val if new_inner_val.present?
+          elsif inner_v.class == ActiveTriples::Resource
+            parse_active_resource(work_id, work_class, inner_k, inner_v)
+          elsif inner_v.class == Array
+            inner_hash[inner_k] = "#{inner_v.class}: #{inner_v.size}"
+          end
         end
-        @work_nested_vals[k] ||= []
-        @work_nested_vals[k].append(inner_hash)
+        @work_nested_vals[attribute_name] ||= []
+        @work_nested_vals[attribute_name].append(inner_hash)
       else
-        vals[k] = v_json.first.class
+        parent_new_val = relation_data.first.class
       end
     else
-      vals[k] = v_json.class
+      parent_new_val = relation_data.class
     end
+    parent_new_val
+  end
+
+
+  def parse_active_resource(work_id, work_class, attribute_name, attr_value)
+    inner_hash = { id: work_id, class: work_class }
+    attr_value.each do |inner_k, inner_v|
+      inner_hash[inner_k] = inner_v.class
+      if inner_v.class == Array
+        inner_hash[inner_k] = "#{inner_v.class}: #{inner_v.size}"
+      end
+    end
+    @work_nested_vals[attribute_name] ||= []
+    @work_nested_vals[attribute_name].append(inner_hash)
   end
 
 end
