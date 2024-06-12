@@ -128,9 +128,11 @@ module ComplexFieldsBehavior
               end
             end
           end
-          complex_purchase_record['manufacturer_attributes'].each_with_index do |manufacturer, ii|
-            if manufacturer['organization'].blank? && manufacturer['purpose'].include?('Manufacturer')
-              attribute['complex_specimen_type_attributes'][index]['complex_purchase_record_attributes'][i]['manufacturer_attributes'].delete_at(ii)
+          if complex_purchase_record['manufacturer_attributes'].present?
+            complex_purchase_record['manufacturer_attributes'].each_with_index do |manufacturer, ii|
+              if manufacturer['organization'].blank? && manufacturer['purpose'].include?('Manufacturer')
+                attribute['complex_specimen_type_attributes'][index]['complex_purchase_record_attributes'][i]['manufacturer_attributes'].delete_at(ii)
+              end
             end
           end
         end
