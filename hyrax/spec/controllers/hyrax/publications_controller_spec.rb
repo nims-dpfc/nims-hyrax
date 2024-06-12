@@ -13,7 +13,7 @@ RSpec.describe Hyrax::PublicationsController do
       Hyrax::Workflow::WorkflowFactory.create(publication, {}, user)
       subject = Hyrax::WorkflowActionInfo.new(publication, user)
       deposited_state = subject.entity.workflow.workflow_states.where(name: 'deposited').first
-      sipity_workflow_action = PowerConverter.convert_to_sipity_action("approve", scope: subject.entity.workflow) { nil }
+      sipity_workflow_action = Sipity.WorkflowAction('approve', subject.entity.workflow)
       Hyrax::Workflow::WorkflowActionService.run(subject: subject, action: sipity_workflow_action, comment: nil)
       subject.entity.update(workflow_state_id: deposited_state.id)
     end
