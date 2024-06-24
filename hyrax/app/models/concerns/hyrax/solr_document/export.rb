@@ -119,21 +119,29 @@ module Hyrax
       end
 
       def bibtex_year
-        if date_published.present?
-          DateTime.parse(date_published[0]).strftime('%Y')
-        elsif date_created.present?
-          DateTime.parse(date_created[0]).strftime('%Y')
-        else
-          ''
+        begin
+          if date_published.present?
+            DateTime.parse(date_published[0]).strftime('%Y')
+          elsif date_created.present?
+            DateTime.parse(date_created[0]).strftime('%Y')
+          else
+            ''
+          end
+        rescue
+          date_published || ''
         end
       end
 
       def bibtex_month
-        if date_published.present?
-          DateTime.parse(date_published[0]).strftime('%m')
-        elsif date_created.present?
-          DateTime.parse(date_created[0]).strftime('%m')
-        else
+        begin
+          if date_published.present?
+            DateTime.parse(date_published[0]).strftime('%m')
+          elsif date_created.present?
+            DateTime.parse(date_created[0]).strftime('%m')
+          else
+            ''
+          end
+        rescue
           ''
         end
       end
