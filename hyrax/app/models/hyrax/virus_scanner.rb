@@ -43,7 +43,7 @@ module Hyrax
 
     def clam_av_scanner
       return false if Clamby.safe?(file)
-      warning "A virus was found in #{file}: #{scan_result}"
+      warning "A virus was found in #{file}"
       true
     end
 
