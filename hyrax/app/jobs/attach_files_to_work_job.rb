@@ -72,10 +72,8 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
   # [nims-override] add virus checking method
   def virus_check!(uploaded_file)
     file_path = URI.unescape(uploaded_file.file.to_s)
-    scan_results = Nims::VirusScanner.scan_file(file_path)
-    return if scan_results.instance_of? ClamAV::SuccessResponse
 
-    if scan_results.instance_of? ClamAV::VirusResponse
+    if Clamby.virus?(file_path)
       FileUtils.rm_rf(File.dirname(file_path))
       raise VirusDetectedError.new(scan_results, file_path)
     end
