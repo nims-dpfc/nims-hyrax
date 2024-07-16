@@ -3,12 +3,12 @@ include Warden::Test::Helpers
 
 RSpec.describe 'hyrax/publications/_attribute_rows' do
   let(:partial) { 'hyrax/publications/attribute_rows' }
-  let(:publication) { build(:publication, :open, :with_alternative_title, :with_complex_author, :with_keyword, :with_subject, :with_language,
+  let(:publication) { build(:publication, :open, :with_alternate_title, :with_complex_author, :with_keyword, :with_subject, :with_language,
                         :with_publisher, :with_date_published, :with_complex_identifier, :with_rights_statement, :with_complex_rights,
                         :with_complex_version, :with_resource_type, :with_source, :with_issue, :with_complex_source, :with_complex_event,
                         :with_place, :with_table_of_contents,
                         :with_number_of_pages, :with_complex_funding_reference,
-                        :with_complex_contact_agent) }
+                        :with_complex_contact_agent, :with_manuscript_type) }
   let(:presenter) { Hyrax::PublicationPresenter.new(SolrDocument.new(publication.to_solr), Ability.new(user), controller.request) }
 
   before do
@@ -45,6 +45,7 @@ RSpec.describe 'hyrax/publications/_attribute_rows' do
       expect(rendered).to have_content('Test journal')
       expect(rendered).to have_content('f1234')
       expect(rendered).to have_content('tanabe@example.jp')
+      expect(rendered).to have_content("Author's original")
     end
   end
 
@@ -73,6 +74,7 @@ RSpec.describe 'hyrax/publications/_attribute_rows' do
       expect(rendered).to have_content('Test journal')
       expect(rendered).to have_content('f1234')
       expect(rendered).to have_content('tanabe@example.jp')
+      expect(rendered).to have_content("Author's original")
     end
   end
 end

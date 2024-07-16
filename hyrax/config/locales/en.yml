@@ -1,7 +1,7 @@
 en:
   ngdr:
     fields:
-      alternative_title:        "Alternative title"
+      alternate_title:        "Alternative title"
       analysis_field:           "Analysis field"
       category:                 "Category"
       characterization_methods: "Characterization methods"
@@ -9,14 +9,17 @@ en:
       custom_property:          "Additional metadata"
       column_number:            "Column number"
       complex_affiliation:      "Affiliation"
+      complex_computational_method: "Computational method"
       complex_contact_agent:    "Contact agent"
       complex_chemical_composition: "Chemical composition"
       complex_crystallographic_structure: "Crystallographic structure"
       complex_date:             "Other Date"
       complex_event:            "Event"
+      complex_experimental_method: "Experimental method"
       complex_funding_reference: "Funding reference"
       complex_identifier:       "Identifier"
       complex_instrument:       "Instrument"
+      complex_instrument_operator: "Instrument operator"
       complex_material_type:    "Material type"
       complex_organization:     "Organization"
       complex_person:           "Creator"
@@ -40,6 +43,7 @@ en:
       instrument_function:      "Instrument function"
       keyword_ordered:          "Keyword"
       last_name:                "Surname"
+      license_description:      "License description"
       managing_organization:    "Managing organization"
       material_sub_type:        "Material sub type"
       material_type:            "Material type"
@@ -68,9 +72,10 @@ en:
         first_published_url: The DOI (in URL form) of the article related to this dataset or the URL where this dataset was first made public.
         supervisor_approval: "If you entered a DOI above, enter \"approved\". If you entered a non-DOI URL above, fill in the name of your supervisor and the date of their approval. See <a href='https://dice.nims.go.jp/services/MDR/manual/html/deposit.html#entering-metadata' target='_blank' rel='noopener'>the User's Manual</a> for details."
         title: The title of your work. English is preferred.
-        alternative_title: Alternative title or the title in another language, if applicable.
+        alternate_title: Alternative title or the title in another language, if applicable.
         rights_statement: "Copyright and license for your work. If none apply, select \"In Copyright\". <a href='https://dice.nims.go.jp/services/MDR/manual/html/glossary.html#rights-and-licenses' target='_blank' rel='noopener'>See the User's Manual</a> for further information."
         licensed_date: Date when the work was released under the license selected above.
+        license_decription: text accompanying the license selected above, if any.
         data_origin: Type of research.
         resource_type: Type of content. More than one type may be selected.
         description: Abstract or a free-text description for the work.

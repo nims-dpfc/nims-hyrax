@@ -30,12 +30,13 @@ class SolrDocument
     creator: 'complex_person_author_tesim',
     date: 'date_tesim',
     # description: 'description_tesim', # hide description/abstract field for OAI-PMH feed
-    identifier: 'complex_identifier_tesim',
+    identifier: 'complex_identifier_ssim',
     language: 'language_tesim',
     publisher: 'publisher_tesim',
-    relation: '', # @todo have a think about what to map here
-    rights: 'rights_tesim',
-    subject: 'subject_tesim',
+    # relation: '', # @todo have a think about what to map here
+    relation: 'first_published_url_tesim',
+    rights: 'rights_statement_tesim',
+    subject: 'keyword_tesim',
     title: 'title_tesim',
     type: 'resource_type_tesim'
   )
@@ -43,8 +44,8 @@ class SolrDocument
   # Using custom extension for content negotiation for ActiveFedora models
   use_extension( ::Hyrax::SolrDocument::ContentNegotiation )
 
-  def alternative_title
-    self[Solrizer.solr_name('alternative_title', :stored_searchable)]
+  def alternate_title
+    self[Solrizer.solr_name('alternate_title', :stored_searchable)]
   end
 
   def date_published
@@ -123,6 +124,10 @@ class SolrDocument
 
   def licensed_date
     self[Solrizer.solr_name('licensed_date', :stored_searchable)]
+  end
+
+  def license_description
+    self[Solrizer.solr_name('license_description', :stored_searchable)]
   end
 
   def instrument
@@ -231,5 +236,13 @@ class SolrDocument
 
   def complex_software
     self[Solrizer.solr_name('complex_software', :displayable)]
+  end
+
+  def complex_computational_method
+    self[Solrizer.solr_name('complex_computational_method', :displayable)]
+  end
+
+  def complex_experimental_method
+    self[Solrizer.solr_name('complex_experimental_method', :displayable)]
   end
 end

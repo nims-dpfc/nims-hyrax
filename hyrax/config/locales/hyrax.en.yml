@@ -9,10 +9,12 @@ en:
           characterization_methods_sim: Characterization methods
           complex_chemical_composition_category_ssim: Chemical composition category
           complex_chemical_composition_identifier_sim: Chemical composition identifier
+          complex_computational_method_category_vocabulary_sim: Computational method category
           complex_contact_agent_ssm: Contact agent
           complex_crystallographic_structure_category_vocabulary_sim: Crystallographic structure
           complex_date_dtsim: Date
           complex_date_accepted_dtsim: Date accepted
+          complex_experimental_method_category_vocabulary_sim: Experimental method category
           complex_year_accepted_sim: Date accepted
           complex_date_available_dtsim: Date available
           complex_year_available_sim: Date available
@@ -190,12 +192,13 @@ en:
           subject_tesim: Subject
           synthesis_and_processing_tesim: Synthesis and processing
         show:
-          alternative_title_tesim: Alternative title
+          alternate_title_tesim: Alternative title
           based_near_tesim: Location
           characterization_methods_tesim: Characterization_methods
           computational_methods_tesim: Computational methods
           contributor_tesim: Contributor
           complex_date_ssm: Date
+          complex_computational_method_ssm: Computational method
           complex_contact_agent_ssm: Contact agent
           complex_chemical_composition: Chemical composition
           complex_crystallographic_structure_ssm: Crystallographic structure
@@ -213,6 +216,7 @@ en:
           complex_date_purchased_ssm: Date purchased
           complex_date_other_ssm: Date
           complex_event_ssm: Event
+          complex_experimental_method_ssm: Experimental method
           complex_feature_ssm: Feature
           complex_funding_reference_ssm: Funding reference
           complex_identifier_ssm: Identifier
@@ -265,6 +269,7 @@ en:
     active_consent_to_supervisor_agreement: I have obtained necessary approval from my supervisor
     base:
       citations:
+        bibtex: Bibtex
         citations: Citations
         endnote: EndNote
         header: 'Export:'

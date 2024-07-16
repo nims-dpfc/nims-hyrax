@@ -43,11 +43,11 @@ module Metadata
       xml.tag!('dc:title', val, "xml:lang" => lang_code)
     end
 
-    def jpcoar_alternative_title(_field, xml)
-      return if alternative_title.blank?
+    def jpcoar_alternate_title(_field, xml)
+      return if alternate_title.blank?
       # Alternative title		dcterms:alternative
       # language attribute: TRUE
-      alternative_title.each do |val|
+      alternate_title.each do |val|
         next if val.blank?
         lang_code = get_language_code(val)
         xml.tag!('dcterms:alternative', val, "xml:lang" => lang_code)

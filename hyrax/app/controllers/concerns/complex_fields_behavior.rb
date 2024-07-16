@@ -188,13 +188,13 @@ module ComplexFieldsBehavior
     if value.is_a? Array
       value.map do |v|
         if v.is_a? String
-          Loofah.fragment(v).scrub!(:escape).to_s
+          Loofah.fragment(v).scrub!(:escape).to_s.gsub('&amp;', '&')
         else
           v
         end
       end
     elsif value.is_a? String
-      Loofah.fragment(value).scrub!(:escape).to_s
+      Loofah.fragment(value).scrub!(:escape).to_s.gsub('&amp;', '&')
     else
       value
     end

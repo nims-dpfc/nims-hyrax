@@ -3,7 +3,7 @@ include Warden::Test::Helpers
 
 RSpec.describe 'hyrax/datasets/_attribute_rows' do
   let(:partial) { 'hyrax/datasets/attribute_rows' }
-  let(:dataset) { create(:dataset, :open, :with_alternative_title, :with_complex_person, :with_keyword, :with_subject,
+  let(:dataset) { create(:dataset, :open, :with_alternate_title, :with_complex_person, :with_keyword, :with_subject,
                         :with_language, :with_publisher, :with_date_published, :with_complex_identifier, :with_rights,
                         :with_complex_version, :with_resource_type, :with_complex_relation, :with_complex_source,
                         :with_complex_event, :with_material_type, :with_complex_funding_reference,
@@ -11,6 +11,7 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
                         :with_complex_structural_feature, :with_complex_crystallographic_structure,
                         :with_complex_software,
                         :with_complex_feature,
+                        :with_complex_computational_method,
                         :with_description_abstract, :with_supervisor_approval) }
   let(:presenter) { Hyrax::DatasetPresenter.new(SolrDocument.new(dataset.to_solr), Ability.new(user), controller.request) }
 
@@ -58,6 +59,10 @@ RSpec.describe 'hyrax/datasets/_attribute_rows' do
       expect(rendered).to have_content('Feature 1')
       expect(rendered).to have_content('notepad.exe')
       expect(rendered).to have_content('Notepad')
+      expect(rendered).to have_content('http://vocabulary.example.jp/Q3456')
+      expect(rendered).to have_content('Vocabulary 3456')
+      expect(rendered).to have_content('Computational method 1')
+      expect(rendered).to have_content('2023-01-01 10:00:00')
       expect(rendered).not_to have_content('Abstract-Description-123') # Abstract/Description is not displayed in this table partial
       expect(rendered).not_to have_content('Professor-Supervisor-Approval')
     end

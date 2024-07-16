@@ -47,8 +47,8 @@ FactoryBot.define do
       sequence(:description) { |n| ["Abstract-Description-#{n}"] }
     end
 
-    trait :with_alternative_title do
-      alternative_title { 'Alternative-Title-123' }
+    trait :with_alternate_title do
+      alternate_title { 'Alternative-Title-123' }
     end
 
     trait :with_keyword do
@@ -453,6 +453,7 @@ FactoryBot.define do
             identifier: '1234567',
             scheme: 'Local'
           }],
+          article_number: 'a1234',
           issue: '34',
           sequence_number: '1.2.2',
           start_page: '4',
@@ -570,10 +571,36 @@ FactoryBot.define do
       }
     end
 
+    trait :with_complex_computational_method do
+      complex_computational_method_attributes {
+        [{
+          category_vocabulary: 'http://vocabulary.example.jp/Q3456',
+          category_description: 'Vocabulary 3456',
+          description: 'Computational method 1',
+          calculated_at: '2023-01-01 10:00:00'
+        }]
+      }
+    end
+
+    trait :with_complex_experimental_method do
+      complex_experimental_method_attributes {
+        [{
+           category_vocabulary: 'http://vocabulary.example.jp/Q4560',
+           category_description: 'Vocabulary 4560',
+           analysis_field_vocabulary: 'http://vocabulary.example.jp/Q4561',
+           analysis_field_description: 'Vocabulary 4561',
+           measurement_environment_vocabulary: 'http://vocabulary.example.jp/Q4562',
+           standarized_procedure_vocabulary: 'http://vocabulary.example.jp/Q4563',
+           measured_at: '2023-02-01 00:00:00',
+           description: 'Experimental method 1'
+         }]
+      }
+    end
+
     trait :with_ja do
       title { ["材料データプラットフォームDICE2.0 - データ創出−蓄積−利用−連携の基盤"] }
       managing_organization { ['ナノテクノロジープラットフォーム事業の成果と課題'] }
-      alternative_title { '試料冷却法を併用したAES深さ方向分析によるSiO2/Si熱酸化膜の分析' }
+      alternate_title { '試料冷却法を併用したAES深さ方向分析によるSiO2/Si熱酸化膜の分析' }
       description { ["わが国の先端共用・技術プラットフォームの 展望と課題を、ナノテクノロジープラットフォーム事業の実績と経験にもとづいて"] }
       keyword { ['ナノテクノロジープラットフォーム事業の活動実績', '共用施策設計'] }
       publisher { ['金属材料技術研究所'] }
@@ -591,6 +618,7 @@ FactoryBot.define do
         [{
            title: '統合データベース',
            alternative_title: 'トリプル',
+           article_number: 'a1234',
            issue: '34',
            start_page: '4',
            end_page: '12',
@@ -628,6 +656,19 @@ FactoryBot.define do
            award_uri: 'http://example.com/a1234',
            award_title: '第2回 SPring-8データワークショップ「SPring-8データセンター構想とMDXプロジェクトとの連携'
          }]
+      }
+    end
+
+    trait :with_complex_instrument_operator do
+      complex_instrument_operator_attributes {
+        [
+          {
+            name: 'Operator1',
+            email: 'operator1@example.jp',
+            organization: 'University',
+            department: 'Department'
+          }
+        ]
       }
     end
   end

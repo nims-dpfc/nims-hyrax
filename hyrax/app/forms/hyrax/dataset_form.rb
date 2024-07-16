@@ -24,12 +24,13 @@ module Hyrax
       # description
       :managing_organization_ordered,
       :first_published_url,
-      :title, :alternative_title, 
+      :title, :alternate_title, 
       :resource_type, :data_origin, 
       :description, :keyword_ordered,
       :specimen_set_ordered, 
       :publisher, :date_published, 
       :rights_statement, :licensed_date,
+      :license_description,
       :complex_person, 
       :complex_contact_agent,
       :complex_source, :manuscript_type, 
@@ -44,13 +45,15 @@ module Hyrax
 
       # method
       :characterization_methods, 
-      :computational_methods,
       :properties_addressed, 
       :synthesis_and_processing,
       :complex_feature,
+      :complex_computational_method,
+      :complex_experimental_method,
 
       # instruments
-      :complex_instrument, 
+      :complex_instrument,
+      :complex_instrument_operator,
 
       # specimen details
       :complex_specimen_type,
@@ -75,8 +78,7 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :managing_organization_ordered, :title, :resource_type, :data_origin,
-      :description, :keyword_ordered, :date_published, :rights_statement
+      :title, :resource_type, :data_origin, :description, :keyword_ordered, :date_published, :rights_statement
     ]
 
     def metadata_tab_terms
@@ -84,13 +86,14 @@ module Hyrax
         # Description tab order determined here
         :managing_organization_ordered,
         :first_published_url,
-        :title, :alternative_title, 
+        :title, :alternate_title, 
         :resource_type, :data_origin,
         :description, :keyword_ordered, 
         :specimen_set_ordered, 
         :material_type,
         :publisher, :date_published, 
-        :rights_statement, :licensed_date, 
+        :rights_statement, :licensed_date,
+        :license_description,
         :complex_person, 
         :complex_contact_agent,
         :complex_source, :manuscript_type,
@@ -108,17 +111,22 @@ module Hyrax
     def method_tab_terms
       [
         # Method tab order determined here
-        :characterization_methods, :computational_methods,
+        :characterization_methods,
         # :origin_system_provenance, # not using this
         :properties_addressed,
         :synthesis_and_processing,
+        :complex_experimental_method,
+        :complex_computational_method,
         :complex_feature,
         :complex_software
       ]
     end
 
     def instrument_tab_terms
-      [ :complex_instrument ]
+      [
+        :complex_instrument,
+        :complex_instrument_operator
+      ]
     end
 
     def specimen_tab_terms
@@ -236,6 +244,18 @@ module Hyrax
          category: [],
          # sub_category: [],
          description: []
+       }
+      ]
+    end
+
+    def self.permitted_instrument_operator_params
+      [:id,
+       :_destroy,
+       {
+         name: [],
+         email: [],
+         organization: [],
+         department: []
        }
       ]
     end
@@ -396,7 +416,8 @@ module Hyrax
          title: [],
          total_number_of_pages: [],
          volume: [],
-         issn: []
+         issn: [],
+         article_number: []
        }
       ]
     end
@@ -438,12 +459,42 @@ module Hyrax
       ]
     end
 
+    def self.permitted_computational_method_params
+      [:id,
+       :_destroy,
+       {
+         category_vocabulary: [],
+         category_description: [],
+         calculated_at: [],
+         description: []
+       }
+      ]
+    end
+
+    def self.permitted_experimental_method_params
+      [:id,
+       :_destroy,
+       {
+         category_vocabulary: [],
+         category_description: [],
+         analysis_field_vocabulary: [],
+         analysis_field_description: [],
+         measurement_environment_vocabulary: [],
+         standarized_procedure_vocabulary: [],
+         measured_at: [],
+         description: []
+       }
+      ]
+    end
+
     def self.build_permitted_params
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
       permitted << :licensed_date
+      permitted << :license_description
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_instrument_attributes: permitted_instrument_params }
+      permitted << { complex_instrument_operator_attributes: permitted_instrument_operator_params }
       permitted << { complex_person_attributes: permitted_person_params }
       permitted << { complex_organization_attributes: permitted_organization_params }
       permitted << { complex_relation_attributes: permitted_relation_params }
@@ -459,7 +510,8 @@ module Hyrax
       permitted << { complex_crystallographic_structure_attributes: permitted_crystallographic_structure_params }
       permitted << { complex_feature_attributes: permitted_feature_params }
       permitted << { complex_software_attributes: permitted_software_params }
-      permitted << :member_of_collection_ids
+      permitted << { complex_computational_method_attributes: permitted_computational_method_params }
+      permitted << { complex_experimental_method_attributes: permitted_experimental_method_params }
       permitted << :find_child_work
     end
   end

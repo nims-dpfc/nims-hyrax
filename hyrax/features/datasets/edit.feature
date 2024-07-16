@@ -20,4 +20,4 @@ Feature: Edit a dataset
       | with_complex_version                    |
       | with_complex_source                     |
     And make dataset editable by the nims_researcher
-    And On edit dataset page should not show extra blank complex source fileds
+    And On edit dataset page should not show extra blank complex source fields

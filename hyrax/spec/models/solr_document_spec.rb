@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SolrDocument do
   let(:model) do
     build(:dataset,
-      alternative_title: 'Alternative Title',
+      alternate_title: 'Alternative Title',
       complex_date_attributes: [{ date: ['2018-02-14'], description: 'Published Date' }],
       date_published: '2018-02-14',
       complex_identifier_attributes: [{ identifier: ['123456'], label: ['Local'] }],
@@ -73,8 +73,8 @@ RSpec.describe SolrDocument do
   end
   let(:solr_document) { described_class.new(model.to_solr) }
 
-  describe '#alternative_title' do
-    subject { solr_document.alternative_title }
+  describe '#alternate_title' do
+    subject { solr_document.alternate_title }
     it { is_expected.to eql ['Alternative Title'] }
   end
 
@@ -311,6 +311,7 @@ RSpec.describe SolrDocument do
     let(:model) { build(:publication,
       complex_source_attributes: [{
         alternative_title: 'Sub title for journal',
+        article_number: 'a1234',
         end_page: '12',
         issue: '34',
         sequence_number: '1.2.2',
@@ -324,6 +325,10 @@ RSpec.describe SolrDocument do
     describe 'alternative_title' do
       subject { complex_source['alternative_title'] }
       it { is_expected.to eql ['Sub title for journal'] }
+    end
+    describe 'article_number' do
+      subject { complex_source['article_number'] }
+      it { is_expected.to eql ['a1234'] }
     end
     describe 'end_page' do
       subject { complex_source['end_page'] }
@@ -438,5 +443,10 @@ RSpec.describe SolrDocument do
       subject { complex_structural_feature['complex_identifier'].first['identifier'] }
       it { is_expected.to eql ['structural_feature/1234567'] }
     end
+  end
+
+  describe "bibtex_filename" do
+    subject { solr_document.bibtex_filename }
+    it { is_expected.to eq("#{ solr_document.id }.bibtex") }
   end
 end

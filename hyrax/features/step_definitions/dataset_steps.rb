@@ -19,7 +19,7 @@ end
 When(/^I navigate to the new dataset page$/) do
   visit hyrax.dashboard_path  # /dashboard
   click_link "Works"
-  click_link "Add new work"
+  click_link "add-new-work-button"
 
   # If you generate more than one work uncomment these lines
   choose "payload_concern", option: "Dataset"
@@ -47,7 +47,7 @@ When(/^I create the dataset with:$/) do |table|
   click_link "Files" # switch tab
   expect(page).to have_content /Add files/i
   expect(page).to have_content /Add folder/i
-  within('span#addfiles') do
+  within('#add-files') do
     attach_file("files[]", File.join(fixture_path,  'image.jp2'), visible: false)
     attach_file("files[]", File.join(fixture_path, 'jp2_fits.xml'), visible: false)
   end
@@ -80,7 +80,7 @@ When(/^I create a draft dataset with:$/) do |table|
   click_link "Files" # switch tab
   expect(page).to have_content /Add files/i
   expect(page).to have_content /Add folder/i
-  within('span#addfiles') do
+  within('#add-files') do
     attach_file("files[]", File.join(fixture_path,  'image.jp2'), visible: false)
     attach_file("files[]", File.join(fixture_path, 'jp2_fits.xml'), visible: false)
   end
@@ -206,7 +206,7 @@ Then('make dataset editable by the nims_researcher') do
   dataset.update(edit_users: [@user.user_key])
 end
 
-Then("On edit dataset page should not show extra blank complex source fileds") do
+Then("On edit dataset page should not show extra blank complex source fields") do
   dataset = Dataset.last
 
   visit edit_hyrax_dataset_path(dataset)

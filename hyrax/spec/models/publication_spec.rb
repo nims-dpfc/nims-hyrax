@@ -162,6 +162,13 @@ RSpec.describe Publication do
     end
   end
 
+  describe 'license description' do
+    it 'has license description' do
+      @obj = build(:publication, license_description: 'This is some description for the license')
+      expect(@obj.license_description).to eq 'This is some description for the license'
+    end
+  end
+
   describe 'supervisor_approval' do
     it 'has supervisor_approval' do
       @obj = build(:publication, supervisor_approval: ['Kosuke Tanabe 2019.08.01'])
@@ -222,10 +229,10 @@ RSpec.describe Publication do
     end
   end
 
-  describe 'alternative_title' do
-    it 'has alternative_title as singular' do
-      @obj = build(:publication, alternative_title: 'Alternative Title')
-      expect(@obj.alternative_title).to eq 'Alternative Title'
+  describe 'alternate_title' do
+    it 'has alternate_title as singular' do
+      @obj = build(:publication, alternate_title: 'Alternative Title')
+      expect(@obj.alternate_title).to eq 'Alternative Title'
     end
   end
 
