@@ -128,7 +128,7 @@ module Hyrax
             ''
           end
         rescue
-          date_published || ''
+          date_published.present? ? date_published.first : ''
         end
       end
 
