@@ -46,6 +46,7 @@ RUN apt-get update -qq && \
     git \
     openjdk-11-jre-headless \
     postgresql-client \
+    clamdscan \
     yarn && \
     yarn config set no-progress && \
     yarn config set silent
