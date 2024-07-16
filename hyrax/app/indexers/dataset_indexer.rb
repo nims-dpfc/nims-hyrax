@@ -10,6 +10,7 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::VersionIndexer
   include ComplexField::OrganizationIndexer
   include ComplexField::InstrumentIndexer
+  include ComplexField::InstrumentOperatorIndexer
   include ComplexField::RelationIndexer
   include ComplexField::EventIndexer
   include ComplexField::SourceIndexer
@@ -26,6 +27,8 @@ class DatasetIndexer < NgdrIndexer
   include ComplexField::CrystallographicStructureIndexer
   include ComplexField::FeatureIndexer
   include ComplexField::SoftwareIndexer
+  include ComplexField::ComputationalMethodIndexer
+  include ComplexField::ExperimentalMethodIndexer
 
   def self.facet_fields
     # solr fields that will be treated as facets
@@ -55,6 +58,8 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_facet_fields
       fields.concat ComplexField::FeatureIndexer.feature_facet_fields
       fields.concat ComplexField::SoftwareIndexer.software_facet_fields
+      fields.concat ComplexField::ComputationalMethodIndexer.computational_method_facet_fields
+      fields.concat ComplexField::ExperimentalMethodIndexer.experimental_method_facet_fields
     end
   end
 
@@ -62,7 +67,7 @@ class DatasetIndexer < NgdrIndexer
     # solr fields that will be used for a search
     super.tap do |fields|
       dataset_search_fields = [
-        'alternative_title',
+        'alternate_title',
         'characterization_methods',
         'computational_methods',
         'data_origin',
@@ -84,6 +89,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::RightsIndexer.rights_search_fields
       fields.concat ComplexField::OrganizationIndexer.organization_search_fields
       fields.concat ComplexField::InstrumentIndexer.instrument_search_fields
+      fields.concat ComplexField::InstrumentOperatorIndexer.instrument_operator_search_fields
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_search_fields
       fields.concat ComplexField::ChemicalCompositionIndexer.chemical_composition_search_fields
       fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_search_fields
@@ -95,6 +101,8 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_search_fields
       fields.concat ComplexField::FeatureIndexer.feature_search_fields
       fields.concat ComplexField::SoftwareIndexer.software_search_fields
+      fields.concat ComplexField::ComputationalMethodIndexer.computational_method_search_fields
+      fields.concat ComplexField::ExperimentalMethodIndexer.experimental_method_search_fields
     end
   end
 
@@ -102,7 +110,7 @@ class DatasetIndexer < NgdrIndexer
     # solr fields that will be used to display results on the record page
     super.tap do |fields|
       dataset_show_fields = [
-        'alternative_title',
+        'alternate_title',
         'characterization_methods',
         'computational_methods',
         'data_origin',
@@ -122,6 +130,7 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::RightsIndexer.rights_show_fields
       fields.concat ComplexField::OrganizationIndexer.organization_show_fields
       fields.concat ComplexField::InstrumentIndexer.instrument_show_fields
+      fields.concat ComplexField::InstrumentOperatorIndexer.instrument_operator_show_fields
       fields.concat ComplexField::SpecimenTypeIndexer.specimen_type_show_fields
       fields.concat ComplexField::FundrefIndexer.fundref_show_fields
       fields.concat ComplexField::ContactAgentIndexer.contact_agent_show_fields
@@ -130,6 +139,8 @@ class DatasetIndexer < NgdrIndexer
       fields.concat ComplexField::CrystallographicStructureIndexer.crystallographic_structure_show_fields
       fields.concat ComplexField::FeatureIndexer.feature_show_fields
       fields.concat ComplexField::SoftwareIndexer.software_show_fields
+      fields.concat ComplexField::ComputationalMethodIndexer.computational_method_show_fields
+      fields.concat ComplexField::ExperimentalMethodIndexer.experimental_method_show_fields
     end
   end
 

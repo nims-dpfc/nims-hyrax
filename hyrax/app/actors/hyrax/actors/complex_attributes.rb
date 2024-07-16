@@ -40,6 +40,7 @@ module Hyrax
           complex_version
           complex_relation
           complex_instrument
+          complex_instrument_operator
           complex_affiliation
           manufacturer
           supplier
@@ -51,14 +52,15 @@ module Hyrax
           complex_material_type
           instrument_function
           complex_chemical_composition
+          complex_computational_method
           complex_crystallographic_structure
           complex_event
+          complex_experimental_method
           complex_source
           complex_event_date
           complex_funding_reference
           complex_feature
           complex_software
-
         ]
       end
     end

@@ -30,5 +30,8 @@ signed in %>
 <!-- Google Analytics -->
 <%= render partial: '/ga', formats: [:html] %>
 
+<!-- Matomo -->
+<%= render partial: 'shared/matomo', formats: [:html] if ENV['MATOMO_BASE_URL'].present? %>
+
 <!-- for extras, e.g., a favicon -->
 <%= render partial: '/head_tag_extras', formats: [:html] %>

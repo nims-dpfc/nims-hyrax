@@ -22,12 +22,13 @@ module Hyrax
       # Adding all fields in order of display in form
       :managing_organization_ordered,
       :first_published_url,
-      :title, :alternative_title, 
+      :title, :alternate_title, 
       :resource_type, 
       :description, :keyword_ordered, 
       :specimen_set_ordered, 
       :publisher, :date_published,
-      :rights_statement, :licensed_date, 
+      :rights_statement, :licensed_date,
+      :license_description,
       :complex_person, 
       :complex_contact_agent,
       :complex_source, :manuscript_type,
@@ -49,8 +50,8 @@ module Hyrax
 
     self.required_fields += [
       # Adding all required fields in order of display in form
-      :managing_organization_ordered, :title, :resource_type,
-      :description, :keyword_ordered, :date_published, :rights_statement
+      :title, :resource_type, :description, :keyword_ordered,
+      :date_published, :rights_statement
     ]
 
     def metadata_tab_terms
@@ -58,12 +59,13 @@ module Hyrax
         # Description tab order determined here
         :managing_organization_ordered,
         :first_published_url,
-        :title, :alternative_title, 
+        :title, :alternate_title, 
         :resource_type, 
         :description, :keyword_ordered,
         :specimen_set_ordered, 
         :publisher, :date_published, 
         :rights_statement, :licensed_date,
+        :license_description,
         :complex_person, 
         :complex_contact_agent,
         :complex_source, :manuscript_type, 
@@ -229,7 +231,8 @@ module Hyrax
          title: [],
          total_number_of_pages: [],
          volume: [],
-         issn: []
+         issn: [],
+         article_number: []
        }
       ]
     end
@@ -251,6 +254,7 @@ module Hyrax
       permitted = super
       permitted << { complex_date_attributes: permitted_date_params }
       permitted << :licensed_date
+      permitted << :license_description
       permitted << { complex_identifier_attributes: permitted_identifier_params }
       permitted << { complex_person_attributes: permitted_person_params }
       permitted << { complex_relation_attributes: permitted_relation_params }
@@ -260,7 +264,6 @@ module Hyrax
       permitted << { custom_property_attributes: permitted_custom_property_params }
       permitted << { complex_funding_reference_attributes: permitted_fundref_params }
       permitted << { complex_contact_agent_attributes: permitted_contact_agent_params }
-      permitted << :member_of_collection_ids
       permitted << :find_child_work
     end
   end

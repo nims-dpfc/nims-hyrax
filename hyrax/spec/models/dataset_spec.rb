@@ -184,6 +184,13 @@ RSpec.describe Dataset do
     end
   end
 
+  describe 'license description' do
+    it 'has license description' do
+      @obj = build(:dataset, license_description: 'This is some description for the license')
+      expect(@obj.license_description).to eq 'This is some description for the license'
+    end
+  end
+
   describe 'supervisor_approval' do
     it 'has supervisor_approval' do
       @obj = build(:dataset, supervisor_approval: ['Kosuke Tanabe 2019.08.01'])
@@ -247,10 +254,10 @@ RSpec.describe Dataset do
     end
   end
 
-  describe 'alternative_title' do
-    it 'has alternative_title as singular' do
-      @obj = build(:dataset, alternative_title: 'Alternative Title')
-      expect(@obj.alternative_title).to eq 'Alternative Title'
+  describe 'alternate_title' do
+    it 'has alternate_title as singular' do
+      @obj = build(:dataset, alternate_title: 'Alternative Title')
+      expect(@obj.alternate_title).to eq 'Alternative Title'
     end
   end
 
@@ -1209,6 +1216,40 @@ RSpec.describe Dataset do
                                                }]
       )
       expect(@obj.complex_software).to be_empty
+    end
+  end
+
+  describe 'complex_computational_method' do
+    it 'creates a complex computational method active triple resource with computational_method' do
+      @obj = build(:dataset, :with_complex_computational_method)
+      expect(@obj.complex_computational_method.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_computational_method.first.description).to eq ['Computational method 1']
+    end
+
+    it 'rejects a complex computational method active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_computational_method_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_computational_method).to be_empty
+    end
+  end
+
+  describe 'complex_experimental_method' do
+    it 'creates a complex experimental method active triple resource with computational_method' do
+      @obj = build(:dataset, :with_complex_experimental_method)
+      expect(@obj.complex_experimental_method.first).to be_kind_of ActiveTriples::Resource
+      expect(@obj.complex_experimental_method.first.description).to eq ['Experimental method 1']
+    end
+
+    it 'rejects a complex experimental method active triple with no attributes' do
+      @obj = build(:dataset,
+                   complex_experimental_method_attributes: [{
+                                                 description: ''
+                                               }]
+      )
+      expect(@obj.complex_experimental_method).to be_empty
     end
   end
 end

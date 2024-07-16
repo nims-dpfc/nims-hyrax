@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::PublicationPresenter do
-  let(:publication) { create(:publication, :open, :with_alternative_title, :with_description_abstract, :with_supervisor_approval, depositor: 'depositor') }
+  let(:publication) { create(:publication, :open, :with_alternate_title, :with_description_abstract, :with_supervisor_approval, depositor: 'depositor') }
   let(:solr_document) { SolrDocument.new(publication.to_solr) }
   let(:host) { double(host: 'http://example.org') }
   let(:user) { nil }

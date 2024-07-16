@@ -55,7 +55,7 @@ Hyrax.config do |config|
   config.analytics = ENV['GOOGLE_ANALYTICS_ID'].present?
 
   # Google Analytics tracking ID to gather usage statistics
-  config.google_analytics_id = ENV['GOOGLE_ANALYTICS_ID'] || 'UA-99999999-1'
+  #config.google_analytics_id = ENV['GOOGLE_ANALYTICS_ID'] || 'UA-99999999-1'
 
   # Date you wish to start collecting Google Analytic statistics for
   # Leaving it blank will set the start date to when ever the file was uploaded by
@@ -158,7 +158,7 @@ Hyrax.config do |config|
   end
 
   # Returns a URL that resolves to an image provided by a IIIF image server
-  config.iiif_image_url_builder = lambda do |file_id, base_url, size|
+  config.iiif_image_url_builder = lambda do |file_id, base_url, size, format|
     Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size, protocol: protocol, port: port)
   end
 

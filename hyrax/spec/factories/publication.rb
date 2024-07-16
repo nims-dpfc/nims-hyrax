@@ -54,8 +54,8 @@ FactoryBot.define do
       }
     end
 
-    trait :with_alternative_title do
-      alternative_title { 'Alternative-Title-123' }
+    trait :with_alternate_title do
+      alternate_title { 'Alternative-Title-123' }
     end
 
     trait :with_keyword do
@@ -170,6 +170,7 @@ FactoryBot.define do
             identifier: '1234567',
             scheme: 'Local'
           }],
+          article_number: 'a1234',
           issue: '34',
           sequence_number: '1.2.2',
           start_page: '4',
@@ -230,6 +231,10 @@ FactoryBot.define do
            department: 'DPFC'
          }]
       }
+    end
+
+    trait :with_manuscript_type do
+      manuscript_type { 'Original' }
     end
   end
 end

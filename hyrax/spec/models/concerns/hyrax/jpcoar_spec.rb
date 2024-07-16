@@ -5,7 +5,7 @@ RSpec.describe ::Hyrax::SolrDocument::Jpcoar do
     let(:model) { build(:dataset,
                         :with_managing_organization,
                         :with_first_published_url,
-                        :with_alternative_title,
+                        :with_alternate_title,
                         :with_article_resource_type,
                         :with_description_abstract,
                         :with_keyword,

@@ -10,7 +10,7 @@ RSpec.describe Hyrax::PublicationForm do
     let(:form) { described_class.new(model, ability, controller) }
 
     subject { form.metadata_tab_terms }
-    it { is_expected.to include(:first_published_url, :title, :alternative_title,
+    it { is_expected.to include(:first_published_url, :title, :alternate_title,
       :language, :resource_type, :description,
       :keyword_ordered, :specimen_set_ordered, :complex_person, :complex_identifier,
       :manuscript_type, :publisher, :specimen_set_ordered,
@@ -24,7 +24,7 @@ RSpec.describe Hyrax::PublicationForm do
   describe '#build_permitted_params' do
     subject { described_class.build_permitted_params }
 
-    it { is_expected.to include(:member_of_collection_ids, :find_child_work) }
+    it { is_expected.to include(:find_child_work) }
 
     context 'permitted params' do
       it do

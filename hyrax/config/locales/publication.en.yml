@@ -19,6 +19,7 @@ en:
         complex_rights:                   "Rights"
         complex_source:                   "Journal/Book/Proceedings/Database"
         complex_version:                  "Version"
+        description:                      "Abstract or Summary"
         issue:                            "Issue"
         keyword_ordered:                  "Keyword"
         managing_organization:            "Managing Organization"
