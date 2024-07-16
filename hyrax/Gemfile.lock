@@ -181,6 +181,7 @@ GEM
       ssrf_filter (~> 1.0, < 1.1.0)
     childprocess (3.0.0)
     clamav-client (3.2.0)
+    clamby (1.6.11)
     cld (0.11.0)
       ffi
     clipboard-rails (1.7.1)
@@ -332,6 +333,12 @@ GEM
     erubi (1.12.0)
     ethon (0.16.0)
       ffi (>= 1.15.0)
+    exception_notification (4.5.0)
+      actionmailer (>= 5.2, < 8)
+      activesupport (>= 5.2, < 8)
+    exception_notification-rake (0.3.1)
+      exception_notification (~> 4.3)
+      rake (>= 0.9.0)
     execjs (2.8.1)
     factory_bot (5.0.2)
       activesupport (>= 4.2.0)
@@ -1044,6 +1051,7 @@ DEPENDENCIES
   cancancan (~> 1.17)
   capybara
   clamav-client
+  clamby
   cld
   coffee-rails (~> 4.2)
   coveralls
@@ -1053,6 +1061,8 @@ DEPENDENCIES
   devise-guests (~> 0.7.0)
   devise_ldap_authenticatable
   elastic-apm
+  exception_notification (~> 4.4)
+  exception_notification-rake (~> 0.3.1)
   factory_bot_rails
   faraday
   faraday_middleware (~> 0.14)
