@@ -87,7 +87,7 @@ gem 'rdf-vocab', '3.1.4'
 
 group :production do
   gem 'exception_notification', '~> 4.4'
- gem 'exception_notification-rake', '~> 0.3.1'
+  gem 'exception_notification-rake', '~> 0.3.1'
 end
 
 gem 'willow_sword', git: 'https://github.com/CottageLabs/willow_sword.git', :branch => 'develop'
