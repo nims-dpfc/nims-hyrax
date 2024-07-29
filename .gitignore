@@ -355,3 +355,5 @@ $RECYCLE.BIN/
 # Default HOST_APP_DATA_PATH in .env.template.development
 /data/
 /hyrax/config/role_map.yml
+/k8s_deployment/key_vault_secrets.yml
+*.secrets

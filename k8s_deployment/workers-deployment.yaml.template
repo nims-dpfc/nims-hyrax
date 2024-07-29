@@ -20,8 +20,8 @@ spec:
         - name: solr-startup
           image: alpine/git
           envFrom:
-          - configMapRef:
-              name: nims-hyrax-config
+            - configMapRef:
+                name: nims-hyrax-config
           command:
             - /bin/sh
             - -c
@@ -29,8 +29,8 @@ spec:
         - name: fedora-startup
           image: alpine/git
           envFrom:
-          - configMapRef:
-              name: nims-hyrax-config
+            - configMapRef:
+                name: nims-hyrax-config
           command:
             - /bin/sh
             - -c
@@ -44,6 +44,16 @@ spec:
           - exec
           - sidekiq
         env:
+        - name: AZURE_APP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mdr-secrets
+              key: azure-app-secret
+        - name: GA_PRIVATE_KEY_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mdr-secrets
+              key: ga-private-key-secret
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -62,20 +72,12 @@ spec:
         - name: SMTP_PASS
           valueFrom:
             secretKeyRef:
-             name: mdr-secrets
-             key: smtp-pass
-        - name: ELASTIC_APM_SECRET_TOKEN
-          valueFrom:
-            secretKeyRef:
               name: mdr-secrets
-              key: elastic-apm-secret-token
+              key: smtp-pass
         envFrom:
         - configMapRef:
             name: nims-hyrax-config
         volumeMounts:
-          - name: mdr-secrets-store
-            mountPath: /mnt/secrets-store
-            readOnly: true
           #- name: web-file-uploads
           #  mountPath: /shared/uploads/
           #- name: web-derivatives
@@ -86,15 +88,13 @@ spec:
             mountPath: /data/public/branding
           - name: hyrax-data
             mountPath: /shared
-          - name: hyrax-shared
-            mountPath: /data/mdrstlargedata
-      volumes:
-        - name: mdr-secrets-store
-          csi:
-            driver: secrets-store.csi.k8s.io
+          - name: azure-shared-storage
+            mountPath: /data/largedatastore
+          # This mount point is required to use Azure Key Vault
+          - name: mdr-secrets-store
+            mountPath: /mnt/secrets-store
             readOnly: true
-            volumeAttributes:
-              secretProviderClass: azure-kvname-user-msi
+      volumes:
         #- name: web-file-uploads
         #  persistentVolumeClaim:
         #    claimName: web-file-uploads
@@ -110,10 +110,16 @@ spec:
         - name: hyrax-data
           persistentVolumeClaim:
             claimName: hyrax-data
-        - name: hyrax-shared
+        - name: azure-shared-storage
           azureFile:
-            shareName: mdrstlargedata
+            shareName: largedatastore
             secretName: azure-fileshare-secret
             readOnly: false
+        - name: mdr-secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azure-kvname-user-msi
       hostname: mdr-workers
       # restartPolicy: Always

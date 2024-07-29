@@ -17,14 +17,6 @@ spec:
         app: mdr-web
     spec:
       initContainers:
-      #- name: test-env
-      #  image: alpine/git
-      #  envFrom:
-      #  - configMapRef:
-      #      name: nims-hyrax-config
-      #  command:
-      #    - echo
-      #    - ${SOLR_HOST}
       - name: solr-startup
         image: alpine/git
         envFrom:
@@ -37,8 +29,8 @@ spec:
       - name: fedora-startup
         image: alpine/git
         envFrom:
-        - configMapRef:
-            name: nims-hyrax-config
+          - configMapRef:
+              name: nims-hyrax-config
         command:
           - /bin/sh
           - -c
@@ -57,6 +49,16 @@ spec:
         - configMapRef:
             name: nims-hyrax-config
         env:
+        - name: AZURE_APP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mdr-secrets
+              key: azure-app-secret
+        - name: GA_PRIVATE_KEY_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mdr-secrets
+              key: ga-private-key-secret
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -72,32 +74,49 @@ spec:
             secretKeyRef:
               name: mdr-secrets
               key: secret-key-base
-        - name: AZURE_APP_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: mdr-secrets
-              key: azure-app-secret
         - name: SMTP_PASS
           valueFrom:
             secretKeyRef:
               name: mdr-secrets
               key: smtp-pass
-        - name: ELASTIC_APM_SECRET_TOKEN
+        - name: AZURE_APP_ID
           valueFrom:
             secretKeyRef:
-              name: mdr-secrets
-              key: elastic-apm-secret-token
-        - name: GA_PRIVATE_KEY_SECRET
+              name: azure-auth-secrets
+              key: AZURE_APP_ID
+        - name: AZURE_SCOPES
           valueFrom:
             secretKeyRef:
-              name: mdr-secrets
-              key: ga-private-key-secret
+              name: azure-auth-secrets
+              key: AZURE_SCOPES
+        - name: AZURE_OAUTH_SITE_URL
+          valueFrom:
+            secretKeyRef:
+              name: azure-auth-secrets
+              key: AZURE_OAUTH_SITE_URL
+        - name: AZURE_OAUTH_AUTHORIZE_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              name: azure-auth-secrets
+              key: AZURE_OAUTH_AUTHORIZE_ENDPOINT
+        - name: AZURE_OAUTH_TOKEN_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              name: azure-auth-secrets
+              key: AZURE_OAUTH_TOKEN_ENDPOINT
+        - name: AZURE_OAUTH_JWKS_URL
+          valueFrom:
+            secretKeyRef:
+              name: azure-auth-secrets
+              key: AZURE_OAUTH_JWKS_URL
+        - name: SMTP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: azure-auth-secrets
+              key: SMTP_USERNAME
         ports:
           - containerPort: 3000
         volumeMounts:
-          - name: mdr-secrets-store
-            mountPath: /mnt/secrets-store
-            readOnly: true
           #- name: web-file-uploads
           #  mountPath: /shared/uploads/
           #- name: web-derivatives
@@ -108,15 +127,13 @@ spec:
             mountPath: /data/public/branding
           - name: hyrax-data
             mountPath: /shared
-          - name: hyrax-shared
-            mountPath: /data/mdrstlargedata
-      volumes:
-        - name: mdr-secrets-store
-          csi:
-            driver: secrets-store.csi.k8s.io
+          - name: azure-shared-storage
+            mountPath: /data/largedatastore
+          # This mount point is required to use Azure Key Vault
+          - name: mdr-secrets-store
+            mountPath: /mnt/secrets-store
             readOnly: true
-            volumeAttributes:
-              secretProviderClass: azure-kvname-user-msi
+      volumes:
         #- name: web-file-uploads
         #  persistentVolumeClaim:
         #    claimName: web-file-uploads
@@ -132,10 +149,45 @@ spec:
         - name: hyrax-data
           persistentVolumeClaim:
             claimName: hyrax-data
-        - name: hyrax-shared
+        - name: azure-shared-storage
           azureFile:
-            shareName: mdrstlargedata
+            shareName: largedatastore
             secretName: azure-fileshare-secret
             readOnly: false
+        - name: mdr-secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azure-kvname-user-msi
+      hostname: mdr-workers
+      # restartPolicy: Always
+      volumes:
+        #- name: web-file-uploads
+        #  persistentVolumeClaim:
+        #    claimName: web-file-uploads
+        #- name: web-derivatives
+        #  persistentVolumeClaim:
+        #    claimName: web-derivatives
+        #- name: web-cache
+        #  persistentVolumeClaim:
+        #    claimName: web-cache
+        - name: web-branding
+          persistentVolumeClaim:
+            claimName: web-branding
+        - name: hyrax-data
+          persistentVolumeClaim:
+            claimName: hyrax-data
+        - name: azure-shared-storage
+          azureFile:
+            shareName: largedatastore
+            secretName: azure-fileshare-secret
+            readOnly: false
+        - name: mdr-secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azure-kvname-user-msi
       hostname: mdr-web
       # restartPolicy: Always
