@@ -23,22 +23,22 @@ module ComplexField
       solr_doc[Solrizer.solr_name('instrument_model_number', :stored_searchable)] = object.complex_instrument.map { |i| i.model_number.reject(&:blank?) }.flatten!
       solr_doc[Solrizer.solr_name('instrument_model_number', :facetable)] = object.complex_instrument.map { |i| i.model_number.reject(&:blank?) }.flatten!
       object.complex_instrument.each do |i|
-        i.complex_date.each do |d|
-          dt = d.date.reject(&:blank?).first
-          next if dt.blank?
-          desc = d.description.first
-          label = 'processed'
-          label = DateService.new.label(d.description.first) unless desc.blank?
-          label = label.downcase.tr(' ', '_')
+        i.date_collected.each do |d|
+          next if d.blank?
+          begin
+            dt = DateTime.parse(d).utc.iso8601
+          rescue
+            dt = nil
+          end
           # date dateable
-          fld_name = Solrizer.solr_name("complex_date_#{label}", :dateable)
+          fld_name = Solrizer.solr_name("date_collected", :dateable)
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
-          solr_doc[fld_name] << d.date.reject(&:blank?).map { |dt| DateTime.parse(dt).utc.iso8601 }
+          solr_doc[fld_name] << dt
           solr_doc[fld_name].flatten!
           # date displayable
-          fld_name = Solrizer.solr_name("complex_date_#{label}", :displayable)
+          fld_name = Solrizer.solr_name("date_collected", :displayable)
           solr_doc[fld_name] = [] unless solr_doc.include?(fld_name)
-          solr_doc[fld_name] << d.date.reject(&:blank?)
+          solr_doc[fld_name] << d
           solr_doc[fld_name].flatten!
         end
         i.complex_identifier.each do |id|

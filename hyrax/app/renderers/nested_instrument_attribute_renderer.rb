@@ -18,11 +18,11 @@ class NestedInstrumentAttributeRenderer < NestedAttributeRenderer
         val = v['alternative_title'][0]
         each_html += get_row(label, val)
       end
-      # complex date
-      unless v.dig('complex_date').blank?
-        label = 'Date'
-        renderer_class = NestedDateAttributeRenderer
-        each_html += get_nested_output(field, label, v['complex_date'], renderer_class, false)
+      # instrument date
+      unless v.dig('date_collected').blank?
+        label = 'Instrument date'
+        val = v['date_collected'][0]
+        each_html += get_row(label, val)
       end
       # description
       unless v.dig('description').blank?

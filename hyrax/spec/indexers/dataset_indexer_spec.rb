@@ -11,54 +11,18 @@ RSpec.describe DatasetIndexer do
     end
   end
 
-  describe 'indexes a date active triple resource with all the attributes' do
+  describe 'indexes date_published' do
     before do
-      dates = [
-        {
-          date: '1988-10-28',
-          description: 'http://bibframe.org/vocab/providerDate',
-        }, {
-          date: '2018-01-01'
-        }, {
-          description: 'http://bibframe.org/vocab/changeDate'
-        }, {
-          description: 'http://purl.org/dc/terms/dateAccepted',
-          date: ''
-        }
-      ]
-      obj = build(:dataset, complex_date_attributes: dates)
+      obj = build(:dataset, date_published: '1988-10-28')
       @solr_document = obj.to_solr
     end
-    it 'rejects blank dates' do
-      expect(@solr_document).not_to include('complex_date_updated_ssm')
-      expect(@solr_document).not_to include('complex_year_updated_sim')
-      expect(@solr_document).not_to include('complex_date_accepted_ssm')
-      expect(@solr_document).not_to include('complex_year_accepted_sim')
+    it 'indexes as stored searchable' do
+      expect(@solr_document).to include('date_published_tesim')
+      expect(JSON.parse(@solr_document['date_published'])).not_to be_empty
     end
-    it 'indexes as displayable' do
-      expect(@solr_document).to include('complex_date_ssm')
-      expect(JSON.parse(@solr_document['complex_date_ssm'])).not_to be_empty
-    end
-    it 'indexes as dateable' do
-      expect(@solr_document['complex_date_dtsim']).to match_array(
-        ["1988-10-28T00:00:00Z", "2018-01-01T00:00:00Z"])
-    end
-    it 'indexes year as facetable' do
-      expect(@solr_document['complex_year_sim']).to match_array(
-        ["1988", "2018"])
-    end
-    it 'indexes each type as sortable' do
-      skip 'this cannot be multi-valued'
-      expect(@solr_document['complex_date_submitted_dtsi']).to match_array("1988-10-28T00:00:00Z")
-    end
-    it 'indexes each type as dateable' do
-      expect(@solr_document['complex_date_submitted_dtsim']).to match_array(["1988-10-28T00:00:00Z"])
-    end
-    it 'indexes each type as displayable' do
-      expect(@solr_document['complex_date_submitted_ssm']).to match_array(["1988-10-28"])
-    end
-    it 'indexes each year as facetable' do
-      expect(@solr_document['complex_year_submitted_sim']).to match_array(["1988"])
+    it 'indexes as facetable' do
+      expect(@solr_document['date_published_sim']).to match_array(
+        ["1988-10-28"])
     end
   end
 
@@ -376,10 +340,7 @@ RSpec.describe DatasetIndexer do
     before do
       instruments = [{
         alternative_title: 'Another instrument title',
-        complex_date_attributes: [{
-          date: ['2018-02-14'],
-          description: ['Registered']
-        }],
+        date_collected: '2018-02-14',
         description: 'Instrument description',
         complex_identifier_attributes: [{
           identifier: ['123456'],
@@ -424,10 +385,7 @@ RSpec.describe DatasetIndexer do
         title: 'Instrument title'
       },{
         alternative_title: 'Another instrument title 2',
-        complex_date_attributes: [{
-          date: ['2019-02-14'],
-          description: ['Registered']
-        }],
+        date_collected: '2019-02-14',
         description: 'Instrument description 2',
         complex_identifier_attributes: [{
           identifier: ['1234567890'],
@@ -487,11 +445,11 @@ RSpec.describe DatasetIndexer do
     it 'indexes alternative title as stored searchable' do
       expect(@solr_document['instrument_alternative_title_tesim']).to match_array(['Another instrument title', 'Another instrument title 2'])
     end
-    it 'indexes date by type as dateable' do
-      expect(@solr_document['complex_date_registered_dtsim']).to match_array(["2018-02-14T00:00:00Z", "2019-02-14T00:00:00Z"])
+    it 'indexes date_collected as dateable' do
+      expect(@solr_document['date_collected_dtsim']).to match_array(["2018-02-14T00:00:00Z", "2019-02-14T00:00:00Z"])
     end
-    it 'indexes date by type as displayable' do
-      expect(@solr_document['complex_date_registered_ssm']).to match_array(["2018-02-14", "2019-02-14"])
+    it 'indexes date_collected as displayable' do
+      expect(@solr_document['date_collected_ssm']).to match_array(["2018-02-14", "2019-02-14"])
     end
     it 'indexes description as stored searchable' do
       expect(@solr_document['instrument_description_tesim']).to match_array(['Instrument description', 'Instrument description 2'])

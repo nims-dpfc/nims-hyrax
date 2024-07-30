@@ -83,5 +83,5 @@ When the app is set up, from `hyrax/`:
 
 for all tests, and e.g.
 
-    bundle exec rspec spec/models/concerns/complex_date_spec.rb
+    bundle exec rspec spec/models/concerns/complex_person_spec.rb
 for tests in a specific file.

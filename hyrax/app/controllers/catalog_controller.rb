@@ -88,7 +88,6 @@ class CatalogController < ApplicationController
     #  config.add_index_field solr_name('depositor'), label: 'Owner', helper_method: :link_to_profile
 
     # config.add_index_field solr_name('publisher', :stored_searchable), itemprop: 'publisher', link_to_search: solr_name('publisher', :facetable)
-    # config.add_index_field solr_name('complex_date_published', :stored_searchable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_published', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
 
     # config.add_index_field solr_name('rights_statement', :stored_searchable), helper_method: :rights_statement_links, if: lambda { |context, field_config, document| context.can?(:read_rights, document.hydra_model) }

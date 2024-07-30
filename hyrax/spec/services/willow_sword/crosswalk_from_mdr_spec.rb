@@ -22,10 +22,6 @@ RSpec.describe WillowSword::CrosswalkFromMdr do
           :complex_organization_attributes => [
               {:organization => "NIMS"}
           ],
-          :complex_date_attributes => [
-              {:date => "2018-12-30", :description => "http://purl.org/dc/terms/created"},
-              {:date => "2018-12-31", :description => "http://bibframe.org/vocab/changeDate"}
-          ],
           :data_origin => ["experiments"],
           :visibility => "open",
           :title => ["unknown"],

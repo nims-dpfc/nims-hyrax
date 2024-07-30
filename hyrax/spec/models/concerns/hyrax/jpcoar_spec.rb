@@ -16,7 +16,6 @@ RSpec.describe ::Hyrax::SolrDocument::Jpcoar do
                         :with_detailed_complex_people,
                         :with_complex_source,
                         :with_complex_event,
-                        :with_complex_date,
                         :with_complex_identifier,
                         :with_complex_version,
                         :with_complex_relation,

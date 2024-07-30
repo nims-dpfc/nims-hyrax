@@ -2,7 +2,7 @@
 #  `rails generate hyrax:work Dataset`
 module Hyrax
   class DatasetPresenter < Hyrax::WorkShowPresenter
-    delegate :alternate_title, :complex_date, :complex_identifier,
+    delegate :alternate_title, :complex_identifier,
       :complex_person, :complex_organization, :complex_rights, :complex_version,
       :complex_funding_reference, :characterization_methods, :computational_methods, :data_origin,
       :complex_contact_agent, :complex_chemical_composition, :complex_structural_feature,

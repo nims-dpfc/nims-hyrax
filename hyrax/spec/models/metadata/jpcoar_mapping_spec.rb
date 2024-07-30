@@ -262,42 +262,6 @@ RSpec.describe Metadata::JpcoarMapping do
       end
     end
 
-    describe 'jpcoar_complex_date' do
-      c_map = {
-        'http://purl.org/dc/terms/dateAccepted' => 'Accepted',
-        'Available' => 'Available',
-        'http://bibframe.org/vocab/copyrightDate' => 'Copyrighted',
-        'Collected' => 'Collected',
-        'http://purl.org/dc/terms/created' => 'Created',
-        'http://bibframe.org/vocab/providerDate' => 'Submitted',
-        'http://bibframe.org/vocab/changeDate' => 'Updated',
-      }
-      c_map.each do |k, v|
-        context k do
-          let(:model) { build(:dataset,
-                              complex_date_attributes: [{
-                                date: '1978-10-28',
-                                description: k
-                              }]) }
-          let(:solr_document) { SolrDocument.new(model.to_solr) }
-          let(:out) {"<datacite:date dateType=\"#{v}\">1978-10-28</datacite:date>"}
-          it "has the xml" do
-            solr_document.jpcoar_complex_date(field, xml)
-            expect(xml.target!.gsub(/<to_s\/>/, '')).to eq out.split("\n").map(&:rstrip).map(&:lstrip).join("")
-          end
-        end
-      end
-      context 'without label' do
-        let(:model) { build(:dataset,
-                            complex_date_attributes: [{ date: '1978-10-28'}]) }
-        let(:solr_document) { SolrDocument.new(model.to_solr) }
-        it "has the xml" do
-          solr_document.jpcoar_complex_date(field, xml)
-          expect(xml.target!.gsub(/<to_s\/>/, '')).to be_empty
-        end
-      end
-    end
-
     describe 'jpcoar_complex_identifier' do
       let(:model) { build(:dataset, :with_complex_identifier) }
       let(:solr_document) { SolrDocument.new(model.to_solr) }

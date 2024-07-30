@@ -17,7 +17,7 @@ RSpec.describe Hyrax::PublicationForm do
       :managing_organization_ordered,
       :date_published, :rights_statement, :licensed_date, :complex_identifier,
       :complex_source, :complex_contact_agent,
-      :complex_version, :complex_funding_reference, :complex_relation, :complex_date, :complex_event,
+      :complex_version, :complex_funding_reference, :complex_relation, :complex_event,
       :custom_property) }
   end
 

@@ -20,7 +20,7 @@ RSpec.describe Hyrax::DatasetForm do
         :licensed_date, :license_description,
         :complex_person, :complex_contact_agent, :complex_source,
         :manuscript_type,
-        :complex_event, :language, :complex_date, :complex_identifier,
+        :complex_event, :language, :complex_identifier,
         :complex_version,
         :complex_funding_reference, :complex_relation, :custom_property
         ) }

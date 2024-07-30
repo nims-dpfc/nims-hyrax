@@ -91,6 +91,13 @@ RSpec.describe Dataset do
     end
   end
 
+  describe 'date_published' do
+    it 'has date_published' do
+      @obj = build(:dataset, date_published: '2018-01-23')
+      expect(@obj.date_published).to eq '2018-01-23'
+    end
+  end
+
   describe 'description' do
     it 'has description' do
       @obj = build(:dataset, description: ['description 1'])
@@ -191,6 +198,13 @@ RSpec.describe Dataset do
     end
   end
 
+  describe 'licensed_date' do
+    it 'has licensed_date' do
+      @obj = build(:dataset, licensed_date: '2018-06-01')
+      expect(@obj.licensed_date).to eq '2018-06-01'
+    end
+  end
+
   describe 'supervisor_approval' do
     it 'has supervisor_approval' do
       @obj = build(:dataset, supervisor_approval: ['Kosuke Tanabe 2019.08.01'])
@@ -258,40 +272,6 @@ RSpec.describe Dataset do
     it 'has alternate_title as singular' do
       @obj = build(:dataset, alternate_title: 'Alternative Title')
       expect(@obj.alternate_title).to eq 'Alternative Title'
-    end
-  end
-
-  describe 'complex_date' do
-    it 'creates a date active triple resource with all the attributes' do
-      @obj = build(:dataset,
-        complex_date_attributes: [{
-          date: '1978-10-28',
-          description: 'Some kind of a date',
-        }]
-      )
-      expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_date.first.date).to eq ['1978-10-28']
-      expect(@obj.complex_date.first.description).to eq ['Some kind of a date']
-    end
-
-    it 'creates a date active triple resource with just the date' do
-      @obj = build(:dataset,
-        complex_date_attributes: [{
-          date: '1984-09-01'
-        }]
-      )
-      expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_date.first.date).to eq ['1984-09-01']
-      expect(@obj.complex_date.first.description).to be_empty
-    end
-
-    it 'rejects a date active triple with no date' do
-      @obj = build(:dataset,
-        complex_date_attributes: [{
-          description: 'Local date'
-        }]
-      )
-      expect(@obj.complex_date).to be_empty
     end
   end
 
@@ -493,8 +473,7 @@ RSpec.describe Dataset do
       @obj = build(:dataset, :with_complex_instrument)
       expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.alternative_title).to eq ['An instrument title']
-      expect(@obj.complex_instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.complex_date.first.date).to eq ['2018-02-14']
+      expect(@obj.complex_instrument.first.date_collected).to eq '2018-02-14'
       expect(@obj.complex_instrument.first.description).to eq ['Instrument description']
       expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['instrument/27213727']
@@ -528,9 +507,7 @@ RSpec.describe Dataset do
       skip
       @obj = build(:dataset,
         complex_instrument_attributes: [{
-          complex_date_attributes: [{
-            date: ['2018-01-28'],
-          }],
+          date_collected: '2018-01-28',
           complex_identifier_attributes: [{
             identifier: ['ewfqwefqwef'],
           }],
@@ -541,8 +518,7 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.complex_date.first.date).to eq ['2018-01-28']
+      expect(@obj.complex_instrument.first.instrumwent_date).to eq '2018-01-28'
       expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
       expect(@obj.complex_instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource

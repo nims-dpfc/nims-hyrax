@@ -397,8 +397,6 @@ def publication_attributes_from_form
 	     "invitation_status"=>["0"],
 	     "_destroy"=>"false"}},
 	 "language"=>[""],
-	 "complex_date_attributes"=>
-	  {"0"=>{"description"=>[""], "date"=>[""], "_destroy"=>"false"}},
 	 "complex_identifier_attributes"=>
 	  {"0"=>
 	    {"scheme"=>["identifier local"],
@@ -512,7 +510,6 @@ def publication_attributes_from_form_cleaned
 	 "manuscript_type"=>"",
 	 "complex_event_attributes"=>[],
 	 "language"=>[""],
-	 "complex_date_attributes"=>[],
 	 "complex_identifier_attributes"=>
 	  [{"scheme"=>["identifier local"],
 	    "identifier"=>["123534523464"],

@@ -38,9 +38,7 @@ RSpec.describe ComplexInstrument do
     context 'with date, identifier, person and title' do
       let(:complex_instrument_attributes) do
         [{
-          complex_date_attributes: [{
-            date: ['2018-01-28'],
-          }],
+          date_collected: ['2018-01-28'],
           complex_identifier_attributes: [{
             identifier: ['ewfqwefqwef'],
           }],
@@ -61,9 +59,7 @@ RSpec.describe ComplexInstrument do
       let(:complex_instrument_attributes) do
         [{
             alternative_title: 'An instrument title',
-            complex_date_attributes: [{
-              date: ['2018-02-14']
-            }],
+            date_collected: ['2018-02-14'],
             description: 'Instrument description',
             complex_identifier_attributes: [{
               identifier: ['123456'],
@@ -104,8 +100,7 @@ RSpec.describe ComplexInstrument do
       it 'creates an instrument active triple resource with all the attributes' do
         expect(subject).to be_kind_of ActiveTriples::Resource
         expect(subject.alternative_title).to eq ['An instrument title']
-        expect(subject.complex_date.first).to be_kind_of ActiveTriples::Resource
-        expect(subject.complex_date.first.date).to eq ['2018-02-14']
+        expect(subject.date_collected).to eq ['2018-02-14']
         expect(subject.description).to eq ['Instrument description']
         expect(subject.complex_identifier.first).to be_kind_of ActiveTriples::Resource
         expect(subject.complex_identifier.first.identifier).to eq ['123456']
@@ -159,7 +154,7 @@ RSpec.describe ComplexInstrument do
       context 'date, identifier and person' do
         let(:complex_instrument_attributes) do
           [{
-               complex_date_attributes: [{ date: ['2018-01-28'] }],
+             date_collected: ['2018-01-28'],
                complex_identifier_attributes: [{ identifier: ['ewfqwefqwef'] }],
                complex_person_attributes: [{
                                                name: ['operator 1'],
@@ -169,8 +164,7 @@ RSpec.describe ComplexInstrument do
         end
         it 'creates an instrument active triple resource with date, identifier and person' do
           expect(subject).to be_kind_of ActiveTriples::Resource
-          expect(subject.complex_date.first).to be_kind_of ActiveTriples::Resource
-          expect(subject.complex_date.first.date).to eq ['2018-01-28']
+          expect(subject.date_collected).to eq ['2018-01-28']
           expect(subject.complex_identifier.first).to be_kind_of ActiveTriples::Resource
           expect(subject.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
           expect(subject.complex_person.first).to be_kind_of ActiveTriples::Resource
@@ -216,9 +210,7 @@ RSpec.describe ComplexInstrument do
         context 'rejects an instrument active triple with no identifier' do
           let(:complex_instrument_attributes) do
             [{
-              complex_date_attributes: [{
-                date: ['2018-01-28'],
-              }],
+              date_collected: ['2018-01-28'],
               complex_person_attributes: [{
                 name: ['operator 1'],
                 role: ['Operator']
@@ -231,9 +223,7 @@ RSpec.describe ComplexInstrument do
         context 'rejects an instrument active triple with no person' do
           let(:complex_instrument_attributes) do
             [{
-              complex_date_attributes: [{
-                date: ['2018-01-28'],
-              }],
+              date_collected: ['2018-01-28'],
               complex_identifier_attributes: [{
                 identifier: ['ewfqwefqwef'],
               }]
