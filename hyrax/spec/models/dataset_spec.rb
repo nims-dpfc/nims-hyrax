@@ -473,7 +473,7 @@ RSpec.describe Dataset do
       @obj = build(:dataset, :with_complex_instrument)
       expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.alternative_title).to eq ['An instrument title']
-      expect(@obj.complex_instrument.first.date_collected).to eq '2018-02-14'
+      expect(@obj.complex_instrument.first.date_collected).to eq ['2018-02-14']
       expect(@obj.complex_instrument.first.description).to eq ['Instrument description']
       expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['instrument/27213727']
@@ -518,7 +518,7 @@ RSpec.describe Dataset do
         }]
       )
       expect(@obj.complex_instrument.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_instrument.first.instrumwent_date).to eq '2018-01-28'
+      expect(@obj.complex_instrument.first.date_collected).to eq ['2018-01-28']
       expect(@obj.complex_instrument.first.complex_identifier.first).to be_kind_of ActiveTriples::Resource
       expect(@obj.complex_instrument.first.complex_identifier.first.identifier).to eq ['ewfqwefqwef']
       expect(@obj.complex_instrument.first.complex_person.first).to be_kind_of ActiveTriples::Resource

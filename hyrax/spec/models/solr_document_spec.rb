@@ -9,7 +9,8 @@ RSpec.describe SolrDocument do
       complex_instrument_attributes: [{
         complex_identifier_attributes: [{ identifier: ['ewfqwefqwef'] }],
         complex_person_attributes: [{ name: ['operator 1'] }],
-        title: 'Instrument 1'
+        title: 'Instrument 1',
+        date_collected: "'2018-01-28'"
       }],
       complex_organization_attributes: [{
         organization: 'Foo',
@@ -78,7 +79,7 @@ RSpec.describe SolrDocument do
 
   describe '#date_published' do
     subject { solr_document.date_published }
-    it { is_expected.to eql '2018-02-14' }
+    it { is_expected.to eql ['2018-02-14'] }
   end
 
   describe '#complex_identifier' do

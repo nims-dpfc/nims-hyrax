@@ -57,7 +57,6 @@ RSpec.describe Hyrax::DatasetForm do
 
     context 'permitted params' do
       it do
-        expect(described_class).to receive(:permitted_date_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_identifier_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_instrument_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_instrument_operator_params).at_least(:once).and_call_original

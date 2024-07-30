@@ -24,6 +24,8 @@ RSpec.describe WillowSword::CrosswalkFromMdr do
           ],
           :data_origin => ["experiments"],
           :visibility => "open",
+          :date_created => "2018-12-30",
+          :date_uploaded => "2018-12-31",
           :title => ["unknown"],
           :complex_specimen_type_attributes => [
               {:complex_identifier_attributes => [{:identifier => "999999999", :scheme => "identifier local"}], :description => ["unknown"]}
