@@ -20,7 +20,7 @@ class NestedInstrumentAttributeRenderer < NestedAttributeRenderer
       end
       # instrument date
       unless v.dig('date_collected').blank?
-        label = 'Instrument date'
+        label = 'Date collected'
         val = v['date_collected'][0]
         each_html += get_row(label, val)
       end

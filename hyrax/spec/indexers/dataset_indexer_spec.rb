@@ -18,11 +18,10 @@ RSpec.describe DatasetIndexer do
     end
     it 'indexes as stored searchable' do
       expect(@solr_document).to include('date_published_tesim')
-      expect(JSON.parse(@solr_document['date_published_tesim'])).not_to be_empty
+      expect(@solr_document['date_published_tesim']).to match_array(["1988-10-28"])
     end
     it 'indexes as facetable' do
-      expect(@solr_document['date_published_sim']).to match_array(
-        ["1988-10-28"])
+      expect(@solr_document['date_published_sim']).to match_array(["1988-10-28"])
     end
   end
 

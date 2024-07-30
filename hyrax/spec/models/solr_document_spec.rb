@@ -10,7 +10,7 @@ RSpec.describe SolrDocument do
         complex_identifier_attributes: [{ identifier: ['ewfqwefqwef'] }],
         complex_person_attributes: [{ name: ['operator 1'] }],
         title: 'Instrument 1',
-        date_collected: "'2018-01-28'"
+        date_collected: "2018-01-28"
       }],
       complex_organization_attributes: [{
         organization: 'Foo',
