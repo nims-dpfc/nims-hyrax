@@ -1,0 +1,125 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mdr-workers
+  name: mdr-workers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mdr-workers
+  # strategy:
+  #   type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mdr-workers
+    spec:
+      initContainers:
+        - name: solr-startup
+          image: alpine/git
+          envFrom:
+            - configMapRef:
+                name: nims-hyrax-config
+          command:
+            - /bin/sh
+            - -c
+            - "wget http://${SOLR_HOST}:${SOLR_PORT}/solr/admin/info/system"
+        - name: fedora-startup
+          image: alpine/git
+          envFrom:
+            - configMapRef:
+                name: nims-hyrax-config
+          command:
+            - /bin/sh
+            - -c
+            - "wget http://${FEDORA_HOST}:${FEDORA_PORT}/fcrepo/rest"
+      containers:
+      - name: mdr-workers
+        image: mdrcontreg.azurecr.io/nims-hyrax_workers:v1.2
+        imagePullPolicy: Always
+        args:
+          - bundle
+          - exec
+          - sidekiq
+        env:
+        - name: AZURE_APP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mdr-secrets
+              key: azure-app-secret
+        - name: GA_PRIVATE_KEY_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mdr-secrets
+              key: ga-private-key-secret
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mdr-secrets
+              key: postgres-password
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mdr-secrets
+              key: redis-password
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: mdr-secrets
+              key: secret-key-base
+        - name: SMTP_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mdr-secrets
+              key: smtp-pass
+        envFrom:
+        - configMapRef:
+            name: nims-hyrax-config
+        volumeMounts:
+          #- name: web-file-uploads
+          #  mountPath: /shared/uploads/
+          #- name: web-derivatives
+          #  mountPath: /shared/derivatives/
+          #- name: web-cache
+          #  mountPath: /shared/cache/
+          - name: web-branding
+            mountPath: /data/public/branding
+          - name: hyrax-data
+            mountPath: /shared
+          - name: azure-shared-storage
+            mountPath: /data/largedatastore
+          # This mount point is required to use Azure Key Vault
+          - name: mdr-secrets-store
+            mountPath: /mnt/secrets-store
+            readOnly: true
+      volumes:
+        #- name: web-file-uploads
+        #  persistentVolumeClaim:
+        #    claimName: web-file-uploads
+        #- name: web-derivatives
+        #  persistentVolumeClaim:
+        #    claimName: web-derivatives
+        #- name: web-cache
+        #  persistentVolumeClaim:
+        #    claimName: web-cache
+        - name: web-branding
+          persistentVolumeClaim:
+            claimName: web-branding
+        - name: hyrax-data
+          persistentVolumeClaim:
+            claimName: hyrax-data
+        - name: azure-shared-storage
+          azureFile:
+            shareName: largedatastore
+            secretName: azure-fileshare-secret
+            readOnly: false
+        - name: mdr-secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azure-kvname-user-msi
+      hostname: mdr-workers
+      # restartPolicy: Always
