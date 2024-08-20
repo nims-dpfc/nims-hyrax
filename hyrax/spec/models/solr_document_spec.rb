@@ -449,4 +449,44 @@ RSpec.describe SolrDocument do
     subject { solr_document.bibtex_filename }
     it { is_expected.to eq("#{ solr_document.id }.bibtex") }
   end
+
+  describe "bibtex using date published" do
+    it 'uses date published for year' do
+      expect(solr_document.bibtex_year).to eq "2018"
+    end
+
+    it 'uses date published for month' do
+      expect(solr_document.bibtex_month).to eq "02"
+    end
+  end
+
+  describe "bibtex using date created" do
+    let(:model2) do
+      build(:dataset, title: nil, date_published: nil, date_created: ['2017-11-18'])
+    end
+    let(:solr_document2) { described_class.new(model2.to_solr) }
+
+    it 'uses date created for month' do
+      expect(solr_document2.bibtex_month).to eq "11"
+    end
+
+    it 'uses date created for year' do
+      expect(solr_document2.bibtex_year).to eq "2017"
+    end
+  end
+
+  describe "bibtex using year published" do
+    let(:model2) do
+      build(:dataset, title: nil, date_published: "2019", date_created: ['2017-11-18'])
+    end
+    let(:solr_document2) { described_class.new(model2.to_solr) }
+
+    it 'uses date created for year' do
+      expect(solr_document2.bibtex_year).to eq "2019"
+    end
+
+    it 'uses date created for month' do
+      expect(solr_document2.bibtex_month).to eq ""
+    end
+  end
 end
