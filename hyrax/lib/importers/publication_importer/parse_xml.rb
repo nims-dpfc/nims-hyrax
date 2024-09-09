@@ -99,7 +99,6 @@ module Importers
         #       tableOfContents
         #       title
         #       total-number-of-pages
-        metadata[:complex_date_attributes] = []
         # abstract
         val = get_text(node, 'abstract')
         metadata[:description] = val if val.any?
@@ -109,22 +108,24 @@ module Importers
         # created - ignoring this date for now
         # creator
         metadata[:complex_person_attributes] = get_creators(node)
+        #  NO longer using complex_date
+        #  metadata[:complex_date_attributes] = []
         # dateAccepted
-        val = get_text(node, 'dateAccepted')
-        desc = DateService.new.find_by_id_or_label('Accepted')['id']
-        metadata[:complex_date_attributes] << {date: val, description: desc} if val.any?
+        # val = get_text(node, 'dateAccepted')
+        # desc = DateService.new.find_by_id_or_label('Accepted')['id']
+        # metadata[:complex_date_attributes] << {date: val, description: desc} if val.any?
         # dateSubmitted
-        val = get_text(node, 'dateSubmitted')
-        desc  = DateService.new.find_by_id_or_label('Submitted')['id']
-        metadata[:complex_date_attributes] << {date: val, description: desc} if val.any?
+        # val = get_text(node, 'dateSubmitted')
+        # desc  = DateService.new.find_by_id_or_label('Submitted')['id']
+        # metadata[:complex_date_attributes] << {date: val, description: desc} if val.any?
+        # issued
+        # val = get_text(node, 'issued')
+        # desc  = DateService.new.find_by_id_or_label('Issued')['id']
+        # metadata[:complex_date_attributes] << {date: val, description: desc} if val.any?
         # degree - not in model
         # event
         metadata[:complex_event_attributes] = get_event(node)
         # identifier - ignoring this. we have this from properties pid
-        # issued
-        val = get_text(node, 'issued')
-        desc  = DateService.new.find_by_id_or_label('Issued')['id']
-        metadata[:complex_date_attributes] << {date: val, description: desc} if val.any?
         # language
         val = get_text(node, 'language')
         metadata[:language] = val if val.any?
@@ -134,7 +135,7 @@ module Importers
         # modified - ignoring date modified for now
         # published-online
         val = get_text(node, 'published-online')
-        metadata[:complex_date_attributes] << {date: val[0], description: 'Published'} if val.any?
+        metadata[:date_published] = val[0] if val.any?
         # publishing-info
         #   publisher
         #   place - Ignoring this. Not accommodated in model

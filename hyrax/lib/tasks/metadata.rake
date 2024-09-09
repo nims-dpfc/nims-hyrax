@@ -33,23 +33,6 @@ namespace :metadata do
           end
         end
 
-        # Published date (row 24)
-        date_issued = date_published = nil
-        work.complex_date.each do |complex_date|
-          if complex_date.description.detect{ |d| complex_date.date.first if d.match(/issued/i) } && date_issued.nil?
-            date_issued = complex_date.date.first
-          end
-          if complex_date.description.detect{ |d| complex_date.date.first if d.match(/published/i) } && date_published.nil?
-            date_published = complex_date.date.first
-          end
-        end
-
-        if date_issued
-          work.date_published = date_issued
-        elsif date_published
-          work.date_published = date_published
-        end
-
         work.save!
       rescue => e
         errors << {work: work, exception: e.message, backtrace: e.backtrace}
@@ -79,23 +62,6 @@ namespace :metadata do
           if complex_person.role.detect { |r| r.match(/contact person/i) }
             work.complex_person_attributes = [complex_person.attributes.merge("corresponding_author" => ["1"])]
           end
-        end
-
-        # Published date (row 24)
-        date_issued = date_published = nil
-        work.complex_date.each do |complex_date|
-          if complex_date.description.detect{ |d| complex_date.date.first if d.match(/issued/i) } && date_issued.nil?
-            date_issued = complex_date.date.first
-          end
-          if complex_date.description.detect{ |d| complex_date.date.first if d.match(/published/i) } && date_published.nil?
-            date_published = complex_date.date.first
-          end
-        end
-
-        if date_issued
-          work.date_published = date_issued
-        elsif date_published
-          work.date_published = date_published
         end
 
         work.save!

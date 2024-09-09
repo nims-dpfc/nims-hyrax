@@ -236,40 +236,6 @@ RSpec.describe Publication do
     end
   end
 
-  describe 'complex_date' do
-    it 'creates a date active triple resource with all the attributes' do
-      @obj = build(:publication, complex_date_attributes: [
-        {
-          date: '2019-05-28',
-          description: 'Published',
-        }
-      ])
-      expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_date.first.date).to eq ['2019-05-28']
-      expect(@obj.complex_date.first.description).to eq ['Published']
-    end
-
-    it 'creates a date active triple resource with just the date' do
-      @obj = build(:publication, complex_date_attributes: [
-        {
-          date: '1984-09-01'
-        }
-      ])
-      expect(@obj.complex_date.first).to be_kind_of ActiveTriples::Resource
-      expect(@obj.complex_date.first.date).to eq ['1984-09-01']
-      expect(@obj.complex_date.first.description).to be_empty
-    end
-
-    it 'rejects a date active triple with no date' do
-      @obj = build(:publication, complex_date_attributes: [
-        {
-          description: 'Local date'
-        }
-      ])
-      expect(@obj.complex_date).to be_empty
-    end
-  end
-
   describe 'complex_identifier' do
     it 'creates an identifier active triple resource with all the attributes' do
       @obj = build(:publication,

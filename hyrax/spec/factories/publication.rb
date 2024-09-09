@@ -124,15 +124,6 @@ FactoryBot.define do
       solr_document { {} }
     end
 
-    trait :with_complex_date do
-      complex_date_attributes {
-        [{
-          date: '1978-10-28',
-          description: 'Published'
-         }]
-      }
-    end
-
     trait :with_date_published do
       date_published { '2019-05-28' }
     end

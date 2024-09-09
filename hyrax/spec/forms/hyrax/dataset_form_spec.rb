@@ -20,7 +20,7 @@ RSpec.describe Hyrax::DatasetForm do
         :licensed_date, :license_description,
         :complex_person, :complex_contact_agent, :complex_source,
         :manuscript_type,
-        :complex_event, :language, :complex_date, :complex_identifier,
+        :complex_event, :language, :complex_identifier,
         :complex_version,
         :complex_funding_reference, :complex_relation, :custom_property
         ) }
@@ -57,7 +57,6 @@ RSpec.describe Hyrax::DatasetForm do
 
     context 'permitted params' do
       it do
-        expect(described_class).to receive(:permitted_date_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_identifier_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_instrument_params).at_least(:once).and_call_original
         expect(described_class).to receive(:permitted_instrument_operator_params).at_least(:once).and_call_original

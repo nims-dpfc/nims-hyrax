@@ -108,7 +108,7 @@ module ComplexValidation
     resource_class.send(:define_method, :instrument_blank) do |attributes|
       return true if attributes.blank?
       # identifiers_blank = get_id_blank(attributes, :complex_identifier_attributes)
-      # date_blank = get_dt_blank(attributes, :complex_date_attributes)
+      # date_blank = get_dt_blank(attributes, :date_collected)
       # person_blank = get_people_blank(attributes, :complex_person_attributes)
       # date_blank || identifiers_blank || person_blank
     end

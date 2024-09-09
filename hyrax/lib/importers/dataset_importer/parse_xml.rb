@@ -133,24 +133,15 @@ module Importers
       end
 
       def get_data_history(ele)
-        parent = 'complex_date'
         # created date
         vals = get_text(ele, 'data-history/created-date-at-origin')
         if vals.any?
-          dt = {
-            date: vals[0],
-            description: 'http://purl.org/dc/terms/created'
-          }
-          assign_nested_hash(parent, dt, false)
+          @attributes[:date_created] = vals[0]
         end
         # modified date
         vals = get_text(ele, 'data-history/latest-modified-date-at-origin')
         if vals.any?
-          dt = {
-            date: vals[0],
-            description: 'http://bibframe.org/vocab/changeDate'
-          }
-          assign_nested_hash(parent, dt, false)
+          @attributes[:date_uploaded] = vals[0]
         end
         # deposit date
         vals = get_text(ele, 'data-history/deposit-to-core-date')
@@ -299,14 +290,7 @@ module Importers
 
       def get_instrument_process_date(ele, inst_hash)
         vals = get_text(ele, 'process-date')
-        if vals.any?
-          dt = {
-            date: vals[0],
-            description: 'Processed'
-          }
-          parent = 'complex_date'
-          assign_nested_hash(parent, dt, false, inst_hash)
-        end
+        inst_hash[:date_collected] = vals[0] if vals.any?
       end
 
       def get_specimen_type_persistent_identifiers(ele, st_hash)
