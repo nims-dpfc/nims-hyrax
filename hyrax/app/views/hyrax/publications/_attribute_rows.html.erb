@@ -71,7 +71,6 @@
 <% if can? :read_date, presenter.model_name.name.constantize %>
   <%= presenter.attribute_to_html(:date_created, render_as: :linked, search_field: 'date_created_tesim', html_dl: true) %>
   <%= presenter.attribute_to_html(:date_modified, label: t('hyrax.base.show.last_modified'), html_dl: true) %>
-  <%= presenter.attribute_to_html(:complex_date, render_as: :nested_date, label: t('ngdr.fields.complex_date'), html_dl: true) %>
 <% end %>
 
 <% if can? :read_funding_reference, presenter.model_name.name.constantize %>

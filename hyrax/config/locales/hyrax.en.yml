@@ -12,34 +12,6 @@ en:
           complex_computational_method_category_vocabulary_sim: Computational method category
           complex_contact_agent_ssm: Contact agent
           complex_crystallographic_structure_category_vocabulary_sim: Crystallographic structure
-          complex_date_dtsim: Date
-          complex_date_accepted_dtsim: Date accepted
-          complex_experimental_method_category_vocabulary_sim: Experimental method category
-          complex_year_accepted_sim: Date accepted
-          complex_date_available_dtsim: Date available
-          complex_year_available_sim: Date available
-          complex_date_copyrighted_dtsim: Date copyrighted
-          complex_year_copyrighted_sim: Date copyrighted
-          complex_date_collected_dtsim: Date collected
-          complex_year_collected_sim: Date collected
-          complex_date_created_dtsim: Date created
-          complex_year_created_sim: Date created
-          complex_date_issued_dtsim: Date issued
-          complex_year_issued_sim: Date issued
-          complex_date_published_dtsim: Date published
-          complex_year_published_sim: Date published
-          complex_date_submitted_dtsim: Date submitted
-          complex_year_submitted_sim: Date submitted
-          complex_date_updated_dtsim: Date updated
-          complex_year_updated_sim: Date updated
-          complex_date_valid_dtsim: Date valid
-          complex_year_valid_sim: Date valid
-          complex_date_processed_dtsim: Date processed
-          complex_year_processed_sim: Date processed
-          complex_date_purchased_dtsim: Date purchased
-          complex_year_purchased_sim: Date purchased
-          complex_date_other_dtsim: Date
-          complex_year_other_sim: Date
           complex_event_sim: Event
           complex_feature_category_vocabulary_sim: Feature category
           complex_feature_unit_vocabulary_sim: Feature unit
@@ -108,20 +80,6 @@ en:
           complex_chemical_composition_identifier_ssim: Chemical composition identifier
           complex_crystallographic_structure_tesim: Crystallographic structure
           complex_crystallographic_structure_identifier_ssim: Crystallographic structure identifier
-          complex_date_dtsim: Date
-          complex_date_accepted_dtsim: Date accepted
-          complex_date_available_dtsim: Date available
-          complex_date_copyrighted_dtsim: Date copyrighted
-          complex_date_collected_dtsim: Date collected
-          complex_date_created_dtsim: Date created
-          complex_date_issued_dtsim: Date issued
-          complex_date_published_dtsim: Date published
-          complex_date_submitted_dtsim: Date submitted
-          complex_date_updated_dtsim: Date updated
-          complex_date_valid_dtsim: Date valid
-          complex_date_processed_dtsim: Date processed
-          complex_date_purchased_dtsim: Date purchased
-          complex_date_other_dtsim: Date
           complex_material_sub_type_tesim: Material sub type
           complex_material_type_tesim: Material type
           complex_material_type_description_tesim: Material type description
@@ -197,24 +155,10 @@ en:
           characterization_methods_tesim: Characterization_methods
           computational_methods_tesim: Computational methods
           contributor_tesim: Contributor
-          complex_date_ssm: Date
           complex_computational_method_ssm: Computational method
           complex_contact_agent_ssm: Contact agent
           complex_chemical_composition: Chemical composition
           complex_crystallographic_structure_ssm: Crystallographic structure
-          complex_date_accepted_ssm: Date accepted
-          complex_date_available_ssm: Date available
-          complex_date_copyrighted_ssm: Date copyrighted
-          complex_date_collected_ssm: Date collected
-          complex_date_created_ssm: Date created
-          complex_date_issued_ssm: Date issued
-          complex_date_published_ssm: Date published
-          complex_date_submitted_ssm: Date submitted
-          complex_date_updated_ssm: Date updated
-          complex_date_valid_ssm: Date valid
-          complex_date_processed_ssm: Date processed
-          complex_date_purchased_ssm: Date purchased
-          complex_date_other_ssm: Date
           complex_event_ssm: Event
           complex_experimental_method_ssm: Experimental method
           complex_feature_ssm: Feature

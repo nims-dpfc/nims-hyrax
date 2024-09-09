@@ -25,6 +25,7 @@ module RDF
       property 'crystallographic-structure'
       property 'custom-property'
       property 'data-origin'
+      property 'date-collected'
       property 'history'
       property 'identifier'
       property 'instrument'

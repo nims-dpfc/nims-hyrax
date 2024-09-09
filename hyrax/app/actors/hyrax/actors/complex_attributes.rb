@@ -34,7 +34,6 @@ module Hyrax
           complex_identifier
           complex_rights
           complex_organization
-          complex_date
           custom_property
           complex_specimen_type
           complex_version

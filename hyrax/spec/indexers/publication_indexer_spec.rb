@@ -11,39 +11,6 @@ RSpec.describe PublicationIndexer do
     end
   end
 
-  describe 'indexes a date active triple resource with all the attributes' do
-    before do
-      dates = [
-        {
-          date: '1988-10-28',
-          description: 'http://bibframe.org/vocab/providerDate',
-        }, {
-          date: '2018-01-01'
-        }
-      ]
-      @obj = build(:publication, complex_date_attributes: dates)
-      @solr_document = @obj.to_solr
-    end
-    it 'indexes as displayable' do
-      expect(@solr_document).to include('complex_date_ssm')
-      expect(JSON.parse(@solr_document['complex_date_ssm'])).not_to be_empty
-    end
-    it 'indexes as dateable' do
-      expect(@solr_document['complex_date_dtsim']).to match_array(
-        ["1988-10-28T00:00:00Z", "2018-01-01T00:00:00Z"])
-    end
-    it 'indexes each type as sortable' do
-      skip 'this cannot be multi-valued'
-      expect(@solr_document['complex_date_submitted_dtsi']).to match_array("1988-10-28T00:00:00Z")
-    end
-    it 'indexes each type as dateable' do
-      expect(@solr_document['complex_date_submitted_dtsim']).to match_array(["1988-10-28T00:00:00Z"])
-    end
-    it 'indexes each type as displayable' do
-      expect(@solr_document['complex_date_submitted_ssm']).to match_array(["1988-10-28"])
-    end
-  end
-
   describe 'indexes an identifier active triple resource with all the attributes' do
     before do
       ids = [
