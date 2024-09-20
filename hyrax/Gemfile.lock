@@ -181,6 +181,8 @@ GEM
       mime-types (>= 1.16)
       ssrf_filter (~> 1.0, < 1.1.0)
     childprocess (3.0.0)
+    clamav-client (3.2.0)
+    clamby (1.6.11)
     cld (0.11.0)
       ffi
     clipboard-rails (1.7.1)
@@ -1039,6 +1041,8 @@ DEPENDENCIES
   byebug
   cancancan (~> 1.17)
   capybara
+  clamav-client
+  clamby
   cld
   coffee-rails (~> 4.2)
   coveralls
