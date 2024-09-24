@@ -34,7 +34,6 @@ class MdrExportService
 
   def mk_zip_file_dir
     FileUtils.mkdir_p(@work_dir)
-    puts @work_dir
   end
 
   def add_metadata
@@ -42,7 +41,6 @@ class MdrExportService
     metadata = ms.yaml_metadata
     @mdr_metadata = ms.mdr_metadata
     filepath = File.join(@work_dir, @metadata_filename)
-    puts filepath
     File.write(
       filepath, metadata, mode: 'wb'
     )
@@ -56,7 +54,6 @@ class MdrExportService
         File.open(filepath, 'wb') do |output|
           file.stream.each { |content| output.write(content) }
         end
-        puts filepath
       end
     end
   end
