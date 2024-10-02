@@ -1,4 +1,4 @@
-class MdrExportService
+class MdrExportWorkService
   attr_accessor :work, :mdr_metadata, :zip_dir, :zip_filepath
 
   class ExportException < StandardError
