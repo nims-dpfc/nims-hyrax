@@ -1,4 +1,5 @@
 require 'yaml'
+require 'cld'
 
 class MdrYamlService
   attr_accessor :mdr_metadata
@@ -41,6 +42,26 @@ class MdrYamlService
     map_created_at
     map_updated_at
     map_rights
+    map_data_origin
+    map_managing_organization
+    map_funding
+    map_related_item
+    map_filesets
+    map_thumbnail
+    map_instruments
+    map_instrument_operator
+    map_instrument_managing_org
+    map_specimens
+    map_chemical_compositions
+    map_crystallographic_structures
+    map_structural_features
+    map_experimental_methods
+    map_features
+    map_processing
+    map_computational_methods
+    map_software
+    map_energy_levels
+    map_custom_property
   end
 
   private
@@ -95,6 +116,7 @@ class MdrYamlService
       end
       identifiers.append(i_hash)
     end
+    doi = []
     doi = @work.doi.reject(&:blank?) if @work.doi.present?
     if doi.present?
       i_hash = {}
@@ -333,9 +355,9 @@ class MdrYamlService
     # manuscript_type: authors_original
     return unless @work.manuscript_type.present?
     case @work.manuscript_type.downcase.strip
-    when 'authors_original', 'under_review', 'authors_manuscript', 'proof', 'vor'
+    when 'authors_original', 'under_review', 'authors_manuscript', 'proof'
       @mdr_metadata[:manuscript_type] = @work.manuscript_type.downcase
-    when 'version of record', 'version'
+    when 'vor', 'version of record', 'version'
         @mdr_metadata[:manuscript_type] = 'vor'
     end
   end
@@ -405,6 +427,457 @@ class MdrYamlService
       end
     end
     @mdr_metadata[:rights] = mdr_rights if mdr_rights.present?
+  end
+
+  def map_data_origin
+    # data_origins:
+    # - data_origin_type: experiment
+    data_origins = []
+    @work.data_origin.reject(&:blank?).each do |d|
+      data_origin_hash = {data_origin_type: d}
+      data_origins.append(data_origin_hash)
+    end
+    @mdr_metadata[:data_origins] = data_origins if data_origins.present?
+  end
+
+  def map_managing_organization
+    # managing_organization:
+    #   ror: https://ror.org/026v1ze26
+    #   organization: NIMS
+    #   department: 統合型材料開発・情報基盤部門 材料データプラットフォームセンター 材料データ解析グループ
+    managing_orgs = []
+    # ToDo: I have not mapped department
+    #       Should I map managing organization to department and assume NIMS as organization?
+    @work.managing_organization.reject(&:blank?).each do |m|
+      managing_org_hash = {organization: m}
+      if m.downcase.strip == "National Institute for Materials Science".downcase
+        managing_org_hash[:ror] = NIMS_ROR
+      end
+      managing_orgs.append(managing_org_hash)
+    end
+    @mdr_metadata[:managing_organization] = managing_orgs if managing_orgs.present?
+  end
+
+  def map_funding
+    # fundings:
+    # - identifier: https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-21K18024/
+    #   description: データ駆動型研究のための研究データパッケージング手法の開発
+    # ToDo: Check code for description is correct
+    fundings = []
+    @work.complex_funding_reference.each do |f|
+      # Funder identifier
+      funder_id = f.funder_identifier.reject(&:blank?).first
+      # Funder name
+      descriptions = []
+      funder_name = f.funder_name.reject(&:blank?).first
+      descriptions.append(funder_name) if funder_name.present?
+      # Award number
+      award_number = f.award_number.reject(&:blank?).first
+      descriptions.append("Award number: #{award_number}") if award_number.present?
+      # Award title
+      award_title = f.award_title.reject(&:blank?).first
+      descriptions.append("Award title: #{award_title}") if award_title.present?
+      # Funder hash
+      funder_hash = {}
+      funder_hash[:identifier] = funder_id if funder_id.present?
+      funder_hash[:description] = descriptions.join(', ') if descriptions.present?
+      fundings.append(funder_hash) if funder_hash.present?
+    end
+    @mdr_metadata[:fundings] = fundings if fundings.present?
+  end
+
+  def map_related_item
+    # related_items:
+    # - relation_type: is_referenced_by - relationship
+    #   identifier: DCStag-47912828 - url
+    #   related_item_type: dataset
+    # ToDo: Have not mapped related item type. We have title, but not type
+    relationships = []
+    @work.complex_relation.each do |r|
+      # identifier
+      identifier = r.url.reject(&:blank?).first
+      # relationship
+      relationship = r.relationship.reject(&:blank?).first
+      related_item_hash = {}
+      related_item_hash[:identifier] = identifier if identifier.present?
+      related_item_hash[:relation_type] = relationship if relationship.present?
+      relationships.append(related_item_hash) if related_item_hash.present?
+    end
+    @mdr_metadata[:related_items] = relationships if relationships.present?
+  end
+
+  def map_filesets
+    # NOTE: This is repeated twice in the example yaml file
+    # filesets:
+    # - filename: example1.txt
+    # - filename: example2.png
+    # - filename: example3.zip
+    fileset_names = []
+    @work.file_sets.each do |file_set|
+      next unless file_set.original_file.present?
+      filename = CGI.unescape(file_set.original_file.file_name.first)
+      fileset_names.append({filename: filename}) if filename.present?
+    end
+    @mdr_metadata[:filesets] = fileset_names if fileset_names.present?
+  end
+
+  def map_thumbnail
+    # NOTE: This is repeated twice in the example yaml file
+    # thumbnail: example2.png
+    if @work.thumbnail.present?
+      titles = @work.thumbnail.title.reject(&:blank?)
+      @mdr_metadata[:thumbnail] = titles.first if titles.present?
+    end
+  end
+
+  def map_instruments
+    # instruments:
+    # - name: APItestInstrument2 #装置名。入力時は必須
+    #   identifier: DCStagid-46401088 # 装置ID
+    #   description: 説明2 # 装置説明
+    #   function_vocabulary: https://matvoc.nims.go.jp/wiki/Item:Q30
+    #   function_description:
+    #   manufacturer:
+    # ToDo: Check the mapping for identifier, function_category and function_description
+    instruments = []
+    @work.complex_instrument.each do |i|
+      instrument_hash = {}
+      # name
+      names = i.title.reject(&:blank?)
+      instrument_hash[:name] = names.first if names.present?
+      # identifier
+      i.complex_identifier.each do |id|
+        ids = id.identifier.reject(&:blank?)
+        instrument_hash[:identifier] = ids.first if ids.present?
+      end
+      # description
+      descriptions = i.description.reject(&:blank?)
+      instrument_hash[:description] = descriptions.first if descriptions.present?
+      # function vocabulary and function description
+      i.instrument_function.each do |inst_func|
+        categories = inst_func.category.reject(&:blank?)
+        instrument_hash[:function_vocabulary] = categories.first if categories.present?
+        descriptions = inst_func.description.reject(&:blank?)
+        instrument_hash[:function_description] = descriptions.first if descriptions.present?
+      end
+      # manufacturer
+      manufacturers = i.manufacturer.reject(&:blank?)
+      instrument_hash[:manufacturer] = manufacturers.first if manufacturers.present?
+      instruments.append(instrument_hash) if instrument_hash.present?
+    end
+    @mdr_metadata[:instruments] = instruments if instruments.present?
+  end
+
+  def map_instrument_operator
+    # instrument_operators:
+    # - name: JAEA Japan Atomic Energy Agency
+    operators = []
+    @work.complex_instrument_operator.each do |o|
+      names = o.name.reject(&:blank?)
+      operators.append({name: names.first}) if names.present?
+    end
+    @work.complex_instrument.each do |c|
+      c.complex_person.each do |p|
+        name = p.name.reject(&:blank?)
+        if name.present?
+          operators.append({name: name.first})
+        else
+          name = (p.first_name + p.last_name).reject(&:blank?).join(' ')
+          operators.append({name: name}) if name.present?
+        end
+      end
+    end
+    @mdr_metadata[:instrument_operators] = operators if operators.present?
+  end
+
+  def map_instrument_managing_org
+    # instrument_managing_organizations:
+    # - organization: JAEA Japan Atomic Energy Agency
+    managing_organizations = []
+    @work.complex_instrument.each do |c|
+      c.managing_organization.each do |m|
+        organization = m.organization.reject(&:blank?)
+        managing_organizations.append({organization: organization.first}) if organization.present?
+      end
+    end
+    @mdr_metadata[:instrument_managing_organizations] = managing_organizations if managing_organizations.present?
+  end
+
+  def map_specimens
+    # specimens:
+    # - name: A002 #試料の名前
+    #   description: NiO polycrystal film サンプル8 #試料の説明
+    #   identifier: DCStagid-47910155 #試料のID
+    specimens = []
+    @work.complex_specimen_type.each do |s|
+      specimen_hash = {}
+      # name
+      names = s.title.reject(&:blank?)
+      specimen_hash[:name] = names.first if names.present?
+      # description
+      descriptions = s.description.reject(&:blank?)
+      specimen_hash[:description] = descriptions.first if descriptions.present?
+      # identifier
+      s.complex_identifier.each do |id|
+        ids = id.identifier.reject(&:blank?)
+        specimen_hash[:identifier] = ids.first if ids.present?
+      end
+      specimens.append(specimen_hash) if specimen_hash.present?
+    end
+    @mdr_metadata[:specimens] = specimens if specimens.present?
+  end
+
+  def map_chemical_compositions
+    # chemical_compositions:
+    # - identifier: 'PubChem: 23954' #試料の化学組成に関するID
+    #   description: TiCoooo #試料の化学組成の説明・記述
+    chemical_compositions = []
+    @work.complex_chemical_composition.each do |c|
+      chemical_composition_hash = map_each_chemical_composition(c)
+      chemical_compositions.append(chemical_composition_hash) if chemical_composition_hash.present?
+    end
+    @work.complex_specimen_type.each do |s|
+      s.complex_chemical_composition.each do |c|
+        chemical_composition_hash = map_each_chemical_composition(c)
+        chemical_compositions.append(chemical_composition_hash) if chemical_composition_hash.present?
+      end
+    end
+    @mdr_metadata[:chemical_compositions] = chemical_compositions if chemical_compositions.present?
+  end
+
+  def map_each_chemical_composition(each_composition)
+    # chemical_compositions:
+    # - identifier: 'PubChem: 23954' #試料の化学組成に関するID
+    #   description: TiCoooo #試料の化学組成の説明・記述
+    chemical_composition_hash = {}
+    # description
+    descriptions = each_composition.description.reject(&:blank?)
+    chemical_composition_hash[:description] = descriptions.first if descriptions.present?
+    # identifier
+    each_composition.complex_identifier.each do |id|
+      ids = id.identifier.reject(&:blank?)
+      chemical_composition_hash[:identifier] = ids.first if ids.present?
+    end
+    chemical_composition_hash
+  end
+
+  def map_crystallographic_structures
+    # crystallographic_structures:
+    # - category_vocabulary: https://matvoc.nims.go.jp/wiki/Item:Q556 #試料の結晶構造に関するID
+    #   description: （試料の結晶構造の説明・記述
+    crystallographic_structures = []
+    @work.complex_crystallographic_structure.each do |c|
+      crystallographic_structure_h = map_each_crystallographic_structure(c)
+      crystallographic_structures.append(crystallographic_structure_h) if crystallographic_structure_h.present?
+    end
+    @work.complex_specimen_type.each do |s|
+      s.complex_crystallographic_structure.each do |c|
+        crystallographic_structure_h = map_each_crystallographic_structure(c)
+        crystallographic_structures.append(crystallographic_structure_h) if crystallographic_structure_h.present?
+      end
+    end
+    @mdr_metadata[:crystallographic_structures] = crystallographic_structures if crystallographic_structures.present?
+  end
+
+  def map_each_crystallographic_structure(each_structure)
+    # crystallographic_structures:
+    # - category_vocabulary: https://matvoc.nims.go.jp/wiki/Item:Q556 #試料の結晶構造に関するID
+    #   description: （試料の結晶構造の説明・記述）
+    structure_hash = {}
+    # category_vocabulary
+    category_vocabulary = each_structure.category_vocabulary.reject(&:blank?)
+    structure_hash[:category_vocabulary] = category_vocabulary.first if category_vocabulary.present?
+    # description
+    descriptions = each_structure.description.reject(&:blank?)
+    structure_hash[:description] = descriptions.first if descriptions.present?
+    # return
+    structure_hash
+  end
+
+  def map_structural_features
+    # structural_features:
+    # - category_vocabulary: https://matvoc.nims.go.jp/wiki/Item:Q639 #試料の構造的特徴の分類
+    #   description: （試料の構造的特徴の説明・記述
+    structural_features = []
+    @work.complex_structural_feature.each do |c|
+      structural_feature_hash = map_each_structural_features(c)
+      structural_features.append(structural_feature_hash) if structural_feature_hash.present?
+    end
+    @work.complex_specimen_type.each do |s|
+      s.complex_structural_feature.each do |c|
+        structural_feature_hash = map_each_structural_features(c)
+        structural_features.append(structural_feature_hash) if structural_feature_hash.present?
+      end
+    end
+    @mdr_metadata[:structural_features] = structural_features if structural_features.present?
+  end
+
+  def map_each_structural_features(each_feature)
+    # structural_features:
+    # - category_vocabulary: https://matvoc.nims.go.jp/wiki/Item:Q639 #試料の構造的特徴の分類
+    #   description: （試料の構造的特徴の説明・記述
+    feature_hash = {}
+    # category_vocabulary
+    category_vocabulary = each_feature.category.reject(&:blank?)
+    feature_hash[:category_vocabulary] = category_vocabulary.first if category_vocabulary.present?
+    # description
+    descriptions = each_feature.description.reject(&:blank?)
+    feature_hash[:description] = descriptions.first if descriptions.present?
+    # return
+    feature_hash
+  end
+
+  def map_experimental_methods
+    # experimental_methods:
+    # - category_vocabulary: https://matvoc.nims.go.jp/wiki/Item:Q31 # 計測法カテゴリー
+    #   category_description: spectroscopy -- x-ray absorption spectroscopy
+    #   description: 受け入れテスト20200304case3 # 標準手順？ 付記事項？
+    experimental_methods = []
+    @work.complex_experimental_method.each do |em|
+      method_hash = {}
+      # category_vocabulary
+      category_vocabulary = em.category_vocabulary.reject(&:blank?)
+      method_hash[:category_vocabulary] = category_vocabulary.first if category_vocabulary.present?
+      # category_description
+      category_descriptions = em.category_description.reject(&:blank?)
+      method_hash[:category_description] = category_descriptions.first if category_descriptions.present?
+      # description
+      descriptions = em.description.reject(&:blank?)
+      method_hash[:description] = descriptions.first if descriptions.present?
+      experimental_methods.append(method_hash) if method_hash.present?
+    end
+    @mdr_metadata[:experimental_methods] = experimental_methods if experimental_methods.present?
+  end
+
+  def map_features
+    # features:
+    # - category_vocabulary: https://matvoc.nims.go.jp/wiki/Item:Q18 # Excelに記述なし
+    #   description: 圧力 / パスカル # Excelに記述なし
+    #   value: '10'
+    features = []
+    @work.complex_feature.each do |cf|
+      feature_hash = {}
+      # category_vocabulary
+      category_vocabulary = cf.category_vocabulary.reject(&:blank?)
+      feature_hash[:category_vocabulary] = category_vocabulary.first if category_vocabulary.present?
+      # description
+      descriptions = cf.description.reject(&:blank?)
+      feature_hash[:description] = descriptions.first if descriptions.present?
+      features.append(feature_hash) if feature_hash.present?
+      # value
+      values = cf.value.reject(&:blank?)
+      feature_hash[:value] = values.first if values.present?
+      features.append(feature_hash) if feature_hash.present?
+    end
+    @mdr_metadata[:features] = features if features.present?
+  end
+
+  def map_processing
+    # processing: # 単複同形であることに注意
+    # - category_vocabulary: https://matvoc.nims.go.jp/wiki/Item:Q29
+    #   description: プロセス名
+    #   processed_at: 2015-11-04T15:00:00Z # 処理年月日
+    #   processing_environment_vocabulary: https://matvoc.nims.go.jp/wiki/Item:Q551 # 処理環境
+    #   column_number: 5 # 処理の順番
+    # ToDo: check the mappings
+    #       I have mapped category_vocabulary, description and column_number from instrument function
+    #       I have mapped processed_at from instrument
+    # ToDo: I have not mapped processing_environment_vocabulary
+    processes = []
+    @work.complex_instrument.each do |ci|
+      process_hash = {}
+      # processed_at - date_collected
+      date_collected = ci.date_collected.reject(&:blank?)
+      process_hash[:processed_at] = date_collected.first if date_collected.present?
+      ci.instrument_function.each do |cif|
+        # category_vocabulary
+        category_vocabulary = cif.category.reject(&:blank?)
+        process_hash[:category_vocabulary] = category_vocabulary.first if category_vocabulary.present?
+        # description
+        descriptions = cif.description.reject(&:blank?)
+        process_hash[:description] = descriptions.first if descriptions.present?
+        # column_number
+        column_numbers = cif.column_number.reject(&:blank?)
+        process_hash[:column_number] = column_numbers.first if column_numbers.present?
+      end
+      processes.append(process_hash) if process_hash.present?
+    end
+    @mdr_metadata[:processing] = processes if processes.present?
+  end
+
+  def map_computational_methods
+    # computational_methods:
+    # - category_vocabulary: https://matvoc.nims.go.jp/wiki/Item:Q493
+    #   description:
+    #   calculated_at: 2015-11-04T15:00:00Z # 計算日
+    methods = []
+    @work.complex_computational_method.each do |ccm|
+      method_hash = {}
+      # category_vocabulary
+      category_vocabulary = ccm.category_vocabulary.reject(&:blank?)
+      method_hash[:category_vocabulary] = category_vocabulary.first if category_vocabulary.present?
+      # description
+      descriptions = ccm.description.reject(&:blank?)
+      method_hash[:description] = descriptions.first if descriptions.present?
+      methods.append(method_hash) if method_hash.present?
+      # calculated_at
+      calculated_at = ccm.calculated_at.reject(&:blank?)
+      method_hash[:calculated_at] = calculated_at.first if calculated_at.present?
+      methods.append(method_hash) if method_hash.present?
+    end
+    @mdr_metadata[:computational_methods] = methods if methods.present?
+  end
+
+  def map_software
+    # software: # ソフトウェア
+    # - name: notepad.exe # 新規追加
+    #   version: '0.1'
+    #   identifier: https://github.com/next-l/enju_leaf
+    software = []
+    @work.complex_software.each do |cs|
+      software_hash = {}
+      # name
+      names = cs.name.reject(&:blank?)
+      software_hash[:name] = names.first if names.present?
+      # version
+      versions = cs.version.reject(&:blank?)
+      software_hash[:version] = versions.first if versions.present?
+      methods.append(software_hash) if software_hash.present?
+      # identifier
+      identifiers = cs.identifier.reject(&:blank?)
+      software_hash[:identifier] = identifiers.first if identifiers.present?
+      software.append(software_hash) if software_hash.present?
+    end
+    @mdr_metadata[:software] = software if software.present?
+  end
+
+  def map_energy_levels
+    # energy_levels: # エネルギー準位・遷移状態
+    # - category_vocabulary:
+    #   description: La L21-edge
+    # ToDo: Which property should this be mapped from?
+  end
+
+  def map_custom_property
+    # custom_properties: # 独自追加項目
+    # - name: 独自項目1
+    #   value: 独自の値
+    # - name: 独自項目2
+    #   value: ABCDE
+    #   identifier: https://example.com
+    properties = []
+    @work.custom_property.each do |cupr|
+      names = cupr.label.reject(&:blank?)
+      values = cupr.description.reject(&:blank?)
+      if names.present? and values.present?
+        property_hash = {
+          name: names.first,
+          value: values.first
+        }
+        properties.append(property_hash)
+      end
+      @mdr_metadata[:custom_properties] = properties if properties.present?
+    end
   end
 
   def get_language_code(val)

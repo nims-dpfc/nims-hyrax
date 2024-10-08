@@ -49,10 +49,10 @@ class MdrExportWorkService
   def add_files
     @work.file_sets.each do |file_set|
       next if file_set.original_file.blank?
-      file_set.original_file.tap do |file|
-        filepath = File.join(@work_dir, CGI.unescape(file_set.original_file.file_name.first))
+      file_set.original_file.tap do |original_file|
+        filepath = File.join(@work_dir, CGI.unescape(original_file.file_name.first))
         File.open(filepath, 'wb') do |output|
-          file.stream.each { |content| output.write(content) }
+          original_file.stream.each { |content| output.write(content) }
         end
       end
     end
