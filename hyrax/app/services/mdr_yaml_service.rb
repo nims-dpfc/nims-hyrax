@@ -139,6 +139,8 @@ class MdrYamlService
     else
       @mdr_metadata[:resource_type] = 'Other'
     end
+
+    @mdr_metadata[:resource_type].downcase
   end
 
   def map_descriptions
@@ -149,7 +151,7 @@ class MdrYamlService
     (@work.description + @work.abstract).each do |d|
       next unless d.present?
       d_hash = {
-        identifier: d,
+        description: d,
         lang: get_language_code(d)
       }
       descriptions.append(d_hash)
@@ -277,17 +279,15 @@ class MdrYamlService
     # publisher:
     #   organization: NIMS
     #   ror: https://ror.org/026v1ze26
-    publishers = []
+    publisher_hash = {}
     publisher = @work.publisher.reject(&:blank?)
     if publisher.present?
-      publisher_hash = {}
       publisher_hash[:organization] = publisher.first
       if publisher.first.downcase.strip == "National Institute for Materials Science".downcase
         publisher_hash[:ror] = NIMS_ROR
       end
-      publishers.append(publisher_hash)
     end
-    @mdr_metadata[:publisher] = publishers if publishers.present?
+    @mdr_metadata[:publisher] = publisher_hash if publisher_hash.present?
   end
 
   def map_date_published_and_state
@@ -295,20 +295,20 @@ class MdrYamlService
     # state: published
     published = false
     if @work.date_published.present?
-      @mdr_metadata[:date_published] = @work.date_published
+      @mdr_metadata[:date_published] = Date.parse(@work.date_published).to_s
       @mdr_metadata[:state] = "published"
       published = true
     else
       #ToDo: Check if this is needed. Published is not in dates.yml
-      @work.complex_date.each do |complex_date|
-        dt = complex_date.date.reject(&:blank?)
-        typ = complex_date.description.reject(&:blank?)
-        if dt.present? and typ.include?('Published')
-          @mdr_metadata[:date_published] = dt.first
-          @mdr_metadata[:state] = "published"
-          published = true
-        end
-      end
+      #@work.complex_date.each do |complex_date|
+      #  dt = complex_date.date.reject(&:blank?)
+      #  typ = complex_date.description.reject(&:blank?)
+      #  if dt.present? and typ.include?('Published')
+      #    @mdr_metadata[:date_published] = dt.first
+      #    @mdr_metadata[:state] = "published"
+      #    published = true
+      #  end
+      #end
     end
     # ToDo: What should be the state if not published
     # @mdr2_metadata[:state] = "unpublsihed" unless published
@@ -528,7 +528,7 @@ class MdrYamlService
     # thumbnail: example2.png
     if @work.thumbnail.present?
       titles = @work.thumbnail.title.reject(&:blank?)
-      @mdr_metadata[:thumbnail] = titles.first if titles.present?
+      @mdr_metadata[:thumbnail] = {filename: titles.first} if titles.present?
     end
   end
 
