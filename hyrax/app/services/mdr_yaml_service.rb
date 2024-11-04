@@ -294,7 +294,14 @@ class MdrYamlService
     # state: published
     published = false
     if @work.date_published.present?
-      @mdr_metadata[:date_published] = Date.parse(@work.date_published).to_s
+      date_published = nil
+      begin
+        date_published = Date.parse(@work.date_published).to_s
+      rescue
+        date_published = @work.date_published
+      end
+      @mdr_metadata[:date_published] = date_published
+
       @mdr_metadata[:state] = "published"
       published = true
     else
