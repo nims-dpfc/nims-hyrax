@@ -118,8 +118,7 @@ class MdrYamlService
       end
       identifiers.append(i_hash)
     end
-    doi = []
-    doi = @work.doi.reject(&:blank?) if @work.doi.present?
+    doi = @work.doi if @work.doi.present?
     if doi.present?
       i_hash = {}
       i_hash[:identifier] =  doi.first
