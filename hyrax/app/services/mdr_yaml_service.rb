@@ -42,26 +42,28 @@ class MdrYamlService
     map_created_at
     map_updated_at
     map_rights
-    map_data_origin
-    map_managing_organization
     map_funding
     map_related_item
     map_filesets
     map_thumbnail
-    map_instruments
-    map_instrument_operator
-    map_instrument_managing_org
-    map_specimens
-    map_chemical_compositions
-    map_crystallographic_structures
-    map_structural_features
-    map_experimental_methods
-    map_features
-    map_processing
-    map_computational_methods
-    map_software
-    map_energy_levels
-    map_custom_property
+    if is_a?(Dataset)
+      map_data_origin
+      map_managing_organization
+      map_instruments
+      map_instrument_operator
+      map_instrument_managing_org
+      map_specimens
+      map_chemical_compositions
+      map_crystallographic_structures
+      map_structural_features
+      map_experimental_methods
+      map_features
+      map_processing
+      map_computational_methods
+      map_software
+      map_energy_levels
+      map_custom_property
+    end
   end
 
   private
