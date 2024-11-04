@@ -118,13 +118,6 @@ class MdrYamlService
       end
       identifiers.append(i_hash)
     end
-    doi = @work.doi if @work.doi.present?
-    if doi.present?
-      i_hash = {}
-      i_hash[:identifier] =  doi.first
-      i_hash[:type] = 'DOI'
-      identifiers.append(i_hash)
-    end
     @mdr_metadata[:identifiers] = identifiers if identifiers.present?
   end
 
@@ -134,12 +127,10 @@ class MdrYamlService
     resource_type = @work.resource_type.reject(&:blank?)
     case resource_type.first
     when 'Article', 'Dataset', 'Report', 'Presentation'
-      @mdr_metadata[:resource_type] = resource_type.first
+      @mdr_metadata[:resource_type] = resource_type.first.downcase
     else
-      @mdr_metadata[:resource_type] = 'Other'
+      @mdr_metadata[:resource_type] = 'Other'.downcase
     end
-
-    @mdr_metadata[:resource_type].downcase
   end
 
   def map_descriptions
