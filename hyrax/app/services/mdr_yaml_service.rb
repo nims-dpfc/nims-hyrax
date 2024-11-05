@@ -114,7 +114,7 @@ class MdrYamlService
       schemes = i.scheme.reject(&:blank?)
       if ids.present?
         i_hash[:identifier] = ids.first
-        i_hash[:type] = schemes.first if schemes.present?
+        i_hash[:identifier_type] = schemes.first if schemes.present?
       end
       identifiers.append(i_hash)
     end
@@ -210,7 +210,7 @@ class MdrYamlService
       if role.present? and role.first.present?
         person_hash[:role] = role.first.downcase
       else
-        person_hash[:role] = 'creator'
+        person_hash[:role] = 'author'
       end
       # organization and ror (for NIMS)
       organization = c.organization.reject(&:blank?)
