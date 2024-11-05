@@ -129,7 +129,7 @@ class MdrYamlService
     when 'Article', 'Dataset', 'Report', 'Presentation'
       @mdr_metadata[:resource_type] = resource_type.first.downcase
     else
-      @mdr_metadata[:resource_type] = 'Other'.downcase
+      @mdr_metadata[:resource_type] = 'other'
     end
   end
 
@@ -208,9 +208,9 @@ class MdrYamlService
       end
       # role
       if role.present? and role.first.present?
-        person_hash[:role] = role.first
+        person_hash[:role] = role.first.downcase
       else
-        person_hash[:role] = 'Creator'
+        person_hash[:role] = 'creator'
       end
       # organization and ror (for NIMS)
       organization = c.organization.reject(&:blank?)
