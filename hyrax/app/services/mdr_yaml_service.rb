@@ -287,7 +287,7 @@ class MdrYamlService
     if @work.date_published.present?
       date_published = nil
       begin
-        date_published = Date.parse(@work.date_published).to_s
+        date_published = Date.parse(@work.date_published).strftime('%Y-%m-%d')
       rescue
         date_published = @work.date_published
       end
