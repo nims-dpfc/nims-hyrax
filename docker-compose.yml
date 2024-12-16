@@ -117,6 +117,7 @@ services:
       args:
         RAILS_ENV: ${RAILS_ENV}
         UPLOADS_PATH: ${UPLOADS_PATH}
+        DOWNLOADS_PATH: ${DOWNLOADS_PATH}
         DERIVATIVES_PATH: ${DERIVATIVES_PATH}
         CACHE_PATH: ${CACHE_PATH}
         FITS_PATH: ${FITS_PATH}
@@ -126,6 +127,7 @@ services:
     volumes:
       - app:${UPLOADS_PATH}
       - app:${DERIVATIVES_PATH}
+      - app:${DOWNLOADS_PATH}
       - app:${CACHE_PATH}
       - app:${BRAND_PATH}
     networks:

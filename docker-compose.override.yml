@@ -9,6 +9,7 @@ version: '3'
 
 volumes:
   file_uploads:
+  file_downloads:
   derivatives:
   cache:
   fcrepo:
@@ -39,8 +40,10 @@ services:
       - 3000:3000
     environment:
       - RAILS_FORCE_SSL=false
+    command: bash -c "/bin/docker-entrypoint.sh"
     volumes:
       - file_uploads:${UPLOADS_PATH}
+      - file_downloads:${DOWNLOADS_PATH}
       - derivatives:${DERIVATIVES_PATH}
       - cache:${CACHE_PATH}
       - ${HOST_APP_DATA_PATH:-/srv/ngdr/data/}:/data/data
@@ -54,6 +57,7 @@ services:
   workers:
     volumes:
       - file_uploads:${UPLOADS_PATH}
+      - file_downloads:${DOWNLOADS_PATH}
       - derivatives:${DERIVATIVES_PATH}
       - cache:${CACHE_PATH}
       - ${HOST_APP_DATA_PATH:-/srv/ngdr/data/}:/data/data
