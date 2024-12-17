@@ -1,3 +1,4 @@
+require 'csv'
 class WorksReportJob < Hyrax::ApplicationJob
   def perform(from_date, to_date, work_id: nil)
     if work_id.present?
@@ -43,6 +44,7 @@ class WorksReportJob < Hyrax::ApplicationJob
         work_uri = "#{ENV.fetch("CAS_BASE_URL")}concern/#{work_type.pluralize}/#{work['id']}"
         publish_year = work["date_published_tesim"].present? ? Date.strptime(work["date_published_tesim"][0], "%d/%m/%Y").year : "0001"
         total_events = Hyrax::Analytics.total_events_for_id(work['id'], "work-view", "#{start_date_of_month.strftime("%d/%m/%Y")},#{end_date_of_month.strftime("%d/%m/%Y")}")
+        total_downloads = Hyrax::Analytics.total_events_for_id(work['id'], "file-set-in-work-download", "#{start_date_of_month.strftime("%d/%m/%Y")},#{end_date_of_month.strftime("%d/%m/%Y")}")
 
         data_row = [work['id'],
                     publishers,
@@ -61,7 +63,7 @@ class WorksReportJob < Hyrax::ApplicationJob
                     "Open",
                     "Regular",
                     total_events,
-                    total_events,
+                    total_downloads,
                     "#{month}-#{year}"]
         row << data_row
       end
@@ -69,7 +71,7 @@ class WorksReportJob < Hyrax::ApplicationJob
   end
 
   def csv_header
-    ["Item", "Publisher", "Authors", "Publication_Date", "Article_Version", "DOI", "Proprietary_ID", "ISBN", "Print_ISSN", "Online_ISSN", "URI", "Title", "Data_Type", "YOP", "Access_Type", "Access_Method", "Total_Item_Requests", "Unique_Item_Requests", "Reporting period"]
+    ["Item", "Publisher", "Authors", "Publication_Date", "Article_Version", "DOI", "Proprietary_ID", "ISBN", "Print_ISSN", "Online_ISSN", "URI", "Title", "Data_Type", "YOP", "Access_Type", "Access_Method", "Total_Item_Requests", "Total_Downloads_For_Item", "Reporting period"]
   end
 
   def public_work
