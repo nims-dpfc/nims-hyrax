@@ -11,6 +11,7 @@ class WorksReportJob < Hyrax::ApplicationJob
 
 
   def prepare_data(work, from_date, to_date)
+    work = work.to_solr unless work.is_a?(Hash)
     start_date = Date.strptime(from_date, "%Y-%m")
     end_date = Date.strptime(to_date, "%Y-%m")
     current_date = start_date
@@ -41,7 +42,7 @@ class WorksReportJob < Hyrax::ApplicationJob
         publishers = work['publisher_tesim'].present? ? work['publisher_tesim'].join(",") : ""
         work_uri = "#{ENV.fetch("CAS_BASE_URL")}concern/#{work_type.pluralize}/#{work['id']}"
         publish_year = work["date_published_tesim"].present? ? Date.strptime(work["date_published_tesim"][0], "%d/%m/%Y").year : "0001"
-
+        total_events = Hyrax::Analytics.total_events_for_id(work['id'], "work-view", "#{start_date_of_month.strftime("%d/%m/%Y")},#{end_date_of_month.strftime("%d/%m/%Y")}")
 
         data_row = [work['id'],
                     publishers,
@@ -59,8 +60,8 @@ class WorksReportJob < Hyrax::ApplicationJob
                     publish_year,
                     "Open",
                     "Regular",
-                    "",
-                    "",
+                    total_events,
+                    total_events,
                     "#{month}-#{year}"]
         row << data_row
       end

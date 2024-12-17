@@ -1,3 +1,5 @@
+# To run this task For all works: rake ngdr:generate_works_report:all'[from_date, to_date]'
+# To run this task for sigle work : rake ngdr:generate_works_report:for_work'[work_id, from_date, to_date]'
 namespace :ngdr do
   namespace :generate_works_report do
     desc "Generating works report"
