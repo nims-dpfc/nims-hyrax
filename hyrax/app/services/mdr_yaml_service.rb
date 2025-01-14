@@ -508,16 +508,25 @@ class MdrYamlService
   def map_filesets
     # NOTE: This is repeated twice in the example yaml file
     # filesets:
-    # - filename: example1.txt
-    # - filename: example2.png
-    # - filename: example3.zip
-    fileset_names = []
+    # - id:
+    #   title:
+    #   filename:
+    #   mime_type:
+    #   size:
+    #   original_checksum:
+    filesets = []
     @work.file_sets.each do |file_set|
       next unless file_set.original_file.present?
-      filename = CGI.unescape(file_set.original_file.file_name.first)
-      fileset_names.append({filename: filename}) if filename.present?
+      file_set_hash = {}
+      file_set_hash[:id] = file_set.id
+      file_set_hash[:title] = file_set.title&.first
+      file_set_hash[:filename] = CGI.unescape(file_set.original_file.file_name.first)
+      file_set_hash[:mime_type] = file_set.mime_type
+      file_set_hash[:file_size] = file_set.file_size&.first
+      file_set_hash[:original_checksum] = file_set.original_checksum&.first
+      filesets.append(file_set_hash) if file_set_hash.present?
     end
-    @mdr_metadata[:filesets] = fileset_names if fileset_names.present?
+    @mdr_metadata[:filesets] = filesets if filesets.present?
   end
 
   def map_thumbnail
