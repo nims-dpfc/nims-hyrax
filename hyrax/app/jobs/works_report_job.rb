@@ -42,16 +42,20 @@ class WorksReportJob < Hyrax::ApplicationJob
         authors = work["complex_person_tesim"].present? ? work["complex_person_tesim"].join('|') : ""
         publishers = work['publisher_tesim'].present? ? work['publisher_tesim'].join(",") : ""
         work_uri = "#{ENV.fetch("CAS_BASE_URL")}concern/#{work_type.pluralize}/#{work['id']}"
-        publish_year = work["date_published_tesim"].present? ? Date.strptime(work["date_published_tesim"][0], "%d/%m/%Y").year : "0001"
+        begin
+          publish_year = work["date_published_tesim"].present? ? Date.strptime(work["date_published_tesim"][0], "%d/%m/%Y").year : "0001"
+        rescue
+          publish_year = "0001"
+        end
         total_events = Hyrax::Analytics.total_events_for_id(work['id'], "work-view", "#{start_date_of_month.strftime("%d/%m/%Y")},#{end_date_of_month.strftime("%d/%m/%Y")}")
         total_downloads = Hyrax::Analytics.total_events_for_id(work['id'], "file-set-in-work-download", "#{start_date_of_month.strftime("%d/%m/%Y")},#{end_date_of_month.strftime("%d/%m/%Y")}")
 
         data_row = [work['id'],
                     publishers,
                     authors,
-                    work["date_published_tesim"][0] || "",
+                    work["date_published_tesim"]&.first || "",
                     work["manuscript_type_tesim"] || "",
-                    work["doi_tesim"] || "",
+                    work["doi_tesim"]&.first || "",
                     work['id'],
                     "",
                     "",
