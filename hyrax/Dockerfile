@@ -1,4 +1,4 @@
-FROM ruby:2.7.8-buster
+FROM ruby:2.7.8-bullseye
 
 # Setup build variables
 ARG RAILS_ENV
@@ -24,6 +24,9 @@ RUN apt-get update -qq && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+    install -d /usr/share/postgresql-common/pgdg && \
+    curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc && \
+    echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt bullseye-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
     apt-get update -qq && apt-get install -y --no-install-recommends \
     libpq-dev \
     libxml2-dev libxslt1-dev \
@@ -40,12 +43,12 @@ RUN apt-get update -qq && \
     libtiffxx5 \
     libltdl-dev \
     ghostscript ffmpeg cifs-utils keyutils \
-    ufraw \
+    # ufraw \
     bzip2 unzip xz-utils \
     vim \
     git \
     openjdk-11-jre-headless \
-    postgresql-client \
+    postgresql-client-16 \
     yarn && \
     yarn config set no-progress && \
     yarn config set silent
