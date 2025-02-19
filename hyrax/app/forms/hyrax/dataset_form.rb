@@ -35,8 +35,7 @@ module Hyrax
       :complex_contact_agent,
       :complex_source, :manuscript_type, 
       :complex_event,
-      :language, 
-      :complex_date,
+      :language,
       :complex_identifier, 
       :complex_version,
       :complex_funding_reference,
@@ -99,7 +98,6 @@ module Hyrax
         :complex_source, :manuscript_type,
         :complex_event,
         :language,
-        :complex_date, 
         :complex_identifier, 
         :complex_version,
         :complex_funding_reference,
@@ -133,7 +131,7 @@ module Hyrax
       [ :complex_chemical_composition, :complex_specimen_type, :complex_structural_feature, :complex_crystallographic_structure ]
     end
 
-    NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier, :complex_instrument,
+    NESTED_ASSOCIATIONS = [:complex_identifier, :complex_instrument,
       :complex_organization, :complex_person, :complex_relation, :complex_event,
       :complex_funding_reference, :complex_contact_agent, :complex_chemical_composition,
       :complex_crystallographic_structure,
@@ -157,16 +155,6 @@ module Hyrax
        :_destroy,
        {
          label: [],
-         description: []
-       }
-      ]
-    end
-
-    def self.permitted_date_params
-      [:id,
-       :_destroy,
-       {
-         date: [],
          description: []
        }
       ]
@@ -223,7 +211,7 @@ module Hyrax
        :_destroy,
        {
          alternative_title: [],
-         complex_date_attributes: permitted_date_params,
+         date_collected: [],
          description: [],
          complex_identifier_attributes: permitted_identifier_params,
          instrument_function_attributes: permitted_instrument_function_params,
@@ -489,7 +477,6 @@ module Hyrax
 
     def self.build_permitted_params
       permitted = super
-      permitted << { complex_date_attributes: permitted_date_params }
       permitted << :licensed_date
       permitted << :license_description
       permitted << { complex_identifier_attributes: permitted_identifier_params }

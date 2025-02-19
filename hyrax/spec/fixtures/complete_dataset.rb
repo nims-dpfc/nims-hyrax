@@ -4,6 +4,7 @@ dataset_attributes = {
   keyword: ['keyword 1', 'keyword 2'],
   language: ['language 1'],
   publisher: ['publisher 1'],
+  date_published: '1978-10-28',
   complex_rights_attributes: [{
     date: '1978-10-28',
     rights: 'CC0'
@@ -12,10 +13,6 @@ dataset_attributes = {
   source: ['Source 1'],
   subject: ['subject 1'],
   alternate_title: 'Alternative Title',
-  complex_date_attributes: [{
-    date: '1978-10-28',
-    description: 'http://purl.org/dc/terms/issued',
-  }],
   complex_identifier_attributes: [{
     identifier: '10.0.0132132',
     scheme: 'http://dx.doi.org',
@@ -42,10 +39,7 @@ dataset_attributes = {
   data_origin: ['informatics and data science'],
   complex_instrument_attributes: [{
     alternative_title: 'An instrument title',
-    complex_date_attributes: [{
-      date: ['2018-02-14'],
-      description: 'Processed'
-    }],
+    date_collected: '2018-02-14',
     description: 'Instrument description',
     complex_identifier_attributes: [{
       identifier: ['123456'],

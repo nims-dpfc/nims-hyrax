@@ -1,5 +1,5 @@
 #
-# To integrate your app with Google Analytics, uncomment the lines below and add your API key information.
+# You can manually fill in these values or use the ENV variables.
 #
 analytics:
   ga4:

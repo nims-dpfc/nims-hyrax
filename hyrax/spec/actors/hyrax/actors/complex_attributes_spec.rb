@@ -40,7 +40,7 @@ RSpec.describe Hyrax::Actors::ComplexAttributes do
 
   describe '#complex_attributes' do
     subject { test.complex_attributes }
-    it { is_expected.to match_array(%w[complex_person complex_identifier complex_rights complex_organization complex_date custom_property
+    it { is_expected.to match_array(%w[complex_person complex_identifier complex_rights complex_organization custom_property
             complex_specimen_type complex_version complex_relation
             complex_instrument complex_instrument_operator complex_affiliation manufacturer
             supplier custom_property complex_structural_feature complex_state_of_matter complex_shape complex_purchase_record

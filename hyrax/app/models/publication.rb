@@ -47,8 +47,6 @@ class Publication < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :complex_date, predicate: ::RDF::Vocab::DC.date, class_name: 'ComplexDate'
-
   property :complex_identifier, predicate: ::RDF::Vocab::NimsRdp.identifier, class_name: 'ComplexIdentifier'
 
   property :complex_person, predicate: ::RDF::Vocab::SIOC.has_creator, class_name: 'ComplexPerson'
@@ -59,9 +57,6 @@ class Publication < ActiveFedora::Base
   property :complex_rights, predicate: ::RDF::Vocab::DC11.rights, class_name: 'ComplexRights'
 
   property :complex_version, predicate: ::RDF::Vocab::NimsRdp.version, class_name: 'ComplexVersion'
-
-  # NGDR Hyrax Work Publication MVP
-  # Note: all date fields are covered by complex_date in Hyrax Work Common above
 
   property :complex_event, predicate: ::RDF::Vocab::ESciDocPublication.event, class_name: 'ComplexEvent'
 
@@ -146,7 +141,6 @@ class Publication < ActiveFedora::Base
   include ::Hyrax::BasicMetadata
   include ComplexValidation
   include OrderedFields
-  accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   # accepts_nested_attributes_for :complex_license, reject_if: :license_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_person, reject_if: :person_blank, allow_destroy: true

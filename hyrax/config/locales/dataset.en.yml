@@ -18,7 +18,6 @@ en:
         complex_computational_method:     "Computational method"
         complex_contact_agent:            "Contact agent"
         complex_crystallographic_structure: "Crystallographic structure"
-        complex_date:                     "Other Date"
         complex_event:                    "Conference/Event"
         complex_experimental_method:      "Experimental method"
         complex_feature:                  "Feature"

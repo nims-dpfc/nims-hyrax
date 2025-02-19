@@ -54,7 +54,6 @@ module Hyrax
           'manuscript_type': {function: 'jpcoar_manuscript_type'},
           'complex_event': {function: 'jpcoar_complex_event'},
           'dc:language': 'language_tesim',
-          'complex_date': {function: 'jpcoar_complex_date'},
           'complex_identifier': {function: 'jpcoar_complex_identifier'},
           'complex_version': {function: 'jpcoar_complex_version'},
           'complex_relation': {function: 'jpcoar_complex_relation'},

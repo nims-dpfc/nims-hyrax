@@ -50,8 +50,8 @@ module Importers
         # issued
         val = get_issued(image)
         if val.any?
-          metadata[:complex_date_attributes] ||= []
-          metadata[:complex_date_attributes] << val
+          metadata[:date_uploaded] ||= []
+          metadata[:date_uploaded] << val[:date]
         end
         # visibility
         val = get_visibility(image)

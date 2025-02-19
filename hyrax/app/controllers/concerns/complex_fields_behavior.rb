@@ -107,15 +107,6 @@ module ComplexFieldsBehavior
           end
         end
       end
-      if complex_instrument['complex_date_attributes'].present?
-        complex_instrument['complex_date_attributes'].each_with_index do |complex_date, i|
-          if complex_date.present?
-            if complex_date['date'].blank? && complex_date['description'].include?('Processed')
-              attribute['complex_instrument_attributes'][index]['complex_date_attributes'].delete_at(i)
-            end
-          end
-        end
-      end
     end
     # complex_specimen_type
     attribute['complex_specimen_type_attributes'].each_with_index do |complex_specimen_type, index|

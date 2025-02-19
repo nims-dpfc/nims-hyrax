@@ -2,7 +2,6 @@
 #  `rails generate hyrax:work Publication`
 class PublicationIndexer < NgdrIndexer
   # Custom indexers for publication model
-  include ComplexField::DateIndexer
   include ComplexField::IdentifierIndexer
   include ComplexField::CustomPropertyIndexer
   include ComplexField::PersonIndexer
@@ -18,7 +17,6 @@ class PublicationIndexer < NgdrIndexer
     super.tap do |fields|
       fields << Solrizer.solr_name('specimen_set', :facetable)
       fields << Solrizer.solr_name('place', :facetable)
-      fields.concat ComplexField::DateIndexer.date_facet_fields
       fields.concat ComplexField::PersonIndexer.person_facet_fields
       fields.concat ComplexField::RightsIndexer.rights_facet_fields
       fields.concat ComplexField::EventIndexer.event_facet_fields
@@ -35,7 +33,6 @@ class PublicationIndexer < NgdrIndexer
       fields << Solrizer.solr_name('table_of_contents', :stored_searchable)
       fields << Solrizer.solr_name('first_published_url', :stored_searchable)
       fields << Solrizer.solr_name('doi', :stored_searchable)
-      fields.concat ComplexField::DateIndexer.date_search_fields
       fields.concat ComplexField::CustomPropertyIndexer.custom_property_search_fields
       fields.concat ComplexField::IdentifierIndexer.identifier_search_fields
       fields.concat ComplexField::PersonIndexer.person_search_fields
@@ -52,7 +49,6 @@ class PublicationIndexer < NgdrIndexer
       fields << Solrizer.solr_name('issue', :stored_searchable)
       fields << Solrizer.solr_name('place', :stored_searchable)
       fields << Solrizer.solr_name('table_of_contents', :stored_searchable)
-      fields.concat ComplexField::DateIndexer.date_show_fields
       fields.concat ComplexField::CustomPropertyIndexer.custom_property_show_fields
       fields.concat ComplexField::IdentifierIndexer.identifier_show_fields
       fields.concat ComplexField::PersonIndexer.person_show_fields

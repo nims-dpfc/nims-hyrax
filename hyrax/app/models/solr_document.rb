@@ -52,10 +52,6 @@ class SolrDocument
     self[Solrizer.solr_name('date_published', :stored_searchable)]
   end
 
-  def complex_date
-    self[Solrizer.solr_name('complex_date', :displayable)]
-  end
-
   def complex_identifier
     self[Solrizer.solr_name('complex_identifier', :displayable)]
   end

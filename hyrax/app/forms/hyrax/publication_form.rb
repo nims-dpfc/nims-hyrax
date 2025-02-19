@@ -33,8 +33,7 @@ module Hyrax
       :complex_contact_agent,
       :complex_source, :manuscript_type,
       :complex_event, 
-      :language, 
-      :complex_date, 
+      :language,
       :complex_identifier,
       :complex_version,
       :complex_funding_reference,
@@ -70,8 +69,7 @@ module Hyrax
         :complex_contact_agent,
         :complex_source, :manuscript_type, 
         :complex_event,
-        :language, 
-        :complex_date, 
+        :language,
         :complex_identifier,
         :complex_version,
         :complex_funding_reference,
@@ -80,7 +78,7 @@ module Hyrax
       ]
     end
 
-    NESTED_ASSOCIATIONS = [:complex_date, :complex_identifier,
+    NESTED_ASSOCIATIONS = [:complex_identifier,
       :complex_person, :complex_version, :complex_funding_reference,
       :complex_event, :complex_source, :complex_contact_agent
     ].freeze
@@ -102,16 +100,6 @@ module Hyrax
        :_destroy,
        {
          label: [],
-         description: []
-       }
-      ]
-    end
-
-    def self.permitted_date_params
-      [:id,
-       :_destroy,
-       {
-         date: [],
          description: []
        }
       ]
@@ -252,7 +240,6 @@ module Hyrax
 
     def self.build_permitted_params
       permitted = super
-      permitted << { complex_date_attributes: permitted_date_params }
       permitted << :licensed_date
       permitted << :license_description
       permitted << { complex_identifier_attributes: permitted_identifier_params }

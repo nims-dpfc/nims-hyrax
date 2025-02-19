@@ -17,9 +17,7 @@ RSpec.describe NestedInstrumentInput, type: :input do
   it 'generates the correct fields' do
     is_expected.to have_field('dataset_instrument_attributes_0_title', type: :text, with: 'Instrument title')
     is_expected.to have_field('dataset_instrument_attributes_0_alternative_title', type: :text, with: 'An instrument title')
-
-    is_expected.to have_select('dataset[instrument_attributes][0]_complex_date_attributes_0_description', selected: 'Collected')
-    is_expected.to have_field('dataset[instrument_attributes][0]_complex_date_attributes_0_date', type: :text, with: '2018-02-14')
+    is_expected.to have_field('dataset_instrument_attributes_0_date_collected', type: :text, with: '2018-02-14')
 
     is_expected.to have_field('dataset_instrument_attributes_0_description', type: :text, with: 'Instrument description')
 

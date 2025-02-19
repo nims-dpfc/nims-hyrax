@@ -320,36 +320,6 @@ module Metadata
       end
     end
 
-    def jpcoar_complex_date(_field, xml)
-      return if complex_date.blank? or Array.wrap(complex_date)[0].blank?
-      # datacite:date@dateType="[(JPCOAR vocabulary)]" See Other date sheet
-      # language attribute: FALSE
-      complex_date_map = {
-        'http://purl.org/dc/terms/dateAccepted' => 'Accepted',
-        'Available' => 'Available',
-        'http://bibframe.org/vocab/copyrightDate' => 'Copyrighted',
-        'Collected' => 'Collected',
-        'http://purl.org/dc/terms/created' => 'Created',
-        'http://bibframe.org/vocab/providerDate' => 'Submitted',
-        'http://bibframe.org/vocab/changeDate' => 'Updated',
-      }
-
-      dates = JSON.parse(Array.wrap(complex_date)[0])
-      dates.each do |date_val|
-        label = nil
-        if date_val.dig('description').present? and date_val['description'][0].present? and complex_date_map.include?(date_val['description'][0])
-          label = complex_date_map[date_val['description'][0]]
-        end
-        val = nil
-        if date_val.dig('date').present? and date_val['date'][0].present?
-          val = date_val['date'][0]
-        end
-        if label.present? and val.present?
-          xml.tag!('datacite:date', val, 'dateType' => label)
-        end
-      end
-    end
-
     def jpcoar_complex_identifier(_field, xml)
       return if complex_identifier.blank? or Array.wrap(complex_identifier)[0].blank?
       # jpcoar:identifier@identifierType="DOI"

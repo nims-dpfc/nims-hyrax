@@ -265,15 +265,6 @@ FactoryBot.define do
       }
     end
 
-    trait :with_complex_date do
-      complex_date_attributes {
-        [{
-          date: '1978-10-28',
-          description: 'Collected'
-         }]
-      }
-    end
-
     trait :with_date_published do
       date_published { '1978-10-28' }
     end
@@ -291,10 +282,7 @@ FactoryBot.define do
       complex_instrument_attributes {
         [{
           alternative_title: 'An instrument title',
-          complex_date_attributes: [{
-            date: '2018-02-14',
-            description: 'Collected'
-          }],
+          date_collected: '2018-02-14',
           description: 'Instrument description',
           complex_identifier_attributes: [{
             identifier: 'instrument/27213727',

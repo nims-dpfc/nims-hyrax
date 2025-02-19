@@ -41,8 +41,6 @@ class Dataset < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :complex_date, predicate: ::RDF::Vocab::DC.date, class_name:"ComplexDate"
-
   property :complex_identifier, predicate: ::RDF::Vocab::NimsRdp.identifier, class_name:"ComplexIdentifier"
 
   property :complex_person, predicate: ::RDF::Vocab::SIOC.has_creator, class_name:"ComplexPerson"
@@ -184,7 +182,6 @@ class Dataset < ActiveFedora::Base
   include ::Hyrax::BasicMetadata
   include ComplexValidation
   include OrderedFields
-  accepts_nested_attributes_for :complex_date, reject_if: :date_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_identifier, reject_if: :identifier_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_instrument, reject_if: :instrument_blank, allow_destroy: true
   accepts_nested_attributes_for :complex_instrument_operator, reject_if: :person_blank, allow_destroy: true

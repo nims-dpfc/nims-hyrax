@@ -4,14 +4,13 @@ RSpec.describe SolrDocument do
   let(:model) do
     build(:dataset,
       alternate_title: 'Alternative Title',
-      complex_date_attributes: [{ date: ['2018-02-14'], description: 'Published Date' }],
       date_published: '2018-02-14',
       complex_identifier_attributes: [{ identifier: ['123456'], label: ['Local'] }],
       complex_instrument_attributes: [{
-        complex_date_attributes: [{ date: ['2018-01-28'] }],
         complex_identifier_attributes: [{ identifier: ['ewfqwefqwef'] }],
         complex_person_attributes: [{ name: ['operator 1'] }],
-        title: 'Instrument 1'
+        title: 'Instrument 1',
+        date_collected: "2018-01-28"
       }],
       complex_organization_attributes: [{
         organization: 'Foo',
@@ -78,16 +77,9 @@ RSpec.describe SolrDocument do
     it { is_expected.to eql ['Alternative Title'] }
   end
 
-  describe '#complex_date' do
-    let(:complex_date) { JSON.parse(solr_document.complex_date).first }
-    describe 'date' do
-      subject { complex_date['date'] }
-      it { is_expected.to eql ['2018-02-14'] }
-    end
-    describe 'description' do
-      subject { complex_date['description'] }
-      it { is_expected.to eql ['Published Date'] }
-    end
+  describe '#date_published' do
+    subject { solr_document.date_published }
+    it { is_expected.to eql ['2018-02-14'] }
   end
 
   describe '#complex_identifier' do
@@ -104,8 +96,8 @@ RSpec.describe SolrDocument do
 
   describe '#complex_instrument' do
     let(:complex_instrument) {  JSON.parse(solr_document.complex_instrument).first }
-    describe 'complex_date' do
-      subject { complex_instrument['complex_date'].first['date'] }
+    describe 'date_collected' do
+      subject { complex_instrument['date_collected'] }
       it { is_expected.to eql ['2018-01-28'] }
     end
     describe 'complex_identifier' do
@@ -442,6 +434,51 @@ RSpec.describe SolrDocument do
     describe 'complex_identifier' do
       subject { complex_structural_feature['complex_identifier'].first['identifier'] }
       it { is_expected.to eql ['structural_feature/1234567'] }
+    end
+  end
+
+  describe "bibtex_filename" do
+    subject { solr_document.bibtex_filename }
+    it { is_expected.to eq("#{ solr_document.id }.bibtex") }
+  end
+
+  describe "bibtex using date published" do
+    it 'uses date published for year' do
+      expect(solr_document.bibtex_year).to eq "2018"
+    end
+
+    it 'uses date published for month' do
+      expect(solr_document.bibtex_month).to eq "02"
+    end
+  end
+
+  describe "bibtex using date created" do
+    let(:model2) do
+      build(:dataset, title: nil, date_published: nil, date_created: ['2017-11-18'])
+    end
+    let(:solr_document2) { described_class.new(model2.to_solr) }
+
+    it 'uses date created for month' do
+      expect(solr_document2.bibtex_month).to eq "11"
+    end
+
+    it 'uses date created for year' do
+      expect(solr_document2.bibtex_year).to eq "2017"
+    end
+  end
+
+  describe "bibtex using year published" do
+    let(:model2) do
+      build(:dataset, title: nil, date_published: "2019", date_created: ['2017-11-18'])
+    end
+    let(:solr_document2) { described_class.new(model2.to_solr) }
+
+    it 'uses date created for year' do
+      expect(solr_document2.bibtex_year).to eq "2019"
+    end
+
+    it 'uses date created for month' do
+      expect(solr_document2.bibtex_month).to eq ""
     end
   end
 end

@@ -12,8 +12,8 @@ RSpec.describe NestedInstrumentAttributeRenderer do
     is_expected.to have_css('div.row label', text: 'Alternative title')
     is_expected.to have_css('div.row', text: 'An instrument title')
 
-    is_expected.to have_css('div.row label', text: 'Collected')
-    is_expected.to have_css('div.row', text: '14/02/2018')
+    is_expected.to have_css('div.row label', text: 'Date collected')
+    is_expected.to have_css('div.row', text: '2018-02-14')
 
     is_expected.to have_css('div.row label', text: 'Description')
     is_expected.to have_css('div.row', text: 'Instrument description')
